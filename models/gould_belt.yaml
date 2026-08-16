@@ -1,0 +1,70 @@
+# Gould Belt scientific model layer (spec Idea.md §16).
+#
+# This is a *scientific model*, not measured or derived data (spec §19):
+# it is a literature-fitted geometric approximation of the Gould Belt, kept
+# strictly outside renderer code and free of any Three.js-specific fields
+# (spec §45 / issue #60 acceptance criteria).
+#
+# Representation: annulus (tilted elliptical ring).
+#
+#   Perrot & Grenier (2003) explicitly describe the Gould Belt as "a broad
+#   elliptical ring of young stars and interstellar matter" - a ring, not a
+#   filled disk or a solid ellipsoid. `thickness_pc` below is their fitted
+#   ring cross-section height (H), i.e. the belt's extent perpendicular to
+#   its own (tilted) plane. An annulus (an elliptical ring swept through
+#   that vertical thickness) is the representation closest to what the
+#   source paper actually fitted, rather than a filled disk (tilted
+#   ellipse) or a solid ellipsoid, both of which would imply a filled
+#   interior the data does not support.
+#
+# Coordinate convention (spec §6, heliocentric Galactic Cartesian, pc):
+#   Sun = (0, 0, 0); +X -> Galactic Center; +Y -> Galactic rotation
+#   direction; +Z -> North Galactic Pole.
+#
+# Parameter derivation from the source paper (Perrot & Grenier 2003,
+# A&A 404, 519-531):
+#   - The paper reports the Belt center as (104 +/- 4) pc from the Sun,
+#     towards Galactic longitude l = 180.4 +/- 2.0 deg, with no latitude
+#     given - i.e. the fitted centroid lies in the Sun's own Galactic
+#     plane (z_pc = 0), and the tilt is applied about the line of nodes.
+#     Converting (distance, l, b=0) to this repo's XYZ convention:
+#       x_pc = 104 * cos(180.4 deg) = -104.00
+#       y_pc = 104 * sin(180.4 deg) = -0.73
+#       z_pc = 0.0
+#   - `orientation_deg` is the Galactic longitude of the ascending node
+#     (l_Omega = 296.1 +/- 2.0 deg) of the tilted plane - the direction, in
+#     the Sun's Galactic plane, of the line about which the Belt's plane is
+#     inclined by `inclination_deg`.
+#   - `major_radius_pc` / `minor_radius_pc` are the paper's fitted current
+#     Belt semi-axes (373 +/- 5 pc and 233 +/- 5 pc).
+#   - `inclination_deg` is the paper's fitted inclination to the Galactic
+#     plane (17.2 +/- 0.5 deg).
+#   - `thickness_pc` is the paper's best-fit ring height H (60 +/- 1 pc).
+
+model: gould_belt
+representation: annulus
+
+center:
+  x_pc: -104.00
+  y_pc: -0.73
+  z_pc: 0.0
+
+major_radius_pc: 373.0
+minor_radius_pc: 233.0
+inclination_deg: 17.2
+orientation_deg: 296.1
+thickness_pc: 60.0
+
+source:
+  reference: >-
+    Perrot, C. A. & Grenier, I. A. (2003), "3D dynamical evolution of the
+    interstellar gas in the Gould Belt", Astronomy & Astrophysics, 404,
+    519-531
+  doi: "10.1051/0004-6361:20030477"
+  url: "https://doi.org/10.1051/0004-6361:20030477"
+  notes: >-
+    Center XYZ derived from the paper's reported (distance=104pc,
+    l=180.4deg, b=0) via this repo's Galactic Cartesian convention
+    (spec §6); orientation_deg is the paper's ascending-node longitude
+    l_Omega=296.1deg. All other fields are the paper's fitted values
+    verbatim (see comments above).
