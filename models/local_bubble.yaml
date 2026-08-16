@@ -1,0 +1,108 @@
+# Local Bubble - simplified MVP structure-layer model (spec Idea.md §18).
+#
+# Represents the Local Bubble shell as a single off-centred prolate
+# spheroid in heliocentric Galactic Cartesian coordinates (spec §6:
+# Sun = origin, +X -> Galactic Center, +Y -> Galactic rotation direction
+# (l = 90 deg), +Z -> North Galactic Pole (b = 90 deg), units parsecs).
+#
+# This is deliberately the coarse "simplified volume" MVP representation
+# spec §18 explicitly permits ("sphere, ellipsoid, mesh, point cloud
+# boundary ... acceptable if backed by a source"), not a realistic
+# reconstruction of the Bubble's actual highly irregular shape. The
+# `representation` field and this schema are generic across
+# sphere/ellipsoid/mesh/point_cloud so a later, more realistic 3D
+# reconstruction (e.g. the spherical-harmonic shell surfaces of
+# Pelgrims et al. 2020 or the Gaia-dust-map-based reconstructions of
+# Lallement et al. 2019 / O'Neill et al. 2024) can replace it without
+# renderer changes.
+#
+# See `source` below for exactly which numbers come from where -
+# spec §11 requires every scientific value to carry a traceable origin,
+# and this model deliberately mixes a precisely-fitted dimensionless
+# shape with an approximate physical scale anchor, so the two must not
+# be conflated.
+
+representation: ellipsoid
+enabled: true
+
+# Center of the ellipsoid in the Sun's frame (heliocentric Galactic
+# Cartesian, pc). The Local Bubble is NOT centered on the Sun - the Sun
+# sits off-center, about 58% of the semi-minor axis away from the
+# ellipsoid's center, in the direction (l, b) = (73 deg, ~0 deg).
+center_pc:
+  x_pc: 10.2
+  y_pc: 33.6
+  z_pc: 0.0
+
+# Semi-axes of the ellipsoid, pc. a_pc == b_pc (prolate spheroid, not a
+# general triaxial ellipsoid) with c_pc the long/polar axis.
+semi_axes_pc:
+  a_pc: 60.0
+  b_pc: 60.0
+  c_pc: 162.0
+
+# Orientation of the ellipsoid's own axes, as fitted by Alves et al.
+# (2018) Table 1: Euler angles (nutation theta_ell, precession psi_ell,
+# intrinsic phi_ell - the latter irrelevant/fixed for a spheroid), plus
+# the directly-stated (l, b) pointing direction of the long (c) axis,
+# kept alongside the Euler angles for clarity since both are quoted in
+# the source paper.
+orientation:
+  theta_ell_deg: 30.0
+  psi_ell_deg: 216.0
+  phi_ell_deg: 0.0
+  long_axis_l_deg: 216.0
+  long_axis_b_deg: 60.0
+
+# Uncertainties preserved where the source paper reports them (spec §20).
+# Several fit parameters were fixed/assumed rather than fitted (see
+# `source.reference` Table 1: aell = bell = 1 set; phi_ell = 0 set;
+# delta_z = 0 set) and so have no associated uncertainty here.
+uncertainty:
+  aspect_ratio_c_over_a: 2.7
+  aspect_ratio_c_over_a_error: 0.6
+  theta_ell_deg_error: 50.0
+  psi_ell_deg_error: 47.0
+  offset_fraction_of_semi_minor_axis: 0.58
+
+# spec §19 - this is a scientific model (a fitted geometric
+# approximation), not a measured value, a derived coordinate, or visual
+# decoration.
+data_classification: scientific_model
+
+source:
+  reference: >-
+    Alves, M.I.R., Boulanger, F., Ferriere, K. & Montier, L. (2018),
+    "The Local Bubble: a magnetic veil to our Galaxy", Astronomy &
+    Astrophysics, 611, L5. Table 1 gives the fitted shape (aspect ratio
+    c_ell/a_ell = 2.7 +/- 0.6), orientation (Euler angles, and the long
+    axis pointing towards l=216 deg, b=60 deg), and the Sun's offset as
+    a fraction of the semi-minor axis (0.58, along l=73 deg, b~0 deg) -
+    all obtained by fitting an off-centred prolate-spheroid shell model
+    to Planck 353 GHz dust polarization observations of the Galactic
+    polar caps.
+  url: "https://doi.org/10.1051/0004-6361/201832637"
+  catalog: null
+  secondary_reference: >-
+    IMPORTANT CAVEAT on absolute scale: dust polarization data alone
+    carry no distance information, so Alves et al. (2018) fit their
+    spheroid in normalized units with the semi-minor axis fixed to 1
+    (aell = bell = 1, set - see their Table 1 and Sec. 3). The
+    `semi_axes_pc` and `center_pc` values in this file were produced by
+    multiplying those dimensionless, precisely-fitted shape/orientation
+    /offset-fraction numbers by an approximate physical scale anchor of
+    a_pc = 60 pc, taken from the paper's own Sec. 1 description of the
+    Local Bubble "extending out to ~60 pc towards the Galactic centre
+    ... (Puspitarini et al. 2014)" - itself citing Puspitarini, R.,
+    Lallement, R., Vergely, J.-L. & Snowden, S.L. (2014), Astronomy &
+    Astrophysics, 566, A13. This 60 pc anchor is an approximate,
+    order-of-magnitude figure, not a quantity fitted jointly with the
+    shape/orientation parameters above - treat `semi_axes_pc` and
+    `center_pc` as illustrative-scale, not precision-fit, values.
+
+notes: >-
+  MVP simplified volume per spec Idea.md §18. A coarse off-centred
+  spheroid approximation of the Local Bubble shell, intended to be
+  replaced by a more realistic 3D reconstruction later without renderer
+  changes (see module docstring in local_bubble.py for the intended
+  extension path).
