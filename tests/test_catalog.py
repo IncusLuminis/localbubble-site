@@ -86,6 +86,70 @@ def test_object_type_is_not_restricted_to_known_set():
     assert obj.object_type == "some_future_structure_type"
 
 
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("ra_deg", -0.1),
+        ("ra_deg", 360.0),
+        ("dec_deg", -90.1),
+        ("dec_deg", 90.1),
+        ("galactic_l_deg", -0.1),
+        ("galactic_l_deg", 360.0),
+        ("galactic_b_deg", -90.1),
+        ("galactic_b_deg", 90.1),
+    ],
+)
+def test_coordinates_reject_out_of_range_values(field, value):
+    kwargs = {
+        "ra_deg": 10.0,
+        "dec_deg": 10.0,
+        "galactic_l_deg": 10.0,
+        "galactic_b_deg": 10.0,
+    }
+    kwargs[field] = value
+    with pytest.raises(ValidationError):
+        Coordinates(**kwargs)
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("ra_deg", 0.0),
+        ("ra_deg", 359.9),
+        ("dec_deg", -90.0),
+        ("dec_deg", 90.0),
+        ("galactic_l_deg", 0.0),
+        ("galactic_b_deg", -90.0),
+        ("galactic_b_deg", 90.0),
+    ],
+)
+def test_coordinates_accept_boundary_values(field, value):
+    kwargs = {
+        "ra_deg": 10.0,
+        "dec_deg": 10.0,
+        "galactic_l_deg": 10.0,
+        "galactic_b_deg": 10.0,
+    }
+    kwargs[field] = value
+    Coordinates(**kwargs)  # does not raise
+
+
+def test_distance_rejects_negative_value():
+    with pytest.raises(ValidationError):
+        Distance(value_pc=-1.0)
+
+
+def test_distance_allows_zero_for_sun_convention():
+    Distance(value_pc=0.0)  # does not raise
+
+
+def test_save_catalog_rejects_duplicate_ids(tmp_path: Path):
+    objects = _sample_objects()
+    duplicate = objects[0].model_copy(update={"name": "Sun (duplicate)"})
+    with pytest.raises(ValueError, match="Duplicate object id"):
+        save_catalog([*objects, duplicate], tmp_path / "catalog.parquet")
+
+
 def test_record_round_trip_preserves_all_fields():
     for obj in _sample_objects():
         rebuilt = from_record(to_record(obj))
@@ -104,6 +168,19 @@ def test_save_and_load_catalog_round_trip(tmp_path: Path):
 
     loaded = load_catalog(parquet_path)
     assert loaded == objects
+
+
+def test_csv_column_order_matches_to_record_output(tmp_path: Path):
+    # Column order must come from to_record()'s own keys (single source of
+    # truth), not a separately hand-maintained list that can drift.
+    objects = _sample_objects()
+    csv_path = tmp_path / "catalog.csv"
+    save_catalog(objects, tmp_path / "catalog.parquet", csv_path)
+
+    with open(csv_path) as f:
+        header = f.readline().strip().split(",")
+
+    assert header == list(to_record(objects[0]).keys())
 
 
 def test_sample_catalog_file_is_present_and_valid():

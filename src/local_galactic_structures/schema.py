@@ -28,14 +28,16 @@ KNOWN_OBJECT_TYPES = {
 
 
 class Coordinates(BaseModel):
-    ra_deg: float
-    dec_deg: float
-    galactic_l_deg: float
-    galactic_b_deg: float
+    ra_deg: float = Field(ge=0.0, lt=360.0)
+    dec_deg: float = Field(ge=-90.0, le=90.0)
+    galactic_l_deg: float = Field(ge=0.0, lt=360.0)
+    galactic_b_deg: float = Field(ge=-90.0, le=90.0)
 
 
 class Distance(BaseModel):
-    value_pc: float
+    # 0 is a valid special case: the Sun/reference_point convention for the
+    # coordinate-system origin (spec §6), not a measured zero distance.
+    value_pc: float = Field(ge=0.0)
     error_pc: float | None = None
 
 

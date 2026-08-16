@@ -22,35 +22,6 @@ from .schema import (
     Visual,
 )
 
-# Flat column order used in the parquet/CSV representation. Nested schema
-# groups (coordinates/distance/cartesian/group/source/visual) are flattened
-# to prefixed columns since parquet/pandas do not round-trip pydantic's
-# nested models directly.
-_COLUMNS = [
-    "id",
-    "name",
-    "aliases",
-    "object_type",
-    "ra_deg",
-    "dec_deg",
-    "galactic_l_deg",
-    "galactic_b_deg",
-    "distance_value_pc",
-    "distance_error_pc",
-    "x_pc",
-    "y_pc",
-    "z_pc",
-    "group_primary",
-    "group_secondary",
-    "source_reference",
-    "source_url",
-    "source_catalog",
-    "visual_size_pc",
-    "visual_color_class",
-    "notes",
-]
-
-
 def to_record(obj: AstronomicalObject) -> dict:
     """Flatten an `AstronomicalObject` into a flat dict (one catalog row)."""
     return {
@@ -115,13 +86,34 @@ def from_record(record: dict) -> AstronomicalObject:
     )
 
 
+def _check_unique_ids(objects: list[AstronomicalObject]) -> None:
+    seen: set[str] = set()
+    duplicates: set[str] = set()
+    for obj in objects:
+        if obj.id in seen:
+            duplicates.add(obj.id)
+        seen.add(obj.id)
+    if duplicates:
+        raise ValueError(
+            f"Duplicate object id(s) in catalog: {sorted(duplicates)}"
+        )
+
+
 def save_catalog(
     objects: list[AstronomicalObject],
     parquet_path: str | Path,
     csv_path: str | Path | None = None,
 ) -> None:
-    """Write `objects` to `parquet_path` (and optionally `csv_path`)."""
+    """Write `objects` to `parquet_path` (and optionally `csv_path`).
+
+    Raises `ValueError` if `objects` contains duplicate `id`s.
+    """
+    _check_unique_ids(objects)
     records = [to_record(obj) for obj in objects]
+    # Column order is derived from to_record()'s own output - the single
+    # source of truth for the flat record shape - rather than hand-kept in
+    # sync with a separate constant.
+    columns = list(records[0].keys()) if records else []
 
     parquet_path = Path(parquet_path)
     parquet_path.parent.mkdir(parents=True, exist_ok=True)
@@ -139,7 +131,7 @@ def save_catalog(
             }
             for r in records
         ]
-        df = pd.DataFrame(csv_records, columns=_COLUMNS)
+        df = pd.DataFrame(csv_records, columns=columns)
         csv_path = Path(csv_path)
         csv_path.parent.mkdir(parents=True, exist_ok=True)
         df.to_csv(csv_path, index=False)
