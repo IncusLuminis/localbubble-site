@@ -6,13 +6,15 @@ structures). Full project spec: [`spec/Idea.md`](spec/Idea.md).
 
 ## Status
 
-Scientific pipeline (Phases 1-2, spec §48): object schema, catalog storage,
+Scientific pipeline (Phases 1-4, spec §48): object schema, catalog storage,
 RA/Dec/distance -> Galactic XYZ coordinate transforms, a live SIMBAD/Gaia/
 VizieR + literature data-acquisition layer, and the initial >=20-object
 catalog (spec §9) are built. The three scientific model layers - Gould Belt,
-Radcliffe Wave, Local Bubble (spec §16-18) - are built as well. Scene export
-and the Three.js web visualizer are separate, not-yet-implemented Stories —
-see the `local-galactic-structures` GitHub Project board.
+Radcliffe Wave, Local Bubble (spec §16-18) - are built as well. The
+renderer-independent scene export and `galactic-structures` CLI (spec §21,
+§34-35) tie the pipeline together end to end. The Three.js web visualizer
+(spec §22) is a separate, not-yet-implemented Story — see the
+`local-galactic-structures` GitHub Project board.
 
 ## Setup
 
@@ -45,6 +47,37 @@ handled by `src/local_galactic_structures/data_sources/`.
 `models/local_bubble.yaml` are checked-in, literature-sourced configs loaded
 by `gould_belt.py`/`radcliffe_wave.py`/`local_bubble.py` respectively -
 nothing to rebuild; see each module's docstring for its source.
+
+## CLI
+
+Installing the package (`pip install -e .`) registers a `galactic-structures`
+console script covering the pipeline stages from spec §35. Every subcommand
+calls the same library functions the tests/notebook use (spec §34) - nothing
+is reimplemented in the CLI layer.
+
+```bash
+galactic-structures acquire "NGC 1976" --source simbad   # resolve+cache one object (spec §12)
+galactic-structures build-catalog                        # rebuild the initial catalog (spec §9)
+galactic-structures build-coordinates                    # re-derive Galactic l/b/XYZ (spec §6)
+galactic-structures build-models                          # validate the model-layer configs (spec §16-18)
+galactic-structures export-scene --radius 800 --output data/derived/scene.json
+galactic-structures build                                 # the above four stages, end to end
+```
+
+`export-scene` composes the normalized catalog and the three model layers
+(Gould Belt, Radcliffe Wave, Local Bubble) into a single renderer-independent
+`scene.json` (spec §21, §45) - the artifact the future Three.js web
+visualizer will consume. `--radius <pc>` filters `objects` to those within
+that heliocentric distance of the Sun (spec §28); pass `--no-radius-filter`
+to include every object regardless of distance. The default output path is
+`data/derived/scene.json` (spec §13); `--output` overrides it. Model layers
+are never radius-filtered - they represent whole physical structures, not
+point objects - and are included whenever `enabled` (or unconditionally, for
+`GouldBeltModel`, which has no `enabled` field).
+
+The same composition logic is available directly from Python via
+`local_galactic_structures.scene.build_scene()` /
+`export_scene()` / `load_scene()` (spec §34).
 
 ## Tests
 
@@ -84,7 +117,15 @@ validation/research tool, not the primary deliverable.
 - `src/local_galactic_structures/{gould_belt,radcliffe_wave,local_bubble}.py`
   — the three scientific model layers (spec §16-18), each config-driven from
   a file under `models/`.
+- `src/local_galactic_structures/initial_catalog.py` — shared
+  load/build logic for the checked-in initial catalog (spec §9), called by
+  both `scripts/build_initial_catalog.py` and the CLI's `build-catalog`.
+- `src/local_galactic_structures/scene.py` — composes the catalog + model
+  layers into the renderer-independent scene export (spec §21, §45).
+- `src/local_galactic_structures/cli.py` — the `galactic-structures` console
+  script (spec §34-35).
 - `data/{raw,normalized,derived}/` — strict raw -> normalized -> derived data
-  separation (spec §13). `raw/` is never modified in place.
+  separation (spec §13). `raw/` is never modified in place. `derived/` holds
+  `scene.json` output by `export-scene`.
 - `notebooks/local_neighborhood.ipynb` — scientific validation notebook
   (spec §33).

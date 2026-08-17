@@ -17,6 +17,9 @@ dependencies = [
     "pyyaml>=6.0",
 ]
 
+[project.scripts]
+galactic-structures = "local_galactic_structures.cli:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",

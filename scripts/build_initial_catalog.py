@@ -10,43 +10,33 @@ documented, checked-in source of truth this script rebuilds from - see spec
 §14 (a clean checkout plus this script must be sufficient to rebuild the
 derived catalog, without needing live network access).
 
+The actual loading/saving logic lives in
+`local_galactic_structures.initial_catalog` (spec §34: CLI, notebooks, and
+tests should call the same underlying library code) - this script, and the
+CLI's `galactic-structures build-catalog` subcommand (Story #63), both call
+it rather than duplicating it.
+
 Usage:
     python scripts/build_initial_catalog.py
 """
 
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 
-from local_galactic_structures.catalog import save_catalog  # noqa: E402
-from local_galactic_structures.coordinates import (  # noqa: E402
-    derive_galactic_coordinates_batch,
+from local_galactic_structures.initial_catalog import (  # noqa: E402
+    DEFAULT_CSV_PATH,
+    DEFAULT_PARQUET_PATH,
+    build_initial_catalog,
 )
-from local_galactic_structures.schema import AstronomicalObject  # noqa: E402
-
-REPO_ROOT = Path(__file__).resolve().parent.parent
-RECORDS_PATH = REPO_ROOT / "data" / "normalized" / "initial_catalog_records.json"
-
-
-def load_initial_objects() -> list[AstronomicalObject]:
-    records = json.loads(RECORDS_PATH.read_text())
-    objects = [AstronomicalObject.model_validate(r) for r in records]
-    # Re-derive Galactic l/b/XYZ deterministically from ra/dec/distance rather
-    # than trusting whatever was last baked into the JSON, so the catalog
-    # stays correct even if the schema's derivation logic changes later.
-    return derive_galactic_coordinates_batch(objects)
 
 
 def main() -> None:
-    objects = load_initial_objects()
-    parquet_path = REPO_ROOT / "data" / "normalized" / "catalog.parquet"
-    csv_path = REPO_ROOT / "data" / "normalized" / "catalog.csv"
-    save_catalog(objects, parquet_path, csv_path)
-    print(f"Wrote {len(objects)} objects to {parquet_path} and {csv_path}")
+    objects = build_initial_catalog()
+    print(f"Wrote {len(objects)} objects to {DEFAULT_PARQUET_PATH} and {DEFAULT_CSV_PATH}")
 
 
 if __name__ == "__main__":
