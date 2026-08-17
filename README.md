@@ -12,9 +12,13 @@ VizieR + literature data-acquisition layer, and the initial >=20-object
 catalog (spec §9) are built. The three scientific model layers - Gould Belt,
 Radcliffe Wave, Local Bubble (spec §16-18) - are built as well. The
 renderer-independent scene export and `galactic-structures` CLI (spec §21,
-§34-35) tie the pipeline together end to end. The Three.js web visualizer
-(spec §22) is a separate, not-yet-implemented Story — see the
-`local-galactic-structures` GitHub Project board.
+§34-35) tie the pipeline together end to end. A first-iteration Three.js web
+visualizer (spec §22, Phase 5) now renders the Sun, Galactic Plane, and
+catalog objects from that scene export — see [Web visualizer](#web-visualizer)
+below. Its interaction layer (layer toggles, labels, inspector, radius
+filter, camera presets, PNG export — spec §23-25, §28-29, §39) is a separate,
+not-yet-implemented Story — see the `local-galactic-structures` GitHub
+Project board.
 
 ## Setup
 
@@ -129,3 +133,48 @@ validation/research tool, not the primary deliverable.
   `scene.json` output by `export-scene`.
 - `notebooks/local_neighborhood.ipynb` — scientific validation notebook
   (spec §33).
+- `web/` — the Three.js MVP web visualizer (spec §22, §31, §36; Story #64).
+  See [Web visualizer](#web-visualizer) below.
+
+## Web visualizer
+
+`web/` is a standalone TypeScript + Three.js + Vite project (spec §31) with
+its own `package.json`/`node_modules`, independent of the Python pipeline's
+toolchain. It loads the scene export as a static JSON asset at runtime and
+never queries an astronomical service or backend (spec §22): "The
+application should work locally without requiring a backend once the scene
+dataset has been built."
+
+Regenerate the scene data it reads from (whenever the catalog or models
+change):
+
+```bash
+galactic-structures export-scene --radius 800 --output web/public/data/scene.json
+```
+
+Then run the web app:
+
+```bash
+cd web
+npm install
+npm run dev      # http://localhost:5173, hot-reloading dev server
+npm run build    # type-checks (tsc --noEmit) then produces web/dist/
+npm test         # vitest: scene-loading/coordinate-mapping unit tests
+```
+
+This first iteration (Story #64) renders the base 3D scene only — WebGL
+renderer, dark restrained background (spec §30), orbit/pan/zoom camera
+controls, the Sun at the origin, a semi-transparent Galactic Plane reference
+grid at Z = 0 (spec §26), coordinate axes (spec §27), and every catalog
+object from `scene.json` at its real `position_pc` (spec §6, §45). Layer
+toggles, labels, an object inspector, radius filtering UI, camera presets,
+and PNG export are a later Story's scope (spec §23-25, §28-29, §39), not
+built here.
+
+`web/src/scene/sceneData.ts` maps each object's `position_pc` onto a
+`THREE.Vector3` component-for-component, with no rescaling or axis
+reordering (spec §3, §45: the renderer must not alter scientific data) —
+covered by `web/test/sceneData.test.ts`. The Galactic frame is Z-up
+(+Z → North Galactic Pole, spec §6), so instead of transforming any
+position, the camera's own `up` vector is set to +Z (`web/src/scene/
+camera.ts`) so the Galactic Plane reads as the scene's "floor".
