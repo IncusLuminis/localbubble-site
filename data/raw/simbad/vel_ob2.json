@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Vel OB2",
+  "retrieved_utc": "2026-08-17T03:35:18+00:00",
+  "record_id": "Ass Vel OB 2",
+  "raw": {
+    "main_id": "Ass Vel OB 2",
+    "ra": 122.34365700000001,
+    "dec": -47.350962,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2018MNRAS.481L..11B",
+    "otype": "As*",
+    "plx_err": 0.07999999821186066,
+    "plx_value": 2.85,
+    "ids": "[KC2019] Theia   22|[KPR2004b] 182|Ass Vel OB 2|NAME gam Vel Cluster|NAME gamma Velorum Cluster|[BBJ2018] 4",
+    "matched_id": "Ass Vel OB 2"
+  }
+}

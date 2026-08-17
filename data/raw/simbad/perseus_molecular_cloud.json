@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Perseus Molecular Cloud",
+  "retrieved_utc": "2026-08-17T03:34:05+00:00",
+  "record_id": "NAME Perseus Cloud",
+  "raw": {
+    "main_id": "NAME Perseus Cloud",
+    "ra": 53.75,
+    "dec": 31.216666666666665,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "plx_value": null,
+    "plx_err": null,
+    "otype": "SFR",
+    "ids": "NAME Perseus Molecular Cloud|NAME Per Molecular Cloud|NAME PMC|NAME PER MCld|NAME PERSEUS MOL CLOUD|NAME PER MOL CLOUD|NAME Hisa Perseus Complex|NAME Per Complex|NAME Perseus Complex|NAME Perseus Cloud|NAME Per Cloud|NAME Perseus Dark Cloud",
+    "matched_id": "NAME Perseus Molecular Cloud"
+  }
+}

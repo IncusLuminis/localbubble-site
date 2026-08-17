@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Rho Ophiuchi",
+  "retrieved_utc": "2026-08-17T03:34:05+00:00",
+  "record_id": "* rho Oph",
+  "raw": {
+    "main_id": "* rho Oph",
+    "ra": 246.39632358927884,
+    "dec": -23.44717083027709,
+    "coo_err_maj": 8.160331726074219,
+    "coo_err_min": 7.831605911254883,
+    "coo_err_angle": 89,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 9.03,
+    "plx_err": 0.8999999761581421,
+    "otype": "**",
+    "ids": "TIC 203822408|HIP 80473|* rho Oph|*   5 Oph|ADS 10049 AB|CCDM J16255-2327AB|CD-23 12861|CSI-23 12861 23|HIC  80473|IDS 16196-2313 AB|UBV   13904|VDB 106|[B10]  4178|WDS J16256-2327AB|** H   19AB|** H  219AB|2MASS J16253509-2326486|[SC96] Oph  63|1RXS J162535.1-232611|RX J1625.5-2326",
+    "matched_id": "* rho Oph"
+  }
+}

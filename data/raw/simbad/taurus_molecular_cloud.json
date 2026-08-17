@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Taurus Molecular Cloud",
+  "retrieved_utc": "2026-08-17T03:34:04+00:00",
+  "record_id": "NAME Taurus Complex",
+  "raw": {
+    "main_id": "NAME Taurus Complex",
+    "ra": 70.25,
+    "dec": 25.866666666666667,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "plx_value": null,
+    "plx_err": null,
+    "otype": "SFR",
+    "ids": "NAME Tau Region|NAME Taurus Molecular Complex|NAME Taurus Region|NAME Taurus GMC|NAME Taurus|TMC-COMPLEX|NAME TAURUS MOL CLOUD|NAME Tau Cloud|NAME Taurus Dark Cloud|NAME Tau Dark Cloud|NAME Tau Molecular Cloud|NAME Taurus Cloud|NAME Taurus Molecular Cloud|NAME Taurus Complex",
+    "matched_id": "NAME Taurus Molecular Cloud"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cep OB4",
+  "retrieved_utc": "2026-08-17T03:35:14+00:00",
+  "record_id": "Ass Cep OB 4",
+  "raw": {
+    "main_id": "Ass Cep OB 4",
+    "ra": 0.4999999999999999,
+    "dec": 67.7,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2009MNRAS.400..518M",
+    "otype": "As*",
+    "plx_err": null,
+    "plx_value": null,
+    "ids": "NAME Cepheus IV|Ass Cep OB 4|[KPS2012] MWSC 0006|NAME Cep IV Association",
+    "matched_id": "Ass Cep OB 4"
+  }
+}

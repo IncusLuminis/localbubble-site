@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cep OB3",
+  "retrieved_utc": "2026-08-17T03:35:13+00:00",
+  "record_id": "NAME III CEP ASSOC",
+  "raw": {
+    "main_id": "NAME III CEP ASSOC",
+    "ra": 346.05,
+    "dec": 63.4,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2005A&A...438.1163K",
+    "otype": "As*",
+    "plx_err": null,
+    "plx_value": null,
+    "ids": "[KPR2004b] 510|[MWC53]  III Cep|NAME III CEP ASSOC|Ass Cep OB 3|[KPS2012] MWSC 3691",
+    "matched_id": "Ass Cep OB 3"
+  }
+}

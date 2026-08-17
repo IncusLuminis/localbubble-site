@@ -183,21 +183,15 @@ def test_csv_column_order_matches_to_record_output(tmp_path: Path):
     assert header == list(to_record(objects[0]).keys())
 
 
-def test_sample_catalog_file_is_present_and_valid():
+def test_initial_catalog_file_is_present():
+    # Content-level checks (>=20 objects, full seed-list coverage, Sun at
+    # the origin, every object sourced, ...) live in test_initial_catalog.py
+    # - this just confirms the file scripts/build_initial_catalog.py
+    # produces is actually there and loadable.
     repo_root = Path(__file__).resolve().parent.parent
     parquet_path = repo_root / "data" / "normalized" / "catalog.parquet"
     assert parquet_path.exists(), (
         "data/normalized/catalog.parquet is missing - run "
-        "scripts/build_sample_catalog.py"
+        "scripts/build_initial_catalog.py"
     )
-
-    objects = load_catalog(parquet_path)
-    assert len(objects) >= 1
-    names = {obj.name for obj in objects}
-    assert "Sun" in names
-
-    sun = next(obj for obj in objects if obj.name == "Sun")
-    assert sun.cartesian == Cartesian(x_pc=0.0, y_pc=0.0, z_pc=0.0)
-
-    for obj in objects:
-        assert obj.source.reference, f"{obj.name} is missing source.reference"
+    assert len(load_catalog(parquet_path)) >= 1

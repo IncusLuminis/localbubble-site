@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Vela SNR",
+  "retrieved_utc": "2026-08-17T03:35:15+00:00",
+  "record_id": "NAME Vela",
+  "raw": {
+    "main_id": "NAME Vela",
+    "ra": 128.5,
+    "dec": -45.83333333333333,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "R",
+    "coo_bibcode": "2009BASI...37...45G",
+    "otype": "SNR",
+    "plx_err": null,
+    "plx_value": null,
+    "ids": "GRS G263.90 -03.00|SNR G263.9-03.0|SNR G263.4-03.0|SNR G263.9-03.3|AJG   8|1E 0840.0-4430|2RE J0838-430|2RE J083856-430913|MSC 263.9-3.3|NAME Vela|NAME Vela SNR|NAME Vela XYZ|RE J0838-430|RE J083854-430902|1ES 0839-44.5|GRS G263.90 -03.30|1FGL J0841.9-4620",
+    "matched_id": "NAME Vela SNR"
+  }
+}

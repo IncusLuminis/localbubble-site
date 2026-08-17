@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Chamaeleon",
+  "retrieved_utc": "2026-08-17T03:34:07+00:00",
+  "record_id": "NAME Chamaeleon Region",
+  "raw": {
+    "main_id": "NAME Chamaeleon Region",
+    "ra": 178.75,
+    "dec": -78.0,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "plx_value": null,
+    "plx_err": null,
+    "otype": "SFR",
+    "ids": "NAME CHA MCLD|NAME Cha Cloud|NAME Cha Dark Cloud|NAME Chamaeleon|NAME Cha Complex|NAME Cha Region|NAME Chamaeleon Region",
+    "matched_id": "NAME Chamaeleon"
+  }
+}

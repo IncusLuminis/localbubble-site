@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cep OB2",
+  "retrieved_utc": "2026-08-17T03:35:12+00:00",
+  "record_id": "Ass Cep OB 2",
+  "raw": {
+    "main_id": "Ass Cep OB 2",
+    "ra": 327.75,
+    "dec": 60.0,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2003AstL...29..311S",
+    "otype": "As*",
+    "plx_err": null,
+    "plx_value": null,
+    "ids": "[MWC53]    I Cep|Ass Cep OB 2",
+    "matched_id": "Ass Cep OB 2"
+  }
+}

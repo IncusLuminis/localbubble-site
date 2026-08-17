@@ -23,4 +23,88 @@
 #       retrieved: 2026-08-17T12:00:00+00:00
 #       record_id: "Cl Melotte 22"
 #       cache_path: data/raw/simbad/pleiades.json
-sources: []
+sources:
+- id: simbad:Cep OB2
+  source: simbad
+  query: Cep OB2
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:12+00:00'
+  record_id: Ass Cep OB 2
+  cache_path: data/raw/simbad/cep_ob2.json
+- id: simbad:Cep OB3
+  source: simbad
+  query: Cep OB3
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:13+00:00'
+  record_id: NAME III CEP ASSOC
+  cache_path: data/raw/simbad/cep_ob3.json
+- id: simbad:Cep OB4
+  source: simbad
+  query: Cep OB4
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:14+00:00'
+  record_id: Ass Cep OB 4
+  cache_path: data/raw/simbad/cep_ob4.json
+- id: simbad:Chamaeleon
+  source: simbad
+  query: Chamaeleon
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:34:07+00:00'
+  record_id: NAME Chamaeleon Region
+  cache_path: data/raw/simbad/chamaeleon.json
+- id: simbad:PSR B0833-45
+  source: simbad
+  query: PSR B0833-45
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:16+00:00'
+  record_id: NAME Vela Pulsar
+  cache_path: data/raw/simbad/psr_b0833_45.json
+- id: simbad:Perseus Molecular Cloud
+  source: simbad
+  query: Perseus Molecular Cloud
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:34:05+00:00'
+  record_id: NAME Perseus Cloud
+  cache_path: data/raw/simbad/perseus_molecular_cloud.json
+- id: simbad:Rho Ophiuchi
+  source: simbad
+  query: Rho Ophiuchi
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:34:05+00:00'
+  record_id: '* rho Oph'
+  cache_path: data/raw/simbad/rho_ophiuchi.json
+- id: simbad:Taurus Molecular Cloud
+  source: simbad
+  query: Taurus Molecular Cloud
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:34:04+00:00'
+  record_id: NAME Taurus Complex
+  cache_path: data/raw/simbad/taurus_molecular_cloud.json
+- id: simbad:Vel OB2
+  source: simbad
+  query: Vel OB2
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:18+00:00'
+  record_id: Ass Vel OB 2
+  cache_path: data/raw/simbad/vel_ob2.json
+- id: simbad:Vela SNR
+  source: simbad
+  query: Vela SNR
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:15+00:00'
+  record_id: NAME Vela
+  cache_path: data/raw/simbad/vela_snr.json
+- id: simbad:Vela X-1
+  source: simbad
+  query: Vela X-1
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:17+00:00'
+  record_id: V* GP Vel
+  cache_path: data/raw/simbad/vela_x_1.json
+- id: simbad:gam Vel
+  source: simbad
+  query: gam Vel
+  dataset: SIMBAD basic identifier query (ra, dec, parallax)
+  retrieved: '2026-08-17T03:35:20+00:00'
+  record_id: '* gam02 Vel'
+  cache_path: data/raw/simbad/gam_vel.json
