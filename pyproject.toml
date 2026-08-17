@@ -9,6 +9,7 @@ description = "Scientifically grounded 3D model and data pipeline for the Solar 
 requires-python = ">=3.12"
 dependencies = [
     "astropy>=6.0",
+    "astroquery>=0.4.8",
     "numpy>=1.26",
     "pandas>=2.2",
     "pyarrow>=15.0",

@@ -1,0 +1,26 @@
+# Data acquisition manifest (spec Idea.md §14).
+#
+# Records every externally retrieved dataset: which source, what was
+# queried, and when it was retrieved. Maintained automatically by
+# `data_sources.update_manifest()` (see
+# src/local_galactic_structures/data_sources/__init__.py) - every live
+# adapter (simbad.py/gaia.py/vizier.py) appends or refreshes one entry
+# here each time it performs an actual upstream fetch (a cache *hit*
+# does not touch this file, since no retrieval happened).
+#
+# Populating real entries for the initial object set is the "Populate &
+# validate initial object catalog" Story's job, not this one (#58 builds
+# the acquisition/caching/manifest machinery only) - this file starts
+# empty and is filled in as that Story (or manual `acquire` runs) uses
+# the adapters below.
+#
+# Example shape of an entry, once populated:
+#   sources:
+#     - id: simbad:Pleiades
+#       source: simbad
+#       query: Pleiades
+#       dataset: SIMBAD basic identifier query (ra, dec, parallax)
+#       retrieved: 2026-08-17T12:00:00+00:00
+#       record_id: "Cl Melotte 22"
+#       cache_path: data/raw/simbad/pleiades.json
+sources: []
