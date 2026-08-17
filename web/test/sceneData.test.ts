@@ -32,7 +32,7 @@ const VALID_SCENE: Scene = {
       notes: null,
     },
   ],
-  structures: { gould_belt: {}, radcliffe_wave: {}, local_bubble: {} },
+  structures: {},
 };
 
 describe("positionToVector3", () => {

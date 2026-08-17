@@ -30,4 +30,147 @@ body {
   font-size: 12px;
   opacity: 0.7;
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Story #65: control panel + inspector panel (spec Idea.md §2's conceptual
+   UI sketch, §23/§24/§28/§29/§39). Plain DOM styling, no framework. */
+.panel {
+  position: absolute;
+  top: 12px;
+  background: rgba(10, 14, 24, 0.82);
+  border: 1px solid rgba(143, 163, 200, 0.25);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #dfe6f3;
+  font-size: 13px;
+  z-index: 2;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+#controls {
+  left: 12px;
+  width: 220px;
+}
+
+#inspector {
+  right: 12px;
+  width: 240px;
+}
+
+.panel-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.panel-section {
+  margin-bottom: 12px;
+}
+
+.panel-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #8fa3c8;
+  margin-bottom: 6px;
+}
+
+.panel-section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.toggle-row input {
+  cursor: pointer;
+}
+
+.radius-select {
+  width: 100%;
+  background: #111726;
+  color: #dfe6f3;
+  border: 1px solid rgba(143, 163, 200, 0.35);
+  border-radius: 4px;
+  padding: 4px 6px;
+}
+
+.size-slider {
+  width: 100%;
+}
+
+.camera-preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.panel button {
+  background: #1a2438;
+  color: #dfe6f3;
+  border: 1px solid rgba(143, 163, 200, 0.35);
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.panel button:hover {
+  background: #24304a;
+}
+
+.inspector-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #8fa3c8;
+  font-size: 16px;
+  line-height: 1;
+  padding: 2px 4px;
+}
+
+.inspector-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.inspector-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #8fa3c8;
+}
+
+.inspector-value {
+  font-size: 13px;
+  word-break: break-word;
+}
+
+/* CSS2DRenderer labels (spec §25) */
+.object-label {
+  color: #cfe0ff;
+  font-size: 11px;
+  font-family: system-ui, -apple-system, sans-serif;
+  text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
+  pointer-events: none;
+  white-space: nowrap;
+  transform: translate(8px, -4px);
+}
+
+.object-label.selected {
+  color: #fff3c4;
+  font-weight: 600;
 }

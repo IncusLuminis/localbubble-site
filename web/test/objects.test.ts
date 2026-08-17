@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  catalogObjectTypes,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
   SUN_OBJECT_ID,
@@ -85,5 +86,20 @@ describe("createCatalogObjectGroup", () => {
       (child) => child.position.x === 0 && child.position.y === 0 && child.position.z === 0,
     );
     expect(atOrigin).toHaveLength(0);
+  });
+});
+
+describe("catalogObjectTypes", () => {
+  it("returns distinct, sorted object_type values, excluding the Sun", () => {
+    const clusterA = makeObject({ id: "cluster-a", object_type: "star_cluster" });
+    const clusterB = makeObject({ id: "cluster-b", object_type: "star_cluster" });
+    const snr = makeObject({ id: "snr-a", object_type: "supernova_remnant" });
+    const types = catalogObjectTypes([SUN_ENTRY, CLOUD_A, clusterA, clusterB, snr]);
+    expect(types).toEqual(["molecular_cloud", "star_cluster", "supernova_remnant"]);
+  });
+
+  it("is empty for an all-Sun (or empty) input", () => {
+    expect(catalogObjectTypes([SUN_ENTRY])).toEqual([]);
+    expect(catalogObjectTypes([])).toEqual([]);
   });
 });

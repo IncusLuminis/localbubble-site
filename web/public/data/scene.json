@@ -33,6 +33,92 @@
       "notes": "Position (ra/dec) taken from the SIMBAD entry 'NAME Cepheus Flare' (otype MoC), the closest single-point designation SIMBAD offers for the complex; SIMBAD carries no parallax/distance for this extended entry, so distance is taken from Zucker et al. 2019 instead (spec S10: prefer Gaia-era literature to a stale/missing SIMBAD distance). The Cepheus Flare is in reality several individually Gaia-resolved dark clouds (L1148, L1158, L1177, L1217, L1219, L1235, L1251, L1228) spanning 330-368 pc (Dzib et al. 2021, MNRAS, 505, 5164, 'The Gaia view of the Cepheus flare', arXiv:2105.10039); the complex also spans ~90x60 pc in the plane of the sky per that paper (visual.size_pc uses the larger axis). This record collapses that structure to one MVP centroid using the Zucker et al. 2019 'Cepheus Near' value, which falls within the Dzib range."
     },
     {
+      "id": "cepheus-ob2-association",
+      "name": "Cepheus OB2",
+      "aliases": [
+        "Cep OB2",
+        "Cepheus OB 2"
+      ],
+      "object_type": "stellar_association",
+      "position_pc": [
+        -185.43723260667795,
+        863.9211948880296,
+        71.66206657929663
+      ],
+      "distance_pc": 886.5,
+      "distance_error_pc": 57.5,
+      "size_pc": null,
+      "color_class": null,
+      "group": {
+        "primary": "Cepheus Flare / Cepheus OB associations",
+        "secondary": []
+      },
+      "source": {
+        "reference": "Szilagyi, M., Kun, M., Abraham, P. & Marton, G. (2023), \"The Gaia view of the Cepheus OB2 association\", MNRAS, 520(1), 1390-1410 (arXiv:2301.02346). Gaia DR3 clustering resolves the association into 13 subgroups spanning heliocentric distances of 829-944 pc along the line of sight, centred at Galactic (l,b) = (102.1 deg, +4.6 deg); the classical literature value (Contreras et al. 2002, ApJ, 572, 926) is ~900 pc. distance_pc/error_pc here are the midpoint/half-range of the quoted Gaia DR3 829-944 pc subgroup spread, not a formal single-value parallax uncertainty - no single-number mean distance + error is given in the source for the association as a whole.",
+        "url": "https://arxiv.org/abs/2301.02346",
+        "catalog": "Gaia DR3"
+      },
+      "notes": "Position is the SIMBAD 'Ass Cep OB 2' centroid (ra=327.75, dec=60.0 deg), independently verified to correspond to Galactic (l,b) = (102.11, 4.64) deg, matching Szilagyi et al. (2023)'s quoted central coordinates for the association."
+    },
+    {
+      "id": "cepheus-ob3-association",
+      "name": "Cepheus OB3",
+      "aliases": [
+        "Cep OB3",
+        "NAME III Cep Assoc"
+      ],
+      "object_type": "stellar_association",
+      "position_pc": [
+        -295.5451405962553,
+        759.4108634695625,
+        42.47599692005736
+      ],
+      "distance_pc": 816.0,
+      "distance_error_pc": 53.0,
+      "size_pc": null,
+      "color_class": null,
+      "group": {
+        "primary": "Cepheus Flare / Cepheus OB associations",
+        "secondary": []
+      },
+      "source": {
+        "reference": "Nagy, Zs., Abraham, P., Kospal, A. et al. (2022), \"Photometric and spectroscopic study of the burst-like brightening of two Gaia-alerted young stellar objects\", MNRAS, 516, 2. Distance to Cep OB3 of 816 +/- 53 pc obtained from a Gaussian fit to Gaia EDR3 parallax-based distances (Bailer-Jones et al. 2021) of 235 quality-filtered (RUWE < 1.4, parallax significant > 5 sigma) association members drawn from Jordi et al. (1996) and Getman et al. (2009).",
+        "url": "https://arxiv.org/abs/2207.02341",
+        "catalog": "Gaia EDR3"
+      },
+      "notes": "Position is the SIMBAD 'NAME III CEP ASSOC' centroid."
+    },
+    {
+      "id": "cepheus-ob4-association",
+      "name": "Cepheus OB4",
+      "aliases": [
+        "Cep OB4",
+        "Cepheus OB 4",
+        "Berkeley 59",
+        "Be 59"
+      ],
+      "object_type": "stellar_association",
+      "position_pc": [
+        -475.4398253130001,
+        885.5763274415883,
+        88.27536905282241
+      ],
+      "distance_pc": 1009.0,
+      "distance_error_pc": 12.0,
+      "size_pc": null,
+      "color_class": null,
+      "group": {
+        "primary": "Cepheus Flare / Cepheus OB associations",
+        "secondary": []
+      },
+      "source": {
+        "reference": "Wiesneth, B., Muzic, K. & Almendros-Abad, V. (2025), \"Internal dynamics and structure of Cepheus OB4: The asymmetric expansion of Berkeley 59\", A&A, 703, A193 (arXiv:2509.19175). Gaia DR3 astrometry gives a distance of 1009 +/- 12 pc to Berkeley 59, the dominant central massive-star cluster of the Cep OB4 association / H II bubble.",
+        "url": "https://arxiv.org/abs/2509.19175",
+        "catalog": "Gaia DR3"
+      },
+      "notes": "Position and distance are for Berkeley 59 (SIMBAD 'Cl Berkeley 59'), the dominant central cluster of Cep OB4 - its SIMBAD position (ra=0.57, dec=67.441) matches the wider association's own SIMBAD centroid ('Ass Cep OB 4', ra=0.50, dec=67.70) to within 0.3 deg. Earlier literature (Kun, Kiss & Balog 2008, Handbook of Star Forming Regions Vol. I, arXiv:0809.4761) placed the Cep OB2/OB3/OB4 group collectively at a coarser 600-900 pc range; the Gaia DR3 Berkeley 59 value is adopted here as the more precise, modern figure."
+    },
+    {
       "id": "chamaeleon-molecular-cloud",
       "name": "Chamaeleon Molecular Cloud",
       "aliases": [

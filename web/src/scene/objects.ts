@@ -43,6 +43,21 @@ export function excludeDedicatedMarkerObjects(objects: SceneObject[]): SceneObje
   return objects.filter((obj) => obj.id !== SUN_OBJECT_ID);
 }
 
+/**
+ * Distinct `object_type` values actually present in the catalog (excluding
+ * the Sun's own dedicated-marker entry), sorted for a stable UI order.
+ *
+ * Story #65's layer-toggle panel (spec §23) builds one checkbox per
+ * category found here rather than a hard-coded list of the spec §8 object
+ * types - this keeps the control panel accurate if the catalog later grows
+ * new types (spec §8: "The type system must be extensible without changes
+ * to the core architecture") without requiring a `web/` code change.
+ */
+export function catalogObjectTypes(objects: SceneObject[]): string[] {
+  const types = new Set(excludeDedicatedMarkerObjects(objects).map((obj) => obj.object_type));
+  return Array.from(types).sort();
+}
+
 const OBJECT_TYPE_COLORS: Record<string, number> = {
   star: 0xffffff,
   star_cluster: 0xffd27f,
