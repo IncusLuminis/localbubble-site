@@ -46,12 +46,95 @@ export interface SceneMetadata {
 
 /**
  * The `structures` block (Gould Belt / Radcliffe Wave / Local Bubble model
- * layers). Story #64 does not render these - out of scope, see issue #64's
- * "Out of scope" list ("layer toggles" is a later Story) - but the field is
- * kept typed as an opaque record so loading/validating the scene doesn't
- * require knowing the internal shape of layers this Story doesn't draw.
+ * layers, spec §21). Story #64 left this untyped/unrendered ("layer
+ * toggles" was explicitly deferred to a later Story). Story #65 renders
+ * these for the first time, so the three known shapes are typed below,
+ * matching exactly what `src/local_galactic_structures/models.py` /
+ * `scene.py` actually emit (verified against the regenerated
+ * `web/public/data/scene.json`) - not invented ahead of the data.
+ *
+ * Every field here is read defensively by `scene/structures.ts` (optional
+ * chaining / explicit shape checks) rather than assumed present, per spec
+ * §38 ("missing optional layers do not break the application") - a
+ * catalog/model file could in principle omit a structure entirely.
  */
-export type SceneStructures = Record<string, Record<string, unknown>>;
+
+export interface GouldBeltCenter {
+  x_pc: number;
+  y_pc: number;
+  z_pc: number;
+}
+
+/** `structures.gould_belt` (spec §16/§21): a tilted-annulus model,
+ * parametrized exactly as `notebooks/local_neighborhood.ipynb`'s
+ * `gould_belt_ellipse_points` consumes it. */
+export interface GouldBeltStructure {
+  model: string;
+  representation: string;
+  center: GouldBeltCenter;
+  major_radius_pc: number;
+  minor_radius_pc: number;
+  inclination_deg: number;
+  orientation_deg: number;
+  thickness_pc: number;
+  source?: unknown;
+}
+
+export interface RadcliffeWavePoint {
+  s_pc: number;
+  x_pc: number;
+  y_pc: number;
+  z_pc: number;
+}
+
+/** `structures.radcliffe_wave` (spec §17/§21): a literal fitted-spine
+ * polyline/spline, already in XYZ - no geometry construction needed, only
+ * a direct `THREE.Line` through `points`. */
+export interface RadcliffeWaveStructure {
+  model: string;
+  representation: string;
+  enabled?: boolean;
+  curve_type?: string;
+  points: RadcliffeWavePoint[];
+  source?: unknown;
+  notes?: string | null;
+}
+
+export interface LocalBubbleCenter {
+  x_pc: number;
+  y_pc: number;
+  z_pc: number;
+}
+
+export interface LocalBubbleSemiAxes {
+  a_pc: number;
+  b_pc: number;
+  c_pc: number;
+}
+
+/** `structures.local_bubble` (spec §18/§21): an off-centred ellipsoid.
+ * `orientation` (Euler angles) is present in the data but deliberately not
+ * applied by the MVP renderer - see `scene/structures.ts`'s
+ * `createLocalBubbleLayer` docstring for why, mirroring the notebook's own
+ * documented "diagnostic approximation" shortcut. */
+export interface LocalBubbleStructure {
+  representation: string;
+  enabled?: boolean;
+  center_pc: LocalBubbleCenter;
+  semi_axes_pc: LocalBubbleSemiAxes;
+  orientation?: unknown;
+  source?: unknown;
+  notes?: string | null;
+  data_classification?: string;
+  uncertainty?: unknown;
+}
+
+export interface SceneStructures {
+  gould_belt?: GouldBeltStructure;
+  radcliffe_wave?: RadcliffeWaveStructure;
+  local_bubble?: LocalBubbleStructure;
+  [key: string]: unknown;
+}
 
 export interface Scene {
   metadata: SceneMetadata;
