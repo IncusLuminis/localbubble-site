@@ -3,6 +3,7 @@ import {
   edgeOnPose,
   faceOnPose,
   fitAllPose,
+  objectCenteredPose,
   perspectivePose,
   sunCenteredPose,
   topViewPose,
@@ -55,6 +56,52 @@ describe("sunCenteredPose", () => {
     const sunDistance = Math.hypot(...pose.position);
     const perspectiveDistance = Math.hypot(...perspectivePose().position);
     expect(sunDistance).toBeLessThan(perspectiveDistance);
+  });
+});
+
+describe("objectCenteredPose", () => {
+  it("targets the object's own position, not the origin", () => {
+    const pose = objectCenteredPose([120, -30, 15], 10);
+    expect(pose.target).toEqual([120, -30, 15]);
+  });
+
+  it("frames a point-like object (small marker radius) at the minimum close-up distance", () => {
+    const pose = objectCenteredPose([0, 0, 0], 4); // MIN_MARKER_RADIUS_PC-scale object
+    const distance = Math.hypot(...pose.position);
+    expect(distance).toBeCloseTo(25, 6); // OBJECT_FRAME_MIN_DISTANCE_PC floor
+  });
+
+  it("frames a larger object (bigger marker radius) proportionally further away", () => {
+    const small = objectCenteredPose([0, 0, 0], 5);
+    const large = objectCenteredPose([0, 0, 0], 45); // MAX_MARKER_RADIUS_PC-scale object
+    const smallDistance = Math.hypot(...small.position);
+    const largeDistance = Math.hypot(...large.position);
+    expect(largeDistance).toBeGreaterThan(smallDistance);
+  });
+
+  it("re-centers correctly for an off-origin object (position offset, not overwritten)", () => {
+    const origin = objectCenteredPose([0, 0, 0], 20);
+    const offset = objectCenteredPose([500, 500, 500], 20);
+    const originOffset: [number, number, number] = [
+      origin.position[0] - origin.target[0],
+      origin.position[1] - origin.target[1],
+      origin.position[2] - origin.target[2],
+    ];
+    const offsetOffset: [number, number, number] = [
+      offset.position[0] - offset.target[0],
+      offset.position[1] - offset.target[1],
+      offset.position[2] - offset.target[2],
+    ];
+    expect(offsetOffset[0]).toBeCloseTo(originOffset[0], 9);
+    expect(offsetOffset[1]).toBeCloseTo(originOffset[1], 9);
+    expect(offsetOffset[2]).toBeCloseTo(originOffset[2], 9);
+  });
+
+  it("is zoomed in closer than the default Perspective view", () => {
+    const pose = objectCenteredPose([0, 0, 0], 45);
+    const distance = Math.hypot(...pose.position);
+    const perspectiveDistance = Math.hypot(...perspectivePose().position);
+    expect(distance).toBeLessThan(perspectiveDistance);
   });
 });
 
