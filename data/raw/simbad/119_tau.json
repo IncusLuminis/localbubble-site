@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "119 Tau",
+  "retrieved_utc": "2026-08-18T06:55:29+00:00",
+  "record_id": "* 119 Tau",
+  "raw": {
+    "main_id": "* 119 Tau",
+    "ra": 83.05313179526708,
+    "dec": 18.59423660180722,
+    "coo_err_maj": 0.20579999685287476,
+    "coo_err_min": 0.14839999377727509,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.5207,
+    "otype": "s*r",
+    "plx_err": 0.2660999894142151,
+    "ids": "TIC 367174762|HIP 25945|Gaia DR3 3400796031719045632|2MASS J05321276+1835394|PLX 1253|* 119 Tau|AAVSO 0526+18|AG+18  459|BD+18   875|DO 11336|GC  6841|GCRV  3354|GEN# +1.00036389|GSC 01301-00707|HD  36389|HIC  25945|HR  1845|IRAS 05292+1833|IRC +20112|JP11  1123|PMC 90-93  5888|PPM 121070|RAFGL  767|SAO  94628|SKY#  8886|TYC 1301-707-1|UBV   21346|V* CE Tau|YZ  18  1563|PLX 1253.00|WEB  5046|Gaia DR2 3400796031718128256",
+    "matched_id": "* 119 Tau"
+  }
+}

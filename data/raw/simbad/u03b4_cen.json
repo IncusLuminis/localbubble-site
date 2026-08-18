@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "δ Cen",
+  "retrieved_utc": "2026-08-18T07:05:09+00:00",
+  "record_id": "* del Cen",
+  "raw": {
+    "main_id": "* del Cen",
+    "ra": 182.08957348875,
+    "dec": -50.722427392777774,
+    "coo_err_maj": 0.25,
+    "coo_err_min": 0.30000001192092896,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 5.7179,
+    "otype": "Be*",
+    "plx_err": 0.6516000032424927,
+    "ids": "TIC 333670784|Gaia DR3 6126469654585981952|HIP 59196|PLX 2794.1|[JE82]  621|* del Cen|AAVSO 1203-50|CCDM J12083-5043A|CD-50  6697|CPC  0 10112|CPD-50  4862|CSV   6892|EM* MWC  219|FK5  452|GC 16584|GCRV  7275|GEN# +1.00105435|GSC 08241-03235|HD 105435|HGAM   2006|HIC  59196|HR  4621|Hen 3-753|IDS 12032-5010 A|IRAS 12057-5026|JP11  2167|N30 2812|PPM 340720|ROT  1783|SACS 264|SAO 239689|SKY# 22784|TD1 16088|TYC 8241-3235-1|UBV   10892|UBV M  17783|V* del Cen|[B10]  3165|2MASS J12082152-5043208|ALS 14963|PLX 2794.10|WDS J12084-5043A|uvby98 100105435|WEB 10531",
+    "matched_id": "* del Cen"
+  }
+}

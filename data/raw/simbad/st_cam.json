@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ST Cam",
+  "retrieved_utc": "2026-08-18T07:02:51+00:00",
+  "record_id": "V* ST Cam",
+  "raw": {
+    "main_id": "V* ST Cam",
+    "ra": 72.80561978959,
+    "dec": 68.16878823045,
+    "coo_err_maj": 0.024299999698996544,
+    "coo_err_min": 0.03370000049471855,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.6631,
+    "otype": "C*",
+    "plx_err": 0.048700001090765,
+    "ids": "TIC 281601266|HIP 22552|Gaia DR3 483958671558728576|2MASS J04511336+6810074|AAVSO 0440+68|AG+68  240|BD+67   350|C*  240|CGCS  769|Case  698|DO 28621|GC  5854|GCRV  2820|GSC 04342-02633|HD  30243|HIC  22552|IRAS 04459+6804|IRC +70055|LEE 275|PPM  15028|RAFGL  633|SAO  13285|SKY#  7553|TYC 4342-2633-1|V* ST Cam|[LFO93] 0446+68|WEB  4355|Gaia DR2 483958671558728576",
+    "matched_id": "V* ST Cam"
+  }
+}

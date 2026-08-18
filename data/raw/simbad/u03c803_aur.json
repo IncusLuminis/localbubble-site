@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ψ03 Aur",
+  "retrieved_utc": "2026-08-18T07:06:40+00:00",
+  "record_id": "* psi03 Aur",
+  "raw": {
+    "main_id": "* psi03 Aur",
+    "ra": 99.70491833077,
+    "dec": 39.90255952769,
+    "coo_err_maj": 0.12349999696016312,
+    "coo_err_min": 0.11919999867677689,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.6617,
+    "otype": "*",
+    "plx_err": 0.11129999905824661,
+    "ids": "TIC 353761097|HIP 31789|Gaia DR3 945182530731075840|2MASS J06384919+3954091|*  52 Aur|* psi03 Aur|AG+39  790|BD+40  1665|GC  8655|GCRV  4291|GEN# +1.00047100|GSC 02932-02464|HD  47100|HIC  31789|HR  2420|PPM  71895|ROT  1061|SAO  59319|SKY# 11604|TD1  7583|TYC 2932-2464-1|UBV    6563|UBV M  12268|YPAC 132|uvby98 100047100|ALS 16563|WEB  6380|Gaia DR2 945182530731075840",
+    "matched_id": "* psi03 Aur"
+  }
+}

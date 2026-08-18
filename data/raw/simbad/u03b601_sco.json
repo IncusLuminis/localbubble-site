@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ζ01 Sco",
+  "retrieved_utc": "2026-08-18T07:05:33+00:00",
+  "record_id": "* zet01 Sco",
+  "raw": {
+    "main_id": "* zet01 Sco",
+    "ra": 253.49886304786997,
+    "dec": -42.36202981513001,
+    "coo_err_maj": 0.09179999679327011,
+    "coo_err_min": 0.06719999760389328,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 0.5855,
+    "otype": "s*b",
+    "plx_err": 0.11760000139474869,
+    "ids": "TIC 246962305|SCORPIO1 012|HIP 82671|Gaia DR3 5964986649547042944|* zet01 Sco|AAVSO 1647-42|Braes  139|CD-42 11633|CEL   4441|CPC  0 15476|CPD-42  7545|EM* MWC  243|GC 22730|GCRV  9704|GEN# +1.00152236|GSC 07876-02743|HD 152236|HIC  82671|HR  6262|Hen 3-1273|JP11  2798|NGC  6231   318|PPM 322342|ROT  7433|SAO 227375|SKY# 30424|TD1 19640|TYC 7876-2743-1|UBV   14284|V* zet01 Sco|[B10]  4287|[MP69] 21|[SC95] ZET 181|[SC96] Mis  181|2MASS J16535972-4221433|ALS 15039|UCAC3 96-237872|uvby98 100152236|WEB 13962|Gaia DR2 5964986649547042944",
+    "matched_id": "* zet01 Sco"
+  }
+}

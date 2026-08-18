@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Canopus",
+  "retrieved_utc": "2026-08-18T06:57:16+00:00",
+  "record_id": "* alf Car",
+  "raw": {
+    "main_id": "* alf Car",
+    "ra": 95.98795782918306,
+    "dec": -52.69566138386201,
+    "coo_err_maj": 6.060718059539795,
+    "coo_err_min": 4.5752482414245605,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 10.55,
+    "otype": "*",
+    "plx_err": 0.5600000023841858,
+    "ids": "TIC 255559489|HIP 30438|2MASS J06235709-5241441|PLX 1497|* alf Car|1AXG J062403-5241|2E  1642|CEL   1228|CPC 19  2125|CPD-52   914|FK5  245|GC  8302|GCRV  4091|GEN# +1.00045348|HD  45348|HIC  30438|HR  2326|IRAS 06228-5240|JP11  1384|N30 1391|NAME Canopus|PPM 335149|ROT  1039|SAO 234480|SKY# 10936|SRS  30245|TD1  7115|UBV    6431|UBV M  12094|uvby98 100045348|PLX 1497.00|1E 0622.8-5239|1ES 0622-52.6|1RXS J062357.2-524139|2E 0622.8-5240|2EUVE J0624-52.6|EUVE J0624-52.6|EXSS 0622.7-5240|TYC 8534-2277-1|WEB  6060",
+    "matched_id": "NAME Canopus"
+  }
+}

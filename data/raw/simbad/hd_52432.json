@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 52432",
+  "retrieved_utc": "2026-08-18T07:00:45+00:00",
+  "record_id": "HD  52432",
+  "raw": {
+    "main_id": "HD  52432",
+    "ra": 105.25813961474,
+    "dec": -3.2525373785399996,
+    "coo_err_maj": 0.02669999934732914,
+    "coo_err_min": 0.037700001150369644,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2317,
+    "otype": "C*",
+    "plx_err": 0.04610000178217888,
+    "ids": "TIC 268584316|WISEA J070101.97-031509.1|HIP 33794|Gaia DR3 3108634179949662848|2MASS J07010195-0315089|AAVSO 0656-03|BD-03  1685|C*  645|CGCS 1507|DJM  93|DO  1886|GCRV  4609|GEN# +1.00052432|GSC 04818-02031|HD  52432|HIC  33794|IRAS 06585-0310|IRC +00141|LEE  77|PPM 189813|RAFGL 1053|SAO 134049|SKY# 12536|TYC 4818-2031-1|UBV    6909|V* V614 Mon|YZ  93  2440|[V58] 23|UCAC3 174-58813|WEB  6783|UCAC4 434-026504|WISE J070102.05-031508.7|Gaia DR2 3108634179949662848",
+    "matched_id": "HD  52432"
+  }
+}

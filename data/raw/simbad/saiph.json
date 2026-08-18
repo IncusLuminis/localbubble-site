@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Saiph",
+  "retrieved_utc": "2026-08-18T07:03:00+00:00",
+  "record_id": "* kap Ori",
+  "raw": {
+    "main_id": "* kap Ori",
+    "ra": 86.93912016833333,
+    "dec": -9.66960491861111,
+    "coo_err_maj": 0.18000000715255737,
+    "coo_err_min": 0.12999999523162842,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 5.04,
+    "otype": "s*b",
+    "plx_err": 0.2199999988079071,
+    "ids": "EUVE J0547-09.6|TIC 66651575|HIP 27366|Gaia DR3 3011968416163350272|2MASS J05474538-0940105|PLX 1330|*  53 Ori|* kap Ori|2E  1562|AAVSO 0543-09|BD-09  1235|CEL    976|CSV 100683|FK5  220|GC  7264|GCRV  3603|GEN# +1.00038771|GSC 05351-00760|HD  38771|HGAM    477|HIC  27366|HR  2004|IRAS 05453-0941|IRC -10098|JP11  1262|KMS 121|MCW  363|N30 1242|NAME Saiph|NSV  2641|PMC 90-93   158|PPM 188455|ROT   929|SAO 132542|SKY#  9544|SV* ZI   484|TD1  5371|TYC 5351-760-1|UBV    5932|UBV M  11510|WH 507|[HFE83]  401|[SC93b] 444|uvby98 100038771|ALS 14795|PLX 1330.00|1E 0545.4-0940|1RXS J054745.2-094013|2E 0545.3-0941|WEB  5378",
+    "matched_id": "NAME Saiph"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V571 Per",
+  "retrieved_utc": "2026-08-18T07:03:46+00:00",
+  "record_id": "V* V571 Per",
+  "raw": {
+    "main_id": "V* V571 Per",
+    "ra": 47.8487944057,
+    "dec": 38.069423102929996,
+    "coo_err_maj": 0.04560000076889992,
+    "coo_err_min": 0.038100000470876694,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7284,
+    "otype": "LP*",
+    "plx_err": 0.0494999997317791,
+    "ids": "TIC 177821919|HIP 14824|Gaia DR3 139578229439674496|2MASS J03112371+3804096|AAVSO 0305+37|AG+37  378|BD+37   719|DO  9774|GSC 02848-00402|HD  19664|HIC  14824|IRAS 03081+3752|IRC +40059|PPM  68185|RAFGL 4254S|SAO  56225|SKY#  4770|TYC 2848-402-1|V* V571 Per|Gaia DR2 139578229439674496",
+    "matched_id": "V* V571 Per"
+  }
+}

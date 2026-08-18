@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 49091",
+  "retrieved_utc": "2026-08-18T07:00:38+00:00",
+  "record_id": "HD  49091",
+  "raw": {
+    "main_id": "HD  49091",
+    "ra": 101.48941992968,
+    "dec": -20.7750440537,
+    "coo_err_maj": 0.01269999984651804,
+    "coo_err_min": 0.019099999219179153,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3354,
+    "otype": "SB*",
+    "plx_err": 0.024299999698996544,
+    "ids": "TIC 49243933|Gaia DR3 2927008083238006144|SBC9 2882|HD  49091|2MASS J06455746-2046301|Cl* NGC 2287    MMU      21|Cl* NGC 2287     AR      62|Cl* NGC 2287     GA      56|Cl* NGC 2287     GN      20|Cl* NGC 2287    UVA      63|Cl* NGC 2287   HFMR      21|BD-20  1555|CPD-20  1599|GC  8855|GCRV 58016|GEN# +2.22870021|GSC 05961-03331|HIC  32406|IRAS 06438-2043|NGC  2287    21|PPM 250962|SAO 172290|SKY# 11887|SRS   7284|TYC 5961-3331-1|uvby98 222870021|HIP 32406|Gaia DR1 2927008083238006144|Gaia DR2 2927008083238006144",
+    "matched_id": "HD  49091"
+  }
+}

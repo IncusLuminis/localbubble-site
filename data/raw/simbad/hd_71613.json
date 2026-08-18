@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 71613",
+  "retrieved_utc": "2026-08-18T07:01:25+00:00",
+  "record_id": "HD  71613",
+  "raw": {
+    "main_id": "HD  71613",
+    "ra": 125.85556863633,
+    "dec": -70.24865635137,
+    "coo_err_maj": 0.01899999938905239,
+    "coo_err_min": 0.020899999886751175,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3072,
+    "otype": "*",
+    "plx_err": 0.01730000041425228,
+    "ids": "TIC 307435661|HIP 41119|Gaia DR3 5269817227429830656|CD-69   539|CPC 21.1  1324|CPD-69   902|GC 11506|GSC 09197-02316|HD  71613|HIC  41119|IRAS 08233-7005|PPM 369923|SAO 256506|SKY# 15928|TYC 9197-2316-1|2MASS J08232534-7014551|Gaia DR1 5269817223132076032|Gaia DR2 5269817227429830656",
+    "matched_id": "HD  71613"
+  }
+}

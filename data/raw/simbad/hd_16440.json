@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 16440",
+  "retrieved_utc": "2026-08-18T06:58:20+00:00",
+  "record_id": "HD  16440",
+  "raw": {
+    "main_id": "HD  16440",
+    "ra": 40.46164586245,
+    "dec": 68.46963134523,
+    "coo_err_maj": 0.016599999740719795,
+    "coo_err_min": 0.019899999722838402,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.4404,
+    "otype": "*",
+    "plx_err": 0.025499999523162842,
+    "ids": "TIC 288945757|HIP 12585|Gaia DR3 517627057630708352|2MASS J02415078+6828106|AG+68  133|ALS  7383|BD+67   221|GEN# +1.00016440|GSC 04312-01368|HD  16440|HIC  12585|LS   I +68   15|PPM  13809|SAO  12387|SKY#  4035|TYC 4312-1368-1|uvby98 100016440|Gaia DR1 517627053332707456|Gaia DR2 517627057630708352",
+    "matched_id": "HD  16440"
+  }
+}

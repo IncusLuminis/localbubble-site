@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ζ Cep",
+  "retrieved_utc": "2026-08-18T07:05:29+00:00",
+  "record_id": "* zet Cep",
+  "raw": {
+    "main_id": "* zet Cep",
+    "ra": 332.71365710650707,
+    "dec": 58.20126183406695,
+    "coo_err_maj": 0.1256999969482422,
+    "coo_err_min": 0.14949999749660492,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.2972,
+    "otype": "s*r",
+    "plx_err": 0.14560000598430634,
+    "ids": "TIC 329273647|Gaia DR3 2199493438511811712|WISE J221051.61+581207.1|PLX 5372|* zet Cep|*  21 Cep|AG+57 1533|BD+57  2475|CSV 102155|FK5  836|GC 31044|GCRV 13949|GEN# +1.00210745|GSC 03981-01590|HD 210745|HIC 109492|HIP 109492|HR  8465|IRAS 22091+5757|IRC +60344|IRCO    64|JP11  3461|N30 4890|NSV 14066|PMC 90-93   586|PPM  40311|RAFGL 2864|ROT  3231|SAO  34137|SKY# 42268|SV* ZI  2076|TYC 3981-1590-1|UBV   18983|UBV M  26209|V* zet Cep|YZ  57 12918|[HFE83] 1488|2MASS J22105129+5812041|PLX 5372.00|WEB 19675|Gaia DR2 2199493438511811712",
+    "matched_id": "* zet Cep"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "omi Pup",
+  "retrieved_utc": "2026-08-18T07:04:37+00:00",
+  "record_id": "* omi Pup",
+  "raw": {
+    "main_id": "* omi Pup",
+    "ra": 117.02153597080543,
+    "dec": -25.93716960934917,
+    "coo_err_maj": 0.07410000264644623,
+    "coo_err_min": 0.12229999899864197,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.011,
+    "otype": "Be*",
+    "plx_err": 0.17219999432563782,
+    "ids": "Gaia DR3 5602287587814648448|TIC 127493611|HIP 38070|[JE82]  347|* omi Pup|ADS  6384 A|CCDM J07481-2556A|CD-25  5081|CPD-25  2882|CSI-25  5081 21|EM* MWC  186|GC 10532|GCRV  5197|GEN# +1.00063462|GSC 06544-04213|Glazar Pup 143|HD  63462|HIC  38070|HR  3034|Hen 3-80|IDS 07439-2541 A|IRAS 07460-2548|JP11  1598|MCW  544|NSV  3745|PMC 90-93  4721|PPM 253217|ROT  6474|SAO 174558|SKY# 14479|SRS  41734|TD1 11075|UBV M  13657|UBV    7531|V* omi Pup|YZ 115  5511|uvby98 100063462|2MASS J07480517-2556138|ALS 14808|TYC 6544-4213-1|UCAC3 129-73662|WDS J07481-2556A|** SEE   86A|WEB  7506|Gaia DR2 5602287587812539264",
+    "matched_id": "* omi Pup"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "35 Aqr",
+  "retrieved_utc": "2026-08-18T06:56:21+00:00",
+  "record_id": "*  35 Aqr",
+  "raw": {
+    "main_id": "*  35 Aqr",
+    "ra": 332.24579301299,
+    "dec": -18.519593397010002,
+    "coo_err_maj": 0.07750000059604645,
+    "coo_err_min": 0.06499999761581421,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.335,
+    "otype": "*",
+    "plx_err": 0.08429999649524689,
+    "ids": "TIC 206498761|Gaia DR3 6825369444765270272|*  35 Aqr|BD-19  6227|GC 30977|GCRV 13913|GEN# +1.00210191|GSC 06380-01740|HD 210191|HIC 109332|HIP 109332|HR  8439|PPM 239860|SAO 164888|SKY# 42205|SRS  17233|TD1 28810|TYC 6380-1740-1|YZ 108  9418|uvby98 100210191|ALS 17325|2MASS J22085899-1831104|** BU  170A|WDS J22091-1829A|WEB 19645|Gaia DR2 6825369444765270272",
+    "matched_id": "*  35 Aqr"
+  }
+}

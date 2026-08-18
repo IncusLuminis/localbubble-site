@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "δ01 Aps",
+  "retrieved_utc": "2026-08-18T07:05:21+00:00",
+  "record_id": "* del01 Aps",
+  "raw": {
+    "main_id": "* del01 Aps",
+    "ra": 245.08667298220666,
+    "dec": -78.69574842204916,
+    "coo_err_maj": 0.13830000162124634,
+    "coo_err_min": 0.14659999310970306,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 5.2508,
+    "otype": "LP?",
+    "plx_err": 0.19419999420642853,
+    "ids": "TIC 384196633|Gaia DR3 5778842011026728704|HIP 80047|2MASS J16202077-7841448|PLX 3665|* del01 Aps|CCDM J16204-7841A|CD-78   712|CPC 21.3  2018|CPD-78  1092|FK5 1424|GC 21862|GCRV  9350|GEN# +1.00145366|GSC 09446-03517|HD 145366|HIC  80047|HR  6020|IDS 16054-7827 A|IRAS 16127-7834|N30 3642|PPM 373033|SAO 257380|SKY# 29473|TYC 9446-3517-1|UBV   13741|UBV M  21223|V* del01 Aps|[DS98] 227|PLX 3665.00|WDS J16203-7842A|WEB 13551|Gaia DR2 5778842011021376512",
+    "matched_id": "* del01 Aps"
+  }
+}

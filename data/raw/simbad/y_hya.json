@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Y Hya",
+  "retrieved_utc": "2026-08-18T07:04:11+00:00",
+  "record_id": "V* Y Hya",
+  "raw": {
+    "main_id": "V* Y Hya",
+    "ra": 147.76549053737,
+    "dec": -23.017319755579997,
+    "coo_err_maj": 0.0843999981880188,
+    "coo_err_min": 0.09489999711513519,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.1991,
+    "otype": "C*",
+    "plx_err": 0.09610000252723694,
+    "ids": "TIC 415648339|HIP 48327|Gaia DR3 5663852920326093952|AAVSO 0946-22|BD-22  2739|C* 1566|CD-22  7652|CGCS 2641|CPD-22  4510|GC 13560|GCRV  6313|GEN# +1.00085405|GSC 06603-00800|HD  85405|HIC  48327|IRC -20199|PPM 256840|SAO 178088|SKY# 19024|TYC 6603-800-1|V* Y Hya|YZ 112  7718|[LFO93] 0948-22|2MASS J09510371-2301025|SV* HV    72|UCAC3 134-131495|Gaia DR1 5663852916030960768|WEB  9013|Gaia DR2 5663852920325744384|WISE J095103.79-230102.3|AKARI-IRC-V1 J0951037-230101",
+    "matched_id": "V* Y Hya"
+  }
+}

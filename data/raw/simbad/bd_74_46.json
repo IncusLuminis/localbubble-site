@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "BD+74 46",
+  "retrieved_utc": "2026-08-18T06:57:04+00:00",
+  "record_id": "BD+74    46",
+  "raw": {
+    "main_id": "BD+74    46",
+    "ra": 16.18197680811,
+    "dec": 74.8346051741,
+    "coo_err_maj": 0.042100001126527786,
+    "coo_err_min": 0.044199999421834946,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3049,
+    "otype": "**",
+    "plx_err": 0.04919999837875366,
+    "ids": "TIC 468591122|Gaia DR3 538901645553444096|AG+74   26|BD+74    46|CCDM J01047+7450AB|GSC 04308-00728|IDS 00575+7418 AB|IRAS 01010+7434|IRC +70016|PPM   4598|RAFGL  149|SAO   4315|TYC 4308-728-1|2MASS J01044367+7450044|WDS J01047+7450AB|** MLR  291AB|Gaia DR2 538901645553444096",
+    "matched_id": "BD+74    46"
+  }
+}

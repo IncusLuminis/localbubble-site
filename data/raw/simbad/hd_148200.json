@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 148200",
+  "retrieved_utc": "2026-08-18T06:58:08+00:00",
+  "record_id": "HD 148200",
+  "raw": {
+    "main_id": "HD 148200",
+    "ra": 246.96668837456997,
+    "dec": -35.12069952080001,
+    "coo_err_maj": 0.046799998730421066,
+    "coo_err_min": 0.029999999329447746,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.272,
+    "otype": "LP?",
+    "plx_err": 0.054099999368190765,
+    "ids": "TIC 211313448|Gaia DR3 6023652466845670016|CD-34 11009|CPC 17  8578|CPD-34  6515|GSC 07352-00240|HD 148200|IRAS 16245-3500|IRSV 1624-3500|PPM 295079|RAFGL 5048S|SAO 207685|TYC 7352-240-1|2MASS J16275201-3507143|Gaia DR2 6023652466845670016",
+    "matched_id": "HD 148200"
+  }
+}

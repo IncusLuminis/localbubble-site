@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "X TrA",
+  "retrieved_utc": "2026-08-18T07:04:05+00:00",
+  "record_id": "V* X TrA",
+  "raw": {
+    "main_id": "V* X TrA",
+    "ra": 228.57989792190997,
+    "dec": -70.07947591614,
+    "coo_err_maj": 0.09070000052452087,
+    "coo_err_min": 0.1273999959230423,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.8588,
+    "otype": "C*",
+    "plx_err": 0.1525000035762787,
+    "ids": "TIC 262259472|HIP 74582|Gaia DR3 5799008222524417408|AAVSO 1504-69|C* 2219|CD-69  1349|CGCS 3569|CPC 21.1  2864|CPD-69  2267|GC 20436|GCRV  8788|GEN# +1.00134453|GSC 09263-02961|HD 134453|HIC  74582|HR  5644|IRAS 15094-6953|PPM 372592|RAFGL 4985S|SAO 253062|SV* HV   113|TYC 9263-2961-1|V* X TrA|[LFO93] 1509-69|2MASS J15141918-7004459|WEB 12728|Gaia DR2 5799008222524417408",
+    "matched_id": "V* X TrA"
+  }
+}

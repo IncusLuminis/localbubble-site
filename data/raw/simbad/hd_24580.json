@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 24580",
+  "retrieved_utc": "2026-08-18T06:59:55+00:00",
+  "record_id": "HD  24580",
+  "raw": {
+    "main_id": "HD  24580",
+    "ra": 59.97927289463,
+    "dec": 70.45021508521,
+    "coo_err_maj": 0.01080000028014183,
+    "coo_err_min": 0.013100000098347664,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3006,
+    "otype": "*",
+    "plx_err": 0.01759999990463257,
+    "ids": "TIC 86013925|HIP 18672|Gaia DR3 494992064585555200|2MASS J03595502+7027008|AG+70  185|AGKR  3483|BD+70   268|GSC 04331-01664|HD  24580|HIC  18672|IRAS 03545+7018|PPM   5439|SAO   5054|TYC 4331-1664-1|Gaia DR1 494992060286241792|Gaia DR2 494992064585555200",
+    "matched_id": "HD  24580"
+  }
+}

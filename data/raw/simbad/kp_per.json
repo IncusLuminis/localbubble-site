@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "KP Per",
+  "retrieved_utc": "2026-08-18T07:02:10+00:00",
+  "record_id": "V* KP Per",
+  "raw": {
+    "main_id": "V* KP Per",
+    "ra": 53.16240704976,
+    "dec": 44.85575965987999,
+    "coo_err_maj": 0.02889999933540821,
+    "coo_err_min": 0.02630000002682209,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.839,
+    "otype": "bC*",
+    "plx_err": 0.037300001829862595,
+    "ids": "TIC 65166720|HIP 16516|Gaia DR3 241678947918118912|2MASS J03323898+4451206|AG+44  351|BD+44   734|GC  4217|GCRV  1950|GEN# +1.00021803|GSC 02874-00518|HD  21803|HGAM    235|HIC  16516|HR  1072|Hilt  392|PPM  46298|SAO  38927|SKY#  5358|TD1  2264|TYC 2874-518-1|UBV    3379|UBV M   9554|V* KP Per|ALS 14585|Gaia DR1 241678943618968448|uvby98 100021803|WEB  3153|Gaia DR2 241678947918118912",
+    "matched_id": "V* KP Per"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GP Dra",
+  "retrieved_utc": "2026-08-18T06:57:24+00:00",
+  "record_id": "V* GP Dra",
+  "raw": {
+    "main_id": "V* GP Dra",
+    "ra": 260.81463472938,
+    "dec": 71.86992870093,
+    "coo_err_maj": 0.060499999672174454,
+    "coo_err_min": 0.05849999934434891,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.2417,
+    "otype": "LP*",
+    "plx_err": 0.05260000005364418,
+    "ids": "TIC 219878176|HIP 85076|Gaia DR3 1651092222945526656|AG+71  508|BD+71   841|DO 35751|GC 23623|GCRV 10082|GSC 04424-00661|HD 158537|HIC  85076|IRAS 17240+7154|IRC +70139|PPM   9495|RAFGL 1968|SAO   8787|SKY# 31371|TYC 4424-661-1|V* GP Dra|2MASS J17231551+7152117|WEB 14365|Gaia DR2 1651092222945526656",
+    "matched_id": "V* GP Dra"
+  }
+}

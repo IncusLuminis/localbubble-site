@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "TT Tau",
+  "retrieved_utc": "2026-08-18T07:03:08+00:00",
+  "record_id": "V* TT Tau",
+  "raw": {
+    "main_id": "V* TT Tau",
+    "ra": 72.88026885697,
+    "dec": 28.526907402429995,
+    "coo_err_maj": 0.022299999371170998,
+    "coo_err_min": 0.009800000116229057,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.4586,
+    "otype": "C*",
+    "plx_err": 0.026399999856948853,
+    "ids": "HIP 22578|Gaia DR3 155132191506964480|2MASS J04513127+2831369|AAVSO 0445+28|AG+28  462|BD+28   707|C*  254|CGCS  794|DO 10805|GCRV  2854|GEN# +1.00030755|GSC 01843-00772|HD  30755|HIC  22578|IRAS 04483+2826|IRC +30098|Kiso C2-2|LEE 172|PPM  93827|RAFGL  639|SAO  76788|SKY#  7565|TYC 1843-772-1|UBV M  10372|V* TT Tau|YZ  28  2192|Gaia DR1 155132191506964480|WEB  4364|Gaia DR2 155132191506964480|TIC 60129383",
+    "matched_id": "V* TT Tau"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "YY Lep",
+  "retrieved_utc": "2026-08-18T07:04:14+00:00",
+  "record_id": "V* YY Lep",
+  "raw": {
+    "main_id": "V* YY Lep",
+    "ra": 91.73963673256,
+    "dec": -21.812298207130002,
+    "coo_err_maj": 0.061799999326467514,
+    "coo_err_min": 0.11890000104904175,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.4302,
+    "otype": "LP*",
+    "plx_err": 0.15369999408721924,
+    "ids": "TIC 124081634|HIP 28984|Gaia DR3 2916888182517895168|2MASS J06065751-2148441|AAVSO 0602-21|BD-21  1353|CPD-21  1106|GC  7779|GEN# +1.00041933|GSC 05944-02701|HD  41933|HIC  28984|HR  2166|IRAS 06048-2148|IRC -20086|N30 1314|NSV  2833|PPM 249863|RAFGL  874|SAO 171251|SKY# 10217|TYC 5944-2701-1|V* YY Lep|YZ 111  2086|Gaia DR2 2916888182516275072",
+    "matched_id": "V* YY Lep"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GZ Eri",
+  "retrieved_utc": "2026-08-18T06:57:25+00:00",
+  "record_id": "V* GZ Eri",
+  "raw": {
+    "main_id": "V* GZ Eri",
+    "ra": 64.56698667655,
+    "dec": -20.715259022029997,
+    "coo_err_maj": 0.05510000139474869,
+    "coo_err_min": 0.04839999973773956,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.2262,
+    "otype": "LP*",
+    "plx_err": 0.08460000157356262,
+    "ids": "TIC 139576743|HIP 20075|Gaia DR3 5091648579396153856|2MASS J04181607-2042547|BD-21   831|CPD-21   521|GC  5202|GEN# +1.00027362|GSC 05896-01378|HD  27362|HIC  20075|HR  1345|IRAS 04160-2050|IRC -20053|NSV  1548|PPM 247372|RAFGL  564|SAO 169317|SKY#  6580|TYC 5896-1378-1|UBV    4175|V* GZ Eri|YZ 110  1306|Gaia DR2 5091648579396153856",
+    "matched_id": "V* GZ Eri"
+  }
+}

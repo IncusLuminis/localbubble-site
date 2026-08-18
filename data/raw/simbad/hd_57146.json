@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 57146",
+  "retrieved_utc": "2026-08-18T07:00:52+00:00",
+  "record_id": "HD  57146",
+  "raw": {
+    "main_id": "HD  57146",
+    "ra": 109.71364057652,
+    "dec": -26.58585586451,
+    "coo_err_maj": 0.04960000142455101,
+    "coo_err_min": 0.0746999979019165,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.881,
+    "otype": "*",
+    "plx_err": 0.09179999679327011,
+    "ids": "TIC 106412328|Gaia DR3 5616047494790640128|2MASS J07185127-2635090|PLX 1725|CD-26  4164|CEL   1769|CPD-26  1973|GC  9740|GCRV  4848|GEN# +1.00057146|GSC 06545-03167|HD  57146|HIC  35427|HIP 35427|HR  2786|IRAS 07168-2629|IRC -30084|PPM 252120|SAO 173453|SKY# 13274|SRS  41593|TD1  9768|TYC 6545-3167-1|UBV    7110|UBV M  13182|YZ 116  4743|uvby98 100057146|PLX 1725.00|WEB  7070|Gaia DR2 5616047494790640128",
+    "matched_id": "HD  57146"
+  }
+}

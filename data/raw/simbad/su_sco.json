@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "SU Sco",
+  "retrieved_utc": "2026-08-18T07:02:52+00:00",
+  "record_id": "V* SU Sco",
+  "raw": {
+    "main_id": "V* SU Sco",
+    "ra": 250.16113670182,
+    "dec": -32.38001308397,
+    "coo_err_maj": 0.02590000070631504,
+    "coo_err_min": 0.015599999576807022,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2827,
+    "otype": "C*",
+    "plx_err": 0.027499999850988388,
+    "ids": "TIC 462963005|Gaia DR3 6030344330823784064|C* 2353|CD-32 11900|CGCS 3720|CPC 17  8711|CPD-32   342|GCRV  9576|GEN# -0.03211900|GSC 07350-00036|IRAS 16374-3217|IRC -30268|PPM 295347|RAFGL 1878|SAO 207911|SKY# 30020|SOPS   IV e-45|TYC 7350-36-1|V* SU Sco|2MASS J16403867-3222481|WEB 13786|Gaia DR2 6030344330823784064",
+    "matched_id": "V* SU Sco"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "31 Peg",
+  "retrieved_utc": "2026-08-18T06:56:20+00:00",
+  "record_id": "*  31 Peg",
+  "raw": {
+    "main_id": "*  31 Peg",
+    "ra": 335.3794796033334,
+    "dec": 12.205184115277778,
+    "coo_err_maj": 0.25,
+    "coo_err_min": 0.20000000298023224,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 2.01,
+    "otype": "Be*",
+    "plx_err": 0.2800000011920929,
+    "ids": "TIC 404555403|Gaia DR3 2730700972271371776|[JE82] 1115|*  31 Peg|AAVSO 2216+11|AG+11 2790|BD+11  4784|EM* MWC  387|FK5  843|GC 31255|GCRV 14061|GEN# +1.00212076|GSC 01146-01242|HD 212076|HIC 110386|HIP 110386|HR  8520|JP11  3476|N30 4926|PMC 90-93   591|PPM 141365|ROT  3255|SAO 107854|SKY# 42581|SRS  30843|TD1 29005|TYC 1146-1242-1|UBV   19129|UBV M  26342|V* IN Peg|YZ  11  8929|[HFE83] 1502|2MASS J22213107+1212187|ALS 15890|uvby98 100212076|WEB 19796|Gaia DR2 2730700972271371776",
+    "matched_id": "*  31 Peg"
+  }
+}

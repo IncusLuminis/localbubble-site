@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Sulafat",
+  "retrieved_utc": "2026-08-18T07:03:06+00:00",
+  "record_id": "* gam Lyr",
+  "raw": {
+    "main_id": "* gam Lyr",
+    "ra": 284.73592734438125,
+    "dec": 32.68955574065722,
+    "coo_err_maj": 0.15700000524520874,
+    "coo_err_min": 0.18160000443458557,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.9656,
+    "otype": "*",
+    "plx_err": 0.23659999668598175,
+    "ids": "TIC 20780347|HIP 93194|Gaia DR3 2043823929421342848|WISE J185856.55+324122.3|PLX 4407|* gam Lyr|*  14 Lyr|ADS 11908 A|AG+32 1705|BD+32  3286|CCDM J18590+3242A|CEL   4678|CSI+32  3286  1|FK5  713|GC 26086|GCRV 11437|GEN# +1.00176437|HD 176437|HIC  93194|HR  7178|IDS 18552+3233 A|JP11  3059|N30 4214|NAME Sulafat|PMC 90-93   507|PPM  82139|ROT  2700|SAO  67663|SKY# 35023|TD1 23665|UBV   16130|UBV M  23384|uvby98 100176437|2MASS J18585663+3241222|ALS 15831|PLX 4407.00|WDS J18589+3241A|TYC 2643-3346-1|Renson 49230|IRAS 18570+3237|AKARI-IRC-V1 J1858566+324122|WEB 16153|Gaia DR2 2043823929419235328",
+    "matched_id": "NAME Sulafat"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "La Superba",
+  "retrieved_utc": "2026-08-18T07:02:14+00:00",
+  "record_id": "V* Y CVn",
+  "raw": {
+    "main_id": "V* Y CVn",
+    "ra": 191.28260867319,
+    "dec": 45.44025730789,
+    "coo_err_maj": 0.06859999895095825,
+    "coo_err_min": 0.10119999945163727,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.2222,
+    "otype": "C*",
+    "plx_err": 0.17440000176429749,
+    "ids": "HIP 62223|Gaia DR3 1542553623374596352|PLX 2936|AAVSO 1240+45|AG+45 1021|BD+46  1817|C* 2030|CGCS 3283|DO 34179|FK5 1327|GC 17342|GCRV  7648|GEN# +1.00110914|GSC 03459-02147|HD 110914|HIC  62223|HR  4846|IRAS 12427+4542|IRC +50219|JP11  2289|LEE 301|N30 2940|NGP 46 107|PMC 90-93   922|PPM  53169|RAFGL 1576|SAO  44317|SKY# 23758|TYC 3459-2147-1|UBV   21484|V* Y CVn|YPAC  51|[LFO93] 1242+45|2MASS J12450780+4526249|PLX 2936.00|NAME La Superba|WEB 11053|Gaia DR2 1542553623370677504|TIC 159163636",
+    "matched_id": "NAME La Superba"
+  }
+}

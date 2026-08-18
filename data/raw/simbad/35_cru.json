@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "35 Cru",
+  "retrieved_utc": "2026-08-18T06:56:22+00:00",
+  "record_id": "*  35 Cru",
+  "raw": {
+    "main_id": "*  35 Cru",
+    "ra": 187.91804315106,
+    "dec": -59.42392352509,
+    "coo_err_maj": 0.030799999833106995,
+    "coo_err_min": 0.0357000008225441,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7843,
+    "otype": "cC*",
+    "plx_err": 0.04989999905228615,
+    "ids": "TIC 272588795|HIP 61136|Gaia DR3 6058439910929477120|PLX 2884|*  35 Cru|AAVSO 1226-58|CD-58  4603|CPC 20  3844|CPD-58  4344|GC 17065|GCRV  7536|GEN# +1.00108968|GSC 08658-00751|HD 108968|HIC  61136|HR  4768|IRAS 12288-5908|N30 2894|PPM 341066|SAO 240027|SKY# 23421|SV* BV   476|TYC 8658-751-1|UBV M  18309|V* BG Cru|2MASS J12314031-5925261|PLX 2884.00|[L67b] 26+  1|uvby98 100108968|WEB 10885|Gaia DR2 6058439910929477120",
+    "matched_id": "*  35 Cru"
+  }
+}

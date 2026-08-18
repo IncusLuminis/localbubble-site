@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Pherkad",
+  "retrieved_utc": "2026-08-18T07:02:37+00:00",
+  "record_id": "* gam UMi",
+  "raw": {
+    "main_id": "* gam UMi",
+    "ra": 230.18209804850082,
+    "dec": 71.83402545491221,
+    "coo_err_maj": 0.26260000467300415,
+    "coo_err_min": 0.28839999437332153,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 6.5959,
+    "otype": "dS*",
+    "plx_err": 0.29429998993873596,
+    "ids": "TIC 230065619|HIP 75097|Gaia DR3 1696877570753454208|PLX 3484|* gam UMi|*  13 UMi|AG+72  399|BD+72   679|CSV 101502|FK5  569|GC 20692|GCRV  8907|GEN# +1.00137422|GSC 04414-02314|HD 137422|HIC  75097|HR  5735|IRAS 15207+7200|IRC +70129|JP11  2602|N30 3464|PMC 90-93   403|PPM   8887|ROT  2184|SAO   8220|SKY# 27791|TD1 18228|TYC 4414-2314-1|UBV   13257|UBV M  20766|V* gam UMi|[HFE83] 1097|2MASS J15204375+7150024|SV* ZI  1129|PLX 3484.00|NAME Pherkad|uvby98 100137422|WEB 12807|Gaia DR2 1696877570752028288",
+    "matched_id": "NAME Pherkad"
+  }
+}

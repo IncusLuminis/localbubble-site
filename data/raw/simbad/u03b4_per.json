@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "δ Per",
+  "retrieved_utc": "2026-08-18T07:05:12+00:00",
+  "record_id": "* del Per",
+  "raw": {
+    "main_id": "* del Per",
+    "ra": 55.73122001957376,
+    "dec": 47.787496738188054,
+    "coo_err_maj": 0.2888999879360199,
+    "coo_err_min": 0.28839999437332153,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 6.2435,
+    "otype": "Be*",
+    "plx_err": 0.499099999666214,
+    "ids": "TIC 431863107|HIP 17358|Gaia DR3 248577867988535296|FK5  131|PLX  765|* del Per|*  39 Per|AAVSO 0335+47|AG+47  395|ALS  7764|BD+47   876|CEL    308|CSI+47   876  1|CSV 100296|GC  4427|GCRV  2039|GEN# +1.00022928|HD  22928|HGAM    249|HIC  17358|HR  1122|JP11   807|LS   V +47    7|N30  753|PMC 90-93    93|PPM  46457|ROT   544|SAO  39053|SKY#  5634|SV* ZI   203|TD1  2414|UBV    3499|UBV M   9635|V* del Per|[HFE83]  247|PLX  765.00|TYC 3317-3034-1|IRAS 03393+4737|AKARI-IRC-V1 J0342555+474714|2MASS J03425548+4747150|uvby98 100022928|WEB  3280|Gaia DR2 248577867983633152|WDS J03429+4747Aa|** HDS  473A",
+    "matched_id": "* del Per"
+  }
+}

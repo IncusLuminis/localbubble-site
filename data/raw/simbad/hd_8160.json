@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 8160",
+  "retrieved_utc": "2026-08-18T07:01:36+00:00",
+  "record_id": "HD   8160",
+  "raw": {
+    "main_id": "HD   8160",
+    "ra": 20.466431045910003,
+    "dec": 50.1219768506,
+    "coo_err_maj": 0.019200000911951065,
+    "coo_err_min": 0.019999999552965164,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.6062,
+    "otype": "*",
+    "plx_err": 0.04309999942779541,
+    "ids": "TIC 241029764|HIP 6371|Gaia DR3 400665958469700608|2MASS J01215195+5007192|AG+49  175|BD+49   358|GC  1636|GSC 03273-00472|HD   8160|HIC   6371|IRAS 01188+4951|PPM  26258|SAO  37148|SKY#  2054|TYC 3273-472-1|Gaia DR1 400665954171862400|Gaia DR2 400665958469700608",
+    "matched_id": "HD   8160"
+  }
+}

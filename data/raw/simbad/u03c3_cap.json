@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "σ Cap",
+  "retrieved_utc": "2026-08-18T07:06:26+00:00",
+  "record_id": "* sig Cap",
+  "raw": {
+    "main_id": "* sig Cap",
+    "ra": 304.84835118396995,
+    "dec": -19.11852538377,
+    "coo_err_maj": 0.07360000163316727,
+    "coo_err_min": 0.06199999898672104,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.4448,
+    "otype": "*",
+    "plx_err": 0.09870000183582306,
+    "ids": "TIC 71759301|IDS 20136-1926 A|Gaia DR3 6860553954296642176|PLX 4832|* sig Cap|*   7 Cap|ADS 13675 A|BD-19  5776|CCDM J20194-1908A|FK5 3625|GC 28233|GCRV 12677|GEN# +1.00193150A|GSC 06336-01995|HD 193150|HIC 100195|HIP 100195|HR  7761|IRC -20587|N30 4490|PMC 90-93  1434|PPM 237241|SACS 445|SAO 163445|IRAS 20165-1916|AKARI-IRC-V1 J2019235-190706|SKY# 38368|TYC 6336-1995-1|YZ 109  8701|uvby98 100193150 A|PLX 4832.00|WDS J20194-1907A|2MASS J20192360-1907066|WEB 18050|Gaia DR2 6860553954296642176",
+    "matched_id": "* sig Cap"
+  }
+}

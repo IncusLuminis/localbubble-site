@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 39654",
+  "retrieved_utc": "2026-08-18T07:00:18+00:00",
+  "record_id": "HD  39654",
+  "raw": {
+    "main_id": "HD  39654",
+    "ra": 87.98072842548,
+    "dec": -41.10528862805,
+    "coo_err_maj": 0.044199999421834946,
+    "coo_err_min": 0.048700001090765,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.5606,
+    "otype": "*",
+    "plx_err": 0.051899999380111694,
+    "ids": "TIC 21718294|HIP 27700|Gaia DR3 4804166528283058560|2MASS J05515538-4106190|CD-41  2109|CPC  0  3170|CPD-41   834|GC  7396|GSC 07602-00449|HD  39654|HIC  27700|IRAS 05503-4106|N30 1260|NSV 16717|PPM 310160|SAO 217583|SKY#  9675|TYC 7602-449-1|Gaia DR2 4804166528283058560",
+    "matched_id": "HD  39654"
+  }
+}

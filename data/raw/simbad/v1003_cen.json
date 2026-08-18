@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V1003 Cen",
+  "retrieved_utc": "2026-08-18T07:03:24+00:00",
+  "record_id": "V* V1003 Cen",
+  "raw": {
+    "main_id": "V* V1003 Cen",
+    "ra": 215.71767996017996,
+    "dec": -55.96232100384,
+    "coo_err_maj": 0.04050000011920929,
+    "coo_err_min": 0.05869999900460243,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.633,
+    "otype": "LP?",
+    "plx_err": 0.06769999861717224,
+    "ids": "TIC 414205172|HIP 70290|Gaia DR3 5892756535278366080|CD-55  5659|CPC 19  5442|CPD-55  6001|GC 19366|GSC 08682-02013|HD 125687|HIC  70290|IRAS 14193-5544|PPM 342798|SAO 241679|SKY# 26215|SRS  12237|TYC 8682-2013-1|V* V1003 Cen|2MASS J14225225-5557443|Gaia DR2 5892756535294414976",
+    "matched_id": "V* V1003 Cen"
+  }
+}

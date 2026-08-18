@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 35520",
+  "retrieved_utc": "2026-08-18T07:00:10+00:00",
+  "record_id": "HD  35520",
+  "raw": {
+    "main_id": "HD  35520",
+    "ra": 81.70334836509,
+    "dec": 34.39180684884,
+    "coo_err_maj": 0.040800001472234726,
+    "coo_err_min": 0.02710000053048134,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.611,
+    "otype": "*",
+    "plx_err": 0.050999999046325684,
+    "ids": "TIC 128017681|HIP 25471|Gaia DR3 182820784811946752|2MASS J05264881+3423303|AAO+34   96|AG+34  565|ALS  8344|BD+34  1040|GC  6689|GCRV  3261|GEN# +1.00035520|GSC 02411-00684|Glazar Aur  16|HD  35520|HIC  25471|HR  1795|LS   V +34    9|PPM  70358|ROT   797|SAO  58028|SKY#  8672|TD1  4570|TYC 2411-684-1|UBV    5157|UBV M  10941|YPAC 377|uvby98 100035520|IRAS 05234+3420|Renson 9140|AKARI-IRC-V1 J0526487+342330|Gaia DR1 182820780514927616|WEB  4932|Gaia DR2 182820784811946752",
+    "matched_id": "HD  35520"
+  }
+}

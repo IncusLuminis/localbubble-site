@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 27639",
+  "retrieved_utc": "2026-08-18T07:00:01+00:00",
+  "record_id": "HD  27639",
+  "raw": {
+    "main_id": "HD  27639",
+    "ra": 65.59470724743,
+    "dec": 20.821413166090004,
+    "coo_err_maj": 0.06019999831914902,
+    "coo_err_min": 0.03310000151395798,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.0369,
+    "otype": "*",
+    "plx_err": 0.0714000016450882,
+    "ids": "CCDM J04224+2049A|** BU   87A|ADS  3158 A|WDS J04224+2049A|Gaia DR2 49177620354353152|TYC 1276-1625-1|HD  27639A|TIC 17310798|IDS 04165+2035 A|HIP 20417|Gaia DR3 49177620354353152|2MASS J04222273+2049169|PLX  963|AG+20  390|BD+20   744|DO 10442|GC  5289|GCRV  2526|GEN# +1.00027639|HD  27639|HD  27640|HIC  20417|HR  1370|IRAS 04194+2042|IRC +20075|NSV 15956|PPM  93455|RAFGL  572|SAO  76571|SKY#  6730|TD1  3084|UBV M  10103|XZ   5638|YZ  20  1402|WEB  3901",
+    "matched_id": "HD  27639"
+  }
+}

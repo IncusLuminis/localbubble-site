@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Acrux",
+  "retrieved_utc": "2026-08-18T06:56:44+00:00",
+  "record_id": "* alf Cru",
+  "raw": {
+    "main_id": "* alf Cru",
+    "ra": 186.64956340120452,
+    "dec": -63.099092857925115,
+    "coo_err_maj": 4.129110813140869,
+    "coo_err_min": 3.7796833515167236,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 10.13,
+    "otype": "SB*",
+    "plx_err": 0.5,
+    "ids": "TIC 450568754|LLNS  8229|CD-62   652|HIP 60718|SBC9 725|* alf Cru|CCDM J12266-6306AB|CEL   4105|CPD-62  2745|CSI-62  2745 43|HIC  60718|IDS 12210-6233 AB|JP11  2217|UBV   11169|AX J1226.6-6305|WDS J12266-6306AB|uvby98 100108248|IRAS 12237-6249|AKARI-IRC-V1 J1226360-630557|GEN# +1.00108248|SBC7   462|EUVE J1226-63.0|2MASS J12263615-6305571|1RXS J122634.8-630554|1ES 1223-62.8|NAME Acrux",
+    "matched_id": "NAME Acrux"
+  }
+}

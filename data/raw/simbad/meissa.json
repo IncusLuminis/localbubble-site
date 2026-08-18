@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Meissa",
+  "retrieved_utc": "2026-08-18T07:02:20+00:00",
+  "record_id": "* lam Ori",
+  "raw": {
+    "main_id": "* lam Ori",
+    "ra": 83.78449002103218,
+    "dec": 9.934155874166667,
+    "coo_err_maj": 5.274713516235352,
+    "coo_err_min": 2.905177593231201,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 2.97,
+    "otype": "**",
+    "plx_err": 0.550000011920929,
+    "ids": "TIC 436103278|HIP 26207|PLX 1271|* lam Ori|ADS  4179 AB|AG+09  550|BD+09   879|CCDM J05351+0956AB|CSI+09   879  2|CSV 100542|GC  6915|HIC  26207|IDS 05296+0952 AB|PPM 149166|SAO 112921|UBV    5449|EUVE J0535+09.9|WDS J05351+0956AB|** STF  738AB|2MASS J05350831+0956036|AAVSO 0529+09|NSV  2240|NAME Heka|NAME Meissa|uvby98 100036861|GEN# +1.00036861",
+    "matched_id": "NAME Meissa"
+  }
+}

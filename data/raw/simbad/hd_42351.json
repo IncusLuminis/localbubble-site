@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 42351",
+  "retrieved_utc": "2026-08-18T07:00:21+00:00",
+  "record_id": "HD  42351",
+  "raw": {
+    "main_id": "HD  42351",
+    "ra": 92.75737731042,
+    "dec": 18.13046205077,
+    "coo_err_maj": 0.03139999881386757,
+    "coo_err_min": 0.027699999511241913,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.8069,
+    "otype": "*",
+    "plx_err": 0.044199999421834946,
+    "ids": "TIC 45653592|HIP 29326|Gaia DR3 3373336072412412160|2MASS J06110177+1807497|AG+18  565|BD+18  1112|GC  7864|GCRV  3894|GEN# +1.00042351|GSC 01318-00982|HD  42351|HIC  29326|HR  2184|IRAS 06081+1808|PMC 90-93  5890|PPM 122038|SAO  95337|SKY# 10390|TYC 1318-982-1|UBV M  11824|YZ  18  1962|Gaia DR1 3373336068115860736|WEB  5758|Gaia DR2 3373336072412412160",
+    "matched_id": "HD  42351"
+  }
+}

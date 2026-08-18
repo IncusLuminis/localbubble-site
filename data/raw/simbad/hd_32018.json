@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 32018",
+  "retrieved_utc": "2026-08-18T07:00:02+00:00",
+  "record_id": "HD  32018",
+  "raw": {
+    "main_id": "HD  32018",
+    "ra": 75.32881119219542,
+    "dec": 26.534294690490835,
+    "coo_err_maj": 0.024000000208616257,
+    "coo_err_min": 0.010400000028312206,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.9627,
+    "otype": "*",
+    "plx_err": 0.024800000712275505,
+    "ids": "TIC 308525303|CCDM J05013+2632A|IDS 04551+2623 A|** BU 1238A|WDS J05013+2632A|ADS  3602 A|Gaia DR2 3420435538477382400|UCAC4 583-014143|WISE J050118.92+263203.6|HD  32018A|HIP 23349|Gaia DR3 3420435538477382400|2MASS J05011891+2632036|AG+26  463|ALS  8129|BD+26   774|GCRV 55729|GSC 01840-00696|HD  32018|HGAM    354|HIC  23349|LS   V +26    1|PPM  93975|SAO  76895|SKY#  7849|TD1  3834|TYC 1840-696-1|YZ  26  2261|uvby98 100032018|WEB  4533",
+    "matched_id": "HD  32018"
+  }
+}

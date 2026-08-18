@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 20074",
+  "retrieved_utc": "2026-08-18T06:59:21+00:00",
+  "record_id": "HD  20074",
+  "raw": {
+    "main_id": "HD  20074",
+    "ra": 49.31618426598,
+    "dec": 65.1196752066,
+    "coo_err_maj": 0.007799999788403511,
+    "coo_err_min": 0.012900000438094139,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.5292,
+    "otype": "*",
+    "plx_err": 0.019600000232458115,
+    "ids": "TIC 82240712|HIP 15289|Gaia DR3 491235342588462720|2MASS J03171584+6507108|AG+64  214|AGKR  2874|BD+64   380|GSC 04057-00364|HD  20074|HIC  15289|IRAS 03129+6456|PPM  14190|SAO  12685|TYC 4057-364-1|uvby98 100020074|Gaia DR1 491235338292955264|GEN# +1.00020074|Gaia DR2 491235342588462720",
+    "matched_id": "HD  20074"
+  }
+}

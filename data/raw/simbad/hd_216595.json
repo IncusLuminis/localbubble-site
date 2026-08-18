@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 216595",
+  "retrieved_utc": "2026-08-18T06:59:42+00:00",
+  "record_id": "HD 216595",
+  "raw": {
+    "main_id": "HD 216595",
+    "ra": 343.26576880228,
+    "dec": 60.1010309928,
+    "coo_err_maj": 0.03610000014305115,
+    "coo_err_min": 0.03779999911785126,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.9819,
+    "otype": "*",
+    "plx_err": 0.04780000075697899,
+    "ids": "TIC 12958037|Gaia DR3 2014529258861130112|AG+59 1551|BD+59  2595|FK5 3830|GC 31922|GCRV 14369|GEN# +1.00216595|GSC 04278-01272|HD 216595|HIC 112998|HIP 112998|HR  8707|IRAS 22510+5950|IRC +60373|IRCO   653|PPM  24026|RAFGL 5722S|SAO  34921|SKY# 43473|TYC 4278-1272-1|UBV M  26695|YZ  59 13526|2MASS J22530378+6006036|Gaia DR1 2014529258861130112|WEB 20119|Gaia DR2 2014529258861130112",
+    "matched_id": "HD 216595"
+  }
+}

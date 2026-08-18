@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "AE Tri",
+  "retrieved_utc": "2026-08-18T06:56:41+00:00",
+  "record_id": "V* AE Tri",
+  "raw": {
+    "main_id": "V* AE Tri",
+    "ra": 36.29177957782,
+    "dec": 33.86675297959,
+    "coo_err_maj": 0.06379999965429306,
+    "coo_err_min": 0.050200000405311584,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.0837,
+    "otype": "LP*",
+    "plx_err": 0.08829999715089798,
+    "ids": "TIC 285384467|HIP 11272|Gaia DR3 326639791939619840|2MASS J02251003+3352001|AAVSO 0219+33|AG+33  230|BD+33   425|DO  9244|GSC 02331-01723|HD  14901|HIC  11272|IRAS 02221+3338|IRC +30041|PPM  67304|SAO  55527|SKY#  3584|TYC 2331-1723-1|V* AE Tri|Gaia DR2 326639791939619840",
+    "matched_id": "V* AE Tri"
+  }
+}

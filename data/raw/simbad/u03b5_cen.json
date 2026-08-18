@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ε Cen",
+  "retrieved_utc": "2026-08-18T07:05:24+00:00",
+  "record_id": "* eps Cen",
+  "raw": {
+    "main_id": "* eps Cen",
+    "ra": 204.97190723090242,
+    "dec": -53.466391146088995,
+    "coo_err_maj": 3.165217399597168,
+    "coo_err_min": 3.1624200344085693,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 7.63,
+    "otype": "bC*",
+    "plx_err": 0.47999998927116394,
+    "ids": "TIC 241398115|HIP 66657|* eps Cen|CCDM J13399-5328A|CD-52  5743|CEL   4275|CPC 19  5136|CPD-52  6655|CSI-52  6655 41|FK5  504|GC 18458|GCRV  8073|GEN# +1.00118716|GSC 08663-02929|HD 118716|HIC  66657|HR  5132|IDS 13335-5257 A|JP11  2411|N30 3113|PPM 342130|ROT  7271|SACS 296|SAO 241047|SKY# 25117|TYC 8663-2929-1|UBV   12227|UBV M  19592|V* eps Cen|[B10]  3521|ALS 14981|EUVE J1339-53.4|WDS J13399-5328A|uvby98 100118716|WEB 11756|IRAS 13366-5312|AKARI-IRC-V1 J1339532-532759|1RXS J133952.7-532745|2MASS J13395324-5327590",
+    "matched_id": "* eps Cen"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Miram",
+  "retrieved_utc": "2026-08-18T07:02:25+00:00",
+  "record_id": "* eta Per",
+  "raw": {
+    "main_id": "* eta Per",
+    "ra": 42.67420822277708,
+    "dec": 55.895494367171665,
+    "coo_err_maj": 0.11410000175237656,
+    "coo_err_min": 0.14980000257492065,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.2657,
+    "otype": "*",
+    "plx_err": 0.18729999661445618,
+    "ids": "TIC 251120869|HIP 13268|Gaia DR3 454491381981202944|2MASS J02504180+5553437|PLX  573|* eta Per|*  15 Per|ADS  2157 A|AG+55  299|BD+55   714|CCDM J02506+5553A|CSI+55   714  1|FK5   99|GC  3390|GCRV  1584|GEN# +1.00017506A|GSC 03704-01332|HD  17506|HIC  13268|HR   834|IDS 02434+5529 A|JP11   701|IRAS 02470+5541|IRC +60099|N30  577|PMC 90-93    71|PPM  28039|RAFGL  382|ROT   379|SAO  23655|SKY#  4268|TYC 3704-1332-1|UBV    2750|YZ  55  2551|[HFE83]  177|[S78b]  33A|PLX  573.00|WDS J02507+5554A|** STF  307A|NAME Miram|WEB  2661|Gaia DR2 454491381980370304",
+    "matched_id": "NAME Miram"
+  }
+}

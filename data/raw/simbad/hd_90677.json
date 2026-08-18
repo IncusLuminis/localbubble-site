@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 90677",
+  "retrieved_utc": "2026-08-18T07:01:47+00:00",
+  "record_id": "HD  90677",
+  "raw": {
+    "main_id": "HD  90677",
+    "ra": 156.7038394767,
+    "dec": -54.87730634236,
+    "coo_err_maj": 0.05849999934434891,
+    "coo_err_min": 0.0568000003695488,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7179,
+    "otype": "*",
+    "plx_err": 0.0640999972820282,
+    "ids": "TIC 464670890|HIP 51140|Gaia DR3 5355489661667879936|CPC 19  3931|CPD-54  3651|GC 14353|GEN# +1.00090677|GSC 08605-02450|HD  90677|HIC  51140|HR  4107|IRAS 10248-5437|N30 2483|PPM 339045|SAO 238067|SKY# 20061|TYC 8605-2450-1|UBV    9662|UBV M  16249|2MASS J10264893-5452380|Gaia DR2 5355489661667879936",
+    "matched_id": "HD  90677"
+  }
+}

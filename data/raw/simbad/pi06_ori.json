@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "pi06 Ori",
+  "retrieved_utc": "2026-08-18T07:25:01+00:00",
+  "record_id": "* pi.06 Ori",
+  "raw": {
+    "main_id": "* pi.06 Ori",
+    "ra": 74.63709287275,
+    "dec": 1.7140135367600002,
+    "coo_err_maj": 0.10130000114440918,
+    "coo_err_min": 0.05979999899864197,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "otype": "*",
+    "plx_value": 4.2093,
+    "plx_err": 0.13930000364780426,
+    "ids": "TIC 452749155|HIP 23123|Gaia DR3 3231949906557374592|2MASS J04583290+0142501|PLX 1116|*  10 Ori|* pi.06 Ori|AG+01  513|BD+01   872|CSV 100426|GC  6068|GCRV  2938|GEN# +1.00031767|GSC 00085-02362|HD  31767|HIC  23123|HR  1601|IRAS 04559+0138|IRC +00065|JP11   956|N30 1061|NSV  1786|PPM 148255|RAFGL  659|ROT   702|SAO 112281|SKY#  7774|TD1  3792|TYC   85-2362-1|UBV    4789|UBV M  10512|YPAC 112|YZ   1  1513|PLX 1116.00|WEB  4484|Gaia DR2 3231949906556068864",
+    "matched_id": "* pi.06 Ori"
+  }
+}

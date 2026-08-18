@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NP Pup",
+  "retrieved_utc": "2026-08-18T07:02:31+00:00",
+  "record_id": "V* NP Pup",
+  "raw": {
+    "main_id": "V* NP Pup",
+    "ra": 103.61118148704001,
+    "dec": -42.36557181146,
+    "coo_err_maj": 0.03579999879002571,
+    "coo_err_min": 0.040300000458955765,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7266,
+    "otype": "C*",
+    "plx_err": 0.0414000004529953,
+    "ids": "TIC 170403852|HIP 33189|Gaia DR3 5562479631873801984|2MASS J06542669-4221560|C*  623|CD-42  2818|CGCS 1478|CPC  0  3999|CPD-42  1122|FK5 2534|GC  9077|GCRV  4533|GEN# +1.00051208|GSC 07636-01316|HD  51208|HIC  33189|HR  2591|IRAS 06528-4218|JP11  1465|N30 1506|PPM 311251|RAFGL 4544S|SAO 218296|SKY# 12261|TYC 7636-1316-1|UBV M  12606|V* NP Pup|[ELL90]  32|Gaia DR1 5562479627575774208|WEB  6673|Gaia DR2 5562479631873801984",
+    "matched_id": "V* NP Pup"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 152220",
+  "retrieved_utc": "2026-08-18T06:58:10+00:00",
+  "record_id": "HD 152220",
+  "raw": {
+    "main_id": "HD 152220",
+    "ra": 253.63148156552,
+    "dec": -49.71080522706,
+    "coo_err_maj": 0.01899999938905239,
+    "coo_err_min": 0.01549999974668026,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7224,
+    "otype": "*",
+    "plx_err": 0.027000000700354576,
+    "ids": "TIC 346821476|HIP 82723|Gaia DR3 5938368984926324992|CD-49 11036|CPC  0 15472|CPD-49  9665|GC 22738|GSC 08335-02712|HD 152220|HIC  82723|IRAS 16506-4937|PPM 322369|SAO 227386|SKY# 30455|TYC 8335-2712-1|2MASS J16543156-4942389|Gaia DR2 5938368984926324992",
+    "matched_id": "HD 152220"
+  }
+}

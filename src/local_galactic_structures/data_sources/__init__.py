@@ -63,8 +63,29 @@ class ObjectResolver(Protocol):
 
 
 def slugify(text: str) -> str:
-    """Turn an arbitrary query string into a filesystem-safe cache key."""
-    slug = re.sub(r"[^a-z0-9]+", "_", text.strip().lower()).strip("_")
+    """Turn an arbitrary query string into a filesystem-safe cache key.
+
+    Non-ASCII characters (e.g. the Greek Bayer-designation letters used
+    throughout Story #88's individual-star candidates, "beta1 Sco",
+    "gamma2 Vel", etc.) are encoded by codepoint (`u03b2`, ...) rather
+    than stripped. Stripping them (the original implementation) silently
+    collapsed every "<Greek letter>[digit] <constellation>"-shaped query
+    that has no other ASCII content to the same cache key (e.g. both
+    "omega Ori" and "chi2 Ori" slugified to just "ori") - a real,
+    previously-undetected cache-collision bug found during Story #88's
+    Validator review: distinct stars were silently resolved to whichever
+    one happened to be cached first under the collapsed key. Encoding by
+    codepoint keeps every distinct input string mapped to a distinct slug.
+    """
+    slug_chars = []
+    for ch in text.strip().lower():
+        if re.match(r"[a-z0-9]", ch):
+            slug_chars.append(ch)
+        elif ch.isalnum():
+            slug_chars.append(f"u{ord(ch):04x}")
+        else:
+            slug_chars.append("_")
+    slug = re.sub(r"_+", "_", "".join(slug_chars)).strip("_")
     return slug or "unnamed"
 
 

@@ -88,6 +88,19 @@ class TestSlugify:
     def test_slugify_never_empty(self):
         assert slugify("   ") == "unnamed"
 
+    def test_slugify_does_not_collide_on_non_ascii_bayer_designations(self):
+        # Regression test (Story #88 Validator review): the original
+        # implementation stripped non-ASCII characters entirely, so every
+        # "<Greek letter>[superscript digit] <constellation>"-shaped query
+        # with no other ASCII content collapsed to the same cache key
+        # (e.g. both "omega Ori" and "chi2 Ori" slugified to just "ori"),
+        # silently resolving distinct stars to whichever got cached first.
+        slugs = {
+            slugify(s)
+            for s in ["ω Ori", "χ² Ori", "π⁵ Ori", "φ¹ Ori", "ι CMa", "β¹ Sco"]
+        }
+        assert len(slugs) == 6, f"expected 6 distinct slugs, got {slugs}"
+
 
 class TestCacheRecordRoundtrip:
     def test_write_then_read_cache_roundtrips(self, tmp_path: Path):

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Mekbuda",
+  "retrieved_utc": "2026-08-18T07:02:21+00:00",
+  "record_id": "* zet Gem",
+  "raw": {
+    "main_id": "* zet Gem",
+    "ra": 106.02721349362085,
+    "dec": 20.570298465267225,
+    "coo_err_maj": 0.1687999963760376,
+    "coo_err_min": 0.1428000032901764,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.0729,
+    "otype": "cC*",
+    "plx_err": 0.21770000457763672,
+    "ids": "TIC 436949033|UCAC4 553-036128|Gaia DR3 3366754155291545344|HIP 34088|2MASS J07040653+2034131|* zet Gem|PLX 1651|*  43 Gem|AAVSO 0658+20|ADS  5742 A|AG+20  786|BD+20  1687|CCDM J07041+2035A|CSI+20  1687  1|FK5  269|GC  9313|GCRV  4639|GEN# +1.00052973A|GSC 01353-01550|HD  52973|HIC  34088|HR  2650|IDS 06582+2043 A|IRAS 07011+2038|IRC +20169|N30 1536|PMC 90-93   193|PPM  96982|RAFGL 4552S|ROT  1136|SAO  79031|SKY# 12677|SRS  30269|TD1  8933|TYC 1353-1550-1|UBV   21353|V* zet Gem|YPAC  30|YZ  20  2753|WDS J07041+2034A|** OCC  293|** SHJ   77A|WDS J07041+2034Aa,Ab|NAME Mekbuda|WEB  6834|Gaia DR2 3366754155291077632",
+    "matched_id": "NAME Mekbuda"
+  }
+}

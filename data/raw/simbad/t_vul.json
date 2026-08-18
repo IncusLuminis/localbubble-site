@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "T Vul",
+  "retrieved_utc": "2026-08-18T07:03:07+00:00",
+  "record_id": "V* T Vul",
+  "raw": {
+    "main_id": "V* T Vul",
+    "ra": 312.86765990349,
+    "dec": 28.25050545082,
+    "coo_err_maj": 0.03440000116825104,
+    "coo_err_min": 0.045099999755620956,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.6885,
+    "otype": "cC*",
+    "plx_err": 0.05820000171661377,
+    "ids": "TIC 368040266|Gaia DR3 1857884212378132096|PLX 4990|AAVSO 2047+27|AG+28 2339|BD+27  3890|GC 29089|GCRV 13088|GEN# +1.00198726|GSC 02183-02726|HD 198726|HIC 102949|HIP 102949|HR  7988|IRAS 20493+2803|PPM 112020|SAO  89216|SKY# 39577|TD1 27371|TYC 2183-2726-1|UBV M  25225|V* T Vul|YPAC 204|YZ  28 11843|2MASS J20512823+2815018|PLX 4990.00|uvby98 100198726|WEB 18679|Gaia DR2 1857884212378132096",
+    "matched_id": "V* T Vul"
+  }
+}

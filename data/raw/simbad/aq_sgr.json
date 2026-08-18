@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "AQ Sgr",
+  "retrieved_utc": "2026-08-18T06:56:43+00:00",
+  "record_id": "V* AQ Sgr",
+  "raw": {
+    "main_id": "V* AQ Sgr",
+    "ra": 293.5791439481195,
+    "dec": -16.3741802523725,
+    "coo_err_maj": 0.14640000462532043,
+    "coo_err_min": 0.131400004029274,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2018yCat.1345....0G",
+    "plx_value": 1.7946,
+    "otype": "C*",
+    "plx_err": 0.1670999974012375,
+    "ids": "TIC 439106796|HIP 96255|Gaia DR3 4180404407794509056|AAVSO 1928-16|AN   62.1901|BD-16  5360|C* 2744|CGCS 4333|GCRV 11965|GEN# +1.00184283|GSC 06298-00279|HD 184283|HIC  96255|IRAS 19314-1629|IRC -20568|PPM 236189|RAFGL 2416|SAO 162777|SKY# 36492|SV* HV   181|TYC 6298-279-1|UBV M  23873|V* AQ Sgr|YZ 106  7348|[LFO93] 1931-16|2MASS J19341899-1622270|WEB 16869|Gaia DR2 4180404407794509056",
+    "matched_id": "V* AQ Sgr"
+  }
+}

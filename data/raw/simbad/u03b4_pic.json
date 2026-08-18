@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "δ Pic",
+  "retrieved_utc": "2026-08-18T07:05:13+00:00",
+  "record_id": "* del Pic",
+  "raw": {
+    "main_id": "* del Pic",
+    "ra": 92.57461867599751,
+    "dec": -54.96864290893555,
+    "coo_err_maj": 0.12280000001192093,
+    "coo_err_min": 0.15880000591278076,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.1503,
+    "otype": "SB*",
+    "plx_err": 0.15160000324249268,
+    "ids": "TIC 260131665|Gaia DR3 5499415974230271488|HIP 29276|2MASS J06101791-5458071|SBC9 385|* del Pic|CPC 19  2031|CPD-54   980|FK5  235|GC  7898|GCRV  3916|GEN# +1.00042933|GSC 08525-01313|HD  42933|HIC  29276|HR  2212|IRAS 06092-5457|JP11  1341|N30 1330|PPM 334955|ROT   995|SACS 137|SAO 234359|SBC7   270|SKY# 10359|TD1  6416|TYC 8525-1313-1|UBV    6268|V* del Pic|[B10]  1558|ALS 14863|EUVE J0610-54.9|1RXS J061017.9-545813|uvby98 100042933|WEB  5745|Gaia DR2 5499415974230271488",
+    "matched_id": "* del Pic"
+  }
+}

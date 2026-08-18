@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "14 Pup",
+  "retrieved_utc": "2026-08-18T06:55:34+00:00",
+  "record_id": "*  14 Pup",
+  "raw": {
+    "main_id": "*  14 Pup",
+    "ra": 121.17257396059999,
+    "dec": -19.728151119009997,
+    "coo_err_maj": 0.03139999881386757,
+    "coo_err_min": 0.030799999833106995,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.4774,
+    "otype": "*",
+    "plx_err": 0.049800001084804535,
+    "ids": "TIC 175930614|HIP 39524|Gaia DR3 5713359874483930112|*  14 Pup|BD-19  2228|CPD-19  3063|FAUST 2331|GC 10964|GCRV  5369|GEN# +1.00066834|GSC 06003-02953|HD  66834|HIC  39524|HR  3168|PPM 219618|SAO 153796|SKY# 15220|TYC 6003-2953-1|UBV    7752|UBV M  13967|YZ 109  3408|uvby98 100066834|2MASS J08044141-1943414|ALS 17295|WEB  7725|Gaia DR2 5713359874483930112",
+    "matched_id": "*  14 Pup"
+  }
+}

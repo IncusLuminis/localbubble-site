@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "RV Cen",
+  "retrieved_utc": "2026-08-18T07:02:44+00:00",
+  "record_id": "V* RV Cen",
+  "raw": {
+    "main_id": "V* RV Cen",
+    "ra": 204.40023056754998,
+    "dec": -56.476404737029995,
+    "coo_err_maj": 0.010200000368058681,
+    "coo_err_min": 0.01759999990463257,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.1569,
+    "otype": "C*",
+    "plx_err": 0.024900000542402267,
+    "ids": "TIC 90144286|HIP 66466|Gaia DR3 6064199225889725696|AAVSO 1331-55|C* 2106|CD-55  5254|CGCS 3412|CPD-55  5650|GEN# +1.00118322|GSC 08671-01707|HD 118322|HIC  66466|Hen 3-919|IRAS 13343-5613|PPM 770881|SKY# 25055|SV* HV    91|TYC 8671-1707-1|V* RV Cen|2MASS J13373605-5628351|Gaia DR2 6064199225889725696",
+    "matched_id": "V* RV Cen"
+  }
+}

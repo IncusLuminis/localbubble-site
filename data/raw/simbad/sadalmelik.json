@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Sadalmelik",
+  "retrieved_utc": "2026-08-18T07:02:57+00:00",
+  "record_id": "* alf Aqr",
+  "raw": {
+    "main_id": "* alf Aqr",
+    "ra": 331.4459814409479,
+    "dec": -0.3198509554241667,
+    "coo_err_maj": 0.30070000886917114,
+    "coo_err_min": 0.3474000096321106,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.9451,
+    "otype": "*",
+    "plx_err": 0.4296000003814697,
+    "ids": "TIC 248692177|Gaia DR3 2680356911816018048|WISE J220546.96-001911.5|PLX 5332|* alf Aqr|*  34 Aqr|AG-00 2832|BD-01  4246|CCDM J22058-0019A|CSI-01  4246  1|EIC   873|FK5  827|GC 30896|GCRV 13879|GEN# +1.00209750|GSC 05224-01806|HD 209750|HIC 109074|HIP 109074|HR  8414|IDS 22006-0048 A|IRAS 22032-0033|IRC +00513|JP11  3444|N30 4868|PMC 90-93   578|PPM 181401|RAFGL 2844|ROT  3207|SAO 145862|SKY# 42093|TD1 28759|TYC 5224-1806-1|UBV   18874|UBV M  26106|YZ  90  5571|uvby98 100209750|2MASS J22054703-0019114|PLX 5332.00|WDS J22058-0019A|** BUP  232A|NAME Sadalmelik|WEB 19611|Gaia DR2 2680356911815074432",
+    "matched_id": "NAME Sadalmelik"
+  }
+}

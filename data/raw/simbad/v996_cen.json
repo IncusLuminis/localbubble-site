@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V996 Cen",
+  "retrieved_utc": "2026-08-18T07:03:55+00:00",
+  "record_id": "V* V996 Cen",
+  "raw": {
+    "main_id": "V* V996 Cen",
+    "ra": 213.53062178896997,
+    "dec": -53.93199110098,
+    "coo_err_maj": 0.021400000900030136,
+    "coo_err_min": 0.021800000220537186,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7366,
+    "otype": "C*",
+    "plx_err": 0.03539999946951866,
+    "ids": "TIC 408748947|HIP 69539|Gaia DR3 5896924440262658432|AAVSO 1407-53|AN   98.1907|C* 2148|CD-53  5490|CGCS 3481|CPC 19  5380|CPD-53  5915|CSV   2116|GEN# +1.00124268|GSC 08678-00678|HD 124268|HIC  69539|IRAS 14107-5341|NSV  6589|PPM 342666|SAO 241556|SV* HV  2950|SV* ZI  1051|TYC 8678-678-1|V* V996 Cen|2MASS J14140736-5355550|Gaia DR2 5896924440262658432",
+    "matched_id": "V* V996 Cen"
+  }
+}

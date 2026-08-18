@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ε CMi",
+  "retrieved_utc": "2026-08-18T07:05:22+00:00",
+  "record_id": "* eps CMi",
+  "raw": {
+    "main_id": "* eps CMi",
+    "ra": 111.4120820166,
+    "dec": 9.276090422389998,
+    "coo_err_maj": 0.07490000128746033,
+    "coo_err_min": 0.07280000299215317,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.9908,
+    "otype": "*",
+    "plx_err": 0.08110000193119049,
+    "ids": "TIC 425201066|AP J07253890+0916339|HIP 36041|Gaia DR3 3155451625572457344|* eps CMi|PLX 1746|*   2 CMi|AG+09  892|BD+09  1643|GC  9908|GCRV  4935|GEN# +1.00058367|GSC 00764-02771|HD  58367|HIC  36041|HR  2828|IRAS 07229+0922|IRC +10163|JP11  1550|PPM 152614|ROT  1198|SAO 115425|SKY# 13538|TD1 10050|TYC  764-2771-1|UBV    7178|UBV M  13253|YPAC 144|YZ   9  3807|uvby98 100058367|2MASS J07253890+0916339|PLX 1746.00|Gaia DR1 3155451621275396480|WEB  7177|Gaia DR2 3155451625572457344",
+    "matched_id": "* eps CMi"
+  }
+}

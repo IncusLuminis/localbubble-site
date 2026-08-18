@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V Nor",
+  "retrieved_utc": "2026-08-18T07:03:21+00:00",
+  "record_id": "V* V Nor",
+  "raw": {
+    "main_id": "V* V Nor",
+    "ra": 242.5071744639,
+    "dec": -49.23668088544,
+    "coo_err_maj": 0.06129999831318855,
+    "coo_err_min": 0.03629999980330467,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.762,
+    "otype": "LP*",
+    "plx_err": 0.08410000056028366,
+    "ids": "TIC 215654139|Gaia DR3 5983294274085942272|AAVSO 1602-48|AN   14.1901|CD-48 10576|CPC  0 14408|CPD-48  8187|GCRV 27359|GEN# +1.00144813|GSC 08319-00877|HD 144813|IRAS 16063-4906|PPM 321438|SAO 226545|SV* HV   156|TYC 8319-877-1|V* V Nor|2MASS J16100171-4914118|RAVE J161001.7-491412|Gaia DR2 5983294274085942272",
+    "matched_id": "V* V Nor"
+  }
+}

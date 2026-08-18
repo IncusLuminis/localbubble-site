@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Shaula",
+  "retrieved_utc": "2026-08-18T07:03:02+00:00",
+  "record_id": "* lam Sco",
+  "raw": {
+    "main_id": "* lam Sco",
+    "ra": 263.40216718438023,
+    "dec": -37.10382355111976,
+    "coo_err_maj": 9.47301959991455,
+    "coo_err_min": 5.44799280166626,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 5.71,
+    "otype": "bC*",
+    "plx_err": 0.75,
+    "ids": "TIC 465088681|HIP 85927|*  35 Sco|* lam Sco|CCDM J17336-3706A|CD-37 11673|CPC 18  8791|CPD-37  7265|CSI-37 11673 21|FK5  652|GC 23769|GCRV 10136|GEN# +1.00158926|GSC 07388-01093|HD 158926|HIC  85927|HR  6527|IDS 17268-3702 A|IRAS 17302-3704|JP11  2862|N30 3905|NAME Shaula|PMC 90-93   462|PPM 296488|ROT  2459|SACS 383|SAO 208954|SKY# 31695|SRS  30652|TD1 20577|TYC 7388-1093-1|UBV M  22240|UBV   14937|V* lam Sco|[B10]  4439|[SC95] ZET 456|[SC96] Mis  521|[SC96] GC  99|2MASS J17333652-3706135|ALS 15082|1E 1730.2-3704|1RXS J173336.7-370604|EUVE J1733-37.1|WDS J17336-3706A|WDS J17336-3706Aa,Ab|** TNG    1|** SEE  334A|** DUN  218A|WD 1730-370|uvby98 100158926|WEB 14501",
+    "matched_id": "NAME Shaula"
+  }
+}

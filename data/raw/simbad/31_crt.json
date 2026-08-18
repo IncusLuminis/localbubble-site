@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "31 Crt",
+  "retrieved_utc": "2026-08-18T06:56:18+00:00",
+  "record_id": "*  31 Crt",
+  "raw": {
+    "main_id": "*  31 Crt",
+    "ra": 180.21316317341999,
+    "dec": -19.658981176430004,
+    "coo_err_maj": 0.09929999709129333,
+    "coo_err_min": 0.08810000121593475,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.6891,
+    "otype": "SB*",
+    "plx_err": 0.1525000035762787,
+    "ids": "TIC 428684629|HIP 58587|Gaia DR3 3518794554458428160|SBC9 698|*  31 Crt|BD-18  3295|EC 11582-1922|FAUST 2981|FK5 2961|GC 16423|GCRV  7222|GEN# +1.00104337|GSC 06097-01648|HD 104337|HGAM    608|HIC  58587|HR  4590|MCW  552|N30 2790|PPM 225249|ROT  1769|SAO 157042|SBC7   448|SKY# 22600|TD1 16009|TYC 6097-1648-1|V* TY Crv|YZ 109  5217|[DBA2001] FA29|uvby98 100104337|2MASS J12005117-1939325|ALS 14812|WEB 10456|Gaia DR2 3518794554458428160",
+    "matched_id": "*  31 Crt"
+  }
+}

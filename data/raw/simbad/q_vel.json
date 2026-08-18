@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Q Vel",
+  "retrieved_utc": "2026-08-18T07:02:40+00:00",
+  "record_id": "* Q Vel",
+  "raw": {
+    "main_id": "* Q Vel",
+    "ra": 152.23433169975752,
+    "dec": -51.81126175603361,
+    "coo_err_maj": 0.07559999823570251,
+    "coo_err_min": 0.08150000125169754,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.0767,
+    "otype": "Pu*",
+    "plx_err": 0.10209999978542328,
+    "ids": "TIC 309920793|HIP 49712|Gaia DR3 5356991663260068480|* Q Vel|CD-51  4507|CPC  0  8223|CPD-51  3008|GC 13953|GCRV  6427|GEN# +1.00088206|GSC 08195-04554|HD  88206|HIC  49712|HR  3990|JP11  1903|N30 2418|PPM 338714|ROT  1538|SAO 237736|SKY# 19530|TD1 14611|TYC 8195-4554-1|UBV    9467|UBV M  15981|[B10]  2702|uvby98 100088206|2MASS J10085623-5148404|ALS 14942|IRAS 10070-5133|AKARI-IRC-V1 J1008562-514840|WEB  9165|Gaia DR2 5356991663260068480",
+    "matched_id": "* Q Vel"
+  }
+}

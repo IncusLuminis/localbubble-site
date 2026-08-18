@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ξ Tel",
+  "retrieved_utc": "2026-08-18T07:06:09+00:00",
+  "record_id": "* ksi Tel",
+  "raw": {
+    "main_id": "* ksi Tel",
+    "ra": 301.84648944839,
+    "dec": -52.880792784149996,
+    "coo_err_maj": 0.23190000653266907,
+    "coo_err_min": 0.1527000069618225,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.3579,
+    "otype": "*",
+    "plx_err": 0.2786000072956085,
+    "ids": "TIC 101543913|HIP 99120|Gaia DR3 6665511449204071424|PLX 4763|* ksi Tel|CPC 19  7913|CPD-53  9794|FK5  755|GC 27879|GCRV 12456|GEN# +1.00190421|GSC 08776-01343|HD 190421|HIC  99120|HR  7673|IRAS 20035-5301|N30 4440|NSV 12783|PPM 348272|SACS 442|SAO 246443|SKY# 37825|TYC 8776-1343-1|UBV   17167|UBV M  24462|2MASS J20072316-5252505|PLX 4763.00|WEB 17634|Gaia DR2 6665511449204071424",
+    "matched_id": "* ksi Tel"
+  }
+}
