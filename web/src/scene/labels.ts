@@ -51,8 +51,9 @@ export function shouldShowLabel(params: LabelVisibilityParams): boolean {
   return params.cameraDistancePc <= params.maxCameraDistancePc;
 }
 
-/** Default distance (pc) beyond which an unselected object's label is
- * hidden to reduce clutter (spec §25).
+/** Floor (pc) for the label-visibility distance threshold - see
+ * `effectiveMaxLabelDistancePc` below for the value actually used at
+ * runtime.
  *
  * `cameraDistancePc` here is measured from the camera itself, not from the
  * scene's center. Story #65 set this to 2000pc back when the catalog held
@@ -67,11 +68,54 @@ export function shouldShowLabel(params: LabelVisibilityParams): boolean {
  *
  * Retuned to 250pc (issue #89, verified interactively - see the PR
  * description): tight enough that only objects genuinely close to the
- * camera keep an always-on label at the default view, while
- * `MAX_VISIBLE_LABELS` below is the actual hard cap on DOM cost regardless
- * of how many objects happen to fall within this radius. Purely a
- * visual/display parameter (spec §19), not a scientific value. */
+ * camera keep an always-on label when the camera itself is close in. But a
+ * *fixed* 250pc threshold turned out to interact badly with the default
+ * camera pose: `scene/camera.ts`'s default position is ~1087pc from the
+ * origin, so at first load, with no user interaction, literally every
+ * catalog object was >250pc from the camera and zero labels rendered
+ * (issue #94) - a large, jarring regression from the pre-#89 "show
+ * everything by default" behavior, even though `MAX_VISIBLE_LABELS` below
+ * was already sitting there ready to cap the DOM cost regardless of how
+ * generous the distance threshold is. `DEFAULT_MAX_LABEL_DISTANCE_PC` is
+ * now a *floor* under `effectiveMaxLabelDistancePc`'s camera-relative
+ * threshold rather than the threshold itself - see that function for the
+ * reconciliation. Purely a visual/display parameter (spec §19), not a
+ * scientific value. */
 export const DEFAULT_MAX_LABEL_DISTANCE_PC = 250;
+
+/** Multiplier applied to the camera's distance from the scene origin (the
+ * Sun, spec §6) to derive the label-visibility threshold at the *current*
+ * view (issue #94's fix). Chosen so that, at the default "Perspective" pose
+ * (`scene/camera.ts`, camera ~1087pc from the origin), the effective
+ * threshold (~1631pc) comfortably covers the near-Sun-concentrated bulk of
+ * the catalog (spec `Idea-v1.2-individual-stars.md`: individual-star density
+ * is highest close to the Sun) without needing to reach every object at the
+ * default 800pc radius-filter edge in every direction - `MAX_VISIBLE_LABELS`
+ * below still caps final DOM output regardless, so there is no performance
+ * downside to a generous multiplier here (see that constant's docstring). */
+export const LABEL_DISTANCE_CAMERA_SCALE_FACTOR = 1.5;
+
+/**
+ * The actual label-visibility distance threshold (pc) for the *current*
+ * camera position, reconciling the two defaults issue #94 flagged as being
+ * out of sync: it scales with `cameraDistanceFromOriginPc` (so the default,
+ * zoomed-out "Perspective" pose still shows a reasonable set of labels)
+ * while never dropping below `DEFAULT_MAX_LABEL_DISTANCE_PC` (so zooming in
+ * close, e.g. the "Sun-centered" preset, doesn't tighten the threshold below
+ * where it already worked fine pre-#94).
+ *
+ * Recomputed by `main.ts`'s `updateLabelVisibility` every frame from
+ * `camera.position.length()` - a single cheap vector-length call, not the
+ * per-frame DOM/CSS2DRenderer cost issue #89 was actually about (that
+ * concern is addressed by `selectNearestLabels`'s hard cap below,
+ * unaffected by how this threshold is computed).
+ */
+export function effectiveMaxLabelDistancePc(cameraDistanceFromOriginPc: number): number {
+  return Math.max(
+    DEFAULT_MAX_LABEL_DISTANCE_PC,
+    cameraDistanceFromOriginPc * LABEL_DISTANCE_CAMERA_SCALE_FACTOR,
+  );
+}
 
 /** Hard cap on the number of labels rendered simultaneously (issue #89):
  * at 605 catalog objects, distance-threshold culling alone

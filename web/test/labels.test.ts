@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { selectNearestLabels, shouldShowLabel, type LabelRankCandidate } from "../src/scene/labels";
+import {
+  DEFAULT_MAX_LABEL_DISTANCE_PC,
+  effectiveMaxLabelDistancePc,
+  LABEL_DISTANCE_CAMERA_SCALE_FACTOR,
+  selectNearestLabels,
+  shouldShowLabel,
+  type LabelRankCandidate,
+} from "../src/scene/labels";
 
 /**
  * Branch coverage for the label clutter-avoidance rule (spec Idea.md §25).
@@ -117,5 +124,63 @@ describe("selectNearestLabels", () => {
     expect(visible.has("obj-0")).toBe(true);
     expect(visible.has("obj-59")).toBe(true);
     expect(visible.has("obj-60")).toBe(false);
+  });
+});
+
+/**
+ * Issue #94: the default camera pose (`scene/camera.ts`) sits ~1087pc from
+ * the origin, well outside the fixed 250pc threshold PR #93/issue #89 set,
+ * so on first load - with no user zoom/pan and nothing selected - literally
+ * every catalog object failed `shouldShowLabel`'s distance check and zero
+ * labels rendered. `effectiveMaxLabelDistancePc` reconciles the two
+ * defaults by scaling the threshold with the camera's current distance from
+ * the origin, floored at the original 250pc so close-in zoom levels
+ * (e.g. the "Sun-centered" preset) keep behaving exactly as before #94.
+ */
+describe("effectiveMaxLabelDistancePc", () => {
+  it("never drops below the DEFAULT_MAX_LABEL_DISTANCE_PC floor when the camera is close in", () => {
+    // Sun-centered preset camera distance (~93.8pc, scene/cameraPresets.ts).
+    expect(effectiveMaxLabelDistancePc(93.8)).toBe(DEFAULT_MAX_LABEL_DISTANCE_PC);
+    expect(effectiveMaxLabelDistancePc(0)).toBe(DEFAULT_MAX_LABEL_DISTANCE_PC);
+  });
+
+  it("scales linearly with camera distance once that exceeds the floor", () => {
+    const cameraDistancePc = 1000;
+    expect(effectiveMaxLabelDistancePc(cameraDistancePc)).toBeCloseTo(
+      cameraDistancePc * LABEL_DISTANCE_CAMERA_SCALE_FACTOR,
+      6,
+    );
+  });
+
+  it("at the default 'Perspective' camera pose (~1087pc from the origin), the threshold comfortably covers near-Sun objects that a fixed 250pc threshold would have excluded entirely", () => {
+    // scene/camera.ts's default position (700, -700, 450); length ~1087.4pc.
+    const defaultCameraDistancePc = Math.sqrt(700 ** 2 + 700 ** 2 + 450 ** 2);
+    const threshold = effectiveMaxLabelDistancePc(defaultCameraDistancePc);
+
+    expect(threshold).toBeGreaterThan(DEFAULT_MAX_LABEL_DISTANCE_PC);
+
+    // A star close to the Sun (10, 10, 5) - representative of the
+    // catalog's near-Sun density (spec Idea-v1.2-individual-stars.md) - is
+    // well within the new threshold from that default camera position,
+    // where it would have been >4x the old fixed 250pc threshold away.
+    const cameraPosition = { x: 700, y: -700, z: 450 };
+    const nearSunObject = { x: 10, y: 10, z: 5 };
+    const cameraDistanceToObject = Math.sqrt(
+      (cameraPosition.x - nearSunObject.x) ** 2 +
+        (cameraPosition.y - nearSunObject.y) ** 2 +
+        (cameraPosition.z - nearSunObject.z) ** 2,
+    );
+    expect(cameraDistanceToObject).toBeGreaterThan(DEFAULT_MAX_LABEL_DISTANCE_PC);
+    expect(cameraDistanceToObject).toBeLessThanOrEqual(threshold);
+    expect(
+      shouldShowLabel({
+        labelsEnabled: true,
+        layerVisible: true,
+        withinRadius: true,
+        isSelected: false,
+        cameraDistancePc: cameraDistanceToObject,
+        maxCameraDistancePc: threshold,
+      }),
+    ).toBe(true);
   });
 });

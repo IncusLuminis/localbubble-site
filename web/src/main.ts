@@ -9,6 +9,7 @@ import {
   catalogObjectTypes,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
+  isSelectedObjectVisible,
   updateCatalogSizeScale,
   updateCatalogVisibility,
   visibleCatalogObjects,
@@ -19,7 +20,7 @@ import { createGouldBeltLayer, createLocalBubbleLayer, createRadcliffeWaveLayer 
 import {
   createLabelRenderer,
   createLabelsLayer,
-  DEFAULT_MAX_LABEL_DISTANCE_PC,
+  effectiveMaxLabelDistancePc,
   MAX_VISIBLE_LABELS,
   selectNearestLabels,
   shouldShowLabel,
@@ -106,6 +107,37 @@ let localBubbleGroup: ReturnType<typeof createLocalBubbleLayer> | null = null;
 function applyCatalogVisibility(): void {
   updateCatalogVisibility(catalogBuckets, categoryVisibility, radiusPc);
   updateCatalogSizeScale(catalogBuckets, sizeScale);
+  refreshSelectionVisibility();
+}
+
+/** Issue #95: keeps the Inspector honest whenever a filter change
+ * (category toggle, radius change) may have hidden the object it's
+ * currently showing. Deliberately does NOT clear `selectedObjectId` - it
+ * just hides the Inspector panel while the object is filtered out, so that
+ * undoing the filter (this function running again on the next
+ * `applyCatalogVisibility()` call) restores the Inspector automatically
+ * without the user needing to re-click the object (spec-equivalent
+ * behavior to re-selection, per issue #95's "if feasible" acceptance
+ * criterion). `updateLabelVisibility`'s own `withinRadius`/`layerVisible`
+ * checks already independently hide a filtered-out object's label
+ * regardless of `selectedObjectId` (see `scene/labels.ts`'s
+ * `shouldShowLabel`), so no label-side change was needed for this issue. */
+function refreshSelectionVisibility(): void {
+  if (selectedObjectId === null) return;
+  const stillVisible = isSelectedObjectVisible(
+    catalogObjects,
+    selectedObjectId,
+    categoryVisibility,
+    radiusPc,
+  );
+  if (!stillVisible) {
+    inspector.hide();
+    return;
+  }
+  const obj = catalogObjects.find((o) => o.id === selectedObjectId);
+  if (obj) {
+    inspector.show(obj);
+  }
 }
 
 function applyStructureVisibility(): void {
@@ -122,6 +154,14 @@ function updateLabelVisibility(): void {
   // distance-threshold rule (`shouldShowLabel`, unchanged from Story #65).
   // At 605 objects this alone is not enough to bound the simultaneously-
   // visible count (issue #89) - pass 2 below applies the actual cap.
+  //
+  // The distance threshold itself is camera-relative (issue #94): computed
+  // once per call from the camera's current distance to the origin, so the
+  // default zoomed-out "Perspective" pose still surfaces a reasonable set
+  // of labels instead of the fixed 250pc threshold excluding literally
+  // everything (see `effectiveMaxLabelDistancePc`'s docstring).
+  const maxCameraDistancePc = effectiveMaxLabelDistancePc(camera.position.length());
+
   const rankCandidates: LabelRankCandidate[] = [];
   for (const label of labelsInfo.labels) {
     const obj = label.object;
@@ -135,7 +175,7 @@ function updateLabelVisibility(): void {
       withinRadius,
       isSelected,
       cameraDistancePc,
-      maxCameraDistancePc: DEFAULT_MAX_LABEL_DISTANCE_PC,
+      maxCameraDistancePc,
     });
     if (passesBaseRule) {
       rankCandidates.push({ id: obj.id, cameraDistancePc, isSelected });
