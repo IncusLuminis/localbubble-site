@@ -9,10 +9,22 @@ import {
   catalogObjectTypes,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
+  updateCatalogSizeScale,
+  updateCatalogVisibility,
+  visibleCatalogObjects,
+  type CatalogBucket,
 } from "./scene/objects";
 import { loadScene } from "./scene/sceneData";
 import { createGouldBeltLayer, createLocalBubbleLayer, createRadcliffeWaveLayer } from "./scene/structures";
-import { createLabelRenderer, createLabelsLayer, DEFAULT_MAX_LABEL_DISTANCE_PC, shouldShowLabel } from "./scene/labels";
+import {
+  createLabelRenderer,
+  createLabelsLayer,
+  DEFAULT_MAX_LABEL_DISTANCE_PC,
+  MAX_VISIBLE_LABELS,
+  selectNearestLabels,
+  shouldShowLabel,
+  type LabelRankCandidate,
+} from "./scene/labels";
 import { DEFAULT_RADIUS_PC, RADIUS_PRESETS_PC, isWithinRadius } from "./scene/radiusFilter";
 import {
   edgeOnPose,
@@ -84,7 +96,7 @@ const structureVisibility = new Map<string, boolean>([
 ]);
 
 // Populated once the scene loads.
-let catalogGroup: ReturnType<typeof createCatalogObjectGroup> | null = null;
+let catalogBuckets: CatalogBucket[] = [];
 let catalogObjects: SceneObject[] = [];
 let labelsInfo: ReturnType<typeof createLabelsLayer> | null = null;
 let gouldBeltGroup: ReturnType<typeof createGouldBeltLayer> | null = null;
@@ -92,14 +104,8 @@ let radcliffeWaveGroup: ReturnType<typeof createRadcliffeWaveLayer> | null = nul
 let localBubbleGroup: ReturnType<typeof createLocalBubbleLayer> | null = null;
 
 function applyCatalogVisibility(): void {
-  if (!catalogGroup) return;
-  for (const child of catalogGroup.children) {
-    const obj = child.userData.sceneObject as SceneObject | undefined;
-    if (!obj) continue;
-    const categoryOn = categoryVisibility.get(obj.object_type) ?? true;
-    child.visible = categoryOn && isWithinRadius(obj.distance_pc, radiusPc);
-    child.scale.setScalar(sizeScale);
-  }
+  updateCatalogVisibility(catalogBuckets, categoryVisibility, radiusPc);
+  updateCatalogSizeScale(catalogBuckets, sizeScale);
 }
 
 function applyStructureVisibility(): void {
@@ -111,19 +117,38 @@ function applyStructureVisibility(): void {
 
 function updateLabelVisibility(): void {
   if (!labelsInfo) return;
+
+  // Pass 1: everything that passes the existing toggle/layer/radius/
+  // distance-threshold rule (`shouldShowLabel`, unchanged from Story #65).
+  // At 605 objects this alone is not enough to bound the simultaneously-
+  // visible count (issue #89) - pass 2 below applies the actual cap.
+  const rankCandidates: LabelRankCandidate[] = [];
   for (const label of labelsInfo.labels) {
     const obj = label.object;
     const categoryOn = categoryVisibility.get(obj.object_type) ?? true;
     const withinRadius = isWithinRadius(obj.distance_pc, radiusPc);
     const cameraDistancePc = camera.position.distanceTo(label.css2dObject.position);
-    const visible = shouldShowLabel({
+    const isSelected = obj.id === selectedObjectId;
+    const passesBaseRule = shouldShowLabel({
       labelsEnabled,
       layerVisible: categoryOn,
       withinRadius,
-      isSelected: obj.id === selectedObjectId,
+      isSelected,
       cameraDistancePc,
       maxCameraDistancePc: DEFAULT_MAX_LABEL_DISTANCE_PC,
     });
+    if (passesBaseRule) {
+      rankCandidates.push({ id: obj.id, cameraDistancePc, isSelected });
+    }
+  }
+
+  // Pass 2: nearest-N cap (issue #89's `MAX_VISIBLE_LABELS`) among those
+  // that passed pass 1, so the selected object's label always survives
+  // regardless of rank.
+  const visibleIds = selectNearestLabels(rankCandidates, MAX_VISIBLE_LABELS);
+
+  for (const label of labelsInfo.labels) {
+    const obj = label.object;
     // `CSS2DRenderer.render()` (see node_modules/three/examples/jsm/
     // renderers/CSS2DRenderer.js) overwrites `element.style.display` every
     // frame based on its own frustum-z test (resetting it to '' whenever
@@ -133,7 +158,7 @@ function updateLabelVisibility(): void {
     // is the mechanism the renderer itself respects (its `hideObject()`
     // path short-circuits before touching `display` again), so that's what
     // drives actual show/hide; `element.style.display` is left alone.
-    label.css2dObject.visible = visible;
+    label.css2dObject.visible = visibleIds.has(obj.id);
     label.element.classList.toggle("selected", obj.id === selectedObjectId);
   }
 }
@@ -149,10 +174,9 @@ function selectObject(obj: SceneObject | null): void {
 }
 
 function currentlyVisiblePositions(): [number, number, number][] {
-  if (!catalogGroup) return [];
-  return catalogGroup.children
-    .filter((child) => child.visible)
-    .map((child): [number, number, number] => [child.position.x, child.position.y, child.position.z]);
+  return visibleCatalogObjects(catalogBuckets, categoryVisibility, radiusPc).map(
+    (obj): [number, number, number] => obj.position_pc,
+  );
 }
 
 function applyCameraPose(pose: CameraPose): void {
@@ -199,8 +223,9 @@ loadScene()
   .then((sceneData) => {
     catalogObjects = excludeDedicatedMarkerObjects(sceneData.objects);
 
-    catalogGroup = createCatalogObjectGroup(sceneData.objects);
-    scene.add(catalogGroup);
+    const catalogLayer = createCatalogObjectGroup(sceneData.objects);
+    catalogBuckets = catalogLayer.buckets;
+    scene.add(catalogLayer.group);
 
     labelsInfo = createLabelsLayer(catalogObjects);
     scene.add(labelsInfo.group);
@@ -306,7 +331,7 @@ renderer.domElement.addEventListener("pointerdown", (event) => {
 });
 
 renderer.domElement.addEventListener("click", (event) => {
-  if (!catalogGroup) return;
+  if (catalogBuckets.length === 0) return;
   if (pointerDownClientPos) {
     const dx = event.clientX - pointerDownClientPos.x;
     const dy = event.clientY - pointerDownClientPos.y;
@@ -316,7 +341,7 @@ renderer.domElement.addEventListener("click", (event) => {
   }
   const rect = renderer.domElement.getBoundingClientRect();
   const ndc = toNdc(event.clientX, event.clientY, rect);
-  const hit = pickSceneObject(raycaster, camera, ndc, catalogGroup);
+  const hit = pickSceneObject(raycaster, camera, ndc, catalogBuckets);
   selectObject(hit);
 });
 

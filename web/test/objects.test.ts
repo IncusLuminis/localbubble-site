@@ -1,20 +1,29 @@
 import { describe, expect, it } from "vitest";
+import { Matrix4, Quaternion, Vector3 } from "three";
+import type { InstancedMesh } from "three";
 import {
   catalogObjectTypes,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
+  isCatalogObjectVisible,
+  markerRadiusPc,
+  setInstanceVisibility,
   SUN_OBJECT_ID,
+  updateCatalogSizeScale,
+  updateCatalogVisibility,
+  visibleCatalogObjects,
+  type CatalogBucket,
 } from "../src/scene/objects";
 import type { SceneObject } from "../src/scene/sceneTypes";
 
 /**
- * Regression coverage for PR #79 review: the Sun was being drawn twice -
- * once via its dedicated marker (`scene/sun.ts`) and again as a generic
- * grey sphere from the catalog-object render loop, because `scene.json`'s
- * `objects` array legitimately includes the Sun itself (`id: "sun"`,
- * `object_type: "reference_point"`) as a real catalog entry. These tests
- * don't need a WebGL context - `THREE.Group`/`Mesh`/`Geometry`/`Material`
- * are plain data objects constructible under Node (spec §38).
+ * Regression coverage for PR #79 review (the Sun double-render bug) plus
+ * issue #89's `InstancedMesh` conversion: one instance buffer per
+ * `object_type`, correct per-instance transforms (position + radius baked
+ * into scale), and the zero-scale visibility mechanism that replaces plain
+ * `Mesh.visible` now that instances can't have their own `.visible`. None
+ * of this needs a real WebGL context - `THREE.InstancedMesh`/`Matrix4` are
+ * plain data/math types constructible under Node (spec §38).
  */
 
 function makeObject(overrides: Partial<SceneObject>): SceneObject {
@@ -43,8 +52,36 @@ const SUN_ENTRY = makeObject({
   distance_pc: 0,
 });
 
-const CLOUD_A = makeObject({ id: "cloud-a", position_pc: [100, 0, 0] });
-const CLOUD_B = makeObject({ id: "cloud-b", position_pc: [0, 200, -10] });
+const CLOUD_A = makeObject({ id: "cloud-a", position_pc: [100, 0, 0], distance_pc: 100 });
+const CLOUD_B = makeObject({ id: "cloud-b", position_pc: [0, 200, -10], distance_pc: 200.25 });
+const STAR_A = makeObject({
+  id: "star-a",
+  object_type: "star",
+  position_pc: [5, 5, 5],
+  distance_pc: 8.66,
+});
+const STAR_B = makeObject({
+  id: "star-b",
+  object_type: "star",
+  position_pc: [50, 0, 0],
+  distance_pc: 50,
+});
+
+/** Reads instance `index`'s baked transform back out of `bucket.mesh` via
+ * `Three`'s own `Matrix4.decompose`, so tests assert against the real
+ * position/scale rather than internals of how the matrix was built. */
+function decomposeInstanceMatrix(
+  bucket: CatalogBucket,
+  index: number,
+): { position: Vector3; quaternion: Quaternion; scale: Vector3 } {
+  const matrix = new Matrix4();
+  (bucket.mesh as InstancedMesh).getMatrixAt(index, matrix);
+  const position = new Vector3();
+  const quaternion = new Quaternion();
+  const scale = new Vector3();
+  matrix.decompose(position, quaternion, scale);
+  return { position, quaternion, scale };
+}
 
 describe("excludeDedicatedMarkerObjects", () => {
   it("drops the Sun's own catalog entry by id", () => {
@@ -69,26 +106,6 @@ describe("excludeDedicatedMarkerObjects", () => {
   });
 });
 
-describe("createCatalogObjectGroup", () => {
-  it("does not create a mesh for the Sun (avoids double-rendering it)", () => {
-    const group = createCatalogObjectGroup([SUN_ENTRY, CLOUD_A, CLOUD_B]);
-    expect(group.children).toHaveLength(2);
-    expect(group.children.some((child) => child.name === SUN_OBJECT_ID)).toBe(false);
-    expect(group.children.map((child) => child.name).sort()).toEqual([
-      "cloud-a",
-      "cloud-b",
-    ]);
-  });
-
-  it("places no mesh at the exact origin when only the Sun is at (0,0,0)", () => {
-    const group = createCatalogObjectGroup([SUN_ENTRY, CLOUD_A]);
-    const atOrigin = group.children.filter(
-      (child) => child.position.x === 0 && child.position.y === 0 && child.position.z === 0,
-    );
-    expect(atOrigin).toHaveLength(0);
-  });
-});
-
 describe("catalogObjectTypes", () => {
   it("returns distinct, sorted object_type values, excluding the Sun", () => {
     const clusterA = makeObject({ id: "cluster-a", object_type: "star_cluster" });
@@ -101,5 +118,135 @@ describe("catalogObjectTypes", () => {
   it("is empty for an all-Sun (or empty) input", () => {
     expect(catalogObjectTypes([SUN_ENTRY])).toEqual([]);
     expect(catalogObjectTypes([])).toEqual([]);
+  });
+});
+
+describe("createCatalogObjectGroup (InstancedMesh buckets)", () => {
+  it("builds one InstancedMesh bucket per object_type, excluding the Sun", () => {
+    const { group, buckets } = createCatalogObjectGroup([SUN_ENTRY, CLOUD_A, CLOUD_B, STAR_A, STAR_B]);
+
+    expect(buckets.map((b) => b.objectType).sort()).toEqual(["molecular_cloud", "star"]);
+    expect(group.children).toHaveLength(2);
+    // Every child of the group is one of the buckets' InstancedMesh.
+    expect(group.children.every((child) => buckets.some((b) => b.mesh === child))).toBe(true);
+  });
+
+  it("sizes each bucket's instance count to the objects actually in it", () => {
+    const { buckets } = createCatalogObjectGroup([SUN_ENTRY, CLOUD_A, CLOUD_B, STAR_A, STAR_B]);
+    const moleculeBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    expect(moleculeBucket.objects.map((o) => o.id).sort()).toEqual(["cloud-a", "cloud-b"]);
+    expect(moleculeBucket.mesh.count).toBe(2);
+    expect(starBucket.objects.map((o) => o.id).sort()).toEqual(["star-a", "star-b"]);
+    expect(starBucket.mesh.count).toBe(2);
+  });
+
+  it("never creates an instance for the Sun's own catalog entry", () => {
+    const { buckets } = createCatalogObjectGroup([SUN_ENTRY, CLOUD_A]);
+    for (const bucket of buckets) {
+      expect(bucket.objects.some((o) => o.id === SUN_OBJECT_ID)).toBe(false);
+    }
+  });
+
+  it("encodes each instance's transform as its real position with a radius-derived scale", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B]);
+    const bucket = buckets[0];
+
+    bucket.objects.forEach((obj, i) => {
+      const { position, scale } = decomposeInstanceMatrix(bucket, i);
+      expect(position.toArray()).toEqual(obj.position_pc);
+      const expectedRadius = markerRadiusPc(obj.size_pc);
+      expect(scale.x).toBeCloseTo(expectedRadius, 6);
+      expect(scale.y).toBeCloseTo(expectedRadius, 6);
+      expect(scale.z).toBeCloseTo(expectedRadius, 6);
+    });
+  });
+});
+
+describe("setInstanceVisibility (zero-scale hide mechanism)", () => {
+  it("collapses a hidden instance's transform to zero scale without touching its position", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B]);
+    const bucket = buckets[0];
+
+    setInstanceVisibility(bucket, 0, false);
+
+    const { position, scale } = decomposeInstanceMatrix(bucket, 0);
+    expect(scale.x).toBe(0);
+    expect(scale.y).toBe(0);
+    expect(scale.z).toBe(0);
+    expect(position.toArray()).toEqual(bucket.objects[0].position_pc);
+  });
+
+  it("restores the real radius scale when shown again, without shifting instance indices", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B]);
+    const bucket = buckets[0];
+
+    setInstanceVisibility(bucket, 0, false);
+    setInstanceVisibility(bucket, 0, true);
+
+    const { scale } = decomposeInstanceMatrix(bucket, 0);
+    expect(scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
+    // Instance count/order is unchanged - index 1 still maps to the same object.
+    expect(bucket.objects[1].id).toBe("cloud-b");
+    expect(bucket.mesh.count).toBe(2);
+  });
+});
+
+describe("isCatalogObjectVisible / updateCatalogVisibility / visibleCatalogObjects", () => {
+  const categoryVisibility = new Map<string, boolean>([
+    ["molecular_cloud", true],
+    ["star", false],
+  ]);
+
+  it("is false when the object's category is toggled off", () => {
+    expect(isCatalogObjectVisible(STAR_A, categoryVisibility, null)).toBe(false);
+  });
+
+  it("is false when the object is outside the radius filter", () => {
+    expect(isCatalogObjectVisible(CLOUD_B, categoryVisibility, 100)).toBe(false);
+  });
+
+  it("is true when the category is on and the object is within radius", () => {
+    expect(isCatalogObjectVisible(CLOUD_A, categoryVisibility, 100)).toBe(true);
+  });
+
+  it("updateCatalogVisibility hides category-off and out-of-radius instances via zero scale", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B, STAR_A, STAR_B]);
+    updateCatalogVisibility(buckets, categoryVisibility, 150);
+
+    const moleculeBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    const scaleOf = (bucket: CatalogBucket, index: number): number =>
+      decomposeInstanceMatrix(bucket, index).scale.x;
+
+    const cloudAIndex = moleculeBucket.objects.findIndex((o) => o.id === "cloud-a");
+    const cloudBIndex = moleculeBucket.objects.findIndex((o) => o.id === "cloud-b");
+    expect(scaleOf(moleculeBucket, cloudAIndex)).toBeGreaterThan(0); // within 150pc, category on
+    expect(scaleOf(moleculeBucket, cloudBIndex)).toBe(0); // 200.25pc > 150pc radius filter
+
+    // Whole "star" category is off - both instances zero-scaled regardless of radius.
+    for (let i = 0; i < starBucket.objects.length; i++) {
+      expect(scaleOf(starBucket, i)).toBe(0);
+    }
+  });
+
+  it("visibleCatalogObjects agrees exactly with the per-instance visibility updateCatalogVisibility applies", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B, STAR_A, STAR_B]);
+    const visible = visibleCatalogObjects(buckets, categoryVisibility, 150);
+    expect(visible.map((o) => o.id)).toEqual(["cloud-a"]);
+  });
+});
+
+describe("updateCatalogSizeScale", () => {
+  it("scales the InstancedMesh container itself, not the per-instance matrices", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A]);
+    updateCatalogSizeScale(buckets, 2.5);
+    for (const bucket of buckets) {
+      expect(bucket.mesh.scale.x).toBe(2.5);
+      expect(bucket.mesh.scale.y).toBe(2.5);
+      expect(bucket.mesh.scale.z).toBe(2.5);
+    }
   });
 });
