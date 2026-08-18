@@ -7,6 +7,7 @@ import {
   excludeDedicatedMarkerObjects,
   isCatalogObjectVisible,
   isSelectedObjectVisible,
+  LOCAL_BUBBLE_OBJECT_ID,
   markerRadiusPc,
   setInstanceVisibility,
   SUN_OBJECT_ID,
@@ -51,6 +52,19 @@ const SUN_ENTRY = makeObject({
   object_type: "reference_point",
   position_pc: [0, 0, 0],
   distance_pc: 0,
+});
+
+/** Issue #101: the Local Bubble's catalog centroid, `object_type: "bubble"`
+ * - `scene/structures.ts`'s `createLocalBubbleLayer` already renders a
+ * true-scale wireframe ellipsoid for this same real object, so (like the
+ * Sun) it must be excluded from the generic catalog-object render loop. */
+const LOCAL_BUBBLE_ENTRY = makeObject({
+  id: "local-bubble-centroid",
+  name: "Local Bubble",
+  object_type: "bubble",
+  position_pc: [10.2, 33.6, 0],
+  distance_pc: 35.11,
+  size_pc: 60,
 });
 
 const CLOUD_A = makeObject({ id: "cloud-a", position_pc: [100, 0, 0], distance_pc: 100 });
@@ -105,6 +119,27 @@ describe("excludeDedicatedMarkerObjects", () => {
     const filtered = excludeDedicatedMarkerObjects([CLOUD_A, CLOUD_B]);
     expect(filtered).toHaveLength(2);
   });
+
+  // Issue #101 regression: the Local Bubble's catalog centroid already has
+  // its own dedicated visual (the structure-layer ellipsoid), so it must be
+  // dropped from the generic marker-sphere/label loop the same way the Sun
+  // is - otherwise the two disagreeing representations (15pc generic marker
+  // vs. true-scale ellipsoid) both render at once.
+  it("drops the Local Bubble's own catalog entry by id", () => {
+    const filtered = excludeDedicatedMarkerObjects([LOCAL_BUBBLE_ENTRY, CLOUD_A, CLOUD_B]);
+    expect(filtered.map((o) => o.id)).toEqual(["cloud-a", "cloud-b"]);
+    expect(filtered.some((o) => o.id === LOCAL_BUBBLE_OBJECT_ID)).toBe(false);
+  });
+
+  it("drops both the Sun and the Local Bubble together, keeping everything else", () => {
+    const filtered = excludeDedicatedMarkerObjects([
+      SUN_ENTRY,
+      LOCAL_BUBBLE_ENTRY,
+      CLOUD_A,
+      CLOUD_B,
+    ]);
+    expect(filtered.map((o) => o.id).sort()).toEqual(["cloud-a", "cloud-b"]);
+  });
 });
 
 describe("catalogObjectTypes", () => {
@@ -119,6 +154,15 @@ describe("catalogObjectTypes", () => {
   it("is empty for an all-Sun (or empty) input", () => {
     expect(catalogObjectTypes([SUN_ENTRY])).toEqual([]);
     expect(catalogObjectTypes([])).toEqual([]);
+  });
+
+  // Issue #101: "bubble" is not currently offered as a layer-toggle category
+  // because the Local Bubble's only catalog member is the excluded centroid
+  // entry - the structure-layer checkbox (main.ts's separate "Local Bubble"
+  // toggle) is what controls its visibility instead.
+  it("omits 'bubble' when the Local Bubble centroid is the only such entry", () => {
+    const types = catalogObjectTypes([SUN_ENTRY, LOCAL_BUBBLE_ENTRY, CLOUD_A]);
+    expect(types).toEqual(["molecular_cloud"]);
   });
 });
 
@@ -147,6 +191,18 @@ describe("createCatalogObjectGroup (InstancedMesh buckets)", () => {
     const { buckets } = createCatalogObjectGroup([SUN_ENTRY, CLOUD_A]);
     for (const bucket of buckets) {
       expect(bucket.objects.some((o) => o.id === SUN_OBJECT_ID)).toBe(false);
+    }
+  });
+
+  // Issue #101 regression: no InstancedMesh bucket, and therefore no
+  // pickable/raycastable marker sphere, should ever be created for the
+  // Local Bubble's catalog centroid - `scene/structures.ts`'s
+  // `createLocalBubbleLayer` is the sole visual for it.
+  it("never creates an instance or a 'bubble' bucket for the Local Bubble centroid", () => {
+    const { buckets } = createCatalogObjectGroup([LOCAL_BUBBLE_ENTRY, CLOUD_A]);
+    expect(buckets.some((b) => b.objectType === "bubble")).toBe(false);
+    for (const bucket of buckets) {
+      expect(bucket.objects.some((o) => o.id === LOCAL_BUBBLE_OBJECT_ID)).toBe(false);
     }
   });
 
