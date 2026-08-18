@@ -10,6 +10,7 @@ import {
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
   isSelectedObjectVisible,
+  markerRadiusPc,
   updateCatalogSizeScale,
   updateCatalogVisibility,
   visibleCatalogObjects,
@@ -33,6 +34,7 @@ import {
   edgeOnPose,
   faceOnPose,
   fitAllPose,
+  objectCenteredPose,
   perspectivePose,
   sunCenteredPose,
   topViewPose,
@@ -42,6 +44,7 @@ import { pickSceneObject, toNdc } from "./scene/picking";
 import { exportSceneAsPng } from "./scene/pngExport";
 import { createControlPanel } from "./ui/controls";
 import { Inspector } from "./ui/inspector";
+import { createSearchBox } from "./ui/search";
 import type { SceneObject } from "./scene/sceneTypes";
 
 /**
@@ -241,6 +244,16 @@ function applyCameraPose(pose: CameraPose): void {
   controls.update();
 }
 
+/** Search / go-to-object (issue #106, spec §2.6): frames the camera closely
+ * on `obj` (via `objectCenteredPose`, distance proportional to the
+ * object's own marker radius) and selects it - reusing `selectObject`
+ * directly so the Inspector/label-selection highlighting stays exactly as
+ * consistent as a manual click-to-select. */
+function goToObject(obj: SceneObject): void {
+  applyCameraPose(objectCenteredPose(obj.position_pc, markerRadiusPc(obj.size_pc)));
+  selectObject(obj);
+}
+
 const CAMERA_PRESETS: { key: string; label: string }[] = [
   { key: "perspective", label: "Perspective" },
   { key: "top", label: "Top view" },
@@ -350,6 +363,12 @@ loadScene()
       },
     });
     app.appendChild(panel);
+
+    const searchBox = createSearchBox({
+      getObjects: () => catalogObjects,
+      onSelect: goToObject,
+    });
+    app.appendChild(searchBox.element);
 
     applyCatalogVisibility();
     applyStructureVisibility();

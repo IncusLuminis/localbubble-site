@@ -68,6 +68,56 @@ export function sunCenteredPose(): CameraPose {
   return { position: [60, -60, 40], target: [0, 0, 0] };
 }
 
+/** Same viewing direction as `sunCenteredPose` (deliberately, for visual
+ * consistency between the two "zoomed in on one point" presets) - just
+ * re-centered on an arbitrary object and distance-scaled by that object's
+ * own marker radius instead of Sun-centered's fixed distance. */
+const OBJECT_FRAME_DIRECTION: [number, number, number] = [60, -60, 40];
+
+/** Framing-distance floor (pc) so a point-like object (a star, marker
+ * radius at `MIN_MARKER_RADIUS_PC` in `scene/objects.ts`) still gets a
+ * sane, non-claustrophobic close-up rather than a near-zero-distance
+ * camera sitting almost inside its marker. */
+const OBJECT_FRAME_MIN_DISTANCE_PC = 25;
+
+/** Distance grows with the object's own marker radius (issue #106's
+ * "distance proportional to the object's own marker radius" acceptance
+ * criterion) so a large extended object (e.g. a molecular cloud, up to
+ * `MAX_MARKER_RADIUS_PC` = 45pc) is framed wide enough to see its full
+ * marker, while a compact one (a star) stays close, at
+ * `OBJECT_FRAME_MIN_DISTANCE_PC`. Chosen so the max marker radius (45pc)
+ * still produces a "close-up" (270pc) well inside the default Perspective
+ * view's ~950pc distance. */
+const OBJECT_FRAME_RADIUS_MULTIPLIER = 6;
+
+function normalizedDirection(v: readonly [number, number, number]): [number, number, number] {
+  const length = Math.hypot(v[0], v[1], v[2]);
+  return [v[0] / length, v[1] / length, v[2] / length];
+}
+
+/**
+ * "Object-centered" (issue #106, generalizing `sunCenteredPose`): frames an
+ * arbitrary catalog object closely, for the search/go-to-object feature
+ * (spec §2.6). `markerRadiusPc` is the object's own rendered marker radius
+ * (`scene/objects.ts`'s `markerRadiusPc(obj.size_pc)`) - passed in rather
+ * than computed here so this module keeps its no-`THREE`,
+ * rendering-independent purity (see the module docstring); the caller
+ * (`main.ts`) already has that value at hand from the catalog bucket/scene
+ * object.
+ */
+export function objectCenteredPose(
+  positionPc: readonly [number, number, number],
+  markerRadiusPc: number,
+): CameraPose {
+  const [ux, uy, uz] = normalizedDirection(OBJECT_FRAME_DIRECTION);
+  const distance = Math.max(markerRadiusPc * OBJECT_FRAME_RADIUS_MULTIPLIER, OBJECT_FRAME_MIN_DISTANCE_PC);
+  const [tx, ty, tz] = positionPc;
+  return {
+    position: [tx + ux * distance, ty + uy * distance, tz + uz * distance],
+    target: [tx, ty, tz],
+  };
+}
+
 const DEFAULT_FIT_ALL_POSE = perspectivePose();
 
 /**

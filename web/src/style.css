@@ -60,6 +60,14 @@ body {
   width: 240px;
 }
 
+/* Issue #106: search / go-to-object panel, top-center so it doesn't
+   collide with #controls (left) or #inspector (right). */
+#search {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+}
+
 .panel-title {
   font-weight: 600;
   font-size: 14px;
@@ -127,6 +135,48 @@ body {
 
 .panel button:hover {
   background: #24304a;
+}
+
+.search-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #111726;
+  color: #dfe6f3;
+  border: 1px solid rgba(143, 163, 200, 0.35);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.search-results {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.search-result-row {
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.search-result-row:hover {
+  background: #24304a;
+}
+
+.search-result-more {
+  padding: 6px 8px;
+  font-size: 11px;
+  color: #8fa3c8;
+}
+
+.search-status {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #8fa3c8;
 }
 
 .inspector-close {
