@@ -145,6 +145,143 @@ def test_batch_with_one_bad_object_raises_coordinate_derivation_error_with_attri
     assert err.original is err.__cause__
 
 
+def test_batch_output_identical_to_per_object_loop_for_larger_mixed_batch():
+    """#70 regression check: the vectorized batch path must produce output
+    identical (within tight float tolerance) to running every object
+    through the unchanged single-object `derive_galactic_coordinates()` in
+    a loop - that per-object loop is kept as the "ground truth" precisely
+    so the vectorized path can be checked against it. Uses a larger, more
+    varied set of RA/Dec/distance combinations than the happy-path test,
+    including the Sun mixed in among non-zero-distance objects and objects
+    spanning all four RA quadrants and both hemispheres."""
+    objects = [
+        _object(56.75, 24.1167, 136.2),  # Pleiades
+        _object(0.0, 0.0, 0.0),  # Sun
+        _object(66.75, 15.87, 47.0),  # Hyades
+        _object(83.8221, -5.3911, 414.0),  # Orion Nebula Cluster
+        _object(280.0, -60.0, 800.0),
+        _object(10.0, 89.0, 5000.0),  # near north celestial pole
+        _object(350.0, -89.0, 1.0),  # near south celestial pole
+        _object(180.0, 0.0, 250.0),
+        _object(0.0, 0.0, 1e6),
+        _object(359.999, 45.0, 10.0),
+    ]
+
+    batch_result = derive_galactic_coordinates_batch(objects)
+    individual_result = [derive_galactic_coordinates(obj) for obj in objects]
+
+    assert len(batch_result) == len(objects)
+    for batch_obj, individual_obj in zip(batch_result, individual_result):
+        assert batch_obj.coordinates.galactic_l_deg == pytest.approx(
+            individual_obj.coordinates.galactic_l_deg, abs=1e-9
+        )
+        assert batch_obj.coordinates.galactic_b_deg == pytest.approx(
+            individual_obj.coordinates.galactic_b_deg, abs=1e-9
+        )
+        assert batch_obj.cartesian.x_pc == pytest.approx(
+            individual_obj.cartesian.x_pc, abs=1e-9
+        )
+        assert batch_obj.cartesian.y_pc == pytest.approx(
+            individual_obj.cartesian.y_pc, abs=1e-9
+        )
+        assert batch_obj.cartesian.z_pc == pytest.approx(
+            individual_obj.cartesian.z_pc, abs=1e-9
+        )
+        assert batch_obj == individual_obj
+
+
+def test_batch_sun_mixed_with_others_stays_at_origin_in_original_order():
+    """The Sun (zero distance) is excluded from the vectorized astropy call
+    and handled via pass-through, while surrounding objects go through the
+    vectorized path - confirm the Sun still lands exactly at the origin
+    and every object comes back in its original input position/order,
+    regardless of which "group" (zero- vs positive-distance) it fell into
+    internally."""
+    pleiades = _object(56.75, 24.1167, 136.2)
+    hyades = _object(66.75, 15.87, 47.0)
+    sun = _object(0.0, 0.0, 0.0)
+    onc = _object(83.8221, -5.3911, 414.0)
+    other = _object(280.0, -60.0, 800.0)
+
+    objects = [pleiades, hyades, sun, onc, other]
+    results = derive_galactic_coordinates_batch(objects)
+
+    assert len(results) == 5
+    # Original order preserved: each result's stored ra_deg still matches
+    # the input object at that same position (ra_deg is distinct per
+    # object here, so this fingerprints position, not just count).
+    for result, source in zip(results, objects):
+        assert result.coordinates.ra_deg == source.coordinates.ra_deg
+        assert result.coordinates.dec_deg == source.coordinates.dec_deg
+
+    sun_result = results[2]
+    assert sun_result.cartesian.x_pc == 0.0
+    assert sun_result.cartesian.y_pc == 0.0
+    assert sun_result.cartesian.z_pc == 0.0
+    assert sun_result.coordinates.galactic_l_deg == 0.0
+    assert sun_result.coordinates.galactic_b_deg == 0.0
+
+    # Non-Sun objects got real vectorized-derived values (non-degenerate,
+    # matching what the single-object function produces for the same
+    # inputs).
+    for idx, expected_src in [(0, pleiades), (1, hyades), (3, onc), (4, other)]:
+        expected = derive_galactic_coordinates(expected_src)
+        actual = results[idx]
+        assert actual.cartesian.x_pc == pytest.approx(expected.cartesian.x_pc, abs=1e-9)
+        assert actual.cartesian.y_pc == pytest.approx(expected.cartesian.y_pc, abs=1e-9)
+        assert actual.cartesian.z_pc == pytest.approx(expected.cartesian.z_pc, abs=1e-9)
+        distance = np.sqrt(
+            actual.cartesian.x_pc**2 + actual.cartesian.y_pc**2 + actual.cartesian.z_pc**2
+        )
+        assert distance == pytest.approx(expected_src.distance.value_pc, abs=1e-6)
+        assert distance > 0.0  # not degenerately at the origin like the Sun
+
+
+def test_batch_large_synthetic_catalog_transforms_correctly_via_vectorized_path():
+    """Sanity check at catalog scale (spec Idea.md §44 mentions "hundreds
+    or thousands of objects"): a synthetic batch of 150 objects spanning
+    the full RA/Dec range and a wide range of distances round-trips
+    through the vectorized path with the same per-object correctness as
+    the single-object function - not asserting a specific speedup, just
+    correctness at scale."""
+    rng = np.random.default_rng(seed=70)
+    n = 150
+    objects = [
+        _object(
+            ra_deg=float(rng.uniform(0.0, 359.999)),
+            dec_deg=float(rng.uniform(-89.999, 89.999)),
+            distance_pc=float(rng.uniform(0.1, 5000.0)),
+        )
+        for _ in range(n)
+    ]
+
+    batch_result = derive_galactic_coordinates_batch(objects)
+    assert len(batch_result) == n
+
+    for obj, batch_obj in zip(objects, batch_result):
+        expected = derive_galactic_coordinates(obj)
+        assert batch_obj.coordinates.galactic_l_deg == pytest.approx(
+            expected.coordinates.galactic_l_deg, abs=1e-9
+        )
+        assert batch_obj.coordinates.galactic_b_deg == pytest.approx(
+            expected.coordinates.galactic_b_deg, abs=1e-9
+        )
+        assert batch_obj.cartesian.x_pc == pytest.approx(expected.cartesian.x_pc, abs=1e-9)
+        assert batch_obj.cartesian.y_pc == pytest.approx(expected.cartesian.y_pc, abs=1e-9)
+        assert batch_obj.cartesian.z_pc == pytest.approx(expected.cartesian.z_pc, abs=1e-9)
+
+        distance = np.sqrt(
+            batch_obj.cartesian.x_pc**2
+            + batch_obj.cartesian.y_pc**2
+            + batch_obj.cartesian.z_pc**2
+        )
+        assert distance == pytest.approx(obj.distance.value_pc, abs=1e-6)
+
+
+def test_batch_empty_list_returns_empty_list():
+    assert derive_galactic_coordinates_batch([]) == []
+
+
 def test_batch_fails_fast_without_returning_partial_results():
     """Fail-fast means the whole batch call raises - it does not swallow
     the error and return a partial list of the objects processed before

@@ -44,6 +44,46 @@ def radec_distance_to_galactic_xyz(
     )
 
 
+def _radec_distance_to_galactic_xyz_batch(
+    ra_deg: list[float], dec_deg: list[float], distance_pc: list[float]
+):
+    """Vectorized form of `radec_distance_to_galactic_xyz()`: builds a
+    single `SkyCoord` from array-valued RA/Dec/distance and runs one
+    ICRS -> Galactic astropy transform for the whole batch, instead of one
+    `SkyCoord`/transform per element (#70).
+
+    Callers must exclude zero-distance objects first (see
+    `derive_galactic_coordinates_batch`) - distance=0 is degenerate for
+    this transform whether done one at a time or vectorized.
+
+    Returns a 5-tuple of numpy arrays (l_deg, b_deg, x_pc, y_pc, z_pc),
+    positionally aligned with the input arrays.
+
+    Note: astropy does NOT raise per-element for a bad input here (e.g. an
+    `inf` distance) - it silently produces `nan` in that one array
+    position among otherwise-good results, with no indication of which
+    element failed. Validating/attributing failures to a specific object
+    is the caller's job (`derive_galactic_coordinates_batch` does this by
+    reconstructing each object's model from its slice of the result and
+    letting the schema's range constraints catch bad values).
+    """
+    coords = SkyCoord(
+        ra=ra_deg * u.deg,
+        dec=dec_deg * u.deg,
+        distance=distance_pc * u.pc,
+        frame="icrs",
+    )
+    galactic = coords.galactic
+    cartesian = galactic.cartesian
+    return (
+        galactic.l.deg,
+        galactic.b.deg,
+        cartesian.x.to(u.pc).value,
+        cartesian.y.to(u.pc).value,
+        cartesian.z.to(u.pc).value,
+    )
+
+
 def derive_galactic_coordinates(obj: AstronomicalObject) -> AstronomicalObject:
     """Return a copy of `obj` with `coordinates` (l/b) and `cartesian` (XYZ)
     (re)computed from `coordinates.ra_deg`/`dec_deg` and `distance.value_pc`.
@@ -129,11 +169,83 @@ def derive_galactic_coordinates_batch(
     ICRS -> Galactic transform to produce `nan` for `l`/`b`, which then
     fails when `derive_galactic_coordinates()` reconstructs a `Coordinates`
     model from the result.
+
+    Vectorization (#70): rather than building and transforming one
+    `SkyCoord` per object, every non-zero-distance object's RA/Dec/distance
+    is transformed via a single vectorized `SkyCoord` - one astropy call
+    for the whole batch (the actual performance win). astropy does not
+    raise per-element for a bad value within that vectorized transform
+    (see `_radec_distance_to_galactic_xyz_batch`), so #68's per-object
+    error attribution is preserved with a second pass: each object's slice
+    of the vectorized result is still reconstructed into its own
+    `Coordinates`/`Cartesian` model individually, in original input order.
+    That per-object reconstruction is what actually raises (via
+    `Coordinates`' l/b range constraints, #67) and gets attributed to the
+    specific object - exactly as the old per-object loop did, just with
+    the expensive astropy transform itself done once for the batch instead
+    of once per object.
+
+    The Sun (and any other zero-distance object) is excluded from the
+    vectorized astropy call entirely - distance=0 is degenerate for the
+    ICRS -> Galactic transform (direction undefined at zero distance, see
+    `derive_galactic_coordinates`) - and is instead handled via the same
+    pass-through-to-origin logic as the single-object function, for every
+    zero-distance object in the batch at once. Results are reassembled in
+    the original input order regardless of which group each object fell
+    into.
+
+    No dual-path/size threshold: a single vectorized `SkyCoord` call
+    handles batches of any size, including 0 or 1 non-zero-distance
+    objects, without special-casing - astropy's array inputs degrade to
+    length-1 arrays cleanly, so there's no concrete reason (measured
+    overhead, correctness edge case, etc.) to add a second per-object code
+    path just for small N.
     """
-    results = []
-    for obj in objects:
-        try:
-            results.append(derive_galactic_coordinates(obj))
-        except Exception as exc:
-            raise CoordinateDerivationError(obj, exc) from exc
-    return results
+    results_by_index: dict[int, AstronomicalObject] = {}
+
+    zero_distance = [
+        (i, obj) for i, obj in enumerate(objects) if obj.distance.value_pc == 0
+    ]
+    positive_distance = [
+        (i, obj) for i, obj in enumerate(objects) if obj.distance.value_pc != 0
+    ]
+
+    for i, obj in zero_distance:
+        results_by_index[i] = obj.model_copy(
+            update={
+                "coordinates": obj.coordinates.model_copy(
+                    update={"galactic_l_deg": 0.0, "galactic_b_deg": 0.0}
+                ),
+                "cartesian": Cartesian(x_pc=0.0, y_pc=0.0, z_pc=0.0),
+            }
+        )
+
+    if positive_distance:
+        ra = [obj.coordinates.ra_deg for _, obj in positive_distance]
+        dec = [obj.coordinates.dec_deg for _, obj in positive_distance]
+        dist = [obj.distance.value_pc for _, obj in positive_distance]
+        l_arr, b_arr, x_arr, y_arr, z_arr = _radec_distance_to_galactic_xyz_batch(
+            ra, dec, dist
+        )
+
+        for pos, (i, obj) in enumerate(positive_distance):
+            try:
+                results_by_index[i] = obj.model_copy(
+                    update={
+                        "coordinates": Coordinates(
+                            ra_deg=obj.coordinates.ra_deg,
+                            dec_deg=obj.coordinates.dec_deg,
+                            galactic_l_deg=float(l_arr[pos]),
+                            galactic_b_deg=float(b_arr[pos]),
+                        ),
+                        "cartesian": Cartesian(
+                            x_pc=float(x_arr[pos]),
+                            y_pc=float(y_arr[pos]),
+                            z_pc=float(z_arr[pos]),
+                        ),
+                    }
+                )
+            except Exception as exc:
+                raise CoordinateDerivationError(obj, exc) from exc
+
+    return [results_by_index[i] for i in range(len(objects))]
