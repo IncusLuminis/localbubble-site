@@ -667,6 +667,125 @@ def test_load_models_for_scene_raises_model_load_error_for_malformed_config(tmp_
         )
 
 
+# --------------------------------------------------------------------------
+# Regression (#82): CoordinateDerivationError must also produce a clean
+# CLI error, not a raw traceback - same pattern as ModelLoadError above.
+# --------------------------------------------------------------------------
+
+
+def test_cli_build_coordinates_reports_clean_error_for_bad_object(
+    tmp_path, sample_objects, capsys
+):
+    # Real (not monkeypatched) failure trigger, same as
+    # test_coordinates.py's test_batch_with_one_bad_object_raises_...:
+    # inf distance is schema-valid at construction time but drives
+    # astropy's transform to nan, which then fails Coordinates' l/b range
+    # constraints when derive_galactic_coordinates_batch() reconstructs
+    # the model.
+    bad_object = AstronomicalObject(
+        id="bad-object-id",
+        name="Bad Object Name",
+        object_type="star",
+        coordinates=Coordinates(
+            ra_deg=56.75, dec_deg=24.1167, galactic_l_deg=0.0, galactic_b_deg=0.0
+        ),
+        distance=Distance(value_pc=float("inf")),
+        cartesian=Cartesian(x_pc=0.0, y_pc=0.0, z_pc=0.0),
+        source=Source(reference="Unit test fixture, definitely > 10 chars"),
+    )
+    catalog_path = tmp_path / "catalog.parquet"
+    save_catalog([*sample_objects, bad_object], catalog_path)
+
+    output_path = tmp_path / "catalog-out.parquet"
+
+    with pytest.warns(RuntimeWarning):
+        exit_code = cli_main(
+            [
+                "build-coordinates",
+                "--catalog",
+                str(catalog_path),
+                "--output",
+                str(output_path),
+            ]
+        )
+
+    assert exit_code == 1
+    assert not output_path.exists()
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert "error" in captured.err.lower()
+    # Names the specific bad object, not a generic message.
+    assert "bad-object-id" in captured.err
+    assert "Bad Object Name" in captured.err
+
+
+def test_cli_build_catalog_reports_clean_error_for_bad_object(tmp_path, capsys):
+    # build-catalog loads records from a JSON file (not a parquet catalog),
+    # so the bad-object trigger has to be injected via a temp records file
+    # rather than reusing save_catalog/sample_objects as the
+    # build-coordinates test above does.
+    good_record = {
+        "id": "good-object-id",
+        "name": "Good Object Name",
+        "aliases": [],
+        "object_type": "star",
+        "coordinates": {
+            "ra_deg": 66.75,
+            "dec_deg": 15.87,
+            "galactic_l_deg": 0.0,
+            "galactic_b_deg": 0.0,
+        },
+        "distance": {"value_pc": 47.0, "error_pc": None},
+        "cartesian": {"x_pc": 0.0, "y_pc": 0.0, "z_pc": 0.0},
+        "group": {"primary": None, "secondary": []},
+        "source": {"reference": "Unit test fixture, definitely > 10 chars"},
+        "visual": {"size_pc": None, "color_class": None},
+        "notes": None,
+    }
+    bad_record = {
+        "id": "bad-object-id",
+        "name": "Bad Object Name",
+        "aliases": [],
+        "object_type": "star",
+        "coordinates": {
+            "ra_deg": 56.75,
+            "dec_deg": 24.1167,
+            "galactic_l_deg": 0.0,
+            "galactic_b_deg": 0.0,
+        },
+        "distance": {"value_pc": float("inf"), "error_pc": None},
+        "cartesian": {"x_pc": 0.0, "y_pc": 0.0, "z_pc": 0.0},
+        "group": {"primary": None, "secondary": []},
+        "source": {"reference": "Unit test fixture, definitely > 10 chars"},
+        "visual": {"size_pc": None, "color_class": None},
+        "notes": None,
+    }
+    records_path = tmp_path / "records.json"
+    records_path.write_text(json.dumps([good_record, bad_record]))
+
+    output_path = tmp_path / "catalog-out.parquet"
+
+    with pytest.warns(RuntimeWarning):
+        exit_code = cli_main(
+            [
+                "build-catalog",
+                "--records",
+                str(records_path),
+                "--output",
+                str(output_path),
+            ]
+        )
+
+    assert exit_code == 1
+    assert not output_path.exists()
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert "error" in captured.err.lower()
+    # Names the specific bad object, not a generic message.
+    assert "bad-object-id" in captured.err
+    assert "Bad Object Name" in captured.err
+
+
 def test_build_does_not_call_load_models_for_scene_twice(tmp_path, monkeypatch):
     # Regression for the "build calls _load_models_for_scene once to print
     # 'build-models: done' (result discarded) and again inside export-scene"
