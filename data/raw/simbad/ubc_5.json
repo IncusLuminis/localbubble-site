@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 5",
+  "retrieved_utc": "2026-08-18T13:16:58+00:00",
+  "record_id": "Cl Alessi  190",
+  "raw": {
+    "main_id": "Cl Alessi  190",
+    "ra": 238.54791666666668,
+    "dec": -47.74,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.003000000026077032,
+    "plx_value": 1.785,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  950|UBC 5|Cl Alessi  190",
+    "matched_id": "UBC 5"
+  }
+}

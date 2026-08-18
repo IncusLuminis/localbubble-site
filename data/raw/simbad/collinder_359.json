@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 359",
+  "retrieved_utc": "2026-08-18T13:13:50+00:00",
+  "record_id": "Cl Melotte  186",
+  "raw": {
+    "main_id": "Cl Melotte  186",
+    "ra": 270.59791666666666,
+    "dec": 3.26,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 1.786,
+    "otype": "OpC",
+    "ids": "C 1758+029|OCl   84.0|[KPR2004b] 423|Cl Collinder  359|Cl Melotte  186|[KPS2012] MWSC 2773",
+    "matched_id": "Cl Collinder  359"
+  }
+}

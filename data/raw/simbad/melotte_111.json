@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Melotte 111",
+  "retrieved_utc": "2026-08-18T13:19:57+00:00",
+  "record_id": "Cl Melotte  111",
+  "raw": {
+    "main_id": "Cl Melotte  111",
+    "ra": 186.01416666666668,
+    "dec": 25.651944444444442,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_value": 11.64,
+    "otype": "OpC",
+    "plx_err": 0.03400000184774399,
+    "ids": "[KPS2012] MWSC 2020|C 1222+263|OCl  558.0|[KPR2004b] 308|Cl Melotte  111|NAME Coma Berenices Cluster|NAME Coma Ber Cluster|NAME Coma Star Cluster|Cl Collinder  256",
+    "matched_id": "Cl Melotte  111"
+  }
+}

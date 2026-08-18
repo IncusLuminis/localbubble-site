@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 2",
+  "retrieved_utc": "2026-08-18T13:16:41+00:00",
+  "record_id": "Cl Alessi   94",
+  "raw": {
+    "main_id": "Cl Alessi   94",
+    "ra": 5.584166666666666,
+    "dec": 46.53194444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 1.754,
+    "otype": "OpC",
+    "ids": "UBC 2|Cl Alessi   94",
+    "matched_id": "UBC 2"
+  }
+}

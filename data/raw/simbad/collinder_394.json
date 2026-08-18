@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 394",
+  "retrieved_utc": "2026-08-18T13:13:51+00:00",
+  "record_id": "Cl Collinder  394",
+  "raw": {
+    "main_id": "Cl Collinder  394",
+    "ra": 283.09208333333333,
+    "dec": -20.228888888888882,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 1.388,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  407|C 1850-204|OCl   42.0|[KPR2004b] 455|Cl Collinder  394|[KPS2012] MWSC 3011",
+    "matched_id": "Cl Collinder  394"
+  }
+}

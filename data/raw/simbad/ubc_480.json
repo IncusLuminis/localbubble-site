@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 480",
+  "retrieved_utc": "2026-08-18T13:16:57+00:00",
+  "record_id": "UBC 480",
+  "raw": {
+    "main_id": "UBC 480",
+    "ra": 119.95416666666668,
+    "dec": -50.63666666666666,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020A&A...640A...1C",
+    "plx_err": 0.019999999552965164,
+    "plx_value": 2.077,
+    "otype": "OpC",
+    "ids": "UBC 480",
+    "matched_id": "UBC 480"
+  }
+}

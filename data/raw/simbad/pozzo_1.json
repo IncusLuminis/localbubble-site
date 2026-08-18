@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Pozzo 1",
+  "retrieved_utc": "2026-08-18T13:15:53+00:00",
+  "record_id": "NAME Pozzo 1",
+  "raw": {
+    "main_id": "NAME Pozzo 1",
+    "ra": 122.37416666666665,
+    "dec": -47.334999999999994,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 2.853,
+    "otype": "OpC",
+    "ids": "Villafranca O-024|NAME gam Vel Subcluster|NAME Pozzo 1",
+    "matched_id": "NAME Pozzo 1"
+  }
+}

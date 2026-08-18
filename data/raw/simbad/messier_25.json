@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 25",
+  "retrieved_utc": "2026-08-18T13:14:39+00:00",
+  "record_id": "IC 4725",
+  "raw": {
+    "main_id": "IC 4725",
+    "ra": 277.93708333333325,
+    "dec": -19.113888888888887,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0019000000320374966,
+    "plx_value": 1.5043,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  650|C 1828-192|IC 4725|M  25|[KPR2004b] 449|[SC95] M 662|[SC95] M 667|[SC96] Mis 1423|[KPS2012] MWSC 2940",
+    "matched_id": "M  25"
+  }
+}

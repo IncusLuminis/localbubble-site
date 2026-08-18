@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 23",
+  "retrieved_utc": "2026-08-18T13:14:36+00:00",
+  "record_id": "M  23",
+  "raw": {
+    "main_id": "M  23",
+    "ra": 269.2370833333333,
+    "dec": -18.98694444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0020000000949949026,
+    "plx_value": 1.354,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  653|C 1753-190|M  23|NGC  6494|[KPR2004b] 422|[KPS2012] MWSC 2757",
+    "matched_id": "M  23"
+  }
+}

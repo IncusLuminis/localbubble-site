@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 9",
+  "retrieved_utc": "2026-08-18T13:17:02+00:00",
+  "record_id": "Teutsch 179",
+  "raw": {
+    "main_id": "Teutsch 179",
+    "ra": 276.5441666666666,
+    "dec": 26.431944444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 2.869,
+    "otype": "OpC",
+    "ids": "UBC 9|Teutsch 179",
+    "matched_id": "UBC 9"
+  }
+}

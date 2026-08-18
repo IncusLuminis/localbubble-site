@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Alessi-Teutsch 12",
+  "retrieved_utc": "2026-08-18T13:13:16+00:00",
+  "record_id": "[KPR2005]  86",
+  "raw": {
+    "main_id": "[KPR2005]  86",
+    "ra": 255.42083333333326,
+    "dec": -58.98111111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.008999999612569809,
+    "plx_value": 1.632,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  257|[KPR2005]  86|NAME Alessi-Teutsch 12|NAME Cl Alessi-Teutsch 12|[KPS2012] MWSC 2513",
+    "matched_id": "NAME Alessi-Teutsch 12"
+  }
+}

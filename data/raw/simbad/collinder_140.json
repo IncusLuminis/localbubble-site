@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 140",
+  "retrieved_utc": "2026-08-18T13:13:46+00:00",
+  "record_id": "Cl Collinder  140",
+  "raw": {
+    "main_id": "Cl Collinder  140",
+    "ra": 110.88208333333331,
+    "dec": -31.966111111111115,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0024999999441206455,
+    "plx_value": 2.5685,
+    "otype": "OpC",
+    "ids": "C 0722-321|[KPR2004b] 136|Cl Collinder  140|Cl VDBH    2|[KPS2012] MWSC 1199",
+    "matched_id": "Cl Collinder  140"
+  }
+}

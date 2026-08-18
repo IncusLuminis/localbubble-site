@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Trumpler 3",
+  "retrieved_utc": "2026-08-18T13:16:26+00:00",
+  "record_id": "Cl Trumpler    3",
+  "raw": {
+    "main_id": "Cl Trumpler    3",
+    "ra": 48.00416666666668,
+    "dec": 63.21805555555556,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 1.461,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  127|C 0307+630|[KPR2004b]  40|Cl Trumpler    3|Cl Harvard    1|[KPS2012] MWSC 0262",
+    "matched_id": "Cl Trumpler    3"
+  }
+}

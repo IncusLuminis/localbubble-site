@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 135",
+  "retrieved_utc": "2026-08-18T13:13:45+00:00",
+  "record_id": "Cl Collinder  135",
+  "raw": {
+    "main_id": "Cl Collinder  135",
+    "ra": 109.36208333333336,
+    "dec": -37.04388888888888,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 3.278,
+    "otype": "OpC",
+    "ids": "C 0715-367|[KPR2004b] 133|Cl Collinder  135|[KPS2012] MWSC 1166",
+    "matched_id": "Cl Collinder  135"
+  }
+}

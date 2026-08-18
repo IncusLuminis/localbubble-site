@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2925",
+  "retrieved_utc": "2026-08-18T13:15:26+00:00",
+  "record_id": "NGC  2925",
+  "raw": {
+    "main_id": "NGC  2925",
+    "ra": 143.32083333333335,
+    "dec": -53.41305555555555,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.295,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  331|LISC 0340|[BMA2003] BH  72|[HXW2022] OC-0516|C 0932-532|NGC  2925|OCl  783.0|[KPR2004b] 224|[KPS2012] MWSC 1686",
+    "matched_id": "NGC  2925"
+  }
+}

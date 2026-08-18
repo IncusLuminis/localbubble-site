@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 6281",
+  "retrieved_utc": "2026-08-18T13:15:35+00:00",
+  "record_id": "NGC  6281",
+  "raw": {
+    "main_id": "NGC  6281",
+    "ra": 256.1791666666667,
+    "dec": -37.948055555555555,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0019000000320374966,
+    "plx_value": 1.8716,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  325|C 1701-378|NGC  6281|[KPR2004b] 392|[SC95] ZET 262|[SC95] ZET 258|[SC96] Mis  258|[SC96] Mis  262|Cl VDBH  213|[KPS2012] MWSC 2530",
+    "matched_id": "NGC  6281"
+  }
+}

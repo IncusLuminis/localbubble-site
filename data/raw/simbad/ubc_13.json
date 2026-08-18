@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 13",
+  "retrieved_utc": "2026-08-18T13:16:33+00:00",
+  "record_id": "UBC 13",
+  "raw": {
+    "main_id": "UBC 13",
+    "ra": 120.9141666666667,
+    "dec": 3.54,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 1.609,
+    "otype": "OpC",
+    "ids": "UBC 13",
+    "matched_id": "UBC 13"
+  }
+}

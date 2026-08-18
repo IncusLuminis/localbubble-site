@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "IC 2602",
+  "retrieved_utc": "2026-08-18T13:14:21+00:00",
+  "record_id": "IC 2602",
+  "raw": {
+    "main_id": "IC 2602",
+    "ra": 160.61291666666665,
+    "dec": -64.42611111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 6.571,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   92|C 1041-641|IC 2602|OCl  838.0|[KPR2004b] 259|Cl Collinder  229|Cl Melotte  102|Cl VDBH  103|[KPS2012] MWSC 1841|NAME THETA CAR Cluster|NAME tet Car Cluster",
+    "matched_id": "IC 2602"
+  }
+}

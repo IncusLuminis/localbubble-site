@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 47",
+  "retrieved_utc": "2026-08-18T13:14:52+00:00",
+  "record_id": "NGC  2422",
+  "raw": {
+    "main_id": "NGC  2422",
+    "ra": 114.14708333333333,
+    "dec": -14.488888888888885,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00139999995008111,
+    "plx_value": 2.069,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  320|C 0734-143|M  47|NGC  2422|OCl  596.0|[KPR2004b] 147|[KPS2012] MWSC 1278",
+    "matched_id": "M  47"
+  }
+}

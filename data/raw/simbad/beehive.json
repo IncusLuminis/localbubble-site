@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Beehive",
+  "retrieved_utc": "2026-08-18T13:13:26+00:00",
+  "record_id": "NGC  2632",
+  "raw": {
+    "main_id": "NGC  2632",
+    "ra": 130.05416666666665,
+    "dec": 19.62111111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.003000000026077032,
+    "plx_value": 5.371,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1184|C 0837+201|M  44|NAME Beehive|NAME Praesepe|NGC  2632|OCl  507.0|[KPR2004b] 201|Cl Melotte   88|[KPS2012] MWSC 1527|NAME Praesepe Cluster",
+    "matched_id": "NAME Beehive"
+  }
+}

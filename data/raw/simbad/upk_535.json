@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 535",
+  "retrieved_utc": "2026-08-18T13:18:19+00:00",
+  "record_id": "UPK 535",
+  "raw": {
+    "main_id": "UPK 535",
+    "ra": 127.025,
+    "dec": -50.89888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.012000000104308128,
+    "plx_value": 3.095,
+    "otype": "OpC",
+    "ids": "UPK 535",
+    "matched_id": "UPK 535"
+  }
+}

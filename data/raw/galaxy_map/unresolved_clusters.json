@@ -1,0 +1,130 @@
+[
+  {
+    "name": "ASCC 10",
+    "reason": "tried ['ASCC 10', 'Cl ASCC 10'], all failed: 'ASCC 10': SIMBAD has no record for 'ASCC 10'; 'Cl ASCC 10': SIMBAD has no record for 'Cl ASCC 10'"
+  },
+  {
+    "name": "ASCC 101",
+    "reason": "tried ['ASCC 101', 'Cl ASCC 101'], all failed: 'ASCC 101': SIMBAD has no record for 'ASCC 101'; 'Cl ASCC 101': SIMBAD has no record for 'Cl ASCC 101'"
+  },
+  {
+    "name": "ASCC 105",
+    "reason": "tried ['ASCC 105', 'Cl ASCC 105'], all failed: 'ASCC 105': SIMBAD has no record for 'ASCC 105'; 'Cl ASCC 105': SIMBAD has no record for 'Cl ASCC 105'"
+  },
+  {
+    "name": "ASCC 113",
+    "reason": "tried ['ASCC 113', 'Cl ASCC 113'], all failed: 'ASCC 113': SIMBAD has no record for 'ASCC 113'; 'Cl ASCC 113': SIMBAD has no record for 'Cl ASCC 113'"
+  },
+  {
+    "name": "ASCC 115",
+    "reason": "tried ['ASCC 115', 'Cl ASCC 115'], all failed: 'ASCC 115': SIMBAD has no record for 'ASCC 115'; 'Cl ASCC 115': SIMBAD has no record for 'Cl ASCC 115'"
+  },
+  {
+    "name": "ASCC 123",
+    "reason": "tried ['ASCC 123', 'Cl ASCC 123'], all failed: 'ASCC 123': SIMBAD has no record for 'ASCC 123'; 'Cl ASCC 123': SIMBAD has no record for 'Cl ASCC 123'"
+  },
+  {
+    "name": "ASCC 127",
+    "reason": "tried ['ASCC 127', 'Cl ASCC 127'], all failed: 'ASCC 127': SIMBAD has no record for 'ASCC 127'; 'Cl ASCC 127': SIMBAD has no record for 'Cl ASCC 127'"
+  },
+  {
+    "name": "ASCC 128",
+    "reason": "tried ['ASCC 128', 'Cl ASCC 128'], all failed: 'ASCC 128': SIMBAD has no record for 'ASCC 128'; 'Cl ASCC 128': SIMBAD has no record for 'Cl ASCC 128'"
+  },
+  {
+    "name": "ASCC 16",
+    "reason": "tried ['ASCC 16', 'Cl ASCC 16'], all failed: 'ASCC 16': SIMBAD has no record for 'ASCC 16'; 'Cl ASCC 16': SIMBAD has no record for 'Cl ASCC 16'"
+  },
+  {
+    "name": "ASCC 19",
+    "reason": "tried ['ASCC 19', 'Cl ASCC 19'], all failed: 'ASCC 19': SIMBAD has no record for 'ASCC 19'; 'Cl ASCC 19': SIMBAD has no record for 'Cl ASCC 19'"
+  },
+  {
+    "name": "ASCC 21",
+    "reason": "tried ['ASCC 21', 'Cl ASCC 21'], all failed: 'ASCC 21': SIMBAD has no record for 'ASCC 21'; 'Cl ASCC 21': SIMBAD has no record for 'Cl ASCC 21'"
+  },
+  {
+    "name": "ASCC 23",
+    "reason": "tried ['ASCC 23', 'Cl ASCC 23'], all failed: 'ASCC 23': SIMBAD has no record for 'ASCC 23'; 'Cl ASCC 23': SIMBAD has no record for 'Cl ASCC 23'"
+  },
+  {
+    "name": "ASCC 32",
+    "reason": "tried ['ASCC 32', 'Cl ASCC 32'], all failed: 'ASCC 32': SIMBAD record for 'ASCC 32' has no usable parallax (plx_value) - cannot derive a distance without one.; 'Cl ASCC 32': SIMBAD has no record for 'Cl ASCC 32'"
+  },
+  {
+    "name": "ASCC 41",
+    "reason": "tried ['ASCC 41', 'Cl ASCC 41'], all failed: 'ASCC 41': SIMBAD has no record for 'ASCC 41'; 'Cl ASCC 41': SIMBAD has no record for 'Cl ASCC 41'"
+  },
+  {
+    "name": "ASCC 58",
+    "reason": "tried ['ASCC 58', 'Cl ASCC 58'], all failed: 'ASCC 58': SIMBAD has no record for 'ASCC 58'; 'Cl ASCC 58': SIMBAD has no record for 'Cl ASCC 58'"
+  },
+  {
+    "name": "ASCC 73",
+    "reason": "tried ['ASCC 73', 'Cl ASCC 73'], all failed: 'ASCC 73': SIMBAD has no record for 'ASCC 73'; 'Cl ASCC 73': SIMBAD has no record for 'Cl ASCC 73'"
+  },
+  {
+    "name": "ASCC 87",
+    "reason": "tried ['ASCC 87', 'Cl ASCC 87'], all failed: 'ASCC 87': SIMBAD has no record for 'ASCC 87'; 'Cl ASCC 87': SIMBAD has no record for 'Cl ASCC 87'"
+  },
+  {
+    "name": "ASCC 90",
+    "reason": "tried ['ASCC 90', 'Cl ASCC 90'], all failed: 'ASCC 90': SIMBAD has no record for 'ASCC 90'; 'Cl ASCC 90': SIMBAD has no record for 'Cl ASCC 90'"
+  },
+  {
+    "name": "ASCC 97",
+    "reason": "tried ['ASCC 97', 'Cl ASCC 97'], all failed: 'ASCC 97': SIMBAD has no record for 'ASCC 97'; 'Cl ASCC 97': SIMBAD has no record for 'Cl ASCC 97'"
+  },
+  {
+    "name": "ASCC 99",
+    "reason": "tried ['ASCC 99', 'Cl ASCC 99'], all failed: 'ASCC 99': SIMBAD has no record for 'ASCC 99'; 'Cl ASCC 99': SIMBAD has no record for 'Cl ASCC 99'"
+  },
+  {
+    "name": "Aveni Hunter 1",
+    "reason": "tried ['Aveni Hunter 1', 'Cl Aveni Hunter 1'], all failed: 'Aveni Hunter 1': SIMBAD has no record for 'Aveni Hunter 1'; 'Cl Aveni Hunter 1': SIMBAD has no record for 'Cl Aveni Hunter 1'"
+  },
+  {
+    "name": "BH 99",
+    "reason": "tried ['BH 99', 'Cl BH 99'], all failed: 'BH 99': SIMBAD has no record for 'BH 99'; 'Cl BH 99': SIMBAD has no record for 'Cl BH 99'"
+  },
+  {
+    "name": "COIN-Gaia 1",
+    "reason": "tried ['COIN-Gaia 1', 'Cl COIN-Gaia 1'], all failed: 'COIN-Gaia 1': SIMBAD has no record for 'COIN-Gaia 1'; 'Cl COIN-Gaia 1': SIMBAD has no record for 'Cl COIN-Gaia 1'"
+  },
+  {
+    "name": "COIN-Gaia 11",
+    "reason": "tried ['COIN-Gaia 11', 'Cl COIN-Gaia 11'], all failed: 'COIN-Gaia 11': SIMBAD has no record for 'COIN-Gaia 11'; 'Cl COIN-Gaia 11': SIMBAD has no record for 'Cl COIN-Gaia 11'"
+  },
+  {
+    "name": "COIN-Gaia 13",
+    "reason": "tried ['COIN-Gaia 13', 'Cl COIN-Gaia 13'], all failed: 'COIN-Gaia 13': SIMBAD has no record for 'COIN-Gaia 13'; 'Cl COIN-Gaia 13': SIMBAD has no record for 'Cl COIN-Gaia 13'"
+  },
+  {
+    "name": "COIN-Gaia 8",
+    "reason": "tried ['COIN-Gaia 8', 'Cl COIN-Gaia 8'], all failed: 'COIN-Gaia 8': SIMBAD has no record for 'COIN-Gaia 8'; 'Cl COIN-Gaia 8': SIMBAD has no record for 'Cl COIN-Gaia 8'"
+  },
+  {
+    "name": "Loden 11",
+    "reason": "tried ['Loden 11', 'Cl Loden 11'], all failed: 'Loden 11': SIMBAD has no record for 'Loden 11'; 'Cl Loden 11': SIMBAD has no record for 'Cl Loden 11'"
+  },
+  {
+    "name": "NGC 2183",
+    "reason": "resolved to 'NGC  2183' via variant 'NGC 2183' but its SIMBAD otype 'RNe' is not a recognized cluster/association type - not accepted without a confident classification (avoids a spurious cross-match, e.g. to a constellation or single star)."
+  },
+  {
+    "name": "Teutsch",
+    "reason": "tried ['Teutsch', 'Cl Teutsch'], all failed: 'Teutsch': SIMBAD has no record for 'Teutsch'; 'Cl Teutsch': SIMBAD has no record for 'Cl Teutsch'"
+  },
+  {
+    "name": "UPK ...",
+    "reason": "tried ['UPK ...', 'Cl UPK ...'], all failed: 'UPK ...': SIMBAD has no record for 'UPK ...'; 'Cl UPK ...': SIMBAD has no record for 'Cl UPK ...'"
+  },
+  {
+    "name": "UPK 3?",
+    "reason": "tried ['UPK 3?', 'Cl UPK 3?'], all failed: 'UPK 3?': SIMBAD has no record for 'UPK 3?'; 'Cl UPK 3?': SIMBAD has no record for 'Cl UPK 3?'"
+  },
+  {
+    "name": "UPK 451",
+    "reason": "tried ['UPK 451', 'Cl UPK 451'], all failed: 'UPK 451': SIMBAD has no record for 'UPK 451'; 'Cl UPK 451': SIMBAD has no record for 'Cl UPK 451'"
+  }
+]

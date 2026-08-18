@@ -19,12 +19,13 @@ the three model layers from that scene export, with a full interaction layer
 — spec §23-25, §28-29, §39) — see [Web visualizer](#web-visualizer) below.
 
 v1.2 (`spec/Idea-v1.2-individual-stars.md`) extends the catalog with ~585
-individual named stars identified from a reference poster (candidate names
-only - never positions, spec §10) and resolved for real against SIMBAD/Gaia,
-alongside the original 20 structural objects - see
-[Individual stars (v1.2)](#individual-stars-v12) below. Scaling the web
-viewer for this larger catalog (`InstancedMesh`, label density) is tracked
-separately - see the `local-galactic-structures` GitHub Project board.
+individual named stars and ~229 additional star clusters/associations
+identified from a reference poster (candidate names only - never positions,
+spec §10) and resolved for real against SIMBAD/Gaia, alongside the original
+20 structural objects - see [Individual stars (v1.2)](#individual-stars-v12)
+and [Additional star clusters (v1.2)](#additional-star-clusters-v12) below.
+Scaling the web viewer for the larger catalog (`InstancedMesh`, label
+density) has already shipped (Story #89).
 
 ## Setup
 
@@ -46,12 +47,14 @@ from the checked-in, sourced records in
 `data/normalized/initial_catalog_records.json` - spec §9's >=20-object seed
 list (molecular clouds, star clusters, OB associations, the Vela SNR, and
 the Local Bubble) plus, since v1.2, ~585 individual named stars (see
-[Individual stars (v1.2)](#individual-stars-v12) below) - 605 objects total.
-Every record is either resolved live via SIMBAD/Gaia/VizieR, or built from a
-cited literature distance; see each record's `source.reference`. No live
-network access is required to rebuild from this checked-in file (spec §14);
-re-resolving from scratch is a separate concern handled by
-`src/local_galactic_structures/data_sources/`.
+[Individual stars (v1.2)](#individual-stars-v12) below) and ~229 additional
+star clusters/associations (see
+[Additional star clusters (v1.2)](#additional-star-clusters-v12) below) -
+**834 objects total**. Every record is either resolved live via
+SIMBAD/Gaia/VizieR, or built from a cited literature distance; see each
+record's `source.reference`. No live network access is required to rebuild
+from this checked-in file (spec §14); re-resolving from scratch is a
+separate concern handled by `src/local_galactic_structures/data_sources/`.
 
 ## Rebuild the scientific model layers
 
@@ -251,3 +254,42 @@ support arbitrary catalog sizes (spec §28, §44) - no pipeline or web code
 changed for this Story. Scaling the web viewer's *rendering performance*
 for ~600 objects (`InstancedMesh`, label density) is tracked as a separate,
 required Story (#89) rather than assumed to already work at this scale.
+
+## Additional star clusters (v1.2)
+
+`spec/Idea-v1.2-individual-stars.md` §9 item 4 (Story #90) rounds out the
+catalog with the poster's remaining star-cluster/OB-association labels not
+already covered by the original 20-object seed catalog - reusing exactly
+the same resolution pipeline as [individual stars](#individual-stars-v12)
+(Story #88), just `object_type: "star_cluster"` (or `"stellar_association"`
+where SIMBAD's own classification says so - see below) instead of `"star"`.
+
+- **Extraction** (Story #87, same poster/methodology as the star candidate
+  list): 264 unique candidate cluster names, 2 already present in the
+  catalog (`Hyades`, `Pleiades`) and skipped. Full methodology:
+  `data/raw/galaxy_map/README.md`.
+- **Resolution** (Story #90): of the remaining 262 candidates, **229
+  resolved** (226 `star_cluster`, 3 `stellar_association`), **32 genuinely
+  unresolved** (`data/raw/galaxy_map/unresolved_clusters.json`), and 1
+  duplicate poster label collapsed into a single real object. Each resolved
+  cluster/association's real SIMBAD `otype` decided its `object_type`
+  honestly - `OpC`/`Cl*`/`GlC` -> `star_cluster`, `As*`/`MGr` ->
+  `stellar_association` - rather than forcing every poster label into
+  `star_cluster`; a name that resolved to something else entirely (an RR
+  Lyrae variable, a reflection nebula) was rejected as a likely wrong
+  cross-match and left unresolved instead of fabricated. Dual provenance
+  (spec §5) again applies: `source.reference` is the real SIMBAD citation,
+  `notes` separately records the Galaxy Map candidate selection.
+
+  The unresolved third mostly reflects small/specialist open-cluster survey
+  catalogs (`ASCC`, `COIN-Gaia`, `BH`, `Loden`, `Aveni Hunter`) that aren't
+  uniformly cross-identified in SIMBAD's main identifier table - a
+  genuine upstream data-coverage gap, not a resolution-method weakness. See
+  `data/raw/galaxy_map/README.md`'s "Story #90" section for the full
+  breakdown and the otype-based safety check that caught the two near-miss
+  false matches.
+
+Catalog now stands at **834 objects** (20 original + 585 individual stars +
+229 clusters/associations). No web viewer changes were needed - the
+`InstancedMesh` per-`object_type` bucketing and color mapping added by
+Story #89 already cover `star_cluster`/`stellar_association` generically.

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 7058",
+  "retrieved_utc": "2026-08-18T13:15:42+00:00",
+  "record_id": "NGC  7058",
+  "raw": {
+    "main_id": "NGC  7058",
+    "ra": 320.4479166666667,
+    "dec": 50.82194444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 2.73,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  450|NGC  7058|[KPR2004b] 496|[KPS2012] MWSC 3501",
+    "matched_id": "NGC  7058"
+  }
+}

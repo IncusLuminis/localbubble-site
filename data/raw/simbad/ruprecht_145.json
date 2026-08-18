@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Ruprecht 145",
+  "retrieved_utc": "2026-08-18T13:16:07+00:00",
+  "record_id": "Cl Ruprecht  145",
+  "raw": {
+    "main_id": "Cl Ruprecht  145",
+    "ra": 282.6358333333333,
+    "dec": -18.27,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.651,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1134|C 1847-181|OCl   52.0|[KPR2004b] 452|Cl Ruprecht  145|[KPS2012] MWSC 3005",
+    "matched_id": "Cl Ruprecht  145"
+  }
+}

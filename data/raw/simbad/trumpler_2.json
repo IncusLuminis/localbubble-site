@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Trumpler 2",
+  "retrieved_utc": "2026-08-18T13:16:25+00:00",
+  "record_id": "Cl Trumpler    2",
+  "raw": {
+    "main_id": "Cl Trumpler    2",
+    "ra": 39.232083333333335,
+    "dec": 55.90500000000001,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.002300000051036477,
+    "plx_value": 1.4316,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  851|C 0233+557|OCl  365.0|[KPR2004b]  35|Cl Trumpler    2|[KPS2012] MWSC 0219",
+    "matched_id": "Cl Trumpler    2"
+  }
+}

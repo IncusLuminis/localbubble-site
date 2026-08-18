@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Platais 10",
+  "retrieved_utc": "2026-08-18T13:15:48+00:00",
+  "record_id": "Cl Platais   10",
+  "raw": {
+    "main_id": "Cl Platais   10",
+    "ra": 205.22,
+    "dec": -59.271111111111104,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.02199999988079071,
+    "plx_value": 4.158,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  439|[KPR2004b] 334|[PKV98] HIP  67014|Cl Platais   10|[KPS2012] MWSC 2150|NAME HIP 67014 Cluster",
+    "matched_id": "Cl Platais   10"
+  }
+}

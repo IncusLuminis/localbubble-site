@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 1",
+  "retrieved_utc": "2026-08-18T13:16:29+00:00",
+  "record_id": "UBC 1",
+  "raw": {
+    "main_id": "UBC 1",
+    "ra": 287.87000000000006,
+    "dec": 56.801111111111105,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 3.049,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  520|UBC 1",
+    "matched_id": "UBC 1"
+  }
+}

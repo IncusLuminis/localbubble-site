@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "IC 4665",
+  "retrieved_utc": "2026-08-18T13:14:23+00:00",
+  "record_id": "IC 4665",
+  "raw": {
+    "main_id": "IC 4665",
+    "ra": 266.5541666666667,
+    "dec": 5.614999999999999,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0034000000450760126,
+    "plx_value": 2.8918,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   76|C 1743+057|IC 4665|OCl   85.0|[KPR2004b] 412|Cl Collinder  349|Cl Melotte  179|[KPS2012] MWSC 2689",
+    "matched_id": "IC 4665"
+  }
+}

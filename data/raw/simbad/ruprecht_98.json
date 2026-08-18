@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Ruprecht 98",
+  "retrieved_utc": "2026-08-18T13:16:09+00:00",
+  "record_id": "Cl Ruprecht   98",
+  "raw": {
+    "main_id": "Cl Ruprecht   98",
+    "ra": 179.715,
+    "dec": -64.58111111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 2.044,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1028|C 1155-642|OCl  868|[KPR2004b] 300|Cl Ruprecht   98|Cl VDBH  125|[KPS2012] MWSC 1988",
+    "matched_id": "Cl Ruprecht   98"
+  }
+}

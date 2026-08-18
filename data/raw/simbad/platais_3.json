@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Platais 3",
+  "retrieved_utc": "2026-08-18T13:15:49+00:00",
+  "record_id": "NAME HIP 21974 Cluster",
+  "raw": {
+    "main_id": "NAME HIP 21974 Cluster",
+    "ra": 69.97583333333334,
+    "dec": 71.28,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.017000000923871994,
+    "plx_value": 5.62,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  787|[KPR2004b]  53|[PKV98] HIP  21974|Cl Platais    3|[KPS2012] MWSC 0395|NAME HIP 21974 Cluster",
+    "matched_id": "Cl Platais    3"
+  }
+}

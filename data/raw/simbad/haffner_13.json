@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Haffner 13",
+  "retrieved_utc": "2026-08-18T13:14:16+00:00",
+  "record_id": "Cl Haffner   13",
+  "raw": {
+    "main_id": "Cl Haffner   13",
+    "ra": 115.20916666666668,
+    "dec": -30.07305555555556,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 1.742,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  106|C 0738-300|[KPR2004b] 155|Cl Haffner   13|Cl VDBH    5|[KPS2012] MWSC 1305",
+    "matched_id": "Cl Haffner   13"
+  }
+}

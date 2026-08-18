@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 185",
+  "retrieved_utc": "2026-08-18T13:17:17+00:00",
+  "record_id": "UBC 171",
+  "raw": {
+    "main_id": "UBC 171",
+    "ra": 346.4241666666667,
+    "dec": 49.37611111111112,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 1.784,
+    "otype": "OpC",
+    "ids": "[LP2019] 2275|UPK 185|UBC 171",
+    "matched_id": "UPK 185"
+  }
+}

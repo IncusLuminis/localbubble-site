@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2264",
+  "retrieved_utc": "2026-08-18T13:15:17+00:00",
+  "record_id": "NGC  2264",
+  "raw": {
+    "main_id": "NGC  2264",
+    "ra": 100.21708333333333,
+    "dec": 9.876944444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 1.354,
+    "otype": "OpC",
+    "ids": "Villafranca O-016|[KC2019] Theia   41|[T70] 22|C 0638+099|CCABS  52|LBN 202.92+02.18|LBN   911|NAME XMAS TREE CL|NGC  2264|OCISM 108|OCl  495.0|OCl  495|SH  2-273|[HMT98] AS 15-0|[KPR2004b] 107|[TP72] 51|GRS G203.20 +02.00|[KPS2012] MWSC 0954|NAME Christmas Tree Cluster",
+    "matched_id": "NGC  2264"
+  }
+}

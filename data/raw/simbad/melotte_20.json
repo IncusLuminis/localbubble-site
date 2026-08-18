@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Melotte 20",
+  "retrieved_utc": "2026-08-18T13:14:33+00:00",
+  "record_id": "Cl Melotte   20",
+  "raw": {
+    "main_id": "Cl Melotte   20",
+    "ra": 51.61708333333334,
+    "dec": 48.974999999999994,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 5.718,
+    "otype": "MGr",
+    "ids": "[KC2019] Theia  133|C 0318+484|OCl  392.0|[KPR2004b]  42|[MGC2022] Crius 229|Cl Melotte   20|[KPS2012] MWSC 0274|Cl Collinder   39|NAME Alpha Per Cluster|NAME Alpha Persei Cluster|NAME alf Per Cluster",
+    "matched_id": "Cl Melotte   20"
+  }
+}

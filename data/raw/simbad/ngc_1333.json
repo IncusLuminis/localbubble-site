@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 1333",
+  "retrieved_utc": "2026-08-18T13:15:00+00:00",
+  "record_id": "NGC  1333",
+  "raw": {
+    "main_id": "NGC  1333",
+    "ra": 52.29708333333333,
+    "dec": 31.310000000000006,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.03799999877810478,
+    "plx_value": 3.344,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   21|[WBR2005] J032902.0+312104|Ced  16|DG  18|LBN 158.31-20.44|LBN   741|NGC  1333|[B77]  56|[TP72]  4|GRS G158.30 -20.50|[KPS2012] MWSC 0279|[RK68]  12|GN 03.26.1",
+    "matched_id": "NGC  1333"
+  }
+}

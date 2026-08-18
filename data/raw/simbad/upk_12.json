@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 12",
+  "retrieved_utc": "2026-08-18T13:17:08+00:00",
+  "record_id": "UBC 98",
+  "raw": {
+    "main_id": "UBC 98",
+    "ra": 288.805,
+    "dec": -22.143055555555556,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.012000000104308128,
+    "plx_value": 1.524,
+    "otype": "OpC",
+    "ids": "UPK 12|UBC 98",
+    "matched_id": "UPK 12"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "BH 23",
+  "retrieved_utc": "2026-08-18T13:13:21+00:00",
+  "record_id": "[KC2019] Theia   80",
+  "raw": {
+    "main_id": "[KC2019] Theia   80",
+    "ra": 123.78351242094753,
+    "dec": -35.6302485355542,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2019AJ....158..122K",
+    "plx_err": null,
+    "plx_value": 2.09707,
+    "otype": "As*",
+    "ids": "[KC2019] Theia   80|BH  23",
+    "matched_id": "BH  23"
+  }
+}

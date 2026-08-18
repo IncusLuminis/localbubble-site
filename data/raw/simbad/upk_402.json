@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 402",
+  "retrieved_utc": "2026-08-18T13:17:52+00:00",
+  "record_id": "UPK 402",
+  "raw": {
+    "main_id": "UPK 402",
+    "ra": 87.515,
+    "dec": 2.8219444444444446,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.01899999938905239,
+    "plx_value": 2.417,
+    "otype": "OpC",
+    "ids": "UPK 402",
+    "matched_id": "UPK 402"
+  }
+}

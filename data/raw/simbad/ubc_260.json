@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 260",
+  "retrieved_utc": "2026-08-18T13:16:51+00:00",
+  "record_id": "UBC 260",
+  "raw": {
+    "main_id": "UBC 260",
+    "ra": 140.1479166666667,
+    "dec": -69.885,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.03799999877810478,
+    "plx_value": 1.831,
+    "otype": "OpC",
+    "ids": "UBC 260",
+    "matched_id": "UBC 260"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 333",
+  "retrieved_utc": "2026-08-18T13:17:37+00:00",
+  "record_id": "UPK 333",
+  "raw": {
+    "main_id": "UPK 333",
+    "ra": 61.77083333333332,
+    "dec": 44.09388888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.009999999776482582,
+    "plx_value": 1.361,
+    "otype": "OpC",
+    "ids": "UPK 333",
+    "matched_id": "UPK 333"
+  }
+}

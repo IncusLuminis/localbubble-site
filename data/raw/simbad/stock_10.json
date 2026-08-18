@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Stock 10",
+  "retrieved_utc": "2026-08-18T13:16:13+00:00",
+  "record_id": "Cl Stock   10",
+  "raw": {
+    "main_id": "Cl Stock   10",
+    "ra": 84.80791666666667,
+    "dec": 37.85,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 2.759,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  609|C 0535+379|[KPR2004b]  81|Cl Stock   10|[KPS2012] MWSC 0616",
+    "matched_id": "Cl Stock   10"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Ferrero 11",
+  "retrieved_utc": "2026-08-18T13:14:01+00:00",
+  "record_id": "Cl Ferrero   11",
+  "raw": {
+    "main_id": "Cl Ferrero   11",
+    "ra": 93.64583333333333,
+    "dec": 0.6369444444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.010999999940395355,
+    "plx_value": 1.24,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  488|Cl Ferrero   11",
+    "matched_id": "Cl Ferrero   11"
+  }
+}

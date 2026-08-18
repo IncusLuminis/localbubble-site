@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 65",
+  "retrieved_utc": "2026-08-18T13:18:47+00:00",
+  "record_id": "UPK 65",
+  "raw": {
+    "main_id": "UPK 65",
+    "ra": 286.51416666666665,
+    "dec": 23.33694444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 1.287,
+    "otype": "OpC",
+    "ids": "UPK 65",
+    "matched_id": "UPK 65"
+  }
+}

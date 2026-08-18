@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Teutsch 35",
+  "retrieved_utc": "2026-08-18T13:16:21+00:00",
+  "record_id": "Teutsch  35",
+  "raw": {
+    "main_id": "Teutsch  35",
+    "ra": 294.09083333333336,
+    "dec": 35.74194444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 2.007,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  457|Teutsch  35|[KPR2005] 103|[KPS2012] MWSC 3141",
+    "matched_id": "Teutsch  35"
+  }
+}

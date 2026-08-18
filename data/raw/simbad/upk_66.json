@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 66",
+  "retrieved_utc": "2026-08-18T13:18:50+00:00",
+  "record_id": "UPK 66",
+  "raw": {
+    "main_id": "UPK 66",
+    "ra": 305.39,
+    "dec": 13.508888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.008999999612569809,
+    "plx_value": 1.453,
+    "otype": "OpC",
+    "ids": "UPK 66",
+    "matched_id": "UPK 66"
+  }
+}

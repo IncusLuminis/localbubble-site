@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 19",
+  "retrieved_utc": "2026-08-18T13:16:39+00:00",
+  "record_id": "UBC 19",
+  "raw": {
+    "main_id": "UBC 19",
+    "ra": 56.33583333333334,
+    "dec": 29.82694444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.01600000075995922,
+    "plx_value": 2.385,
+    "otype": "OpC",
+    "ids": "UBC 19|NAME Cl Alessi-Teutsch 10|OCSN 284",
+    "matched_id": "UBC 19"
+  }
+}

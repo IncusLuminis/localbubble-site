@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 24",
+  "retrieved_utc": "2026-08-18T13:17:24+00:00",
+  "record_id": "UPK 24",
+  "raw": {
+    "main_id": "UPK 24",
+    "ra": 282.6458333333333,
+    "dec": -10.788055555555555,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 1.963,
+    "otype": "OpC",
+    "ids": "UPK 24",
+    "matched_id": "UPK 24"
+  }
+}

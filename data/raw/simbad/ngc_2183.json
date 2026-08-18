@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2183",
+  "retrieved_utc": "2026-08-18T13:15:12+00:00",
+  "record_id": "NGC  2183",
+  "raw": {
+    "main_id": "NGC  2183",
+    "ra": 92.69479166666667,
+    "dec": -6.212472222222223,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "",
+    "plx_err": 0.10199999809265137,
+    "plx_value": 1.171,
+    "otype": "RNe",
+    "ids": "Ced  69|DG  94|LBN   996|LBN 213.83-11.89|NGC  2183|[GSL2002]  20|[WBH98] 06084-0611|LEDA 1035508|[RK68]  53",
+    "matched_id": "NGC  2183"
+  }
+}

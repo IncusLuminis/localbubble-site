@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Alessi 31",
+  "retrieved_utc": "2026-08-18T13:12:59+00:00",
+  "record_id": "Cl Alessi   31",
+  "raw": {
+    "main_id": "Cl Alessi   31",
+    "ra": 267.69791666666663,
+    "dec": -11.853055555555553,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 1.477,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  739|Cl Alessi   31",
+    "matched_id": "Cl Alessi   31"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "COIN-Gaia 30",
+  "retrieved_utc": "2026-08-18T13:13:41+00:00",
+  "record_id": "NAME COIN-Gaia 30",
+  "raw": {
+    "main_id": "NAME COIN-Gaia 30",
+    "ra": 21.08,
+    "dec": 70.57388888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 1.346,
+    "otype": "OpC",
+    "ids": "[CKS2019] COIN-Gaia 30|[KC2019] Theia  757|NAME COIN-Gaia 30",
+    "matched_id": "NAME COIN-Gaia 30"
+  }
+}

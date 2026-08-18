@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 502",
+  "retrieved_utc": "2026-08-18T13:18:11+00:00",
+  "record_id": "UPK 502",
+  "raw": {
+    "main_id": "UPK 502",
+    "ra": 124.36249999999998,
+    "dec": -37.78833333333333,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020A&A...633A..99C",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 1.405,
+    "otype": "OpC",
+    "ids": "UPK 502",
+    "matched_id": "UPK 502"
+  }
+}

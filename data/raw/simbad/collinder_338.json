@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 338",
+  "retrieved_utc": "2026-08-18T13:13:47+00:00",
+  "record_id": "Cl Collinder  338",
+  "raw": {
+    "main_id": "Cl Collinder  338",
+    "ra": 264.4829166666667,
+    "dec": -37.65694444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 1.521,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  334|C 1734-375|IRAS 17349-3730|OCl 1013.0|[KPR2004b] 406|Cl Collinder  338|[KPS2012] MWSC 2651",
+    "matched_id": "Cl Collinder  338"
+  }
+}

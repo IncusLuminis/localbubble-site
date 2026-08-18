@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Platais 8",
+  "retrieved_utc": "2026-08-18T13:15:50+00:00",
+  "record_id": "Cl Platais    8",
+  "raw": {
+    "main_id": "Cl Platais    8",
+    "ra": 136.71791666666667,
+    "dec": -58.685,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.01899999938905239,
+    "plx_value": 7.415,
+    "otype": "OpC",
+    "ids": "NAME a Car Cluster|[KPR2004b] 216|[PKV98] HIP  45080|Cl Platais    8|[KPS2012] MWSC 1629|NAME HIP 45080 Cluster",
+    "matched_id": "Cl Platais    8"
+  }
+}

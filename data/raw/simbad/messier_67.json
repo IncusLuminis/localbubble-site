@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 67",
+  "retrieved_utc": "2026-08-18T13:14:58+00:00",
+  "record_id": "NGC  2682",
+  "raw": {
+    "main_id": "NGC  2682",
+    "ra": 132.84583333333333,
+    "dec": 11.81388888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0010999999940395355,
+    "plx_value": 1.1325,
+    "otype": "OpC",
+    "ids": "C 0847+120|M  67|NGC  2682|OCl  549.0|[KPR2004b] 212|HR  3515|[KPS2012] MWSC 1585",
+    "matched_id": "M  67"
+  }
+}

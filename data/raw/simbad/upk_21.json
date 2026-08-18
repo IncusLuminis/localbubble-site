@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 21",
+  "retrieved_utc": "2026-08-18T13:17:20+00:00",
+  "record_id": "UPK 21",
+  "raw": {
+    "main_id": "UPK 21",
+    "ra": 282.89500000000004,
+    "dec": -15.149999999999995,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 1.686,
+    "otype": "OpC",
+    "ids": "UPK 21",
+    "matched_id": "UPK 21"
+  }
+}

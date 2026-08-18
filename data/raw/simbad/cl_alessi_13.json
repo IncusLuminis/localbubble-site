@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Alessi 13",
+  "retrieved_utc": "2026-08-18T13:12:44+00:00",
+  "record_id": "Cl Alessi   13",
+  "raw": {
+    "main_id": "Cl Alessi   13",
+    "ra": 51.762083333333344,
+    "dec": -35.821111111111115,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.03799999877810478,
+    "plx_value": 9.584,
+    "otype": "OpC",
+    "ids": "[KPS2012] MWSC 0278|[KPR2004b]  44|Cl Alessi   13|HIDDEN NAME chi1 For Cluster|HIDDEN NAME chi1 Fornacis Cluster|NAME chi1 For moving group",
+    "matched_id": "Cl Alessi   13"
+  }
+}

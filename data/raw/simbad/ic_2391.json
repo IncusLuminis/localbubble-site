@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "IC 2391",
+  "retrieved_utc": "2026-08-18T13:14:18+00:00",
+  "record_id": "IC 2391",
+  "raw": {
+    "main_id": "IC 2391",
+    "ra": 130.29208333333335,
+    "dec": -52.99111111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 6.597,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  114|C 0838-528|IC 2391|OCl  767.0|[KPR2004b] 202|Cl VDBH   42|Escorial 31|[KPS2012] MWSC 1529|NAME omi Vel Cluster",
+    "matched_id": "IC 2391"
+  }
+}

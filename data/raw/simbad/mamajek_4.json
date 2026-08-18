@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Mamajek 4",
+  "retrieved_utc": "2026-08-18T13:14:31+00:00",
+  "record_id": "Mamajek 4",
+  "raw": {
+    "main_id": "Mamajek 4",
+    "ra": 273.4178058984186,
+    "dec": -53.954432929783295,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2019AJ....158..122K",
+    "plx_err": 0.05700000002980232,
+    "plx_value": 2.222,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  823|Mamajek 4",
+    "matched_id": "Mamajek 4"
+  }
+}

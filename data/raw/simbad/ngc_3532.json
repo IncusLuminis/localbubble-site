@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 3532",
+  "retrieved_utc": "2026-08-18T13:15:28+00:00",
+  "record_id": "NGC  3532",
+  "raw": {
+    "main_id": "NGC  3532",
+    "ra": 166.41708333333332,
+    "dec": -58.70694444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.000699999975040555,
+    "plx_value": 2.0659,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  720|LISC 2266|C 1104-584|NGC  3532|OCl  839.0|[KPR2004b] 276|Cl VDBH  109|[KPS2012] MWSC 1890|OCSN 236",
+    "matched_id": "NGC  3532"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Alessi 5",
+  "retrieved_utc": "2026-08-18T13:13:06+00:00",
+  "record_id": "Cl Alessi    5",
+  "raw": {
+    "main_id": "Cl Alessi    5",
+    "ra": 160.8191666666667,
+    "dec": -61.081111111111106,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 2.501,
+    "otype": "OpC",
+    "ids": "[KPR2004b] 261|Cl Alessi    5|[KPS2012] MWSC 1844",
+    "matched_id": "Cl Alessi    5"
+  }
+}

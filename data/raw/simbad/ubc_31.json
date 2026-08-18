@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 31",
+  "retrieved_utc": "2026-08-18T13:16:53+00:00",
+  "record_id": "UBC 31",
+  "raw": {
+    "main_id": "UBC 31",
+    "ra": 61.14583333333333,
+    "dec": 32.53194444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 2.723,
+    "otype": "OpC",
+    "ids": "UBC 31",
+    "matched_id": "UBC 31"
+  }
+}

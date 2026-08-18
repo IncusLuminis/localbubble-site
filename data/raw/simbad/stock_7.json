@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Stock 7",
+  "retrieved_utc": "2026-08-18T13:16:18+00:00",
+  "record_id": "Cl Mrk    6",
+  "raw": {
+    "main_id": "Cl Mrk    6",
+    "ra": 37.43083333333333,
+    "dec": 60.62694444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.441,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  964|C 0225+604|OCl  351|[KPR2004b]  32|Cl Mrk    6|Cl Stock    7|[KPS2012] MWSC 0202",
+    "matched_id": "Cl Stock    7"
+  }
+}

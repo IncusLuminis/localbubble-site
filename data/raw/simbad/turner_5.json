@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Turner 5",
+  "retrieved_utc": "2026-08-18T13:16:27+00:00",
+  "record_id": "Cl Turner    5",
+  "raw": {
+    "main_id": "Cl Turner    5",
+    "ra": 143.28416666666666,
+    "dec": -36.35805555555556,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.01899999938905239,
+    "plx_value": 2.373,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  443|[KPR2004b] 223|Cl Turner    5|[KPS2012] MWSC 1684",
+    "matched_id": "Cl Turner    5"
+  }
+}

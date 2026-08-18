@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 230",
+  "retrieved_utc": "2026-08-18T13:17:21+00:00",
+  "record_id": "UPK 230",
+  "raw": {
+    "main_id": "UPK 230",
+    "ra": 353.46500000000003,
+    "dec": 71.78805555555556,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.008999999612569809,
+    "plx_value": 1.837,
+    "otype": "OpC",
+    "ids": "UPK 230",
+    "matched_id": "UPK 230"
+  }
+}

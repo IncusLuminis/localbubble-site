@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 350",
+  "retrieved_utc": "2026-08-18T13:13:48+00:00",
+  "record_id": "Cl Collinder  350",
+  "raw": {
+    "main_id": "Cl Collinder  350",
+    "ra": 267.0179166666667,
+    "dec": 1.525,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.010999999940395355,
+    "plx_value": 2.708,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  919|C 1745+013|[KPR2004b] 414|Cl Collinder  350|[KPS2012] MWSC 2700",
+    "matched_id": "Cl Collinder  350"
+  }
+}

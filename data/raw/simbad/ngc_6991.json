@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 6991",
+  "retrieved_utc": "2026-08-18T13:15:40+00:00",
+  "record_id": "NGC  6991",
+  "raw": {
+    "main_id": "NGC  6991",
+    "ra": 313.6208333333333,
+    "dec": 47.4,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 1.765,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1231|NGC  6991|[KPR2004b] 494",
+    "matched_id": "NGC  6991"
+  }
+}

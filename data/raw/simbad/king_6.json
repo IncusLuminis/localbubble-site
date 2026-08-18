@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "King 6",
+  "retrieved_utc": "2026-08-18T13:14:26+00:00",
+  "record_id": "Cl King    6",
+  "raw": {
+    "main_id": "Cl King    6",
+    "ra": 51.982083333333335,
+    "dec": 56.443888888888885,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.346,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  864|C 0324+562|[KPR2004b]  43|Cl King    6|[KPS2012] MWSC 0277",
+    "matched_id": "Cl King    6"
+  }
+}
