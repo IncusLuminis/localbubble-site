@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "κ CMa",
+  "retrieved_utc": "2026-08-18T07:05:51+00:00",
+  "record_id": "* kap CMa",
+  "raw": {
+    "main_id": "* kap CMa",
+    "ra": 102.46024630194668,
+    "dec": -32.508478839148054,
+    "coo_err_maj": 0.12160000205039978,
+    "coo_err_min": 0.16840000450611115,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.83,
+    "otype": "Be*",
+    "plx_err": 0.17890000343322754,
+    "ids": "Gaia DR3 5583216215017531648|TIC 52982382|HIP 32759|2MASS J06495046-3230305|[JE82]  243|* kap CMa|*  13 CMa|AAVSO 0646-32|CD-32  3404|CPC 17  2994|CPD-32  1311|EM* MWC  155|FK5 1180|GC  8946|GCRV  4452|GEN# +1.00050013|GSC 07092-02576|HD  50013|HIC  32759|HR  2538|Hen 3-18|IRAS 06479-3226|JP11  1437|N30 1488|PMC 90-93   796|PPM 283177|ROT  6464|SAO 197258|SKY# 12056|SRS  31180|TD1  8307|TYC 7092-2576-1|UBV    6783|UBV M  12504|V* kap CMa|uvby98 100050013|ALS 14870|EUVE J0649-32.4|WEB  6594|Gaia DR2 5583216210720045568",
+    "matched_id": "* kap CMa"
+  }
+}

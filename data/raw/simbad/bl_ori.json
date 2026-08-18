@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "BL Ori",
+  "retrieved_utc": "2026-08-18T06:57:06+00:00",
+  "record_id": "V* BL Ori",
+  "raw": {
+    "main_id": "V* BL Ori",
+    "ra": 96.36739264613,
+    "dec": 14.721992263719999,
+    "coo_err_maj": 0.08839999884366989,
+    "coo_err_min": 0.09529999643564224,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3544,
+    "otype": "C*",
+    "plx_err": 0.0877000018954277,
+    "ids": "TIC 438211553|HIP 30564|Gaia DR3 3356702213833773440|BSD  74-1087|2MASS J06252818+1443192|AAVSO 0619+14|AG+14  648|BD+14  1283|C*  508|CGCS 1264|Case  277|DO 12191|Fuen C 209|GC  8294|GCRV  4087|GEN# +1.00044984|GSC 00744-00949|HD  44984|HIC  30564|HR  2308|IRAS 06225+1445|IRC +10121|JP11  1380|LEE  46|LF  8 +14  416|MSX5C G196.9046+01.0630|PPM 122445|RAFGL  934|SAO  95659|SKY# 11006|TYC  744-949-1|UBV   21336|V* BL Ori|YPAC 420|YZ  14  2239|[LFO93] 0622+14|UCAC3 210-55669|WEB  6093|Gaia DR2 3356702213833773440",
+    "matched_id": "V* BL Ori"
+  }
+}

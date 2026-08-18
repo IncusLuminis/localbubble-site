@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 1166",
+  "retrieved_utc": "2026-08-18T06:57:38+00:00",
+  "record_id": "HD   1166",
+  "raw": {
+    "main_id": "HD   1166",
+    "ra": 4.0553340296,
+    "dec": 61.89256499886001,
+    "coo_err_maj": 0.02370000071823597,
+    "coo_err_min": 0.025699999183416367,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.1267,
+    "otype": "*",
+    "plx_err": 0.03310000151395798,
+    "ids": "TIC 83910944|Gaia DR3 429726841074029184|2MASS J00161329+6153331|AG+61   15|BD+61    21|DO 23040|GCRV 50202|GEN# +1.00001166|GSC 04018-01953|HD   1166|IRAS 00135+6136|PPM  12059|SAO  11077|TYC 4018-1953-1|UBV     174|UBV M   7255|Gaia DR1 429726836771624448|WEB   228|Gaia DR2 429726841074029184",
+    "matched_id": "HD   1166"
+  }
+}

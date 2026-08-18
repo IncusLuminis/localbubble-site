@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "27 CMa",
+  "retrieved_utc": "2026-08-18T06:56:15+00:00",
+  "record_id": "*  27 CMa",
+  "raw": {
+    "main_id": "*  27 CMa",
+    "ra": 108.56338216558667,
+    "dec": -26.352508045988618,
+    "coo_err_maj": 0.24320000410079956,
+    "coo_err_min": 0.3321000039577484,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.2694,
+    "otype": "Be*",
+    "plx_err": 0.42649999260902405,
+    "ids": "TIC 65803653|GEN# +1.00056014|HIP 34981|Gaia DR3 5610288149803056896|2MASS J07141520-2621091|[JE82]  290|*  27 CMa|AAVSO 0710-26B|CCDM J07143-2621AB|CD-26  4057|CEL   1698|CPD-26  1904|EM* MWC  170|GC  9608|GCRV  4786|HD  56014|HIC  34981|HR  2745|IDS 07102-2611 AB|IRAS 07122-2615|JP11  1507|N30 1605|PPM 251933|ROT  1161|SAO 173264|SKY# 13070|SRS  41568|TD1  9527|UBV   21658|UBV M  13065|V* EW CMa|YZ 116  4627|uvby98 100056014 ABV|ALS 14881|WDS J07143-2621AB|TYC 6532-5000-1|** FIN  323|WEB  6996|Gaia DR2 5610288149803056896",
+    "matched_id": "*  27 CMa"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "69 Cet",
+  "retrieved_utc": "2026-08-18T06:56:35+00:00",
+  "record_id": "*  69 Cet",
+  "raw": {
+    "main_id": "*  69 Cet",
+    "ra": 35.48594849934,
+    "dec": 0.39567238831,
+    "coo_err_maj": 0.12219999730587006,
+    "coo_err_min": 0.08820000290870667,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.8443,
+    "otype": "*",
+    "plx_err": 0.14499999582767487,
+    "ids": "TIC 420016522|HIP 11021|Gaia DR3 2501083018375563776|2MASS J02215663+0023446|*  69 Cet|AG+00  203|BD-00   355|DO   438|GC  2846|GCRV  1334|GEN# +1.00014652|GSC 00039-01275|HD  14652|HIC  11021|HR   689|IRAS 02193+0010|IRC +00031|NSV   805|PPM 145523|RAFGL  321|SAO 110495|SKY#  3496|TYC   39-1275-1|UBV    2453|UBV M   8900|YPAC 293|YZ   0   474|[B10]   539|WEB  2316|Gaia DR2 2501083018375563776",
+    "matched_id": "*  69 Cet"
+  }
+}

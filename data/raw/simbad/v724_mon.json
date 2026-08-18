@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V724 Mon",
+  "retrieved_utc": "2026-08-18T07:03:49+00:00",
+  "record_id": "V* V724 Mon",
+  "raw": {
+    "main_id": "V* V724 Mon",
+    "ra": 97.31416092918002,
+    "dec": -8.10065317408,
+    "coo_err_maj": 0.028999999165534973,
+    "coo_err_min": 0.03189999982714653,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2052,
+    "otype": "LP*",
+    "plx_err": 0.03849999979138374,
+    "ids": "TIC 24829181|HIP 30909|Gaia DR3 3006727147315300736|2MASS J06291540-0806023|BD-08  1448|EIC   134|GSC 05364-01575|GSC 05364-02106|HD  45804|HIC  30909|IRAS 06268-0804|IRC -10124|PPM 189226|RAFGL  948|RAFGL  948S|SAO 133326|SRS   7098|TYC 5364-1575-1|V* V724 Mon|YZ  98  1994|Gaia DR1 3006727143018546432|Gaia DR2 3006727147315300736",
+    "matched_id": "V* V724 Mon"
+  }
+}

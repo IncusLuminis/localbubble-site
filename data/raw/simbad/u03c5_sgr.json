@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "υ Sgr",
+  "retrieved_utc": "2026-08-18T07:06:31+00:00",
+  "record_id": "* ups Sgr",
+  "raw": {
+    "main_id": "* ups Sgr",
+    "ra": 290.4317608155338,
+    "dec": -15.955017423970556,
+    "coo_err_maj": 0.13840000331401825,
+    "coo_err_min": 0.12300000339746475,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.0869,
+    "otype": "Be*",
+    "plx_err": 0.17159999907016754,
+    "ids": "TIC 334020482|uvby98 100181615|GEN# +1.00181615|HIP 95176|Gaia DR3 4184011836737423872|TYC 6297-1419-1|V* ups Sgr|* ups Sgr|*  46 Sgr|AN   17.1938|[B10]  4934|BD-16  5283|EM* MWC  313|FK5  727|GC 26697|GCRV 11810|GSC 06297-01419|HD 181615|[HFE83] 1284|HIC  95176|HR  7342|IRAS 19188-1603|SBC9 1147|[JE82] 1008|IRC -20558|JP11  3095|N30 4287|PMC 90-93   517|PPM 235885|RAFGL 2373|ROT  2777|SACS 428|SAO 162518|SBC7   748|SKY# 35999|TD1 24473|UBV   21647|YZ   0  7233|HD 181616|2MASS J19214363-1557181|ALS 19729|Renson 50300|WEB 16625|Gaia DR2 4184011836737423872",
+    "matched_id": "* ups Sgr"
+  }
+}

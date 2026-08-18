@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ν Cen",
+  "retrieved_utc": "2026-08-18T07:06:05+00:00",
+  "record_id": "* nu. Cen",
+  "raw": {
+    "main_id": "* nu. Cen",
+    "ra": 207.37615211559708,
+    "dec": -41.68770852979139,
+    "coo_err_maj": 0.3084000051021576,
+    "coo_err_min": 0.5270000100135803,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 8.0476,
+    "otype": "bC*",
+    "plx_err": 0.34700000286102295,
+    "ids": "Gaia DR3 6112195451032545024|TIC 166447153|HIP 67464|SBC9 782|* nu. Cen|CD-41  8171|CPC  0 11719|CPD-41  6479|CSV 101405|GC 18665|GCRV  8151|GEN# +1.00120307|GSC 07797-02744|HD 120307|HGAM   2016|HIC  67464|HR  5190|IRAS 13465-4126|JP11  2430|N30 3143|NSV  6454|PPM 318895|ROT  1998|SAO 224469|SBC7   497|SKY# 25358|TD1 17066|TYC 7797-2744-1|UBV   12315|UBV M  19727|V* nu. Cen|[B10]  3564|2MASS J13493028-4141156|ALS 14982|SV* ZI  1024|uvby98 100120307|WEB 11863|Gaia DR2 6112195451031438464|NAME-IAU Heng",
+    "matched_id": "* nu. Cen"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Azmidi",
+  "retrieved_utc": "2026-08-18T06:57:00+00:00",
+  "record_id": "* ksi Pup",
+  "raw": {
+    "main_id": "* ksi Pup",
+    "ra": 117.32355646601665,
+    "dec": -24.859783879637224,
+    "coo_err_maj": 0.06120000034570694,
+    "coo_err_min": 0.08860000222921371,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.0059,
+    "otype": "*",
+    "plx_err": 0.13169999420642853,
+    "ids": "TIC 127799216|Gaia DR3 5614471482318442240|HIP 38170|PLX 1851|* ksi Pup|*   7 Pup|ADS  6393 A|CCDM J07493-2452A|CD-24  6030|CPD-24  2939|CSI-24  6030 21|FK5 1204|GC 10562|GCRV  5209|GSC 06557-04522|HD  63700|HIC  38170|HR  3045|IDS 07451-2437 A|IRAS 07471-2443|IRC -20145|JP11  1603|N30 1786|PMC 90-93   815|PPM 253258|RAFGL 1195|SAO 174601|SKY# 14530|SRS  31204|** BU 1063A|GEN# +1.00063700|TD1 11133|TYC 6557-4522-1|UBV    7550|UBV M  13685|YZ 114  5543|PLX 1851.00|WDS J07493-2452A|NAME Asmidiske|NAME Azmidiske|2MASS J07491766-2451349|uvby98 100063700|WEB  7525|Gaia DR2 5614471482299920384|NAME-IAU Azmidi",
+    "matched_id": "NAME-IAU Azmidi"
+  }
+}

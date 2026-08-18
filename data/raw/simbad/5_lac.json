@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "5 Lac",
+  "retrieved_utc": "2026-08-18T06:56:25+00:00",
+  "record_id": "*   5 Lac",
+  "raw": {
+    "main_id": "*   5 Lac",
+    "ra": 337.3826173137183,
+    "dec": 47.706905899615,
+    "coo_err_maj": 0.09679999947547913,
+    "coo_err_min": 0.09989999979734421,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.4838,
+    "otype": "s*r",
+    "plx_err": 0.13830000162124634,
+    "ids": "TIC 200120841|Gaia DR3 1986628812013105152|PLX 5441|SBC9 1376|*   5 Lac|AG+47 1916|BD+46  3719|CSV 102179|FK5 3799|GC 31426|GCRV 14142|GEN# +1.00213310|GSC 03611-02304|HD 213311|HD 213310|HIC 111022|HIP 111022|HR  8572|IRAS 22274+4726|IRC +50433|JP11  3500|NSV 14177|PMC 90-93  1467|PPM  63008|RAFGL 2913|SAO  52055|SKY# 42798|SV* ZI  2092|TYC 3611-2304-1|UBV   19227|UBV M  26438|V* V412 Lac|[R57]  835|2MASS J22293182+4742247|PLX 5441.00|WDS J22295+4742AB|** MCA   71|WEB 19877|Gaia DR2 1986628812012131712",
+    "matched_id": "*   5 Lac"
+  }
+}

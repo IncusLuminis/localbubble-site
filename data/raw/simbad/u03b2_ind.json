@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "β Ind",
+  "retrieved_utc": "2026-08-18T07:04:57+00:00",
+  "record_id": "* bet Ind",
+  "raw": {
+    "main_id": "* bet Ind",
+    "ra": 313.7024920504803,
+    "dec": -58.45414476248056,
+    "coo_err_maj": 0.07419999688863754,
+    "coo_err_min": 0.08250000327825546,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 5.6426,
+    "otype": "*",
+    "plx_err": 0.1379999965429306,
+    "ids": "TIC 273209702|Gaia DR3 6456322112116572160|PLX 4989|* bet Ind|CCDM J20548-5827A|CPC 20  6621|CPD-58  7788|CSI-58  7788 41|FK5  785|GC 29133|GCRV 13108|GEN# +1.00198700|GSC 08804-01375|HD 198700|HIC 103227|HIP 103227|HR  7986|IDS 20470-5850 A|IRAS 20509-5838|JP11  3286|N30 4623|PPM 348943|SACS 459|SAO 246784|SKY# 39711|TD1 27367|TYC 8804-1375-1|UBV   18051|UBV M  25223|2MASS J20544860-5827149|PLX 4989.00|WDS J20548-5827A|WEB 18753|Gaia DR2 6456322112115927424",
+    "matched_id": "* bet Ind"
+  }
+}

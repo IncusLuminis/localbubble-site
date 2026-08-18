@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "δ TrA",
+  "retrieved_utc": "2026-08-18T07:05:16+00:00",
+  "record_id": "* del TrA",
+  "raw": {
+    "main_id": "* del TrA",
+    "ra": 243.85946160941205,
+    "dec": -63.68568150484638,
+    "coo_err_maj": 0.0860000029206276,
+    "coo_err_min": 0.08070000261068344,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.5766,
+    "otype": "*",
+    "plx_err": 0.13130000233650208,
+    "ids": "TIC 299607053|HIP 79664|Gaia DR3 5828952940687722496|PLX 3672|* del TrA|CCDM J16155-6341A|CPC 20.1  4880|CPD-63  3854|CSI-63  3854 41|FK5  602|GC 21819|GCRV  9331|GEN# +1.00145544|GSC 09040-04790|HD 145544|HIC  79664|HR  6030|IDS 16063-6326 A|IRAS 16108-6333|N30 3633|PPM 361956|SAO 253474|SKY# 29343|TD1 18943|TYC 9040-4790-1|UBV   13766|UBV M  21241|uvby98 100145544|2MASS J16152629-6341086|PLX 3672.00|WDS J16154-6341A|WEB 13480|Gaia DR2 5828952940679767296",
+    "matched_id": "* del TrA"
+  }
+}

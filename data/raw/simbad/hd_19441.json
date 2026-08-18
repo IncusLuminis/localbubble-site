@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 19441",
+  "retrieved_utc": "2026-08-18T06:59:16+00:00",
+  "record_id": "HD  19441",
+  "raw": {
+    "main_id": "HD  19441",
+    "ra": 47.577427485870004,
+    "dec": 59.52463249856999,
+    "coo_err_maj": 0.010599999688565731,
+    "coo_err_min": 0.015699999406933784,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2587,
+    "otype": "*",
+    "plx_err": 0.020400000736117363,
+    "ids": "TIC 470946126|AP J03101858+5931285|HIP 14738|Gaia DR3 462786406937073280|2MASS J03101858+5931285|AG+59  322|ALS  7649|BD+58   567|BSD   9-485|GCRV 53772|GEN# +1.00019441|GSC 03714-00170|HD  19441|HGAM    185|HIC  14738|LS   I +59  169|PPM  28267|SAO  23846|SKY#  4733|TYC 3714-170-1|UBV    3021|UBV M   9342|YZ  59  2792|uvby98 100019441|Gaia DR1 462786402636586240|WEB  2854|Gaia DR2 462786406937073280",
+    "matched_id": "HD  19441"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "29 CMa",
+  "retrieved_utc": "2026-08-18T06:56:16+00:00",
+  "record_id": "*  29 CMa",
+  "raw": {
+    "main_id": "*  29 CMa",
+    "ra": 109.66824556404002,
+    "dec": -24.55869951348,
+    "coo_err_maj": 0.05939999967813492,
+    "coo_err_min": 0.09669999778270721,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 0.8549,
+    "otype": "SB*",
+    "plx_err": 0.12770000100135803,
+    "ids": "TIC 106349204|HIP 35412|Gaia DR3 5617678822143017088|2MASS J07184037-2433312|SBC9 443|*  29 CMa|2E  1803|ALS   306|CD-24  5173|CEL   1760|CGO 155|CPD-24  2210|EM* CDS  678|GC  9734|GCRV  4840|GEN# +1.00057060|GOS G237.82-05.37 01|GSC 06541-04202|HD  57060|HIC  35412|HR  2781|IRAS 07165-2427|JP11  1534|LS  306|MCW  526|PPM 252112|ROT  1173|SAO 173444|SBC7   301|SKY# 13267|TD1  9745|TYC 6541-4202-1|UBV   21654|V* UW CMa|2E 0716.6-2428|2XMM J071840.4-243331|3XMM J071840.3-243331|UCAC4 328-025023|uvby98 100057060|WEB  7066|Gaia DR2 5617678822143017088",
+    "matched_id": "*  29 CMa"
+  }
+}

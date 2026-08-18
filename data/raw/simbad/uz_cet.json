@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UZ Cet",
+  "retrieved_utc": "2026-08-18T07:03:19+00:00",
+  "record_id": "V* UZ Cet",
+  "raw": {
+    "main_id": "V* UZ Cet",
+    "ra": 31.523797854130002,
+    "dec": -10.212586375220003,
+    "coo_err_maj": 0.06560000032186508,
+    "coo_err_min": 0.05739999935030937,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7938,
+    "otype": "Mi*",
+    "plx_err": 0.08380000293254852,
+    "ids": "TIC 423398081|WISE J020605.50-101245.1|Gaia DR3 2461686829557803520|2MASS J02060572-1012451|AAVSO 0201-10|AN  161.1932|BD-10   429|BPS CS 22171-0028|CSV    191|GSC 05281-01315|HD  12900|IRAS 02036-1027|IRC -10032|PPM 211062|RAFGL  297|SAO 148198|TYC 5281-1315-1|V* UZ Cet|YZC 11   471|Gaia DR2 2461686829557803520",
+    "matched_id": "V* UZ Cet"
+  }
+}

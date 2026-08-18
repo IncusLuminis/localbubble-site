@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 126595",
+  "retrieved_utc": "2026-08-18T06:57:46+00:00",
+  "record_id": "HD 126595",
+  "raw": {
+    "main_id": "HD 126595",
+    "ra": 217.95877845471625,
+    "dec": -76.27395952046389,
+    "coo_err_maj": 0.013000000268220901,
+    "coo_err_min": 0.013299999758601189,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3226,
+    "otype": "*",
+    "plx_err": 0.01600000075995922,
+    "ids": "Gaia DR3 5786838656019906560|HD 126595A|WISE J143150.06-761625.9|TIC 401862221|CD-75   702|CPC 21.2  2185|CPD-75   965|CSI-75   965 41|GC 19529|HD 126595|HIC  71055|PPM 372310|SAO 257167|SKY# 26460|AKARI-IRC-V1 J1431499-761626|IRAS 14265-7603|2MASS J14315008-7616263|IDS 14214-7550 A|HIP 71055|TYC 9427-1812-1|** I  326A|WDS J14318-7616A|CCDM J14318-7616A",
+    "matched_id": "HD 126595"
+  }
+}

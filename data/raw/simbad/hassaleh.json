@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Hassaleh",
+  "retrieved_utc": "2026-08-18T07:02:01+00:00",
+  "record_id": "* iot Aur",
+  "raw": {
+    "main_id": "* iot Aur",
+    "ra": 74.24841676022209,
+    "dec": 33.166093772077225,
+    "coo_err_maj": 0.2935999929904938,
+    "coo_err_min": 0.1517000049352646,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 7.2491,
+    "otype": "*",
+    "plx_err": 0.38190001249313354,
+    "ids": "TIC 96868656|HIP 23015|Gaia DR3 160886283751041408|2MASS J04565963+3309578|* iot Aur|PLX 1100|*   3 Aur|AAVSO 0450+33|AG+33  456|BD+32   855|CSV    463|FK5  181|GC  6029|GCRV  2923|GEN# +1.00031398|GSC 02391-01446|HD  31398|HIC  23015|HR  1577|IRAS 04537+3305|IRC +30100|JP11   949|N30 1053|NSV  1778|PMC 90-93   129|PPM  69775|RAFGL  654|ROT   696|SAO  57522|SKY#  7731|SRS  30181|SV* ZI   325|TD1  3720|TYC 2391-1446-1|UBV    4742|UBV M  10459|YPAC  20|[HFE83]  339|uvby98 100031398|PLX 1100.00|NAME Hassaleh|WEB  4467",
+    "matched_id": "NAME Hassaleh"
+  }
+}

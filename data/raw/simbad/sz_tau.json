@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "SZ Tau",
+  "retrieved_utc": "2026-08-18T07:02:55+00:00",
+  "record_id": "V* SZ Tau",
+  "raw": {
+    "main_id": "V* SZ Tau",
+    "ra": 69.31157356521,
+    "dec": 18.54303526135,
+    "coo_err_maj": 0.021299999207258224,
+    "coo_err_min": 0.011099999770522118,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.5741,
+    "otype": "cC*",
+    "plx_err": 0.02800000086426735,
+    "ids": "TIC 118592633|EPIC 247086981|HIP 21517|Gaia DR3 3409635486731094400|2MASS J04371478+1832350|PLX 1016|AAVSO 0431+18|AG+18  355|AN   41.1910|BD+18   661|GC  5621|GCRV  2700|GEN# +1.00029260|GSC 01270-00424|HD  29260|HIC  21517|IRAS 04343+1826|PPM 120081|SAO  94036|SKY#  7170|TYC 1270-424-1|V* SZ Tau|YPAC 354|YZ  18  1241|PLX 1016.00|Gaia DR1 3409635482434117888|WEB  4129|Gaia DR2 3409635486731094400",
+    "matched_id": "V* SZ Tau"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 89095",
+  "retrieved_utc": "2026-08-18T07:01:44+00:00",
+  "record_id": "HD  89095",
+  "raw": {
+    "main_id": "HD  89095",
+    "ra": 153.792301918,
+    "dec": -55.65709103529,
+    "coo_err_maj": 0.016699999570846558,
+    "coo_err_min": 0.016200000420212746,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2353,
+    "otype": "*",
+    "plx_err": 0.020099999383091927,
+    "ids": "TIC 463445156|LLNS   623|Gaia DR3 5355128953104028416|BM    V 202|CD-55  3231|CPC 19  3839|CPD-55  3118|GC 14085|GSC 08604-00070|HD  89095|IRAS 10133-5524|PPM 338811|SAO 237833|SKY# 19719|TYC 8604-70-1|2MASS J10151017-5539254|Gaia DR1 5355128948806134912|Gaia DR2 5355128953104028416",
+    "matched_id": "HD  89095"
+  }
+}

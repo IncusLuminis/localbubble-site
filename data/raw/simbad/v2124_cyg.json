@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V2124 Cyg",
+  "retrieved_utc": "2026-08-18T07:03:30+00:00",
+  "record_id": "V* V2124 Cyg",
+  "raw": {
+    "main_id": "V* V2124 Cyg",
+    "ra": 308.27743811285,
+    "dec": 54.45696591246,
+    "coo_err_maj": 0.01889999955892563,
+    "coo_err_min": 0.01860000006854534,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7414,
+    "otype": "LP*",
+    "plx_err": 0.019500000402331352,
+    "ids": "TIC 276399157|Gaia DR3 2183511418533608064|AG+54 1331|BD+53  2435|DO 38576|GC 28622|GSC 03954-02099|HD 196143|HIC 101412|HIP 101412|IRAS 20317+5417|IRC +50333|PPM  38629|RAFGL 2606|SAO  32681|SKY# 38900|TYC 3954-2099-1|V* V2124 Cyg|YZ  54  6633|2MASS J20330656+5427251|Gaia DR1 2183511414229959040|Gaia DR2 2183511418533608064",
+    "matched_id": "V* V2124 Cyg"
+  }
+}

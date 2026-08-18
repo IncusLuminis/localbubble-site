@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V428 Pup",
+  "retrieved_utc": "2026-08-18T07:03:42+00:00",
+  "record_id": "V* V428 Pup",
+  "raw": {
+    "main_id": "V* V428 Pup",
+    "ra": 123.34125630886,
+    "dec": -41.41420341536,
+    "coo_err_maj": 0.014600000344216824,
+    "coo_err_min": 0.019500000402331352,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3703,
+    "otype": "LP*",
+    "plx_err": 0.019899999722838402,
+    "ids": "TIC 182266101|HIP 40264|Gaia DR3 5533493236892534528|2MASS J08132189-4124509|CD-41  3888|CPC  0  5564|CPD-41  2257|GSC 07668-03305|HD  69020|HIC  40264|IRAS 08116-4115|PPM 312772|SAO 219619|SRS    979|TYC 7668-3305-1|V* V428 Pup|Gaia DR1 5533493236892534528|Gaia DR2 5533493236892534528",
+    "matched_id": "V* V428 Pup"
+  }
+}

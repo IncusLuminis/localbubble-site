@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 105437",
+  "retrieved_utc": "2026-08-18T06:57:30+00:00",
+  "record_id": "HD 105437",
+  "raw": {
+    "main_id": "HD 105437",
+    "ra": 182.10304638156998,
+    "dec": -60.84712987737001,
+    "coo_err_maj": 0.01860000006854534,
+    "coo_err_min": 0.01860000006854534,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2493,
+    "otype": "*",
+    "plx_err": 0.025200000032782555,
+    "ids": "TIC 380695266|HIP 59200|Gaia DR3 6058584397964308992|CD-60  4001|CPC 20.1  3478|CPD-60  3777|GC 16585|GEN# +1.00105437|GSC 08974-02209|HD 105437|HIC  59200|HR  4622|IRAS 12057-6034|PPM 359211|SAO 251757|SKY# 22785|TYC 8974-2209-1|UBV   10893|UBV M  17784|2MASS J12082473-6050494|Cl Loden  565     1|Gaia DR2 6058584397964308992",
+    "matched_id": "HD 105437"
+  }
+}

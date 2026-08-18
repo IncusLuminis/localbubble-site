@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "56 Ori",
+  "retrieved_utc": "2026-08-18T06:56:27+00:00",
+  "record_id": "*  56 Ori",
+  "raw": {
+    "main_id": "*  56 Ori",
+    "ra": 88.11016073755,
+    "dec": 1.85513786428,
+    "coo_err_maj": 0.08529999852180481,
+    "coo_err_min": 0.0820000022649765,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.5424,
+    "otype": "*",
+    "plx_err": 0.1168999969959259,
+    "ids": "TIC 159026879|HIP 27750|Gaia DR3 3315870440783129600|2MASS J05522644+0151184|PLX 1349|*  56 Ori|ADS  4467 A|AG+01  630|BD+01  1151|CCDM J05524+0151A|CSI+01  1151  1|CSV 100692|EIC   105|FK5 2444|GC  7380|GCRV  3648|GEN# +1.00039400|GSC 00116-01329|HD  39400|HIC  27750|HR  2037|IDS 05472+0150 A|IRAS 05498+0150|IRC +00089|NSV  2690|PPM 149576|RAFGL  830|ROT   941|SAO 113220|SKY#  9703|SV* ZI   490|TD1  5512|TYC  116-1329-1|UBV    5983|UBV M  11569|YZ   1  1930|PLX 1349.00|WDS J05524+0151A|WEB  5442|Gaia DR2 3315870440783129600",
+    "matched_id": "*  56 Ori"
+  }
+}

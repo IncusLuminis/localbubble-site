@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "BQ Oct",
+  "retrieved_utc": "2026-08-18T06:57:09+00:00",
+  "record_id": "V* BQ Oct",
+  "raw": {
+    "main_id": "V* BQ Oct",
+    "ra": 218.87359685157998,
+    "dec": -89.7717155628,
+    "coo_err_maj": 0.028300000354647636,
+    "coo_err_min": 0.02810000069439411,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.8237,
+    "otype": "S*",
+    "plx_err": 0.029600000008940697,
+    "ids": "TIC 383715654|HIP 71348|Gaia DR3 5764614467999340032|2MASS J14353106-8946181|CD-89    10|CPC 22  1646|CPD-89    37|CSS  804|CSV   6957|FK5 3985|GC 17838|GCRV 63543|GEN# +1.00110994|GSC 09521-00302|HD 110994|HIC  71348|Hen 4-127|IRAS 13079-8931|N30 3024|PPM 377700|S1* 453|SAO 258660|SKY# 26539|SV* BV   635|TYC 9521-302-1|UBV   11461|V* BQ Oct|GSC2.3 S740000291|WEB 12319|Gaia DR2 5764614467999340032",
+    "matched_id": "V* BQ Oct"
+  }
+}

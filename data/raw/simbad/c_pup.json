@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "c Pup",
+  "retrieved_utc": "2026-08-18T07:04:19+00:00",
+  "record_id": "* c Pup",
+  "raw": {
+    "main_id": "* c Pup",
+    "ra": 116.31373389138793,
+    "dec": -37.968585259939175,
+    "coo_err_maj": 0.11289999634027481,
+    "coo_err_min": 0.1362999975681305,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.946,
+    "otype": "*",
+    "plx_err": 0.14820000529289246,
+    "ids": "TIC 175380021|HIP 37819|Gaia DR3 5538814190283894656|2MASS J07451529-3758068|Cl* NGC 2451    MMU     254|PLX 1840|Cl* NGC 2451      W     983|* c Pup|CD-37  3863|CPC 18  3254|CPD-37  1558|FK5 2605|GC 10462|GCRV  5177|GEN# +2.24510254|GSC 07645-03246|HD  63032|HIC  37819|HR  3017|IRAS 07434-3750|JP11  4029|N30 1765|NGC  2451   254|NSV  3723|PPM 284382|SAO 198398|SKY# 14347|TYC 7645-3246-1|UBV    7495|UBV M  32870|[HWS2003] X94|PLX 1840.00|WEB  7470|Gaia DR2 5538814190271704960",
+    "matched_id": "* c Pup"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "δ Vol",
+  "retrieved_utc": "2026-08-18T07:05:17+00:00",
+  "record_id": "* del Vol",
+  "raw": {
+    "main_id": "* del Vol",
+    "ra": 109.20759145422502,
+    "dec": -67.95715267864945,
+    "coo_err_maj": 0.1867000013589859,
+    "coo_err_min": 0.18129999935626984,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.7522,
+    "otype": "*",
+    "plx_err": 0.20829999446868896,
+    "ids": "TIC 300162674|HIP 35228|Gaia DR3 5269012591076800256|2MASS J07164982-6757256|PLX 1732|* del Vol|CPC 21  1353|CPD-67   730|FK5  281|GC  9747|GCRV  4851|GEN# +1.00057623|GSC 09179-02107|HD  57623|HIC  35228|HR  2803|IRAS 07168-6751|JP11  1541|N30 1629|PPM 355940|ROT  1183|SAO 249809|SKY# 13183|TD1  9894|TYC 9179-2107-1|UBV    7133|UBV M  13213|uvby98 100057623|PLX 1732.00|WEB  7038|Gaia DR2 5269012591076006272",
+    "matched_id": "* del Vol"
+  }
+}

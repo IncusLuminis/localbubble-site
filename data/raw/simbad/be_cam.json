@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "BE Cam",
+  "retrieved_utc": "2026-08-18T06:57:05+00:00",
+  "record_id": "V* BE Cam",
+  "raw": {
+    "main_id": "V* BE Cam",
+    "ra": 57.38032311777,
+    "dec": 65.52597939514,
+    "coo_err_maj": 0.0786999985575676,
+    "coo_err_min": 0.1103999987244606,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 3.3288,
+    "otype": "LP*",
+    "plx_err": 0.18469999730587006,
+    "ids": "TIC 392830266|HIP 17884|Gaia DR3 488354175450563968|2MASS J03493130+6531333|PLX  810|AAVSO 0340+65|AG+65  230|BD+65   369|CSV    343|GC  4553|GCRV  2146|GEN# +1.00023475|GSC 04071-01894|HD  23475|HIC  17884|HR  1155|IRAS 03449+6522|IRC +70046|JP11   821|PPM  14503|RAFGL  520|SAO  12916|SKY#  5841|SV* P   109|TYC 4071-1894-1|UBV    3604|UBV M   9686|V* BE Cam|PLX  810.00|WEB  3436|Gaia DR2 488354175445515520",
+    "matched_id": "V* BE Cam"
+  }
+}

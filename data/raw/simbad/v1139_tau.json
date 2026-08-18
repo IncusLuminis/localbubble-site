@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V1139 Tau",
+  "retrieved_utc": "2026-08-18T07:03:25+00:00",
+  "record_id": "V* V1139 Tau",
+  "raw": {
+    "main_id": "V* V1139 Tau",
+    "ra": 63.8505167968,
+    "dec": 24.0784787288,
+    "coo_err_maj": 0.041999999433755875,
+    "coo_err_min": 0.02199999988079071,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7996,
+    "otype": "S*",
+    "plx_err": 0.04820000007748604,
+    "ids": "HIP 19853|Gaia DR3 149796330297236992|2MASS J04152412+2404425|AAVSO 0409+23|AG+23  393|BD+23   654|CCDM J04154+2405AB|CSS   89|CSV   6099|DO 10361|GSC 01815-00198|HD  26816|HIC  19853|IRAS 04123+2357|IRC +20073|NSV  1529|PPM  93368|RAFGL  555|SAO  76523|SV* BV   127|TYC 1815-198-1|V* V1139 Tau|YZ  23  1369|WDS J04154+2405AB|TIC 56653225|** HDS  541|Gaia DR2 149796330297236992",
+    "matched_id": "V* V1139 Tau"
+  }
+}

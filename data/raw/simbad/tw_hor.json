@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "TW Hor",
+  "retrieved_utc": "2026-08-18T07:03:09+00:00",
+  "record_id": "V* TW Hor",
+  "raw": {
+    "main_id": "V* TW Hor",
+    "ra": 48.1381662957,
+    "dec": -57.321549230420004,
+    "coo_err_maj": 0.061500001698732376,
+    "coo_err_min": 0.06769999861717224,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.1714,
+    "otype": "C*",
+    "plx_err": 0.07029999792575836,
+    "ids": "TIC 207205231|HIP 14930|Gaia DR3 4727337637895749888|2MASS J03123315-5719176|AAVSO 0310-57|C*  136|CD-57   626|CGCS  471|CPC 20   826|CPD-57   513|CSV   6019|FK5  118|GC  3857|GCRV  1779|GEN# +1.00020234|GSC 08495-00151|HD  20234|HIC  14930|HR   977|IRAS 03112-5730|JP11   759|N30  659|NGC  1252    38|PPM 332477|SACS  69|SAO 233037|SKY#  4808|TYC 8495-151-1|UBV   21737|V* TW Hor|[ELL90]   1|[LFO93] 0311-57|WEB  2884|Gaia DR2 4727337637895749888",
+    "matched_id": "V* TW Hor"
+  }
+}

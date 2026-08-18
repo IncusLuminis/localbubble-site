@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 4817",
+  "retrieved_utc": "2026-08-18T07:00:37+00:00",
+  "record_id": "HD   4817",
+  "raw": {
+    "main_id": "HD   4817",
+    "ra": 12.81826321648,
+    "dec": 61.80549444194,
+    "coo_err_maj": 0.026200000196695328,
+    "coo_err_min": 0.02800000086426735,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 0.9903,
+    "otype": "**",
+    "plx_err": 0.038600001484155655,
+    "ids": "TIC 285534579|HIP 3988|Gaia DR3 427499264872921472|2MASS J00511639+6148196|AG+61   70|BD+61   178|DO 23820|GC  1014|GCRV   476|GEN# +1.00004817|GSC 04016-00534|HD   4817|HIC   3988|HR   237|IRAS 00482+6132|IRC +60022|IRCO  2515|NSV   319|PPM  12522|RAFGL  117|SAO  11430|SKY#  1317|TYC 4016-534-1|UBV     686|WEB   711|Gaia DR2 427499264872921472",
+    "matched_id": "HD   4817"
+  }
+}

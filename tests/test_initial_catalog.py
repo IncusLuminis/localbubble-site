@@ -3,15 +3,10 @@
 test_catalog.py.
 """
 
-from pathlib import Path
-
 import numpy as np
 import pytest
 
-from local_galactic_structures.catalog import load_catalog
-
-REPO_ROOT = Path(__file__).resolve().parent.parent
-CATALOG_PATH = REPO_ROOT / "data" / "normalized" / "catalog.parquet"
+# `catalog_objects` fixture is shared via conftest.py.
 
 # Substrings expected to appear somewhere in the catalog's object names/ids,
 # covering every entry in spec §9's seed list. Matched loosely (case-
@@ -42,15 +37,6 @@ EXPECTED_NAME_FRAGMENTS = [
     # object exists
     "local bubble",
 ]
-
-
-@pytest.fixture(scope="module")
-def catalog_objects():
-    assert CATALOG_PATH.exists(), (
-        "data/normalized/catalog.parquet is missing - run "
-        "scripts/build_initial_catalog.py"
-    )
-    return load_catalog(CATALOG_PATH)
 
 
 def test_catalog_has_at_least_20_objects(catalog_objects):

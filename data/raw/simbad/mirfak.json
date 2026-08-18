@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Mirfak",
+  "retrieved_utc": "2026-08-18T07:02:26+00:00",
+  "record_id": "* alf Per",
+  "raw": {
+    "main_id": "* alf Per",
+    "ra": 51.08070871833333,
+    "dec": 49.86117929305556,
+    "coo_err_maj": 0.15000000596046448,
+    "coo_err_min": 0.10999999940395355,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 6.44,
+    "otype": "V*",
+    "plx_err": 0.17000000178813934,
+    "ids": "TIC 252830952|HIP 15863|2MASS J03241936+4951401|PLX  707|*  33 Per|* alf Per|AG+49  396|BD+49   917|CCDM J03243+4951A|CSI+49   917  1|CSV 100269|FK5  120|GC  4041|GCRV  1871|GEN# +5.20200605|GSC 03320-02808|HD  20902|HIC  15863|HR  1017|IDS 03171+4930 A|JP11  4562|IRAS 03207+4941|IRC +50095|N30  690|NAME Mirfak|NSV  1125|PMC 90-93    85|PPM  46127|RAFGL  487|ROT   464|SAO  38787|SKY#  5117|SV* ZI   183|TD1  2127|TYC 3320-2808-1|UBV    3256|UBV M  40922|[HFE83]  221|uvby98 520200605|Cl Melotte   20   605|Cl* Melotte   20    MMU     605|PLX  707.00|WDS J03243+4952A|WEB  3026",
+    "matched_id": "NAME Mirfak"
+  }
+}

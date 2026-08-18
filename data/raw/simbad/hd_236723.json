@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 236723",
+  "retrieved_utc": "2026-08-18T06:59:54+00:00",
+  "record_id": "HD 236723",
+  "raw": {
+    "main_id": "HD 236723",
+    "ra": 21.285872956590005,
+    "dec": 58.24538291934,
+    "coo_err_maj": 0.009200000204145908,
+    "coo_err_min": 0.011699999682605267,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2118,
+    "otype": "*",
+    "plx_err": 0.01769999973475933,
+    "ids": "TIC 332983572|HIP 6637|Gaia DR3 413162664042711424|AG+57  154|BD+57   280|GSC 03682-02284|HD 236723|HIC   6637|IRAS 01219+5759|PPM  26306|SAO  22259|TYC 3682-2284-1|YZ  57  1199|2MASS J01250860+5814433|Gaia DR1 413162659735699072|Gaia DR2 413162664042711424",
+    "matched_id": "HD 236723"
+  }
+}

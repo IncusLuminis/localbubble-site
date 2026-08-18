@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "73 Ori",
+  "retrieved_utc": "2026-08-18T06:56:38+00:00",
+  "record_id": "*  73 Ori",
+  "raw": {
+    "main_id": "*  73 Ori",
+    "ra": 93.93735211446,
+    "dec": 12.55107027374,
+    "coo_err_maj": 0.1518000066280365,
+    "coo_err_min": 0.13930000364780426,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.343,
+    "otype": "*",
+    "plx_err": 0.15970000624656677,
+    "ids": "TIC 434408053|HIP 29736|Gaia DR3 3332037694121800960|2MASS J06154497+1233040|*  73 Ori|AG+12  713|ALS  8827|BD+12  1081|CEL   1146|GC  7996|GCRV  3953|GEN# +1.00043247|GSC 00739-02616|HD  43247|HIC  29736|HR  2229|IRAS 06129+1234|LF  8 +12  154|LS  VI +12    3|PPM 122187|ROT  1002|SAO  95457|SKY# 10576|TD1  6518|TYC  739-2616-1|UBV    6291|UBV M  11909|YPAC 414|YZ  12  2127|[SC93] 112|uvby98 100043247|WEB  5865|Gaia DR2 3332037694121800960",
+    "matched_id": "*  73 Ori"
+  }
+}

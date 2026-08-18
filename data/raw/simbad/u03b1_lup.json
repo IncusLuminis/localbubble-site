@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "α Lup",
+  "retrieved_utc": "2026-08-18T07:04:51+00:00",
+  "record_id": "* alf Lup",
+  "raw": {
+    "main_id": "* alf Lup",
+    "ra": 220.4823157775,
+    "dec": -47.38819874611111,
+    "coo_err_maj": 0.10999999940395355,
+    "coo_err_min": 0.09000000357627869,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 7.02,
+    "otype": "bC*",
+    "plx_err": 0.17000000178813934,
+    "ids": "TIC 129117325|Gaia DR3 5905821894507108864|HIP 71860|* alf Lup|CCDM J14419-4723A|CD-46  9501|CPC  0 12549|CPD-46  6927|CSI-46  9501 21|FK5  541|GC 19774|GCRV  8536|GEN# +1.00129056|GSC 08283-04134|HD 129056|HGAM   2025|HIC  71860|HR  5469|IDS 14353-4658 A|IRAS 14385-4710|JP11  2524|N30 3316|PPM 319805|ROT  2098|SACS 316|SAO 225128|SKY# 26711|TD1 17625|TYC 8283-4134-1|UBV   12788|UBV M  20295|V* alf Lup|[B10]  3745|[CS62] E6  89|2MASS J14415577-4723174|ALS 15001|EUVE J1441-47.3|1RXS J144156.3-472332|WDS J14419-4723A|uvby98 100129056|WEB 12374|NAME-IAU Uridim",
+    "matched_id": "* alf Lup"
+  }
+}

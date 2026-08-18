@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "CL CVn",
+  "retrieved_utc": "2026-08-18T06:57:15+00:00",
+  "record_id": "V* CL CVn",
+  "raw": {
+    "main_id": "V* CL CVn",
+    "ra": 200.97470684217998,
+    "dec": 37.03392144669,
+    "coo_err_maj": 0.03310000151395798,
+    "coo_err_min": 0.033799998462200165,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.6013,
+    "otype": "LP*",
+    "plx_err": 0.05380000174045563,
+    "ids": "HIP 65376|Gaia DR3 1473800572875309184|AG+37 1261|BD+37  2404|DO 14749|GC 18127|GCRV  7955|GEN# +1.00116581|GSC 02541-00727|HD 116581|HIC  65376|HR  5052|IRAS 13216+3717|IRC +40245|NSV  6220|PPM  77152|RAFGL 1620|SAO  63514|SKY# 24721|TYC 2541-727-1|UBV M  19354|V* CL CVn|2MASS J13235393+3702020|TIC 180675145|WEB 11537|Gaia DR2 1473800572875309184",
+    "matched_id": "V* CL CVn"
+  }
+}

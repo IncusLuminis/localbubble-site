@@ -12,13 +12,19 @@ VizieR + literature data-acquisition layer, and the initial >=20-object
 catalog (spec §9) are built. The three scientific model layers - Gould Belt,
 Radcliffe Wave, Local Bubble (spec §16-18) - are built as well. The
 renderer-independent scene export and `galactic-structures` CLI (spec §21,
-§34-35) tie the pipeline together end to end. A first-iteration Three.js web
-visualizer (spec §22, Phase 5) now renders the Sun, Galactic Plane, and
-catalog objects from that scene export — see [Web visualizer](#web-visualizer)
-below. Its interaction layer (layer toggles, labels, inspector, radius
-filter, camera presets, PNG export — spec §23-25, §28-29, §39) is a separate,
-not-yet-implemented Story — see the `local-galactic-structures` GitHub
-Project board.
+§34-35) tie the pipeline together end to end. A Three.js web visualizer
+(spec §22, Phase 5-6) renders the Sun, Galactic Plane, catalog objects, and
+the three model layers from that scene export, with a full interaction layer
+(layer toggles, labels, inspector, radius filter, camera presets, PNG export
+— spec §23-25, §28-29, §39) — see [Web visualizer](#web-visualizer) below.
+
+v1.2 (`spec/Idea-v1.2-individual-stars.md`) extends the catalog with ~585
+individual named stars identified from a reference poster (candidate names
+only - never positions, spec §10) and resolved for real against SIMBAD/Gaia,
+alongside the original 20 structural objects - see
+[Individual stars (v1.2)](#individual-stars-v12) below. Scaling the web
+viewer for this larger catalog (`InstancedMesh`, label density) is tracked
+separately - see the `local-galactic-structures` GitHub Project board.
 
 ## Setup
 
@@ -37,13 +43,15 @@ python scripts/build_initial_catalog.py
 
 Writes `data/normalized/catalog.parquet` and `data/normalized/catalog.csv`
 from the checked-in, sourced records in
-`data/normalized/initial_catalog_records.json` (spec §9's >=20-object seed
-list - molecular clouds, star clusters, OB associations, the Vela SNR, and
-the Local Bubble - each resolved live via SIMBAD/Gaia/VizieR where possible,
-or from a cited literature distance otherwise; see each record's
-`source.reference`). No live network access is required to rebuild from this
-checked-in file (spec §14); re-resolving from scratch is a separate concern
-handled by `src/local_galactic_structures/data_sources/`.
+`data/normalized/initial_catalog_records.json` - spec §9's >=20-object seed
+list (molecular clouds, star clusters, OB associations, the Vela SNR, and
+the Local Bubble) plus, since v1.2, ~585 individual named stars (see
+[Individual stars (v1.2)](#individual-stars-v12) below) - 605 objects total.
+Every record is either resolved live via SIMBAD/Gaia/VizieR, or built from a
+cited literature distance; see each record's `source.reference`. No live
+network access is required to rebuild from this checked-in file (spec §14);
+re-resolving from scratch is a separate concern handled by
+`src/local_galactic_structures/data_sources/`.
 
 ## Rebuild the scientific model layers
 
@@ -178,3 +186,68 @@ covered by `web/test/sceneData.test.ts`. The Galactic frame is Z-up
 (+Z → North Galactic Pole, spec §6), so instead of transforming any
 position, the camera's own `up` vector is set to +Z (`web/src/scene/
 camera.ts`) so the Galactic Plane reads as the scene's "floor".
+
+(Note: the paragraph above describes Story #64's original scope. Story #65
+subsequently added the full interaction layer this section doesn't mention
+yet - layer toggles, labels, an inspector, radius filtering, camera presets,
+and PNG export are all built; see the individual `web/src/scene/*.ts` and
+`web/src/ui/*.ts` modules. This section is due a rewrite to reflect that -
+not done here since it's outside this Story's scope.)
+
+## Individual stars (v1.2)
+
+`spec/Idea-v1.2-individual-stars.md` extends the catalog with individual
+named stars, sourced by candidate name from Galaxy Map's "Gaia star density
+map" poster (galaxymap.org) and resolved for real against SIMBAD/Gaia -
+never inferred from the poster itself (spec §10).
+
+- **Extraction** (Story #87): the poster was cut into a 25-tile grid and
+  read by independent agents, cross-validated against an automated
+  color-segmentation detector, then a second-pass sweep for silent misses.
+  Result: 595 unique candidate star names (+264 candidate clusters for a
+  possible future Story). Full methodology and raw transcripts:
+  `data/raw/galaxy_map/README.md`.
+- **Resolution** (Story #88): all 595 candidates resolved via
+  `SimbadResolver` - **585 distinct real stars** resolved, 7 genuinely
+  unresolved (tile-edge transcription fragments with no recoverable full
+  name, one unfamiliar designation not in SIMBAD, and one real star with no
+  parallax on file) - see `data/raw/galaxy_map/unresolved_stars.json`. Each
+  resolved star carries dual provenance (spec §5): `source.reference` is the
+  real SIMBAD citation, and `notes` separately records that the *candidate*
+  itself came from the Galaxy Map poster.
+
+  Two resolution gotchas worth knowing if you extend this further:
+
+  1. SIMBAD's `query_object()` does not accept the poster's Unicode Bayer
+     notation directly (e.g. `"β¹ Sco"`, `"γ² Vel"`) - it expects Latin
+     transliterations (`"bet01 Sco"`, `"gam02 Vel"`), and Flamsteed-style
+     lowercase-letter designations (`"o And"` for omicron Andromedae, `"f01
+     Cyg"`) need the Greek name spelled out (`"omi And"`) or a Flamsteed
+     number substituted (`"41 Cyg"`).
+  2. **A real cache-collision bug was found and fixed in shared Story #58
+     infrastructure during this Story's Validator review**:
+     `data_sources.slugify()` stripped non-ASCII characters entirely rather
+     than encoding them, so every `"<Greek letter>[superscript digit]
+     <constellation>"`-shaped query with no other ASCII content (which
+     describes most Bayer-designation stars, since the raw poster label is
+     tried before any Latin-transliterated fallback) collapsed to the
+     *same* cache key - e.g. both `"ω Ori"` and `"χ² Ori"` slugified to
+     just `"ori"`. Whichever star got cached under that key first silently
+     "resolved" every other Greek-lettered star in the same constellation
+     to itself. This produced real stars duplicated 2-4x under distinct
+     catalog ids (`iot-cma`, `iot-cma-2`, `iot-cma-3`, `iot-cma-4`, etc.) -
+     caught by `tests/test_individual_stars.py::test_no_duplicate_star_records`,
+     which checks resolved SIMBAD identity, not just catalog-id uniqueness
+     (the latter was already satisfied and did not catch this). Fixed by
+     encoding non-ASCII characters by Unicode codepoint instead of
+     stripping them (`data_sources/__init__.py`), then re-resolving the
+     entire candidate list from a wiped cache to guarantee no residual
+     corruption survived. See `tests/test_data_sources.py::TestSlugify::
+     test_slugify_does_not_collide_on_non_ascii_bayer_designations` for the
+     regression test.
+
+Radius filtering, layer toggles, and the web viewer's rendering all already
+support arbitrary catalog sizes (spec §28, §44) - no pipeline or web code
+changed for this Story. Scaling the web viewer's *rendering performance*
+for ~600 objects (`InstancedMesh`, label density) is tracked as a separate,
+required Story (#89) rather than assumed to already work at this scale.

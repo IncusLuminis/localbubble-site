@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 1240",
+  "retrieved_utc": "2026-08-18T06:57:41+00:00",
+  "record_id": "HD   1240",
+  "raw": {
+    "main_id": "HD   1240",
+    "ra": 4.22482451984,
+    "dec": 49.46191585211,
+    "coo_err_maj": 0.016599999740719795,
+    "coo_err_min": 0.019200000911951065,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.7141,
+    "otype": "*",
+    "plx_err": 0.03909999877214432,
+    "ids": "TIC 202091193|HIP 1352|Gaia DR3 394372452695158656|2MASS J00165397+4927429|AG+49   45|BD+48    60|DO 23036|GC   328|HD   1240|HIC   1352|IRAS 00142+4911|IRC +50004|NSV 15065|PPM  42776|RAFGL   41|SAO  36234|SKY#   498|TYC 3255-842-1|Gaia DR2 394372452695158656",
+    "matched_id": "HD   1240"
+  }
+}

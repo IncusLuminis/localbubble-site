@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V978 Her",
+  "retrieved_utc": "2026-08-18T07:03:54+00:00",
+  "record_id": "V* V978 Her",
+  "raw": {
+    "main_id": "V* V978 Her",
+    "ra": 270.83571991131,
+    "dec": 19.55587563779,
+    "coo_err_maj": 0.016499999910593033,
+    "coo_err_min": 0.025100000202655792,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.6942,
+    "otype": "LP*",
+    "plx_err": 0.029400000348687172,
+    "ids": "TIC 462736655|HIP 88434|Gaia DR3 4527585890143638144|AG+19 1690|AGKR 16094|BD+19  3509|DO 16410|GC 24589|GCRV 10498|GEN# +1.00165042|GSC 01562-00584|HD 165042|HIC  88434|IRC +20346|IRAS 18011+1933|PPM 134179|RAFGL 2056|SAO 103336|SKY# 32762|TYC 1562-584-1|V* V978 Her|YZ  19  6576|2MASS J18032058+1933211|WEB 14953|Gaia DR2 4527585890143638144",
+    "matched_id": "V* V978 Her"
+  }
+}

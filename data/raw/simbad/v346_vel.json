@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V346 Vel",
+  "retrieved_utc": "2026-08-18T07:03:32+00:00",
+  "record_id": "V* V346 Vel",
+  "raw": {
+    "main_id": "V* V346 Vel",
+    "ra": 156.16516510358,
+    "dec": -54.32193476565,
+    "coo_err_maj": 0.04129999876022339,
+    "coo_err_min": 0.03999999910593033,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.4036,
+    "otype": "LP*",
+    "plx_err": 0.0502999983727932,
+    "ids": "TIC 464351378|LLNS  1205|HIP 50970|Gaia DR3 5355568551631287424|BM    V 213|CD-53  3510|CPC 19  3921|CPD-53  3758|GC 14307|GSC 08600-03290|HD  90371|HIC  50970|IRAS 10227-5404|PPM 339017|SAO 238040|SKY# 19995|TYC 8600-3290-1|V* V346 Vel|2MASS J10243964-5419190|Gaia DR1 5355568547301407232|Gaia DR2 5355568551631287424",
+    "matched_id": "V* V346 Vel"
+  }
+}

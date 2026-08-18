@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 63323",
+  "retrieved_utc": "2026-08-18T07:01:05+00:00",
+  "record_id": "HD  63323",
+  "raw": {
+    "main_id": "HD  63323",
+    "ra": 116.93836378525002,
+    "dec": -16.01448295893,
+    "coo_err_maj": 0.026100000366568565,
+    "coo_err_min": 0.029200000688433647,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.4215,
+    "otype": "*",
+    "plx_err": 0.031599998474121094,
+    "ids": "TIC 334352535|HIP 38037|Gaia DR3 5718985903686146432|BD-15  2052|CCDM J07477-1600A|CSI-15  2052  1|GC 10514|GEN# +1.00063323|HD  63323|HIC  38037|HR  3027|IDS 07431-1544 A|IRAS 07454-1553|IRC -20144|NSV  3741|PPM 219200|RAFGL 4636S|SAO 153409|SKY# 14468|YZ 105  2955|2MASS J07474521-1600519|WDS J07478-1601B|TYC 5981-1836-1|Gaia DR1 5718985899380032256|Gaia DR2 5718985903686146432",
+    "matched_id": "HD  63323"
+  }
+}

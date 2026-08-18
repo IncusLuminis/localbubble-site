@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "omi02 Cyg",
+  "retrieved_utc": "2026-08-18T07:08:24+00:00",
+  "record_id": "* omi02 Cyg",
+  "raw": {
+    "main_id": "* omi02 Cyg",
+    "ra": 303.8680175512,
+    "dec": 47.71422609236,
+    "coo_err_maj": 0.1624000072479248,
+    "coo_err_min": 0.181099995970726,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "otype": "SB*",
+    "plx_value": 3.2558,
+    "plx_err": 0.1889999955892563,
+    "ids": "HIP 99848|Gaia DR3 2084154943646648320|PLX 4826|SBC9 1218|* omi02 Cyg|*  32 Cyg|AAVSO 2012+47|AG+47 1545|BD+47  3059|CEL   5001|GC 28160|GCRV 12638|GEN# +1.00192909|GEN# +1.00192910|GSC 03576-02157|HD 192910|HD 192909|HIC  99848|HR  7751|IRAS 20139+4733|IRC +50322|JP11  3209|PPM  59586|RAFGL 2540|ROT  2949|SAO  49385|SBC7   797|SKY# 38194|TD1 26409|TYC 3576-2157-1|UBV   17554|UBV M  24686|UBV M  24687|V* V1488 Cyg|V* omi02 Cyg|* tet02 Cyg|PLX 4826.00|uvby98 100192909|WEB 17952|Gaia DR2 2084154943645178368|TIC 1972296808|TIC 471012067",
+    "matched_id": "* omi02 Cyg"
+  }
+}

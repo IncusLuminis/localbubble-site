@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "RY Dra",
+  "retrieved_utc": "2026-08-18T07:02:46+00:00",
+  "record_id": "V* RY Dra",
+  "raw": {
+    "main_id": "V* RY Dra",
+    "ra": 194.10796348399998,
+    "dec": 65.99439212941,
+    "coo_err_maj": 0.04340000078082085,
+    "coo_err_min": 0.042399998754262924,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.4891,
+    "otype": "C*",
+    "plx_err": 0.04800000041723251,
+    "ids": "TIC 459217194|HIP 63152|Gaia DR3 1678844308746410880|AAVSO 1252+66|AG+66  593|AN   10.1907|BD+66   780|C* 2047|CGCS 3313|DO 34237|GC 17574|GCRV  7739|GEN# +1.00112559|GSC 04168-00885|HD 112559|HIC  63152|IRAS 12544+6615|IRC +70116|JP11  2338|LEE 302|PPM  18429|RAFGL 1588|SAO  15945|SKY# 24046|SV* HV  1310|TYC 4168-885-1|UBV   21576|V* RY Dra|[LFO93] 1254+66|[LMW2001] 773|2MASS J12562590+6559398|[LTY2003] NIRS 12545+6615|WEB 11196|Gaia DR2 1678844308746410880",
+    "matched_id": "V* RY Dra"
+  }
+}

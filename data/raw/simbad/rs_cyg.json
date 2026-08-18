@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "RS Cyg",
+  "retrieved_utc": "2026-08-18T07:02:43+00:00",
+  "record_id": "V* RS Cyg",
+  "raw": {
+    "main_id": "V* RS Cyg",
+    "ra": 303.34859036417,
+    "dec": 38.72901945302,
+    "coo_err_maj": 0.016100000590085983,
+    "coo_err_min": 0.019700000062584877,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3294,
+    "otype": "C*",
+    "plx_err": 0.022700000554323196,
+    "ids": "TIC 312364784|HIP 99653|Gaia DR3 2061720267887555840|AAVSO 2009+38|AG+38 1989|BD+38  3957|C* 2880|CCDM J20134+3844A|CGCS 4758|CSI+38  3957  1|Case   25|GC 28087|GCRV 12588|GEN# +1.00192443|GSC 03151-00539|HD 192443|HIC  99653|Hen 3-1852|IDS 20097+3826 A|IRAS 20115+3834|IRC +40397|JP11  3192|PPM  84477|RAFGL 2528|SAO  69636|SKY# 38090|TYC 3151-539-1|UBV   21460|V* RS Cyg|[KW97] 43-46|uvby98 100192443|2MASS J20132366+3843445|UCAC3 258-194487|WDS J20134+3844A|Gaia DR1 2061720263570440576|WEB 17865|Gaia DR2 2061720267887555840|KIC 3710436",
+    "matched_id": "V* RS Cyg"
+  }
+}

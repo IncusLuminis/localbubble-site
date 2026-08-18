@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 80577",
+  "retrieved_utc": "2026-08-18T07:01:33+00:00",
+  "record_id": "HD  80577",
+  "raw": {
+    "main_id": "HD  80577",
+    "ra": 139.60382754406,
+    "dec": -57.27305554394,
+    "coo_err_maj": 0.01640000008046627,
+    "coo_err_min": 0.014800000004470348,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.431,
+    "otype": "*",
+    "plx_err": 0.01860000006854534,
+    "ids": "TIC 386567366|HIP 45659|Gaia DR3 5306746180895394432|CD-56  2698|CPC 20  2554|CPD-56  2095|GC 12855|GSC 08591-01211|HD  80577|HIC  45659|IRAS 09169-5703|PPM 337816|SAO 236834|SKY# 17960|TYC 8591-1211-1|2MASS J09182494-5716230|Gaia DR1 5306746176576431104|Gaia DR2 5306746180895394432",
+    "matched_id": "HD  80577"
+  }
+}

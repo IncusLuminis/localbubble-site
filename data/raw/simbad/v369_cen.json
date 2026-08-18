@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V369 Cen",
+  "retrieved_utc": "2026-08-18T07:03:34+00:00",
+  "record_id": "V* V369 Cen",
+  "raw": {
+    "main_id": "V* V369 Cen",
+    "ra": 183.74889121192996,
+    "dec": -54.82027770888,
+    "coo_err_maj": 0.0203000009059906,
+    "coo_err_min": 0.021299999207258224,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2702,
+    "otype": "LP*",
+    "plx_err": 0.035100001841783524,
+    "ids": "TIC 390226317|Gaia DR3 6075847035430510464|AN  614.1936|CD-54  4654|CPC 19  4605|CPD-54  5075|GCRV 27373|GEN# +1.00106474|GSC 08637-01598|HD 106474|IRAS 12123-5432|PPM 340822|SAO 239789|SKY# 22971|TYC 8637-1598-1|V* V369 Cen|2MASS J12145973-5449130|Gaia DR2 6075847035430510464",
+    "matched_id": "V* V369 Cen"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 42619",
+  "retrieved_utc": "2026-08-18T07:00:22+00:00",
+  "record_id": "HD  42619",
+  "raw": {
+    "main_id": "HD  42619",
+    "ra": 92.84764147145,
+    "dec": -7.250513838630001,
+    "coo_err_maj": 0.01979999989271164,
+    "coo_err_min": 0.019300000742077827,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3462,
+    "otype": "*",
+    "plx_err": 0.024700000882148743,
+    "ids": "TIC 72311250|Gaia DR3 3006151411241065728|2MASS J06112343-0715019|BD-07  1318|EIC   116|GSC 04795-00612|HD  42619|IRAS 06089-0714|IRC -10111|PPM 188891|RAFGL  892|SAO 132935|SKY# 10412|TYC 4795-612-1|YZ  97  1822|Gaia DR1 3006151411241065728|Gaia DR2 3006151411241065728",
+    "matched_id": "HD  42619"
+  }
+}

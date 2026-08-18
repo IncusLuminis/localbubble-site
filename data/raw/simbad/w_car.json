@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "w Car",
+  "retrieved_utc": "2026-08-18T07:04:48+00:00",
+  "record_id": "V* V Vel",
+  "raw": {
+    "main_id": "V* V Vel",
+    "ra": 140.56736675247,
+    "dec": -55.96032052567999,
+    "coo_err_maj": 0.015399999916553497,
+    "coo_err_min": 0.015399999916553497,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 0.945,
+    "otype": "cC*",
+    "plx_err": 0.017400000244379044,
+    "ids": "TIC 436811829|HIP 45949|Gaia DR3 5309930194773990400|CD-55  2664|CPC 19  3423|CPD-55  2118|GC 12946|GCRV 60629|GEN# +1.00081222|GSC 08588-01663|HD  81222|HIC  45949|IRAS 09207-5544|PPM 337875|SAO 236893|SKY# 18092|TYC 8588-1663-1|V* V Vel|V* W Car|2MASS J09221616-5557372|Gaia DR1 5309930190461611136|uvby98 100081222|WEB  8714|Gaia DR2 5309930194773990400",
+    "matched_id": "V* W Car"
+  }
+}

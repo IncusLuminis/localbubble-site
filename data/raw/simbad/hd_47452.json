@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 47452",
+  "retrieved_utc": "2026-08-18T07:00:33+00:00",
+  "record_id": "HD  47452",
+  "raw": {
+    "main_id": "HD  47452",
+    "ra": 99.71215740296,
+    "dec": 5.19103574615,
+    "coo_err_maj": 0.03290000185370445,
+    "coo_err_min": 0.03280000016093254,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3205,
+    "otype": "LP?",
+    "plx_err": 0.03790000081062317,
+    "ids": "TIC 369591524|Gaia DR3 3131012157848982272|2MASS J06385092+0511275|AG+05  845|BD+05  1345|DO  1689|EIC   145|GCRV 57842|GSC 00155-00414|HD  47452|IRAS 06361+0514|IRC +10130|PPM 150948|RAFGL  981|SAO 114196|TYC  155-414-1|YZ   5  3101|WEB  6383|Gaia DR2 3131012157848982272",
+    "matched_id": "HD  47452"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 207328",
+  "retrieved_utc": "2026-08-18T06:59:27+00:00",
+  "record_id": "HD 207328",
+  "raw": {
+    "main_id": "HD 207328",
+    "ra": 326.5691846863999,
+    "dec": 58.06247580515001,
+    "coo_err_maj": 0.017400000244379044,
+    "coo_err_min": 0.01759999990463257,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.6385,
+    "otype": "*",
+    "plx_err": 0.020500000566244125,
+    "ids": "TIC 342337222|Gaia DR3 2178333405963459968|Cl* Trumpler   37    MMU     780|AG+57 1489|BD+57  2396|DO 40105|GEN# +4.35370780|GSC 03975-00719|HD 207328|IRAS 21447+5749|IRC +60327|PPM  39851|RAFGL 2807|SAO  33741|SKY# 41495|TYC 3975-719-1|UBV M  25943|YZ  57 12516|[L91b] 351|2MASS J21461660+5803450|Cl Trumpler   37   780|Gaia DR1 2178333401658427776|Gaia DR2 2178333405963459968",
+    "matched_id": "HD 207328"
+  }
+}

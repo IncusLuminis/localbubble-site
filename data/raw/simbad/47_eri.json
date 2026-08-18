@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "47 Eri",
+  "retrieved_utc": "2026-08-18T06:56:24+00:00",
+  "record_id": "*  47 Eri",
+  "raw": {
+    "main_id": "*  47 Eri",
+    "ra": 68.54845190421,
+    "dec": -8.231351553679998,
+    "coo_err_maj": 0.08569999784231186,
+    "coo_err_min": 0.05530000105500221,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.22,
+    "otype": "LP?",
+    "plx_err": 0.10949999839067459,
+    "ids": "TIC 55896815|HIP 21296|Gaia DR3 3197763169471183488|2MASS J04341163-0813529|PLX 1007|*  47 Eri|BD-08   887|CSV    421|EIC    65|FK5 2337|GC  5576|GCRV  2679|GEN# +1.00029064|GSC 05314-03037|HD  29064|HIC  21296|HR  1451|IRAS 04317-0820|IRC -10070|PPM 187083|RAFGL  598|SACS  99|SAO 131315|SKY#  7083|SV* P   136|TYC 5314-3037-1|UBV    4408|UBV M  10213|V* DV Eri|YZ  98  1154|PLX 1007.00|WEB  4094|Gaia DR2 3197763169471183488",
+    "matched_id": "*  47 Eri"
+  }
+}

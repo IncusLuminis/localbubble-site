@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "BM Sco",
+  "retrieved_utc": "2026-08-18T06:57:07+00:00",
+  "record_id": "V* BM Sco",
+  "raw": {
+    "main_id": "V* BM Sco",
+    "ra": 265.24394331645,
+    "dec": -32.21446232125,
+    "coo_err_maj": 0.04769999906420708,
+    "coo_err_min": 0.04039999842643738,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.0344,
+    "otype": "s*r",
+    "plx_err": 0.06809999793767929,
+    "ids": "TIC 108379361|HIP 86527|Gaia DR3 4054313101536149376|Cl* NGC 6405    MMU       1|GC 23957|AAVSO 1734-32|AN   23.1920|CD-32 13142|CPC 17  9383|CPD-32  4756|GSC 07380-00218|HD 160371|HIC  86527|IRAS 17377-3211|IRC -30313|NGC  6405     1|PPM 296667|RAFGL 5372|SAO 209132|SKY# 31944|SV* HV  3526|TYC 7380-218-1|UBV M  35981|V* BM Sco|2MASS J17405855-3212520|UCAC3 116-291810|GEN# +2.64050001|Gaia DR2 4054313101536149376",
+    "matched_id": "V* BM Sco"
+  }
+}

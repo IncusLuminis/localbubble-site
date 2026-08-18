@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "s Car",
+  "retrieved_utc": "2026-08-18T07:04:44+00:00",
+  "record_id": "V* S Car",
+  "raw": {
+    "main_id": "V* S Car",
+    "ra": 152.34121988981,
+    "dec": -61.549009306520006,
+    "coo_err_maj": 0.07320000231266022,
+    "coo_err_min": 0.07360000163316727,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.1378,
+    "otype": "Mi*",
+    "plx_err": 0.08630000054836273,
+    "ids": "TIC 375879953|ASASSN-V J100921.65-613251.9|WISEA J100921.97-613255.1|WISE J100921.74-613255.7|AKARI-IRC-V1 J1009218-613255|HIP 49751|Gaia DR3 5253294179046079872|AAVSO 1050-58|AAVSO 1006-61|CD-60  2949|CPC 20.1  2720|CPD-60  1701|GC 13971|GCRV  6431|GEN# +1.00088366|HD  88366|HIC  49751|HR  3999|IRAS 10077-6118|JP11  1912|PPM 357799|ASAS J100921-6133.0|SAO 250840|SKY# 19549|V* S Car|2MASS J10092189-6132564|TYC 8943-2313-1|GSC 08943-02313|UCAC3 57-77823|uvby98 100088366|WEB  9173|Gaia DR2 5253294179044702848",
+    "matched_id": "V* S Car"
+  }
+}

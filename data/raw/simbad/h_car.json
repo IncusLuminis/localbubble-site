@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "h Car",
+  "retrieved_utc": "2026-08-18T07:04:27+00:00",
+  "record_id": "* h Car",
+  "raw": {
+    "main_id": "* h Car",
+    "ra": 143.61104506125,
+    "dec": -59.229751953055555,
+    "coo_err_maj": 0.07999999821186066,
+    "coo_err_min": 0.09000000357627869,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 2.46,
+    "otype": "*",
+    "plx_err": 0.10000000149011612,
+    "ids": "TIC 439431474|HIP 46974|* h Car|CEL   3332|CPC 20  2649|CPD-58  1576|GC 13246|GCRV  6202|GEN# +1.00083183|GSC 08597-02340|HD  83183|HIC  46974|HR  3825|IRAS 09330-5900|JP11  1837|PPM 338096|ROT  1491|SAO 237117|SKY# 18516|TYC 8597-2340-1|UBV    9154|UBV M  15575|[B10]  2581|uvby98 100083183|2MASS J09342665-5913470|ALS 14937|Gaia DR1 5305373436309149952|WEB  8854|Gaia DR2 5305373440631311488",
+    "matched_id": "* h Car"
+  }
+}

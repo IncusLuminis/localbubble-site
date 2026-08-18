@@ -1,0 +1,30 @@
+[
+  {
+    "name": "HD 164...",
+    "reason": "tried ['HD 164...'], all failed: SIMBAD has no record for 'HD 164...'"
+  },
+  {
+    "name": "HD 164?",
+    "reason": "tried ['HD 164?'], all failed: SIMBAD has no record for 'HD 164?'"
+  },
+  {
+    "name": "HD 2...",
+    "reason": "tried ['HD 2...'], all failed: SIMBAD has no record for 'HD 2...'"
+  },
+  {
+    "name": "HD 748??",
+    "reason": "tried ['HD 748??'], all failed: SIMBAD has no record for 'HD 748??'"
+  },
+  {
+    "name": "PQ...",
+    "reason": "tried ['PQ...'], all failed: SIMBAD has no record for 'PQ...'"
+  },
+  {
+    "name": "Unurgunite",
+    "reason": "tried ['Unurgunite'], all failed: SIMBAD has no record for 'Unurgunite'"
+  },
+  {
+    "name": "h01 Pup",
+    "reason": "SIMBAD resolves the corrected query form '2 Pup' (real object, main_id '* 2 Pup') but it has no usable parallax on file - cannot derive a distance without one."
+  }
+]

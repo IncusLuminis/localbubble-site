@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "V369 Nor",
+  "retrieved_utc": "2026-08-18T07:03:35+00:00",
+  "record_id": "V* V369 Nor",
+  "raw": {
+    "main_id": "V* V369 Nor",
+    "ra": 244.57275309599004,
+    "dec": -46.44979986744,
+    "coo_err_maj": 0.05909999832510948,
+    "coo_err_min": 0.04089999943971634,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.2532,
+    "otype": "LP*",
+    "plx_err": 0.06430000066757202,
+    "ids": "TIC 15161212|HIP 79880|Gaia DR3 5989988650636770944|CD-46 10627|CPC  0 14548|CPD-46  7878|GSC 08311-00815|HD 146422|HIC  79880|IRAS 16146-4619|PPM 321568|SAO 226636|SKY# 29415|SRS   1937|TYC 8311-815-1|V* V369 Nor|2MASS J16181748-4626592|RAVE J161817.5-462659|Gaia DR2 5989988650636770944",
+    "matched_id": "V* V369 Nor"
+  }
+}

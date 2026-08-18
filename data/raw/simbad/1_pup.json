@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "1 Pup",
+  "retrieved_utc": "2026-08-18T06:55:15+00:00",
+  "record_id": "*   1 Pup",
+  "raw": {
+    "main_id": "*   1 Pup",
+    "ra": 115.88494452232,
+    "dec": -28.41088574833,
+    "coo_err_maj": 0.06210000067949295,
+    "coo_err_min": 0.08630000054836273,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 4.1384,
+    "otype": "*",
+    "plx_err": 0.11429999768733978,
+    "ids": "TIC 126366000|HIP 37648|Gaia DR3 5599927623535365888|PLX 1828|*   1 Pup|ADS  6324 A|CCDM J07435-2825A|CD-28  4767|CPD-28  2361|CSI-28  4767 21|CSV 100894|GC 10409|GCRV  5151|GEN# +1.00062576|GSC 06552-03227|HD  62576|HIC  37648|HR  2993|IDS 07395-2810 A|IRAS 07415-2817|IRC -30098|JP11  1592|N30 1750|NSV  3708|PPM 253043|RAFGL 1179|SAO 174391|SKY# 14273|SRS  41716|TYC 6552-3227-1|UBV    7425|YZ 118  4347|uvby98 100062576|2MASS J07433238-2824392|SV* ZI   658|PLX 1828.00|WDS J07435-2825A|** SEE   85A|** SKF 1443A|WEB  7443|Gaia DR2 5599927623538756736",
+    "matched_id": "*   1 Pup"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "22 Cyg",
+  "retrieved_utc": "2026-08-18T06:55:54+00:00",
+  "record_id": "*  22 Cyg",
+  "raw": {
+    "main_id": "*  22 Cyg",
+    "ra": 298.96567047159,
+    "dec": 38.48671912339001,
+    "coo_err_maj": 0.14090000092983246,
+    "coo_err_min": 0.18330000340938568,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 2.5612,
+    "otype": "SB*",
+    "plx_err": 0.18850000202655792,
+    "ids": "TIC 171416831|HIP 98068|Gaia DR3 2072529601058432768|*  22 Cyg|AG+38 1927|BD+38  3817|GC 27613|GCRV 12283|GEN# +1.00188892|GSC 03137-03765|HD 188892|HIC  98068|HR  7613|IRAS 19540+3821|JP11  3158|LF  3b +38   29|PPM  83837|ROT  2884|SAO  69101|SKY# 37338|TD1 25734|TYC 3137-3765-1|UBV   17006|UBV M  24312|uvby98 100188892|2MASS J19555176+3829121|ALS 16391|SBC9 3038|WEB 17282|Gaia DR2 2072529601058432768",
+    "matched_id": "*  22 Cyg"
+  }
+}

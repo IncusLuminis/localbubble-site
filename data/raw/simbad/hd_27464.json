@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 27464",
+  "retrieved_utc": "2026-08-18T07:00:00+00:00",
+  "record_id": "HD  27464",
+  "raw": {
+    "main_id": "HD  27464",
+    "ra": 65.8945337289,
+    "dec": 59.73257317832001,
+    "coo_err_maj": 0.015300000086426735,
+    "coo_err_min": 0.011900000274181366,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.3745,
+    "otype": "SB*",
+    "plx_err": 0.020400000736117363,
+    "ids": "TIC 8567388|HIP 20495|Gaia DR3 471893215074410880|2MASS J04233468+5943574|AG+59  423|AGKR  3875|BD+59   795|GSC 03731-00501|HD  27464|HIC  20495|PMC 90-93  2165|PPM  29114|SAO  24580|SKY#  6758|TYC 3731-501-1|YZ  59  3510|uvby98 100027464|Gaia DR1 471893210772929536|GEN# +1.00027464|Gaia DR2 471893215074410880",
+    "matched_id": "HD  27464"
+  }
+}

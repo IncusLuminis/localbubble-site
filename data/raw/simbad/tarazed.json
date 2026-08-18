@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Tarazed",
+  "retrieved_utc": "2026-08-18T07:03:10+00:00",
+  "record_id": "* gam Aql",
+  "raw": {
+    "main_id": "* gam Aql",
+    "ra": 296.5649123092774,
+    "dec": 10.6132587226325,
+    "coo_err_maj": 0.28870001435279846,
+    "coo_err_min": 0.2280000001192093,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 5.5899,
+    "otype": "*",
+    "plx_err": 0.38839998841285706,
+    "ids": "TIC 69413478|HIP 97278|Gaia DR3 4302054339959905920|WISE J194615.52+103648.5|PLX 4645|* gam Aql|*  50 Aql|AG+10 2518|BD+10  4043|CCDM J19462+1037A|CSI+10  4043  1|FK5  741|GC 27354|GCRV 12137|GEN# +1.00186791|GSC 01061-02577|HD 186791|HIC  97278|HR  7525|IDS 19415+1022 A|IRAS 19438+1029|IRC +10439|JP11  3130|N30 4372|NSV 24880|PMC 90-93   527|PPM 136931|RAFGL 2453|ROT  2845|SAO 105223|SKY# 36958|SRS  30741|TD1 25398|TYC 1061-2577-1|UBV M  24125|UBV   16822|YZ  10  7453|uvby98 100186791|2MASS J19461557+1036475|WDS J19463+1037D|NAME Tarazed|WEB 17087|Gaia DR2 4302054339950301696",
+    "matched_id": "NAME Tarazed"
+  }
+}

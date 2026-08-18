@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "SZ Car",
+  "retrieved_utc": "2026-08-18T07:02:54+00:00",
+  "record_id": "V* SZ Car",
+  "raw": {
+    "main_id": "V* SZ Car",
+    "ra": 149.96546761328,
+    "dec": -60.21834488553999,
+    "coo_err_maj": 0.017500000074505806,
+    "coo_err_min": 0.01590000092983246,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.4009,
+    "otype": "C*",
+    "plx_err": 0.01860000006854534,
+    "ids": "TIC 374062307|LLNS   151|Gaia DR3 5256612848727214720|AAVSO 0956-59|AN   48.1910|C* 1604|CD-59  2676|CGCS 2685|CPD-59  1591|GEN# +1.00086936|GSC 08942-02668|HD  86936|IRAS 09582-5958|PPM 777747|SV* HV  3234|TYC 8942-2668-1|V* SZ Car|[ELL90] 105|2MASS J09595173-6013060|UCAC3 60-76617|Gaia DR1 5256612844400603264|Gaia DR2 5256612848727214720",
+    "matched_id": "V* SZ Car"
+  }
+}

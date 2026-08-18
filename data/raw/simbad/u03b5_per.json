@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ε Per",
+  "retrieved_utc": "2026-08-18T07:05:25+00:00",
+  "record_id": "* eps Per",
+  "raw": {
+    "main_id": "* eps Per",
+    "ra": 59.463497424225004,
+    "dec": 40.01019978155972,
+    "coo_err_maj": 0.39480000734329224,
+    "coo_err_min": 0.3091000020503998,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 5.3316,
+    "otype": "bC*",
+    "plx_err": 0.4268999993801117,
+    "ids": "TIC 187107884|HIP 18532|uvby98 100024760|Gaia DR3 229898024422755840|PLX  869|SBC9 2402|*  45 Per|* eps Per|AAVSO 0351+39|ADS  2888 A|AG+39  463|ALS  7825|BD+39   895|CCDM J03579+4001A|CEL    373|CSI+39   895  1|CSV 100363|EUVE J0357+40.0|FK5  147|GC  4759|GCRV  2266|GEN# +1.00024760A|GSC 02868-01623|HD  24760|HGAM    307|HIC  18532|HR  1220|IDS 03511+3943 A|JP11   837|LS   V +39    1|MCW  257|N30  815|NSV  1423|PMC 90-93   105|PPM  46661|ROT  3497|SAO  56840|SKY#  6055|SRS  30147|SV* ZI   263|TD1  2676|TYC 2868-1623-1|UBV    3847|V* eps Per|WDS J03579+4001A|IRAS 03544+3952|AKARI-IRC-V1 J0357512+400036|PMSC 03511+3943A|PMSC 03511+3943Aabc|2MASS J03575124+4000367|CSI+39   895  4|WEB  3572|Gaia DR2 229898024419041280",
+    "matched_id": "* eps Per"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "HD 203096",
+  "retrieved_utc": "2026-08-18T06:59:22+00:00",
+  "record_id": "HD 203096",
+  "raw": {
+    "main_id": "HD 203096",
+    "ra": 319.7305390087299,
+    "dec": 41.04051915573,
+    "coo_err_maj": 0.012900000438094139,
+    "coo_err_min": 0.014999999664723873,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 1.8339,
+    "otype": "*",
+    "plx_err": 0.01850000023841858,
+    "ids": "TIC 373113969|Gaia DR3 1968686637677399168|ADS 14849 A|AG+40 2187|BD+40  4485|CCDM J21190+4102A|CSI+40  4485  1|GC 29836|GCRV 13404|GSC 03173-00540|HD 203096|HIC 105229|HIP 105229|HR  8155|IDS 21150+4037 A|PPM  61269|SAO  50699|SKY# 40586|TD1 27955|TYC 3173-540-1|uvby98 100203096|2MASS J21185532+4102257|WDS J21189+4102A|Renson 56557|Gaia DR1 1968686633368704512|GEN# +1.00203096|WEB 19112|Gaia DR2 1968686637677399168",
+    "matched_id": "HD 203096"
+  }
+}
