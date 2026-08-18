@@ -1,0 +1,2732 @@
+[
+  {
+    "name": "ASCC 10",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 101",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 105",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 113",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 115",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 123",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 127",
+    "tiles": [
+      "r1_c1",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "cropped at right tile edge ('ASCC 12...'); full label confirmed in adjacent tile r1_c2 at matching position"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 128",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 16",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 19",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 21",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 23",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 32",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 41",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 58",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 73",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 87",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 90",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 97",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "near bottom tile edge"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ASCC 99",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 1",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 10",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 12",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 13",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 19",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 2",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 20",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 21",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 24",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 3",
+    "tiles": [
+      "r0_c1",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "Label sits right at the tile's right edge; 'Alessi 3' is fully legible but cannot rule out additional trailing characters cut off by the crop."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 31",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 37",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 44",
+    "tiles": [
+      "r1_c3",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "cropped at right tile edge; full label confirmed in adjacent tile r1_c4"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 5",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 62",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 8",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi 9",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi Teutsch 11",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi Teutsch 12",
+    "tiles": [
+      "r3_c3",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alessi Teutsch 3",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Aveni Hunter 1",
+    "tiles": [
+      "r1_c1",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "cropped at right tile edge ('Aveni Hunt...'); full label confirmed in adjacent tile r1_c2"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BH 164",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BH 23",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BH 99",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Beehive (NGC 2632, Messier 44)",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Blanco 1",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Butterfly (NGC 6405, Messier 6)",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "COIN-Gaia 1",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "COIN-Gaia 11",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "COIN-Gaia 13",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "COIN-Gaia 30",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "COIN-Gaia 8",
+    "tiles": [
+      "r0_c0",
+      "r1_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 132",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 135",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 140",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 338",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 350",
+    "tiles": [
+      "r1_c3",
+      "r2_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 359",
+    "tiles": [
+      "r1_c3",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "cropped at left tile edge"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 394",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 69",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Collinder 95",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Coma",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ESO 130 06",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Ferrero 11",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Gulliver 10",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Gulliver 20",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Gulliver 21",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Gulliver 28",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "near top tile edge"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Gulliver 6",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Gulliver 9",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Haffner 13",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Harvard 10",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Hyades",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": true
+  },
+  {
+    "name": "IC 2391",
+    "tiles": [
+      "r2_c2",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IC 2395",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IC 2602",
+    "tiles": [
+      "r2_c2",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IC 348",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IC 4665",
+    "tiles": [
+      "r1_c3",
+      "r2_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IC 4756",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "King 6",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Loden 11",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "cropped at right tile edge, only 'Loden 11' visible; likely 'Loden 1194' which appears fully in r4_c4, but could be a different Loden number"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Loden 1194",
+    "tiles": [
+      "r4_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Mamajek 4",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Melotte 20",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 23 (NGC 6494)",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 25 (IC 4725)",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 34 (NGC 1039)",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 39 (NGC 7092)",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 41",
+    "tiles": [
+      "r4_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [
+      "label cut off at right tile edge; full form 'Messier 41 (NGC 2287)' visible in r4_c1"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 41 (NGC 2287)",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 47 (NGC 2422)",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 48 (NGC 2548)",
+    "tiles": [
+      "r4_c0",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Messier 67 (NGC 2682)",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1333",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1342",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1545",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1647",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1662",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1750",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1901",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1977",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 1980",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2183",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2184",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2232",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 225",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2264",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2281",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2451A",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2451B",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2516",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2527",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2547",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 2925",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 3228",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 3532",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 5460",
+    "tiles": [
+      "r4_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 5662",
+    "tiles": [
+      "r4_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 6025",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 6124",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 6281",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 6633",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 6716",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 6793",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 6991",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 7039",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 7058",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 7063",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NGC 752",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Pismis 4",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Platais 10",
+    "tiles": [
+      "r2_c3",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Platais 3",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Platais 8",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Platais 9",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Pleiades (Messier 45)",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": true
+  },
+  {
+    "name": "Pozzo 1",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Ptolemy (NGC 6475, Messier 7)",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RSG 1",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RSG 5",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RSG 7",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RSG 8",
+    "tiles": [
+      "r1_c1",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at tile edge"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Roslund 5",
+    "tiles": [
+      "r0_c2",
+      "r0_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Roslund 6",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Ruprecht 145",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Ruprecht 147",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Ruprecht 98",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Stephenson 1",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Stock 1",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Stock 10",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Stock 12",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Stock 2",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Stock 23",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Stock 7",
+    "tiles": [
+      "r0_c0",
+      "r0_c1",
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 4,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Teutsch",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "only 'Te' visible at far right tile edge; likely start of 'Teutsch 38', which appears fully in r4_c2, but could be a different Teutsch-numbered cluster"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Teutsch 35",
+    "tiles": [
+      "r1_c2",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at right tile edge; full label confirmed in adjacent tile r1_c3"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Teutsch 38",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Trumpler 10",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Trumpler 2",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Trumpler 3",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Turner 5",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 1",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 11",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 12",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 13",
+    "tiles": [
+      "r3_c0",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 14",
+    "tiles": [
+      "r0_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 159",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 17a",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 17b",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 19",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 2",
+    "tiles": [
+      "r0_c1",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 207",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 26",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 260",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 31",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 32",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 4",
+    "tiles": [
+      "r1_c0",
+      "r2_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 480",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 5",
+    "tiles": [
+      "r3_c3",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 7",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 8",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UBC 9",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK ...",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Only 'UPK' visible at right tile edge near the HD 185418 / UPK 65 row; the identifying number is cut off and not resolved in the adjacent tile r0_c4 (which is empty/black at that position)."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 113",
+    "tiles": [
+      "r0_c2",
+      "r0_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 119",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 12",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 136",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 166",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 167",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 168",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 17",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 18",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 185",
+    "tiles": [
+      "r0_c1",
+      "r0_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 20",
+    "tiles": [
+      "r1_c3",
+      "r2_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 21",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 230",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 237",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 24",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 25",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 29",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 294",
+    "tiles": [
+      "r0_c0",
+      "r1_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 296",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 303",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 305",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 31",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 312",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 33",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 333",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 350",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 379",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 38",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 381",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 385",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 394",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 398",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 3?",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Only 'UPK 3' visible before right-edge crop; the full number (e.g. UPK 31, 38...) could not be confirmed against a matching label in adjacent tile r1_c4."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 4",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 40",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 402",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 42",
+    "tiles": [
+      "r1_c3",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "cropped at right tile edge; full label confirmed in adjacent tile r1_c4"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 422",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 431",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 433",
+    "tiles": [
+      "r3_c0",
+      "r4_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 442",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 445",
+    "tiles": [
+      "r3_c0",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 451",
+    "tiles": [
+      "r4_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "severely cropped at very top edge of tile, only bottoms of letters/digits visible; best guess reading, digits could differ"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 452",
+    "tiles": [
+      "r3_c1",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 46",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 467",
+    "tiles": [
+      "r3_c1",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 495",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 5",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 502",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 524",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 526",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 53",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 533",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 535",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 537",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 540",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 545",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 55",
+    "tiles": [
+      "r0_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 552",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 560",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 567",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 579",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 585",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 599",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 604",
+    "tiles": [
+      "r4_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 605",
+    "tiles": [
+      "r3_c4",
+      "r4_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 612",
+    "tiles": [
+      "r2_c3",
+      "r3_c2",
+      "r3_c3"
+    ],
+    "occurrences": 3,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 617",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 624",
+    "tiles": [
+      "r2_c3",
+      "r3_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 626",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 627",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 640",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 644",
+    "tiles": [
+      "r2_c4",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 645",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 65",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 654",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 66",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 7",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 82",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 88",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 93",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UPK 99",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  }
+]

@@ -1,0 +1,6152 @@
+[
+  {
+    "name": "1 Cam A",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "1 Cam B",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "1 Cas",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "1 Pup",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "10 CMa",
+    "tiles": [
+      "r3_c1",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "10 Lac",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "10 Pup",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "102 Her",
+    "tiles": [
+      "r1_c2",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at right tile edge; full label confirmed in adjacent tile r1_c3"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "119 Tau",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "12 Peg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "13 Sge",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "139 Tau",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "14 Per",
+    "tiles": [
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "cropped at tile edge; full label confirmed in adjacent tile r1_c1"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "14 Pup",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "15 CMa",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "16 Lac",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "19 Mon",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "19 Psc",
+    "tiles": [
+      "r1_c2",
+      "r2_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "19 Vul",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "Very bottom edge of tile, partially cropped. Reads approximately '[1]9 Vul [-84]'; the leading digit is ambiguous, could be '9 Vul' or '19 Vul'."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "2 Vul",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "22 And",
+    "tiles": [
+      "r1_c1",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "22 Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "228 Eri",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "25 Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "25 Gem",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "27 CMa",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "29 CMa",
+    "tiles": [
+      "r3_c1",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "3 Cet",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "31 Crt",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "31 Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "31 Peg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "35 Aqr",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "35 Cru",
+    "tiles": [
+      "r3_c3",
+      "r4_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "37 Oph",
+    "tiles": [
+      "r1_c3",
+      "r2_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "41 Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "47 Eri",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "5 Lac",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "55 Cyg",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "56 Ori",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "57 Ori",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "58 Per",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "6 Cep",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "6 Lac",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "6 Sgr",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "60 Cyg",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "66 Aur",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "69 Cet",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "70 Aql",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "72 Leo",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "73 Ori",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "8 Lac A",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "9 Cas",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "9 Peg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "AE Tri",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "AM CrA",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "AQ Sgr",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Acrux",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Adhara",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Ainalrami",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Aladfar",
+    "tiles": [
+      "r1_c2",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Albaldah",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Albireo",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alfirk",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Almach",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alnitak",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Alniyat",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Antares",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Arneb",
+    "tiles": [
+      "r3_c0",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Aspidiske",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Atria",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Avior",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Azelfafage",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Azmidi",
+    "tiles": [
+      "r3_c1",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "B Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BB Sgr",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BD+60 2152",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BD+74 46",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BE Cam",
+    "tiles": [
+      "r1_c1",
+      "r2_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BL Ori",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BM Sco",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BP Cap",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BQ Oct",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BR CVn",
+    "tiles": [
+      "r1_c2",
+      "r2_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "BR Lyn",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Bellatrix",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Betelgeuse",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "CH Hyi",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "CK Lyn",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "CL CVn",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Canopus",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "DT Cyg",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Deneb",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Dschubba",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Enif",
+    "tiles": [
+      "r1_c2",
+      "r2_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "FQ Lup",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Fang",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "GL Mon",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "GP Dra",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "GZ Eri",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "GZ Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 102839",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 103400",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 10497",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 105437",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 10550",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 105521",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Text color read as white/off-white rather than the usual green used for HD numbers elsewhere on the poster, which would normally indicate a cluster rather than a star. Could not fully resolve the color at this JPEG compression level; transcribed as a star per HD-catalog convention but flagging the color mismatch."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 105943",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 107543",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 110432",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 114533",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 115211",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 1166",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 116835",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 122938",
+    "tiles": [
+      "r4_c3",
+      "r4_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracketed value cropped at tile edge, full value -23 visible in r4_c4"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 1240",
+    "tiles": [
+      "r0_c1",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 124099",
+    "tiles": [
+      "r3_c3",
+      "r4_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 124471",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 125835",
+    "tiles": [
+      "r4_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 126226",
+    "tiles": [
+      "r4_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 126595",
+    "tiles": [
+      "r4_c3",
+      "r4_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 126610",
+    "tiles": [
+      "r4_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 126692",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false,
+    "found_in_second_pass_qa": true
+  },
+  {
+    "name": "HD 127753",
+    "tiles": [
+      "r3_c4",
+      "r4_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "small visual overlap/artifact near the digits at this resolution makes the exact number slightly uncertain; best reading is HD 127753"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 129932",
+    "tiles": [
+      "r3_c4",
+      "r4_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 130157",
+    "tiles": [
+      "r2_c3",
+      "r3_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 130206",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 130907",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 131432",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 134270",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 135689",
+    "tiles": [
+      "r3_c3",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 136505",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 136537",
+    "tiles": [
+      "r3_c4",
+      "r4_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 137071",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 137465",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 137709",
+    "tiles": [
+      "r2_c3",
+      "r3_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 139236",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 139915",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 141318",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 142581",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 144858",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 146630",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 148200",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 149967",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 150097",
+    "tiles": [
+      "r3_c3",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 152220",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 153261",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 153573",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 155650",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 156091",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 158476",
+    "tiles": [
+      "r2_c4",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "label sits at the very bottom edge of the tile, partially cropped; digits read as 'HD 158476' but the last digit or two could be clipped"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 158799",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 161068",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 161664",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 164...",
+    "tiles": [
+      "r0_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Only 'HD 164' visible before the label runs off the right/bottom tile edge; remaining digits of the catalog number not visible in this tile."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 16440",
+    "tiles": [
+      "r0_c1",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 164432",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 164?",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Only 'HD 164' visible before right-edge crop; likely the same label as 'HD 16440 [+92]' seen fully in adjacent tile r1_c1 (aligned position, same row), but not independently confirmable from this tile alone."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 165022",
+    "tiles": [
+      "r2_c4",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 167506",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 167818",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 168201",
+    "tiles": [
+      "r0_c4",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 168357",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 170521",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 172365",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 17246",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 172522",
+    "tiles": [
+      "r0_c4",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 172680",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 172991",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 173854",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 174088",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 174208",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 174328",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 174391",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 174464",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 174857",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 175156",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 176155",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 176254",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 176537",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 176818",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 177846",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 178175",
+    "tiles": [
+      "r1_c3",
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 3,
+    "uncertain": false,
+    "notes": [
+      "cropped at bottom-right corner; full label confirmed in adjacent tile r1_c4"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 179323",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 17958",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 181475",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 183589",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 185418",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 186021",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 186121",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 186377",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 186442",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 187203",
+    "tiles": [
+      "r0_c3",
+      "r0_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 187734",
+    "tiles": [
+      "r0_c3",
+      "r0_c4",
+      "r1_c3",
+      "r1_c4"
+    ],
+    "occurrences": 4,
+    "uncertain": false,
+    "notes": [
+      "cropped at right tile edge ('HD 1877...'); full label confirmed in adjacent tile r1_c4"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 188875",
+    "tiles": [
+      "r0_c2",
+      "r0_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 189276",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 19039",
+    "tiles": [
+      "r0_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 190405",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 191639",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 192289",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 192575",
+    "tiles": [
+      "r0_c1",
+      "r0_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 192661",
+    "tiles": [
+      "r0_c2",
+      "r0_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 193092",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 193217",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 19332",
+    "tiles": [
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 194069",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 19441",
+    "tiles": [
+      "r0_c0",
+      "r1_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 199021",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 2...",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Only 'HD 2' visible at the right tile edge near the Alessi 3 / Sh 2-137 labels; rest of the catalog number cut off."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 200102",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 200465",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 20074",
+    "tiles": [
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at tile edge; full label confirmed in adjacent tile r1_c1"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 203096",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 20468",
+    "tiles": [
+      "r1_c1",
+      "r2_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 205349",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 20567",
+    "tiles": [
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at tile edge; full label confirmed in adjacent tile r1_c1"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 207119",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 207328",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 207489",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 207538",
+    "tiles": [
+      "r0_c1",
+      "r0_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 207884",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 208682",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 208971",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 209339",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 210641",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 210762",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 21269",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 213021",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 21465",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 21483",
+    "tiles": [
+      "r1_c1",
+      "r2_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 214976",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 216532",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 216595",
+    "tiles": [
+      "r0_c1",
+      "r0_c2",
+      "r1_c1",
+      "r1_c2"
+    ],
+    "occurrences": 4,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 217491",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 220130",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 220369",
+    "tiles": [
+      "r0_c1",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 221861",
+    "tiles": [
+      "r0_c1",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 222325",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 22253",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 223173",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 224165",
+    "tiles": [
+      "r0_c1",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 224893",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 23089",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 236723",
+    "tiles": [
+      "r0_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 24580",
+    "tiles": [
+      "r0_c0",
+      "r1_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 25291",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 26553",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 27192",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 27292",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 27464",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 27639",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 32018",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 32655",
+    "tiles": [
+      "r1_c0",
+      "r1_c1",
+      "r2_c0"
+    ],
+    "occurrences": 3,
+    "uncertain": false,
+    "notes": [
+      "cropped at bottom-left tile edge; full label seen in adjacent tile r1_c0"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 33034",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 33299",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 33462",
+    "tiles": [
+      "r1_c0",
+      "r2_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 33463",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 35202",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 35520",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 36404",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 36881",
+    "tiles": [
+      "r2_c0",
+      "r3_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 36905",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 36960",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 3699",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 37710",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 39632",
+    "tiles": [
+      "r2_c1",
+      "r3_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 39654",
+    "tiles": [
+      "r3_c1",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 41335",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 42049",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 42351",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 42619",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 43476",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 4362",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 44458",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 44506",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 44891",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 45995",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 46547",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 46709",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 46769",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 46785",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 47452",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 47667",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 48016",
+    "tiles": [
+      "r3_c0",
+      "r4_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 4817",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 49091",
+    "tiles": [
+      "r4_c0",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracketed height value cropped off tile edge, name itself clear (full value -137 visible in r4_c1)"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 49131",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 49331",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 49517",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "Label sits right at the bottom edge of the tile (row boundary with row 4); the HD number was legible but the row is tightly cropped so digits could be misread."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 49793",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 51283",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 51799",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 52432",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 53208",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 54669",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 55663",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 55832",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 56955",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 57146",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 57608",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 58526",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 58978",
+    "tiles": [
+      "r3_c1",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 59381",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 59408",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 59610",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 59669",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 59890",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 59929",
+    "tiles": [
+      "r3_c0",
+      "r4_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 6130",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 61367",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 63323",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 63578",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 63752",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 64067",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 64571",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 65257",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 65460",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 65662",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 66190",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 66478",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 67243",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 67341",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 67456",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 67582",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 67880",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 67888",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 69511",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 70556",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 70839",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 71613",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 72014",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 72900",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 74599",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 74824",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 748??",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "cropped at bottom-right tile edge, only 'HD 748' visible, remaining digits unknown"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 76270",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 77321",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 80577",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 81502",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 8160",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 81817",
+    "tiles": [
+      "r1_c1",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 81949",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 84228",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 85436",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 85953",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 87481",
+    "tiles": [
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "number cropped at tile edge; full label confirmed in adjacent tile r1_c1"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 88825",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 89095",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 89736",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 89805",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 90677",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 91496",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 9353",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 94683",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 94717",
+    "tiles": [
+      "r3_c3",
+      "r4_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 95208",
+    "tiles": [
+      "r3_c3",
+      "r4_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 96088",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 97670",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 98993",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 9900",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HD 99556",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "HQ CMa",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Hadar",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Hassaleh",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Hatysa",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IRAS 02531+4657",
+    "tiles": [
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "cropped at tile edge; full label confirmed in adjacent tile r1_c1"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IV Aqr",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IV Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "IZ TrA",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "J Pup",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "J Vel",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "KP Per",
+    "tiles": [
+      "r1_c0",
+      "r1_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at tile edge"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Kaus Media",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "LS CMa",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "LZ CMa",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "La Superba",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Lesath",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "MW Vel",
+    "tiles": [
+      "r4_c2",
+      "r4_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "cropped at right tile edge ('MW V...'); confirmed fully as 'MW Vel' in r4_c3"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "MZ Pup",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Mebsuta",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Meissa",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Mekbuda",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Menkhib",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Mimosa",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Mintaka",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Miram",
+    "tiles": [
+      "r1_c1",
+      "r2_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Mirfak",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Mirzam",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "N Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NO Vel",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "NP Pup",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Naos",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "P Pup",
+    "tiles": [
+      "r3_c2",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "PQ Peg",
+    "tiles": [
+      "r0_c3",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "PQ...",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Only 'PQ' visible at bottom-right tile edge, bracket/rest cut off. Adjacent tile r0_c3 shows a 'PQ Peg [-433]' label in roughly the same sky area, so this is likely the same label, but it is not independently confirmable within this tile alone."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Paikauhale",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Pherkad",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Polaris",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Propus",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Q Vel",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RR Ant",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RS Cyg",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RV Cen",
+    "tiles": [
+      "r4_c3",
+      "r4_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RV Cyg",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RY Dra",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "RZ Sct",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Rasalgethi",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Rastaban",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Rigel",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ST Cam",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "SU Sco",
+    "tiles": [
+      "r2_c4",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "SZ Car",
+    "tiles": [
+      "r4_c2",
+      "r4_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracketed value cropped at tile edge, full value -52 visible in r4_c3"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "SZ Tau",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Saclateni",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Sadalmelik",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Sadalsuud",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Sadr",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Saiph",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Sargas",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Shaula",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Spica",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Suhail",
+    "tiles": [
+      "r2_c2",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Sulafat",
+    "tiles": [
+      "r1_c2",
+      "r2_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "T Vul",
+    "tiles": [
+      "r0_c2",
+      "r0_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "TT Tau",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "TW Hor",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Tarazed",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "U Ant",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "U Cam",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "U Hya",
+    "tiles": [
+      "r2_c2",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UX And",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UX Cen",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UX Dra",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UY Cen",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "UZ Cet",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Unurgunite",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "Unusual/unfamiliar star designation; spelling confirmed consistent between r3_c1 and r3_c2 overlap, but not a name I could independently verify against known catalogs at this resolution."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V Nor",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V Pav",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V Pup",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V1003 Cen",
+    "tiles": [
+      "r3_c3",
+      "r3_c4",
+      "r4_c3"
+    ],
+    "occurrences": 3,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V1139 Tau",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V1401 Aql",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V1435 Aql",
+    "tiles": [
+      "r1_c3",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "Only 'V14' visible before top-right corner crop. Best guess is 'V1435 Aql', which appears fully and in a roughly consistent position in adjacent tile r1_c4, but the fragment alone is not independently confirmable."
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V1942 Sgr",
+    "tiles": [
+      "r1_c3",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at right tile edge; full label confirmed in adjacent tile r1_c4"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V2124 Cyg",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V2141 Cyg",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V346 Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V365 Lac",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V369 Cen",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V369 Nor",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V378 Pav",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V390 Pup",
+    "tiles": [
+      "r4_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V3954 Sgr",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V398 Lyr",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V424 Lac",
+    "tiles": [
+      "r0_c2",
+      "r1_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V428 Pup",
+    "tiles": [
+      "r4_c1",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracketed value cropped at tile edge, full value -51 visible in r4_c2"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V430 Ori",
+    "tiles": [
+      "r3_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V460 Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V515 Car",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V571 Per",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V721 Mon",
+    "tiles": [
+      "r3_c0",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V724 Mon",
+    "tiles": [
+      "r3_c0",
+      "r4_c0"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V747 Cas",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V809 Cas",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V829 Ara",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V924 Cen",
+    "tiles": [
+      "r4_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V978 Her",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "V996 Cen",
+    "tiles": [
+      "r3_c3",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "VV Cep",
+    "tiles": [
+      "r0_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "VY UMa",
+    "tiles": [
+      "r1_c1",
+      "r2_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "W CMa",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "WZ Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Wezen",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "X Per",
+    "tiles": [
+      "r1_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "X Sgr",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "X TrA",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "X Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "XX Col",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "XZ Dor",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Xamidimura",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Y Hya",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Y Oph",
+    "tiles": [
+      "r1_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Y Tau",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "YY Lep",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "Z Psc",
+    "tiles": [
+      "r1_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "a Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "b Sgr",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "c Pup",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "d Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "d Cen",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "d Dra",
+    "tiles": [
+      "r0_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "e Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "f Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "f01 Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "f02 Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "h Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "h01 Pup",
+    "tiles": [
+      "r4_c1",
+      "r4_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "cropped at right tile edge ('h01 Pu...'); confirmed fully as 'h01 Pup' in r4_c2"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "i Lup",
+    "tiles": [
+      "r3_c3",
+      "r3_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "l Car",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": true,
+    "notes": [
+      "single-character Flamsteed-style designation renders ambiguously - could be lowercase 'l', capital 'I', or digit '1' Car"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "m Vel",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "n Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "o And",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "o Pup",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "o Sco",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "o² Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "q Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "r Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "s Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "t Vel",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "u Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "w Car",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "w Pup",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "x Vel",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "y03 Pup",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "α Lup",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "α Pyx",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "β Ara",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "β Cam",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "β Dor",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "β Ind",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "β Sct",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "β¹ Sco",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "γ Ara",
+    "tiles": [
+      "r2_c3",
+      "r3_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "γ Cas",
+    "tiles": [
+      "r1_c2",
+      "r2_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "near bottom tile edge"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "γ Lup",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "γ² Vel",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "γ¹ Nor",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ Cen",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ Cep",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ Lup",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ Per",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ Pic",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ Sge",
+    "tiles": [
+      "r1_c2",
+      "r2_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ TrA",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ Vol",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ² Lyr",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "δ¹ Aps",
+    "tiles": [
+      "r2_c2",
+      "r3_c2",
+      "r3_c3"
+    ],
+    "occurrences": 3,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ε CMi",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ε Cap",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ε Cen",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ε Per",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ζ Ara",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ζ Cen",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ζ Cep",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ζ Mon",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ζ Per",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ζ¹ Sco",
+    "tiles": [
+      "r3_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "η Leo",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "θ Ara",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "θ Car",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "θ Cir",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "θ Del",
+    "tiles": [
+      "r0_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "θ Her",
+    "tiles": [
+      "r1_c2",
+      "r2_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "θ Lyr",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "θ² Ori A",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ι CMa",
+    "tiles": [
+      "r4_c0",
+      "r4_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "the Bayer-letter glyph renders like a dotless/lowercase 'l' or 'i' rather than a clear Greek iota at this resolution; likely ι CMa (Iota Canis Majoris)",
+      "same ambiguous Bayer-letter glyph as noted in r4_c0; also cropped at left tile edge here"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ι² Sco",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ι¹ Sco",
+    "tiles": [
+      "r2_c4"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "κ Aql",
+    "tiles": [
+      "r1_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "κ CMa",
+    "tiles": [
+      "r2_c2",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "κ Sco",
+    "tiles": [
+      "r2_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "κ TrA",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "κ Vel",
+    "tiles": [
+      "r2_c2",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "λ Cep",
+    "tiles": [
+      "r0_c1",
+      "r0_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "λ Lep",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "λ Lup",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "λ Lyr",
+    "tiles": [
+      "r1_c2",
+      "r1_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at right tile edge"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "λ Pav",
+    "tiles": [
+      "r2_c3",
+      "r3_c3"
+    ],
+    "occurrences": 2,
+    "uncertain": true,
+    "notes": [
+      "label sits right at the tile's bottom edge; bracket number partly cropped, but the name text itself reads clearly as 'λ Pav'"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "μ Col",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "μ Per",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ν Cen",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ν Her",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ξ Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ξ Tel",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ξ¹ CMa",
+    "tiles": [
+      "r3_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ξ¹ Sgr",
+    "tiles": [
+      "r1_c4",
+      "r2_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "π Aur",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "π Pup",
+    "tiles": [
+      "r3_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "π² Cyg",
+    "tiles": [
+      "r1_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "π² Oct",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "π⁴ Ori",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "π⁵ Ori",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "π⁶ Ori",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "σ Cap",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "σ Oph",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "τ¹ Lup",
+    "tiles": [
+      "r3_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "υ Sgr",
+    "tiles": [
+      "r1_c3",
+      "r1_c4"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [
+      "bracket value cropped at right tile edge; full label confirmed in adjacent tile r1_c4"
+    ],
+    "already_in_catalog": false
+  },
+  {
+    "name": "φ Vel",
+    "tiles": [
+      "r4_c2"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "φ¹ Ori",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "χ Pup",
+    "tiles": [
+      "r3_c1",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "χ² Ori",
+    "tiles": [
+      "r2_c0"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ψ³ Aur",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ω CMa",
+    "tiles": [
+      "r3_c1",
+      "r3_c2"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ω Cap",
+    "tiles": [
+      "r2_c3"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ω Gem",
+    "tiles": [
+      "r2_c1"
+    ],
+    "occurrences": 1,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  },
+  {
+    "name": "ω Ori",
+    "tiles": [
+      "r2_c1",
+      "r3_c1"
+    ],
+    "occurrences": 2,
+    "uncertain": false,
+    "notes": [],
+    "already_in_catalog": false
+  }
+]
