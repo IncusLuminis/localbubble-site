@@ -29,7 +29,7 @@ from pathlib import Path
 from typing import Sequence
 
 from .catalog import load_catalog, save_catalog
-from .coordinates import derive_galactic_coordinates_batch
+from .coordinates import CoordinateDerivationError, derive_galactic_coordinates_batch
 from .data_sources.gaia import GaiaResolver
 from .data_sources.simbad import SimbadResolver
 from .data_sources.vizier import VizierResolver
@@ -128,11 +128,15 @@ def _cmd_build_catalog(args: argparse.Namespace) -> int:
     csv_output = args.csv_output
     if csv_output is None:
         csv_output = _default_csv_output(args.output)
-    objects = build_initial_catalog(
-        records_path=args.records,
-        parquet_path=args.output,
-        csv_path=csv_output,
-    )
+    try:
+        objects = build_initial_catalog(
+            records_path=args.records,
+            parquet_path=args.output,
+            csv_path=csv_output,
+        )
+    except CoordinateDerivationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     print(f"Wrote {len(objects)} objects to {args.output} and {csv_output}")
     return 0
 
@@ -142,7 +146,11 @@ def _cmd_build_coordinates(args: argparse.Namespace) -> int:
     every object already in the catalog, and re-save it. Idempotent:
     re-running against already-correct coordinates changes nothing."""
     objects = load_catalog(args.catalog)
-    objects = derive_galactic_coordinates_batch(objects)
+    try:
+        objects = derive_galactic_coordinates_batch(objects)
+    except CoordinateDerivationError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     output = args.output or args.catalog
     csv_output = args.csv_output
     if csv_output is None:
