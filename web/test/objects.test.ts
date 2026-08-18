@@ -6,6 +6,7 @@ import {
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
   isCatalogObjectVisible,
+  isSelectedObjectVisible,
   markerRadiusPc,
   setInstanceVisibility,
   SUN_OBJECT_ID,
@@ -236,6 +237,55 @@ describe("isCatalogObjectVisible / updateCatalogVisibility / visibleCatalogObjec
     const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B, STAR_A, STAR_B]);
     const visible = visibleCatalogObjects(buckets, categoryVisibility, 150);
     expect(visible.map((o) => o.id)).toEqual(["cloud-a"]);
+  });
+});
+
+/**
+ * Issue #95: selecting an object and then filtering it out (radius slider,
+ * object-type toggle) previously left the Inspector showing stale data for
+ * a now-invisible/unpickable object, because nothing re-checked
+ * `selectedObjectId`'s own visibility when a filter changed.
+ * `isSelectedObjectVisible` is the single check `main.ts`'s
+ * `applyCatalogVisibility()` now runs on every filter change to decide
+ * whether to keep showing the Inspector or hide it - it deliberately reuses
+ * `isCatalogObjectVisible` (already exercised above) so the two can never
+ * disagree about what's actually visible on screen.
+ */
+describe("isSelectedObjectVisible", () => {
+  const categoryVisibility = new Map<string, boolean>([
+    ["molecular_cloud", true],
+    ["star", false],
+  ]);
+  const objects = [CLOUD_A, CLOUD_B, STAR_A, STAR_B];
+
+  it("is false when nothing is selected", () => {
+    expect(isSelectedObjectVisible(objects, null, categoryVisibility, null)).toBe(false);
+  });
+
+  it("is false when the selected id no longer exists in the catalog", () => {
+    expect(isSelectedObjectVisible(objects, "no-such-id", categoryVisibility, null)).toBe(false);
+  });
+
+  it("is true when the selected object's category is on and it is within radius", () => {
+    expect(isSelectedObjectVisible(objects, "cloud-a", categoryVisibility, 150)).toBe(true);
+  });
+
+  it("is false when the selected object's category has been toggled off", () => {
+    // star-a's category ('star') is off in categoryVisibility above.
+    expect(isSelectedObjectVisible(objects, "star-a", categoryVisibility, null)).toBe(false);
+  });
+
+  it("is false when the selected object has been filtered out by radius", () => {
+    // cloud-b is 200.25pc away, outside a 150pc radius filter.
+    expect(isSelectedObjectVisible(objects, "cloud-b", categoryVisibility, 150)).toBe(false);
+  });
+
+  it("agrees with isCatalogObjectVisible for the same object/filter state", () => {
+    for (const obj of objects) {
+      expect(isSelectedObjectVisible(objects, obj.id, categoryVisibility, 150)).toBe(
+        isCatalogObjectVisible(obj, categoryVisibility, 150),
+      );
+    }
   });
 });
 

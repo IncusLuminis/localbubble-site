@@ -259,6 +259,34 @@ export function updateCatalogSizeScale(buckets: CatalogBucket[], sizeScale: numb
   }
 }
 
+/** Whether the currently-selected object (by id) is still visible under the
+ * current category-toggle/radius-filter state (issue #95). Reuses
+ * `isCatalogObjectVisible` so this can never disagree with what
+ * `updateCatalogVisibility` actually renders - `main.ts` calls this from
+ * `applyCatalogVisibility()` (the one chokepoint every filter change already
+ * runs through) to decide whether the Inspector should keep showing the
+ * selection or hide it until the object is visible again, instead of
+ * leaving stale data on screen for an object that's no longer
+ * pickable/visible.
+ *
+ * `selectedId === null` (nothing selected) and "id not found in `objects`"
+ * both return `false` - neither case has anything valid to show. */
+export function isSelectedObjectVisible(
+  objects: readonly SceneObject[],
+  selectedId: string | null,
+  categoryVisibility: ReadonlyMap<string, boolean>,
+  radiusPc: number | null,
+): boolean {
+  if (selectedId === null) {
+    return false;
+  }
+  const obj = objects.find((o) => o.id === selectedId);
+  if (!obj) {
+    return false;
+  }
+  return isCatalogObjectVisible(obj, categoryVisibility, radiusPc);
+}
+
 /** The `SceneObject`s currently visible under `categoryVisibility`/
  * `radiusPc`, across all buckets - used by `main.ts`'s "Fit all" camera
  * preset, which needs to frame exactly what's actually on screen. Shares
