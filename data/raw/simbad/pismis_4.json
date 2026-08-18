@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Pismis 4",
+  "retrieved_utc": "2026-08-18T13:15:46+00:00",
+  "record_id": "Cl Pismis    4",
+  "raw": {
+    "main_id": "Cl Pismis    4",
+    "ra": 128.79,
+    "dec": -44.40694444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 1.414,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  343|BRAN 159|C 0832-441|OCl  746|[KPR2004b] 196|Cl Pismis    4|Cl VDBH   36|[KPS2012] MWSC 1507",
+    "matched_id": "Cl Pismis    4"
+  }
+}

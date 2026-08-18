@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 159",
+  "retrieved_utc": "2026-08-18T13:16:35+00:00",
+  "record_id": "UBC 159",
+  "raw": {
+    "main_id": "UBC 159",
+    "ra": 339.03000000000003,
+    "dec": 39.62111111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.058800000697374344,
+    "plx_value": 1.9817,
+    "otype": "OpC",
+    "ids": "UBC 159",
+    "matched_id": "UBC 159"
+  }
+}

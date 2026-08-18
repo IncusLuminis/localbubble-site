@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 6633",
+  "retrieved_utc": "2026-08-18T13:15:36+00:00",
+  "record_id": "NGC  6633",
+  "raw": {
+    "main_id": "NGC  6633",
+    "ra": 276.845,
+    "dec": 6.614999999999999,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.002300000051036477,
+    "plx_value": 2.5232,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  924|C 1825+065|NGC  6633|[KPR2004b] 446|[KPS2012] MWSC 2917",
+    "matched_id": "NGC  6633"
+  }
+}

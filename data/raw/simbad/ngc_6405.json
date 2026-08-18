@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 6405",
+  "retrieved_utc": "2026-08-18T13:13:33+00:00",
+  "record_id": "NGC  6405",
+  "raw": {
+    "main_id": "NGC  6405",
+    "ra": 265.06916666666666,
+    "dec": -32.24194444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.002099999925121665,
+    "plx_value": 2.1626,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  122|C 1736-321|M   6|NGC  6405|OCl 1030.0|[KPR2004b] 408|[SC95] M  38|[SC95] M  43|[SC96] GC 128|[SC96] GC 130|[SC96] GC 137|[SC96] Mis  588|[SC96] Mis  589|[SC96] Mis  607|Cl VDBH  242|[KPS2012] MWSC 2661|NAME Butterfly Cluster",
+    "matched_id": "NGC  6405"
+  }
+}

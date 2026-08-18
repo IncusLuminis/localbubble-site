@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 1901",
+  "retrieved_utc": "2026-08-18T13:15:08+00:00",
+  "record_id": "NGC  1901",
+  "raw": {
+    "main_id": "NGC  1901",
+    "ra": 79.49166666666666,
+    "dec": -68.34166666666667,
+    "coo_err_maj": 381600.0,
+    "coo_err_min": 111600.0,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2018MNRAS.480.5242K",
+    "plx_err": 0.003100000089034438,
+    "plx_value": 2.3582,
+    "otype": "OpC",
+    "ids": "C 0518-685|NGC  1901|OCl  791.1|[KPR2004b]  65|[KPS2012] MWSC 0500",
+    "matched_id": "NGC  1901"
+  }
+}

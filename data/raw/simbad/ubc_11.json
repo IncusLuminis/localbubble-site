@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 11",
+  "retrieved_utc": "2026-08-18T13:16:30+00:00",
+  "record_id": "UBC 11",
+  "raw": {
+    "main_id": "UBC 11",
+    "ra": 246.66583333333338,
+    "dec": -59.93611111111112,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 2.147,
+    "otype": "OpC",
+    "ids": "UBC 11",
+    "matched_id": "UBC 11"
+  }
+}

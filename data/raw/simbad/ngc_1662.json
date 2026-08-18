@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 1662",
+  "retrieved_utc": "2026-08-18T13:15:05+00:00",
+  "record_id": "NGC  1662",
+  "raw": {
+    "main_id": "NGC  1662",
+    "ra": 72.19791666666666,
+    "dec": 10.881944444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 2.4,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1018|C 0445+108|NGC  1662|[KPR2004b]  56|[KPS2012] MWSC 0425",
+    "matched_id": "NGC  1662"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Platais 9",
+  "retrieved_utc": "2026-08-18T13:15:51+00:00",
+  "record_id": "Cl Platais    9",
+  "raw": {
+    "main_id": "Cl Platais    9",
+    "ra": 139.24083333333334,
+    "dec": -43.861944444444454,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.026000000536441803,
+    "plx_value": 5.463,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  134|[KPR2004b] 218|[PKV98] HIP  45189|Cl Platais    9|[KPS2012] MWSC 1639|NAME HIP 45189 Cluster|OCSN 252",
+    "matched_id": "Cl Platais    9"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 1750",
+  "retrieved_utc": "2026-08-18T13:15:06+00:00",
+  "record_id": "NGC  1750",
+  "raw": {
+    "main_id": "NGC  1750",
+    "ra": 75.92583333333334,
+    "dec": 23.695,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.361,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  754|C 0500+235|NGC  1750|OCl  454",
+    "matched_id": "NGC  1750"
+  }
+}

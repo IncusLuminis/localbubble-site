@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 654",
+  "retrieved_utc": "2026-08-18T13:18:48+00:00",
+  "record_id": "UPK 654",
+  "raw": {
+    "main_id": "UPK 654",
+    "ra": 277.32916666666665,
+    "dec": -34.528055555555554,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.010999999940395355,
+    "plx_value": 1.967,
+    "otype": "OpC",
+    "ids": "UPK 654",
+    "matched_id": "UPK 654"
+  }
+}

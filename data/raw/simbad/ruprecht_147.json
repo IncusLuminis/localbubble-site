@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Ruprecht 147",
+  "retrieved_utc": "2026-08-18T13:16:08+00:00",
+  "record_id": "NGC  6774",
+  "raw": {
+    "main_id": "NGC  6774",
+    "ra": 289.08708333333334,
+    "dec": -16.333055555555553,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.003800000064074993,
+    "plx_value": 3.2516,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1531|C 1913-163|OCl   65.0|[KPR2004b] 460|Cl Ruprecht  147|NGC  6774|[KPS2012] MWSC 3078",
+    "matched_id": "Cl Ruprecht  147"
+  }
+}

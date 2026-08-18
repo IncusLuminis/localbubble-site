@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "IC 4756",
+  "retrieved_utc": "2026-08-18T13:14:25+00:00",
+  "record_id": "IC 4756",
+  "raw": {
+    "main_id": "IC 4756",
+    "ra": 279.6491666666667,
+    "dec": 5.435,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0017999999690800905,
+    "plx_value": 2.0943,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1115|C 1836+054|IC 4756|OCl   94.0|[KPR2004b] 450|Cl Melotte  210|[KPS2012] MWSC 2967",
+    "matched_id": "IC 4756"
+  }
+}

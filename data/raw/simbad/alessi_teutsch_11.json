@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Alessi Teutsch 11",
+  "retrieved_utc": "2026-08-18T13:13:12+00:00",
+  "record_id": "[KPR2005] 112",
+  "raw": {
+    "main_id": "[KPR2005] 112",
+    "ra": 304.12708333333325,
+    "dec": 52.0511111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.52,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  397|NAME Alessi-Teutsch 11|NAME Cl Alessi-Teutsch 11|[KPR2005] 112|[KPS2012] MWSC 3295|NAME Alessi Teutsch 11",
+    "matched_id": "NAME Alessi Teutsch 11"
+  }
+}

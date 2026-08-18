@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Alessi 37",
+  "retrieved_utc": "2026-08-18T13:13:01+00:00",
+  "record_id": "Cl Alessi   37",
+  "raw": {
+    "main_id": "Cl Alessi   37",
+    "ra": 341.96083333333326,
+    "dec": 46.34194444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 1.384,
+    "otype": "OpC",
+    "ids": "[KPR2005] 124|[KC2019] Theia  349|[KPS2012] MWSC 3663|Cl Alessi   37",
+    "matched_id": "Cl Alessi   37"
+  }
+}

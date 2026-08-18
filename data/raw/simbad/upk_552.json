@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 552",
+  "retrieved_utc": "2026-08-18T13:18:26+00:00",
+  "record_id": "[PKV98] HIP  51688",
+  "raw": {
+    "main_id": "[PKV98] HIP  51688",
+    "ra": 158.50916666666666,
+    "dec": -47.26305555555555,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.014999999664723873,
+    "plx_value": 3.066,
+    "otype": "OpC",
+    "ids": "UPK 552|[PKV98] HIP  51688",
+    "matched_id": "UPK 552"
+  }
+}

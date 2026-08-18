@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 752",
+  "retrieved_utc": "2026-08-18T13:15:45+00:00",
+  "record_id": "NGC   752",
+  "raw": {
+    "main_id": "NGC   752",
+    "ra": 29.22291666666667,
+    "dec": 37.79388888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0027000000700354576,
+    "plx_value": 2.2304,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia 1214|C 0154+374|NGC   752|OCl  363|[KPR2004b]  25|Cl Melotte   12|[KPS2012] MWSC 0151",
+    "matched_id": "NGC   752"
+  }
+}

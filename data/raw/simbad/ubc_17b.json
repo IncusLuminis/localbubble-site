@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 17b",
+  "retrieved_utc": "2026-08-18T13:16:38+00:00",
+  "record_id": "UBC 17b",
+  "raw": {
+    "main_id": "UBC 17b",
+    "ra": 83.195,
+    "dec": -1.5850000000000004,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 2.376,
+    "otype": "OpC",
+    "ids": "UBC 17b",
+    "matched_id": "UBC 17b"
+  }
+}

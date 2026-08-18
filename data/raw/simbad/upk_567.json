@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 567",
+  "retrieved_utc": "2026-08-18T13:18:29+00:00",
+  "record_id": "UPK 567",
+  "raw": {
+    "main_id": "UPK 567",
+    "ra": 161.02916666666664,
+    "dec": -67.52388888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 1.536,
+    "otype": "OpC",
+    "ids": "UPK 567",
+    "matched_id": "UPK 567"
+  }
+}

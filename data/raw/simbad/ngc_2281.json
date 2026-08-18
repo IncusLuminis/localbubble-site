@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2281",
+  "retrieved_utc": "2026-08-18T13:15:18+00:00",
+  "record_id": "NGC  2281",
+  "raw": {
+    "main_id": "NGC  2281",
+    "ra": 102.09083333333332,
+    "dec": 41.05999999999999,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.896,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  635|C 0645+411|NGC  2281|[KPR2004b] 111|HR  2496|[KPS2012] MWSC 0989|Cl Collinder  116|Cl Melotte   51|OCl  446",
+    "matched_id": "NGC  2281"
+  }
+}

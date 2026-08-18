@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Teutsch 38",
+  "retrieved_utc": "2026-08-18T13:16:22+00:00",
+  "record_id": "Teutsch  38",
+  "raw": {
+    "main_id": "Teutsch  38",
+    "ra": 131.52291666666665,
+    "dec": -38.025,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 1.502,
+    "otype": "OpC",
+    "ids": "Teutsch  38",
+    "matched_id": "Teutsch  38"
+  }
+}

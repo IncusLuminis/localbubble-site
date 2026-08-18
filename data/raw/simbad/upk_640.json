@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 640",
+  "retrieved_utc": "2026-08-18T13:18:43+00:00",
+  "record_id": "UPK 640",
+  "raw": {
+    "main_id": "UPK 640",
+    "ra": 250.25999999999993,
+    "dec": -39.49388888888888,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.008999999612569809,
+    "plx_value": 5.684,
+    "otype": "OpC",
+    "ids": "UPK 640",
+    "matched_id": "UPK 640"
+  }
+}

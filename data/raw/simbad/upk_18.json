@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 18",
+  "retrieved_utc": "2026-08-18T13:17:16+00:00",
+  "record_id": "UPK 18",
+  "raw": {
+    "main_id": "UPK 18",
+    "ra": 280.7625,
+    "dec": -15.330000000000004,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020A&A...633A..99C",
+    "plx_err": 0.014999999664723873,
+    "plx_value": 1.243,
+    "otype": "OpC",
+    "ids": "UPK 18",
+    "matched_id": "UPK 18"
+  }
+}

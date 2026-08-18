@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2232",
+  "retrieved_utc": "2026-08-18T13:15:14+00:00",
+  "record_id": "NGC  2232",
+  "raw": {
+    "main_id": "NGC  2232",
+    "ra": 96.88791666666667,
+    "dec": -4.74888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0032999999821186066,
+    "plx_value": 3.071,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   55|C 0624-047|NGC  2232|[KPR2004b]  95|[KPS2012] MWSC 0871",
+    "matched_id": "NGC  2232"
+  }
+}

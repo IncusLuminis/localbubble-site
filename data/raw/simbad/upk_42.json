@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 42",
+  "retrieved_utc": "2026-08-18T13:17:54+00:00",
+  "record_id": "UBC 115",
+  "raw": {
+    "main_id": "UBC 115",
+    "ra": 293.9041666666666,
+    "dec": -3.6483333333333334,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020A&A...633A..99C",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 1.666,
+    "otype": "OpC",
+    "ids": "UPK 42|UBC 115",
+    "matched_id": "UPK 42"
+  }
+}

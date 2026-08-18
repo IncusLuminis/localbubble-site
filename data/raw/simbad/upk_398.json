@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 398",
+  "retrieved_utc": "2026-08-18T13:17:46+00:00",
+  "record_id": "NAME lambda Orion South Group",
+  "raw": {
+    "main_id": "NAME lambda Orion South Group",
+    "ra": 85.99416666666667,
+    "dec": 7.021111111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.020999999716877937,
+    "plx_value": 2.196,
+    "otype": "OpC",
+    "ids": "NAME lambda Orion South Group|UPK 398",
+    "matched_id": "UPK 398"
+  }
+}

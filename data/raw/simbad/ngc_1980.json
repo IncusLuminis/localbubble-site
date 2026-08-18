@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 1980",
+  "retrieved_utc": "2026-08-18T13:15:10+00:00",
+  "record_id": "NGC  1980",
+  "raw": {
+    "main_id": "NGC  1980",
+    "ra": 83.80999999999999,
+    "dec": -5.92388888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.061000000685453415,
+    "plx_value": 2.586,
+    "otype": "OpC",
+    "ids": "UBC 208|C 0532-059|LBN 209.84-19.13|LBN   977|NGC  1980|OCl  529.0|[KPR2004b]  76|NAME Lower Sword|[KPS2012] MWSC 0586",
+    "matched_id": "NGC  1980"
+  }
+}

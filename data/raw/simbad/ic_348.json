@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "IC 348",
+  "retrieved_utc": "2026-08-18T13:14:22+00:00",
+  "record_id": "IC  348",
+  "raw": {
+    "main_id": "IC  348",
+    "ra": 56.13208333333334,
+    "dec": 32.15888888888888,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.013000000268220901,
+    "plx_value": 3.079,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   17|C 0341+321|Ced  20|DG  23|IC  348|LBN 160.47-17.86|LBN   758|NAME Gingrich 1|OCISM  99|OCl  409|OCl  409.0|[BDB2003] G160.48-17.81|[BDB2003] G160.40-17.72|[C2000b]  1|[KPR2004b]  46|[T70]  1|[TP72]  5|Cl Collinder   41|[WBR2005] J034434.1+320946|[KPS2012] MWSC 0301|NAME omi Per Cloud",
+    "matched_id": "IC  348"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Alessi 10",
+  "retrieved_utc": "2026-08-18T13:12:40+00:00",
+  "record_id": "Cl Alessi   10",
+  "raw": {
+    "main_id": "Cl Alessi   10",
+    "ra": 301.2329166666667,
+    "dec": -10.555,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.009999999776482582,
+    "plx_value": 2.233,
+    "otype": "OpC",
+    "ids": "[KPR2004b] 474|[KC2019] Theia  535|Cl Alessi   10|[KPS2012] MWSC 3242|OCSN 140",
+    "matched_id": "Cl Alessi   10"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Coma",
+  "retrieved_utc": "2026-08-18T13:13:56+00:00",
+  "record_id": "V* CL Com",
+  "raw": {
+    "main_id": "V* CL Com",
+    "ra": 184.31801769362997,
+    "dec": 30.977641105300002,
+    "coo_err_maj": 0.02280000038444996,
+    "coo_err_min": 0.020800000056624413,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_err": 0.027899999171495438,
+    "plx_value": 0.1243,
+    "otype": "RR*",
+    "ids": "TIC 139069517|ATO J184.3180+30.9776|ZTF J121716.32+305839.3|Gaia DR3 4013811216316981632|[KWJ66] 11|V* CL Com|2MASS J12171632+3058394|LINEAR 3481248|SDSS J121716.32+305839.4|[DCD2013] CSS J121716.2+305838|UCAC3 242-107228|Gaia DR2 4013811216316981632|[SHM2017] J184.31806+30.97764",
+    "matched_id": "V* CL Com"
+  }
+}

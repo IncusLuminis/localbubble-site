@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Gulliver 10",
+  "retrieved_utc": "2026-08-18T13:14:03+00:00",
+  "record_id": "Cl Gulliver   10",
+  "raw": {
+    "main_id": "Cl Gulliver   10",
+    "ra": 123.08999999999997,
+    "dec": -38.67611111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.014999999664723873,
+    "plx_value": 1.652,
+    "otype": "OpC",
+    "ids": "Cl Gulliver   10",
+    "matched_id": "Cl Gulliver   10"
+  }
+}

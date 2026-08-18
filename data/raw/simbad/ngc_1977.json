@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 1977",
+  "retrieved_utc": "2026-08-18T13:15:09+00:00",
+  "record_id": "NGC  1977",
+  "raw": {
+    "main_id": "NGC  1977",
+    "ra": 83.815,
+    "dec": -4.818888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0689999982714653,
+    "plx_value": 2.521,
+    "otype": "OpC",
+    "ids": "C 0532-048|NGC  1977|NAME ONC Flank N|[KPR2004b]  75|[KPS2012] MWSC 0587|NAME the Running Man Nebula",
+    "matched_id": "NGC  1977"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Alessi 20",
+  "retrieved_utc": "2026-08-18T13:12:51+00:00",
+  "record_id": "Cl Alessi   20",
+  "raw": {
+    "main_id": "Cl Alessi   20",
+    "ra": 2.5929166666666665,
+    "dec": 58.74194444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 2.311,
+    "otype": "OpC",
+    "ids": "[KPR2004b]   4|[KC2019] Theia   34|Cl Alessi   20|[KPS2012] MWSC 0023",
+    "matched_id": "Cl Alessi   20"
+  }
+}

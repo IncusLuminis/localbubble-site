@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "RSG 5",
+  "retrieved_utc": "2026-08-18T13:16:00+00:00",
+  "record_id": "RSG 5",
+  "raw": {
+    "main_id": "RSG 5",
+    "ra": 303.4820833333334,
+    "dec": 45.573888888888895,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00800000037997961,
+    "plx_value": 2.945,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   96|RSG 5",
+    "matched_id": "RSG 5"
+  }
+}

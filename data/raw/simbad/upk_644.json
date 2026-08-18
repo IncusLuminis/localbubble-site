@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 644",
+  "retrieved_utc": "2026-08-18T13:18:44+00:00",
+  "record_id": "UPK 644",
+  "raw": {
+    "main_id": "UPK 644",
+    "ra": 249.15499999999997,
+    "dec": -31.418055555555565,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.010999999940395355,
+    "plx_value": 1.305,
+    "otype": "OpC",
+    "ids": "UPK 644",
+    "matched_id": "UPK 644"
+  }
+}

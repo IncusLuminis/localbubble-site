@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "RSG 8",
+  "retrieved_utc": "2026-08-18T13:16:03+00:00",
+  "record_id": "RSG 8",
+  "raw": {
+    "main_id": "RSG 8",
+    "ra": 344.9829166666667,
+    "dec": 59.37111111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.012000000104308128,
+    "plx_value": 2.21,
+    "otype": "OpC",
+    "ids": "RSG 8",
+    "matched_id": "RSG 8"
+  }
+}

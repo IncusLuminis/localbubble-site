@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 4",
+  "retrieved_utc": "2026-08-18T13:17:50+00:00",
+  "record_id": "UPK 4",
+  "raw": {
+    "main_id": "UPK 4",
+    "ra": 281.3608333333333,
+    "dec": -23.763888888888886,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 1.245,
+    "otype": "OpC",
+    "ids": "UPK 4",
+    "matched_id": "UPK 4"
+  }
+}

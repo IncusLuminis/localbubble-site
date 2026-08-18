@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Cl Alessi 1",
+  "retrieved_utc": "2026-08-18T13:12:38+00:00",
+  "record_id": "Cl Alessi    1",
+  "raw": {
+    "main_id": "Cl Alessi    1",
+    "ra": 13.342916666666667,
+    "dec": 49.53611111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.008999999612569809,
+    "plx_value": 1.39,
+    "otype": "OpC",
+    "ids": "Casado 1|[KPR2004b]  13|[KC2019] Theia 1254|Cl Alessi    1|[KPS2012] MWSC 0088|NAME Casado Alessi 1",
+    "matched_id": "Cl Alessi    1"
+  }
+}

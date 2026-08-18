@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 34",
+  "retrieved_utc": "2026-08-18T13:14:42+00:00",
+  "record_id": "NGC  1039",
+  "raw": {
+    "main_id": "NGC  1039",
+    "ra": 40.53083333333333,
+    "dec": 42.721944444444446,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0027000000700354576,
+    "plx_value": 1.9536,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  251|C 0238+425|M  34|NGC  1039|OCl  382|[KPR2004b]  36|[KPS2012] MWSC 0223",
+    "matched_id": "M  34"
+  }
+}

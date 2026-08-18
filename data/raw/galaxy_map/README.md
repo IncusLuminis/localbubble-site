@@ -89,3 +89,98 @@ effectively complete, not just approximately so.
   uncertain. Two (`Hyades`, `Pleiades (Messier 45)`) already exist in the
   catalog and are flagged `already_in_catalog: true` - Story #90 should
   skip them.
+
+## Story #90: resolving the candidate clusters
+
+Story #90 (spec `Idea-v1.2-individual-stars.md` §9 item 4) resolved the
+remaining **262** candidate clusters (264 minus the 2 `already_in_catalog`
+entries) via `SimbadResolver` - the same live-query pipeline Story #88 used
+for individual stars, just `object_type: "star_cluster"` (or
+`"stellar_association"` where SIMBAD's own `otype` says so - see below)
+instead of `"star"`. No schema or pipeline changes were needed.
+
+### Method
+
+For each candidate name, several plausible SIMBAD query-form variants were
+tried in order (first hit wins): the name as printed, the same name with a
+`"Cl "` prefix (SIMBAD's common convention for open-cluster-catalog
+designations, e.g. `"Cl Alessi 3"`, `"Cl Trumpler 10"`), each part of a
+`"Foo (Bar, Baz)"`-style parenthetical alternate-name label tried on its
+own (with and without `"Cl "`), a `"Messier N"` <-> `"M N"` abbreviation
+swap, `"Alessi Teutsch N"` <-> `"Alessi-Teutsch N"` (SIMBAD's actual
+hyphenated form), and an `"ESO nnn nn"` -> `"ESO nnn-nn"` reformat. A
+second, smaller pass fixed two names that resolved to the *wrong* thing on
+the first pass (see "otype safety check" below) once a better query form
+was found (`"Coma"` -> its real catalog name `"Melotte 111"`).
+
+### Cluster vs. association - resolved honestly, not forced
+
+Per the spec's explicit instruction not to force every poster cluster label
+into `object_type: "star_cluster"`, each successful match's real SIMBAD
+`otype` field decided the catalog `object_type`:
+
+- `OpC` / `Cl*` / `GlC` (open/generic/globular cluster) -> `star_cluster`
+- `As*` (association of stars) -> `stellar_association` (found for two of
+  the poster's `"BH"` (van den Bergh-Hagen catalog) labels, which SIMBAD
+  cross-matches to Kounkel & Covey 2019 "Theia" Gaia-identified moving
+  groups)
+- `MGr` (moving group) -> also accepted as `stellar_association` after a
+  second look (a loose, kinematically-identified group like the Alpha
+  Persei cluster, `Melotte 20`, is a closer physical match to this
+  project's "stellar_association" concept than a bound "star_cluster")
+
+**Otype safety check**: a name resolving to *any other* otype was
+**rejected**, not silently accepted as a cluster - this caught two
+first-pass false matches that would otherwise have fabricated wrong
+objects: `"Coma"` alone cross-matched an RR Lyrae variable star
+(`otype=RR*`, real cluster is `"Melotte 111"`, fixed on the second pass),
+and `"NGC 2183"` matched a real NGC object, but a reflection nebula
+(`otype=RNe`, not a cluster) - likely the poster pairing it with the
+adjacent open cluster NGC 2184 rather than labeling NGC 2183 itself as a
+cluster. `NGC 2183` was left unresolved rather than guessed.
+
+### Results
+
+**229 resolved** (226 `star_cluster`, 3 `stellar_association`), **32
+genuinely unresolved** (`unresolved_clusters.json`), **1 duplicate** poster
+label collapsed to a single catalog record (`"Messier 41"` and `"Messier 41
+(NGC 2287)"` are the same real cluster - see
+`duplicate_cluster_candidates.json`). Every resolved record carries dual
+provenance (spec §5): `source.reference`/`source.catalog` is the real
+SIMBAD citation, `notes` separately records the Galaxy Map candidate
+selection.
+
+The 32 unresolved break down as:
+
+- **19** `ASCC N` labels: confirmed (via a direct SIMBAD `ident` table
+  query) that SIMBAD has *no* short cross-identifier of this shape at all -
+  every `"ASCC..."` string in SIMBAD's identifier table turns out to be an
+  individual *star's* running number within the All-Sky Compiled Catalogue
+  of stars (Kharchenko 2001), not a cluster designation. The poster's
+  "ASCC N" cluster labels (Kharchenko et al. 2005's own cluster-numbering
+  convention within that same survey) are not independently catalogued
+  under that name in SIMBAD.
+- **4** `COIN-Gaia N` labels, **1** `Aveni Hunter 1`, **1** `BH 99`, **1**
+  `Loden 11`, **1** bare `Teutsch` (no cluster number - genuinely
+  ambiguous, matching Story #87's own flag): no SIMBAD record found under
+  the printed name, `"Cl "`-prefixed form, or (spot-checked individually)
+  several other plausible catalog-prefix variants (`vdBH`/`VDBH` for `BH`,
+  `AH01`/`[AH85]` for Aveni-Hunter, underscore/bibcode-bracket forms for
+  COIN-Gaia).
+- **1** `ASCC 32`: SIMBAD *does* have a record, but it carries no usable
+  parallax - no distance derivable, same honest-failure behavior
+  `SimbadResolver` already had for stars with this problem (e.g. Story
+  #88's `h01 Pup`).
+- **1** `NGC 2183`: resolves, but to a reflection nebula, not a cluster
+  (see "otype safety check" above).
+- **3** `UPK ...` / `UPK 3?` / `UPK 451`: Story #87 itself flagged these as
+  transcription-uncertain (illegible/ambiguous label crops); no SIMBAD
+  record exists under the garbled printed form, and no digit was invented
+  to force a guess.
+
+This candidate list, unlike Story #87/#88's individual stars (1.2%
+unresolved), skews toward several small/specialist open-cluster survey
+catalogs (ASCC, COIN-Gaia, BH, Loden, Aveni-Hunter) that are not uniformly
+cross-identified in SIMBAD's main identifier table - a genuine data-coverage
+gap in the underlying catalogs' cross-referencing, not a resolution-method
+weakness specific to this Story.

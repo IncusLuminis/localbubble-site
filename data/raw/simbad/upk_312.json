@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 312",
+  "retrieved_utc": "2026-08-18T13:17:34+00:00",
+  "record_id": "UPK 312",
+  "raw": {
+    "main_id": "UPK 312",
+    "ra": 68.0625,
+    "dec": 56.07166666666668,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020A&A...633A..99C",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 1.406,
+    "otype": "OpC",
+    "ids": "UPK 312",
+    "matched_id": "UPK 312"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 495",
+  "retrieved_utc": "2026-08-18T13:18:09+00:00",
+  "record_id": "UPK 495",
+  "raw": {
+    "main_id": "UPK 495",
+    "ra": 105.86291666666668,
+    "dec": -40.88611111111112,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.014999999664723873,
+    "plx_value": 1.461,
+    "otype": "OpC",
+    "ids": "UPK 495",
+    "matched_id": "UPK 495"
+  }
+}

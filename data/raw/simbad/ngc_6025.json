@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 6025",
+  "retrieved_utc": "2026-08-18T13:15:32+00:00",
+  "record_id": "NGC  6025",
+  "raw": {
+    "main_id": "NGC  6025",
+    "ra": 240.77916666666664,
+    "dec": -60.42999999999999,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.001500000013038516,
+    "plx_value": 1.2646,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  405|C 1559-603|NGC  6025|[KPR2004b] 366|Cl VDBH  181|[KPS2012] MWSC 2347",
+    "matched_id": "NGC  6025"
+  }
+}

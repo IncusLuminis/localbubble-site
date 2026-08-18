@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 442",
+  "retrieved_utc": "2026-08-18T13:17:59+00:00",
+  "record_id": "UPK 442",
+  "raw": {
+    "main_id": "UPK 442",
+    "ra": 98.4,
+    "dec": -11.54888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.013000000268220901,
+    "plx_value": 1.516,
+    "otype": "OpC",
+    "ids": "UPK 442",
+    "matched_id": "UPK 442"
+  }
+}

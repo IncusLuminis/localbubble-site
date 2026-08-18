@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 3228",
+  "retrieved_utc": "2026-08-18T13:15:27+00:00",
+  "record_id": "NGC  3228",
+  "raw": {
+    "main_id": "NGC  3228",
+    "ra": 155.37791666666666,
+    "dec": -51.81388888888888,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.002899999963119626,
+    "plx_value": 2.0323,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  102|C 1019-514|NGC  3228|OCl  800|[KPR2004b] 241|Cl VDBH   93|[KPS2012] MWSC 1794",
+    "matched_id": "NGC  3228"
+  }
+}

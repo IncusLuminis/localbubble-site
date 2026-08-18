@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 41",
+  "retrieved_utc": "2026-08-18T13:14:47+00:00",
+  "record_id": "M  41",
+  "raw": {
+    "main_id": "M  41",
+    "ra": 101.49916666666667,
+    "dec": -20.716111111111108,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0020000000949949026,
+    "plx_value": 1.36,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  476|C 0644-206|M  41|NGC  2287|OCl  597.0|[KPR2004b] 110|[KPS2012] MWSC 0978",
+    "matched_id": "M  41"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 69",
+  "retrieved_utc": "2026-08-18T13:13:52+00:00",
+  "record_id": "Cl Collinder   69",
+  "raw": {
+    "main_id": "Cl Collinder   69",
+    "ra": 83.79208333333334,
+    "dec": 9.813055555555556,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 2.462,
+    "otype": "OpC",
+    "ids": "C 0532+099|OCl  479.0|[KPR2004b]  72|Cl Collinder   69|[KPS2012] MWSC 0580|NAME lam Ori Cluster|NAME lambda Ori Cluster|NAME lambda Ori Association|NAME lam Ori Group",
+    "matched_id": "Cl Collinder   69"
+  }
+}

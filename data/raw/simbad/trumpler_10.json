@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Trumpler 10",
+  "retrieved_utc": "2026-08-18T13:16:23+00:00",
+  "record_id": "Cl Trumpler   10",
+  "raw": {
+    "main_id": "Cl Trumpler   10",
+    "ra": 131.94291666666666,
+    "dec": -42.566111111111105,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.00139999995008111,
+    "plx_value": 2.2637,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  143|C 0846-423|OCl  747.0|[KPR2004b] 210|Cl Trumpler   10|Cl VDBH   53|Escorial 33|[KPS2012] MWSC 1567",
+    "matched_id": "Cl Trumpler   10"
+  }
+}

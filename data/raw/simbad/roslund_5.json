@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Roslund 5",
+  "retrieved_utc": "2026-08-18T13:16:04+00:00",
+  "record_id": "Cl Roslund    5",
+  "raw": {
+    "main_id": "Cl Roslund    5",
+    "ra": 302.6408333333334,
+    "dec": 33.751111111111115,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.831,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  165|C 2008+336|[KPR2004b] 479|Cl Roslund    5|[KPS2012] MWSC 3272",
+    "matched_id": "Cl Roslund    5"
+  }
+}

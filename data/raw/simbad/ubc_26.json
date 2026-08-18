@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UBC 26",
+  "retrieved_utc": "2026-08-18T13:16:50+00:00",
+  "record_id": "UBC 26",
+  "raw": {
+    "main_id": "UBC 26",
+    "ra": 285.24867297906115,
+    "dec": 21.922520084604947,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2018A&A...618A..59C",
+    "plx_err": 0.004000000189989805,
+    "plx_value": 1.661,
+    "otype": "OpC",
+    "ids": "UBC 26",
+    "matched_id": "UBC 26"
+  }
+}

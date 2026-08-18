@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 48",
+  "retrieved_utc": "2026-08-18T13:14:55+00:00",
+  "record_id": "NGC  2548",
+  "raw": {
+    "main_id": "NGC  2548",
+    "ra": 123.41208333333333,
+    "dec": -5.726111111111112,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.002400000113993883,
+    "plx_value": 1.2897,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  870|C 0811-056|M  48|NGC  2548|[KPR2004b] 189|[KPS2012] MWSC 1454",
+    "matched_id": "M  48"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 467",
+  "retrieved_utc": "2026-08-18T13:18:07+00:00",
+  "record_id": "UPK 467",
+  "raw": {
+    "main_id": "UPK 467",
+    "ra": 121.23708333333336,
+    "dec": -11.420000000000002,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.009999999776482582,
+    "plx_value": 1.704,
+    "otype": "OpC",
+    "ids": "UPK 467",
+    "matched_id": "UPK 467"
+  }
+}

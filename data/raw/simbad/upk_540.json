@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 540",
+  "retrieved_utc": "2026-08-18T13:18:22+00:00",
+  "record_id": "UPK 540",
+  "raw": {
+    "main_id": "UPK 540",
+    "ra": 114.56708333333333,
+    "dec": -58.60888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.012000000104308128,
+    "plx_value": 2.693,
+    "otype": "OpC",
+    "ids": "UPK 540",
+    "matched_id": "UPK 540"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 294",
+  "retrieved_utc": "2026-08-18T13:17:28+00:00",
+  "record_id": "UPK 294",
+  "raw": {
+    "main_id": "UPK 294",
+    "ra": 60.90208333333332,
+    "dec": 66.17611111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.309,
+    "otype": "OpC",
+    "ids": "UPK 294",
+    "matched_id": "UPK 294"
+  }
+}

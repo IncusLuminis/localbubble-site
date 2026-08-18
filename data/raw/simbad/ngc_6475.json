@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 6475",
+  "retrieved_utc": "2026-08-18T13:15:58+00:00",
+  "record_id": "NGC  6475",
+  "raw": {
+    "main_id": "NGC  6475",
+    "ra": 268.44708333333335,
+    "dec": -34.84111111111112,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0015999999595806003,
+    "plx_value": 3.5704,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  692|C 1750-348|M   7|NGC  6475|OCl 1028.0|[KPR2004b] 420|[SC96] GC 228|[SC96] GC 243|[SC96] Mis  753|[SC96] Mis  774|Cl VDBH  254|[KPS2012] MWSC 2739|NAME Ptolemy's Cluster",
+    "matched_id": "NGC  6475"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2547",
+  "retrieved_utc": "2026-08-18T13:15:24+00:00",
+  "record_id": "NGC  2547",
+  "raw": {
+    "main_id": "NGC  2547",
+    "ra": 122.46816666666666,
+    "dec": -49.17639166666666,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2018MNRAS.481L..11B",
+    "plx_err": 0.001500000013038516,
+    "plx_value": 2.5438,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   74|BRAN 115|C 0809-491|NGC  2547|OCl  753.0|[KPR2004b] 183|[KPS2012] MWSC 1437|[BBJ2018] 3",
+    "matched_id": "NGC  2547"
+  }
+}

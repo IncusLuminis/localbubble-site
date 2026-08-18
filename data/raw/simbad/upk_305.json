@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "UPK 305",
+  "retrieved_utc": "2026-08-18T13:17:32+00:00",
+  "record_id": "UPK 305",
+  "raw": {
+    "main_id": "UPK 305",
+    "ra": 41.12708333333334,
+    "dec": 39.026944444444446,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.017000000923871994,
+    "plx_value": 2.391,
+    "otype": "OpC",
+    "ids": "UPK 305",
+    "matched_id": "UPK 305"
+  }
+}

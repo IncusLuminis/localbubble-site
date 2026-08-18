@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2451B",
+  "retrieved_utc": "2026-08-18T13:15:21+00:00",
+  "record_id": "NGC  2451B",
+  "raw": {
+    "main_id": "NGC  2451B",
+    "ra": 116.1279166666667,
+    "dec": -37.95388888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 2.719,
+    "otype": "OpC",
+    "ids": "NGC  2451B|[KPR2004b] 162|[PKV98] HIP  37742|[KPS2012] MWSC 1322|NAME HIP 37742 Cluster",
+    "matched_id": "NGC  2451B"
+  }
+}

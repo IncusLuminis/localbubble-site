@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 6793",
+  "retrieved_utc": "2026-08-18T13:15:39+00:00",
+  "record_id": "NGC  6793",
+  "raw": {
+    "main_id": "NGC  6793",
+    "ra": 290.81708333333336,
+    "dec": 22.158888888888885,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.002099999925121665,
+    "plx_value": 1.6672,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  738|C 1921+220|NGC  6793|[KPR2004b] 461|[KPS2012] MWSC 3098",
+    "matched_id": "NGC  6793"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Harvard 10",
+  "retrieved_utc": "2026-08-18T13:14:17+00:00",
+  "record_id": "Cl Collinder  299",
+  "raw": {
+    "main_id": "Cl Collinder  299",
+    "ra": 244.85916666666662,
+    "dec": -54.956944444444446,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.418,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  348|C 1615-548|OCl  952.0|[KPR2004b] 370|Cl Collinder  299|Cl Harvard   10|[KPS2012] MWSC 2381",
+    "matched_id": "Cl Harvard   10"
+  }
+}

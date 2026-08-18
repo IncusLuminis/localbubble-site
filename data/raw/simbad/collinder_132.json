@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 132",
+  "retrieved_utc": "2026-08-18T13:13:44+00:00",
+  "record_id": "Cl Collinder  132",
+  "raw": {
+    "main_id": "Cl Collinder  132",
+    "ra": 108.485,
+    "dec": -30.758055555555547,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.008999999612569809,
+    "plx_value": 1.501,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   87|C 0712-310|[KPS2012] MWSC 1147|[KPR2004b] 126|Cl Collinder  132",
+    "matched_id": "Cl Collinder  132"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "IC 2395",
+  "retrieved_utc": "2026-08-18T13:14:20+00:00",
+  "record_id": "IC 2395",
+  "raw": {
+    "main_id": "IC 2395",
+    "ra": 130.53083333333333,
+    "dec": -48.09,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.379,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   25|C 0841-479|C 0839-480|IC 2395|[KPR2004b] 205|Cl Collinder  192|Cl VDBH   47|Escorial 32|[KPS2012] MWSC 1537",
+    "matched_id": "IC 2395"
+  }
+}

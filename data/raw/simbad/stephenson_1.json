@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Stephenson 1",
+  "retrieved_utc": "2026-08-18T13:16:11+00:00",
+  "record_id": "NAME del Lyr Cluster",
+  "raw": {
+    "main_id": "NAME del Lyr Cluster",
+    "ra": 283.56791666666663,
+    "dec": 36.89888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 2.779,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia   73|C 1851+368|OCl  137.0|[KPR2004b] 456|Cl Stephenson    1|[KPS2012] MWSC 3018|NAME del Lyr Cluster",
+    "matched_id": "Cl Stephenson    1"
+  }
+}

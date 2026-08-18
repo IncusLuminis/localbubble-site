@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Collinder 95",
+  "retrieved_utc": "2026-08-18T13:13:53+00:00",
+  "record_id": "Cl Collinder   95",
+  "raw": {
+    "main_id": "Cl Collinder   95",
+    "ra": 97.78791666666666,
+    "dec": 9.893888888888887,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.012000000104308128,
+    "plx_value": 1.458,
+    "otype": "OpC",
+    "ids": "C 0627+099|OCl  491.0|[KPR2004b]  96|Cl Collinder   95|[KPS2012] MWSC 0889",
+    "matched_id": "Cl Collinder   95"
+  }
+}

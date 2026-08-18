@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2451A",
+  "retrieved_utc": "2026-08-18T13:15:20+00:00",
+  "record_id": "NGC  2451A",
+  "raw": {
+    "main_id": "NGC  2451A",
+    "ra": 115.73583333333335,
+    "dec": -38.263888888888886,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.007000000216066837,
+    "plx_value": 5.165,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  118|NGC  2451A|[KPR2004b] 159|NAME Puppis Moving Group|[KPS2012] MWSC 1308",
+    "matched_id": "NGC  2451A"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Roslund 6",
+  "retrieved_utc": "2026-08-18T13:16:06+00:00",
+  "record_id": "Cl Roslund    6",
+  "raw": {
+    "main_id": "Cl Roslund    6",
+    "ra": 307.18499999999995,
+    "dec": 39.79805555555555,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.006000000052154064,
+    "plx_value": 2.809,
+    "otype": "OpC",
+    "ids": "LISC 0777|[HXW2022] OC-0128|C 2027+392|[KPR2004b] 489|Cl Roslund    6|[KPS2012] MWSC 3348",
+    "matched_id": "Cl Roslund    6"
+  }
+}

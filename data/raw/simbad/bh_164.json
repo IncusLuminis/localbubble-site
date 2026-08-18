@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "BH 164",
+  "retrieved_utc": "2026-08-18T13:13:20+00:00",
+  "record_id": "[KC2019] Theia   75",
+  "raw": {
+    "main_id": "[KC2019] Theia   75",
+    "ra": 200.08067787173033,
+    "dec": -70.192685129434,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2019AJ....158..122K",
+    "plx_err": null,
+    "plx_value": 2.87842,
+    "otype": "As*",
+    "ids": "[KC2019] Theia   75|BH 164",
+    "matched_id": "BH 164"
+  }
+}

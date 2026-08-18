@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "NGC 2516",
+  "retrieved_utc": "2026-08-18T13:15:22+00:00",
+  "record_id": "NGC  2516",
+  "raw": {
+    "main_id": "NGC  2516",
+    "ra": 119.52708333333337,
+    "dec": -60.8,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0006000000284984708,
+    "plx_value": 2.4118,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  613|C 0757-607|NGC  2516|OCl  776.0|[KPR2004b] 175|[KPS2012] MWSC 1393",
+    "matched_id": "NGC  2516"
+  }
+}

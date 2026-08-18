@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Messier 39",
+  "retrieved_utc": "2026-08-18T13:14:46+00:00",
+  "record_id": "NGC  7092",
+  "raw": {
+    "main_id": "NGC  7092",
+    "ra": 322.88916666666654,
+    "dec": 48.246944444444445,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.002400000113993883,
+    "plx_value": 3.3373,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  517|C 2130+482|M  39|NGC  7092|OCl  211.0|[KPR2004b] 499|[KPS2012] MWSC 3521",
+    "matched_id": "M  39"
+  }
+}

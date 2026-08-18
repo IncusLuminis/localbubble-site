@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "ASCC 32",
+  "retrieved_utc": "2026-08-18T13:12:17+00:00",
+  "record_id": "ASCC      32",
+  "raw": {
+    "main_id": "ASCC      32",
+    "ra": 105.65120000000002,
+    "dec": -25.8278,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2022A&A...664A.175P",
+    "plx_err": null,
+    "plx_value": null,
+    "otype": "*",
+    "ids": "ASCC      32",
+    "matched_id": "ASCC      32"
+  }
+}

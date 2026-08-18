@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Stock 2",
+  "retrieved_utc": "2026-08-18T13:16:15+00:00",
+  "record_id": "Cl Stock    2",
+  "raw": {
+    "main_id": "Cl Stock    2",
+    "ra": 33.85583333333334,
+    "dec": 59.52194444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.0008999999845400453,
+    "plx_value": 2.6367,
+    "otype": "OpC",
+    "ids": "[KC2019] Theia  524|C 0211+590|OCl  348.0|[KPR2004b]  28|Cl Stock    2|[KPS2012] MWSC 0173|OCSN 265",
+    "matched_id": "Cl Stock    2"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Alessi 62",
+  "retrieved_utc": "2026-08-18T13:13:07+00:00",
+  "record_id": "Cl Alessi   62",
+  "raw": {
+    "main_id": "Cl Alessi   62",
+    "ra": 284.0258333333333,
+    "dec": 21.596944444444443,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "plx_err": 0.004999999888241291,
+    "plx_value": 1.591,
+    "otype": "OpC",
+    "ids": "[KPS2012] MWSC 3025|Cl Alessi   62|[KC2019] Theia 1131",
+    "matched_id": "Cl Alessi   62"
+  }
+}
