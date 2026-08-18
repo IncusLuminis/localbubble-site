@@ -47,6 +47,16 @@ import { isWithinRadius } from "./radiusFilter";
  * generic catalog loop must exclude it - otherwise it draws a second,
  * generic-grey sphere on top of the dedicated marker, both at the exact
  * origin (found in PR #79 review; see `SUN_OBJECT_ID`).
+ *
+ * Issue #101 found the same problem for the Local Bubble: `scene.json`
+ * carries a `local-bubble-centroid` point (`object_type: "bubble"`,
+ * `size_pc: 60`) that this generic loop would otherwise draw as a 15pc
+ * marker sphere (`markerRadiusPc(60)`) at the same time `scene/structures.ts`'s
+ * `createLocalBubbleLayer` draws a true-scale wireframe ellipsoid for the
+ * exact same real object - two disagreeing representations at once (the Sun
+ * sits outside the 15pc marker but inside the true-scale ellipsoid, which is
+ * what surfaced the bug). Same fix, same mechanism: exclude it here and let
+ * the structure layer be the sole visual (see `LOCAL_BUBBLE_OBJECT_ID`).
  */
 
 /** `scene.json`'s stable id for the Sun's own catalog entry (see
@@ -59,17 +69,38 @@ import { isWithinRadius } from "./radiusFilter";
  * normally through this loop instead of being silently dropped. */
 export const SUN_OBJECT_ID = "sun";
 
+/** `scene.json`'s stable id for the Local Bubble's centroid catalog entry
+ * (`object_type: "bubble"`). Filtered out of the generic catalog-object
+ * render loop below (issue #101) because `scene/structures.ts`'s
+ * `createLocalBubbleLayer` already renders a true-scale wireframe ellipsoid
+ * for this same real object - matched on `id`, same reasoning as
+ * `SUN_OBJECT_ID`, so a future non-Local-Bubble `bubble`-type object (out of
+ * scope per issue #101, but not precluded by the schema) would still render
+ * normally through this loop instead of being silently dropped. */
+export const LOCAL_BUBBLE_OBJECT_ID = "local-bubble-centroid";
+
+/** Catalog object ids that already have their own dedicated visual
+ * representation elsewhere in the scene (a hand-styled marker or a
+ * structure-layer mesh), and so must be excluded from the generic
+ * catalog-object render loop below - otherwise the same real object would
+ * be drawn twice, in two different (and potentially disagreeing) ways. */
+const DEDICATED_MARKER_OBJECT_IDS: ReadonlySet<string> = new Set([
+  SUN_OBJECT_ID,
+  LOCAL_BUBBLE_OBJECT_ID,
+]);
+
 /** `scene.json` objects that should NOT be drawn by the generic catalog
  * loop because they already have their own dedicated marker. Exported so
  * `main.ts` can derive an accurate "N objects" count from the same
  * definition used to build the render group. */
 export function excludeDedicatedMarkerObjects(objects: SceneObject[]): SceneObject[] {
-  return objects.filter((obj) => obj.id !== SUN_OBJECT_ID);
+  return objects.filter((obj) => !DEDICATED_MARKER_OBJECT_IDS.has(obj.id));
 }
 
 /**
  * Distinct `object_type` values actually present in the catalog (excluding
- * the Sun's own dedicated-marker entry), sorted for a stable UI order.
+ * dedicated-marker entries such as the Sun and the Local Bubble centroid),
+ * sorted for a stable UI order.
  *
  * Story #65's layer-toggle panel (spec §23) builds one checkbox per
  * category found here rather than a hard-coded list of the spec §8 object
@@ -188,7 +219,7 @@ export function setInstanceVisibility(bucket: CatalogBucket, index: number, visi
 }
 
 /** Builds one `InstancedMesh` per `object_type` present in `objects`
- * (excluding the Sun's dedicated-marker entry, see `SUN_OBJECT_ID`), all
+ * (excluding dedicated-marker entries, see `DEDICATED_MARKER_OBJECT_IDS`), all
  * parented under a returned `Group`, plus the `CatalogBucket[]` mapping
  * `main.ts`/`scene/picking.ts` need to resolve instances back to real
  * `SceneObject`s and to drive visibility. */
