@@ -20,10 +20,12 @@ import { createGouldBeltLayer, createLocalBubbleLayer, createRadcliffeWaveLayer 
 import {
   createLabelRenderer,
   createLabelsLayer,
+  createSunLabel,
   effectiveMaxLabelDistancePc,
   MAX_VISIBLE_LABELS,
   selectNearestLabels,
   shouldShowLabel,
+  shouldShowSunLabel,
   type LabelRankCandidate,
 } from "./scene/labels";
 import { DEFAULT_RADIUS_PC, RADIUS_PRESETS_PC, isWithinRadius } from "./scene/radiusFilter";
@@ -73,7 +75,15 @@ const camera = createCamera();
 const controls = createControls(camera, renderer.domElement);
 const labelRenderer = createLabelRenderer(app);
 
-scene.add(createSunMarker());
+const sunMarker = createSunMarker();
+scene.add(sunMarker);
+// The Sun's dedicated label (issue #105, spec §2.5) - parented to the Sun's
+// own marker group (both live at the coordinate origin) rather than the
+// catalog `labelsInfo.group` below, since the Sun isn't a catalog object
+// that flows through `createLabelsLayer` (see `createSunLabel`'s
+// docstring). Visibility is driven solely by `updateLabelVisibility`.
+const sunLabel = createSunLabel();
+sunMarker.add(sunLabel);
 const galacticPlaneGroup = createGalacticPlane(WORLD_EXTENT_PC);
 scene.add(galacticPlaneGroup);
 scene.add(createAxes(WORLD_EXTENT_PC));
@@ -148,6 +158,12 @@ function applyStructureVisibility(): void {
 }
 
 function updateLabelVisibility(): void {
+  // The Sun's label (issue #105) is a permanent exemption from the
+  // distance/rank filtering below - wired to nothing but the global
+  // labels-enabled toggle, independent of whether the catalog has finished
+  // loading (`labelsInfo`, checked just below).
+  sunLabel.visible = shouldShowSunLabel(labelsEnabled);
+
   if (!labelsInfo) return;
 
   // Pass 1: everything that passes the existing toggle/layer/radius/

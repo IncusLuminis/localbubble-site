@@ -5,6 +5,7 @@ import {
   LABEL_DISTANCE_CAMERA_SCALE_FACTOR,
   selectNearestLabels,
   shouldShowLabel,
+  shouldShowSunLabel,
   type LabelRankCandidate,
 } from "../src/scene/labels";
 
@@ -182,5 +183,49 @@ describe("effectiveMaxLabelDistancePc", () => {
         maxCameraDistancePc: threshold,
       }),
     ).toBe(true);
+  });
+});
+
+/**
+ * Issue #105 (spec §2.5): the Sun's dedicated marker (`scene/sun.ts`) gets
+ * its own label, wired into the same global labels toggle as catalog
+ * labels but permanently exempt from the distance-based hide-at-large-zoom
+ * threshold (`shouldShowLabel`) and the `MAX_VISIBLE_LABELS` nearest-N cap
+ * (`selectNearestLabels`) - "the coordinate origin should never
+ * disappear." `shouldShowSunLabel`'s signature takes no distance/rank
+ * inputs at all, so there is nothing for these tests to vary except the
+ * global toggle itself.
+ */
+describe("shouldShowSunLabel", () => {
+  it("is visible whenever the global labels toggle is on", () => {
+    expect(shouldShowSunLabel(true)).toBe(true);
+  });
+
+  it("is hidden only when the global labels toggle is off", () => {
+    expect(shouldShowSunLabel(false)).toBe(false);
+  });
+
+  it("stays visible under camera-distance/rank conditions that would hide any ordinary catalog label", () => {
+    // An extreme distance, far beyond any realistic threshold, and a rank
+    // that would lose to `MAX_VISIBLE_LABELS` competition for a regular,
+    // unselected catalog object under `shouldShowLabel`/
+    // `selectNearestLabels` - the Sun's label ignores both, because its
+    // visibility function never receives them.
+    const extremeCameraDistancePc = 1_000_000;
+    const tinyThreshold = 1;
+
+    const ordinaryObjectWouldBeHidden = !shouldShowLabel({
+      labelsEnabled: true,
+      layerVisible: true,
+      withinRadius: true,
+      isSelected: false,
+      cameraDistancePc: extremeCameraDistancePc,
+      maxCameraDistancePc: tinyThreshold,
+    });
+    expect(ordinaryObjectWouldBeHidden).toBe(true);
+
+    // Same "labels are on" condition, but the Sun's own policy is
+    // unaffected by the distance/rank scenario above.
+    expect(shouldShowSunLabel(true)).toBe(true);
   });
 });

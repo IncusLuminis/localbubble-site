@@ -208,6 +208,67 @@ export function createLabelsLayer(objects: SceneObject[]): {
   return { group, labels };
 }
 
+/**
+ * The Sun's own label ("Sun") - a separate, parallel path from
+ * `createLabelsLayer` above because the Sun is not a catalog object that
+ * flows through it: its catalog record is deliberately excluded from the
+ * generic per-object label loop (`scene/objects.ts`'s `SUN_OBJECT_ID`
+ * filter) to avoid a double marker/label for the same object, and nothing
+ * ever filled in a replacement label for its dedicated marker
+ * (`scene/sun.ts`) - issue #105.
+ *
+ * Per spec §2.5 (v1.3 addendum), this label must stay visible whenever the
+ * global labels toggle is on, "regardless of zoom/rank" - a *permanent*
+ * exemption from both the distance-based cutoff (`shouldShowLabel`) and
+ * the `MAX_VISIBLE_LABELS` nearest-N cap (`selectNearestLabels`), mirroring
+ * why the currently-selected object's label is exempted from those same
+ * cutoffs (spec §25: "remain legible while navigating" - the coordinate
+ * origin should never disappear). This is deliberately NOT built by
+ * reusing that `isSelected` mechanism: `isSelected` is scoped to a single,
+ * changeable "currently selected catalog object" id, threaded through
+ * `selectNearestLabels`'s budget accounting and the `.selected` CSS class -
+ * repurposing it for the Sun would make it compete for/consume
+ * `MAX_VISIBLE_LABELS` budget bookkeeping and pick up selection styling it
+ * doesn't need, for a label that isn't actually "selected" in that sense
+ * and should never NOT be exempt. The caller (`main.ts`) instead gates
+ * this label's visibility on nothing but the same global `labelsEnabled`
+ * flag, bypassing `shouldShowLabel`/`selectNearestLabels` entirely - see
+ * `shouldShowSunLabel` below, the pure policy `main.ts` calls each frame.
+ */
+export function createSunLabel(): CSS2DObject {
+  const element = document.createElement("div");
+  element.className = "object-label";
+  element.textContent = "Sun";
+
+  const css2dObject = new CSS2DObject(element);
+  // The Sun is always exactly the coordinate-system origin (spec §6,
+  // `scene/sun.ts`'s own docstring on this being a legitimate literal
+  // constant rather than data read from `scene.json`).
+  css2dObject.position.set(0, 0, 0);
+  return css2dObject;
+}
+
+/**
+ * The Sun label's visibility policy (issue #105, spec §2.5): gated on
+ * nothing but the global labels toggle - no distance or rank parameters
+ * exist on this signature at all, which is the point. Unlike
+ * `shouldShowLabel` (which takes `cameraDistancePc`/`maxCameraDistancePc`
+ * and an `isSelected` escape hatch) or `selectNearestLabels` (which caps
+ * the visible set at `MAX_VISIBLE_LABELS`), this function structurally
+ * cannot hide the Sun's label for being too far away or ranking outside a
+ * cap, because those inputs are never wired to it. Kept as its own pure
+ * function (rather than inlining `labelsEnabled` directly at the call
+ * site) so the exemption itself - "the Sun label depends only on the
+ * global toggle" - is independently unit-testable without a DOM
+ * environment (this repo's `vitest.config.ts` runs with `environment:
+ * "node"`, so `createSunLabel`'s `document.createElement` call above isn't
+ * itself unit-tested, mirroring `createLabelsLayer`'s same DOM-touching
+ * parts).
+ */
+export function shouldShowSunLabel(labelsEnabled: boolean): boolean {
+  return labelsEnabled;
+}
+
 /** Thin wrapper around `THREE.CSS2DRenderer` construction/sizing, kept here
  * so `main.ts` doesn't need its own import of the Three.js examples path. */
 export function createLabelRenderer(container: HTMLElement): CSS2DRenderer {
