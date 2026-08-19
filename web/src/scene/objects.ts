@@ -203,12 +203,56 @@ export function markerRadiusPc(sizePc: number | null, objectType: string): numbe
   return Math.min(Math.max(sizePc / SIZE_PC_DIVISOR, minRadiusPc), maxRadiusPc);
 }
 
-const materialCache = new Map<number, MeshBasicMaterial>();
-function materialFor(color: number): MeshBasicMaterial {
-  let material = materialCache.get(color);
+/** Issue #115: opacity tiers for the same generic catalog-object markers
+ * #103 already tiers by radius (spec `Idea-v1.3-visual-fidelity-and-navigation.md`
+ * §2.3 follow-up, human owner decision 2026-08-19). Discrete groupings of
+ * individual stars (`star`, `star_cluster`, `stellar_association`) keep the
+ * pre-#115 fully-opaque look; extended, physically-diffuse structures
+ * (gas/dust clouds, ionized regions, bubbles, remnants) render visibly
+ * translucent instead, so a marker's opacity hints at "this is a discrete
+ * object" vs. "this is a diffuse cloud of something" the same way its color
+ * already hints at object_type.
+ *
+ * Deliberately reuses the exact same `STAR_OBJECT_TYPES`/`CLUSTER_OBJECT_TYPES`
+ * partition `markerRadiusPc` already uses, rather than maintaining a second,
+ * possibly-drifting list of "which types are structures" - the two axes
+ * (radius tier, opacity tier) are conceptually the same split (discrete
+ * point-like/grouped objects vs. everything else) and this guarantees they
+ * can never disagree about which bucket a given object_type falls into.
+ * That also means the catch-all "everything else" bucket picks up
+ * `star_forming_region` (a diffuse star-forming gas cloud, physically akin
+ * to `molecular_cloud`/`hii_region` even though the issue's own example list
+ * didn't spell it out) and `reference_point` (in practice only ever the
+ * Sun's own entry today, which never reaches this render path at all - see
+ * `SUN_OBJECT_ID` - but per that constant's own comment a future non-Sun
+ * `reference_point` object is possible and must render *some* sensible way
+ * rather than erroring), plus any future/unrecognized object_type, exactly
+ * as `markerRadiusPc` already does for radius. */
+const OPAQUE_MARKER_OPACITY = 0.85; // unchanged pre-#115 value - star/cluster/association tier
+const EXTENDED_STRUCTURE_OPACITY = 0.35; // #115: visibly translucent - diffuse structure tier
+
+/** Exported for tests - the type-aware opacity a marker's material should
+ * use, mirroring `markerRadiusPc`'s tiering (see the comment above). */
+export function markerOpacityFor(objectType: string): number {
+  if (STAR_OBJECT_TYPES.has(objectType) || CLUSTER_OBJECT_TYPES.has(objectType)) {
+    return OPAQUE_MARKER_OPACITY;
+  }
+  return EXTENDED_STRUCTURE_OPACITY;
+}
+
+/** Cached by `color`+`opacity` together (not color alone) since #115 - two
+ * buckets can now share a color-only cache key but need different
+ * materials if they land in different opacity tiers (they never do today,
+ * since `OBJECT_TYPE_COLORS` already gives every type its own color, but
+ * the combined key keeps that an invariant of the color table rather than
+ * of this cache). */
+const materialCache = new Map<string, MeshBasicMaterial>();
+function materialFor(color: number, opacity: number): MeshBasicMaterial {
+  const key = `${color}:${opacity}`;
+  let material = materialCache.get(key);
   if (!material) {
-    material = new MeshBasicMaterial({ color, transparent: true, opacity: 0.85 });
-    materialCache.set(color, material);
+    material = new MeshBasicMaterial({ color, transparent: true, opacity });
+    materialCache.set(key, material);
   }
   return material;
 }
@@ -314,7 +358,12 @@ export function createCatalogObjectGroup(objects: SceneObject[]): {
   for (const objectType of Array.from(byType.keys()).sort()) {
     const bucketObjects = byType.get(objectType) as SceneObject[];
     const color = OBJECT_TYPE_COLORS[objectType] ?? DEFAULT_COLOR;
-    const mesh = new InstancedMesh(UNIT_SPHERE_GEOMETRY, materialFor(color), bucketObjects.length);
+    const opacity = markerOpacityFor(objectType);
+    const mesh = new InstancedMesh(
+      UNIT_SPHERE_GEOMETRY,
+      materialFor(color, opacity),
+      bucketObjects.length,
+    );
     mesh.name = `catalog-${objectType}`;
 
     const radiiPc = bucketObjects.map((obj) => markerRadiusPc(obj.size_pc, obj.object_type));
