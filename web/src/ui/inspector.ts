@@ -1,5 +1,6 @@
 import type { SceneObject } from "../scene/sceneTypes";
 import { cartesianToGalacticLB } from "../scene/galacticCoords";
+import { displayName } from "../scene/labels";
 
 /**
  * The object inspector panel (spec Idea.md §24): "Clicking or selecting an
@@ -54,7 +55,7 @@ export class Inspector {
 
     this.content.replaceChildren();
     const rows: [string, string][] = [
-      ["Name", obj.name],
+      ["Name", displayName(obj.name)],
       ["Type", humanizeType(obj.object_type)],
       [
         "Distance",

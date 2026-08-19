@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   DEFAULT_MAX_LABEL_DISTANCE_PC,
   DENSE_BATCH_MAX_VISIBLE_LABELS,
+  displayName,
   effectiveMaxLabelDistancePc,
   hasProperName,
   LABEL_DISTANCE_CAMERA_SCALE_FACTOR,
@@ -231,6 +232,38 @@ describe("shouldShowSunLabel", () => {
     // Same "labels are on" condition, but the Sun's own policy is
     // unaffected by the distance/rank scenario above.
     expect(shouldShowSunLabel(true)).toBe(true);
+  });
+});
+
+/**
+ * Issue #122: SIMBAD's "NAME " prefix (see `hasProperName` above) is
+ * load-bearing classification signal, but was also leaking into the two
+ * on-screen DISPLAY sites (the 3D label and the Inspector's "Name" row) as
+ * a raw, unstripped internal-catalog artifact. `displayName` strips exactly
+ * that leading prefix, and nothing else - `hasProperName`/`searchObjects`
+ * must keep reading the raw, unstripped `name`/`aliases`.
+ */
+describe("displayName", () => {
+  it("strips a leading 'NAME ' prefix (Proxima Centauri)", () => {
+    expect(displayName("NAME Proxima Centauri")).toBe("Proxima Centauri");
+  });
+
+  it("leaves a name with no 'NAME ' prefix completely unaffected", () => {
+    expect(displayName("* alf Cen A")).toBe("* alf Cen A");
+    expect(displayName("Wolf  359")).toBe("Wolf  359");
+    expect(displayName("HD  95735")).toBe("HD  95735");
+  });
+
+  it("does not touch the unrelated 'NAME-IAU ' convention (no space after NAME)", () => {
+    expect(displayName("NAME-IAU Ramus")).toBe("NAME-IAU Ramus");
+  });
+
+  it("only strips a leading occurrence, not one embedded mid-string", () => {
+    expect(displayName("V* NAME something")).toBe("V* NAME something");
+  });
+
+  it("returns an empty string unchanged", () => {
+    expect(displayName("")).toBe("");
   });
 });
 
