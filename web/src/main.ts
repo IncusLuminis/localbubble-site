@@ -19,7 +19,13 @@ import {
 } from "./scene/objects";
 import { denseBatchCollectionRadiusPc, isDenseBatchMember, passesDenseBatchLod } from "./scene/lod";
 import { loadScene } from "./scene/sceneData";
-import { createGouldBeltLayer, createLocalBubbleLayer, createRadcliffeWaveLayer } from "./scene/structures";
+import {
+  createGouldBeltLabel,
+  createGouldBeltLayer,
+  createLocalBubbleLayer,
+  createRadcliffeWaveLabel,
+  createRadcliffeWaveLayer,
+} from "./scene/structures";
 import {
   createLabelRenderer,
   createLabelsLayer,
@@ -395,10 +401,28 @@ loadScene()
     scene.add(labelsInfo.group);
 
     gouldBeltGroup = createGouldBeltLayer(sceneData.structures.gould_belt);
-    if (gouldBeltGroup) scene.add(gouldBeltGroup);
+    if (gouldBeltGroup) {
+      scene.add(gouldBeltGroup);
+      // Issue #124's optional label: built separately from the group itself
+      // (see `structures.ts`'s `structureLabel` docstring for why) and
+      // parented under the SAME group, so it inherits `gouldBeltGroup`'s
+      // existing `visible` flag - already driven by the "Gould Belt"
+      // checkbox below via `applyStructureVisibility` - without a new
+      // toggle. `gouldBeltGroup !== null` already implies
+      // `sceneData.structures.gould_belt` is defined and valid.
+      if (sceneData.structures.gould_belt) {
+        gouldBeltGroup.add(createGouldBeltLabel(sceneData.structures.gould_belt));
+      }
+    }
 
     radcliffeWaveGroup = createRadcliffeWaveLayer(sceneData.structures.radcliffe_wave);
-    if (radcliffeWaveGroup) scene.add(radcliffeWaveGroup);
+    if (radcliffeWaveGroup) {
+      scene.add(radcliffeWaveGroup);
+      // Same pattern as the Gould Belt label above.
+      if (sceneData.structures.radcliffe_wave) {
+        radcliffeWaveGroup.add(createRadcliffeWaveLabel(sceneData.structures.radcliffe_wave));
+      }
+    }
 
     localBubbleGroup = createLocalBubbleLayer(sceneData.structures.local_bubble);
     if (localBubbleGroup) scene.add(localBubbleGroup);

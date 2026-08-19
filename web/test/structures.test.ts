@@ -1,13 +1,21 @@
 import { describe, expect, it } from "vitest";
-import { Mesh, Quaternion } from "three";
+import { Mesh, Quaternion, TubeGeometry } from "three";
 import {
+  createGouldBeltLayer,
   createLocalBubbleLayer,
+  createRadcliffeWaveLayer,
   gouldBeltEllipsePoints,
+  gouldBeltLabelPosition,
   localBubbleLongAxisDirection,
   localBubbleOrientationMatrix,
+  radcliffeWaveLabelPosition,
 } from "../src/scene/structures";
 import { cartesianToGalacticLB } from "../src/scene/galacticCoords";
-import type { GouldBeltStructure, LocalBubbleStructure } from "../src/scene/sceneTypes";
+import type {
+  GouldBeltStructure,
+  LocalBubbleStructure,
+  RadcliffeWaveStructure,
+} from "../src/scene/sceneTypes";
 
 /**
  * Numerical sanity checks for the Gould Belt ellipse parametrization (spec
@@ -251,5 +259,157 @@ describe("createLocalBubbleLayer orientation", () => {
     expect(mesh.quaternion.y).toBe(0);
     expect(mesh.quaternion.z).toBe(0);
     expect(mesh.quaternion.w).toBe(1);
+  });
+});
+
+/**
+ * Issue #124: the Gould Belt / Radcliffe Wave overlays moved from a
+ * hairline `THREE.Line` to a translucent `THREE.TubeGeometry` band (plus an
+ * optional, unobtrusive `CSS2DObject` label `main.ts` builds and parents
+ * under the same group - see `structures.ts`'s `structureLabel` docstring
+ * for why label construction is a separate, DOM-touching call rather than
+ * baked into `createGouldBeltLayer`/`createRadcliffeWaveLayer` themselves:
+ * this repo's `vitest.config.ts` runs with `environment: "node"`, so
+ * `document.createElement` isn't available here, mirroring why
+ * `scene/labels.ts`'s `createSunLabel` isn't unit-tested for its own DOM
+ * call either. These tests cover the new tube-geometry construction (fully
+ * DOM-free) and the pure label-position math - the acceptance criteria this
+ * issue actually added ("visibly thicker band", "translucent... not
+ * visually dominant").
+ */
+describe("createGouldBeltLayer tube geometry", () => {
+  it("renders a translucent TubeGeometry mesh (not a hairline Line)", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    expect(group).not.toBeNull();
+    expect(group!.children).toHaveLength(1); // tube only - no DOM/label
+    const mesh = group!.children[0] as Mesh;
+    expect(mesh).toBeInstanceOf(Mesh);
+    expect(mesh.geometry).toBeInstanceOf(TubeGeometry);
+
+    const material = mesh.material as import("three").MeshBasicMaterial;
+    expect(material.transparent).toBe(true);
+    // Visible but subordinate (issue #124: "not visually dominant over
+    // catalog object markers or the Local Bubble ellipsoid") - strictly
+    // between fully transparent and fully opaque, matching issue #115's
+    // extended-structure opacity tier (0.35) used elsewhere in this app.
+    expect(material.opacity).toBeGreaterThan(0);
+    expect(material.opacity).toBeLessThan(1);
+    expect(material.opacity).toBeCloseTo(0.35, 10);
+    // Matches `createLocalBubbleLayer`'s own translucent-mesh convention -
+    // a depth-writing translucent mesh would incorrectly occlude whatever's
+    // behind it along the band instead of blending with it.
+    expect(material.depthWrite).toBe(false);
+  });
+
+  it("builds a closed tube (the ellipse loops back on itself)", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const mesh = group!.children[0] as Mesh;
+    const geometry = mesh.geometry as TubeGeometry;
+    expect(geometry.parameters.closed).toBe(true);
+  });
+
+  it("uses a small radius relative to the ellipse's own extent (a band, not a pipe)", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const mesh = group!.children[0] as Mesh;
+    const geometry = mesh.geometry as TubeGeometry;
+    expect(geometry.parameters.radius).toBeGreaterThan(0);
+    // Well under the ellipse's own major radius (373pc) - a visibly
+    // thicker band than a hairline, but nowhere near overpowering the
+    // structure itself.
+    expect(geometry.parameters.radius).toBeLessThan(GOULD_BELT.major_radius_pc / 10);
+  });
+
+  it("does not duplicate the closing point as an extra near-zero-length curve segment", () => {
+    // `gouldBeltEllipsePoints`'s first and last points coincide by
+    // construction; the tube's underlying curve should be built from the
+    // de-duplicated point set (n-1 points), not the raw n-point array,
+    // since `closed: true` already wraps the curve back to its start.
+    const rawPoints = gouldBeltEllipsePoints(GOULD_BELT);
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const mesh = group!.children[0] as Mesh;
+    const geometry = mesh.geometry as TubeGeometry;
+    const curve = geometry.parameters.path as import("three").CatmullRomCurve3;
+    expect(curve.points.length).toBe(rawPoints.length - 1);
+  });
+});
+
+describe("gouldBeltLabelPosition", () => {
+  it("returns the ellipse's apex (t=0, i.e. points[0] of gouldBeltEllipsePoints)", () => {
+    const points = gouldBeltEllipsePoints(GOULD_BELT);
+    const position = gouldBeltLabelPosition(GOULD_BELT);
+    expect(position[0]).toBeCloseTo(points[0]![0], 10);
+    expect(position[1]).toBeCloseTo(points[0]![1], 10);
+    expect(position[2]).toBeCloseTo(points[0]![2], 10);
+  });
+});
+
+const RADCLIFFE_WAVE: RadcliffeWaveStructure = {
+  model: "radcliffe_wave",
+  representation: "spline",
+  points: [
+    { s_pc: 0, x_pc: -900, y_pc: -900, z_pc: 0 },
+    { s_pc: 500, x_pc: -600, y_pc: -400, z_pc: 50 },
+    { s_pc: 1000, x_pc: -300, y_pc: 0, z_pc: 100 },
+    { s_pc: 1500, x_pc: 0, y_pc: 400, z_pc: 50 },
+    { s_pc: 2000, x_pc: 300, y_pc: 900, z_pc: 0 },
+    { s_pc: 2500, x_pc: 600, y_pc: 1300, z_pc: -50 },
+  ],
+};
+
+describe("createRadcliffeWaveLayer tube geometry", () => {
+  it("renders a translucent TubeGeometry mesh (not a hairline Line)", () => {
+    const group = createRadcliffeWaveLayer(RADCLIFFE_WAVE);
+    expect(group).not.toBeNull();
+    expect(group!.children).toHaveLength(1); // tube only - no DOM/label
+    const mesh = group!.children[0] as Mesh;
+    expect(mesh).toBeInstanceOf(Mesh);
+    expect(mesh.geometry).toBeInstanceOf(TubeGeometry);
+
+    const material = mesh.material as import("three").MeshBasicMaterial;
+    expect(material.transparent).toBe(true);
+    expect(material.opacity).toBeCloseTo(0.35, 10);
+    expect(material.depthWrite).toBe(false);
+  });
+
+  it("builds an open (non-looping) tube - the spine's endpoints are genuinely distinct", () => {
+    const group = createRadcliffeWaveLayer(RADCLIFFE_WAVE);
+    const mesh = group!.children[0] as Mesh;
+    const geometry = mesh.geometry as TubeGeometry;
+    expect(geometry.parameters.closed).toBe(false);
+  });
+
+  it("caps tubularSegments well below the raw point count for large point arrays", () => {
+    const denselySampled: RadcliffeWaveStructure = {
+      model: "radcliffe_wave",
+      representation: "spline",
+      points: Array.from({ length: 1500 }, (_, i) => ({
+        s_pc: i,
+        x_pc: -900 + i,
+        y_pc: -900 + i * 1.5,
+        z_pc: Math.sin(i / 100) * 50,
+      })),
+    };
+    const group = createRadcliffeWaveLayer(denselySampled);
+    const mesh = group!.children[0] as Mesh;
+    const geometry = mesh.geometry as TubeGeometry;
+    expect(geometry.parameters.tubularSegments).toBeLessThan(500);
+    expect(geometry.parameters.tubularSegments).toBeGreaterThan(1);
+  });
+
+  it("still returns null for missing/too-short point data (spec §38 - unchanged from the pre-#124 behavior)", () => {
+    expect(createRadcliffeWaveLayer(undefined)).toBeNull();
+    expect(
+      createRadcliffeWaveLayer({ ...RADCLIFFE_WAVE, points: [RADCLIFFE_WAVE.points[0]!] }),
+    ).toBeNull();
+  });
+});
+
+describe("radcliffeWaveLabelPosition", () => {
+  it("returns the spine's midpoint by point-array index", () => {
+    const position = radcliffeWaveLabelPosition(RADCLIFFE_WAVE);
+    const midpoint = RADCLIFFE_WAVE.points[Math.floor((RADCLIFFE_WAVE.points.length - 1) / 2)]!;
+    expect(position[0]).toBeCloseTo(midpoint.x_pc, 10);
+    expect(position[1]).toBeCloseTo(midpoint.y_pc, 10);
+    expect(position[2]).toBeCloseTo(midpoint.z_pc, 10);
   });
 });
