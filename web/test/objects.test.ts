@@ -3,6 +3,7 @@ import { Matrix4, Quaternion, Vector3 } from "three";
 import type { InstancedMesh, MeshBasicMaterial } from "three";
 import {
   catalogObjectTypes,
+  CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
   isCatalogObjectVisible,
@@ -10,10 +11,12 @@ import {
   LOCAL_BUBBLE_OBJECT_ID,
   markerOpacityFor,
   markerRadiusPc,
+  selectedMarkerRadiusPc,
   setInstanceVisibility,
   STAR_MARKER_MIN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
+  STAR_OBJECT_TYPES,
   SUN_OBJECT_ID,
   updateCatalogSizeScale,
   updateCatalogVisibility,
@@ -21,6 +24,7 @@ import {
   visibleCatalogObjects,
   type CatalogBucket,
 } from "../src/scene/objects";
+import { sunCoreRadiusPc } from "../src/scene/sun";
 import { DENSE_BATCH_GROUP_TAG } from "../src/scene/lod";
 import type { SceneObject } from "../src/scene/sceneTypes";
 
@@ -296,6 +300,127 @@ describe("starMarkerRadiusPc (issue #119)", () => {
     // 1.302pc Sun-Proxima gap.
     const sunCoreMinRadiusPc = 0.15;
     expect(sunCoreMinRadiusPc + shrunkRadius).toBeLessThan(proximaToSunPc);
+  });
+});
+
+describe("STAR_OBJECT_TYPES / CLUSTER_OBJECT_TYPES (issue #130 exports)", () => {
+  it("STAR_OBJECT_TYPES contains exactly 'star'", () => {
+    expect(STAR_OBJECT_TYPES.has("star")).toBe(true);
+    expect(STAR_OBJECT_TYPES.has("star_cluster")).toBe(false);
+  });
+
+  it("CLUSTER_OBJECT_TYPES contains exactly 'star_cluster' and 'stellar_association'", () => {
+    expect(CLUSTER_OBJECT_TYPES.has("star_cluster")).toBe(true);
+    expect(CLUSTER_OBJECT_TYPES.has("stellar_association")).toBe(true);
+    expect(CLUSTER_OBJECT_TYPES.has("star")).toBe(false);
+  });
+});
+
+/**
+ * Issue #130: `selectedMarkerRadiusPc` is the extracted, pure version of
+ * (former) `main.ts`-private `selectedObjectMarkerRadiusPc` (issue #123) -
+ * the selection reticle's radius resolution. Must mirror
+ * `setInstanceVisibility`'s own priority order exactly: Sun -> dense-batch
+ * star -> generic `markerRadiusPc`. `main.ts`'s own camera/`denseBatchRadiusPc`
+ * module state is replaced here by explicit parameters, so these branches
+ * get real unit coverage without needing a real `THREE.PerspectiveCamera`.
+ */
+describe("selectedMarkerRadiusPc (issue #130 extraction of issue #123 logic)", () => {
+  const collectionRadiusPc = 11.26;
+
+  const sunEntry = makeObject({
+    id: "sun",
+    name: "Sun",
+    object_type: "reference_point",
+    position_pc: [0, 0, 0],
+    distance_pc: 0,
+  });
+
+  const denseBatchStar = makeObject({
+    id: "proxima",
+    object_type: "star",
+    position_pc: [0.9, -0.9, -0.04],
+    distance_pc: 1.3,
+    group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+  });
+
+  const nonDenseBatchStar = makeObject({
+    id: "far-star",
+    object_type: "star",
+    position_pc: [500, 0, 0],
+    distance_pc: 500,
+    // No DENSE_BATCH_GROUP_TAG - a real, non-dense-batch star.
+  });
+
+  const genericObject = makeObject({
+    id: "cloud-generic",
+    object_type: "molecular_cloud",
+    position_pc: [10, 20, 30],
+    distance_pc: 37.4,
+    size_pc: 20,
+  });
+
+  it("branch (a) the Sun: matches sunCoreRadiusPc exactly, regardless of object_type", () => {
+    const cameraDistancePc = 5;
+    const expected = sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc);
+    expect(
+      selectedMarkerRadiusPc(sunEntry, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+    ).toBe(expected);
+  });
+
+  it("branch (a) the Sun: id match takes priority even far from origin (shrink not yet triggered)", () => {
+    const cameraDistancePc = 1087;
+    expect(
+      selectedMarkerRadiusPc(sunEntry, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+    ).toBe(sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc));
+  });
+
+  it("branch (b) a dense-batch star: matches starMarkerRadiusPc exactly when the camera is close in", () => {
+    const cameraDistancePc = 0;
+    const expected = starMarkerRadiusPc(cameraDistancePc, collectionRadiusPc);
+    expect(expected).toBe(STAR_MARKER_MIN_RADIUS_PC);
+    expect(
+      selectedMarkerRadiusPc(denseBatchStar, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+    ).toBe(expected);
+  });
+
+  it("branch (b) a dense-batch star: still tracks starMarkerRadiusPc at the un-shrunk overview distance", () => {
+    const cameraDistancePc = 1087;
+    expect(
+      selectedMarkerRadiusPc(denseBatchStar, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+    ).toBe(starMarkerRadiusPc(cameraDistancePc, collectionRadiusPc));
+  });
+
+  it("branch (c) generic: a star NOT tagged as a dense-batch member falls through to markerRadiusPc, not the dense-batch branch", () => {
+    const cameraDistancePc = 0; // Would trigger the shrink floor if this were mis-routed to branch (b).
+    const result = selectedMarkerRadiusPc(
+      nonDenseBatchStar,
+      SUN_OBJECT_ID,
+      cameraDistancePc,
+      collectionRadiusPc,
+    );
+    expect(result).toBe(markerRadiusPc(nonDenseBatchStar.size_pc, nonDenseBatchStar.object_type));
+    expect(result).not.toBe(STAR_MARKER_MIN_RADIUS_PC);
+  });
+
+  it("branch (c) generic: a non-star, non-Sun object always uses markerRadiusPc, regardless of camera distance", () => {
+    const expected = markerRadiusPc(genericObject.size_pc, genericObject.object_type);
+    expect(selectedMarkerRadiusPc(genericObject, SUN_OBJECT_ID, 0, collectionRadiusPc)).toBe(expected);
+    expect(selectedMarkerRadiusPc(genericObject, SUN_OBJECT_ID, 1087, collectionRadiusPc)).toBe(expected);
+  });
+
+  it("priority order: id === sunObjectId wins even if object_type were somehow star-like", () => {
+    const sunLikeStar = makeObject({
+      id: SUN_OBJECT_ID,
+      object_type: "star",
+      position_pc: [0, 0, 0],
+      distance_pc: 0,
+      group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+    });
+    const cameraDistancePc = 5;
+    expect(
+      selectedMarkerRadiusPc(sunLikeStar, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+    ).toBe(sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc));
   });
 });
 

@@ -11,7 +11,7 @@ import {
   excludeDedicatedMarkerObjects,
   isSelectedObjectVisible,
   markerRadiusPc,
-  starMarkerRadiusPc,
+  selectedMarkerRadiusPc,
   SUN_OBJECT_ID,
   updateCatalogSizeScale,
   updateCatalogVisibility,
@@ -213,15 +213,14 @@ function applySunCoreScale(): void {
  * (`excludeDedicatedMarkerObjects`) and so never actually reaches
  * `selectObject` today (out of scope: the picking mechanism itself, issue
  * #123's "if ever selectable" caveat) - handled here anyway so this stays
- * correct if that ever changes. */
+ * correct if that ever changes.
+ *
+ * Issue #130: the actual branch logic now lives in `objects.ts`'s exported,
+ * pure `selectedMarkerRadiusPc` (real unit test coverage there) - this stays
+ * a thin wrapper that just supplies the closure-only values (`camera`,
+ * `denseBatchRadiusPc`) that function can't see on its own. */
 function selectedObjectMarkerRadiusPc(obj: SceneObject): number {
-  if (obj.id === SUN_OBJECT_ID) {
-    return sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc);
-  }
-  if (obj.object_type === "star" && isDenseBatchMember(obj)) {
-    return starMarkerRadiusPc(camera.position.length(), denseBatchRadiusPc);
-  }
-  return markerRadiusPc(obj.size_pc, obj.object_type);
+  return selectedMarkerRadiusPc(obj, SUN_OBJECT_ID, camera.position.length(), denseBatchRadiusPc);
 }
 
 /** Issue #123: pushes the selection indicator (reticle + line-to-Sun) to

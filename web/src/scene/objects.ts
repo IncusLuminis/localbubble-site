@@ -11,6 +11,7 @@ import type { SceneObject } from "./sceneTypes";
 import { positionToVector3 } from "./sceneData";
 import { isWithinRadius } from "./radiusFilter";
 import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
+import { sunCoreRadiusPc } from "./sun";
 
 /**
  * Catalog object rendering (spec Idea.md §22/§45, issue #64: "Catalog
@@ -183,8 +184,14 @@ const STRUCTURE_MAX_RADIUS_PC = 45;
  * the same thing in both tiers - only each tier's clamp range differs. */
 const SIZE_PC_DIVISOR = 4;
 
-const STAR_OBJECT_TYPES: ReadonlySet<string> = new Set(["star"]);
-const CLUSTER_OBJECT_TYPES: ReadonlySet<string> = new Set([
+/** Exported (issue #130) so callers outside this module - `main.ts`'s
+ * selection-indicator radius resolution among them - can check "is this a
+ * star-like type" against the same single source of truth `markerRadiusPc`/
+ * `markerOpacityFor`/`setInstanceVisibility` already use below, rather than
+ * re-hardcoding the `"star"` string literal in a second place that could
+ * silently drift if a second star-like type is ever added here. */
+export const STAR_OBJECT_TYPES: ReadonlySet<string> = new Set(["star"]);
+export const CLUSTER_OBJECT_TYPES: ReadonlySet<string> = new Set([
   "star_cluster",
   "stellar_association",
 ]);
@@ -297,6 +304,32 @@ export function starMarkerRadiusPc(
 
   const t = (cameraDistanceFromOriginPc - denseBatchRadiusPc) / (shrinkStartPc - denseBatchRadiusPc);
   return STAR_MARKER_MIN_RADIUS_PC + t * (STAR_MARKER_RADIUS_PC - STAR_MARKER_MIN_RADIUS_PC);
+}
+
+/** Issue #123's selection-reticle radius resolution, extracted (issue #130)
+ * into this testable, pure module function instead of living only as
+ * `main.ts`'s unexported `selectedObjectMarkerRadiusPc` closure. Must mirror
+ * `setInstanceVisibility`'s own radius-resolution priority - Sun ->
+ * dense-batch star -> generic - exactly, or the reticle can visibly
+ * disagree with the marker it's supposed to surround. `sunObjectId`,
+ * `cameraDistanceFromOriginPc`, and `denseBatchRadiusPc` are taken as
+ * explicit parameters (rather than closed over module state, the way
+ * `main.ts`'s camera/`denseBatchRadiusPc` live) precisely so this function
+ * can be unit tested without needing a real `THREE.PerspectiveCamera` or
+ * `main.ts`'s own module-level scene state. */
+export function selectedMarkerRadiusPc(
+  obj: SceneObject,
+  sunObjectId: string,
+  cameraDistanceFromOriginPc: number,
+  denseBatchRadiusPc: number,
+): number {
+  if (obj.id === sunObjectId) {
+    return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
+  }
+  if (STAR_OBJECT_TYPES.has(obj.object_type) && isDenseBatchMember(obj)) {
+    return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
+  }
+  return markerRadiusPc(obj.size_pc, obj.object_type);
 }
 
 /** Issue #115: opacity tiers for the same generic catalog-object markers
