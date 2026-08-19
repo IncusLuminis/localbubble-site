@@ -112,17 +112,28 @@ export interface LocalBubbleSemiAxes {
   c_pc: number;
 }
 
+/** Alves et al. (2018) Table 1 fitted Euler angles (`theta_ell_deg`
+ * nutation, `psi_ell_deg` precession, `phi_ell_deg` intrinsic - the latter
+ * fixed/irrelevant for a spheroid) plus the independently-stated (l, b)
+ * pointing direction of the long (c) axis, kept for cross-checking (see
+ * `scene/structures.ts`'s `createLocalBubbleLayer`). */
+export interface LocalBubbleOrientation {
+  theta_ell_deg: number;
+  psi_ell_deg: number;
+  phi_ell_deg: number;
+  long_axis_l_deg?: number;
+  long_axis_b_deg?: number;
+}
+
 /** `structures.local_bubble` (spec §18/§21): an off-centred ellipsoid.
- * `orientation` (Euler angles) is present in the data but deliberately not
- * applied by the MVP renderer - see `scene/structures.ts`'s
- * `createLocalBubbleLayer` docstring for why, mirroring the notebook's own
- * documented "diagnostic approximation" shortcut. */
+ * `orientation` (Euler angles, Story #102) is now applied by the renderer -
+ * see `scene/structures.ts`'s `createLocalBubbleLayer`. */
 export interface LocalBubbleStructure {
   representation: string;
   enabled?: boolean;
   center_pc: LocalBubbleCenter;
   semi_axes_pc: LocalBubbleSemiAxes;
-  orientation?: unknown;
+  orientation?: LocalBubbleOrientation;
   source?: unknown;
   notes?: string | null;
   data_classification?: string;

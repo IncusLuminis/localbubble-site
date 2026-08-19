@@ -4,12 +4,15 @@ import {
   Group,
   Line,
   LineBasicMaterial,
+  Matrix4,
   Mesh,
   MeshBasicMaterial,
   SphereGeometry,
+  Vector3,
 } from "three";
 import type {
   GouldBeltStructure,
+  LocalBubbleOrientation,
   LocalBubbleStructure,
   RadcliffeWaveStructure,
 } from "./sceneTypes";
@@ -135,23 +138,101 @@ export function createRadcliffeWaveLayer(
 }
 
 /**
+ * Rotation matrix for the Local Bubble ellipsoid's fitted orientation
+ * (Alves et al. 2018, A&A 611, L5, arXiv:1803.05251 - `source.reference`
+ * in `models/local_bubble.yaml`). Sec. 2/3 + Table 1 state only, in prose:
+ * "the standard Euler angles, theta_ell (nutation), psi_ell (precession),
+ * and phi_ell (intrinsic)" - no explicit matrix equation - so this
+ * implements the textbook (Goldstein) definition of those three names:
+ *
+ *   R = Rz(psi_ell) . Ry(theta_ell) . Rz(phi_ell)
+ *
+ * (precession about the fixed Z axis, then nutation about the
+ * once-rotated line-of-nodes axis, then an intrinsic spin about the
+ * twice-rotated Z axis), applied to the ellipsoid's own local axes, where
+ * local +Z is the long (c) axis before rotation - matching
+ * `createLocalBubbleLayer`'s `scale.set(a_pc, b_pc, c_pc)` convention
+ * (c_pc scales local Z). The classic "proper Euler angle" definition
+ * uses a repeated axis for the line of nodes (Z-X-Z or Z-Y-Z; Goldstein
+ * uses Z-X-Z) - X vs Y cannot be distinguished from the paper's numbers
+ * alone, but it doesn't matter here: `phi_ell_deg` (the only place the
+ * X-vs-Y choice would show up) is fixed to 0 by the fit for this
+ * axisymmetric (a_pc == b_pc) spheroid, so both choices give the
+ * identical rotation. `phi_ell` is still applied below for
+ * correctness/completeness in case a future, non-axisymmetric model ever
+ * sets it.
+ *
+ * Cross-checked, not guessed: with the fitted `theta_ell_deg = 30`,
+ * `psi_ell_deg = 216`, this rotates local +Z to exactly (l, b) = (216 deg,
+ * 60 deg) - the paper's own INDEPENDENTLY-stated long-axis pointing
+ * direction ("long axis points towards (l,b) = (216 deg, 60 deg)",
+ * `long_axis_l_deg`/`long_axis_b_deg`) - because under this rotation
+ * local +Z always lands at (l, b) = (psi_ell, 90 - theta_ell): a
+ * b=90-theta identity plus an l=psi identity. Verified numerically by
+ * `localBubbleLongAxisDirection`'s test in `structures.test.ts` against
+ * that ground truth. Pure/no-WebGL-context-needed (spec §38) even though
+ * it uses `THREE.Matrix4`, which is plain math under Node - see
+ * `objects.test.ts` for existing precedent of testing `THREE.Matrix4`
+ * this way.
+ */
+export function localBubbleOrientationMatrix(orientation: LocalBubbleOrientation): Matrix4 {
+  const psiRad = (orientation.psi_ell_deg * Math.PI) / 180;
+  const thetaRad = (orientation.theta_ell_deg * Math.PI) / 180;
+  const phiRad = (orientation.phi_ell_deg * Math.PI) / 180;
+
+  const matrix = new Matrix4().makeRotationZ(psiRad);
+  matrix.multiply(new Matrix4().makeRotationY(thetaRad));
+  matrix.multiply(new Matrix4().makeRotationZ(phiRad));
+  return matrix;
+}
+
+/**
+ * The direction (unit XYZ, heliocentric Galactic Cartesian) the
+ * ellipsoid's long (c) axis points after `localBubbleOrientationMatrix` is
+ * applied - i.e. that rotation applied to the local +Z axis (0,0,1).
+ * Exported for the orientation sanity-check test (issue #102's
+ * acceptance criterion: "the ellipsoid's long (c) axis direction in the
+ * scene must numerically match the paper's independently-stated pointing
+ * direction"); not used by the renderer itself, which applies the
+ * rotation matrix directly to the mesh.
+ */
+export function localBubbleLongAxisDirection(
+  orientation: LocalBubbleOrientation,
+): [number, number, number] {
+  const axis = new Vector3(0, 0, 1).applyMatrix4(localBubbleOrientationMatrix(orientation));
+  return [axis.x, axis.y, axis.z];
+}
+
+function isFiniteOrientation(
+  orientation: LocalBubbleOrientation | undefined,
+): orientation is LocalBubbleOrientation {
+  return (
+    !!orientation &&
+    Number.isFinite(orientation.theta_ell_deg) &&
+    Number.isFinite(orientation.psi_ell_deg) &&
+    Number.isFinite(orientation.phi_ell_deg)
+  );
+}
+
+/**
  * Build the Local Bubble as a coarse translucent wireframe ellipsoid (spec
  * §18: "For MVP, a simplified volume is acceptable if backed by a
  * source... sphere / ellipsoid / mesh / point cloud boundary").
  *
- * Implementation shortcut (explicitly flagged, matching Story #65's brief
- * and the notebook's own documented precedent): a `THREE.SphereGeometry`
- * non-uniformly scaled by `semi_axes_pc.{a_pc,b_pc,c_pc}` along the mesh's
- * own local X/Y/Z, positioned at `center_pc`. The model's `orientation`
- * Euler angles (`long_axis_l_deg`/`long_axis_b_deg`/`theta_ell_deg`/etc.)
- * are NOT applied - `notebooks/local_neighborhood.ipynb` explicitly treats
- * the full orientation as out of scope for what it calls a "diagnostic
- * approximation" (see the cell producing `local_bubble_wireframe_points`),
- * and this Story takes the same shortcut for the same reason: an
- * axis-aligned ellipsoid is still a reasonable MVP visual for "roughly
- * where and how big the Local Bubble is", and adding the Euler-angle
- * rotation is a well-scoped follow-up rather than something this
- * interaction-layer Story needs to solve.
+ * Implementation (Story #65's `THREE.SphereGeometry` shortcut, plus Story
+ * #102's orientation fix): a `THREE.SphereGeometry` non-uniformly scaled
+ * by `semi_axes_pc.{a_pc,b_pc,c_pc}` along the mesh's own local X/Y/Z,
+ * then rotated per `localBubbleOrientationMatrix` (the fitted Euler
+ * angles - Story #65 explicitly deferred this, matching the notebook's
+ * own documented "diagnostic approximation" shortcut; #102 now applies
+ * it), then positioned at `center_pc`. `Object3D.updateMatrix` composes
+ * position/quaternion/scale as `T . R . S`, i.e. exactly scale-then-rotate
+ * -then-translate, so setting `mesh.scale`, `mesh.quaternion` and
+ * `mesh.position` independently (as below) gets that order for free with
+ * no extra matrix plumbing. If `orientation` is absent or has
+ * non-finite fields, the rotation is skipped and the ellipsoid renders
+ * axis-aligned as before (spec §38: missing optional data doesn't break
+ * the layer).
  */
 export function createLocalBubbleLayer(model: LocalBubbleStructure | undefined): Group | null {
   if (!model || !model.center_pc || !model.semi_axes_pc) {
@@ -175,6 +256,9 @@ export function createLocalBubbleLayer(model: LocalBubbleStructure | undefined):
   });
   const mesh = new Mesh(geometry, material);
   mesh.scale.set(a_pc, b_pc, c_pc);
+  if (isFiniteOrientation(model.orientation)) {
+    mesh.quaternion.setFromRotationMatrix(localBubbleOrientationMatrix(model.orientation));
+  }
   mesh.position.set(model.center_pc.x_pc, model.center_pc.y_pc, model.center_pc.z_pc);
   group.add(mesh);
 

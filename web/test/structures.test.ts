@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { gouldBeltEllipsePoints } from "../src/scene/structures";
-import type { GouldBeltStructure } from "../src/scene/sceneTypes";
+import { Mesh, Quaternion } from "three";
+import {
+  createLocalBubbleLayer,
+  gouldBeltEllipsePoints,
+  localBubbleLongAxisDirection,
+  localBubbleOrientationMatrix,
+} from "../src/scene/structures";
+import { cartesianToGalacticLB } from "../src/scene/galacticCoords";
+import type { GouldBeltStructure, LocalBubbleStructure } from "../src/scene/sceneTypes";
 
 /**
  * Numerical sanity checks for the Gould Belt ellipse parametrization (spec
@@ -105,5 +112,144 @@ describe("gouldBeltEllipsePoints", () => {
       const rLength = Math.hypot(...r) || 1;
       expect(Math.abs(dot) / (normalLength * rLength)).toBeLessThan(1e-9);
     }
+  });
+});
+
+/**
+ * Story #102 (issue #102): the Local Bubble ellipsoid must now be rotated
+ * per the Alves et al. (2018) fitted Euler angles, and that rotation must
+ * be verified against the paper's own INDEPENDENTLY-stated long-axis
+ * pointing direction (l, b) = (216 deg, 60 deg) - the acceptance
+ * criterion's "ground truth" - rather than trusted by construction.
+ *
+ * These are the actual fitted values from `models/local_bubble.yaml` /
+ * `web/public/data/scene.json`'s `structures.local_bubble.orientation`.
+ */
+const LOCAL_BUBBLE_ORIENTATION = {
+  theta_ell_deg: 30.0,
+  psi_ell_deg: 216.0,
+  phi_ell_deg: 0.0,
+  long_axis_l_deg: 216.0,
+  long_axis_b_deg: 60.0,
+};
+
+const LOCAL_BUBBLE: LocalBubbleStructure = {
+  representation: "ellipsoid",
+  enabled: true,
+  center_pc: { x_pc: 10.2, y_pc: 33.6, z_pc: 0.0 },
+  semi_axes_pc: { a_pc: 60.0, b_pc: 60.0, c_pc: 162.0 },
+  orientation: LOCAL_BUBBLE_ORIENTATION,
+};
+
+describe("localBubbleLongAxisDirection", () => {
+  it("matches the paper's independently-stated long-axis ground truth (l, b) = (216 deg, 60 deg)", () => {
+    const [x, y, z] = localBubbleLongAxisDirection(LOCAL_BUBBLE_ORIENTATION);
+    const { l_deg, b_deg } = cartesianToGalacticLB(x, y, z);
+    expect(l_deg).toBeCloseTo(LOCAL_BUBBLE_ORIENTATION.long_axis_l_deg, 6);
+    expect(b_deg).toBeCloseTo(LOCAL_BUBBLE_ORIENTATION.long_axis_b_deg, 6);
+  });
+
+  it("returns a unit vector", () => {
+    const [x, y, z] = localBubbleLongAxisDirection(LOCAL_BUBBLE_ORIENTATION);
+    expect(Math.hypot(x, y, z)).toBeCloseTo(1, 10);
+  });
+
+  it("is insensitive to phi_ell (intrinsic spin) for this axisymmetric spheroid", () => {
+    // phi_ell rotates about the already-pointed symmetry (Z) axis, so it
+    // must not move where that axis itself points, for any phi.
+    const withZeroPhi = localBubbleLongAxisDirection({ ...LOCAL_BUBBLE_ORIENTATION, phi_ell_deg: 0 });
+    const withOtherPhi = localBubbleLongAxisDirection({
+      ...LOCAL_BUBBLE_ORIENTATION,
+      phi_ell_deg: 137,
+    });
+    expect(withOtherPhi[0]).toBeCloseTo(withZeroPhi[0], 10);
+    expect(withOtherPhi[1]).toBeCloseTo(withZeroPhi[1], 10);
+    expect(withOtherPhi[2]).toBeCloseTo(withZeroPhi[2], 10);
+  });
+
+  it("degenerates to the un-rotated +Z axis when all Euler angles are 0", () => {
+    const [x, y, z] = localBubbleLongAxisDirection({
+      theta_ell_deg: 0,
+      psi_ell_deg: 0,
+      phi_ell_deg: 0,
+    });
+    expect(x).toBeCloseTo(0, 10);
+    expect(y).toBeCloseTo(0, 10);
+    expect(z).toBeCloseTo(1, 10);
+  });
+});
+
+describe("localBubbleOrientationMatrix", () => {
+  it("is a pure rotation: orthogonal with determinant +1", () => {
+    const m = localBubbleOrientationMatrix(LOCAL_BUBBLE_ORIENTATION).elements;
+    // three.js Matrix4.elements is column-major; extract the 3x3 block.
+    const r = [
+      [m[0]!, m[4]!, m[8]!],
+      [m[1]!, m[5]!, m[9]!],
+      [m[2]!, m[6]!, m[10]!],
+    ];
+    const det =
+      r[0]![0]! * (r[1]![1]! * r[2]![2]! - r[1]![2]! * r[2]![1]!) -
+      r[0]![1]! * (r[1]![0]! * r[2]![2]! - r[1]![2]! * r[2]![0]!) +
+      r[0]![2]! * (r[1]![0]! * r[2]![1]! - r[1]![1]! * r[2]![0]!);
+    expect(det).toBeCloseTo(1, 10);
+
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        let dot = 0;
+        for (let k = 0; k < 3; k++) {
+          dot += r[i]![k]! * r[j]![k]!;
+        }
+        expect(dot).toBeCloseTo(i === j ? 1 : 0, 10);
+      }
+    }
+  });
+});
+
+describe("createLocalBubbleLayer orientation", () => {
+  it("applies the fitted rotation to the mesh's quaternion", () => {
+    const group = createLocalBubbleLayer(LOCAL_BUBBLE);
+    expect(group).not.toBeNull();
+    const mesh = group!.children[0] as Mesh;
+    const expected = new Quaternion().setFromRotationMatrix(
+      localBubbleOrientationMatrix(LOCAL_BUBBLE_ORIENTATION),
+    );
+    expect(mesh.quaternion.x).toBeCloseTo(expected.x, 10);
+    expect(mesh.quaternion.y).toBeCloseTo(expected.y, 10);
+    expect(mesh.quaternion.z).toBeCloseTo(expected.z, 10);
+    expect(mesh.quaternion.w).toBeCloseTo(expected.w, 10);
+  });
+
+  it("still scales and positions the mesh correctly alongside the rotation", () => {
+    const group = createLocalBubbleLayer(LOCAL_BUBBLE);
+    const mesh = group!.children[0] as Mesh;
+    expect(mesh.scale.x).toBeCloseTo(60.0, 10);
+    expect(mesh.scale.y).toBeCloseTo(60.0, 10);
+    expect(mesh.scale.z).toBeCloseTo(162.0, 10);
+    expect(mesh.position.x).toBeCloseTo(10.2, 10);
+    expect(mesh.position.y).toBeCloseTo(33.6, 10);
+    expect(mesh.position.z).toBeCloseTo(0.0, 10);
+  });
+
+  it("falls back to an axis-aligned (identity-rotation) ellipsoid when orientation is absent", () => {
+    const { orientation, ...withoutOrientation } = LOCAL_BUBBLE;
+    const group = createLocalBubbleLayer(withoutOrientation as LocalBubbleStructure);
+    const mesh = group!.children[0] as Mesh;
+    expect(mesh.quaternion.x).toBe(0);
+    expect(mesh.quaternion.y).toBe(0);
+    expect(mesh.quaternion.z).toBe(0);
+    expect(mesh.quaternion.w).toBe(1);
+  });
+
+  it("falls back to identity rotation when orientation has non-finite fields (malformed data, spec §38)", () => {
+    const group = createLocalBubbleLayer({
+      ...LOCAL_BUBBLE,
+      orientation: { theta_ell_deg: Number.NaN, psi_ell_deg: 216, phi_ell_deg: 0 },
+    });
+    const mesh = group!.children[0] as Mesh;
+    expect(mesh.quaternion.x).toBe(0);
+    expect(mesh.quaternion.y).toBe(0);
+    expect(mesh.quaternion.z).toBe(0);
+    expect(mesh.quaternion.w).toBe(1);
   });
 });
