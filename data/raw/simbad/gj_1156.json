@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 1156",
+  "retrieved_utc": "2026-08-18T16:44:09+00:00",
+  "record_id": "V* GL Vir",
+  "raw": {
+    "main_id": "V* GL Vir",
+    "ra": 184.74749886977372,
+    "dec": 11.126048121199167,
+    "coo_err_maj": 0.03970000147819519,
+    "coo_err_min": 0.028999999165534973,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 154.6999,
+    "plx_err": 0.04450000077486038,
+    "otype": "PM*",
+    "ids": "TIC 389356212|GJ 1156|Gaia DR3 3907283967108054528|[ZEH2003] RX J1219.0+1107  3|PLX 2835.0|Cl* Melotte   25    EGG      42|LSPM J1218+1107|NLTT 30309|2MASS J12185939+1107338|USNO-B1.0 1011-00205601|8pc 152.90|G  12-30|GEN# +9.80012030|CNS5 3023|L 1190-34|LFT  895|LHS   324|LP  494-77|LTT 13440|NSV  5547|PM 12165+1124|UBV M  42590|USNO 237|V* GL Vir|Zkh 177|[GKL99] 256|[RHG95]  1934|PLX 2835.01|WISEA J121858.47+110735.8|UCAC4 506-054032|PM J12189+1107|Gaia DR2 3907283967108054528|Karmn J12189+111|RX J1219.0+1107|1RXS J121900.7+110727",
+    "matched_id": "GJ 1156"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 570 D",
+  "retrieved_utc": "2026-08-18T16:43:15+00:00",
+  "record_id": "GJ 570 D",
+  "raw": {
+    "main_id": "GJ 570 D",
+    "ra": 224.312344,
+    "dec": -21.363264,
+    "coo_err_maj": 80.0,
+    "coo_err_min": 80.0,
+    "coo_err_angle": 90,
+    "coo_wavelength": "N",
+    "coo_bibcode": "2003yCat.2246....0C",
+    "plx_value": 169.3,
+    "plx_err": 1.7000000476837158,
+    "otype": "BD*",
+    "ids": "TIC 287157669|GJ 570 D|CWISE J145716.20-212216.3|WISE J145715.84-212207.9|EQ J145716.21-212216.5|2MASS J14571496-2121477|2MASSW J1457150-212148|8pc 169.32D|CNS5 3699|WISEP J145715.85-212207.6|WISEP J145715.84-212207.5|WDS J14575-2125G|WISEA J145715.83-212208.0",
+    "matched_id": "GJ 570 D"
+  }
+}

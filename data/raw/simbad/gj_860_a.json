@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 860 A",
+  "retrieved_utc": "2026-08-18T16:41:52+00:00",
+  "record_id": "HD 239960A",
+  "raw": {
+    "main_id": "HD 239960A",
+    "ra": 336.9981564512275,
+    "dec": 57.69502237771611,
+    "coo_err_maj": 0.18170000612735748,
+    "coo_err_min": 0.13289999961853027,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2018yCat.1345....0G",
+    "plx_value": 249.3926,
+    "plx_err": 0.16529999673366547,
+    "otype": "PM*",
+    "ids": "Gaia DR3 2007876324466455040|CCDM J22281+5741A|8pc 249.52A|ADS 15972 A|BD+56  2783A|GJ 860 A|CSI+56  2783  1|WDS J22280+5742A|** KR   60A|TYC 3991-92-1|HD 239960A|Gaia DR2 2007876324466455424|LHS  3814|LTT 16592|NLTT 53952|Zkh 331|LFT 1719|[RHG95]  3537|GCRV 14123|PM J22279+5741W|LSPM J2227+5741A|TIC 2016398813",
+    "matched_id": "GJ 860 A"
+  }
+}

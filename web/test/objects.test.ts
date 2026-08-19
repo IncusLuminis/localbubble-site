@@ -13,9 +13,11 @@ import {
   SUN_OBJECT_ID,
   updateCatalogSizeScale,
   updateCatalogVisibility,
+  updateDenseBatchLod,
   visibleCatalogObjects,
   type CatalogBucket,
 } from "../src/scene/objects";
+import { DENSE_BATCH_GROUP_TAG } from "../src/scene/lod";
 import type { SceneObject } from "../src/scene/sceneTypes";
 
 /**
@@ -441,5 +443,108 @@ describe("updateCatalogSizeScale", () => {
       expect(bucket.mesh.scale.y).toBe(2.5);
       expect(bucket.mesh.scale.z).toBe(2.5);
     }
+  });
+});
+
+/**
+ * Issue #104: camera-distance-gated (LOD) marker visibility for the dense
+ * RECONS batch. `lod.ts`'s own predicate/radius-derivation logic is
+ * covered in `lod.test.ts`; these tests cover how `objects.ts` composes
+ * that with the pre-existing category/radius-filter visibility rules, and
+ * the per-frame-only `updateDenseBatchLod` update path.
+ */
+describe("dense-batch LOD (isCatalogObjectVisible / updateDenseBatchLod)", () => {
+  const NEARBY_STAR = makeObject({
+    id: "proxima",
+    object_type: "star",
+    position_pc: [0.9, -0.9, -0.04],
+    distance_pc: 1.3,
+    group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+  });
+  const ALL_ON = new Map<string, boolean>([["star", true]]);
+  const collectionRadiusPc = 11.26;
+
+  it("isCatalogObjectVisible defaults to no LOD gating when the extra params are omitted", () => {
+    // Unaffected, pre-existing 3-arg call sites (see the describe block
+    // above) must keep working exactly as before, even for a dense-batch
+    // member - this is what makes the added parameters backward compatible.
+    expect(isCatalogObjectVisible(NEARBY_STAR, ALL_ON, null)).toBe(true);
+  });
+
+  it("isCatalogObjectVisible hides a dense-batch member when the camera is far from the origin", () => {
+    expect(
+      isCatalogObjectVisible(NEARBY_STAR, ALL_ON, null, 1087, collectionRadiusPc),
+    ).toBe(false);
+  });
+
+  it("isCatalogObjectVisible shows a dense-batch member once the camera is close enough in", () => {
+    expect(isCatalogObjectVisible(NEARBY_STAR, ALL_ON, null, 5, collectionRadiusPc)).toBe(true);
+  });
+
+  it("isCatalogObjectVisible still applies category/radius filters on top of LOD", () => {
+    const starOff = new Map<string, boolean>([["star", false]]);
+    expect(isCatalogObjectVisible(NEARBY_STAR, starOff, null, 5, collectionRadiusPc)).toBe(false);
+    expect(isCatalogObjectVisible(NEARBY_STAR, ALL_ON, 1, 5, collectionRadiusPc)).toBe(false); // 1.3pc > 1pc radius
+  });
+
+  it("isCatalogObjectVisible never LOD-gates an object outside the dense batch", () => {
+    expect(isCatalogObjectVisible(STAR_A, ALL_ON, null, 1087, collectionRadiusPc)).toBe(true);
+  });
+
+  it("updateDenseBatchLod hides the dense-batch instance when the camera is far, without touching non-member instances", () => {
+    const { buckets } = createCatalogObjectGroup([NEARBY_STAR, STAR_A]);
+    const bucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const nearbyIndex = bucket.objects.findIndex((o) => o.id === "proxima");
+    const otherIndex = bucket.objects.findIndex((o) => o.id === "star-a");
+
+    updateDenseBatchLod(buckets, ALL_ON, null, 1087, collectionRadiusPc);
+
+    expect(decomposeInstanceMatrix(bucket, nearbyIndex).scale.x).toBe(0);
+    // STAR_A is not a dense-batch member - its own radius-derived scale
+    // must be left exactly as `createCatalogObjectGroup` set it.
+    expect(decomposeInstanceMatrix(bucket, otherIndex).scale.x).toBeCloseTo(
+      bucket.radiiPc[otherIndex],
+      6,
+    );
+  });
+
+  it("updateDenseBatchLod shows the dense-batch instance again once the camera moves close enough in", () => {
+    const { buckets } = createCatalogObjectGroup([NEARBY_STAR]);
+    const bucket = buckets[0];
+
+    updateDenseBatchLod(buckets, ALL_ON, null, 1087, collectionRadiusPc);
+    expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBe(0);
+
+    updateDenseBatchLod(buckets, ALL_ON, null, 5, collectionRadiusPc);
+    expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
+  });
+
+  it("updateDenseBatchLod still respects a category toggle turned off for the dense-batch member", () => {
+    const { buckets } = createCatalogObjectGroup([NEARBY_STAR]);
+    const bucket = buckets[0];
+    const starOff = new Map<string, boolean>([["star", false]]);
+
+    updateDenseBatchLod(buckets, starOff, null, 5, collectionRadiusPc);
+
+    expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBe(0);
+  });
+
+  it("visibleCatalogObjects excludes dense-batch members that fail the LOD check", () => {
+    const { buckets } = createCatalogObjectGroup([NEARBY_STAR, STAR_A]);
+    const visibleFar = visibleCatalogObjects(buckets, ALL_ON, null, 1087, collectionRadiusPc);
+    expect(visibleFar.map((o) => o.id).sort()).toEqual(["star-a"]);
+
+    const visibleClose = visibleCatalogObjects(buckets, ALL_ON, null, 5, collectionRadiusPc);
+    expect(visibleClose.map((o) => o.id).sort()).toEqual(["proxima", "star-a"]);
+  });
+
+  it("isSelectedObjectVisible respects the LOD gate for a selected dense-batch member", () => {
+    const objects = [NEARBY_STAR, STAR_A];
+    expect(
+      isSelectedObjectVisible(objects, "proxima", ALL_ON, null, 1087, collectionRadiusPc),
+    ).toBe(false);
+    expect(
+      isSelectedObjectVisible(objects, "proxima", ALL_ON, null, 5, collectionRadiusPc),
+    ).toBe(true);
   });
 });

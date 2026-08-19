@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 54.1",
+  "retrieved_utc": "2026-08-18T16:41:38+00:00",
+  "record_id": "V* YZ Cet",
+  "raw": {
+    "main_id": "V* YZ Cet",
+    "ra": 18.127653677659172,
+    "dec": -16.998988336544166,
+    "coo_err_maj": 0.024299999698996544,
+    "coo_err_min": 0.022299999371170998,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 269.0573,
+    "plx_err": 0.03370000049471855,
+    "otype": "PM*",
+    "ids": "TIC 439403362|HIP 5643|TIC 610210976|Gaia DR3 2358524597030794112|CNS5 334|Gaia DR2 2358524597030794112|WISEA J011231.51-165949.5|TYC 5851-171-1|GJ 54.1|UCAC4 366-001333|GCRV 26152|2MASS J01123052-1659570|8pc 269.05|CSI-17-01099|CSS   25|G 268-135|GCRV   694|GSC 05851-01939|HIC   5643|IRAS F01100-1716|L  725-32|LFT  118|LHS   138|LP  767-22|LPM  63|LTT   670|NLTT  4016|PM 01100-1716|RBS   164|RE J011231-170021|USNO 493|V* YZ Cet|Zkh  26|[FS2003] 0039|[RHG95]   234|PLX  248.01|1RXS J011229.6-165949|PM J01125-1659|[GKL99] 38|WEB  1270|Karmn J01125-169",
+    "matched_id": "GJ 54.1"
+  }
+}

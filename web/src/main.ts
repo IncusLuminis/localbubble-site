@@ -13,9 +13,11 @@ import {
   markerRadiusPc,
   updateCatalogSizeScale,
   updateCatalogVisibility,
+  updateDenseBatchLod,
   visibleCatalogObjects,
   type CatalogBucket,
 } from "./scene/objects";
+import { denseBatchCollectionRadiusPc } from "./scene/lod";
 import { loadScene } from "./scene/sceneData";
 import { createGouldBeltLayer, createLocalBubbleLayer, createRadcliffeWaveLayer } from "./scene/structures";
 import {
@@ -117,10 +119,43 @@ let gouldBeltGroup: ReturnType<typeof createGouldBeltLayer> | null = null;
 let radcliffeWaveGroup: ReturnType<typeof createRadcliffeWaveLayer> | null = null;
 let localBubbleGroup: ReturnType<typeof createLocalBubbleLayer> | null = null;
 
+/** Issue #104: the dense RECONS batch's own collection radius (pc),
+ * derived once from the loaded scene data (`lod.ts`'s
+ * `denseBatchCollectionRadiusPc`) rather than hard-coded - `0` (its
+ * initial value, before the scene has loaded) makes `passesDenseBatchLod`
+ * hide every dense-batch member until the real radius is known, which is
+ * the correct "not loaded yet" state anyway. */
+let denseBatchRadiusPc = 0;
+
 function applyCatalogVisibility(): void {
-  updateCatalogVisibility(catalogBuckets, categoryVisibility, radiusPc);
+  updateCatalogVisibility(
+    catalogBuckets,
+    categoryVisibility,
+    radiusPc,
+    camera.position.length(),
+    denseBatchRadiusPc,
+  );
   updateCatalogSizeScale(catalogBuckets, sizeScale);
   refreshSelectionVisibility();
+}
+
+/** Issue #104: re-applies just the camera-distance-gated (LOD) visibility
+ * rule for the dense RECONS batch, cheaply, every frame (see
+ * `objects.ts`'s `updateDenseBatchLod` docstring for why this is split out
+ * from the full `applyCatalogVisibility()` above rather than calling that
+ * every frame - it would needlessly re-touch every one of the ~956
+ * catalog objects' instance matrices instead of just the ~122 gated
+ * ones). Category/radius-filter changes still go through the full
+ * `applyCatalogVisibility()` path above, so the two mechanisms never
+ * disagree about what's currently visible. */
+function applyDenseBatchLod(): void {
+  updateDenseBatchLod(
+    catalogBuckets,
+    categoryVisibility,
+    radiusPc,
+    camera.position.length(),
+    denseBatchRadiusPc,
+  );
 }
 
 /** Issue #95: keeps the Inspector honest whenever a filter change
@@ -142,6 +177,8 @@ function refreshSelectionVisibility(): void {
     selectedObjectId,
     categoryVisibility,
     radiusPc,
+    camera.position.length(),
+    denseBatchRadiusPc,
   );
   if (!stillVisible) {
     inspector.hide();
@@ -233,9 +270,13 @@ function selectObject(obj: SceneObject | null): void {
 }
 
 function currentlyVisiblePositions(): [number, number, number][] {
-  return visibleCatalogObjects(catalogBuckets, categoryVisibility, radiusPc).map(
-    (obj): [number, number, number] => obj.position_pc,
-  );
+  return visibleCatalogObjects(
+    catalogBuckets,
+    categoryVisibility,
+    radiusPc,
+    camera.position.length(),
+    denseBatchRadiusPc,
+  ).map((obj): [number, number, number] => obj.position_pc);
 }
 
 function applyCameraPose(pose: CameraPose): void {
@@ -291,6 +332,7 @@ function applyCameraPreset(key: string): void {
 loadScene()
   .then((sceneData) => {
     catalogObjects = excludeDedicatedMarkerObjects(sceneData.objects);
+    denseBatchRadiusPc = denseBatchCollectionRadiusPc(sceneData.objects);
 
     const catalogLayer = createCatalogObjectGroup(sceneData.objects);
     catalogBuckets = catalogLayer.buckets;
@@ -432,6 +474,7 @@ function animate(): void {
   requestAnimationFrame(animate);
   controls.update();
   updateLabelVisibility();
+  applyDenseBatchLod();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }

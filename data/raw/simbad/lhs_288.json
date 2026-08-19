@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "LHS 288",
+  "retrieved_utc": "2026-08-18T16:42:22+00:00",
+  "record_id": "L  143-23",
+  "raw": {
+    "main_id": "L  143-23",
+    "ra": 161.08847046423625,
+    "dec": -61.20979871122639,
+    "coo_err_maj": 0.03720000013709068,
+    "coo_err_min": 0.03920000046491623,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 206.9698,
+    "plx_err": 0.04479999840259552,
+    "otype": "PM*",
+    "ids": "TIC 391039604|GJ 3618|Gaia DR3 5254061535106490112|L  143-23|LHS   288|LTT  3946|CNS5 2631|[RHG95]  1673|PLX 2511.01|2MASS J10442131-6112384|Gaia DR2 5254061535097566848|WISEA J104420.75-611218.4|NLTT 25245|LFT  734",
+    "matched_id": "LHS   288"
+  }
+}

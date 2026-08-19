@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 1002",
+  "retrieved_utc": "2026-08-18T16:42:20+00:00",
+  "record_id": "G 158-27",
+  "raw": {
+    "main_id": "G 158-27",
+    "ra": 1.6799888292112501,
+    "dec": -7.538060861407779,
+    "coo_err_maj": 0.04450000077486038,
+    "coo_err_min": 0.03150000050663948,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 206.35,
+    "plx_err": 0.04740000143647194,
+    "otype": "PM*",
+    "ids": "TIC 176287658|GJ 1002|Gaia DR3 2441630500517079808|PLX    9.0|CNS5 28|2MASS J00064325-0732147|8pc 213.00|G 158-27|GEN# +9.80158027|JP11  5942|LHS     2|NLTT   248|NSV 15022|PM 00042-0747|UBV M  53816|USNO 210|Zkh   3|[RHG95]    19|FBS L 10-3|FBS 0004-077|PLX    9.01|Gaia DR2 2441630500517079808|WISEA J000642.61-073237.0|UCAC4 413-000170|Karmn J00067-075",
+    "matched_id": "GJ 1002"
+  }
+}

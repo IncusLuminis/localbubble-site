@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "* alf CMi B",
+  "retrieved_utc": "2026-08-18T16:41:24+00:00",
+  "record_id": "* alf CMi B",
+  "raw": {
+    "main_id": "* alf CMi B",
+    "ra": 114.8245,
+    "dec": 5.2241111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2015ApJS..219...19L",
+    "plx_value": null,
+    "plx_err": null,
+    "otype": "WD*",
+    "ids": "GJ 280 B|* alf CMi B|8pc 285.93B|ADS  6251 B|BD+05  1739B|CCDM J07393+0514B|CSI+05  1739  2|EGGR  53|IDS 07341+0529 B|NAME Procyon B|UBV    7350|WD 0736+05|WD 0736+053|WD 0736+052|Zkh 107|WDS J07393+0514B|2XMMi J073917.7+051324|2RXP J073918.2+051334|** SHB    1B",
+    "matched_id": "* alf CMi B"
+  }
+}

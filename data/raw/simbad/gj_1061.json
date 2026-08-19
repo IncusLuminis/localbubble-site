@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 1061",
+  "retrieved_utc": "2026-08-18T16:41:37+00:00",
+  "record_id": "L  372-58",
+  "raw": {
+    "main_id": "L  372-58",
+    "ra": 53.998746505525006,
+    "dec": -44.51270300849139,
+    "coo_err_maj": 0.026100000366568565,
+    "coo_err_min": 0.027699999511241913,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 272.1615,
+    "plx_err": 0.031599998474121094,
+    "otype": "PM*",
+    "ids": "GJ 1061|Gaia DR3 4848140361962951552|APMPM J0336-4431|GEN# +9.85995046|L  372-58|LFT  295|LHS  1565|LP  995-46|LTT  1702|CNS5 919|Zkh  52|[RHG95]   642|[SII2000] 122|2MASS J03355969-4430453|PM 03342-4440|WISEA J033600.43-443049.7|GCRV 26222|Gaia DR2 4848140361962951552|PM J03359-4430|NLTT 11388|TIC 79611981",
+    "matched_id": "GJ 1061"
+  }
+}

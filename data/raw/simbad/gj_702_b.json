@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 702 B",
+  "retrieved_utc": "2026-08-18T16:42:41+00:00",
+  "record_id": "*  70 Oph B",
+  "raw": {
+    "main_id": "*  70 Oph B",
+    "ra": 271.3644289008066,
+    "dec": 2.498946996844167,
+    "coo_err_maj": 0.1956000030040741,
+    "coo_err_min": 0.1770000010728836,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 195.8563,
+    "plx_err": 0.2535000145435333,
+    "otype": "PM*",
+    "ids": "TIC 1674663308|GJ 702 B|Gaia DR3 4468557611977674496|TYC  434-5212-1|ASCC 1153898|*  70 Oph B|8pc 196.62B|ADS 11046 B|BD+02  3482B|CCDM J18055+0230B|CSI+02  3482 11|GCRV 10532|HD 165341B|IDS 18004+0232 B|CNS5 4474|LFT 1391|LHS   459|LTT 15338|NLTT 45900|ROT  3570|UBV   15378|Zkh 272|1E 1802.9+0229|WDS J18055+0230B|** STF 2272B|2XMM J180527.3+022955|Gaia DR2 4468557611977674496|UCAC4 463-073987|LSPM J1805+0229B",
+    "matched_id": "GJ 702 B"
+  }
+}

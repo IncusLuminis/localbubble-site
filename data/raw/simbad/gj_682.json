@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 682",
+  "retrieved_utc": "2026-08-18T16:42:38+00:00",
+  "record_id": "CD-44 11909",
+  "raw": {
+    "main_id": "CD-44 11909",
+    "ra": 264.26527273611407,
+    "dec": -44.31921291471444,
+    "coo_err_maj": 0.0272000003606081,
+    "coo_err_min": 0.024000000208616257,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 199.6944,
+    "plx_err": 0.031199999153614044,
+    "otype": "PM*",
+    "ids": "TIC 16909043|HIP 86214|Gaia DR3 5955305209191546112|CNS5 4348|Gaia DR2 5955305209191546112|WISEA J173703.02-441918.8|TYC 7896-3808-1|GJ 682|PM J17370-4419|UCAC4 229-146141|AKARI-IRC-V1 J1737032-441915|IRAS 17334-4417|PM 17335-4416|PLX 3992|CD-44 11909|Ci 20 1046|GCRV 20417|GEN# -0.04411909|HIC  86214|JP11   333|LFT 1358|LHS   451|LPM 649|LTT  7000|NLTT 45107|Zkh 258|[RHG95]  2779|2MASS J17370367-4419088|PLX 3992.00|** WDK    3A|WDS J17371-4419A",
+    "matched_id": "GJ 682"
+  }
+}

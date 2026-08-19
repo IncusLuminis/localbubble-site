@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 752 B",
+  "retrieved_utc": "2026-08-18T16:43:09+00:00",
+  "record_id": "VB 10",
+  "raw": {
+    "main_id": "VB 10",
+    "ra": 289.2400456449525,
+    "dec": 5.150444700948055,
+    "coo_err_maj": 0.05860000103712082,
+    "coo_err_min": 0.0568000003695488,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 168.9537,
+    "plx_err": 0.06679999828338623,
+    "otype": "PM*",
+    "ids": "TIC 176178205|GJ 752 B|Gaia DR3 4293315765165489536|2MASS J19165762+0509021|LSPM J1916+0509|USNO-B1.0 0951-00432259|8pc 170.26B|CSI+04  4048  2|CSV 102917|GEN# +1.00180617B|CNS5 4780|LFT 1467|LHS   474|LTT 15646|NLTT 47621|UBV   16317|USNO 885|V* V1298 Aql|VB 10|Zkh 289|[GKL99] 370|[RHG95]  3038|[B2006] J191657.6+050902|WDS J19169+0510B|CCDM J19169+0510B|** LDS 6334B|WISEA J191657.19+050847.2|Gaia DR2 4293315765165489536|Karmn J19169+051S|WISE J191657.20+050847.6",
+    "matched_id": "GJ 752 B"
+  }
+}
