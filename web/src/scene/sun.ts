@@ -23,9 +23,18 @@ export const SUN_CORE_MAX_RADIUS_PC = 3;
 /** The core's radius (pc) once the camera is at or inside the RECONS dense
  * batch's own collection radius (`lod.ts`'s `denseBatchCollectionRadiusPc`,
  * issue #104) - small enough to read as "point-like" and clearly not
- * overlap/dominate Proxima Centauri's own marker (1.3pc from the Sun,
- * `STAR_MARKER_RADIUS_PC` = 2pc in `scene/objects.ts`), but not literally
- * zero/invisible (issue #113's acceptance criteria). */
+ * overlap/dominate Proxima Centauri's own marker (1.3pc from the Sun), but
+ * not literally zero/invisible (issue #113's acceptance criteria).
+ *
+ * Chosen against the pre-#119 fixed `STAR_MARKER_RADIUS_PC` (2pc in
+ * `scene/objects.ts`) since that was the only star marker radius that
+ * existed at the time. Issue #119 later gave close-in star markers their
+ * own camera-distance-dependent shrink (`objects.ts`'s
+ * `starMarkerRadiusPc`), so at the same close zoom this core's 0.15pc now
+ * sits alongside a star marker that has *also* shrunk (down to
+ * `STAR_MARKER_MIN_RADIUS_PC`, 0.02pc) - only more clearance against
+ * Proxima's 1.302pc gap than before, never less, so this value did not need
+ * to change. */
 export const SUN_CORE_MIN_RADIUS_PC = 0.15;
 
 /** How far out (as a multiple of the dense batch's own collection radius)

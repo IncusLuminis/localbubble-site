@@ -149,8 +149,14 @@ const DEFAULT_COLOR = 0xaab4c8;
  *
  * 1. Individual stars (`star`) - a single small, fixed radius, deliberately
  *    decoupled from `size_pc` entirely (stars are point sources; any nonzero
- *    radius is already a convention, spec §19/§2.3). Never varies, so stars
- *    can never accidentally grow to match a cluster's marker.
+ *    radius is already a convention, spec §19/§2.3). Never varies *by type or
+ *    size*, so stars can never accidentally grow to match a cluster's
+ *    marker. Issue #119 adds a separate, camera-distance-dependent shrink on
+ *    top of this baseline for close-in RECONS-batch stars specifically (see
+ *    `starMarkerRadiusPc` below) - that's an instance-matrix-level per-frame
+ *    override applied downstream of this function, not a change to
+ *    `markerRadiusPc`'s own return value, which stays the fixed overview
+ *    radius `STAR_MARKER_RADIUS_PC` always.
  * 2. Clusters/associations (`star_cluster`, `stellar_association`) - a
  *    mid-sized range. Still primarily floor-driven given the data above, but
  *    a real `size_pc` nudges the radius up within the tier's own range,
@@ -201,6 +207,96 @@ export function markerRadiusPc(sizePc: number | null, objectType: string): numbe
     return minRadiusPc;
   }
   return Math.min(Math.max(sizePc / SIZE_PC_DIVISOR, minRadiusPc), maxRadiusPc);
+}
+
+/** Issue #119: the star marker's floor radius (pc) once the camera is at or
+ * inside the RECONS dense batch's own collection radius
+ * (`lod.ts`'s `denseBatchCollectionRadiusPc`) - i.e. the close-zoom end of
+ * `starMarkerRadiusPc` below, mirroring `scene/sun.ts`'s
+ * `SUN_CORE_MIN_RADIUS_PC` for the same LOD volume.
+ *
+ * `STAR_MARKER_RADIUS_PC` (2pc, the unshrunk/overview radius) is already
+ * bigger than the real separation between the Sun's nearest neighbors:
+ * Proxima Centauri sits only 1.302pc from the Sun, and only ~0.068pc from
+ * the Alpha Centauri A/B system (computed from `scene.json`'s own
+ * `position_pc` values, 2026-08-19) - tighter than either star's own 2pc
+ * marker radius, let alone two of them side by side. This floor is chosen
+ * so two adjacent RECONS-batch stars at their shrunk size stay visually
+ * distinct even at that tightest real gap: `2 * STAR_MARKER_MIN_RADIUS_PC`
+ * (0.04pc) leaves comfortable clearance under the 0.068pc Proxima-to-Alpha-
+ * Centauri-AB separation, while still reading as "small, point-like" rather
+ * than literally zero/invisible (matching `SUN_CORE_MIN_RADIUS_PC`'s own
+ * "not literally zero" reasoning, issue #113). Alpha Centauri A and B
+ * themselves (~0.0001pc apart, a genuinely-unresolvable-at-this-scale real
+ * binary) are expected to still render as a single coincident point at this
+ * floor - the issue's own acceptance criteria only asks that Proxima and
+ * "Alpha Centauri A/B" (as a system) read as distinct, not that A and B
+ * resolve from each other. */
+export const STAR_MARKER_MIN_RADIUS_PC = 0.02;
+
+/** How far out (as a multiple of the dense batch's own collection radius)
+ * the star radius starts shrinking from `STAR_MARKER_RADIUS_PC`, reaching
+ * `STAR_MARKER_MIN_RADIUS_PC` exactly at the collection radius itself -
+ * the same multiplier `scene/sun.ts` uses for `SUN_CORE_SHRINK_START_MULTIPLIER`,
+ * so both LOD-driven shrinks (Sun core, star markers) finish shrinking to
+ * their point-like floor at the same camera distance rather than visibly
+ * lagging/leading each other. */
+export const STAR_MARKER_SHRINK_START_MULTIPLIER = 3;
+
+/**
+ * The star marker's camera-distance-dependent radius (pc), issue #119:
+ * fixes the same class of scale bug #113 already fixed for the Sun's own
+ * marker, this time for individual stars - the fixed `STAR_MARKER_RADIUS_PC`
+ * (2pc, tuned for legibility at the ~800pc overview) is bigger than the real
+ * distance between the Sun and its nearest neighbors, so at
+ * solar-neighborhood zoom Proxima Centauri's and Alpha Centauri A/B's
+ * markers visually overlap/engulf the Sun's position instead of reading as
+ * distinct nearby stars.
+ *
+ * Deliberately mirrors `scene/sun.ts`'s `sunCoreRadiusPc` exactly - same
+ * signature shape (current camera distance from the origin, plus the
+ * data-derived `denseBatchRadiusPc` reference point from `lod.ts`'s
+ * `denseBatchCollectionRadiusPc`), same continuous/monotonic linear-shrink
+ * curve between the same kind of max/min radius pair and the same
+ * `*_SHRINK_START_MULTIPLIER` shape. Only the actual max/min radius values
+ * differ (star markers are smaller than the Sun's core to begin with, and
+ * need a much smaller floor - see `STAR_MARKER_MIN_RADIUS_PC`'s docstring).
+ *
+ * Stays at `STAR_MARKER_RADIUS_PC` for any camera distance at or beyond
+ * `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc` (no regression
+ * to the ~800pc overview, where 2pc was already tuned to be visible), and
+ * clamps to `STAR_MARKER_MIN_RADIUS_PC` once the camera is at or inside
+ * `denseBatchRadiusPc` itself. `denseBatchRadiusPc <= 0` (scene not loaded
+ * yet) has nothing to shrink toward, so this simply returns the overview
+ * radius, matching pre-#119 appearance.
+ *
+ * This is only ever applied to RECONS dense-batch star instances (see
+ * `setInstanceVisibility` below) - non-dense-batch stars are always far
+ * enough from the Sun (closest is ~76.6pc, well outside even
+ * `denseBatchRadiusPc`'s ~11.26pc collection radius times the shrink-start
+ * multiplier) that this formula would return `STAR_MARKER_RADIUS_PC`
+ * unchanged for them anyway; skipping those ~585 instances is a pure
+ * performance win with no visual difference, mirroring #104's own
+ * dense-batch-only scoping rationale (`lod.ts`'s module docstring).
+ */
+export function starMarkerRadiusPc(
+  cameraDistanceFromOriginPc: number,
+  denseBatchRadiusPc: number,
+): number {
+  if (denseBatchRadiusPc <= 0) {
+    return STAR_MARKER_RADIUS_PC;
+  }
+
+  const shrinkStartPc = denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+  if (cameraDistanceFromOriginPc >= shrinkStartPc) {
+    return STAR_MARKER_RADIUS_PC;
+  }
+  if (cameraDistanceFromOriginPc <= denseBatchRadiusPc) {
+    return STAR_MARKER_MIN_RADIUS_PC;
+  }
+
+  const t = (cameraDistanceFromOriginPc - denseBatchRadiusPc) / (shrinkStartPc - denseBatchRadiusPc);
+  return STAR_MARKER_MIN_RADIUS_PC + t * (STAR_MARKER_RADIUS_PC - STAR_MARKER_MIN_RADIUS_PC);
 }
 
 /** Issue #115: opacity tiers for the same generic catalog-object markers
@@ -324,11 +420,35 @@ export function isCatalogObjectVisible(
 /** Sets instance `index` of `bucket.mesh`'s transform to its real
  * position + radius (visible) or to the zero-scale hidden transform,
  * without touching instance count/order - the standard
- * `InstancedMesh`-has-no-per-instance-`.visible` workaround (issue #89). */
-export function setInstanceVisibility(bucket: CatalogBucket, index: number, visible: boolean): void {
+ * `InstancedMesh`-has-no-per-instance-`.visible` workaround (issue #89).
+ *
+ * Issue #119: when the instance being shown is both a RECONS dense-batch
+ * member (`lod.ts`'s `isDenseBatchMember`) and a `star`-type object, its
+ * baked-in `bucket.radiiPc[index]` (the fixed overview radius) is replaced
+ * by `starMarkerRadiusPc`'s camera-distance-dependent value instead - the
+ * same LOD-gated subset `updateDenseBatchLod` below already recomputes every
+ * frame for visibility, now also getting its radius recomputed in the same
+ * pass. Every other instance (non-dense-batch, or dense-batch but not a
+ * star - not the case in today's data, see `starMarkerRadiusPc`'s
+ * docstring, but checked explicitly rather than assumed) keeps using its
+ * static baked-in radius, unaffected. `cameraDistanceFromOriginPc`/
+ * `denseBatchRadiusPc` default to `Number.POSITIVE_INFINITY`, under which
+ * `starMarkerRadiusPc` always returns the unshrunk overview radius anyway -
+ * i.e. any existing caller that doesn't pass them sees no behavior change. */
+export function setInstanceVisibility(
+  bucket: CatalogBucket,
+  index: number,
+  visible: boolean,
+  cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
+  denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
+): void {
   const obj = bucket.objects[index];
-  const radiusPc = visible ? bucket.radiiPc[index] : HIDDEN_INSTANCE_SCALE;
-  bucket.mesh.setMatrixAt(index, instanceMatrixFor(obj, radiusPc));
+  let radiusPc = bucket.radiiPc[index];
+  if (visible && STAR_OBJECT_TYPES.has(obj.object_type) && isDenseBatchMember(obj)) {
+    radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
+  }
+  const effectiveRadiusPc = visible ? radiusPc : HIDDEN_INSTANCE_SCALE;
+  bucket.mesh.setMatrixAt(index, instanceMatrixFor(obj, effectiveRadiusPc));
   bucket.mesh.instanceMatrix.needsUpdate = true;
 }
 
@@ -404,6 +524,8 @@ export function updateCatalogVisibility(
           cameraDistanceFromOriginPc,
           denseBatchRadiusPc,
         ),
+        cameraDistanceFromOriginPc,
+        denseBatchRadiusPc,
       );
     });
   }
@@ -420,7 +542,16 @@ export function updateCatalogVisibility(
  * defers to `isCatalogObjectVisible` for the full visibility decision, so
  * a dense-batch member that's also currently category-off or outside the
  * radius filter stays hidden regardless of camera distance - the two
- * mechanisms can never disagree about what's on screen. */
+ * mechanisms can never disagree about what's on screen.
+ *
+ * Issue #119: this same per-frame pass now also carries the dense batch's
+ * `star`-type instances' camera-distance-dependent radius
+ * (`starMarkerRadiusPc`, via `setInstanceVisibility`'s
+ * `cameraDistanceFromOriginPc`/`denseBatchRadiusPc` passthrough) - piggy-
+ * backing on the exact same already-cheap subset/pass rather than adding a
+ * second full-catalog or second dense-batch-only walk, since both concerns
+ * (LOD visibility, LOD radius) only ever apply to the same ~122-instance
+ * dense batch and are cheapest to recompute together. */
 export function updateDenseBatchLod(
   buckets: CatalogBucket[],
   categoryVisibility: ReadonlyMap<string, boolean>,
@@ -441,6 +572,8 @@ export function updateDenseBatchLod(
           cameraDistanceFromOriginPc,
           denseBatchRadiusPc,
         ),
+        cameraDistanceFromOriginPc,
+        denseBatchRadiusPc,
       );
     });
   }
