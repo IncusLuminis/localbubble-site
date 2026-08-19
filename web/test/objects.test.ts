@@ -11,6 +11,9 @@ import {
   markerOpacityFor,
   markerRadiusPc,
   setInstanceVisibility,
+  STAR_MARKER_MIN_RADIUS_PC,
+  STAR_MARKER_SHRINK_START_MULTIPLIER,
+  starMarkerRadiusPc,
   SUN_OBJECT_ID,
   updateCatalogSizeScale,
   updateCatalogVisibility,
@@ -185,6 +188,114 @@ describe("markerRadiusPc (issue #103 three-tier hierarchy)", () => {
     // Clamped, not unbounded: a further increase in size_pc must not move it.
     expect(markerRadiusPc(hugeSize * 10, "star_cluster")).toBe(clusterMax);
     expect(markerRadiusPc(hugeSize * 10, "molecular_cloud")).toBe(structureMax);
+  });
+});
+
+/**
+ * Issue #119: the star marker's camera-distance-dependent radius. Before
+ * this issue, `STAR_MARKER_RADIUS_PC` (2pc) was fixed regardless of camera
+ * distance - bigger than the real distance between the Sun and its nearest
+ * neighbors (Proxima Centauri, 1.302pc; Alpha Centauri A/B, ~1.347pc,
+ * ~0.068pc from Proxima itself - see `starMarkerRadiusPc`'s own docstring
+ * for how these were computed from `scene.json`), so at solar-neighborhood
+ * zoom those markers visually overlapped/engulfed the Sun and each other.
+ * Mirrors `sun.test.ts`'s coverage style for `sunCoreRadiusPc` exactly:
+ * boundary values at both clamped ends, the interpolated region in between,
+ * and a real-world sanity check against the Sun's nearest neighbors.
+ */
+describe("starMarkerRadiusPc (issue #119)", () => {
+  // Same realistic dense-batch collection radius `sun.test.ts` uses
+  // (`lod.test.ts`'s DENSE_MEMBER_FAR), so these tests exercise the same
+  // values `main.ts` would see at runtime.
+  const REALISTIC_DENSE_BATCH_RADIUS_PC = 11.26;
+
+  it("is the fixed overview radius at the default ~1087pc 'Perspective' camera distance", () => {
+    expect(starMarkerRadiusPc(1087, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(markerRadiusPc(null, "star"));
+  });
+
+  it("is the fixed overview radius at the ~800pc overview radius-filter preset", () => {
+    expect(starMarkerRadiusPc(800, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(markerRadiusPc(null, "star"));
+  });
+
+  it("is the fixed overview radius at any distance at or beyond the shrink-start threshold", () => {
+    const shrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    expect(starMarkerRadiusPc(shrinkStartPc, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(markerRadiusPc(null, "star"));
+    expect(starMarkerRadiusPc(shrinkStartPc + 1000, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(
+      markerRadiusPc(null, "star"),
+    );
+  });
+
+  it("is the min (point-like) radius once the camera is at the dense batch's own collection radius", () => {
+    expect(
+      starMarkerRadiusPc(REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC),
+    ).toBe(STAR_MARKER_MIN_RADIUS_PC);
+  });
+
+  it("is the min radius for any distance inside the dense batch's own collection radius", () => {
+    expect(starMarkerRadiusPc(1.3, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(STAR_MARKER_MIN_RADIUS_PC);
+    expect(starMarkerRadiusPc(0, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(STAR_MARKER_MIN_RADIUS_PC);
+  });
+
+  it("interpolates continuously and monotonically between the shrink-start threshold and the collection radius", () => {
+    const shrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    const midpointPc = (shrinkStartPc + REALISTIC_DENSE_BATCH_RADIUS_PC) / 2;
+
+    const atStart = starMarkerRadiusPc(shrinkStartPc, REALISTIC_DENSE_BATCH_RADIUS_PC);
+    const atMidpoint = starMarkerRadiusPc(midpointPc, REALISTIC_DENSE_BATCH_RADIUS_PC);
+    const atFloor = starMarkerRadiusPc(REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC);
+
+    expect(atStart).toBe(markerRadiusPc(null, "star"));
+    expect(atFloor).toBe(STAR_MARKER_MIN_RADIUS_PC);
+    expect(atMidpoint).toBeLessThan(atStart);
+    expect(atMidpoint).toBeGreaterThan(atFloor);
+    expect(atMidpoint).toBeCloseTo((markerRadiusPc(null, "star") + STAR_MARKER_MIN_RADIUS_PC) / 2, 5);
+
+    const samples = Array.from({ length: 11 }, (_, i) =>
+      starMarkerRadiusPc(
+        REALISTIC_DENSE_BATCH_RADIUS_PC + (i / 10) * (shrinkStartPc - REALISTIC_DENSE_BATCH_RADIUS_PC),
+        REALISTIC_DENSE_BATCH_RADIUS_PC,
+      ),
+    );
+    for (let i = 1; i < samples.length; i++) {
+      expect(samples[i]).toBeGreaterThanOrEqual(samples[i - 1]);
+    }
+  });
+
+  it("stays at the overview radius regardless of camera distance when denseBatchRadiusPc is 0 (not loaded yet)", () => {
+    expect(starMarkerRadiusPc(0, 0)).toBe(markerRadiusPc(null, "star"));
+    expect(starMarkerRadiusPc(1087, 0)).toBe(markerRadiusPc(null, "star"));
+  });
+
+  /**
+   * The actual numerical verification issue #119 asks for: at the shrunk
+   * (close-zoom) radius, two RECONS-batch stars separated by their real
+   * distance must not overlap - `2 * radius < separation`. Positions read
+   * from `web/public/data/scene.json` (2026-08-19):
+   *   - Proxima Centauri: [0.90293..., -0.93698..., -0.04378...] pc
+   *   - Alpha Centauri A: [0.96488..., -0.94047..., -0.01598...] pc
+   *   - Alpha Centauri B: [0.96482..., -0.94054..., -0.01603...] pc
+   *   - Sun (origin): [0, 0, 0] pc
+   * giving Proxima-to-Sun = 1.302pc, Proxima-to-Alpha-Centauri-A/B =
+   * ~0.068pc (both A and B, to 3 significant figures - the AB pair itself
+   * is only ~0.0001pc apart, a real, genuinely-unresolvable-at-this-scale
+   * binary that is expected to stay a single coincident point).
+   */
+  it("the shrunk radius leaves Proxima Centauri and Alpha Centauri A/B visually distinct (issue #119's own numerical check)", () => {
+    const shrunkRadius = starMarkerRadiusPc(0, REALISTIC_DENSE_BATCH_RADIUS_PC);
+    expect(shrunkRadius).toBe(STAR_MARKER_MIN_RADIUS_PC);
+
+    const proximaToSunPc = 1.302;
+    const proximaToAlphaCenPc = 0.068;
+
+    // Two shrunk star markers, placed at their real separation, must not
+    // touch/overlap: the sum of their radii must be strictly less than the
+    // distance between them.
+    expect(2 * shrunkRadius).toBeLessThan(proximaToAlphaCenPc);
+    // The Sun's own shrunk core (0.15pc, issue #113's SUN_CORE_MIN_RADIUS_PC)
+    // plus Proxima's shrunk marker must likewise stay well under the
+    // 1.302pc Sun-Proxima gap.
+    const sunCoreMinRadiusPc = 0.15;
+    expect(sunCoreMinRadiusPc + shrunkRadius).toBeLessThan(proximaToSunPc);
   });
 });
 
@@ -408,6 +519,72 @@ describe("setInstanceVisibility (zero-scale hide mechanism)", () => {
     expect(bucket.objects[1].id).toBe("cloud-b");
     expect(bucket.mesh.count).toBe(2);
   });
+
+  /**
+   * Issue #119: `setInstanceVisibility`'s two new optional parameters
+   * (`cameraDistanceFromOriginPc`/`denseBatchRadiusPc`) are the mechanism
+   * `updateCatalogVisibility`/`updateDenseBatchLod` both funnel through to
+   * apply the LOD-dependent star radius - these tests exercise it directly,
+   * independent of either caller.
+   */
+  describe("issue #119 dense-batch star radius override", () => {
+    const collectionRadiusPc = 11.26;
+    const nearbyStar = makeObject({
+      id: "proxima",
+      object_type: "star",
+      position_pc: [0.9, -0.9, -0.04],
+      distance_pc: 1.3,
+      group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+    });
+
+    it("defaults to the static baked-in radius when the LOD params are omitted (backward compatible)", () => {
+      const { buckets } = createCatalogObjectGroup([nearbyStar]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, true);
+
+      expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
+    });
+
+    it("uses the LOD-shrunk radius for a dense-batch star instance once the camera is close in", () => {
+      const { buckets } = createCatalogObjectGroup([nearbyStar]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, true, 0, collectionRadiusPc);
+
+      expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(STAR_MARKER_MIN_RADIUS_PC, 6);
+    });
+
+    it("never applies the shrink to a hidden instance (stays exactly zero-scale)", () => {
+      const { buckets } = createCatalogObjectGroup([nearbyStar]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, false, 0, collectionRadiusPc);
+
+      expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBe(0);
+    });
+
+    it("does not apply the star-radius shrink to a non-star dense-batch-tagged instance", () => {
+      const denseBatchCloud = makeObject({
+        id: "dense-cloud",
+        object_type: "molecular_cloud",
+        position_pc: [1, 1, 1],
+        distance_pc: 1.7,
+        group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+      });
+      const { buckets } = createCatalogObjectGroup([denseBatchCloud]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, true, 0, collectionRadiusPc);
+
+      // Not a `star`-type object, so the type-aware clamp still applies -
+      // this instance keeps its static structure-tier radius even though it
+      // carries the dense-batch tag (not the case in today's real data, see
+      // `starMarkerRadiusPc`'s docstring, but must not silently mis-shrink
+      // a hypothetical future non-star dense-batch member).
+      expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
+    });
+  });
 });
 
 describe("isCatalogObjectVisible / updateCatalogVisibility / visibleCatalogObjects", () => {
@@ -453,6 +630,30 @@ describe("isCatalogObjectVisible / updateCatalogVisibility / visibleCatalogObjec
     const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B, STAR_A, STAR_B]);
     const visible = visibleCatalogObjects(buckets, categoryVisibility, 150);
     expect(visible.map((o) => o.id)).toEqual(["cloud-a"]);
+  });
+
+  // Issue #119: the full-recompute `updateCatalogVisibility` path (called on
+  // every category/radius-filter change) must apply the same LOD-dependent
+  // star radius `updateDenseBatchLod`'s own per-frame path does, so a filter
+  // change doesn't visibly "pop" a close-zoomed dense-batch star back to its
+  // full overview radius for a frame before the next `applyDenseBatchLod()`
+  // call corrects it.
+  it("updateCatalogVisibility also applies the LOD-shrunk radius to a visible dense-batch star", () => {
+    const nearbyStar = makeObject({
+      id: "proxima",
+      object_type: "star",
+      position_pc: [0.9, -0.9, -0.04],
+      distance_pc: 1.3,
+      group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+    });
+    const starsOn = new Map<string, boolean>([["star", true]]);
+    const collectionRadiusPc = 11.26;
+    const { buckets } = createCatalogObjectGroup([nearbyStar]);
+    const bucket = buckets[0];
+
+    updateCatalogVisibility(buckets, starsOn, null, 0, collectionRadiusPc);
+
+    expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(STAR_MARKER_MIN_RADIUS_PC, 6);
   });
 });
 
@@ -579,15 +780,40 @@ describe("dense-batch LOD (isCatalogObjectVisible / updateDenseBatchLod)", () =>
     );
   });
 
-  it("updateDenseBatchLod shows the dense-batch instance again once the camera moves close enough in", () => {
+  it("updateDenseBatchLod shows the dense-batch instance again once the camera moves close enough in, at its LOD-shrunk radius", () => {
     const { buckets } = createCatalogObjectGroup([NEARBY_STAR]);
     const bucket = buckets[0];
 
     updateDenseBatchLod(buckets, ALL_ON, null, 1087, collectionRadiusPc);
     expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBe(0);
 
+    // Issue #119: once shown again, a dense-batch *star* no longer jumps
+    // back to its static baked-in radius (`bucket.radiiPc[0]`, the fixed
+    // overview 2pc) - it uses `starMarkerRadiusPc`'s camera-distance-
+    // dependent value instead, which at this close a distance (well inside
+    // the collection radius) is the shrunk `STAR_MARKER_MIN_RADIUS_PC`
+    // floor, strictly smaller than the static radius.
     updateDenseBatchLod(buckets, ALL_ON, null, 5, collectionRadiusPc);
-    expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
+    const shownScale = decomposeInstanceMatrix(bucket, 0).scale.x;
+    expect(shownScale).toBeCloseTo(starMarkerRadiusPc(5, collectionRadiusPc), 6);
+    expect(shownScale).toBeLessThan(bucket.radiiPc[0]);
+  });
+
+  it("updateDenseBatchLod never touches a non-dense-batch star's radius, even at a close camera distance where the shrink would otherwise apply", () => {
+    const { buckets } = createCatalogObjectGroup([NEARBY_STAR, STAR_A]);
+    const bucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const otherIndex = bucket.objects.findIndex((o) => o.id === "star-a");
+
+    // Camera close enough in that the dense-batch member (proxima) would
+    // shrink to its LOD floor - STAR_A is not a dense-batch member, so its
+    // radius must stay exactly as `createCatalogObjectGroup` baked it,
+    // regardless of camera distance (this function only ever touches
+    // dense-batch instances at all - see the `isDenseBatchMember` guard).
+    updateDenseBatchLod(buckets, ALL_ON, null, 5, collectionRadiusPc);
+    expect(decomposeInstanceMatrix(bucket, otherIndex).scale.x).toBeCloseTo(
+      bucket.radiiPc[otherIndex],
+      6,
+    );
   });
 
   it("updateDenseBatchLod still respects a category toggle turned off for the dense-batch member", () => {

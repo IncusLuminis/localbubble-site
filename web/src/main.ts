@@ -151,7 +151,13 @@ function applyCatalogVisibility(): void {
  * catalog objects' instance matrices instead of just the ~122 gated
  * ones). Category/radius-filter changes still go through the full
  * `applyCatalogVisibility()` path above, so the two mechanisms never
- * disagree about what's currently visible. */
+ * disagree about what's currently visible.
+ *
+ * Issue #119: this same call now also carries the dense batch's `star`
+ * instances' camera-distance-dependent marker radius (`objects.ts`'s
+ * `starMarkerRadiusPc`, applied inside `updateDenseBatchLod` itself) - no
+ * separate per-frame call needed, since both LOD effects (visibility,
+ * radius) only ever apply to the same dense-batch subset. */
 function applyDenseBatchLod(): void {
   updateDenseBatchLod(
     catalogBuckets,
