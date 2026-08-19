@@ -1,11 +1,15 @@
 import { describe, expect, it } from "vitest";
 import {
   DEFAULT_MAX_LABEL_DISTANCE_PC,
+  DENSE_BATCH_MAX_VISIBLE_LABELS,
   effectiveMaxLabelDistancePc,
+  hasProperName,
   LABEL_DISTANCE_CAMERA_SCALE_FACTOR,
+  selectDenseBatchLabels,
   selectNearestLabels,
   shouldShowLabel,
   shouldShowSunLabel,
+  type DenseBatchLabelRankCandidate,
   type LabelRankCandidate,
 } from "../src/scene/labels";
 
@@ -227,5 +231,215 @@ describe("shouldShowSunLabel", () => {
     // Same "labels are on" condition, but the Sun's own policy is
     // unaffected by the distance/rank scenario above.
     expect(shouldShowSunLabel(true)).toBe(true);
+  });
+});
+
+/**
+ * Issue #114's proper-name heuristic: SIMBAD's own "NAME " prefix
+ * convention, checked against `name` first and then `aliases` - verified
+ * against the *actual* RECONS-batch catalog records (`data/normalized/
+ * initial_catalog_records.json` / exported `scene.json`), not invented
+ * shapes. Real examples used below:
+ *   - `name_proxima_centauri`: `name` is literally "NAME Proxima
+ *     Centauri" - caught by the primary-name check.
+ *   - `alf_cen_a`/`alf_cen_b`: `name` is the bare Bayer designation
+ *     "* alf Cen A"/"* alf Cen B", with the recognizable common name only
+ *     present as an alias - "NAME Rigil Kentaurus"/"NAME Toliman" - caught
+ *     by the alias fallback.
+ *   - `wolf_359`/`hd_95735`/`ross_128`: neither `name` nor any alias
+ *     carries a "NAME " entry - correctly treated as bare designations
+ *     even though some read as quasi-names colloquially.
+ */
+describe("hasProperName", () => {
+  it("recognizes a primary name using SIMBAD's 'NAME ' convention (Proxima Centauri)", () => {
+    expect(
+      hasProperName({
+        name: "NAME Proxima Centauri",
+        aliases: ["GJ 551", "HIP 70890", "NAME Proxima Cen", "NAME Proxima"],
+      }),
+    ).toBe(true);
+  });
+
+  it("recognizes a proper name that only appears as an alias, not the primary name (Alpha Centauri A)", () => {
+    expect(
+      hasProperName({
+        name: "* alf Cen A",
+        aliases: ["GJ 559 A", "HIP 71683", "HD 128620", "NAME Rigel Kentaurus", "NAME Rigil Kentaurus"],
+      }),
+    ).toBe(true);
+  });
+
+  it("recognizes Alpha Centauri B's proper name alias (Toliman)", () => {
+    expect(
+      hasProperName({
+        name: "* alf Cen B",
+        aliases: ["GJ 559 B", "HIP 71681", "HD 128621", "NAME Toliman"],
+      }),
+    ).toBe(true);
+  });
+
+  it("treats a bare catalog designation with no 'NAME ' anywhere as unnamed (Wolf 359)", () => {
+    expect(
+      hasProperName({
+        name: "Wolf  359",
+        aliases: ["GJ 406", "PLX 2553", "LHS    36", "LTT 12923"],
+      }),
+    ).toBe(false);
+  });
+
+  it("treats an HD-designation-only record as unnamed (HD 95735 / Lalande 21185, no NAME alias present here)", () => {
+    expect(
+      hasProperName({
+        name: "HD  95735",
+        aliases: ["GJ 411", "HIP 54035", "LHS    37", "LTT 12960"],
+      }),
+    ).toBe(false);
+  });
+
+  it("treats Ross 128 (catalog designation) as unnamed", () => {
+    expect(
+      hasProperName({
+        name: "Ross  128",
+        aliases: ["GJ 447", "HIP 57548", "LHS   315"],
+      }),
+    ).toBe(false);
+  });
+
+  it("does not false-positive on a 'NAME-IAU' prefixed alias (distinct convention, no space after NAME)", () => {
+    // Real record `102_her`: aliases include "NAME-IAU Ramus" - SIMBAD's
+    // IAU-approved-name convention, a different prefix than the plain
+    // "NAME " proper-name convention this heuristic targets.
+    expect(
+      hasProperName({
+        name: "* 102 Her",
+        aliases: ["HIP 88886", "HD 166182", "NAME-IAU Ramus"],
+      }),
+    ).toBe(false);
+  });
+
+  it("requires the 'NAME ' prefix at the start of the string, not merely present somewhere", () => {
+    expect(hasProperName({ name: "GJ 551", aliases: ["V* NAME something"] })).toBe(false);
+  });
+});
+
+/**
+ * Issue #114: within the dense RECONS "100 nearest stellar systems" LOD
+ * batch (#104), the general 60-object cap is far too generous for the tiny
+ * screen area involved once the camera is close enough for the batch to be
+ * visible - `selectDenseBatchLabels` applies a much smaller cap
+ * (`DENSE_BATCH_MAX_VISIBLE_LABELS`) and prioritizes proper-named objects
+ * (Alpha Centauri, Proxima, Barnard's Star, ...) over bare catalog
+ * designations, not just nearest-to-camera.
+ */
+describe("selectDenseBatchLabels", () => {
+  function denseCandidate(
+    id: string,
+    cameraDistancePc: number,
+    hasProperNameValue: boolean,
+    isSelected = false,
+  ): DenseBatchLabelRankCandidate {
+    return { id, cameraDistancePc, isSelected, hasProperName: hasProperNameValue };
+  }
+
+  it("shows everything when the candidate count is already within the cap", () => {
+    const candidates = [denseCandidate("a", 1, true), denseCandidate("b", 2, false)];
+    expect(selectDenseBatchLabels(candidates, 5)).toEqual(new Set(["a", "b"]));
+  });
+
+  it("prioritizes proper-named objects over bare designations, even when the designation-only object is nearer", () => {
+    const candidates = [
+      denseCandidate("named-far", 5, true),
+      denseCandidate("bare-near-1", 1, false),
+      denseCandidate("bare-near-2", 2, false),
+    ];
+    const visible = selectDenseBatchLabels(candidates, 1);
+    expect(visible).toEqual(new Set(["named-far"]));
+  });
+
+  it("breaks ties within the same proper-name tier by nearest camera distance", () => {
+    const candidates = [
+      denseCandidate("named-far", 10, true),
+      denseCandidate("named-near", 3, true),
+      denseCandidate("bare-near", 1, false),
+    ];
+    const visible = selectDenseBatchLabels(candidates, 2);
+    expect(visible).toEqual(new Set(["named-near", "named-far"]));
+  });
+
+  it("always includes the selected candidate even if unnamed and far, without competing for name-priority budget", () => {
+    const candidates = [
+      denseCandidate("named-1", 1, true),
+      denseCandidate("named-2", 2, true),
+      denseCandidate("selected-bare-far", 9999, false, true),
+    ];
+    const visible = selectDenseBatchLabels(candidates, 2);
+    expect(visible.has("selected-bare-far")).toBe(true);
+    expect(visible.size).toBe(2);
+    expect(visible.has("named-1")).toBe(true);
+  });
+
+  it("caps well below the general MAX_VISIBLE_LABELS at realistic dense-batch scale (122 candidates)", () => {
+    // Mirrors the real RECONS batch: 22 proper-named entries, 100 bare
+    // designations (approximate real split - see `hasProperName`'s
+    // docstring for the real catalog numbers).
+    const named: DenseBatchLabelRankCandidate[] = Array.from({ length: 22 }, (_, i) =>
+      denseCandidate(`named-${i}`, i + 1, true),
+    );
+    const bare: DenseBatchLabelRankCandidate[] = Array.from({ length: 100 }, (_, i) =>
+      denseCandidate(`bare-${i}`, i + 1, false),
+    );
+    const visible = selectDenseBatchLabels([...named, ...bare], DENSE_BATCH_MAX_VISIBLE_LABELS);
+    expect(visible.size).toBe(DENSE_BATCH_MAX_VISIBLE_LABELS);
+    expect(visible.size).toBeLessThan(60);
+    // All winners are drawn from the named pool (there are more named
+    // entries than the cap, so no bare designation should win a slot).
+    for (const id of visible) {
+      expect(id.startsWith("named-")).toBe(true);
+    }
+  });
+
+  it("reliably includes the Alpha Centauri system (Proxima, A, B) - the batch's own three nearest, real-data-shaped members", () => {
+    // Real distances/ids from the RECONS batch (scene.json): Proxima
+    // ~1.30pc, Alpha Cen A ~1.35pc, Alpha Cen B ~1.35pc - the batch's own
+    // three nearest members, so proper-name-priority and nearest-distance
+    // agree on ranking them first regardless of tie-break order.
+    const alphaCenSystem: DenseBatchLabelRankCandidate[] = [
+      denseCandidate("name_proxima_centauri", 1.3, true),
+      denseCandidate("alf_cen_a", 1.35, true),
+      denseCandidate("alf_cen_b", 1.35, true),
+    ];
+    // A representative slice of the rest of the batch: some named, mostly
+    // bare designations, at realistic distances.
+    const rest: DenseBatchLabelRankCandidate[] = [
+      denseCandidate("name_barnard_s_star", 1.83, true),
+      denseCandidate("alf_cma", 2.64, true),
+      denseCandidate("wolf_359", 2.41, false),
+      denseCandidate("hd_95735", 2.55, false),
+      denseCandidate("g_272_61a", 2.72, false),
+      denseCandidate("g_272_61b", 2.67, false),
+      denseCandidate("cd_23_14742", 2.98, false),
+      denseCandidate("ross_248", 3.16, false),
+      denseCandidate("ross_128", 3.37, false),
+    ];
+
+    const visible = selectDenseBatchLabels(
+      [...alphaCenSystem, ...rest],
+      DENSE_BATCH_MAX_VISIBLE_LABELS,
+    );
+
+    expect(visible.has("name_proxima_centauri")).toBe(true);
+    expect(visible.has("alf_cen_a")).toBe(true);
+    expect(visible.has("alf_cen_b")).toBe(true);
+    expect(visible.size).toBe(DENSE_BATCH_MAX_VISIBLE_LABELS);
+    expect(visible.size).toBeLessThan(60);
+  });
+
+  it("returns an empty set for an empty candidate list (outside the dense LOD volume, nothing to rank)", () => {
+    expect(selectDenseBatchLabels([], DENSE_BATCH_MAX_VISIBLE_LABELS)).toEqual(new Set());
+  });
+
+  it("handles a cap of zero by showing only selected candidates", () => {
+    const candidates = [denseCandidate("a", 1, true), denseCandidate("b", 2, false, true)];
+    expect(selectDenseBatchLabels(candidates, 0)).toEqual(new Set(["b"]));
   });
 });

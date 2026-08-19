@@ -168,6 +168,108 @@ export function selectNearestLabels(
   return new Set([...selectedIds, ...nearest]);
 }
 
+/**
+ * True if `obj` carries at least one genuine, recognizable proper name -
+ * either as its primary `name` or among its `aliases` - as opposed to a
+ * bare catalog designation (e.g. "GJ 551", "HIP 70890", "LHS 292"). Added
+ * for issue #114's dense-batch label prioritization (`selectDenseBatchLabels`
+ * below), so "Alpha Centauri"/"Proxima Centauri"/"Barnard's Star"-style
+ * labels win scarce cap slots over bare designations, not just whichever
+ * happens to be nearest to the camera.
+ *
+ * Heuristic verified against the actual catalog data (`data/normalized/
+ * initial_catalog_records.json` / the exported `scene.json`), not guessed:
+ * SIMBAD's own "NAME " prefix convention marks a genuine proper name.
+ * `name_proxima_centauri`'s `name` is literally "NAME Proxima Centauri", so
+ * the primary-name check alone catches it. `alf_cen_a`/`alf_cen_b`'s `name`
+ * is instead the bare Bayer designation "* alf Cen A"/"* alf Cen B", with
+ * the recognizable common name only present as an alias - "NAME Rigil
+ * Kentaurus"/"NAME Toliman" respectively - hence the alias fallback check.
+ * Records with neither (e.g. `wolf_359`'s "Wolf  359", `hd_95735`'s
+ * "HD  95735", `ross_128`'s "Ross  128") are treated as bare designations
+ * even though some read as quasi-names colloquially - SIMBAD itself
+ * doesn't mark them with "NAME ", so neither does this heuristic; it
+ * tracks SIMBAD's own "is this a genuine proper name" judgment rather than
+ * general astronomical familiarity.
+ */
+export function hasProperName(obj: Pick<SceneObject, "name" | "aliases">): boolean {
+  if (obj.name.startsWith("NAME ")) {
+    return true;
+  }
+  return obj.aliases.some((alias) => alias.startsWith("NAME "));
+}
+
+/**
+ * Hard cap on simultaneously-visible labels specifically for the dense
+ * RECONS "100 nearest stellar systems" LOD batch (issue #104's `lod.ts`
+ * `DENSE_BATCH_GROUP_TAG`) - independent of, and much smaller than, the
+ * general `MAX_VISIBLE_LABELS` cap above (issue #114).
+ *
+ * 122 real stars packed within the batch's own ~11pc collection radius
+ * means the general 60-object cap - tuned for the ~800pc overview, where
+ * 60 simultaneously-visible labels have a whole screen's worth of room to
+ * spread out - produces overlapping/illegible labels once the camera is
+ * close enough for the whole batch to occupy a tiny screen area. A
+ * "handful" (the issue's own suggested 5-8) stays legible; 7 was chosen to
+ * comfortably fit the Alpha Centauri system's all three catalog entries
+ * (Proxima, A, and B - themselves the batch's three nearest members, so
+ * they win the proper-name-first ranking outright) plus a few more named
+ * neighbors (Barnard's Star, Sirius A/B, ...) without crowding back into
+ * the clutter this issue exists to fix.
+ */
+export const DENSE_BATCH_MAX_VISIBLE_LABELS = 7;
+
+/** `LabelRankCandidate` plus whether the candidate has a genuine proper
+ * name (`hasProperName` above) - the dense batch's ranking criterion
+ * (issue #114) prioritizes that ahead of raw camera distance, unlike the
+ * general `selectNearestLabels` cap which ranks purely by distance. */
+export interface DenseBatchLabelRankCandidate extends LabelRankCandidate {
+  hasProperName: boolean;
+}
+
+/**
+ * The dense-batch-specific counterpart to `selectNearestLabels` (issue
+ * #114): same selected-always-included/remaining-budget structure, but
+ * ranks the non-selected remainder by proper-name-first, then nearest-
+ * camera-distance as the tiebreaker, rather than by pure camera distance -
+ * so within the dense RECONS batch, "Alpha Centauri" beats a marginally
+ * closer bare "GJ ####"-style designation for one of the small cap's
+ * scarce slots.
+ *
+ * Deliberately a separate function from `selectNearestLabels` rather than
+ * a generalized "ranking strategy" parameter on it: the two caps serve
+ * different pools (general catalog vs. one specific LOD-gated batch) with
+ * different budgets and different ranking criteria, and `main.ts` unions
+ * their results rather than ever passing the same candidate through both -
+ * keeping them separate keeps each one simple to read and test in
+ * isolation, per this issue's "don't touch non-RECONS-batch label
+ * behavior" scope boundary.
+ */
+export function selectDenseBatchLabels(
+  candidates: readonly DenseBatchLabelRankCandidate[],
+  maxVisible: number,
+): Set<string> {
+  if (candidates.length <= maxVisible) {
+    return new Set(candidates.map((c) => c.id));
+  }
+
+  const selectedIds = candidates.filter((c) => c.isSelected).map((c) => c.id);
+  const remainingBudget = Math.max(0, maxVisible - selectedIds.length);
+
+  const ranked = candidates
+    .filter((c) => !c.isSelected)
+    .sort((a, b) => {
+      if (a.hasProperName !== b.hasProperName) {
+        return a.hasProperName ? -1 : 1;
+      }
+      return a.cameraDistancePc - b.cameraDistancePc;
+    })
+    .slice(0, remainingBudget)
+    .map((c) => c.id);
+
+  return new Set([...selectedIds, ...ranked]);
+}
+
 export interface CatalogLabel {
   /** The scene object this label belongs to. */
   object: SceneObject;
