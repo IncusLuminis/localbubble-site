@@ -98,6 +98,93 @@ function decomposeInstanceMatrix(
   return { position, quaternion, scale };
 }
 
+/**
+ * Issue #103: type-aware three-tier marker-radius hierarchy (spec
+ * `Idea-v1.3-visual-fidelity-and-navigation.md` §2.3) - individual stars
+ * strictly smaller than clusters/associations, which are strictly smaller
+ * than everything else (extended structures, and any unrecognized/future
+ * object_type as a catch-all). The tiers' pc ranges are constructed not to
+ * overlap, so `star < cluster < structure` must hold for *every* possible
+ * `size_pc`, not just the catalog's actual (mostly-null) values - these
+ * tests sweep a range of `size_pc` inputs rather than asserting one sample
+ * point, so a future change that lets one tier's range creep into another's
+ * would fail here even if today's catalog data happened not to expose it.
+ */
+describe("markerRadiusPc (issue #103 three-tier hierarchy)", () => {
+  const CLUSTER_TYPES = ["star_cluster", "stellar_association"];
+  // Representative of "everything else": real extended-structure types plus
+  // an unrecognized/future object_type, which must fall through to the same
+  // catch-all tier rather than erroring or silently matching a real tier.
+  const STRUCTURE_TYPES = [
+    "molecular_cloud",
+    "hii_region",
+    "supernova_remnant",
+    "bubble",
+    "some_future_object_type",
+  ];
+  const SIZE_PC_SAMPLES = [null, 0, -5, 1, 4, 8, 11.6, 20, 45, 60, 200, 10_000];
+
+  it("stars always render at one fixed radius, regardless of size_pc", () => {
+    const radii = new Set(SIZE_PC_SAMPLES.map((sizePc) => markerRadiusPc(sizePc, "star")));
+    expect(radii.size).toBe(1);
+  });
+
+  it("clusters and associations share the same tier for every size_pc sample", () => {
+    for (const sizePc of SIZE_PC_SAMPLES) {
+      const radii = CLUSTER_TYPES.map((type) => markerRadiusPc(sizePc, type));
+      expect(new Set(radii).size).toBe(1);
+    }
+  });
+
+  it("every structure type (plus an unrecognized/future type) shares the same catch-all tier", () => {
+    for (const sizePc of SIZE_PC_SAMPLES) {
+      const radii = STRUCTURE_TYPES.map((type) => markerRadiusPc(sizePc, type));
+      expect(new Set(radii).size).toBe(1);
+    }
+  });
+
+  it("holds star < cluster < structure strictly, across every size_pc sample and every type combination", () => {
+    for (const sizePc of SIZE_PC_SAMPLES) {
+      const starRadius = markerRadiusPc(sizePc, "star");
+      for (const clusterType of CLUSTER_TYPES) {
+        const clusterRadius = markerRadiusPc(sizePc, clusterType);
+        expect(starRadius).toBeLessThan(clusterRadius);
+        for (const structureType of STRUCTURE_TYPES) {
+          const structureRadius = markerRadiusPc(sizePc, structureType);
+          expect(clusterRadius).toBeLessThan(structureRadius);
+          expect(starRadius).toBeLessThan(structureRadius);
+        }
+      }
+    }
+  });
+
+  it("a real size_pc nudges the cluster tier's radius up within its own range, without ever reaching the structure tier's minimum", () => {
+    const floorRadius = markerRadiusPc(null, "star_cluster");
+    const withSize = markerRadiusPc(11.6, "star_cluster"); // catalog's one nonnull star_cluster size_pc
+    expect(withSize).toBeGreaterThanOrEqual(floorRadius);
+    expect(withSize).toBeLessThan(markerRadiusPc(null, "molecular_cloud"));
+  });
+
+  it("null/zero/negative/non-finite size_pc all fall back to each tier's own floor", () => {
+    for (const invalidSize of [null, 0, -5, Number.NaN, Number.POSITIVE_INFINITY]) {
+      expect(markerRadiusPc(invalidSize, "star")).toBe(markerRadiusPc(null, "star"));
+      expect(markerRadiusPc(invalidSize, "star_cluster")).toBe(markerRadiusPc(null, "star_cluster"));
+      expect(markerRadiusPc(invalidSize, "molecular_cloud")).toBe(markerRadiusPc(null, "molecular_cloud"));
+    }
+  });
+
+  it("a very large size_pc is clamped at each tier's own ceiling, never crossing into the next tier", () => {
+    const hugeSize = 1_000_000;
+    expect(markerRadiusPc(hugeSize, "star")).toBe(markerRadiusPc(null, "star"));
+    const clusterMax = markerRadiusPc(hugeSize, "star_cluster");
+    const structureMax = markerRadiusPc(hugeSize, "molecular_cloud");
+    expect(clusterMax).toBeLessThan(structureMax);
+    // Clamped, not unbounded: a further increase in size_pc must not move it.
+    expect(markerRadiusPc(hugeSize * 10, "star_cluster")).toBe(clusterMax);
+    expect(markerRadiusPc(hugeSize * 10, "molecular_cloud")).toBe(structureMax);
+  });
+});
+
 describe("excludeDedicatedMarkerObjects", () => {
   it("drops the Sun's own catalog entry by id", () => {
     const filtered = excludeDedicatedMarkerObjects([SUN_ENTRY, CLOUD_A, CLOUD_B]);
@@ -213,7 +300,7 @@ describe("createCatalogObjectGroup (InstancedMesh buckets)", () => {
     bucket.objects.forEach((obj, i) => {
       const { position, scale } = decomposeInstanceMatrix(bucket, i);
       expect(position.toArray()).toEqual(obj.position_pc);
-      const expectedRadius = markerRadiusPc(obj.size_pc);
+      const expectedRadius = markerRadiusPc(obj.size_pc, obj.object_type);
       expect(scale.x).toBeCloseTo(expectedRadius, 6);
       expect(scale.y).toBeCloseTo(expectedRadius, 6);
       expect(scale.z).toBeCloseTo(expectedRadius, 6);
