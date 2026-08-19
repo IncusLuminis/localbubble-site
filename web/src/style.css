@@ -33,6 +33,20 @@ body {
   z-index: 1;
 }
 
+/* Issue #125: field-of-view extent readout - mirrors #status's minimal
+   chrome (plain text, no panel box), bottom-right so it doesn't collide
+   with #status (bottom-left) or #inspector (top-right). */
+#fov-readout {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  color: #8fa3c8;
+  font-size: 12px;
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* Story #65: control panel + inspector panel (spec Idea.md §2's conceptual
    UI sketch, §23/§24/§28/§29/§39). Plain DOM styling, no framework. */
 .panel {

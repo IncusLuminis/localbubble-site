@@ -57,6 +57,8 @@ import { exportSceneAsPng } from "./scene/pngExport";
 import { createControlPanel } from "./ui/controls";
 import { Inspector } from "./ui/inspector";
 import { createSearchBox } from "./ui/search";
+import { createFovReadout } from "./ui/fovReadout";
+import { fovExtentPc } from "./scene/fov";
 import type { SceneObject } from "./scene/sceneTypes";
 
 /**
@@ -105,6 +107,10 @@ scene.add(createAxes(WORLD_EXTENT_PC));
 
 const inspector = new Inspector();
 app.appendChild(inspector.element);
+
+// Issue #125: field-of-view extent readout, bottom-right.
+const fovReadout = createFovReadout();
+app.appendChild(fovReadout.element);
 
 const raycaster = new Raycaster();
 
@@ -183,6 +189,19 @@ function applyDenseBatchLod(): void {
  * two LOD effects stay consistent with each other. */
 function applySunCoreScale(): void {
   sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc));
+}
+
+/** Issue #125: recomputes and redisplays the field-of-view extent readout
+ * each frame from the camera's *current* `fov`/`aspect` (rather than
+ * caching them) and its distance to `controls.target` - the same point the
+ * camera presets (`applyCameraPose`) orbit/frame around - so the readout
+ * stays correct across zoom, orbit, pan, and window resize (`onResize`
+ * below mutates `camera.aspect` in place) without needing its own resize
+ * listener. */
+function applyFovReadout(): void {
+  const distancePc = camera.position.distanceTo(controls.target);
+  const { horizontalPc, verticalPc } = fovExtentPc(camera.fov, camera.aspect, distancePc);
+  fovReadout.update(horizontalPc, verticalPc);
 }
 
 /** Issue #95: keeps the Inspector honest whenever a filter change
@@ -553,6 +572,7 @@ function animate(): void {
   updateLabelVisibility();
   applyDenseBatchLod();
   applySunCoreScale();
+  applyFovReadout();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }
