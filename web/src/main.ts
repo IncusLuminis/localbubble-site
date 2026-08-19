@@ -250,7 +250,7 @@ function applyCameraPose(pose: CameraPose): void {
  * directly so the Inspector/label-selection highlighting stays exactly as
  * consistent as a manual click-to-select. */
 function goToObject(obj: SceneObject): void {
-  applyCameraPose(objectCenteredPose(obj.position_pc, markerRadiusPc(obj.size_pc)));
+  applyCameraPose(objectCenteredPose(obj.position_pc, markerRadiusPc(obj.size_pc, obj.object_type)));
   selectObject(obj);
 }
 

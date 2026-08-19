@@ -127,22 +127,79 @@ const OBJECT_TYPE_COLORS: Record<string, number> = {
 
 const DEFAULT_COLOR = 0xaab4c8;
 
-/** Visual-only marker radius floor (pc), so point-like objects with no
- * `size_pc` (e.g. stars, clusters) stay visible against an 800pc-scale
- * scene. This is display convenience, not a scientific value (spec §19
- * distinguishes measured/derived/model data from visual decoration). */
-const MIN_MARKER_RADIUS_PC = 4;
-const MAX_MARKER_RADIUS_PC = 45;
+/** Visual-only marker radius tiers (pc) - issue #103, spec
+ * `Idea-v1.3-visual-fidelity-and-navigation.md` §2.3. This is display
+ * convenience, not a scientific value (spec §19 distinguishes
+ * measured/derived/model data from visual decoration).
+ *
+ * Before #103, every object type shared one `size_pc`-driven formula with a
+ * single floor/ceiling. At 834-object scale (585 of them individual stars,
+ * spec v1.2) that meant a star and a small cluster - both of which usually
+ * lack `size_pc` in this catalog - rendered at the exact same radius, with
+ * nothing distinguishing "this is a point-source star" from "this is a
+ * genuinely-sized cluster." Confirmed against
+ * `data/normalized/initial_catalog_records.json` (2026-08-18): all 585
+ * `star` entries have `size_pc: null`; of 228 `star_cluster` and 10
+ * `stellar_association` entries, only 1 `star_cluster` carries a nonnull
+ * `size_pc` (11.6pc) - so both tiers are floor-dominated in practice, and
+ * the floors themselves are what need to differ.
+ *
+ * Three tiers, small to large, matching the spec's decision:
+ *
+ * 1. Individual stars (`star`) - a single small, fixed radius, deliberately
+ *    decoupled from `size_pc` entirely (stars are point sources; any nonzero
+ *    radius is already a convention, spec §19/§2.3). Never varies, so stars
+ *    can never accidentally grow to match a cluster's marker.
+ * 2. Clusters/associations (`star_cluster`, `stellar_association`) - a
+ *    mid-sized range. Still primarily floor-driven given the data above, but
+ *    a real `size_pc` nudges the radius up within the tier's own range,
+ *    per spec: "may still take a cue from `size_pc` where present."
+ * 3. Everything else (extended structures - molecular clouds, HII regions,
+ *    supernova remnants, bubbles - plus any other/future object type): the
+ *    pre-#103 `size_pc`-driven range, floor raised just enough to sit
+ *    strictly above tier 2's own ceiling.
+ *
+ * The three ranges - `STAR_MARKER_RADIUS_PC` / `[CLUSTER_MIN, CLUSTER_MAX]`
+ * / `[STRUCTURE_MIN, STRUCTURE_MAX]` - are constructed not to overlap
+ * (2 < [5, 9] < [10, 45]), so `star < cluster < structure` holds for *every*
+ * possible `size_pc`, not just today's catalog values. */
+const STAR_MARKER_RADIUS_PC = 2;
 
-/** Exported for tests - the same visual-radius derivation, per object,
- * that gets baked into each instance's transform matrix below. */
-export function markerRadiusPc(sizePc: number | null): number {
-  if (sizePc === null || !Number.isFinite(sizePc) || sizePc <= 0) {
-    return MIN_MARKER_RADIUS_PC;
+const CLUSTER_MIN_RADIUS_PC = 5;
+const CLUSTER_MAX_RADIUS_PC = 9;
+
+const STRUCTURE_MIN_RADIUS_PC = 10;
+const STRUCTURE_MAX_RADIUS_PC = 45;
+
+/** `size_pc` divisor shared by the cluster and structure tiers (unchanged
+ * from the pre-#103 single-tier formula), so a given `size_pc` value means
+ * the same thing in both tiers - only each tier's clamp range differs. */
+const SIZE_PC_DIVISOR = 4;
+
+const STAR_OBJECT_TYPES: ReadonlySet<string> = new Set(["star"]);
+const CLUSTER_OBJECT_TYPES: ReadonlySet<string> = new Set([
+  "star_cluster",
+  "stellar_association",
+]);
+
+/** Exported for tests - the same visual-radius derivation, per object, that
+ * gets baked into each instance's transform matrix below. Type-aware
+ * (issue #103): `objectType` picks which of the three tiers above applies;
+ * only the cluster/structure tiers then also look at `sizePc`, clamped to
+ * that tier's own range. */
+export function markerRadiusPc(sizePc: number | null, objectType: string): number {
+  if (STAR_OBJECT_TYPES.has(objectType)) {
+    return STAR_MARKER_RADIUS_PC;
   }
-  // Extended structures (molecular clouds etc.) carry a physical size;
-  // clamp only so a very large cloud doesn't dwarf the whole scene.
-  return Math.min(Math.max(sizePc / 4, MIN_MARKER_RADIUS_PC), MAX_MARKER_RADIUS_PC);
+
+  const [minRadiusPc, maxRadiusPc] = CLUSTER_OBJECT_TYPES.has(objectType)
+    ? [CLUSTER_MIN_RADIUS_PC, CLUSTER_MAX_RADIUS_PC]
+    : [STRUCTURE_MIN_RADIUS_PC, STRUCTURE_MAX_RADIUS_PC];
+
+  if (sizePc === null || !Number.isFinite(sizePc) || sizePc <= 0) {
+    return minRadiusPc;
+  }
+  return Math.min(Math.max(sizePc / SIZE_PC_DIVISOR, minRadiusPc), maxRadiusPc);
 }
 
 const materialCache = new Map<number, MeshBasicMaterial>();
@@ -247,7 +304,7 @@ export function createCatalogObjectGroup(objects: SceneObject[]): {
     const mesh = new InstancedMesh(UNIT_SPHERE_GEOMETRY, materialFor(color), bucketObjects.length);
     mesh.name = `catalog-${objectType}`;
 
-    const radiiPc = bucketObjects.map((obj) => markerRadiusPc(obj.size_pc));
+    const radiiPc = bucketObjects.map((obj) => markerRadiusPc(obj.size_pc, obj.object_type));
     bucketObjects.forEach((obj, i) => {
       mesh.setMatrixAt(i, instanceMatrixFor(obj, radiiPc[i]));
     });
