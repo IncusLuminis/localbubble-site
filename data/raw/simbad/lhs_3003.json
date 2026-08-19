@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "LHS 3003",
+  "retrieved_utc": "2026-08-18T16:44:12+00:00",
+  "record_id": "LP  914-54",
+  "raw": {
+    "main_id": "LP  914-54",
+    "ra": 224.15943113148623,
+    "dec": -28.163505320412494,
+    "coo_err_maj": 0.057500001043081284,
+    "coo_err_min": 0.04610000178217888,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 141.7891,
+    "plx_err": 0.0617000013589859,
+    "otype": "Em*",
+    "ids": "GJ 3877|Gaia DR3 6224387727748521344|2MUCD 11264|2MASS J14563831-2809473|2MASSI J1456383-280947|CNS5 3697|LHS  3003|LP  914-54|NLTT 38829|[GKL99] 310|[RHG95]  2363|PLX 3372.03|[B2006] J145638.3-280947|WISEA J145637.87-280957.3|Gaia DR2 6224387727748521344|8pc 156.30",
+    "matched_id": "LHS  3003"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "2MASS J04151954-0935066",
+  "retrieved_utc": "2026-08-18T16:43:01+00:00",
+  "record_id": "2MASSI J0415195-093506",
+  "raw": {
+    "main_id": "2MASSI J0415195-093506",
+    "ra": 63.831432,
+    "dec": -9.585187000000001,
+    "coo_err_maj": 110.0,
+    "coo_err_min": 110.0,
+    "coo_err_angle": 29,
+    "coo_wavelength": "N",
+    "coo_bibcode": "2003yCat.2246....0C",
+    "plx_value": 174.34,
+    "plx_err": 2.759999990463257,
+    "otype": "BD*",
+    "ids": "TIC 67773411|2MASS J04151954-0935066|2MASSI J0415195-093506|2MASSW J0415195-093506|CNS5 1054|[B2006] J041519.5-093506|WISEP J041521.20-093500.6|WISE J041521.21-093500.6|WISEA J041521.26-093500.4|EQ J0415-0935",
+    "matched_id": "2MASS J04151954-0935066"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 559 A",
+  "retrieved_utc": "2026-08-18T16:40:54+00:00",
+  "record_id": "* alf Cen A",
+  "raw": {
+    "main_id": "* alf Cen A",
+    "ra": 219.90205833170774,
+    "dec": -60.83399268831004,
+    "coo_err_maj": 34.1756706237793,
+    "coo_err_min": 28.45652961730957,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 742.12,
+    "plx_err": 1.399999976158142,
+    "otype": "PM*",
+    "ids": "GALAH 140708001701306|2MASS J14393592-6050069|TIC 471011145|GJ 559 A|HIP 71683|PLX 3309|* alf Cen A|CCDM J14396-6050A|CPD-60  5483A|CSI-60  5483 41|GCRV  8517|GEN# +1.00128620A|HD 128620|HIC  71683|HR  5459|IDS 14328-6025 A|LFT 1127|LHS    50|LTT  5806|CNS5 3627|NLTT 37984|PM 14362-6038A|PPM 360911|SKY# 26645|SPOCS  610|TD1 17606|Zkh 209|WDS J14396-6050A|TYC 9007-5849-1|PMSC 14328-6025A|* alf01 Cen|** RHD    1A|CD-60  5293A|WEB 12354|NAME Rigel Kentaurus|NAME Rigil Kentaurus",
+    "matched_id": "GJ 559 A"
+  }
+}

@@ -27,6 +27,13 @@ and [Additional star clusters (v1.2)](#additional-star-clusters-v12) below.
 Scaling the web viewer for the larger catalog (`InstancedMesh`, label
 density) has already shipped (Story #89).
 
+v1.3 (`spec/Idea-v1.3-visual-fidelity-and-navigation.md`) adds a second,
+disjoint batch: ~122 individual stars from RECONS's "100 nearest stellar
+systems" census, resolved the same way but gated behind camera-distance
+(LOD) marker visibility in the web viewer so this dense, close-in batch
+doesn't clutter the default/overview zoom - see
+[Nearby stars & marker LOD (v1.3)](#nearby-stars--marker-lod-v13) below.
+
 ## Setup
 
 ```bash
@@ -49,8 +56,10 @@ list (molecular clouds, star clusters, OB associations, the Vela SNR, and
 the Local Bubble) plus, since v1.2, ~585 individual named stars (see
 [Individual stars (v1.2)](#individual-stars-v12) below) and ~229 additional
 star clusters/associations (see
-[Additional star clusters (v1.2)](#additional-star-clusters-v12) below) -
-**834 objects total**. Every record is either resolved live via
+[Additional star clusters (v1.2)](#additional-star-clusters-v12) below),
+plus, since v1.3, ~122 individual nearby stars from the RECONS census (see
+[Nearby stars & marker LOD (v1.3)](#nearby-stars--marker-lod-v13) below) -
+**956 objects total**. Every record is either resolved live via
 SIMBAD/Gaia/VizieR, or built from a cited literature distance; see each
 record's `source.reference`. No live network access is required to rebuild
 from this checked-in file (spec §14); re-resolving from scratch is a
@@ -289,7 +298,77 @@ where SIMBAD's own classification says so - see below) instead of `"star"`.
   breakdown and the otype-based safety check that caught the two near-miss
   false matches.
 
-Catalog now stands at **834 objects** (20 original + 585 individual stars +
-229 clusters/associations). No web viewer changes were needed - the
-`InstancedMesh` per-`object_type` bucketing and color mapping added by
-Story #89 already cover `star_cluster`/`stellar_association` generically.
+Catalog stood at **834 objects** (20 original + 585 individual stars +
+229 clusters/associations) after v1.2. No web viewer changes were needed
+for this batch - the `InstancedMesh` per-`object_type` bucketing and color
+mapping added by Story #89 already cover `star_cluster`/`stellar_association`
+generically.
+
+## Nearby stars & marker LOD (v1.3)
+
+Issue #104 (spec `Idea-v1.3-visual-fidelity-and-navigation.md` §2.4) adds
+the follow-up v1.2 §4 explicitly deferred: v1.2's poster-sourced stars are
+a "luminous star" (bright/distant) selection, not a complete close-in
+census - most real nearby stars (mostly faint red/white dwarfs) never
+appeared on that poster at all.
+
+- **Source**: RECONS (Research Consortium On Nearby Stars) "The 100
+  Nearest Star Systems" table (`astro.gsu.edu/RECONS/TOP100.posted.htm`),
+  100 ranked systems / 142 individual components, live-fetched 2026-08-18.
+  Full methodology, results breakdown, and dedup notes:
+  `data/raw/recons/README.md`.
+- **Resolution**: same `SimbadResolver` dual-provenance pipeline as
+  Story #88/#90, just against this different candidate source. **122
+  resolved** distinct stars, **13 genuinely unresolved**
+  (`data/raw/recons/unresolved_stars.json` - no fabricated guesses), **0**
+  rejected for an implausible distance.
+- **Dedup**: zero overlap with the existing 834-object catalog (by id,
+  name, and every alias in both directions) - expected, since this census
+  and the poster's bright-star selection are essentially disjoint
+  populations. Within the batch itself, 6 RECONS-listed multi-star systems
+  had two or three components that all resolved to the exact same SIMBAD
+  record (SIMBAD carries no independent identifier for those individual
+  components); each such group was collapsed to one catalog record rather
+  than fabricating distinct positions for something the source data
+  doesn't distinguish - see `data/raw/recons/README.md`'s dedup table.
+- **Provenance**: `source.reference`/`source.catalog` is the real SIMBAD
+  citation; `notes` separately cites RECONS as the candidate-selection
+  source - never the Galaxy Map poster, since this data doesn't come from
+  it (issue #104's own acceptance criteria; covered by
+  `tests/test_nearby_stars.py::test_every_nearby_star_has_dual_provenance`).
+
+Catalog now stands at **956 objects** (834 + 122 nearby stars).
+
+### Marker LOD (camera-distance-gated visibility)
+
+This batch is dense within a small radius (max resolved distance ~11.3 pc)
+- rendering it unconditionally would reintroduce issue #89's clutter
+problem right around the Sun, at the default/overview zoom. Rather than a
+new schema field, gating reuses the existing `group.secondary` provenance
+tag every resolved record already carries (`"recons-nearest-100"`):
+
+- `web/src/scene/lod.ts` derives the batch's own "collection radius" (the
+  farthest distance among tagged objects actually present in the loaded
+  scene, rather than a hard-coded constant - spec §28's "must not
+  hard-code a permanent limit" principle applied to the LOD threshold too)
+  and exposes `passesDenseBatchLod(obj, cameraDistanceFromOriginPc,
+  collectionRadiusPc)`: any non-member object always passes; a
+  dense-batch member passes only once the camera itself (not the object)
+  is within the collection radius of the Sun.
+- `web/src/scene/objects.ts`'s `isCatalogObjectVisible` composes this with
+  the pre-existing category-toggle/radius-filter rules (all three must
+  pass), and a new `updateDenseBatchLod` cheaply re-applies just the LOD
+  check every animation frame - touching only the dense batch's own
+  instances (not the full ~956-object catalog) so it stays cheap enough to
+  run continuously as the camera moves, unlike the full
+  `updateCatalogVisibility` pass (still only run on an actual filter
+  change).
+- `main.ts` wires this in: the collection radius is computed once when the
+  scene loads, `applyDenseBatchLod()` runs every frame in the render loop
+  alongside the existing per-frame label-visibility update, and "Fit all"/
+  the Inspector's selected-object visibility check both respect the same
+  LOD rule so nothing disagrees about what's actually on screen.
+
+Covered by `web/test/lod.test.ts` (the predicate/radius-derivation logic in
+isolation) and the "dense-batch LOD" tests added to `web/test/objects.test.ts`
+(how `objects.ts` composes it with category/radius filtering).

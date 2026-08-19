@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 896 B",
+  "retrieved_utc": "2026-08-18T16:43:49+00:00",
+  "record_id": "BD+19  5116B",
+  "raw": {
+    "main_id": "BD+19  5116B",
+    "ra": 352.9690639074758,
+    "dec": 19.93722361842083,
+    "coo_err_maj": 0.04270000010728836,
+    "coo_err_min": 0.03099999949336052,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 159.9085,
+    "plx_err": 0.05130000039935112,
+    "otype": "PM*",
+    "ids": "TIC 247985093|AP J23315244+1956138|GJ 896 B|Gaia DR3 2824770686019004032|GJ 896 b|TYC 1723-23-2|CNS5 5801|8pc 160.06B|BD+19  5116B|CCDM J23319+1956B|CSI+19  5116  2|GCRV 14753|IDS 23267+1923 B|LFT 1800|LHS  3966|LTT 16920|NLTT 57136|Zkh 350|[RHG95]  3706|LSPM J2331+1956S|2MASS J23315244+1956138|WDS J23317+1956B|** WIR    1B|PMSC 23268+1923B|PMSC 23268+1923Bab|UCAC4 550-148508|PM J23318+1956E|WEB 20531|Gaia DR2 2824770686019004032|Karmn J23318+199W|V* EQ Peg B",
+    "matched_id": "GJ 896 B"
+  }
+}

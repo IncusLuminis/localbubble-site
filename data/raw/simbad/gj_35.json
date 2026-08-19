@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 35",
+  "retrieved_utc": "2026-08-18T16:42:00+00:00",
+  "record_id": "Wolf   28",
+  "raw": {
+    "main_id": "Wolf   28",
+    "ra": 12.291243072220414,
+    "dec": 5.388609396929721,
+    "coo_err_maj": 0.016599999740719795,
+    "coo_err_min": 0.008299999870359898,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 231.78,
+    "plx_err": 0.018300000578165054,
+    "otype": "WD*",
+    "ids": "TIC 257219223|HIP 3829|Gaia DR3 2552928187080872832|CNS5 240|TIC 471011239|WISEA J004910.78+052249.8|TYC   17-1272-1|NAME van Maanen's Star|NAME van Maanen Star|NAME van Maanen 2|GCRV 26270|PLX  160|LSPM J0049+0523|ASCC 1001769|2MASS J00490996+0523173|USNO-B1.0 0953-00007838|8pc 226.95|AC +05     6-75|CSI+05-00465|Ci 20   58|EGGR   5|G   1-27|G  70-16|GAT  135|GCRV   453|GEN# +9.80001027|HIC   3829|LAWD  6|LFT   76|LHS     7|LTT 10292|NAME vMA 2|NLTT  2724|PM 00465+0509|UBV     668|UCAC2  33505597|USNO 690|WD 0046+05|WD 0046+051|Wolf   28|Zkh  18|uvby98 980001027|vMa 1-2|PLX  160.00|GJ 35|WEB   681|Gaia DR2 2552928187080872832|PM J00491+0523|SDSS J004910.62+052255.5|SDSS J004910.62+052255.4",
+    "matched_id": "GJ 35"
+  }
+}

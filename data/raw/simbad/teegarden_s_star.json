@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "Teegarden's Star",
+  "retrieved_utc": "2026-08-18T16:41:46+00:00",
+  "record_id": "NAME Teegarden's Star",
+  "raw": {
+    "main_id": "NAME Teegarden's Star",
+    "ra": 43.253715805170415,
+    "dec": 16.881286719482496,
+    "coo_err_maj": 0.07460000365972519,
+    "coo_err_min": 0.07699999958276749,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 260.9884,
+    "plx_err": 0.0934000015258789,
+    "otype": "LM*",
+    "ids": "TIC 257870150|Gaia DR3 35227046884571776|GAT 1370|LSPM J0253+1652|2MASS J02530084+1652532|CNS5 723|FBS L 14-17|FBS 0250+167|NAME SO J025300.5+165258|NAME APM EO0425-0315372|USNO-B1.0 1068-00028941|USNO-A2.0 1050-00774305|WISEP J025303.27+165214.2|PM J02530+1652|NAME Teegarden's Star|WISEA J025303.34+165213.2|Gaia DR2 35227046884571776|Karmn J02530+168",
+    "matched_id": "NAME Teegarden's Star"
+  }
+}

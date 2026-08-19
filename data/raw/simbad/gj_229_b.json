@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 229 B",
+  "retrieved_utc": "2026-08-18T16:43:04+00:00",
+  "record_id": "HD  42581B",
+  "raw": {
+    "main_id": "HD  42581B",
+    "ra": 92.645,
+    "dec": -21.866666666666667,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2009AJ....137....1F",
+    "plx_value": 173.19,
+    "plx_err": 1.1200000047683716,
+    "otype": "BD*",
+    "ids": "GJ 229 B|8pc 173.19B|CNS5 1529|[B2006] J061035.1-215117|WDS J06106-2152B|** NAJ    1B|HD  42581B",
+    "matched_id": "GJ 229 B"
+  }
+}

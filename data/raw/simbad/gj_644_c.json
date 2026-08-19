@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 644 C",
+  "retrieved_utc": "2026-08-18T16:44:04+00:00",
+  "record_id": "VB  8",
+  "raw": {
+    "main_id": "VB  8",
+    "ra": 253.89689890597333,
+    "dec": -8.39465363140972,
+    "coo_err_maj": 0.04479999840259552,
+    "coo_err_min": 0.022299999371170998,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 153.9659,
+    "plx_err": 0.05700000002980232,
+    "otype": "LM*",
+    "ids": "TIC 181609153|GJ 644 C|Gaia DR3 4339417394313320192|2MASS J16553529-0823401|8pc 153.96C|CCDM J16555-0820D|CSI-08-16529|CNS5 4137|TIC 471012515|LHS   429|PM 16529-0818|USNO 869|VB  8|Zkh 235|[GKL99] 336|[RHG95]  2663|WDS J16555-0820F|UCAC3 164-149688|SDSS J165534.95-082345.5|EXO 1652.8-0818|[B2006] J165535.3-082340|PMSC 16501-0809D|DENIS J165535.4-082337|WISEA J165534.68-082349.7|PM J16555-0823|UCAC4 409-067034|Gaia DR2 4339417394313320192|Karmn J16555-083|NLTT 43802",
+    "matched_id": "GJ 644 C"
+  }
+}

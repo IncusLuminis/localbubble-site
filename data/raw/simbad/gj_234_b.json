@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 234 B",
+  "retrieved_utc": "2026-08-18T16:41:56+00:00",
+  "record_id": "Ross  614B",
+  "raw": {
+    "main_id": "Ross  614B",
+    "ra": 97.348,
+    "dec": -2.8141944444444444,
+    "coo_err_maj": 2000.0,
+    "coo_err_min": 2000.0,
+    "coo_err_angle": 90,
+    "coo_wavelength": "",
+    "coo_bibcode": "2002ApJS..141..187B",
+    "plx_value": null,
+    "plx_err": null,
+    "otype": "PM*",
+    "ids": "GJ 234 B|CSI-02-06268  2|8pc 242.89B|CCDM J06294-0249B|IDS 06243-0244 B|LHS  1850|Ross  614B|Zkh  89|[RHG95]  1049|WDS J06293-0248B|** B 2601B|NLTT 16581",
+    "matched_id": "GJ 234 B"
+  }
+}

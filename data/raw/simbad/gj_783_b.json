@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 783 B",
+  "retrieved_utc": "2026-08-18T16:43:33+00:00",
+  "record_id": "HD 191408B",
+  "raw": {
+    "main_id": "HD 191408B",
+    "ra": 302.80334539554167,
+    "dec": -36.108935028545005,
+    "coo_err_maj": 19.377500534057617,
+    "coo_err_min": 19.916200637817383,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": null,
+    "plx_err": null,
+    "otype": "PM*",
+    "ids": "Gaia DR3 6697578465310948992|GJ 783 B|HD 191408B|LFT 1530|LHS   487|Zkh 302|CD-36 13940B|CCDM J20112-3605B|** HJ 5173B|WDS J20112-3606B|LTT  7989|NLTT 48833",
+    "matched_id": "GJ 783 B"
+  }
+}

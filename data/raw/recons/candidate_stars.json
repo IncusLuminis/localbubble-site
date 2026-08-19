@@ -1,0 +1,1282 @@
+[
+  {
+    "rank": 1,
+    "components": [
+      {
+        "query": "GJ 551",
+        "alts": [
+          "Proxima Centauri",
+          "* alf Cen C"
+        ]
+      },
+      {
+        "query": "GJ 559 A",
+        "alts": [
+          "alf Cen A",
+          "* alf Cen A"
+        ]
+      },
+      {
+        "query": "GJ 559 B",
+        "alts": [
+          "alf Cen B",
+          "* alf Cen B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 2,
+    "components": [
+      {
+        "query": "GJ 699",
+        "alts": [
+          "Barnard's Star"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 3,
+    "components": [
+      {
+        "query": "GJ 406",
+        "alts": [
+          "Wolf 359"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 4,
+    "components": [
+      {
+        "query": "GJ 411",
+        "alts": [
+          "Lalande 21185"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 5,
+    "components": [
+      {
+        "query": "GJ 244 A",
+        "alts": [
+          "Sirius",
+          "* alf CMa A"
+        ]
+      },
+      {
+        "query": "GJ 244 B",
+        "alts": [
+          "Sirius B",
+          "* alf CMa B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 6,
+    "components": [
+      {
+        "query": "GJ 65 A",
+        "alts": [
+          "BL Ceti"
+        ]
+      },
+      {
+        "query": "GJ 65 B",
+        "alts": [
+          "UV Ceti"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 7,
+    "components": [
+      {
+        "query": "GJ 729",
+        "alts": [
+          "Ross 154"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 8,
+    "components": [
+      {
+        "query": "GJ 905",
+        "alts": [
+          "Ross 248"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 9,
+    "components": [
+      {
+        "query": "GJ 144",
+        "alts": [
+          "epsilon Eridani",
+          "eps Eri"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 10,
+    "components": [
+      {
+        "query": "GJ 887",
+        "alts": [
+          "Lacaille 9352"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 11,
+    "components": [
+      {
+        "query": "GJ 447",
+        "alts": [
+          "Ross 128"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 12,
+    "components": [
+      {
+        "query": "GJ 866 A",
+        "alts": [
+          "EZ Aquarii A"
+        ]
+      },
+      {
+        "query": "GJ 866 B",
+        "alts": [
+          "EZ Aquarii B"
+        ]
+      },
+      {
+        "query": "GJ 866 C",
+        "alts": [
+          "EZ Aquarii C"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 13,
+    "components": [
+      {
+        "query": "GJ 820 A",
+        "alts": [
+          "61 Cygni A"
+        ]
+      },
+      {
+        "query": "GJ 820 B",
+        "alts": [
+          "61 Cygni B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 14,
+    "components": [
+      {
+        "query": "GJ 280 A",
+        "alts": [
+          "Procyon",
+          "* alf CMi A"
+        ]
+      },
+      {
+        "query": "GJ 280 B",
+        "alts": [
+          "Procyon B",
+          "* alf CMi B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 15,
+    "components": [
+      {
+        "query": "GJ 725 A",
+        "alts": [
+          "Struve 2398 A"
+        ]
+      },
+      {
+        "query": "GJ 725 B",
+        "alts": [
+          "Struve 2398 B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 16,
+    "components": [
+      {
+        "query": "GJ 15 A",
+        "alts": [
+          "Groombridge 34 A",
+          "GX Andromedae"
+        ]
+      },
+      {
+        "query": "GJ 15 B",
+        "alts": [
+          "Groombridge 34 B",
+          "GQ Andromedae"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 17,
+    "components": [
+      {
+        "query": "GJ 845 A",
+        "alts": [
+          "epsilon Indi A",
+          "eps Ind"
+        ]
+      },
+      {
+        "query": "GJ 845 B",
+        "alts": [
+          "epsilon Indi B"
+        ]
+      },
+      {
+        "query": "GJ 845 C",
+        "alts": [
+          "epsilon Indi C"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 18,
+    "components": [
+      {
+        "query": "GJ 1111",
+        "alts": [
+          "DX Cancri"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 19,
+    "components": [
+      {
+        "query": "GJ 71",
+        "alts": [
+          "tau Ceti"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 20,
+    "components": [
+      {
+        "query": "GJ 1061",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 21,
+    "components": [
+      {
+        "query": "GJ 54.1",
+        "alts": [
+          "YZ Ceti"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 22,
+    "components": [
+      {
+        "query": "GJ 273",
+        "alts": [
+          "Luyten's Star"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 23,
+    "components": [
+      {
+        "query": "SCR 1845-6357 A",
+        "alts": [
+          "2MASS J18450097-6357475"
+        ]
+      },
+      {
+        "query": "SCR 1845-6357 B",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 24,
+    "components": [
+      {
+        "query": "SO025300.5+165258",
+        "alts": [
+          "SO 0253+1652",
+          "Teegarden's Star",
+          "2MASS J02530084+1652532"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 25,
+    "components": [
+      {
+        "query": "GJ 191",
+        "alts": [
+          "Kapteyn's Star"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 26,
+    "components": [
+      {
+        "query": "GJ 825",
+        "alts": [
+          "AX Microscopii",
+          "Lacaille 8760"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 27,
+    "components": [
+      {
+        "query": "DENIS J1048-3956",
+        "alts": [
+          "DEN 1048-3956",
+          "2MASS J10481258-3956062"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 28,
+    "components": [
+      {
+        "query": "GJ 860 A",
+        "alts": [
+          "Kruger 60 A"
+        ]
+      },
+      {
+        "query": "GJ 860 B",
+        "alts": [
+          "Kruger 60 B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 29,
+    "components": [
+      {
+        "query": "GJ 234 A",
+        "alts": [
+          "Ross 614 A"
+        ]
+      },
+      {
+        "query": "GJ 234 B",
+        "alts": [
+          "Ross 614 B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 30,
+    "components": [
+      {
+        "query": "GJ 628",
+        "alts": [
+          "Wolf 1061"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 31,
+    "components": [
+      {
+        "query": "GJ 35",
+        "alts": [
+          "van Maanen's Star"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 32,
+    "components": [
+      {
+        "query": "GJ 1",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 33,
+    "components": [
+      {
+        "query": "GJ 473 A",
+        "alts": [
+          "Wolf 424 A"
+        ]
+      },
+      {
+        "query": "GJ 473 B",
+        "alts": [
+          "Wolf 424 B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 34,
+    "components": [
+      {
+        "query": "GJ 83.1",
+        "alts": [
+          "TZ Arietis"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 35,
+    "components": [
+      {
+        "query": "GJ 687",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 36,
+    "components": [
+      {
+        "query": "LHS 292",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 37,
+    "components": [
+      {
+        "query": "GJ 1245 A",
+        "alts": [
+          "G 208-044 A"
+        ]
+      },
+      {
+        "query": "GJ 1245 C",
+        "alts": [
+          "G 208-044 B"
+        ]
+      },
+      {
+        "query": "GJ 1245 B",
+        "alts": [
+          "G 208-045"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 38,
+    "components": [
+      {
+        "query": "GJ 674",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 39,
+    "components": [
+      {
+        "query": "GJ 440",
+        "alts": [
+          "WD 1142-645"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 40,
+    "components": [
+      {
+        "query": "GJ 876",
+        "alts": [
+          "Ross 780"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 41,
+    "components": [
+      {
+        "query": "GJ 1002",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 42,
+    "components": [
+      {
+        "query": "LHS 288",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 43,
+    "components": [
+      {
+        "query": "GJ 412 A",
+        "alts": []
+      },
+      {
+        "query": "GJ 412 B",
+        "alts": [
+          "WX Ursae Majoris"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 44,
+    "components": [
+      {
+        "query": "GJ 380",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 45,
+    "components": [
+      {
+        "query": "GJ 388",
+        "alts": [
+          "AD Leonis"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 46,
+    "components": [
+      {
+        "query": "GJ 832",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 47,
+    "components": [
+      {
+        "query": "LP 944-020",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 48,
+    "components": [
+      {
+        "query": "DENIS J0255-4700",
+        "alts": [
+          "DEN 0255-4700"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 49,
+    "components": [
+      {
+        "query": "GJ 166 A",
+        "alts": [
+          "omicron 2 Eridani",
+          "40 Eridani A"
+        ]
+      },
+      {
+        "query": "GJ 166 B",
+        "alts": [
+          "40 Eridani B"
+        ]
+      },
+      {
+        "query": "GJ 166 C",
+        "alts": [
+          "40 Eridani C"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 50,
+    "components": [
+      {
+        "query": "GJ 873",
+        "alts": [
+          "EV Lacertae"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 51,
+    "components": [
+      {
+        "query": "GJ 682",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 52,
+    "components": [
+      {
+        "query": "GJ 702 A",
+        "alts": [
+          "70 Ophiuchi A"
+        ]
+      },
+      {
+        "query": "GJ 702 B",
+        "alts": [
+          "70 Ophiuchi B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 53,
+    "components": [
+      {
+        "query": "GJ 768",
+        "alts": [
+          "Altair",
+          "* alf Aql"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 54,
+    "components": [
+      {
+        "query": "GJ 1116 A",
+        "alts": [
+          "EI Cancri"
+        ]
+      },
+      {
+        "query": "GJ 1116 B",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 55,
+    "components": [
+      {
+        "query": "G 099-049",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 56,
+    "components": [
+      {
+        "query": "LHS 1723",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 57,
+    "components": [
+      {
+        "query": "2MASS J09393548-2448279",
+        "alts": [
+          "2MA 0939-2448"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 58,
+    "components": [
+      {
+        "query": "GJ 445",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 59,
+    "components": [
+      {
+        "query": "GJ 526",
+        "alts": [
+          "Wolf 498"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 60,
+    "components": [
+      {
+        "query": "GJ 169.1 A",
+        "alts": [
+          "Stein 2051 A"
+        ]
+      },
+      {
+        "query": "GJ 169.1 B",
+        "alts": [
+          "Stein 2051 B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 61,
+    "components": [
+      {
+        "query": "GJ 251",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 62,
+    "components": [
+      {
+        "query": "2MASS J18353790+3259545",
+        "alts": [
+          "2MA 1835+3259"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 63,
+    "components": [
+      {
+        "query": "GJ 205",
+        "alts": [
+          "Wolf 1453"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 64,
+    "components": [
+      {
+        "query": "LP 816-060",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 65,
+    "components": [
+      {
+        "query": "2MASS J04151954-0935066",
+        "alts": [
+          "2MA 0415-0935"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 66,
+    "components": [
+      {
+        "query": "GJ 764",
+        "alts": [
+          "sigma Draconis"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 67,
+    "components": [
+      {
+        "query": "GJ 229 A",
+        "alts": []
+      },
+      {
+        "query": "GJ 229 B",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 68,
+    "components": [
+      {
+        "query": "GJ 213",
+        "alts": [
+          "Ross 47"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 69,
+    "components": [
+      {
+        "query": "GJ 693",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 70,
+    "components": [
+      {
+        "query": "GJ 752 A",
+        "alts": [
+          "Wolf 1055"
+        ]
+      },
+      {
+        "query": "GJ 752 B",
+        "alts": [
+          "VB 10",
+          "van Biesbroeck 10"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 71,
+    "components": [
+      {
+        "query": "GJ 570 A",
+        "alts": []
+      },
+      {
+        "query": "GJ 570 B",
+        "alts": []
+      },
+      {
+        "query": "GJ 570 C",
+        "alts": []
+      },
+      {
+        "query": "GJ 570 D",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 72,
+    "components": [
+      {
+        "query": "GJ 754",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 73,
+    "components": [
+      {
+        "query": "GJ 588",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 74,
+    "components": [
+      {
+        "query": "GJ 1005 A",
+        "alts": []
+      },
+      {
+        "query": "GJ 1005 B",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 75,
+    "components": [
+      {
+        "query": "GJ 34 A",
+        "alts": [
+          "eta Cassiopeiae A"
+        ]
+      },
+      {
+        "query": "GJ 34 B",
+        "alts": [
+          "eta Cassiopeiae B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 76,
+    "components": [
+      {
+        "query": "GJ 663 A",
+        "alts": [
+          "36 Ophiuchi A"
+        ]
+      },
+      {
+        "query": "GJ 663 B",
+        "alts": [
+          "36 Ophiuchi B"
+        ]
+      },
+      {
+        "query": "GJ 664",
+        "alts": [
+          "36 Ophiuchi C"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 77,
+    "components": [
+      {
+        "query": "GJ 908",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 78,
+    "components": [
+      {
+        "query": "GJ 285",
+        "alts": [
+          "YZ Canis Minoris",
+          "Ross 882"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 79,
+    "components": [
+      {
+        "query": "GJ 783 A",
+        "alts": []
+      },
+      {
+        "query": "GJ 783 B",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 80,
+    "components": [
+      {
+        "query": "GJ 139",
+        "alts": [
+          "82 Eridani"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 81,
+    "components": [
+      {
+        "query": "GJ 1221",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 82,
+    "components": [
+      {
+        "query": "GJ 338 A",
+        "alts": []
+      },
+      {
+        "query": "GJ 338 B",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 83,
+    "components": [
+      {
+        "query": "GJ 780",
+        "alts": [
+          "delta Pavonis"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 84,
+    "components": [
+      {
+        "query": "GJ 268 A",
+        "alts": [
+          "QY Aurigae A"
+        ]
+      },
+      {
+        "query": "GJ 268 B",
+        "alts": [
+          "QY Aurigae B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 85,
+    "components": [
+      {
+        "query": "2MASS J09373487+2931409",
+        "alts": [
+          "2MA 0937+2931"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 86,
+    "components": [
+      {
+        "query": "GJ 784",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 87,
+    "components": [
+      {
+        "query": "GJ 555",
+        "alts": [
+          "HN Librae"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 88,
+    "components": [
+      {
+        "query": "GJ 896 A",
+        "alts": [
+          "EQ Pegasi A"
+        ]
+      },
+      {
+        "query": "GJ 896 B",
+        "alts": [
+          "EQ Pegasi B"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 89,
+    "components": [
+      {
+        "query": "GJ 581",
+        "alts": [
+          "Wolf 562"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 90,
+    "components": [
+      {
+        "query": "LHS 2090",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 91,
+    "components": [
+      {
+        "query": "LHS 337",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 92,
+    "components": [
+      {
+        "query": "GJ 661 A",
+        "alts": []
+      },
+      {
+        "query": "GJ 661 B",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 93,
+    "components": [
+      {
+        "query": "GJ 223.2",
+        "alts": [
+          "WD 0552-041"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 94,
+    "components": [
+      {
+        "query": "G 180-060",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 95,
+    "components": [
+      {
+        "query": "GJ 644 A",
+        "alts": [
+          "Wolf 630 A"
+        ]
+      },
+      {
+        "query": "GJ 644 B",
+        "alts": [
+          "Wolf 630 B"
+        ]
+      },
+      {
+        "query": "GJ 644 D",
+        "alts": [
+          "Wolf 630 C"
+        ]
+      },
+      {
+        "query": "GJ 644 C",
+        "alts": [
+          "van Biesbroeck 8",
+          "VB 8"
+        ]
+      },
+      {
+        "query": "GJ 643",
+        "alts": [
+          "Wolf 629"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 96,
+    "components": [
+      {
+        "query": "GJ 625",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 97,
+    "components": [
+      {
+        "query": "GJ 1128",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 98,
+    "components": [
+      {
+        "query": "GJ 1156",
+        "alts": [
+          "GL Virginis"
+        ]
+      }
+    ]
+  },
+  {
+    "rank": 99,
+    "components": [
+      {
+        "query": "GJ 892",
+        "alts": []
+      }
+    ]
+  },
+  {
+    "rank": 100,
+    "components": [
+      {
+        "query": "LHS 3003",
+        "alts": []
+      }
+    ]
+  }
+]

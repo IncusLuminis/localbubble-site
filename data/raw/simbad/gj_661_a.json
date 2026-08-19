@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 661 A",
+  "retrieved_utc": "2026-08-18T16:43:54+00:00",
+  "record_id": "HD 155876A",
+  "raw": {
+    "main_id": "HD 155876A",
+    "ra": 258.0342159836542,
+    "dec": 45.659059737301114,
+    "coo_err_maj": 17.80340003967285,
+    "coo_err_min": 21.717100143432617,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": null,
+    "plx_err": null,
+    "otype": "PM*",
+    "ids": "HD 155876A|** KUI   79A|WDS J17121+4540A|Gaia DR3 1364668825433448704|GJ 661 A|LSPM J1712+4539A",
+    "matched_id": "GJ 661 A"
+  }
+}

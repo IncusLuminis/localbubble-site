@@ -10,6 +10,7 @@ import {
 import type { SceneObject } from "./sceneTypes";
 import { positionToVector3 } from "./sceneData";
 import { isWithinRadius } from "./radiusFilter";
+import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
 
 /**
  * Catalog object rendering (spec Idea.md §22/§45, issue #64: "Catalog
@@ -250,18 +251,30 @@ export interface CatalogBucket {
   radiiPc: number[];
 }
 
-/** True if `obj` should currently be shown, given the category-toggle and
- * radius-filter state - the single predicate both `updateCatalogVisibility`
- * (which drives the instance matrices) and `visibleCatalogObjects` (used
- * for "Fit all" camera framing) evaluate against, so the two can never
- * disagree about what's actually on screen. */
+/** True if `obj` should currently be shown, given the category-toggle,
+ * radius-filter, and dense-batch LOD (issue #104) state - the single
+ * predicate `updateCatalogVisibility`/`updateDenseBatchLod` (which drive
+ * the instance matrices) and `visibleCatalogObjects` (used for "Fit all"
+ * camera framing) all evaluate against, so none of them can disagree about
+ * what's actually on screen.
+ *
+ * `cameraDistanceFromOriginPc`/`denseBatchRadiusPc` default to
+ * `Number.POSITIVE_INFINITY`, i.e. "no LOD gating" - every existing caller
+ * that doesn't pass them (any object outside the LOD-gated dense batch,
+ * see `lod.ts`'s `passesDenseBatchLod`) is completely unaffected. */
 export function isCatalogObjectVisible(
   obj: SceneObject,
   categoryVisibility: ReadonlyMap<string, boolean>,
   radiusPc: number | null,
+  cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
+  denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
 ): boolean {
   const categoryOn = categoryVisibility.get(obj.object_type) ?? true;
-  return categoryOn && isWithinRadius(obj.distance_pc, radiusPc);
+  return (
+    categoryOn &&
+    isWithinRadius(obj.distance_pc, radiusPc) &&
+    passesDenseBatchLod(obj, cameraDistanceFromOriginPc, denseBatchRadiusPc)
+  );
 }
 
 /** Sets instance `index` of `bucket.mesh`'s transform to its real
@@ -327,10 +340,59 @@ export function updateCatalogVisibility(
   buckets: CatalogBucket[],
   categoryVisibility: ReadonlyMap<string, boolean>,
   radiusPc: number | null,
+  cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
+  denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
 ): void {
   for (const bucket of buckets) {
     bucket.objects.forEach((obj, i) => {
-      setInstanceVisibility(bucket, i, isCatalogObjectVisible(obj, categoryVisibility, radiusPc));
+      setInstanceVisibility(
+        bucket,
+        i,
+        isCatalogObjectVisible(
+          obj,
+          categoryVisibility,
+          radiusPc,
+          cameraDistanceFromOriginPc,
+          denseBatchRadiusPc,
+        ),
+      );
+    });
+  }
+}
+
+/**
+ * Per-frame LOD-only visibility update (issue #104): unlike
+ * `updateCatalogVisibility` (called once per category/radius filter
+ * change, touching every instance), this is cheap enough to call every
+ * frame from the render loop - it walks every bucket's objects but only
+ * ever touches the instance matrix of objects that are actually members of
+ * the LOD-gated dense batch (`lod.ts`'s `isDenseBatchMember`), skipping
+ * everything else with a single cheap array-membership check. Still
+ * defers to `isCatalogObjectVisible` for the full visibility decision, so
+ * a dense-batch member that's also currently category-off or outside the
+ * radius filter stays hidden regardless of camera distance - the two
+ * mechanisms can never disagree about what's on screen. */
+export function updateDenseBatchLod(
+  buckets: CatalogBucket[],
+  categoryVisibility: ReadonlyMap<string, boolean>,
+  radiusPc: number | null,
+  cameraDistanceFromOriginPc: number,
+  denseBatchRadiusPc: number,
+): void {
+  for (const bucket of buckets) {
+    bucket.objects.forEach((obj, i) => {
+      if (!isDenseBatchMember(obj)) return;
+      setInstanceVisibility(
+        bucket,
+        i,
+        isCatalogObjectVisible(
+          obj,
+          categoryVisibility,
+          radiusPc,
+          cameraDistanceFromOriginPc,
+          denseBatchRadiusPc,
+        ),
+      );
     });
   }
 }
@@ -364,6 +426,8 @@ export function isSelectedObjectVisible(
   selectedId: string | null,
   categoryVisibility: ReadonlyMap<string, boolean>,
   radiusPc: number | null,
+  cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
+  denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
 ): boolean {
   if (selectedId === null) {
     return false;
@@ -372,7 +436,13 @@ export function isSelectedObjectVisible(
   if (!obj) {
     return false;
   }
-  return isCatalogObjectVisible(obj, categoryVisibility, radiusPc);
+  return isCatalogObjectVisible(
+    obj,
+    categoryVisibility,
+    radiusPc,
+    cameraDistanceFromOriginPc,
+    denseBatchRadiusPc,
+  );
 }
 
 /** The `SceneObject`s currently visible under `categoryVisibility`/
@@ -384,11 +454,21 @@ export function visibleCatalogObjects(
   buckets: CatalogBucket[],
   categoryVisibility: ReadonlyMap<string, boolean>,
   radiusPc: number | null,
+  cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
+  denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
 ): SceneObject[] {
   const result: SceneObject[] = [];
   for (const bucket of buckets) {
     for (const obj of bucket.objects) {
-      if (isCatalogObjectVisible(obj, categoryVisibility, radiusPc)) {
+      if (
+        isCatalogObjectVisible(
+          obj,
+          categoryVisibility,
+          radiusPc,
+          cameraDistanceFromOriginPc,
+          denseBatchRadiusPc,
+        )
+      ) {
         result.push(obj);
       }
     }

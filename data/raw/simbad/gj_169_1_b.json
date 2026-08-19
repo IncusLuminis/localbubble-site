@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 169.1 B",
+  "retrieved_utc": "2026-08-18T16:42:54+00:00",
+  "record_id": "EGGR 180",
+  "raw": {
+    "main_id": "EGGR 180",
+    "ra": 67.80238099867749,
+    "dec": 58.978136863278614,
+    "coo_err_maj": 0.014700000174343586,
+    "coo_err_min": 0.013199999928474426,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 181.273,
+    "plx_err": 0.0203000009059906,
+    "otype": "WD*",
+    "ids": "** STI 2051B|GJ 169.1 B|Gaia DR3 470826482637310848|CNS5 1121|TYC 3744-2062-1|ASCC  176743|LSPM J0431+5858E|8pc 181.36B|AC +58  2500|CCDM J04312+5858B|CSI+58-04268  2|EGGR 180|G 175-34B|IDS 04224+5849 B|KPD 0426+5852|LHS    27|NLTT 13375|UBV    4296|USNO 121|USNO 808|WD 0426+588|Zkh  63|WDS J04312+5858B|UCAC4 745-033849|NAME Stein 2051 B|Gaia DR2 470826482635701376|PM J04312+5858|TYC 3744-412-1",
+    "matched_id": "GJ 169.1 B"
+  }
+}

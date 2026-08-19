@@ -1,0 +1,114 @@
+[
+  {
+    "rank": 14,
+    "query": "GJ 280 B",
+    "tried": [
+      "GJ 280 B",
+      "Procyon B",
+      "* alf CMi B"
+    ],
+    "reason": "'GJ 280 B': SIMBAD record for 'GJ 280 B' has no usable parallax (plx_value) - cannot derive a distance without one.; 'Procyon B': SIMBAD record for 'Procyon B' has no usable parallax (plx_value) - cannot derive a distance without one.; '* alf CMi B': SIMBAD record for '* alf CMi B' has no usable parallax (plx_value) - cannot derive a distance without one."
+  },
+  {
+    "rank": 23,
+    "query": "SCR 1845-6357 A",
+    "tried": [
+      "SCR 1845-6357 A",
+      "2MASS J18450097-6357475"
+    ],
+    "reason": "'SCR 1845-6357 A': SIMBAD has no record for 'SCR 1845-6357 A'; '2MASS J18450097-6357475': SIMBAD has no record for '2MASS J18450097-6357475'"
+  },
+  {
+    "rank": 23,
+    "query": "SCR 1845-6357 B",
+    "tried": [
+      "SCR 1845-6357 B"
+    ],
+    "reason": "'SCR 1845-6357 B': SIMBAD has no record for 'SCR 1845-6357 B'"
+  },
+  {
+    "rank": 27,
+    "query": "DENIS J1048-3956",
+    "tried": [
+      "DENIS J1048-3956",
+      "DEN 1048-3956",
+      "2MASS J10481258-3956062"
+    ],
+    "reason": "'DENIS J1048-3956': SIMBAD has no record for 'DENIS J1048-3956'; 'DEN 1048-3956': SIMBAD has no record for 'DEN 1048-3956'; '2MASS J10481258-3956062': SIMBAD has no record for '2MASS J10481258-3956062'"
+  },
+  {
+    "rank": 29,
+    "query": "GJ 234 B",
+    "tried": [
+      "GJ 234 B",
+      "Ross 614 B"
+    ],
+    "reason": "'GJ 234 B': SIMBAD record for 'GJ 234 B' has no usable parallax (plx_value) - cannot derive a distance without one.; 'Ross 614 B': SIMBAD record for 'Ross 614 B' has no usable parallax (plx_value) - cannot derive a distance without one."
+  },
+  {
+    "rank": 48,
+    "query": "DENIS J0255-4700",
+    "tried": [
+      "DENIS J0255-4700",
+      "DEN 0255-4700"
+    ],
+    "reason": "'DENIS J0255-4700': SIMBAD has no record for 'DENIS J0255-4700'; 'DEN 0255-4700': SIMBAD has no record for 'DEN 0255-4700'"
+  },
+  {
+    "rank": 67,
+    "query": "GJ 229 A",
+    "tried": [
+      "GJ 229 A"
+    ],
+    "reason": "'GJ 229 A': SIMBAD has no record for 'GJ 229 A'"
+  },
+  {
+    "rank": 74,
+    "query": "GJ 1005 A",
+    "tried": [
+      "GJ 1005 A"
+    ],
+    "reason": "'GJ 1005 A': SIMBAD has no record for 'GJ 1005 A'"
+  },
+  {
+    "rank": 74,
+    "query": "GJ 1005 B",
+    "tried": [
+      "GJ 1005 B"
+    ],
+    "reason": "'GJ 1005 B': SIMBAD has no record for 'GJ 1005 B'"
+  },
+  {
+    "rank": 79,
+    "query": "GJ 783 B",
+    "tried": [
+      "GJ 783 B"
+    ],
+    "reason": "'GJ 783 B': SIMBAD record for 'GJ 783 B' has no usable parallax (plx_value) - cannot derive a distance without one."
+  },
+  {
+    "rank": 92,
+    "query": "GJ 661 A",
+    "tried": [
+      "GJ 661 A"
+    ],
+    "reason": "'GJ 661 A': SIMBAD record for 'GJ 661 A' has no usable parallax (plx_value) - cannot derive a distance without one."
+  },
+  {
+    "rank": 92,
+    "query": "GJ 661 B",
+    "tried": [
+      "GJ 661 B"
+    ],
+    "reason": "'GJ 661 B': SIMBAD record for 'GJ 661 B' has no usable parallax (plx_value) - cannot derive a distance without one."
+  },
+  {
+    "rank": 95,
+    "query": "GJ 644 D",
+    "tried": [
+      "GJ 644 D",
+      "Wolf 630 C"
+    ],
+    "reason": "'GJ 644 D': SIMBAD has no record for 'GJ 644 D'; 'Wolf 630 C': SIMBAD has no record for 'Wolf 630 C'"
+  }
+]

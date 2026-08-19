@@ -33,9 +33,24 @@ EXPECTED_STAR_NAMES = [
 MAX_PLAUSIBLE_STAR_DISTANCE_PC = 2500
 
 
+#: Issue #104 added a second, disjoint batch of `object_type: "star"`
+#: records (the RECONS "100 nearest stellar systems" resolution, tagged
+#: `group.secondary: ["recons-nearest-100"]` - see
+#: `data/raw/recons/README.md` and `test_nearby_stars.py`). This module's
+#: own checks (dual provenance mentioning "galaxy map", etc.) are scoped to
+#: the Galaxy Map poster batch specifically, so `star_objects` excludes the
+#: RECONS batch rather than asserting poster-specific provenance text
+#: against records that were never sourced from the poster.
+RECONS_BATCH_TAG = "recons-nearest-100"
+
+
 @pytest.fixture(scope="module")
 def star_objects(catalog_objects):
-    return [obj for obj in catalog_objects if obj.object_type == "star"]
+    return [
+        obj
+        for obj in catalog_objects
+        if obj.object_type == "star" and RECONS_BATCH_TAG not in obj.group.secondary
+    ]
 
 
 def test_star_population_added_at_expected_scale(star_objects):

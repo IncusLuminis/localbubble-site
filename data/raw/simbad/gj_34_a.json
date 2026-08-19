@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 34 A",
+  "retrieved_utc": "2026-08-18T16:43:22+00:00",
+  "record_id": "* eta Cas",
+  "raw": {
+    "main_id": "* eta Cas",
+    "ra": 12.276227476217503,
+    "dec": 57.81517728880999,
+    "coo_err_maj": 0.09510000050067902,
+    "coo_err_min": 0.11169999837875366,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 168.8322,
+    "plx_err": 0.1662999987602234,
+    "otype": "PM*",
+    "ids": "TIC 445258206|IDS 00430+5717 A|GJ 34 A|HIP 3821|Gaia DR3 425040000962559616|CNS5 239|AP J00490622+5748545|PLX  155|LSPM J0049+5748|ASCC  159214|USNO-B1.0 1478-00036288|*  24 Cas|* eta Cas|1RXS J004904.0+574917|2E   191|AG+57   81|BD+57   150|CSI+57   150  8|CSI+57   150  1|Ci 20   56|GC   962|GCRV   447|HD   4614|HIC   3821|HR   219|IRAS 00461+5732|IRC +60019|JP11   419|LFT   74|LHS   123|LTT 10287|N30  163|NLTT  2690|PM 00461+5733|PPM  25718|ROT  6014|ROT  3488|SAO  21732|SBC7    31|SKY#  1265|SPOCS   41|TD1   443|UBV     650|USNO 793|V* eta Cas|Wolf   24|Zkh  15|2E 0046.1+5733|NAME Achird|uvby98 100004614|WEB   675|Gaia DR2 425040000951479424|GEN# +1.00004614A|* eta Cas A|8pc 167.99A|ADS   671 A|BD+57   150A|CCDM J00491+5749A|WDS J00491+5749A|TYC 3663-2669-1|2MASS J00490622+5748545|** STF   60A|HD   4614A",
+    "matched_id": "GJ 34 A"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 754",
+  "retrieved_utc": "2026-08-18T16:43:16+00:00",
+  "record_id": "L  347-14",
+  "raw": {
+    "main_id": "L  347-14",
+    "ra": 290.1999346677496,
+    "dec": -45.55823431625721,
+    "coo_err_maj": 0.0471000000834465,
+    "coo_err_min": 0.04050000011920929,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 169.2351,
+    "plx_err": 0.058800000697374344,
+    "otype": "PM*",
+    "ids": "TIC 62020444|GJ 754|Gaia DR3 6663600360560306560|PLX 4505|CSI-45-19171|GEN# +9.86347014|L  347-14|LFT 1469|LHS    60|LPM 701|LTT  7652|CNS5 4800|Zkh 290|[RHG95]  3040|PLX 4505.00|2MASS J19204795-4533283|Gaia DR2 6663600360559308672|PM 19171-4537|GCRV 26176|NLTT 47673",
+    "matched_id": "GJ 754"
+  }
+}

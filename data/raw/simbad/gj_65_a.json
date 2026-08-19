@@ -1,0 +1,21 @@
+{
+  "source": "simbad",
+  "query": "GJ 65 A",
+  "retrieved_utc": "2026-08-18T16:41:03+00:00",
+  "record_id": "G 272-61A",
+  "raw": {
+    "main_id": "G 272-61A",
+    "ra": 24.75573856713083,
+    "dec": -17.950718742164163,
+    "coo_err_maj": 0.4278999865055084,
+    "coo_err_min": 0.3382999897003174,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 367.7119,
+    "plx_err": 0.7418000102043152,
+    "otype": "PM*",
+    "ids": "GJ 65 A|Gaia DR3 5140693571158739840|CNS5 424|8pc 373.70A|G 272-61A|IDS 01340-1828 A|L  726-8 A|LFT  144|LHS     9|LP  768-27|LTT   892|NLTT  5505|V* BL Cet|[RHG95]   301|CCDM J01390-1756A|WDS J01388-1758A|** LDS  838A|Gaia DR2 5140693571158739840|Zkh  27|[GKL99] 44",
+    "matched_id": "GJ 65 A"
+  }
+}
