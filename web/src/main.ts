@@ -11,6 +11,8 @@ import {
   excludeDedicatedMarkerObjects,
   isSelectedObjectVisible,
   markerRadiusPc,
+  starMarkerRadiusPc,
+  SUN_OBJECT_ID,
   updateCatalogSizeScale,
   updateCatalogVisibility,
   updateDenseBatchLod,
@@ -18,6 +20,7 @@ import {
   type CatalogBucket,
 } from "./scene/objects";
 import { denseBatchCollectionRadiusPc, isDenseBatchMember, passesDenseBatchLod } from "./scene/lod";
+import { createSelectionIndicator } from "./scene/selectionIndicator";
 import { loadScene } from "./scene/sceneData";
 import {
   createGouldBeltLabel,
@@ -105,6 +108,14 @@ const galacticPlaneGroup = createGalacticPlane(WORLD_EXTENT_PC);
 scene.add(galacticPlaneGroup);
 scene.add(createAxes(WORLD_EXTENT_PC));
 
+// Issue #123: the selection reticle + line-to-Sun indicator, a persistent
+// scene object (like `sunMarker` above) that `selectObject`/
+// `refreshSelectionVisibility`/`updateSelectionIndicatorScale` below
+// reposition, rescale, and show/hide as the selection changes, rather than
+// being created/destroyed per click.
+const selectionIndicator = createSelectionIndicator();
+scene.add(selectionIndicator.group);
+
 const inspector = new Inspector();
 app.appendChild(inspector.element);
 
@@ -191,6 +202,39 @@ function applySunCoreScale(): void {
   sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc));
 }
 
+/** Issue #123: the selection reticle's scale should track the *same*
+ * effective marker radius the object's own catalog instance is currently
+ * rendered at - including the Sun's own #113 LOD-shrunk core radius, and
+ * RECONS dense-batch stars' #119 LOD-shrunk radius - not the fixed,
+ * un-shrunk `markerRadiusPc` tier alone. Mirrors `objects.ts`'s
+ * `setInstanceVisibility`'s own radius resolution (same conditions, same
+ * fallback order) so the reticle can never disagree with the marker it's
+ * drawn around. The Sun is excluded from `catalogObjects`
+ * (`excludeDedicatedMarkerObjects`) and so never actually reaches
+ * `selectObject` today (out of scope: the picking mechanism itself, issue
+ * #123's "if ever selectable" caveat) - handled here anyway so this stays
+ * correct if that ever changes. */
+function selectedObjectMarkerRadiusPc(obj: SceneObject): number {
+  if (obj.id === SUN_OBJECT_ID) {
+    return sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc);
+  }
+  if (obj.object_type === "star" && isDenseBatchMember(obj)) {
+    return starMarkerRadiusPc(camera.position.length(), denseBatchRadiusPc);
+  }
+  return markerRadiusPc(obj.size_pc, obj.object_type);
+}
+
+/** Issue #123: pushes the selection indicator (reticle + line-to-Sun) to
+ * match `obj`'s current position/effective marker radius and shows it -
+ * the single chokepoint `selectObject`, `refreshSelectionVisibility`, and
+ * the per-frame `updateSelectionIndicatorScale` below all call, so the
+ * indicator can never diverge from what those three call sites each
+ * independently know about the current selection. */
+function showSelectionIndicatorFor(obj: SceneObject): void {
+  selectionIndicator.updateForObject(obj.position_pc, selectedObjectMarkerRadiusPc(obj));
+  selectionIndicator.setVisible(true);
+}
+
 /** Issue #125: recomputes and redisplays the field-of-view extent readout
  * each frame from the camera's *current* `fov`/`aspect` (rather than
  * caching them) and its distance to `controls.target` - the same point the
@@ -228,11 +272,16 @@ function refreshSelectionVisibility(): void {
   );
   if (!stillVisible) {
     inspector.hide();
+    // Issue #123: the reticle/line-to-Sun hide together with the Inspector,
+    // driven by this same `isSelectedObjectVisible` check - never a
+    // separate, potentially-out-of-sync mechanism.
+    selectionIndicator.setVisible(false);
     return;
   }
   const obj = catalogObjects.find((o) => o.id === selectedObjectId);
   if (obj) {
     inspector.show(obj);
+    showSelectionIndicatorFor(obj);
   }
 }
 
@@ -341,8 +390,10 @@ function selectObject(obj: SceneObject | null): void {
   selectedObjectId = obj ? obj.id : null;
   if (obj) {
     inspector.show(obj);
+    showSelectionIndicatorFor(obj);
   } else {
     inspector.hide();
+    selectionIndicator.setVisible(false);
   }
   updateLabelVisibility();
 }
@@ -566,12 +617,29 @@ function onResize(): void {
 }
 window.addEventListener("resize", onResize);
 
+/** Issue #123: keeps the selection reticle's scale in sync with the
+ * selected object's own current (possibly camera-distance-shrunk, #113/
+ * #119) marker radius every frame - a selected RECONS dense-batch star's
+ * (or the Sun's) effective marker radius changes continuously as the
+ * camera crosses the #104 LOD volume, so a reticle sized once at selection
+ * time would otherwise drift out of proportion with the marker as the user
+ * zooms. No-op whenever nothing is selected; otherwise cheap (two small
+ * `Object3D` transforms plus a 2-point line update, never per-catalog-
+ * object work). */
+function updateSelectionIndicatorScale(): void {
+  if (selectedObjectId === null) return;
+  const obj = catalogObjects.find((o) => o.id === selectedObjectId);
+  if (!obj) return;
+  showSelectionIndicatorFor(obj);
+}
+
 function animate(): void {
   requestAnimationFrame(animate);
   controls.update();
   updateLabelVisibility();
   applyDenseBatchLod();
   applySunCoreScale();
+  updateSelectionIndicatorScale();
   applyFovReadout();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
