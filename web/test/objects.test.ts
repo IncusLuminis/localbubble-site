@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Matrix4, Quaternion, Vector3 } from "three";
-import type { InstancedMesh } from "three";
+import type { InstancedMesh, MeshBasicMaterial } from "three";
 import {
   catalogObjectTypes,
   createCatalogObjectGroup,
@@ -8,6 +8,7 @@ import {
   isCatalogObjectVisible,
   isSelectedObjectVisible,
   LOCAL_BUBBLE_OBJECT_ID,
+  markerOpacityFor,
   markerRadiusPc,
   setInstanceVisibility,
   SUN_OBJECT_ID,
@@ -184,6 +185,76 @@ describe("markerRadiusPc (issue #103 three-tier hierarchy)", () => {
     // Clamped, not unbounded: a further increase in size_pc must not move it.
     expect(markerRadiusPc(hugeSize * 10, "star_cluster")).toBe(clusterMax);
     expect(markerRadiusPc(hugeSize * 10, "molecular_cloud")).toBe(structureMax);
+  });
+});
+
+/**
+ * Issue #115: type-aware marker opacity, mirroring #103's radius-tier test
+ * shape above and deliberately reusing the exact same star/cluster/
+ * "everything else" partition. Discrete stellar groupings (stars,
+ * clusters, associations) must stay exactly as opaque as before #115;
+ * extended, physically-diffuse structures (molecular clouds, HII regions,
+ * bubbles, supernova remnants, star-forming regions, and any
+ * unrecognized/future object_type) must render meaningfully more
+ * translucent than that.
+ */
+describe("markerOpacityFor (issue #115 opacity tiers)", () => {
+  const STAR_AND_CLUSTER_TYPES = ["star", "star_cluster", "stellar_association"];
+  // Representative of "everything else": every real extended-structure type
+  // named in the issue, plus star_forming_region (physically diffuse too,
+  // even though not spelled out in the issue's own example list) and an
+  // unrecognized/future object_type, which must all fall through to the
+  // same catch-all translucent tier rather than erroring or staying opaque.
+  const STRUCTURE_TYPES = [
+    "molecular_cloud",
+    "hii_region",
+    "supernova_remnant",
+    "bubble",
+    "star_forming_region",
+    "some_future_object_type",
+  ];
+
+  it("stars, clusters, and associations all share one fully-opaque tier", () => {
+    const opacities = new Set(STAR_AND_CLUSTER_TYPES.map((type) => markerOpacityFor(type)));
+    expect(opacities.size).toBe(1);
+    expect([...opacities][0]).toBe(0.85);
+  });
+
+  it("every extended-structure type (plus an unrecognized/future type) shares one translucent tier", () => {
+    const opacities = new Set(STRUCTURE_TYPES.map((type) => markerOpacityFor(type)));
+    expect(opacities.size).toBe(1);
+  });
+
+  it("the structure tier is meaningfully more translucent than the star/cluster tier", () => {
+    const opaqueOpacity = markerOpacityFor("star");
+    for (const structureType of STRUCTURE_TYPES) {
+      const structureOpacity = markerOpacityFor(structureType);
+      expect(structureOpacity).toBeLessThan(opaqueOpacity);
+      // "Meaningfully" translucent, not just a hair lower.
+      expect(opaqueOpacity - structureOpacity).toBeGreaterThanOrEqual(0.3);
+    }
+  });
+
+  it("a non-Sun reference_point (the catch-all's only currently-plausible real-world member) renders translucent, not erroring", () => {
+    expect(markerOpacityFor("reference_point")).toBe(markerOpacityFor("molecular_cloud"));
+  });
+
+  it("createCatalogObjectGroup bakes the type-appropriate opacity into each bucket's material", () => {
+    const cluster = makeObject({ id: "cluster-a", object_type: "star_cluster" });
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, cluster, STAR_A]);
+
+    const structureBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    const clusterBucket = buckets.find((b) => b.objectType === "star_cluster") as CatalogBucket;
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    const opacityOf = (bucket: CatalogBucket): number =>
+      (bucket.mesh.material as MeshBasicMaterial).opacity;
+
+    expect(opacityOf(structureBucket)).toBe(markerOpacityFor("molecular_cloud"));
+    expect(opacityOf(clusterBucket)).toBe(markerOpacityFor("star_cluster"));
+    expect(opacityOf(starBucket)).toBe(markerOpacityFor("star"));
+    expect(opacityOf(structureBucket)).toBeLessThan(opacityOf(clusterBucket));
+    expect(opacityOf(starBucket)).toBe(opacityOf(clusterBucket));
   });
 });
 
