@@ -17,18 +17,22 @@ import {
   visibleCatalogObjects,
   type CatalogBucket,
 } from "./scene/objects";
-import { denseBatchCollectionRadiusPc } from "./scene/lod";
+import { denseBatchCollectionRadiusPc, isDenseBatchMember, passesDenseBatchLod } from "./scene/lod";
 import { loadScene } from "./scene/sceneData";
 import { createGouldBeltLayer, createLocalBubbleLayer, createRadcliffeWaveLayer } from "./scene/structures";
 import {
   createLabelRenderer,
   createLabelsLayer,
   createSunLabel,
+  DENSE_BATCH_MAX_VISIBLE_LABELS,
   effectiveMaxLabelDistancePc,
+  hasProperName,
   MAX_VISIBLE_LABELS,
+  selectDenseBatchLabels,
   selectNearestLabels,
   shouldShowLabel,
   shouldShowSunLabel,
+  type DenseBatchLabelRankCandidate,
   type LabelRankCandidate,
 } from "./scene/labels";
 import { DEFAULT_RADIUS_PC, RADIUS_PRESETS_PC, isWithinRadius } from "./scene/radiusFilter";
@@ -229,7 +233,15 @@ function updateLabelVisibility(): void {
   // everything (see `effectiveMaxLabelDistancePc`'s docstring).
   const maxCameraDistancePc = effectiveMaxLabelDistancePc(camera.position.length());
 
+  // Issue #114: dense RECONS-batch members (#104's LOD-gated nearby-star
+  // batch, `lod.ts`'s `isDenseBatchMember`) are routed to their own pool
+  // (`denseBatchCandidates`) and ranked/capped separately below, instead of
+  // competing in the general `rankCandidates` pool - see the dedicated
+  // block right after this loop. Everything else about this loop (the
+  // base toggle/layer/radius/distance-threshold rule itself) is untouched
+  // from Story #65/#89/#94.
   const rankCandidates: LabelRankCandidate[] = [];
+  const denseBatchCandidates: DenseBatchLabelRankCandidate[] = [];
   for (const label of labelsInfo.labels) {
     const obj = label.object;
     const categoryOn = categoryVisibility.get(obj.object_type) ?? true;
@@ -244,15 +256,39 @@ function updateLabelVisibility(): void {
       cameraDistancePc,
       maxCameraDistancePc,
     });
-    if (passesBaseRule) {
+    if (!passesBaseRule) {
+      continue;
+    }
+    if (isDenseBatchMember(obj)) {
+      // Also gated on the same LOD check that already governs this
+      // object's *marker* visibility (`objects.ts`'s `updateDenseBatchLod`)
+      // - reused rather than re-derived, per issue #114's brief - so a
+      // dense-batch label never floats visible while its marker is hidden
+      // by the LOD gate (i.e. this cap only ever engages "once the camera
+      // is close enough that the #104 batch is visible").
+      if (passesDenseBatchLod(obj, camera.position.length(), denseBatchRadiusPc)) {
+        denseBatchCandidates.push({ id: obj.id, cameraDistancePc, isSelected, hasProperName: hasProperName(obj) });
+      }
+    } else {
       rankCandidates.push({ id: obj.id, cameraDistancePc, isSelected });
     }
   }
 
-  // Pass 2: nearest-N cap (issue #89's `MAX_VISIBLE_LABELS`) among those
-  // that passed pass 1, so the selected object's label always survives
-  // regardless of rank.
-  const visibleIds = selectNearestLabels(rankCandidates, MAX_VISIBLE_LABELS);
+  // Pass 2: nearest-N cap (issue #89's `MAX_VISIBLE_LABELS`) among the
+  // general (non-dense-batch) candidates that passed pass 1, so the
+  // selected object's label always survives regardless of rank. Unchanged
+  // by issue #114 - dense-batch candidates never reach this pool.
+  const generalVisibleIds = selectNearestLabels(rankCandidates, MAX_VISIBLE_LABELS);
+
+  // Issue #114: the dense batch's own, much smaller cap - proper-name
+  // priority first, nearest-camera-distance as the tiebreaker (see
+  // `selectDenseBatchLabels`'s docstring) - unioned with the general result
+  // above. Outside the dense LOD volume `denseBatchCandidates` is always
+  // empty (nothing passes the `passesDenseBatchLod` gate above), so this is
+  // a no-op there and general-scale label behavior is exactly as before.
+  const denseBatchVisibleIds = selectDenseBatchLabels(denseBatchCandidates, DENSE_BATCH_MAX_VISIBLE_LABELS);
+
+  const visibleIds = new Set([...generalVisibleIds, ...denseBatchVisibleIds]);
 
   for (const label of labelsInfo.labels) {
     const obj = label.object;
