@@ -2,7 +2,7 @@ import "./style.css";
 import { Raycaster } from "three";
 import { createCamera, createControls } from "./scene/camera";
 import { createRenderer, createScene } from "./scene/createScene";
-import { createSunMarker } from "./scene/sun";
+import { createSunMarker, sunCoreRadiusPc } from "./scene/sun";
 import { createGalacticPlane } from "./scene/galacticPlane";
 import { createAxes } from "./scene/axes";
 import {
@@ -81,14 +81,14 @@ const controls = createControls(camera, renderer.domElement);
 const labelRenderer = createLabelRenderer(app);
 
 const sunMarker = createSunMarker();
-scene.add(sunMarker);
+scene.add(sunMarker.group);
 // The Sun's dedicated label (issue #105, spec §2.5) - parented to the Sun's
 // own marker group (both live at the coordinate origin) rather than the
 // catalog `labelsInfo.group` below, since the Sun isn't a catalog object
 // that flows through `createLabelsLayer` (see `createSunLabel`'s
 // docstring). Visibility is driven solely by `updateLabelVisibility`.
 const sunLabel = createSunLabel();
-sunMarker.add(sunLabel);
+sunMarker.group.add(sunLabel);
 const galacticPlaneGroup = createGalacticPlane(WORLD_EXTENT_PC);
 scene.add(galacticPlaneGroup);
 scene.add(createAxes(WORLD_EXTENT_PC));
@@ -156,6 +156,17 @@ function applyDenseBatchLod(): void {
     camera.position.length(),
     denseBatchRadiusPc,
   );
+}
+
+/** Issue #113: rescales the Sun's opaque core each frame/camera-move so it
+ * doesn't visually engulf the RECONS dense batch's own nearby markers once
+ * the camera approaches solar-neighborhood scale - see `scene/sun.ts`'s
+ * `sunCoreRadiusPc` docstring for the actual distance->radius curve. Reuses
+ * the same `denseBatchRadiusPc` (populated once the scene loads, `0` until
+ * then) that `applyDenseBatchLod` above already benchmarks against, so the
+ * two LOD effects stay consistent with each other. */
+function applySunCoreScale(): void {
+  sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc));
 }
 
 /** Issue #95: keeps the Inspector honest whenever a filter change
@@ -475,6 +486,7 @@ function animate(): void {
   controls.update();
   updateLabelVisibility();
   applyDenseBatchLod();
+  applySunCoreScale();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }
