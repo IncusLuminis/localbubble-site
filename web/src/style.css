@@ -234,9 +234,14 @@ body {
   transform: translate(8px, -4px);
 }
 
+/* Issue #123: a visibly larger font-size in addition to the existing
+   color/weight change, so the selected object's label reads as a clearer
+   on-scene selection cue - paired with the new reticle + line-to-Sun
+   indicator (`scene/selectionIndicator.ts`). */
 .object-label.selected {
   color: #fff3c4;
   font-weight: 600;
+  font-size: 14px;
 }
 
 /* Structure-overlay labels ("Gould Belt" / "Radcliffe Wave", issue #124) -
