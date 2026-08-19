@@ -270,6 +270,30 @@ export function selectDenseBatchLabels(
   return new Set([...selectedIds, ...ranked]);
 }
 
+/**
+ * Strips SIMBAD's own "NAME " proper-name prefix (see `hasProperName`
+ * above) for on-screen DISPLAY purposes only (issue #122). SIMBAD marks
+ * genuine proper names with a literal leading "NAME " in the raw
+ * `name`/`aliases` strings (e.g. "NAME Proxima Centauri") - useful as
+ * classification signal (`hasProperName`, issue #114's dense-LOD label
+ * prioritization), but an internal-catalog artifact nobody should actually
+ * see rendered in the 3D scene or the Inspector panel.
+ *
+ * Deliberately narrow: strips only a leading "NAME " (note the trailing
+ * space, matching SIMBAD's own convention exactly) and leaves every other
+ * string - including names with no such prefix, and the unrelated
+ * "NAME-IAU " convention `hasProperName`'s own tests already distinguish -
+ * completely untouched. Callers that need the classification signal
+ * (`hasProperName`, `scene/search.ts`'s substring matching) must keep
+ * reading the raw, unstripped `name`/`aliases` - this helper exists only
+ * for the two places that put `name` on screen (`createLabelsLayer` below
+ * and `ui/inspector.ts`'s "Name" row), never for logic.
+ */
+export function displayName(name: string): string {
+  const prefix = "NAME ";
+  return name.startsWith(prefix) ? name.slice(prefix.length) : name;
+}
+
 export interface CatalogLabel {
   /** The scene object this label belongs to. */
   object: SceneObject;
@@ -298,7 +322,7 @@ export function createLabelsLayer(objects: SceneObject[]): {
   const labels: CatalogLabel[] = objects.map((obj) => {
     const element = document.createElement("div");
     element.className = "object-label";
-    element.textContent = obj.name;
+    element.textContent = displayName(obj.name);
 
     const css2dObject = new CSS2DObject(element);
     css2dObject.position.copy(positionToVector3(obj.position_pc));
