@@ -77,6 +77,7 @@ import { pickSceneObject, toNdc } from "./scene/picking";
 import { exportSceneAsPng } from "./scene/pngExport";
 import { createControlPanel } from "./ui/controls";
 import { Inspector } from "./ui/inspector";
+import { InfoDialog } from "./ui/infoDialog";
 import { createSearchBox } from "./ui/search";
 import { createFovReadout } from "./ui/fovReadout";
 import { createFullscreenToggle } from "./ui/fullscreenToggle";
@@ -205,6 +206,21 @@ app.appendChild(menuToggle);
 // browser fullscreen on `app` itself, not the Search/Structures panels.
 const fullscreenToggle = createFullscreenToggle(app);
 app.appendChild(fullscreenToggle.element);
+
+// Issue #164: "i" (Info) button, same top-left row/sizing/style as
+// `#menu-toggle`/`#fullscreen-toggle` - placed after #163's Expand/Collapse
+// button (final left-to-right order settled by this rebase: hamburger,
+// Expand/Collapse, Info).
+const infoDialog = new InfoDialog();
+app.appendChild(infoDialog.element);
+
+const infoToggle = document.createElement("button");
+infoToggle.id = "info-toggle";
+infoToggle.type = "button";
+infoToggle.textContent = "i";
+infoToggle.setAttribute("aria-label", "About Local Galactic Structures");
+infoToggle.addEventListener("click", () => infoDialog.show());
+app.appendChild(infoToggle);
 
 const raycaster = new Raycaster();
 
