@@ -79,6 +79,7 @@ import { createControlPanel } from "./ui/controls";
 import { Inspector } from "./ui/inspector";
 import { createSearchBox } from "./ui/search";
 import { createFovReadout } from "./ui/fovReadout";
+import { createFullscreenToggle } from "./ui/fullscreenToggle";
 import { fovExtentPc } from "./scene/fov";
 import type { SceneObject } from "./scene/sceneTypes";
 
@@ -196,6 +197,14 @@ menuToggle.addEventListener("click", () => {
   menuToggle.setAttribute("aria-expanded", String(open));
 });
 app.appendChild(menuToggle);
+
+// Issue #163: Expand/Collapse fullscreen toggle, immediately right of
+// `#menu-toggle` in the same top-left button row (see
+// `ui/fullscreenToggle.ts` for the Fullscreen API wiring/state-sync).
+// Entirely independent of `menuToggle`/`menuPanels` above - it toggles
+// browser fullscreen on `app` itself, not the Search/Structures panels.
+const fullscreenToggle = createFullscreenToggle(app);
+app.appendChild(fullscreenToggle.element);
 
 const raycaster = new Raycaster();
 
