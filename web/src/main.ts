@@ -556,12 +556,16 @@ function updateLabelVisibility(): void {
   // by issue #114 - dense-batch candidates never reach this pool.
   const generalVisibleIds = selectNearestLabels(rankCandidates, MAX_VISIBLE_LABELS);
 
-  // Issue #114: the dense batch's own, much smaller cap - proper-name
-  // priority first, nearest-camera-distance as the tiebreaker (see
-  // `selectDenseBatchLabels`'s docstring) - unioned with the general result
-  // above. Outside the dense LOD volume `denseBatchCandidates` is always
-  // empty (nothing passes the `passesDenseBatchLod` gate above), so this is
-  // a no-op there and general-scale label behavior is exactly as before.
+  // Issue #114 introduced a much smaller dense-batch-only cap here; issue
+  // #159 set `DENSE_BATCH_MAX_VISIBLE_LABELS` to `Number.POSITIVE_INFINITY`
+  // so every dense-batch candidate that reaches this call is shown - see
+  // that constant's docstring. Still routed through `selectDenseBatchLabels`
+  // (rather than skipping the call) so the "selected candidate always
+  // included" bookkeeping stays in one place, unioned with the general
+  // result above. Outside the dense LOD volume `denseBatchCandidates` is
+  // always empty (nothing passes the `passesDenseBatchLod` gate above), so
+  // this is a no-op there and general-scale label behavior is exactly as
+  // before.
   const denseBatchVisibleIds = selectDenseBatchLabels(denseBatchCandidates, DENSE_BATCH_MAX_VISIBLE_LABELS);
 
   const visibleIds = new Set([...generalVisibleIds, ...denseBatchVisibleIds]);

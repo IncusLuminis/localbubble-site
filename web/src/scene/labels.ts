@@ -200,46 +200,28 @@ export function hasProperName(obj: Pick<SceneObject, "name" | "aliases">): boole
 }
 
 /**
- * Hard cap on simultaneously-visible labels specifically for the dense
- * RECONS "100 nearest stellar systems" LOD batch (issue #104's `lod.ts`
- * `DENSE_BATCH_GROUP_TAG`) - independent of, and much smaller than, the
- * general `MAX_VISIBLE_LABELS` cap above (issue #114).
+ * Cap on simultaneously-visible labels specifically for the dense RECONS
+ * "100 nearest stellar systems" LOD batch (issue #104's `lod.ts`
+ * `DENSE_BATCH_GROUP_TAG`) - independent of, and historically much smaller
+ * than, the general `MAX_VISIBLE_LABELS` cap above (issue #114).
  *
- * 122 real stars packed within the batch's own ~11pc collection radius
- * means the general 60-object cap - tuned for the ~800pc overview, where
- * 60 simultaneously-visible labels have a whole screen's worth of room to
- * spread out - produces overlapping/illegible labels once the camera is
- * close enough for the whole batch to occupy a tiny screen area. #114
- * originally picked 7 (a "handful", the issue's own suggested 5-8) to
- * comfortably fit the Alpha Centauri system's all three catalog entries
- * (Proxima, A, and B - themselves the batch's three nearest members, so
- * they win the proper-name-first ranking outright) plus a few more named
- * neighbors (Barnard's Star, Sirius A/B, ...) without crowding back into
- * the clutter this issue exists to fix.
+ * History: #114 originally picked 7 (a "handful") to fit the Alpha
+ * Centauri system plus a few more named neighbors without clutter; #151
+ * raised that to 20 so more of the ~122 nearby stars were labeled, while
+ * staying within the batch's own ~22 proper-named stars so no bare catalog
+ * designation (e.g. `GJ ####`/`HIP ####`/`LHS ####`) won a slot.
  *
- * Raised to 20 by issue #151: having used the finished #114 feature, the
- * human owner wanted more of the ~122 nearby stars labeled for legibility/
- * context of what's actually nearby, even at some cost in visual density
- * versus #114's original conservative cap. Checked against the real batch
- * data (`data/normalized/initial_catalog_records.json` / `scene.json`):
- * exactly 22 of the 122 dense-batch stars carry a genuine proper name
- * (`hasProperName`) per #114's own count. 20 was chosen just under that 22
- * (rather than, say, 22 or above) so the cap stays entirely within the
- * batch's own named-star pool: every winning slot goes to a proper-named
- * star (Alpha Centauri A/B, Proxima, Barnard's Star, Sirius A/B, Procyon,
- * Altair, ...) and zero bare-designation entries (e.g. `GJ ####`/
- * `HIP ####`/`LHS ####` catalog numbers) win a slot - only the two
- * farthest of the 22 named stars miss out, not any of the ~100 bare ones.
- * That's meaningfully more than 7 (nearly 3x) without reintroducing the
- * pre-#114 clutter of showing bare designations nobody recognizes.
- * Verified live in the dense-LOD sphere (see PR #151's description) that
- * 20 simultaneous labels still reads as legible, not as overlapping
- * clutter - confirmed the rendered set is exactly the 20 nearest of the
- * real 22 named dense-batch stars, e.g. Eta Cassiopeiae ("eta_cas",
- * ~5.92pc, the single farthest named entry) is the kind of star that
- * misses the cap at this value.
+ * Issue #159 removes the cap's effect entirely: having used the feature
+ * further, the human owner wants *every* star inside the dense-LOD sphere
+ * labeled (currently ~122), not just a capped subset - full legibility of
+ * everything nearby now outweighs the original anti-clutter concern.
+ * Set to `Number.POSITIVE_INFINITY` rather than a literal matching today's
+ * batch size (e.g. 122): `selectDenseBatchLabels`'s `candidates.length <=
+ * maxVisible` early-return then always holds regardless of how the batch's
+ * real size changes over time, so this can never silently start dropping
+ * stars again the way a stale hardcoded count would if the batch grew.
  */
-export const DENSE_BATCH_MAX_VISIBLE_LABELS = 20;
+export const DENSE_BATCH_MAX_VISIBLE_LABELS = Number.POSITIVE_INFINITY;
 
 /** `LabelRankCandidate` plus whether the candidate has a genuine proper
  * name (`hasProperName` above) - the dense batch's ranking criterion
@@ -266,6 +248,15 @@ export interface DenseBatchLabelRankCandidate extends LabelRankCandidate {
  * keeping them separate keeps each one simple to read and test in
  * isolation, per this issue's "don't touch non-RECONS-batch label
  * behavior" scope boundary.
+ *
+ * Issue #159: `main.ts` now calls this with `DENSE_BATCH_MAX_VISIBLE_LABELS`
+ * set to `Number.POSITIVE_INFINITY`, so the `candidates.length <= maxVisible`
+ * branch above always holds in production and the proper-name-first
+ * ranking/`.slice()` below never actually executes there. The ranking logic
+ * itself is left in place rather than deleted: `hasProperName` remains a
+ * meaningful, independently-tested classification (see its own docstring),
+ * and this function still behaves correctly - and is still covered by unit
+ * tests - for any finite `maxVisible` a future caller might pass.
  */
 export function selectDenseBatchLabels(
   candidates: readonly DenseBatchLabelRankCandidate[],
