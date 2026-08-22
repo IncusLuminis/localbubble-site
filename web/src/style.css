@@ -384,14 +384,40 @@ body {
  *
  * Issue #155: `display: flex` (was a plain text-only block) so the new
  * direction-arrow `<span>` (`.galactic-center-label__arrow` below) sits
- * beside the "Galactic Center" text rather than stacking under it - the
- * `margin-left`/`margin-top` above still offset the whole element (arrow +
- * text together) from the anchored 3D point exactly as before. */
+ * beside the "Galactic Center" text rather than stacking under it.
+ *
+ * Issue #160: the human owner wants the indicator to read as visually tied
+ * to the +X axis's own red line (`scene/axes.ts`'s `createAxes`, a
+ * `THREE.AxesHelper` - see that file's top docstring: red = `(1,0,0)` =
+ * `#ff0000` exactly, verified against `AxesHelper`'s own source), so both
+ * this text and `.galactic-center-label__arrow` below now use that same
+ * `#ff0000` rather than #146/#149's light blue - and the arrow is
+ * repositioned to sit directly on that line instead of beside it:
+ * `margin-top` drops from -5px to 0 (no more vertical nudge off the line -
+ * `align-items: center` already keeps the arrow and text vertically
+ * centered on each other, so this also keeps the text vertically level with
+ * the arrow, not just the arrow on the line), and `margin-left` grows from
+ * 8px to 45px. That 45px is NOT an arbitrary re-nudge like the old 8px was -
+ * it exists to counteract flex centering, not to move the whole label away
+ * from the line: `CSS2DRenderer` centers this element's full box (arrow +
+ * gap + text) on the anchored 3D point (see the `.object-label` comment
+ * below for the mechanics - margin composes with the per-frame centering
+ * transform). With centering alone, the *midpoint of the whole row* would
+ * land on the line, i.e. roughly mid-"Galactic Center" text, not the arrow.
+ * 45px ≈ half the combined width of the 3px gap + "Galactic Center" text at
+ * this font/size/weight (measured live in-browser), which shifts the whole
+ * row right by just enough that the arrow (the row's leftmost element)
+ * lands on the anchor point/line instead of the row's midpoint - leaving
+ * the text readable just to the right of the arrow, off the line, per this
+ * issue's acceptance criteria. Because the text is static ("Galactic
+ * Center") and the font/size/weight are fixed, this width is deterministic
+ * across camera poses/frames, unlike e.g. `galacticCenterLabelPosition`'s
+ * per-frame math. */
 .galactic-center-label {
   display: flex;
   align-items: center;
   gap: 3px;
-  color: #a9d6ff;
+  color: #ff0000;
   font-size: 12px;
   font-family: system-ui, -apple-system, sans-serif;
   font-weight: 500;
@@ -399,8 +425,8 @@ body {
   pointer-events: none;
   white-space: nowrap;
   letter-spacing: 0.03em;
-  margin-left: 8px;
-  margin-top: -5px;
+  margin-left: 45px;
+  margin-top: 0;
 }
 
 /* Issue #155: the on-screen label's own direction arrow, rotated every
@@ -409,14 +435,17 @@ body {
  * current on-screen direction - so the label reads as "this way" rather
  * than "this spot". `display: inline-block` so `transform: rotate(...)`
  * has a box to rotate (a bare inline text node/span without an explicit
- * display can behave inconsistently under `transform` in some engines);
- * same color/size/text-shadow as the label text beside it, matching #154's
- * edge-indicator arrow's own visual weight (proportionate to #149's
- * "noticeable but not dominant" guidance - this is a small glyph
- * supplementing the label, not a new focal element). */
+ * display can behave inconsistently under `transform` in some engines).
+ *
+ * Issue #160: same `#ff0000` as `.galactic-center-label` above (see that
+ * class's docstring) - matches `AxesHelper`'s own X-axis red exactly, so
+ * the arrow reads as continuous with the axis line it now sits on, rather
+ * than #154's edge-indicator arrow's light-blue visual weight (that
+ * fallback indicator is deliberately untouched by #160 - see its own
+ * classes below). */
 .galactic-center-label__arrow {
   display: inline-block;
-  color: #a9d6ff;
+  color: #ff0000;
   font-size: 12px;
   text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
 }
