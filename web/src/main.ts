@@ -13,13 +13,19 @@ import {
   markerRadiusPc,
   selectedMarkerRadiusPc,
   SUN_OBJECT_ID,
+  updateBackgroundDimming,
   updateCatalogSizeScale,
   updateCatalogVisibility,
   updateDenseBatchLod,
   visibleCatalogObjects,
   type CatalogBucket,
 } from "./scene/objects";
-import { denseBatchCollectionRadiusPc, isDenseBatchMember, passesDenseBatchLod } from "./scene/lod";
+import {
+  denseBatchCollectionRadiusPc,
+  isCameraInsideDenseBatchSphere,
+  isDenseBatchMember,
+  passesDenseBatchLod,
+} from "./scene/lod";
 import { createSelectionIndicator } from "./scene/selectionIndicator";
 import { loadScene } from "./scene/sceneData";
 import {
@@ -28,6 +34,9 @@ import {
   createLocalBubbleLayer,
   createRadcliffeWaveLabel,
   createRadcliffeWaveLayer,
+  setGouldBeltDimmed,
+  setLocalBubbleDimmed,
+  setRadcliffeWaveDimmed,
 } from "./scene/structures";
 import {
   createLabelRenderer,
@@ -200,6 +209,51 @@ function applyDenseBatchLod(): void {
  * two LOD effects stay consistent with each other. */
 function applySunCoreScale(): void {
   sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc));
+}
+
+/** Issue #137: tracks whether the camera was inside the RECONS dense
+ * batch's own collection sphere as of the last frame this ran, so
+ * `applyBackgroundDimming` below only touches materials on the frame the
+ * camera actually crosses the boundary (in either direction) rather than
+ * redundantly reassigning the same material reference every single frame. */
+let cameraWasInsideDenseBatchSphere = false;
+
+/**
+ * Issue #137: dims the "background" - every non-star catalog bucket
+ * (clusters, associations, extended structures - `objects.ts`'s
+ * `updateBackgroundDimming`) plus the three structure-layer overlays (Gould
+ * Belt, Radcliffe Wave, Local Bubble - `structures.ts`'s `set*Dimmed`) -
+ * once the camera is inside the dense batch's own collection sphere, and
+ * restores normal opacity once it exits, so the RECONS nearby-star
+ * neighborhood reads as clearly spotlighted against everything else.
+ *
+ * Threshold-snap, not a smooth per-frame ramp: `lod.ts`'s own dense-batch
+ * visibility gate (`passesDenseBatchLod`/`isDenseBatchMember`) already snaps
+ * hard at this exact same radius, so a matching hard snap here keeps every
+ * "inside the sphere" effect in this app agreeing on where the boundary is,
+ * and keeps this a single boolean decision to test/reason about rather than
+ * a second continuous curve alongside `sunCoreRadiusPc`'s/
+ * `starMarkerRadiusPc`'s existing ramps (which shrink *radius*, a different
+ * concern, for a different reason - see those functions' own docstrings).
+ * Only does any work on the frame the boolean actually flips (see
+ * `cameraWasInsideDenseBatchSphere` above), so this is cheap enough to call
+ * unconditionally every frame alongside `applyDenseBatchLod`/
+ * `applySunCoreScale`.
+ *
+ * Deliberately never touches the star bucket (`updateBackgroundDimming`'s
+ * own `shouldDimBackground` excludes it) or any dense-batch star instance -
+ * the RECONS nearby stars this issue spotlights are completely unaffected by
+ * this function, satisfying #137's explicit constraint against any
+ * per-instance star-opacity change. */
+function applyBackgroundDimming(): void {
+  const insideSphere = isCameraInsideDenseBatchSphere(camera.position.length(), denseBatchRadiusPc);
+  if (insideSphere === cameraWasInsideDenseBatchSphere) return;
+  cameraWasInsideDenseBatchSphere = insideSphere;
+
+  updateBackgroundDimming(catalogBuckets, insideSphere);
+  setGouldBeltDimmed(gouldBeltGroup, insideSphere);
+  setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere);
+  setLocalBubbleDimmed(localBubbleGroup, insideSphere);
 }
 
 /** Issue #123: the selection reticle's scale should track the *same*
@@ -642,6 +696,7 @@ function animate(): void {
   updateLabelVisibility();
   applyDenseBatchLod();
   applySunCoreScale();
+  applyBackgroundDimming();
   updateSelectionIndicatorScale();
   applyFovReadout();
   renderer.render(scene, camera);

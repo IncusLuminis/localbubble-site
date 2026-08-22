@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Mesh, Quaternion, TubeGeometry } from "three";
+import { Mesh, Object3D, Quaternion, TubeGeometry } from "three";
 import {
   createGouldBeltLayer,
   createLocalBubbleLayer,
@@ -9,6 +9,9 @@ import {
   localBubbleLongAxisDirection,
   localBubbleOrientationMatrix,
   radcliffeWaveLabelPosition,
+  setGouldBeltDimmed,
+  setLocalBubbleDimmed,
+  setRadcliffeWaveDimmed,
 } from "../src/scene/structures";
 import { cartesianToGalacticLB } from "../src/scene/galacticCoords";
 import type {
@@ -411,5 +414,78 @@ describe("radcliffeWaveLabelPosition", () => {
     expect(position[0]).toBeCloseTo(midpoint.x_pc, 10);
     expect(position[1]).toBeCloseTo(midpoint.y_pc, 10);
     expect(position[2]).toBeCloseTo(midpoint.z_pc, 10);
+  });
+});
+
+/**
+ * Issue #137: dims/restores these three structure-layer overlays (Gould
+ * Belt, Radcliffe Wave, Local Bubble) once the camera is inside the RECONS
+ * dense batch's collection sphere, as part of the "spotlight the nearby
+ * stars by dimming the background" effect (`objects.ts`'s
+ * `updateBackgroundDimming` covers the catalog-bucket half of this same
+ * effect). Each `set*Dimmed` mutates the layer's own (not-cached,
+ * freshly-constructed-per-call) material's `.opacity` in place - safe here
+ * specifically because `createGouldBeltLayer`/`createRadcliffeWaveLayer`/
+ * `createLocalBubbleLayer` never share a material instance across separate
+ * calls (unlike `objects.ts`'s `materialFor` cache).
+ */
+describe("setGouldBeltDimmed / setRadcliffeWaveDimmed / setLocalBubbleDimmed (issue #137)", () => {
+  it("dims the Gould Belt tube's opacity, then restores it exactly", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    setGouldBeltDimmed(group, true);
+    expect(material.opacity).toBeLessThan(originalOpacity);
+    expect(material.opacity).toBeGreaterThan(0);
+
+    setGouldBeltDimmed(group, false);
+    expect(material.opacity).toBe(originalOpacity);
+  });
+
+  it("dims the Radcliffe Wave tube's opacity, then restores it exactly", () => {
+    const group = createRadcliffeWaveLayer(RADCLIFFE_WAVE);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    setRadcliffeWaveDimmed(group, true);
+    expect(material.opacity).toBeLessThan(originalOpacity);
+    expect(material.opacity).toBeGreaterThan(0);
+
+    setRadcliffeWaveDimmed(group, false);
+    expect(material.opacity).toBe(originalOpacity);
+  });
+
+  it("dims the Local Bubble ellipsoid's opacity, then restores it exactly", () => {
+    const group = createLocalBubbleLayer(LOCAL_BUBBLE);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    setLocalBubbleDimmed(group, true);
+    expect(material.opacity).toBeLessThan(originalOpacity);
+    expect(material.opacity).toBeGreaterThan(0);
+
+    setLocalBubbleDimmed(group, false);
+    expect(material.opacity).toBe(originalOpacity);
+  });
+
+  it("is a safe no-op when the layer is null (structure failed to build from missing/malformed data)", () => {
+    expect(() => setGouldBeltDimmed(null, true)).not.toThrow();
+    expect(() => setRadcliffeWaveDimmed(null, true)).not.toThrow();
+    expect(() => setLocalBubbleDimmed(null, true)).not.toThrow();
+  });
+
+  it("still dims correctly even with an unrelated child (the optional structure label) present in the group", () => {
+    const group = createGouldBeltLayer(GOULD_BELT)!;
+    // Simulates `main.ts` parenting the CSS2DObject label under the same
+    // group (see `structures.ts`'s `structureLabel` docstring) - a plain
+    // `Object3D` stand-in is enough here since `structureLayerMesh` only
+    // needs to NOT mistake it for the real tube `Mesh` (it isn't one).
+    group.add(new Object3D());
+    const material = (group.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    setGouldBeltDimmed(group, true);
+    expect(material.opacity).toBeLessThan(originalOpacity);
   });
 });

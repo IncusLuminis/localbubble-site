@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   DENSE_BATCH_GROUP_TAG,
   denseBatchCollectionRadiusPc,
+  isCameraInsideDenseBatchSphere,
   isDenseBatchMember,
   passesDenseBatchLod,
 } from "../src/scene/lod";
@@ -112,5 +113,41 @@ describe("passesDenseBatchLod", () => {
   it("hides every dense-batch member at the default (0) collection radius, e.g. before scene load", () => {
     expect(passesDenseBatchLod(DENSE_MEMBER, 0, 0)).toBe(true); // camera at the very origin still passes 0<=0
     expect(passesDenseBatchLod(DENSE_MEMBER, 1087, 0)).toBe(false);
+  });
+});
+
+/**
+ * Issue #137: a plain "is the camera itself inside the dense batch's own
+ * collection sphere" boolean, independent of any particular object - the
+ * trigger `main.ts` uses to dim/restore the "background" (non-star catalog
+ * buckets, structure-layer overlays). Same inclusive boundary and same
+ * "collection radius <= 0 means nothing to be inside of" guard as
+ * `passesDenseBatchLod` above, so both LOD-driven effects agree on exactly
+ * where "inside the sphere" begins.
+ */
+describe("isCameraInsideDenseBatchSphere", () => {
+  const collectionRadiusPc = 11.26;
+
+  it("is true when the camera is well within the sphere", () => {
+    expect(isCameraInsideDenseBatchSphere(5, collectionRadiusPc)).toBe(true);
+  });
+
+  it("is false when the camera is well outside the sphere", () => {
+    expect(isCameraInsideDenseBatchSphere(1087, collectionRadiusPc)).toBe(false);
+  });
+
+  it("treats the collection radius as inclusive (camera exactly at the boundary counts as inside)", () => {
+    expect(isCameraInsideDenseBatchSphere(collectionRadiusPc, collectionRadiusPc)).toBe(true);
+  });
+
+  it("is false just outside the boundary", () => {
+    expect(isCameraInsideDenseBatchSphere(collectionRadiusPc + 0.01, collectionRadiusPc)).toBe(
+      false,
+    );
+  });
+
+  it("is false at a 0 collection radius (e.g. before scene load), regardless of camera distance", () => {
+    expect(isCameraInsideDenseBatchSphere(0, 0)).toBe(false);
+    expect(isCameraInsideDenseBatchSphere(1087, 0)).toBe(false);
   });
 });
