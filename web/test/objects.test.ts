@@ -613,6 +613,18 @@ describe("backgroundBucketOpacity (issue #137)", () => {
     expect(dimmedCluster).toBeGreaterThan(dimmedStructure);
   });
 
+  it("dims to roughly 15% of normal opacity (issue #156: strengthened from #137's original 40%)", () => {
+    const clusterRatio =
+      backgroundBucketOpacity("star_cluster", true) / markerOpacityFor("star_cluster");
+    const structureRatio =
+      backgroundBucketOpacity("molecular_cloud", true) / markerOpacityFor("molecular_cloud");
+    expect(clusterRatio).toBeCloseTo(0.15, 5);
+    expect(structureRatio).toBeCloseTo(0.15, 5);
+    // Well below #137's original 0.4 factor - the whole point of #156.
+    expect(clusterRatio).toBeLessThan(0.2);
+    expect(structureRatio).toBeLessThan(0.2);
+  });
+
   it("restoring (camera outside again) returns exactly the original opacity, no drift", () => {
     const original = markerOpacityFor("star_cluster");
     // Simulate several dim/restore cycles.

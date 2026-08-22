@@ -396,8 +396,17 @@ export function markerOpacityFor(objectType: string): number {
  * clusters/associations (opaque, discrete objects) stay a bit more visible
  * than diffuse structures even while dimmed, preserving #115's own
  * discrete-vs-diffuse opacity distinction instead of erasing it.
+ *
+ * Issue #156: #137's original 0.4 (60% dimmer) still left the background
+ * visually competitive with the spotlighted nearby stars per the human
+ * owner's live feedback. Dropped to 0.15 (85% dimmer, within the issue's
+ * requested 10-20%-of-normal range) rather than a full hide (opacity/
+ * visibility 0) - a full hide would erase spatial context for where the
+ * dense-LOD sphere sits relative to the wider catalog/structures, whereas a
+ * faint-but-still-present background at 15% keeps that context while still
+ * reading unambiguously as background, not competing focus.
  */
-const BACKGROUND_DIM_FACTOR = 0.4;
+const BACKGROUND_DIM_FACTOR = 0.15;
 
 /** True for every catalog bucket type EXCEPT `STAR_OBJECT_TYPES` - i.e. the
  * "background" this issue dims. Exported so `main.ts`/tests can reason about
