@@ -116,7 +116,7 @@ describe("createSelectionIndicator", () => {
     expect(positions[5]).toBe(3);
   });
 
-  it("updateForObject called again (e.g. next frame, or a different selection) overwrites the previous position/scale", () => {
+  it("updateForObject called again (e.g. a re-show after a filter change, or a different selection) overwrites the previous position/scale", () => {
     const indicator = createSelectionIndicator();
     indicator.updateForObject([12, -5, 3], 2);
     indicator.updateForObject([0, 0, 100], 0.5);
