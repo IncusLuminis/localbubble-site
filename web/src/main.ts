@@ -1,6 +1,6 @@
 import "./style.css";
 import { Raycaster } from "three";
-import { createCamera, createControls } from "./scene/camera";
+import { createCamera, createControls, deriveMinZoomDistancePc } from "./scene/camera";
 import { createRenderer, createScene } from "./scene/createScene";
 import { createSunMarker, sunCoreRadiusPc } from "./scene/sun";
 import { createGalacticPlane } from "./scene/galacticPlane";
@@ -461,6 +461,10 @@ loadScene()
   .then((sceneData) => {
     catalogObjects = excludeDedicatedMarkerObjects(sceneData.objects);
     denseBatchRadiusPc = denseBatchCollectionRadiusPc(sceneData.objects);
+    // Issue #134: replace the pre-load fallback close-zoom floor
+    // (`camera.ts`'s `FALLBACK_MIN_DISTANCE_PC`) with the real data-derived
+    // one, now that the catalog's actual object distances are known.
+    controls.minDistance = deriveMinZoomDistancePc(sceneData.objects);
 
     const catalogLayer = createCatalogObjectGroup(sceneData.objects);
     catalogBuckets = catalogLayer.buckets;
