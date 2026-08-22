@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { Matrix4, Quaternion, Vector3 } from "three";
 import type { InstancedMesh, MeshBasicMaterial } from "three";
 import {
+  backgroundBucketOpacity,
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
@@ -13,11 +14,13 @@ import {
   markerRadiusPc,
   selectedMarkerRadiusPc,
   setInstanceVisibility,
+  shouldDimBackground,
   STAR_MARKER_MIN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
   STAR_OBJECT_TYPES,
   SUN_OBJECT_ID,
+  updateBackgroundDimming,
   updateCatalogSizeScale,
   updateCatalogVisibility,
   updateDenseBatchLod,
@@ -491,6 +494,131 @@ describe("markerOpacityFor (issue #115 opacity tiers)", () => {
     expect(opacityOf(starBucket)).toBe(markerOpacityFor("star"));
     expect(opacityOf(structureBucket)).toBeLessThan(opacityOf(clusterBucket));
     expect(opacityOf(starBucket)).toBe(opacityOf(clusterBucket));
+  });
+});
+
+/**
+ * Issue #137: dims the "background" (non-star catalog buckets) once the
+ * camera is inside the RECONS dense batch's collection sphere, so the
+ * spotlighted nearby stars read as the visual focus. Covers the pure
+ * decision logic (`shouldDimBackground`/`backgroundBucketOpacity`) plus a
+ * real-`InstancedMesh` integration check that the star bucket's material is
+ * genuinely untouched while other buckets' materials do change.
+ */
+describe("shouldDimBackground (issue #137)", () => {
+  it("is false for the star bucket - never dimmed, this is what's being spotlighted", () => {
+    expect(shouldDimBackground("star")).toBe(false);
+  });
+
+  it("is true for cluster/association types", () => {
+    for (const type of CLUSTER_OBJECT_TYPES) {
+      expect(shouldDimBackground(type)).toBe(true);
+    }
+  });
+
+  it("is true for extended-structure types and any unrecognized/future type", () => {
+    for (const type of [
+      "molecular_cloud",
+      "hii_region",
+      "supernova_remnant",
+      "bubble",
+      "star_forming_region",
+      "reference_point",
+      "some_future_object_type",
+    ]) {
+      expect(shouldDimBackground(type)).toBe(true);
+    }
+  });
+});
+
+describe("backgroundBucketOpacity (issue #137)", () => {
+  it("returns the normal, undimmed opacity when the camera is outside the sphere", () => {
+    expect(backgroundBucketOpacity("star_cluster", false)).toBe(markerOpacityFor("star_cluster"));
+    expect(backgroundBucketOpacity("molecular_cloud", false)).toBe(
+      markerOpacityFor("molecular_cloud"),
+    );
+  });
+
+  it("never dims the star bucket, even when the camera is inside the sphere", () => {
+    expect(backgroundBucketOpacity("star", true)).toBe(markerOpacityFor("star"));
+  });
+
+  it("dims a cluster/association bucket's opacity when the camera is inside the sphere", () => {
+    const dimmed = backgroundBucketOpacity("star_cluster", true);
+    expect(dimmed).toBeLessThan(markerOpacityFor("star_cluster"));
+    expect(dimmed).toBeGreaterThan(0);
+  });
+
+  it("dims an extended-structure bucket's opacity when the camera is inside the sphere", () => {
+    const dimmed = backgroundBucketOpacity("molecular_cloud", true);
+    expect(dimmed).toBeLessThan(markerOpacityFor("molecular_cloud"));
+    expect(dimmed).toBeGreaterThan(0);
+  });
+
+  it("dims proportionally: the discrete (cluster) tier stays more visible than the diffuse (structure) tier while both are dimmed", () => {
+    const dimmedCluster = backgroundBucketOpacity("star_cluster", true);
+    const dimmedStructure = backgroundBucketOpacity("molecular_cloud", true);
+    expect(dimmedCluster).toBeGreaterThan(dimmedStructure);
+  });
+
+  it("restoring (camera outside again) returns exactly the original opacity, no drift", () => {
+    const original = markerOpacityFor("star_cluster");
+    // Simulate several dim/restore cycles.
+    backgroundBucketOpacity("star_cluster", true);
+    backgroundBucketOpacity("star_cluster", false);
+    backgroundBucketOpacity("star_cluster", true);
+    expect(backgroundBucketOpacity("star_cluster", false)).toBe(original);
+  });
+});
+
+describe("updateBackgroundDimming (issue #137 integration)", () => {
+  it("dims non-star bucket materials but leaves the star bucket's material completely untouched", () => {
+    const cluster = makeObject({ id: "cluster-a", object_type: "star_cluster" });
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, cluster, STAR_A]);
+
+    const structureBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    const clusterBucket = buckets.find((b) => b.objectType === "star_cluster") as CatalogBucket;
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    const starMaterialBefore = starBucket.mesh.material;
+    const starOpacityBefore = (starMaterialBefore as MeshBasicMaterial).opacity;
+
+    updateBackgroundDimming(buckets, true);
+
+    // The star bucket's material reference AND opacity must be exactly
+    // unchanged - this is the issue's hard constraint that the spotlighted
+    // nearby stars are never altered by this change.
+    expect(starBucket.mesh.material).toBe(starMaterialBefore);
+    expect((starBucket.mesh.material as MeshBasicMaterial).opacity).toBe(starOpacityBefore);
+
+    expect((structureBucket.mesh.material as MeshBasicMaterial).opacity).toBeLessThan(
+      markerOpacityFor("molecular_cloud"),
+    );
+    expect((clusterBucket.mesh.material as MeshBasicMaterial).opacity).toBeLessThan(
+      markerOpacityFor("star_cluster"),
+    );
+  });
+
+  it("restores every non-star bucket's original opacity once the camera exits the sphere", () => {
+    const cluster = makeObject({ id: "cluster-a", object_type: "star_cluster" });
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, cluster, STAR_A]);
+
+    const structureBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    const clusterBucket = buckets.find((b) => b.objectType === "star_cluster") as CatalogBucket;
+
+    updateBackgroundDimming(buckets, true);
+    updateBackgroundDimming(buckets, false);
+
+    expect((structureBucket.mesh.material as MeshBasicMaterial).opacity).toBe(
+      markerOpacityFor("molecular_cloud"),
+    );
+    expect((clusterBucket.mesh.material as MeshBasicMaterial).opacity).toBe(
+      markerOpacityFor("star_cluster"),
+    );
+  });
+
+  it("is a safe no-op on an empty bucket list (scene not loaded yet)", () => {
+    expect(() => updateBackgroundDimming([], true)).not.toThrow();
   });
 });
 

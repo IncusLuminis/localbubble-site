@@ -82,3 +82,29 @@ export function passesDenseBatchLod(
   }
   return cameraDistanceFromOriginPc <= collectionRadiusPc;
 }
+
+/**
+ * Issue #137: a single "is the camera currently inside the dense batch's own
+ * collection sphere at all" boolean - unlike `passesDenseBatchLod` above
+ * (which answers "should THIS object be visible", and always returns `true`
+ * for non-members regardless of camera position), this is a plain,
+ * object-independent camera-position check, needed so `main.ts` can decide
+ * whether to dim the "background" (non-star catalog buckets, structure-layer
+ * overlays) once the camera is inside the same sphere the RECONS nearby-star
+ * neighborhood is spotlighted within (see `objects.ts`'s
+ * `updateBackgroundDimming`/`structures.ts`'s `set*Dimmed` helpers).
+ *
+ * Same inclusive (`<=`) boundary and same `collectionRadiusPc <= 0` ("scene
+ * not loaded yet" - nothing to be inside of) guard as `passesDenseBatchLod`,
+ * so the dimming trigger and the dense-batch visibility/radius LOD effects
+ * all agree on exactly where "inside the sphere" begins.
+ */
+export function isCameraInsideDenseBatchSphere(
+  cameraDistanceFromOriginPc: number,
+  collectionRadiusPc: number,
+): boolean {
+  if (collectionRadiusPc <= 0) {
+    return false;
+  }
+  return cameraDistanceFromOriginPc <= collectionRadiusPc;
+}

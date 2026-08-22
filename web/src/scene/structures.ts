@@ -160,6 +160,17 @@ const MAX_TUBULAR_SEGMENTS = 300;
  * `EXTENDED_STRUCTURE_OPACITY` value (0.35) as its reference point. */
 const STRUCTURE_TUBE_OPACITY = 0.35;
 
+/** Issue #137: dim factor for this file's three structure-layer overlays
+ * (Gould Belt / Radcliffe Wave tubes, Local Bubble ellipsoid) once the
+ * camera is inside the RECONS dense batch's collection sphere - own
+ * constant, not imported from `objects.ts`, matching this file's existing
+ * convention (see `STRUCTURE_TUBE_OPACITY`'s own docstring) of duplicating a
+ * shared tuning value per-file rather than creating a cross-file import for
+ * what is conceptually the same choice. Kept numerically equal to
+ * `objects.ts`'s `BACKGROUND_DIM_FACTOR` so every dimmed thing (catalog
+ * buckets and structure overlays alike) recedes by the same proportion. */
+const STRUCTURE_DIM_FACTOR = 0.4;
+
 /**
  * Issue #124 (optional per the acceptance criteria): a small, unobtrusive
  * `CSS2DObject` label for a structure overlay, positioned at one
@@ -242,6 +253,13 @@ const RADCLIFFE_WAVE_COLOR = 0x4dd2ff;
 /** Local Bubble color: pale violet, matching the notebook's diagnostic
  * plot's "mediumpurple". */
 const LOCAL_BUBBLE_COLOR = 0xb18cff;
+
+/** Local Bubble wireframe opacity - pulled out to a named constant (issue
+ * #137) so `setLocalBubbleDimmed` below and `createLocalBubbleLayer`'s own
+ * material construction share one source of truth instead of a second
+ * `0.35` literal that could silently drift from the first. Matches
+ * `STRUCTURE_TUBE_OPACITY`'s own value (see that constant's docstring). */
+const LOCAL_BUBBLE_OPACITY = 0.35;
 
 /**
  * Build the Gould Belt ring as a translucent `THREE.TubeGeometry` band
@@ -415,7 +433,7 @@ export function createLocalBubbleLayer(model: LocalBubbleStructure | undefined):
     color: LOCAL_BUBBLE_COLOR,
     wireframe: true,
     transparent: true,
-    opacity: 0.35,
+    opacity: LOCAL_BUBBLE_OPACITY,
     depthWrite: false,
   });
   const mesh = new Mesh(geometry, material);
@@ -427,4 +445,63 @@ export function createLocalBubbleLayer(model: LocalBubbleStructure | undefined):
   group.add(mesh);
 
   return group;
+}
+
+/**
+ * Issue #137: finds the one true geometry `Mesh` inside a structure-layer
+ * group (as opposed to the optional `CSS2DObject` label `main.ts` may have
+ * parented alongside it, see `structureLabel`'s docstring on why the label
+ * is added as a separate child rather than built inside these layer
+ * functions). Returns `null` for a `null` group (a structure that failed to
+ * build from missing/malformed data, spec §38) so `set*Dimmed` below can
+ * treat "layer doesn't exist" as a harmless no-op rather than a crash.
+ */
+function structureLayerMesh(group: Group | null): Mesh | null {
+  if (!group) {
+    return null;
+  }
+  return group.children.find((child): child is Mesh => child instanceof Mesh) ?? null;
+}
+
+/**
+ * Issue #137: dims (or restores) a structure-layer overlay's own mesh
+ * opacity in place. Unlike `objects.ts`'s `updateBackgroundDimming` (which
+ * swaps `InstancedMesh.material` between cached instances rather than
+ * mutating one in place, because that cache is a module-level singleton
+ * shared across independent `createCatalogObjectGroup` calls), each call to
+ * `createGouldBeltLayer`/`createRadcliffeWaveLayer`/`createLocalBubbleLayer`
+ * builds a brand-new, NOT-cached `MeshBasicMaterial` (see `tubeFromPoints`/
+ * `createLocalBubbleLayer` above - no `materialFor`-style cache in this
+ * file) - so there is no other owner of this exact material instance to
+ * leak a mutation into, and in-place `.opacity` mutation is both simpler and
+ * safe here. Restoring always resets to the same known `baseOpacity`
+ * constant (never derived from the current, possibly-dimmed value), so
+ * repeated dim/restore cycles can never drift.
+ */
+function setStructureLayerDimmed(group: Group | null, baseOpacity: number, dimmed: boolean): void {
+  const mesh = structureLayerMesh(group);
+  if (!mesh) {
+    return;
+  }
+  const material = mesh.material as MeshBasicMaterial;
+  material.opacity = dimmed ? baseOpacity * STRUCTURE_DIM_FACTOR : baseOpacity;
+}
+
+/** Dims/restores the Gould Belt tube overlay (issue #137). No-op if the
+ * layer wasn't built (`createGouldBeltLayer` returned `null`). */
+export function setGouldBeltDimmed(group: Group | null, dimmed: boolean): void {
+  setStructureLayerDimmed(group, STRUCTURE_TUBE_OPACITY, dimmed);
+}
+
+/** Dims/restores the Radcliffe Wave tube overlay (issue #137). No-op if the
+ * layer wasn't built (`createRadcliffeWaveLayer` returned `null`). */
+export function setRadcliffeWaveDimmed(group: Group | null, dimmed: boolean): void {
+  setStructureLayerDimmed(group, STRUCTURE_TUBE_OPACITY, dimmed);
+}
+
+/** Dims/restores the Local Bubble wireframe ellipsoid overlay (issue #137).
+ * No-op if the layer wasn't built (`createLocalBubbleLayer` returned
+ * `null`). */
+export function setLocalBubbleDimmed(group: Group | null, dimmed: boolean): void {
+  setStructureLayerDimmed(group, LOCAL_BUBBLE_OPACITY, dimmed);
 }

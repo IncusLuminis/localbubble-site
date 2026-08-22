@@ -369,6 +369,53 @@ export function markerOpacityFor(objectType: string): number {
   return EXTENDED_STRUCTURE_OPACITY;
 }
 
+/**
+ * Issue #137: dims every catalog bucket that is NOT the star bucket
+ * (clusters, associations, and every extended-structure type - the same
+ * "everything but `STAR_OBJECT_TYPES`" partition `markerOpacityFor` already
+ * draws) once the camera is inside the RECONS dense batch's own collection
+ * sphere (`lod.ts`'s `isCameraInsideDenseBatchSphere`), so the highlighted
+ * nearby-star neighborhood reads as the visual focus. The star bucket itself
+ * is never touched here - it's excluded by `shouldDimBackground` below, not
+ * by the caller, so this can never accidentally dim the very stars issue
+ * #137 is spotlighting, even if a future caller forgets to filter it out
+ * first.
+ *
+ * `BACKGROUND_DIM_FACTOR` (not a fixed target opacity) is a multiplier
+ * applied to each bucket's own already-tiered `markerOpacityFor` value, so
+ * the cluster tier (0.85) and the extended-structure tier (0.35) both dim by
+ * the same *proportion* rather than converging toward one flat number -
+ * clusters/associations (opaque, discrete objects) stay a bit more visible
+ * than diffuse structures even while dimmed, preserving #115's own
+ * discrete-vs-diffuse opacity distinction instead of erasing it.
+ */
+const BACKGROUND_DIM_FACTOR = 0.4;
+
+/** True for every catalog bucket type EXCEPT `STAR_OBJECT_TYPES` - i.e. the
+ * "background" this issue dims. Exported so `main.ts`/tests can reason about
+ * which buckets are affected without re-deriving the partition themselves. */
+export function shouldDimBackground(objectType: string): boolean {
+  return !STAR_OBJECT_TYPES.has(objectType);
+}
+
+/** Exported for tests - the pure "what opacity should this bucket's
+ * material use right now" decision, independent of any `THREE.Material`/
+ * `InstancedMesh` plumbing. Returns the bucket's normal, undimmed
+ * `markerOpacityFor` value whenever `cameraInsideDenseBatchSphere` is
+ * `false`, or `objectType` is the star bucket (never dimmed, regardless of
+ * camera position) - only actually applies `BACKGROUND_DIM_FACTOR` in the
+ * remaining case (a non-star bucket, camera inside the sphere). */
+export function backgroundBucketOpacity(
+  objectType: string,
+  cameraInsideDenseBatchSphere: boolean,
+): number {
+  const baseOpacity = markerOpacityFor(objectType);
+  if (!cameraInsideDenseBatchSphere || !shouldDimBackground(objectType)) {
+    return baseOpacity;
+  }
+  return baseOpacity * BACKGROUND_DIM_FACTOR;
+}
+
 /** Cached by `color`+`opacity` together (not color alone) since #115 - two
  * buckets can now share a color-only cache key but need different
  * materials if they land in different opacity tiers (they never do today,
@@ -621,6 +668,45 @@ export function updateDenseBatchLod(
 export function updateCatalogSizeScale(buckets: CatalogBucket[], sizeScale: number): void {
   for (const bucket of buckets) {
     bucket.mesh.scale.setScalar(sizeScale);
+  }
+}
+
+/**
+ * Issue #137: applies (or restores from) the "background dimming" effect
+ * across every catalog bucket - swaps each bucket's `InstancedMesh.material`
+ * between its normal-opacity material and a dimmed-opacity one, both drawn
+ * from the same `materialFor` cache `createCatalogObjectGroup` already uses.
+ *
+ * Deliberately a reference SWAP, not an in-place `.opacity` mutation of the
+ * bucket's existing (cached) material: `materialCache` is keyed by
+ * `color:opacity` and is a MODULE-LEVEL singleton, reused across every call
+ * to `createCatalogObjectGroup` (e.g. across independent tests, or a
+ * hypothetical future scene reload) - mutating a cached material's own
+ * `.opacity` in place would leave that mutation visible to any later caller
+ * who looks up the exact same `color:opacity` key expecting the original
+ * value. `OBJECT_TYPE_COLORS` happens to give every real `object_type` its
+ * own distinct color today (checked explicitly - no two types share a
+ * `color:opacity` pair), so in-place mutation of "this bucket's own
+ * material" would not actually leak into a DIFFERENT bucket's material right
+ * now; the cross-call/cross-test leak above is the real risk this avoids.
+ * `materialFor`'s cache means the swap itself allocates nothing beyond the
+ * first dim/restore cycle (the dimmed-opacity material, once created, is
+ * reused on every subsequent toggle) - restoring calls `materialFor` again
+ * with the exact original `(color, baseOpacity)` key, so it always resolves
+ * back to the SAME original material instance, never a fresh copy.
+ *
+ * Always safe to call on the star bucket too (its opacity is unaffected -
+ * see `backgroundBucketOpacity`), so callers don't need to filter buckets
+ * themselves before calling this.
+ */
+export function updateBackgroundDimming(
+  buckets: CatalogBucket[],
+  cameraInsideDenseBatchSphere: boolean,
+): void {
+  for (const bucket of buckets) {
+    const color = OBJECT_TYPE_COLORS[bucket.objectType] ?? DEFAULT_COLOR;
+    const opacity = backgroundBucketOpacity(bucket.objectType, cameraInsideDenseBatchSphere);
+    bucket.mesh.material = materialFor(color, opacity);
   }
 }
 
