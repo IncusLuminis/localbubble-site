@@ -359,24 +359,46 @@ describe("hasProperName", () => {
  * Issue #114: within the dense RECONS "100 nearest stellar systems" LOD
  * batch (#104), the general 60-object cap is far too generous for the tiny
  * screen area involved once the camera is close enough for the batch to be
- * visible - `selectDenseBatchLabels` applies a much smaller cap
- * (`DENSE_BATCH_MAX_VISIBLE_LABELS`) and prioritizes proper-named objects
+ * visible - `selectDenseBatchLabels` originally applied a much smaller cap
+ * (`DENSE_BATCH_MAX_VISIBLE_LABELS`) and prioritized proper-named objects
  * (Alpha Centauri, Proxima, Barnard's Star, ...) over bare catalog
- * designations, not just nearest-to-camera.
+ * designations, not just nearest-to-camera. Issue #151 raised that cap from
+ * #114's original 7 to 20.
  *
- * Issue #151 raised the cap from #114's original 7 to 20 (still well below
- * the general 60-object cap, and below the real batch's own 22 proper-named
- * stars - see `DENSE_BATCH_MAX_VISIBLE_LABELS`'s docstring) so more of the
- * ~122 nearby stars get labeled without reverting to #114's original
- * clutter problem. The tests below use the `DENSE_BATCH_MAX_VISIBLE_LABELS`
- * constant rather than a hardcoded number so they track whichever value is
- * currently configured.
+ * Issue #159 removes the cap's effect entirely: `DENSE_BATCH_MAX_VISIBLE_LABELS`
+ * is now `Number.POSITIVE_INFINITY`, so every dense-batch star gets a label
+ * regardless of count or proper-name status. The proper-name-first ranking
+ * logic in `selectDenseBatchLabels` itself is kept (and still tested below
+ * with explicit finite caps) since `hasProperName` remains load-bearing
+ * elsewhere and the function must still behave correctly for any caller
+ * that passes a finite `maxVisible`.
  */
 describe("selectDenseBatchLabels", () => {
-  it("is tuned to 20 (#151): meaningfully more than #114's original 7, while staying below the real batch's own 22 proper-named stars and far below the general 60-object cap", () => {
-    expect(DENSE_BATCH_MAX_VISIBLE_LABELS).toBe(20);
-    expect(DENSE_BATCH_MAX_VISIBLE_LABELS).toBeGreaterThan(7);
-    expect(DENSE_BATCH_MAX_VISIBLE_LABELS).toBeLessThan(60);
+  it("is uncapped (#159): every dense-batch star gets a label regardless of how many, or how the real batch's size changes over time", () => {
+    expect(DENSE_BATCH_MAX_VISIBLE_LABELS).toBe(Number.POSITIVE_INFINITY);
+  });
+
+  it("shows every one of the real batch's ~122 stars with no drops, mixing named and bare-designation entries", () => {
+    const named: DenseBatchLabelRankCandidate[] = Array.from({ length: 22 }, (_, i) =>
+      denseCandidate(`named-${i}`, i + 1, true),
+    );
+    const bare: DenseBatchLabelRankCandidate[] = Array.from({ length: 100 }, (_, i) =>
+      denseCandidate(`bare-${i}`, i + 1, false),
+    );
+    const allCandidates = [...named, ...bare];
+    const visible = selectDenseBatchLabels(allCandidates, DENSE_BATCH_MAX_VISIBLE_LABELS);
+    expect(visible.size).toBe(allCandidates.length);
+    for (const c of allCandidates) {
+      expect(visible.has(c.id)).toBe(true);
+    }
+  });
+
+  it("does not silently regress if the batch grows past today's ~122 count", () => {
+    const largerBatch: DenseBatchLabelRankCandidate[] = Array.from({ length: 500 }, (_, i) =>
+      denseCandidate(`star-${i}`, i + 1, i % 5 === 0),
+    );
+    const visible = selectDenseBatchLabels(largerBatch, DENSE_BATCH_MAX_VISIBLE_LABELS);
+    expect(visible.size).toBe(largerBatch.length);
   });
 
   function denseCandidate(
@@ -425,11 +447,11 @@ describe("selectDenseBatchLabels", () => {
     expect(visible.has("named-1")).toBe(true);
   });
 
-  it("caps well below the general MAX_VISIBLE_LABELS at realistic dense-batch scale (122 candidates), staying within the real 22-named-star pool at the #151 cap of 20", () => {
+  it("at realistic dense-batch scale (122 candidates, #159), shows the full batch instead of capping to the real 22-named-star pool", () => {
     // Mirrors the real RECONS batch: 22 proper-named entries, 100 bare
     // designations (the actual real catalog split - see `hasProperName`'s
-    // docstring and `DENSE_BATCH_MAX_VISIBLE_LABELS`'s docstring for how
-    // this count was verified against `scene.json`).
+    // docstring). Pre-#159 this capped to 20 named-only entries; #159
+    // requires every one of the 122 to come through instead.
     const named: DenseBatchLabelRankCandidate[] = Array.from({ length: 22 }, (_, i) =>
       denseCandidate(`named-${i}`, i + 1, true),
     );
@@ -437,20 +459,16 @@ describe("selectDenseBatchLabels", () => {
       denseCandidate(`bare-${i}`, i + 1, false),
     );
     const visible = selectDenseBatchLabels([...named, ...bare], DENSE_BATCH_MAX_VISIBLE_LABELS);
-    expect(visible.size).toBe(DENSE_BATCH_MAX_VISIBLE_LABELS);
-    expect(visible.size).toBeLessThan(60);
-    // All winners are drawn from the named pool (there are more named
-    // entries than the cap, so no bare designation should win a slot).
-    for (const id of visible) {
-      expect(id.startsWith("named-")).toBe(true);
+    expect(visible.size).toBe(122);
+    for (const c of [...named, ...bare]) {
+      expect(visible.has(c.id)).toBe(true);
     }
   });
 
-  it("reliably includes the Alpha Centauri system (Proxima, A, B) - the batch's own three nearest, real-data-shaped members - at the #151 cap of 20", () => {
+  it("includes the Alpha Centauri system and every other real-data-shaped dense-batch member, named or bare (#159)", () => {
     // Real distances/ids from the RECONS batch (scene.json): Proxima
     // ~1.30pc, Alpha Cen A ~1.35pc, Alpha Cen B ~1.35pc - the batch's own
-    // three nearest members, so proper-name-priority and nearest-distance
-    // agree on ranking them first regardless of tie-break order.
+    // three nearest members.
     const alphaCenSystem: DenseBatchLabelRankCandidate[] = [
       denseCandidate("name_proxima_centauri", 1.3, true),
       denseCandidate("alf_cen_a", 1.35, true),
@@ -458,10 +476,7 @@ describe("selectDenseBatchLabels", () => {
     ];
     // The RECONS batch's remaining 19 real proper-named entries (real ids/
     // distances from scene.json), so the named pool here matches the real
-    // batch's full 22 - large enough that, at the #151 cap of 20, the two
-    // nearest named entries below the top 20 get squeezed out by nothing
-    // (there's no unnamed competitor that ranks ahead of a named one), and
-    // no bare designation should win a slot either.
+    // batch's full 22.
     const otherNamed: DenseBatchLabelRankCandidate[] = [
       denseCandidate("name_barnard_s_star", 1.83, true),
       denseCandidate("alf_cma", 2.64, true),
@@ -484,8 +499,9 @@ describe("selectDenseBatchLabels", () => {
       denseCandidate("eggr_45", 6.44, true),
     ];
     // A representative slice of the batch's bare-designation majority, at
-    // realistic distances - none of these should win a slot given 22 named
-    // entries already exceed the 20-slot cap.
+    // realistic distances - pre-#159 none of these would have won a slot
+    // given 22 named entries already exceeded the old 20-slot cap; #159
+    // requires all of them to show a label too.
     const bare: DenseBatchLabelRankCandidate[] = [
       denseCandidate("wolf_359", 2.41, false),
       denseCandidate("hd_95735", 2.55, false),
@@ -496,21 +512,12 @@ describe("selectDenseBatchLabels", () => {
       denseCandidate("ross_128", 3.37, false),
     ];
 
-    const visible = selectDenseBatchLabels(
-      [...alphaCenSystem, ...otherNamed, ...bare],
-      DENSE_BATCH_MAX_VISIBLE_LABELS,
-    );
+    const allCandidates = [...alphaCenSystem, ...otherNamed, ...bare];
+    const visible = selectDenseBatchLabels(allCandidates, DENSE_BATCH_MAX_VISIBLE_LABELS);
 
-    expect(visible.has("name_proxima_centauri")).toBe(true);
-    expect(visible.has("alf_cen_a")).toBe(true);
-    expect(visible.has("alf_cen_b")).toBe(true);
-    expect(visible.size).toBe(DENSE_BATCH_MAX_VISIBLE_LABELS);
-    expect(visible.size).toBeLessThan(60);
-    // At 22 real named entries vs. a 20-slot cap, no bare designation
-    // should win a slot - the two farthest named entries (eta_cas,
-    // eggr_45) are the ones squeezed out instead.
-    for (const id of bare.map((c) => c.id)) {
-      expect(visible.has(id)).toBe(false);
+    expect(visible.size).toBe(allCandidates.length);
+    for (const c of allCandidates) {
+      expect(visible.has(c.id)).toBe(true);
     }
   });
 
