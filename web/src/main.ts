@@ -4,7 +4,7 @@ import { createCamera, createControls, deriveMinZoomDistancePc } from "./scene/c
 import { createRenderer, createScene } from "./scene/createScene";
 import { createSunMarker, sunCoreRadiusPc } from "./scene/sun";
 import { createGalacticPlane } from "./scene/galacticPlane";
-import { createAxes } from "./scene/axes";
+import { createAxes, createGalacticCenterLabel } from "./scene/axes";
 import {
   catalogObjectTypes,
   createCatalogObjectGroup,
@@ -116,7 +116,14 @@ const sunLabel = createSunLabel();
 sunMarker.group.add(sunLabel);
 const galacticPlaneGroup = createGalacticPlane(WORLD_EXTENT_PC);
 scene.add(galacticPlaneGroup);
-scene.add(createAxes(WORLD_EXTENT_PC));
+const axes = createAxes(WORLD_EXTENT_PC);
+scene.add(axes);
+// Issue #146: mark the +X axis's real-world meaning (Galactic Center
+// direction, spec §6/§27) directly in the scene rather than leaving it to
+// documentation - parented under `axes` itself (like `createGouldBeltLabel`
+// parented under its own structure group) so it travels with the axis line
+// it annotates.
+axes.add(createGalacticCenterLabel(WORLD_EXTENT_PC));
 
 // Issue #123: the selection reticle + line-to-Sun indicator, a persistent
 // scene object (like `sunMarker` above) that `selectObject`/
