@@ -133,6 +133,31 @@ app.appendChild(inspector.element);
 const fovReadout = createFovReadout();
 app.appendChild(fovReadout.element);
 
+// Issue #143: a single hamburger button, always present (created here at
+// top-level startup, not inside `loadScene().then(...)` below, so it's
+// visible even before scene data loads), toggling a shared container that
+// holds both the Search box (#106) and the Structures control panel
+// (`createControlPanel`, previously always-visible top-left). Both panels
+// are appended into `menuPanels` once they're created below (they're built
+// asynchronously, after the scene data loads) - `menuPanels` itself starts
+// empty and hidden, so toggling before the scene has loaded is a harmless
+// no-op (nothing inside it yet).
+const menuPanels = document.createElement("div");
+menuPanels.id = "menu-panels";
+app.appendChild(menuPanels);
+
+const menuToggle = document.createElement("button");
+menuToggle.id = "menu-toggle";
+menuToggle.type = "button";
+menuToggle.textContent = "☰";
+menuToggle.setAttribute("aria-label", "Toggle Search and Structures panels");
+menuToggle.setAttribute("aria-expanded", "false");
+menuToggle.addEventListener("click", () => {
+  const open = menuPanels.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(open));
+});
+app.appendChild(menuToggle);
+
 const raycaster = new Raycaster();
 
 let radiusPc = DEFAULT_RADIUS_PC;
@@ -661,13 +686,19 @@ loadScene()
         applyCatalogVisibility();
       },
     });
-    app.appendChild(panel);
 
     const searchBox = createSearchBox({
       getObjects: () => catalogObjects,
       onSelect: goToObject,
     });
-    app.appendChild(searchBox.element);
+
+    // Issue #143: both panels live inside the shared `menuPanels` toggle
+    // container (top-left) instead of directly in `#app` - Search first
+    // (top), Structures panel below it (bottom), per the human owner's
+    // requested stacking order. Neither panel's own internal
+    // content/behavior changes - only where it's mounted.
+    menuPanels.appendChild(searchBox.element);
+    menuPanels.appendChild(panel);
 
     applyCatalogVisibility();
     applyStructureVisibility();

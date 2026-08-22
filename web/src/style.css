@@ -65,7 +65,6 @@ body {
 }
 
 #controls {
-  left: 12px;
   width: 220px;
 }
 
@@ -74,12 +73,69 @@ body {
   width: 240px;
 }
 
-/* Issue #106: search / go-to-object panel, top-center so it doesn't
-   collide with #controls (left) or #inspector (right). */
+/* Issue #106 (repositioned by #143): search / go-to-object panel - now
+   stacked above the Structures panel inside `#menu-panels` (top-left),
+   rather than top-center on its own. */
 #search {
-  left: 50%;
-  transform: translateX(-50%);
   width: 260px;
+}
+
+/* Issue #143: hamburger toggle button, always visible in the top-left
+   corner (the position `#controls` used to occupy on its own). Clicking it
+   toggles `#menu-panels` (below) open/closed. */
+#menu-toggle {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  background: rgba(10, 14, 24, 0.82);
+  border: 1px solid rgba(143, 163, 200, 0.35);
+  border-radius: 8px;
+  color: #dfe6f3;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+#menu-toggle:hover {
+  background: #24304a;
+}
+
+/* Issue #143: shared container for Search + Structures, stacked vertically
+   in the top-left (Search above Structures per the human owner's request).
+   Hidden by default; `.open` (toggled in `main.ts` by `#menu-toggle`)
+   reveals it. Positioned below `#menu-toggle` so the button stays clickable
+   (to close the menu again) even while both panels are open. */
+#menu-panels {
+  display: none;
+  position: absolute;
+  top: 54px;
+  left: 12px;
+  z-index: 2;
+  flex-direction: column;
+  gap: 12px;
+  max-height: calc(100vh - 66px);
+  overflow-y: auto;
+}
+
+#menu-panels.open {
+  display: flex;
+}
+
+/* The panels keep their shared `.panel` box styling (background/border/
+   padding/etc) but no longer position or scroll themselves independently -
+   stacking order/placement/scrolling now come from the `#menu-panels` flex
+   container above (so the two panels don't each grow their own nested
+   scrollbar), so `position`/`top`/`left`/`transform`/`max-height`/
+   `overflow-y` are neutralized here. */
+#menu-panels .panel {
+  position: static;
+  transform: none;
+  max-height: none;
+  overflow-y: visible;
 }
 
 .panel-title {
