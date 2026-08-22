@@ -141,15 +141,102 @@ export function galacticCenterLabelPosition(
  * `AxesHelper`, mirroring how it already parents `createGouldBeltLabel`'s
  * result under `createGouldBeltLayer`'s group.
  */
-export function createGalacticCenterLabel(maxDistancePc: number): CSS2DObject {
+export interface GalacticCenterLabel {
+  css2dObject: CSS2DObject;
+  /** The direction glyph beside the text (issue #155) - `main.ts`'s
+   * `applyGalacticCenterLabelPosition` rotates this every frame via
+   * `galacticCenterOnScreenArrowAngleDeg` below, so it always points along
+   * the +X axis's *current* on-screen direction rather than sitting at a
+   * fixed orientation. A nested `<span>`, not the `css2dObject`'s own root
+   * element: `CSS2DRenderer.render()` overwrites the root element's own
+   * `style.transform` every frame to reposition it (see the `.object-label`
+   * CSS comment this file's `createGalacticCenterLabel` docstring already
+   * points at), which would fight a rotation set there directly - a
+   * descendant element's `transform` is untouched by that render pass, so
+   * rotating this nested span instead is the same escape hatch #154's edge
+   * indicator already relies on for its own arrow. */
+  arrow: HTMLSpanElement;
+}
+
+export function createGalacticCenterLabel(maxDistancePc: number): GalacticCenterLabel {
   const element = document.createElement("div");
   element.className = "galactic-center-label";
-  element.textContent = "Galactic Center";
+
+  // Issue #155: a small direction glyph beside the text, so the label reads
+  // as "this way is the Galactic Center" (a direction) rather than "this is
+  // the Galactic Center" (a location) - see issue #155 itself for the full
+  // rationale. Resting
+  // orientation is "point up" ("▲", matching #154's edge-indicator arrow's
+  // own resting glyph/rotation convention); rotated per-frame by `main.ts`.
+  const arrow = document.createElement("span");
+  arrow.className = "galactic-center-label__arrow";
+  arrow.textContent = "▲";
+  element.appendChild(arrow);
+
+  element.appendChild(document.createTextNode("Galactic Center"));
 
   const css2dObject = new CSS2DObject(element);
   const [x, y, z] = galacticCenterLabelPosition(maxDistancePc, maxDistancePc);
   css2dObject.position.set(x, y, z);
-  return css2dObject;
+  return { css2dObject, arrow };
+}
+
+/**
+ * Issue #155: the screen-space rotation angle (degrees, clockwise from
+ * "up") for the on-screen "Galactic Center" label's direction arrow
+ * (`GalacticCenterLabel.arrow` above), so it visually points further
+ * outward along the +X axis's *current* on-screen projected direction -
+ * parallel to the visible red axis line, pointing away from the origin -
+ * rather than sitting at a fixed orientation (the axis's on-screen angle
+ * changes with every camera pose, per #149's whole premise).
+ *
+ * Takes the already-computed `NdcProjection` of two points genuinely on the
+ * +X axis - the origin and the label's own anchor point are what `main.ts`
+ * passes, both already available there every frame - rather than a `camera`
+ * + raw `Vector3` pair, so this stays a pure, DOM/camera-free function
+ * unit-testable the same way as `galacticCenterLabelPosition` above (see
+ * that function's docstring for why that split matters in this codebase).
+ * Callers are expected to have produced both via this file's own
+ * `projectToNdc` (per issue #155's explicit ask to reuse it rather than
+ * invent a second projection method), not some other projection method.
+ *
+ * `edgeClampedDirection` (already defined above for #154's off-screen
+ * fallback) is reused to un-mirror each point's raw NDC x/y individually
+ * before taking their difference - guards against the same behind-camera
+ * sign flip #154 already had to handle, for the (structurally possible,
+ * even if the origin is never actually behind the camera for any built-in
+ * preset) case where the axis's near end sits behind the camera plane while
+ * the far/anchor end - which `galacticCenterIndicatorPlacement`'s caller
+ * has already confirmed is on-screen - does not.
+ *
+ * The `atan2(dx, dy)` argument order (not the more usual `atan2(dy, dx)`)
+ * and the lack of any pixel-space y-flip mirror `main.ts`'s existing
+ * off-screen arrow angle calculation for #154's edge indicator exactly -
+ * both measure clockwise-from-"up" directly in NDC's +y-is-up space, which
+ * already matches CSS `rotate()`'s clockwise-positive convention against an
+ * arrow glyph resting in the "point up" orientation with no separate
+ * pixel-space correction needed (see that call site's own comment for the
+ * fuller reasoning, which applies unchanged here).
+ *
+ * Total even for the degenerate zero-length direction (the two points
+ * project to the same on-screen location - only possible in the limit as
+ * the anchor point's distance-from-origin floor, `GALACTIC_CENTER_LABEL_MIN_DISTANCE_PC`,
+ * shrinks toward `0`, which the real app never reaches): defaults to `0`
+ * (the arrow's own resting "point up" orientation), an arbitrary but
+ * harmless choice for a direction that isn't well-defined anyway.
+ */
+export function galacticCenterOnScreenArrowAngleDeg(
+  originNdc: NdcProjection,
+  anchorNdc: NdcProjection,
+): number {
+  const origin = edgeClampedDirection(originNdc);
+  const anchor = edgeClampedDirection(anchorNdc);
+  const dx = anchor.x - origin.x;
+  const dy = anchor.y - origin.y;
+  if (dx === 0 && dy === 0) {
+    return 0;
+  }
+  return Math.atan2(dx, dy) * (180 / Math.PI);
 }
 
 /**

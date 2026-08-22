@@ -380,8 +380,17 @@ body {
  * catalog-object labels or the Sun's own label for visual attention. Uses
  * margin, not transform - see the `.object-label` comment above for why
  * transform is inert on CSS2DObject label elements (CSS2DRenderer
- * overwrites it inline every frame). */
+ * overwrites it inline every frame).
+ *
+ * Issue #155: `display: flex` (was a plain text-only block) so the new
+ * direction-arrow `<span>` (`.galactic-center-label__arrow` below) sits
+ * beside the "Galactic Center" text rather than stacking under it - the
+ * `margin-left`/`margin-top` above still offset the whole element (arrow +
+ * text together) from the anchored 3D point exactly as before. */
 .galactic-center-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
   color: #a9d6ff;
   font-size: 12px;
   font-family: system-ui, -apple-system, sans-serif;
@@ -392,6 +401,24 @@ body {
   letter-spacing: 0.03em;
   margin-left: 8px;
   margin-top: -5px;
+}
+
+/* Issue #155: the on-screen label's own direction arrow, rotated every
+ * frame by `main.ts`'s `applyGalacticCenterLabelPosition` (via
+ * `galacticCenterOnScreenArrowAngleDeg`) to point along the +X axis's
+ * current on-screen direction - so the label reads as "this way" rather
+ * than "this spot". `display: inline-block` so `transform: rotate(...)`
+ * has a box to rotate (a bare inline text node/span without an explicit
+ * display can behave inconsistently under `transform` in some engines);
+ * same color/size/text-shadow as the label text beside it, matching #154's
+ * edge-indicator arrow's own visual weight (proportionate to #149's
+ * "noticeable but not dominant" guidance - this is a small glyph
+ * supplementing the label, not a new focal element). */
+.galactic-center-label__arrow {
+  display: inline-block;
+  color: #a9d6ff;
+  font-size: 12px;
+  text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
 }
 
 /* Issue #154: the "Galactic Center" fallback indicator, shown instead of
