@@ -368,3 +368,72 @@ body {
   margin-left: 6px;
   margin-top: -3px;
 }
+
+/* The "Galactic Center" axis label (issue #146) - a dedicated class (issue
+ * #149), not `.structure-label` above, even though it started as a reuse of
+ * it: the human owner asked specifically for *this* label to be made more
+ * noticeable, without also loudening the Gould Belt/Radcliffe Wave overlay
+ * labels that still use `.structure-label`. Larger font and brighter,
+ * higher-contrast color than `.structure-label` (12px/full opacity vs.
+ * 9px/0.8 opacity) so it's easy to spot at a glance, but still well under
+ * `.object-label`'s 11px/`.selected`'s 14px so it doesn't compete with
+ * catalog-object labels or the Sun's own label for visual attention. Uses
+ * margin, not transform - see the `.object-label` comment above for why
+ * transform is inert on CSS2DObject label elements (CSS2DRenderer
+ * overwrites it inline every frame). */
+.galactic-center-label {
+  color: #a9d6ff;
+  font-size: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  margin-left: 8px;
+  margin-top: -5px;
+}
+
+/* Issue #154: the "Galactic Center" fallback indicator, shown instead of
+ * `.galactic-center-label` above whenever the real 3D-anchored point isn't
+ * on-screen (e.g. after "go to object" search recenters the camera on a
+ * distant catalog object) - see `scene/axes.ts`'s
+ * `createGalacticCenterEdgeIndicator`/`galacticCenterIndicatorPlacement`
+ * docstrings. A plain DOM element (not a `CSS2DObject`), positioned via
+ * direct `left`/`top` pixel math each frame by `main.ts`'s
+ * `applyGalacticCenterLabelPosition` rather than by `CSS2DRenderer` - so
+ * `transform` here is only ever the constant centering translate; the
+ * frame-to-frame movement is `left`/`top`, unlike `.object-label`/
+ * `.galactic-center-label` above (see those classes' own comments on why
+ * `transform` is inert for them). Same color/weight as
+ * `.galactic-center-label` so the fallback reads as "the same thing,
+ * relocated" rather than a distinct UI element. */
+.galactic-center-edge-indicator {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 20;
+}
+
+/* The direction glyph - rotated (not the whole indicator, which would also
+ * rotate its own text illegibly) by `main.ts` every frame to point toward
+ * the Galactic Center's actual off-screen direction. */
+.galactic-center-edge-indicator__arrow {
+  display: inline-block;
+  color: #a9d6ff;
+  font-size: 12px;
+  text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
+}
+
+.galactic-center-edge-indicator__label {
+  color: #a9d6ff;
+  font-size: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
+  letter-spacing: 0.03em;
+}
