@@ -209,15 +209,37 @@ export function hasProperName(obj: Pick<SceneObject, "name" | "aliases">): boole
  * means the general 60-object cap - tuned for the ~800pc overview, where
  * 60 simultaneously-visible labels have a whole screen's worth of room to
  * spread out - produces overlapping/illegible labels once the camera is
- * close enough for the whole batch to occupy a tiny screen area. A
- * "handful" (the issue's own suggested 5-8) stays legible; 7 was chosen to
+ * close enough for the whole batch to occupy a tiny screen area. #114
+ * originally picked 7 (a "handful", the issue's own suggested 5-8) to
  * comfortably fit the Alpha Centauri system's all three catalog entries
  * (Proxima, A, and B - themselves the batch's three nearest members, so
  * they win the proper-name-first ranking outright) plus a few more named
  * neighbors (Barnard's Star, Sirius A/B, ...) without crowding back into
  * the clutter this issue exists to fix.
+ *
+ * Raised to 20 by issue #151: having used the finished #114 feature, the
+ * human owner wanted more of the ~122 nearby stars labeled for legibility/
+ * context of what's actually nearby, even at some cost in visual density
+ * versus #114's original conservative cap. Checked against the real batch
+ * data (`data/normalized/initial_catalog_records.json` / `scene.json`):
+ * exactly 22 of the 122 dense-batch stars carry a genuine proper name
+ * (`hasProperName`) per #114's own count. 20 was chosen just under that 22
+ * (rather than, say, 22 or above) so the cap stays entirely within the
+ * batch's own named-star pool: every winning slot goes to a proper-named
+ * star (Alpha Centauri A/B, Proxima, Barnard's Star, Sirius A/B, Procyon,
+ * Altair, ...) and zero bare-designation entries (e.g. `GJ ####`/
+ * `HIP ####`/`LHS ####` catalog numbers) win a slot - only the two
+ * farthest of the 22 named stars miss out, not any of the ~100 bare ones.
+ * That's meaningfully more than 7 (nearly 3x) without reintroducing the
+ * pre-#114 clutter of showing bare designations nobody recognizes.
+ * Verified live in the dense-LOD sphere (see PR #151's description) that
+ * 20 simultaneous labels still reads as legible, not as overlapping
+ * clutter - confirmed the rendered set is exactly the 20 nearest of the
+ * real 22 named dense-batch stars, e.g. Eta Cassiopeiae ("eta_cas",
+ * ~5.92pc, the single farthest named entry) is the kind of star that
+ * misses the cap at this value.
  */
-export const DENSE_BATCH_MAX_VISIBLE_LABELS = 7;
+export const DENSE_BATCH_MAX_VISIBLE_LABELS = 20;
 
 /** `LabelRankCandidate` plus whether the candidate has a genuine proper
  * name (`hasProperName` above) - the dense batch's ranking criterion
