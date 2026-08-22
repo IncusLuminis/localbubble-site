@@ -89,11 +89,15 @@ body {
    toggles `#menu-panels` (below) open/closed. Issue #145: roughly doubled
    from the original 34x34px (too small/easy to lose track of) to 68x68px,
    with `font-size` scaled by the same ~2x factor (16px -> 32px) so the ☰
-   glyph fills the bigger button rather than looking lost in empty space. */
-#menu-toggle {
+   glyph fills the bigger button rather than looking lost in empty space.
+   Issue #163: this sizing/visual-style rule is now shared with
+   `#fullscreen-toggle` so the two read as one consistent top-left button
+   row rather than each having its own visual language; only positioning
+   (`left`) differs between them. */
+#menu-toggle,
+#fullscreen-toggle {
   position: absolute;
   top: 12px;
-  left: 12px;
   z-index: 3;
   width: 68px;
   height: 68px;
@@ -107,7 +111,20 @@ body {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
-#menu-toggle:hover {
+#menu-toggle {
+  left: 12px;
+}
+
+/* Issue #163: Expand/Collapse fullscreen toggle, immediately right of
+   `#menu-toggle` (12px left + 68px width + 8px gap = 88px), leaving room
+   for a further button (Info, a separate parallel Story) to its right
+   later. Behavior lives in `ui/fullscreenToggle.ts`. */
+#fullscreen-toggle {
+  left: 88px;
+}
+
+#menu-toggle:hover,
+#fullscreen-toggle:hover {
   background: #24304a;
 }
 
