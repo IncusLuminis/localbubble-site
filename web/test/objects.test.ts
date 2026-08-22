@@ -330,6 +330,10 @@ describe("STAR_OBJECT_TYPES / CLUSTER_OBJECT_TYPES (issue #130 exports)", () => 
  */
 describe("selectedMarkerRadiusPc (issue #130 extraction of issue #123 logic)", () => {
   const collectionRadiusPc = 11.26;
+  // Issue #136: a realistic minZoomDistancePc (~Proxima's 1.302pc + the
+  // Sun core's SUN_CORE_MID_RADIUS_PC margin, matching camera.ts's
+  // deriveMinZoomDistancePc derivation), passed through to sunCoreRadiusPc.
+  const minZoomDistancePc = 1.452;
 
   const sunEntry = makeObject({
     id: "sun",
@@ -365,17 +369,42 @@ describe("selectedMarkerRadiusPc (issue #130 extraction of issue #123 logic)", (
 
   it("branch (a) the Sun: matches sunCoreRadiusPc exactly, regardless of object_type", () => {
     const cameraDistancePc = 5;
-    const expected = sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc);
+    const expected = sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc, minZoomDistancePc);
     expect(
-      selectedMarkerRadiusPc(sunEntry, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+      selectedMarkerRadiusPc(
+        sunEntry,
+        SUN_OBJECT_ID,
+        cameraDistancePc,
+        collectionRadiusPc,
+        minZoomDistancePc,
+      ),
     ).toBe(expected);
   });
 
   it("branch (a) the Sun: id match takes priority even far from origin (shrink not yet triggered)", () => {
     const cameraDistancePc = 1087;
     expect(
-      selectedMarkerRadiusPc(sunEntry, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
-    ).toBe(sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc));
+      selectedMarkerRadiusPc(
+        sunEntry,
+        SUN_OBJECT_ID,
+        cameraDistancePc,
+        collectionRadiusPc,
+        minZoomDistancePc,
+      ),
+    ).toBe(sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc, minZoomDistancePc));
+  });
+
+  it("branch (a) the Sun: issue #136 - still matches sunCoreRadiusPc's extended floor deep inside the sphere", () => {
+    const cameraDistancePc = 2; // Between minZoomDistancePc and collectionRadiusPc.
+    expect(
+      selectedMarkerRadiusPc(
+        sunEntry,
+        SUN_OBJECT_ID,
+        cameraDistancePc,
+        collectionRadiusPc,
+        minZoomDistancePc,
+      ),
+    ).toBe(sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc, minZoomDistancePc));
   });
 
   it("branch (b) a dense-batch star: matches starMarkerRadiusPc exactly when the camera is close in", () => {
@@ -383,14 +412,26 @@ describe("selectedMarkerRadiusPc (issue #130 extraction of issue #123 logic)", (
     const expected = starMarkerRadiusPc(cameraDistancePc, collectionRadiusPc);
     expect(expected).toBe(STAR_MARKER_MIN_RADIUS_PC);
     expect(
-      selectedMarkerRadiusPc(denseBatchStar, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+      selectedMarkerRadiusPc(
+        denseBatchStar,
+        SUN_OBJECT_ID,
+        cameraDistancePc,
+        collectionRadiusPc,
+        minZoomDistancePc,
+      ),
     ).toBe(expected);
   });
 
   it("branch (b) a dense-batch star: still tracks starMarkerRadiusPc at the un-shrunk overview distance", () => {
     const cameraDistancePc = 1087;
     expect(
-      selectedMarkerRadiusPc(denseBatchStar, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
+      selectedMarkerRadiusPc(
+        denseBatchStar,
+        SUN_OBJECT_ID,
+        cameraDistancePc,
+        collectionRadiusPc,
+        minZoomDistancePc,
+      ),
     ).toBe(starMarkerRadiusPc(cameraDistancePc, collectionRadiusPc));
   });
 
@@ -401,6 +442,7 @@ describe("selectedMarkerRadiusPc (issue #130 extraction of issue #123 logic)", (
       SUN_OBJECT_ID,
       cameraDistancePc,
       collectionRadiusPc,
+      minZoomDistancePc,
     );
     expect(result).toBe(markerRadiusPc(nonDenseBatchStar.size_pc, nonDenseBatchStar.object_type));
     expect(result).not.toBe(STAR_MARKER_MIN_RADIUS_PC);
@@ -408,8 +450,12 @@ describe("selectedMarkerRadiusPc (issue #130 extraction of issue #123 logic)", (
 
   it("branch (c) generic: a non-star, non-Sun object always uses markerRadiusPc, regardless of camera distance", () => {
     const expected = markerRadiusPc(genericObject.size_pc, genericObject.object_type);
-    expect(selectedMarkerRadiusPc(genericObject, SUN_OBJECT_ID, 0, collectionRadiusPc)).toBe(expected);
-    expect(selectedMarkerRadiusPc(genericObject, SUN_OBJECT_ID, 1087, collectionRadiusPc)).toBe(expected);
+    expect(
+      selectedMarkerRadiusPc(genericObject, SUN_OBJECT_ID, 0, collectionRadiusPc, minZoomDistancePc),
+    ).toBe(expected);
+    expect(
+      selectedMarkerRadiusPc(genericObject, SUN_OBJECT_ID, 1087, collectionRadiusPc, minZoomDistancePc),
+    ).toBe(expected);
   });
 
   it("priority order: id === sunObjectId wins even if object_type were somehow star-like", () => {
@@ -422,8 +468,14 @@ describe("selectedMarkerRadiusPc (issue #130 extraction of issue #123 logic)", (
     });
     const cameraDistancePc = 5;
     expect(
-      selectedMarkerRadiusPc(sunLikeStar, SUN_OBJECT_ID, cameraDistancePc, collectionRadiusPc),
-    ).toBe(sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc));
+      selectedMarkerRadiusPc(
+        sunLikeStar,
+        SUN_OBJECT_ID,
+        cameraDistancePc,
+        collectionRadiusPc,
+        minZoomDistancePc,
+      ),
+    ).toBe(sunCoreRadiusPc(cameraDistancePc, collectionRadiusPc, minZoomDistancePc));
   });
 });
 

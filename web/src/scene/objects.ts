@@ -316,15 +316,23 @@ export function starMarkerRadiusPc(
  * explicit parameters (rather than closed over module state, the way
  * `main.ts`'s camera/`denseBatchRadiusPc` live) precisely so this function
  * can be unit tested without needing a real `THREE.PerspectiveCamera` or
- * `main.ts`'s own module-level scene state. */
+ * `main.ts`'s own module-level scene state.
+ *
+ * `minZoomDistancePc` (issue #136) is passed straight through to
+ * `sunCoreRadiusPc` for the Sun branch - the same `controls.minDistance`
+ * value `main.ts`'s per-frame `applySunCoreScale` already uses - so the
+ * selection reticle around the Sun (issue #123) always matches its actual
+ * rendered core radius, including at the extended close-zoom range #136
+ * added. Unused for the other two branches. */
 export function selectedMarkerRadiusPc(
   obj: SceneObject,
   sunObjectId: string,
   cameraDistanceFromOriginPc: number,
   denseBatchRadiusPc: number,
+  minZoomDistancePc: number,
 ): number {
   if (obj.id === sunObjectId) {
-    return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
+    return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, minZoomDistancePc);
   }
   if (STAR_OBJECT_TYPES.has(obj.object_type) && isDenseBatchMember(obj)) {
     return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
