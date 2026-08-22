@@ -10,6 +10,7 @@ import {
   createGalacticCenterLabel,
   galacticCenterIndicatorPlacement,
   galacticCenterLabelPosition,
+  galacticCenterOnScreenArrowAngleDeg,
   projectToNdc,
 } from "./scene/axes";
 import {
@@ -132,7 +133,13 @@ scene.add(axes);
 // it annotates. Issue #149: kept as its own named binding (not inlined into
 // `axes.add(...)`) so `applyGalacticCenterLabelPosition` below can reposition
 // it every frame.
-const galacticCenterLabel = createGalacticCenterLabel(WORLD_EXTENT_PC);
+// Issue #155: destructured out (not just the `CSS2DObject`) so
+// `applyGalacticCenterLabelPosition` below can also rotate the label's own
+// direction-arrow child element every frame - see `createGalacticCenterLabel`'s
+// updated docstring in `scene/axes.ts` for why that arrow is a plain nested
+// `<span>` rather than a second `CSS2DObject`.
+const { css2dObject: galacticCenterLabel, arrow: galacticCenterLabelArrow } =
+  createGalacticCenterLabel(WORLD_EXTENT_PC);
 axes.add(galacticCenterLabel);
 // Issue #154: the Validator found #149's dynamic label still silently
 // vanishes when the camera orbits far from the origin (e.g. searching a
@@ -849,6 +856,17 @@ window.addEventListener("resize", onResize);
  * mirroring `scene/axes.ts`'s own module-level scratch vectors. */
 const _galacticCenterPointScratch = new Vector3();
 
+/** Issue #155: the origin end of the +X axis, projected every frame
+ * alongside the label's own anchor point (`_galacticCenterPointScratch`
+ * above) so `galacticCenterOnScreenArrowAngleDeg` has two genuinely
+ * distinct points on the axis to derive its current on-screen direction
+ * from. A plain constant (not reset/mutated per frame like the scratch
+ * vector above): the origin never moves, and `projectToNdc` only reads its
+ * `point` argument (copies it into its own internal scratch vectors - see
+ * that function's own definition), so one shared instance is safe to reuse
+ * indefinitely. */
+const _galacticCenterOrigin = new Vector3(0, 0, 0);
+
 /**
  * Issue #149: repositions the "Galactic Center" label along +X every frame
  * from the camera's *current* distance from the origin
@@ -879,6 +897,17 @@ const _galacticCenterPointScratch = new Vector3();
  * the viewport in the correct on-screen direction - the standard
  * off-screen compass/radar-arrow pattern, so the label never fully
  * disappears regardless of where the camera is looking.
+ *
+ * Issue #155: the on-screen case (`placement.onScreen`) also rotates
+ * `galacticCenterLabelArrow` - the small direction glyph beside the label's
+ * text - toward the +X axis's current on-screen direction, computed via
+ * `galacticCenterOnScreenArrowAngleDeg` from this same anchor point's `ndc`
+ * plus a fresh `projectToNdc` of the axis's origin end. Without this, the
+ * anchored label read as "this is where the Galactic Center is" (a fixed
+ * location marker) rather than "this way is the Galactic Center" (a
+ * direction, which is what #149's whole distance-scaling point actually
+ * conveys) - the off-screen fallback above already got its own rotating
+ * arrow in #154; this closes the gap for the far more common on-screen case.
  */
 function applyGalacticCenterLabelPosition(): void {
   const [x, y, z] = galacticCenterLabelPosition(camera.position.length(), WORLD_EXTENT_PC);
@@ -892,6 +921,15 @@ function applyGalacticCenterLabelPosition(): void {
 
   if (placement.onScreen) {
     galacticCenterEdgeIndicator.element.style.display = "none";
+    // Issue #155: point the on-screen label's own direction arrow further
+    // outward along the +X axis's current on-screen direction, derived from
+    // the projected screen positions of two points already on that axis -
+    // the origin and this same anchor point (`ndc`, computed above) - per
+    // #155's explicit ask to reuse `projectToNdc` rather than a second
+    // projection method.
+    const originNdc = projectToNdc(_galacticCenterOrigin, camera);
+    const arrowAngleDeg = galacticCenterOnScreenArrowAngleDeg(originNdc, ndc);
+    galacticCenterLabelArrow.style.transform = `rotate(${arrowAngleDeg}deg)`;
     return;
   }
 

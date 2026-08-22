@@ -6,6 +6,7 @@ import {
   edgeClampedDirection,
   galacticCenterIndicatorPlacement,
   galacticCenterLabelPosition,
+  galacticCenterOnScreenArrowAngleDeg,
   GALACTIC_CENTER_EDGE_MARGIN,
   isNdcOnScreen,
   projectToNdc,
@@ -190,6 +191,88 @@ describe("clampDirectionToEdge (issue #154)", () => {
     // along its own view axis - an arbitrary but harmless choice since
     // that's a measure-zero set of camera poses.
     expect(clampDirectionToEdge({ x: 0, y: 0 })).toEqual({ x: 0, y: GALACTIC_CENTER_EDGE_MARGIN });
+  });
+});
+
+/**
+ * Issue #155: the on-screen anchored label was plain text with no
+ * directional glyph, reading as "this is where the Galactic Center is"
+ * rather than "this way is the Galactic Center" - these tests cover
+ * `galacticCenterOnScreenArrowAngleDeg`, the pure function that derives the
+ * arrow's screen-space rotation from the projected screen positions of two
+ * points on the +X axis (per the issue's explicit ask to reuse
+ * `projectToNdc` rather than a second projection method).
+ */
+describe("galacticCenterOnScreenArrowAngleDeg (issue #155)", () => {
+  it("points straight up (0deg, the arrow's resting orientation) when the axis runs straight up on screen", () => {
+    const origin: NdcProjection = { x: 0, y: 0, z: 0, behindCamera: false };
+    const anchor: NdcProjection = { x: 0, y: 0.5, z: 0, behindCamera: false };
+    expect(galacticCenterOnScreenArrowAngleDeg(origin, anchor)).toBeCloseTo(0, 10);
+  });
+
+  it("points right (90deg) when the axis runs rightward on screen", () => {
+    const origin: NdcProjection = { x: 0, y: 0, z: 0, behindCamera: false };
+    const anchor: NdcProjection = { x: 0.5, y: 0, z: 0, behindCamera: false };
+    expect(galacticCenterOnScreenArrowAngleDeg(origin, anchor)).toBeCloseTo(90, 10);
+  });
+
+  it("points down-left (-135deg) for a down-left on-screen direction", () => {
+    const origin: NdcProjection = { x: 0, y: 0, z: 0, behindCamera: false };
+    const anchor: NdcProjection = { x: -0.3, y: -0.3, z: 0, behindCamera: false };
+    expect(galacticCenterOnScreenArrowAngleDeg(origin, anchor)).toBeCloseTo(-135, 10);
+  });
+
+  it("un-mirrors each point's x/y individually before taking their difference (behind-camera sign flip)", () => {
+    // Same sign-flip correction #154's `edgeClampedDirection` already
+    // handles - if the origin end of the axis were behind the camera plane
+    // while the anchor end (already confirmed on-screen by the caller) is
+    // not, the raw NDC difference would be wrong without un-mirroring each
+    // point first.
+    const origin: NdcProjection = { x: 0.2, y: 0.1, z: 1.5, behindCamera: true };
+    const anchor: NdcProjection = { x: 0.3, y: 0.4, z: 0, behindCamera: false };
+    // Un-mirrored origin is (-0.2, -0.1); dx = 0.3 - (-0.2) = 0.5,
+    // dy = 0.4 - (-0.1) = 0.5 -> 45deg.
+    expect(galacticCenterOnScreenArrowAngleDeg(origin, anchor)).toBeCloseTo(45, 10);
+  });
+
+  it("defaults to 0deg (the resting orientation) for the degenerate case of coincident points", () => {
+    const ndc: NdcProjection = { x: 0.1, y: -0.2, z: 0, behindCamera: false };
+    expect(galacticCenterOnScreenArrowAngleDeg(ndc, ndc)).toBe(0);
+  });
+
+  it("end-to-end: points right for the 'Edge-on' preset, where +X runs along the camera's screen-right", () => {
+    // Camera on -Y looking at the origin, Z-up (this app's convention, see
+    // `makeCamera` above): forward = (0,1,0), world up = (0,0,1), so
+    // screen-right = normalize(cross(forward, up)) = (1,0,0) - i.e. world
+    // +X really does run straight rightward on screen in this pose, giving
+    // a hand-verifiable 90deg expectation (not just "some finite number").
+    const camera = makeCamera([0, -1280, 0], [0, 0, 0], 16 / 9);
+    const originNdc = projectToNdc(new Vector3(0, 0, 0), camera);
+    const [x, y, z] = galacticCenterLabelPosition(1280, 2000);
+    const anchorNdc = projectToNdc(new Vector3(x, y, z), camera);
+    expect(galacticCenterOnScreenArrowAngleDeg(originNdc, anchorNdc)).toBeCloseTo(90, 5);
+  });
+
+  it("end-to-end: the arrow angle changes with camera pose, rather than sitting at a fixed orientation", () => {
+    // Core requirement of issue #155: the axis's on-screen angle changes
+    // with every camera pose, so the arrow can't be a static glyph. Compare
+    // the default "Perspective" pose against "Edge-on" above and confirm
+    // they genuinely differ.
+    const perspectiveCamera = makeCamera([700, -700, 450], [0, 0, 0], 16 / 9);
+    const perspectiveDistance = Math.hypot(700, 700, 450);
+    const perspectiveOriginNdc = projectToNdc(new Vector3(0, 0, 0), perspectiveCamera);
+    const [px, py, pz] = galacticCenterLabelPosition(perspectiveDistance, 2000);
+    const perspectiveAnchorNdc = projectToNdc(new Vector3(px, py, pz), perspectiveCamera);
+    const perspectiveAngle = galacticCenterOnScreenArrowAngleDeg(perspectiveOriginNdc, perspectiveAnchorNdc);
+
+    const edgeOnCamera = makeCamera([0, -1280, 0], [0, 0, 0], 16 / 9);
+    const edgeOnOriginNdc = projectToNdc(new Vector3(0, 0, 0), edgeOnCamera);
+    const [ex, ey, ez] = galacticCenterLabelPosition(1280, 2000);
+    const edgeOnAnchorNdc = projectToNdc(new Vector3(ex, ey, ez), edgeOnCamera);
+    const edgeOnAngle = galacticCenterOnScreenArrowAngleDeg(edgeOnOriginNdc, edgeOnAnchorNdc);
+
+    expect(Number.isFinite(perspectiveAngle)).toBe(true);
+    expect(perspectiveAngle).not.toBeCloseTo(edgeOnAngle, 1);
   });
 });
 
