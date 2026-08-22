@@ -64,8 +64,11 @@ body {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
+/* Issue #145: shares a common width with #search (below) so the two panels
+   stacked inside #menu-panels line up visually rather than each keeping
+   their own pre-#143 width (220px here vs 260px there). */
 #controls {
-  width: 220px;
+  width: 240px;
 }
 
 #inspector {
@@ -75,26 +78,30 @@ body {
 
 /* Issue #106 (repositioned by #143): search / go-to-object panel - now
    stacked above the Structures panel inside `#menu-panels` (top-left),
-   rather than top-center on its own. */
+   rather than top-center on its own. Issue #145: width now matches
+   `#controls` (240px, was 260px) so the two panels align when stacked. */
 #search {
-  width: 260px;
+  width: 240px;
 }
 
 /* Issue #143: hamburger toggle button, always visible in the top-left
    corner (the position `#controls` used to occupy on its own). Clicking it
-   toggles `#menu-panels` (below) open/closed. */
+   toggles `#menu-panels` (below) open/closed. Issue #145: roughly doubled
+   from the original 34x34px (too small/easy to lose track of) to 68x68px,
+   with `font-size` scaled by the same ~2x factor (16px -> 32px) so the ☰
+   glyph fills the bigger button rather than looking lost in empty space. */
 #menu-toggle {
   position: absolute;
   top: 12px;
   left: 12px;
   z-index: 3;
-  width: 34px;
-  height: 34px;
+  width: 68px;
+  height: 68px;
   background: rgba(10, 14, 24, 0.82);
   border: 1px solid rgba(143, 163, 200, 0.35);
   border-radius: 8px;
   color: #dfe6f3;
-  font-size: 16px;
+  font-size: 32px;
   line-height: 1;
   cursor: pointer;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
@@ -108,16 +115,19 @@ body {
    in the top-left (Search above Structures per the human owner's request).
    Hidden by default; `.open` (toggled in `main.ts` by `#menu-toggle`)
    reveals it. Positioned below `#menu-toggle` so the button stays clickable
-   (to close the menu again) even while both panels are open. */
+   (to close the menu again) even while both panels are open. Issue #145:
+   `top`/`max-height` shifted down to keep clearing `#menu-toggle` now that
+   it's grown to 68px tall (was 34px) - same 8px gap below the button as
+   before (12px button top + 68px height + 8px gap = 88px). */
 #menu-panels {
   display: none;
   position: absolute;
-  top: 54px;
+  top: 88px;
   left: 12px;
   z-index: 2;
   flex-direction: column;
   gap: 12px;
-  max-height: calc(100vh - 66px);
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
 
