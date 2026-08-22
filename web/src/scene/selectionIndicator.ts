@@ -24,10 +24,20 @@ import { positionToVector3 } from "./sceneData";
  * than a single camera-facing ring/crosshair sprite. That reads clearly as
  * "a ring around this marker" from *any* camera angle with no per-frame
  * billboard/`lookAt` update needed, which keeps the whole indicator cheap:
- * only `updateForObject` (called on selection change, on selection-
- * visibility refresh, and once per frame while something is selected - see
- * `main.ts`'s `updateSelectionIndicatorScale` - to track #113/#119's own
- * per-frame LOD marker-radius shrink) ever touches its transform.
+ * only `updateForObject` ever touches its transform.
+ *
+ * Issue #150: `updateForObject` is deliberately called ONLY on the two
+ * actual selection-relevant events in `main.ts` - a fresh `selectObject`,
+ * or a `refreshSelectionVisibility` re-show after a filter hid/re-showed
+ * the selected object - never once per animation frame. An earlier version
+ * of this wiring called it every frame (to keep tracking #113/#119's own
+ * live LOD marker-radius shrink), which meant the reticle's size grew
+ * continuously as the user zoomed OUT from inside the dense-LOD sphere,
+ * before perspective had a chance to shrink it back down - a visible bug
+ * ("the marker scales infinitely large"). This module itself holds no
+ * opinion on WHEN it's called - see `main.ts`'s `showSelectionIndicatorFor`
+ * docstring for the full call-timing writeup - it just applies whatever
+ * radius it's given.
  */
 
 /** How much bigger than the selected object's own current effective marker
@@ -109,12 +119,11 @@ export interface SelectionIndicator {
   group: Group;
   /** Repositions the reticle onto `positionPc`, rescales it to
    * `reticleScaleFor(markerRadiusPcValue)`, and moves the line-to-Sun's far
-   * endpoint to match. Called on selection change, on selection-visibility
-   * refresh (#95/#97's mechanism), and once per frame while a selection is
-   * active so a LOD-driven marker-radius change (#113/#119) keeps the
-   * reticle in proportion as the camera moves - cheap either way, this only
-   * ever touches two small `Object3D` transforms plus a 2-point line's
-   * buffer attribute, never per-catalog-object work. */
+   * endpoint to match. Called on selection change and on selection-
+   * visibility refresh (#95/#97's mechanism) - deliberately NOT once per
+   * frame (issue #150; see this file's top-of-module docstring) - cheap
+   * either way, this only ever touches two small `Object3D` transforms plus
+   * a 2-point line's buffer attribute, never per-catalog-object work. */
   updateForObject(positionPc: SceneObject["position_pc"], markerRadiusPcValue: number): void;
   /** Shows/hides the reticle and the line-to-Sun together, in lockstep -
    * they are never toggled independently, so they can't drift out of sync

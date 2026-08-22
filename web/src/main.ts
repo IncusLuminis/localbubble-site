@@ -127,9 +127,11 @@ axes.add(createGalacticCenterLabel(WORLD_EXTENT_PC));
 
 // Issue #123: the selection reticle + line-to-Sun indicator, a persistent
 // scene object (like `sunMarker` above) that `selectObject`/
-// `refreshSelectionVisibility`/`updateSelectionIndicatorScale` below
-// reposition, rescale, and show/hide as the selection changes, rather than
-// being created/destroyed per click.
+// `refreshSelectionVisibility` below reposition, rescale, and show/hide as
+// the selection changes, rather than being created/destroyed per click.
+// Issue #150: this pair is the ONLY two call sites that touch its
+// transform - there is deliberately no per-frame call any more (see
+// `showSelectionIndicatorFor`'s docstring below for why).
 const selectionIndicator = createSelectionIndicator();
 scene.add(selectionIndicator.group);
 
@@ -354,11 +356,31 @@ function selectedObjectMarkerRadiusPc(obj: SceneObject): number {
 }
 
 /** Issue #123: pushes the selection indicator (reticle + line-to-Sun) to
- * match `obj`'s current position/effective marker radius and shows it -
- * the single chokepoint `selectObject`, `refreshSelectionVisibility`, and
- * the per-frame `updateSelectionIndicatorScale` below all call, so the
- * indicator can never diverge from what those three call sites each
- * independently know about the current selection. */
+ * match `obj`'s current position/effective marker radius and shows it - the
+ * single chokepoint `selectObject` and `refreshSelectionVisibility` below
+ * both call, so the indicator can never diverge from what those two call
+ * sites each independently know about the current selection.
+ *
+ * Issue #150: this used to ALSO be called once per animation frame (a
+ * since-removed `updateSelectionIndicatorScale`), which meant a selected
+ * object's reticle radius - for camera-distance-dependent markers, i.e. a
+ * dense-LOD-batch star (#119) or the Sun (#113/#136) - was recomputed from
+ * the live camera distance on every rendered frame. Selecting such an
+ * object deep inside the dense-LOD sphere (small effective radius) and
+ * then zooming out made the reticle's world-space size balloon back
+ * toward the object's un-shrunk cap over a relatively short zoom range,
+ * before perspective had shrunk it back down - visibly wrong ("the marker
+ * scales infinitely large" on zoom-out). The fix is for the reticle's
+ * radius to be captured ONCE per actual selection-relevant event (a new
+ * selection via `selectObject`, or a visibility re-check via
+ * `refreshSelectionVisibility`) and stay fixed at that value regardless of
+ * subsequent camera movement - never re-derived merely because a new
+ * frame rendered. This function's position-update half is unaffected and
+ * unconditionally correct either way: no current object type's
+ * `position_pc` ever changes after catalog load, so re-supplying it here
+ * on each of those two event-driven calls is a correct no-op today and
+ * the right place to pick up a future moving object, should one ever
+ * exist. */
 function showSelectionIndicatorFor(obj: SceneObject): void {
   selectionIndicator.updateForObject(obj.position_pc, selectedObjectMarkerRadiusPc(obj));
   selectionIndicator.setVisible(true);
@@ -388,7 +410,22 @@ function applyFovReadout(): void {
  * criterion). `updateLabelVisibility`'s own `withinRadius`/`layerVisible`
  * checks already independently hide a filtered-out object's label
  * regardless of `selectedObjectId` (see `scene/labels.ts`'s
- * `shouldShowLabel`), so no label-side change was needed for this issue. */
+ * `shouldShowLabel`), so no label-side change was needed for this issue.
+ *
+ * Issue #150 design choice: when a previously-hidden selected object
+ * becomes visible again here, the reticle's frozen marker radius IS
+ * recomputed fresh (via `showSelectionIndicatorFor`, from whatever the
+ * camera distance is at that moment) rather than reusing whatever value
+ * was frozen at the original selection, long before. This function only
+ * runs on discrete, user-driven filter events (a category checkbox, the
+ * radius slider - see `applyCatalogVisibility`'s call sites), never on a
+ * per-animation-frame timer the way the now-removed per-frame recompute
+ * did, so recomputing here does not reintroduce #150's "grows continuously
+ * while just zooming" bug. Recomputing on re-show also reads more
+ * consistently to the user - "the reticle reflects this object as it looks
+ * right now that I can see it again" - than resurrecting a radius frozen
+ * at a possibly very different camera distance from before the object was
+ * hidden. */
 function refreshSelectionVisibility(): void {
   if (selectedObjectId === null) return;
   const stillVisible = isSelectedObjectVisible(
@@ -765,21 +802,24 @@ function onResize(): void {
 }
 window.addEventListener("resize", onResize);
 
-/** Issue #123: keeps the selection reticle's scale in sync with the
- * selected object's own current (possibly camera-distance-shrunk, #113/
- * #119) marker radius every frame - a selected RECONS dense-batch star's
- * (or the Sun's) effective marker radius changes continuously as the
- * camera crosses the #104 LOD volume, so a reticle sized once at selection
- * time would otherwise drift out of proportion with the marker as the user
- * zooms. No-op whenever nothing is selected; otherwise cheap (two small
- * `Object3D` transforms plus a 2-point line update, never per-catalog-
- * object work). */
-function updateSelectionIndicatorScale(): void {
-  if (selectedObjectId === null) return;
-  const obj = catalogObjects.find((o) => o.id === selectedObjectId);
-  if (!obj) return;
-  showSelectionIndicatorFor(obj);
-}
+// Issue #150: there used to be an `updateSelectionIndicatorScale()` here,
+// called once per animation frame from `animate()` below, which re-ran
+// `showSelectionIndicatorFor` (and so recomputed `selectedObjectMarkerRadiusPc`
+// from the CURRENT camera distance) on every single rendered frame while
+// something was selected. That was the actual bug (#123/#130 follow-up):
+// for camera-distance-dependent markers (a dense-LOD-batch star, #119, or
+// the Sun, #113/#136), continuously re-tracking the live radius made the
+// reticle's world-space size balloon back up as the user zoomed OUT from
+// inside the dense-LOD sphere, well before perspective had shrunk it back
+// down - see `showSelectionIndicatorFor`'s docstring above for the full
+// writeup. The fix is to delete this per-frame call entirely: the reticle's
+// radius is now captured only at the two actual selection-relevant events
+// (`selectObject`, `refreshSelectionVisibility`), and nothing else needs a
+// per-frame check here today - no current object type's position ever
+// changes after catalog load, so there is no remaining per-frame work for
+// this function to do (verified: `refreshSelectionVisibility`'s own
+// visibility-toggle behavior is untouched, since it doesn't depend on this
+// removed function at all).
 
 function animate(): void {
   requestAnimationFrame(animate);
@@ -789,7 +829,6 @@ function animate(): void {
   applySunCoreScale();
   applyDenseBatchBoundaryVisibility();
   applyBackgroundDimming();
-  updateSelectionIndicatorScale();
   applyFovReadout();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
