@@ -26,6 +26,7 @@ import {
   isDenseBatchMember,
   passesDenseBatchLod,
 } from "./scene/lod";
+import { createDenseBatchBoundaryLayer, isDenseBatchBoundaryVisible } from "./scene/denseBatchBoundary";
 import { createSelectionIndicator } from "./scene/selectionIndicator";
 import { loadScene } from "./scene/sceneData";
 import {
@@ -154,6 +155,13 @@ let labelsInfo: ReturnType<typeof createLabelsLayer> | null = null;
 let gouldBeltGroup: ReturnType<typeof createGouldBeltLayer> | null = null;
 let radcliffeWaveGroup: ReturnType<typeof createRadcliffeWaveLayer> | null = null;
 let localBubbleGroup: ReturnType<typeof createLocalBubbleLayer> | null = null;
+/** Issue #138: the dense-batch collection-radius boundary shell - built
+ * once, right after `denseBatchRadiusPc` below is computed from the loaded
+ * scene data (see `denseBatchBoundary.ts`'s `createDenseBatchBoundaryLayer`
+ * docstring for why this doesn't need per-frame geometry rebuilding the
+ * way `sunMarker.core` does). `null` until the scene loads, and stays
+ * `null` thereafter if no dense-batch member was present (radius 0). */
+let denseBatchBoundaryMesh: ReturnType<typeof createDenseBatchBoundaryLayer> | null = null;
 
 /** Issue #104: the dense RECONS batch's own collection radius (pc),
  * derived once from the loaded scene data (`lod.ts`'s
@@ -209,6 +217,24 @@ function applyDenseBatchLod(): void {
  * two LOD effects stay consistent with each other. */
 function applySunCoreScale(): void {
   sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc));
+}
+
+/** Issue #138: toggles the dense-batch collection-radius boundary shell's
+ * visibility each frame, "as soon as we enter this sphere" per the human
+ * owner's request - reuses the same `denseBatchRadiusPc` that
+ * `applyDenseBatchLod`/`applySunCoreScale` above already benchmark against,
+ * so all three LOD-adjacent effects agree on exactly where that boundary
+ * is. Kept as its own tiny, separate function (not folded into either of
+ * those) since this issue's change is deliberately small and self-
+ * contained. No-op if the shell was never built (`denseBatchBoundaryMesh`
+ * stays `null` when `denseBatchRadiusPc` was 0 at scene-load time - see
+ * `denseBatchBoundary.ts`'s `createDenseBatchBoundaryLayer` docstring). */
+function applyDenseBatchBoundaryVisibility(): void {
+  if (!denseBatchBoundaryMesh) return;
+  denseBatchBoundaryMesh.visible = isDenseBatchBoundaryVisible(
+    camera.position.length(),
+    denseBatchRadiusPc,
+  );
 }
 
 /** Issue #137: tracks whether the camera was inside the RECONS dense
@@ -520,6 +546,15 @@ loadScene()
     // one, now that the catalog's actual object distances are known.
     controls.minDistance = deriveMinZoomDistancePc(sceneData.objects);
 
+    // Issue #138: the dense-batch boundary shell's radius is fixed for the
+    // session once `denseBatchRadiusPc` is known - built once here rather
+    // than per frame (see `createDenseBatchBoundaryLayer`'s docstring).
+    // `applyDenseBatchBoundaryVisibility` (called from `animate()`) toggles
+    // its `.visible` flag every frame; this is a no-op (stays `null`) if no
+    // dense-batch member was present.
+    denseBatchBoundaryMesh = createDenseBatchBoundaryLayer(denseBatchRadiusPc);
+    if (denseBatchBoundaryMesh) scene.add(denseBatchBoundaryMesh);
+
     const catalogLayer = createCatalogObjectGroup(sceneData.objects);
     catalogBuckets = catalogLayer.buckets;
     scene.add(catalogLayer.group);
@@ -696,6 +731,7 @@ function animate(): void {
   updateLabelVisibility();
   applyDenseBatchLod();
   applySunCoreScale();
+  applyDenseBatchBoundaryVisibility();
   applyBackgroundDimming();
   updateSelectionIndicatorScale();
   applyFovReadout();
