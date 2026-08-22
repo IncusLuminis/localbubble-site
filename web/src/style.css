@@ -223,7 +223,37 @@ body {
   word-break: break-word;
 }
 
-/* CSS2DRenderer labels (spec §25) */
+/* CSS2DRenderer labels (spec §25).
+ *
+ * Issue #132: the offset below is deliberately generous (up from the
+ * original translate(8px, -4px)) because at solar-neighborhood zoom, star
+ * markers shrink toward the #119 floor (STAR_MARKER_MIN_RADIUS_PC) and
+ * render as only a few screen pixels - an 11-14px label with just an 8px/
+ * -4px nudge sat almost directly on top of its own marker, hiding the very
+ * thing the user needs to see in order to click it. The up-and-right
+ * direction is unchanged (least likely to run under the cursor doing the
+ * pointing), only the magnitude grew. This offset is relative to each
+ * label's OWN marker position (which varies continuously across the whole
+ * canvas), not anchored to a screen edge, so it can't systematically push
+ * labels into #search (top-center), #inspector (top-right), #fov-readout
+ * (bottom-right), or #status (bottom-left) - those are all fixed-position
+ * panels unrelated to this per-marker transform.
+ *
+ * IMPORTANT - do not use `transform` here: CSS2DRenderer.render() sets
+ * `element.style.transform` as an inline style on this exact div every
+ * single frame (to translate(-50%,-50%) translate(screenX, screenY) for
+ * centering + positioning). An inline style always beats a stylesheet rule
+ * of any specificity, so a `transform` declared in CSS is completely inert
+ * here - confirmed by reading
+ * node_modules/three/examples/jsm/renderers/CSS2DRenderer.js and by live
+ * browser verification (labels rendered exactly on top of their markers,
+ * zero offset, despite this rule). CSS2DRenderer never touches margin, so
+ * `margin-left`/`margin-top` is used instead: the element is positioned
+ * absolutely with left/top left as `auto`, so its "static position" (used
+ * as the implicit left/top origin before the JS transform is applied)
+ * includes its margin - the margin offset and the per-frame transform
+ * compose correctly.
+ */
 .object-label {
   color: #cfe0ff;
   font-size: 11px;
@@ -231,17 +261,25 @@ body {
   text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
   pointer-events: none;
   white-space: nowrap;
-  transform: translate(8px, -4px);
+  margin-left: 16px;
+  margin-top: -10px;
 }
 
 /* Issue #123: a visibly larger font-size in addition to the existing
    color/weight change, so the selected object's label reads as a clearer
    on-scene selection cue - paired with the new reticle + line-to-Sun
-   indicator (`scene/selectionIndicator.ts`). */
+   indicator (`scene/selectionIndicator.ts`). Issue #132: the larger 14px
+   font needs proportionally more clearance than the base 11px label gets,
+   so `.selected` scales the offset up too (~1.25x the base offset) rather
+   than inheriting it unchanged. Uses margin, not transform - see the
+   `.object-label` comment above for why transform is inert on this
+   element (CSS2DRenderer overwrites it inline every frame). */
 .object-label.selected {
   color: #fff3c4;
   font-weight: 600;
   font-size: 14px;
+  margin-left: 20px;
+  margin-top: -13px;
 }
 
 /* Structure-overlay labels ("Gould Belt" / "Radcliffe Wave", issue #124) -
@@ -249,7 +287,9 @@ body {
  * rather than reused verbatim: these sit on top of the translucent
  * structure bands and are meant to read as a subtle annotation, not compete
  * with catalog-object labels (which get a larger font in the parallel issue
- * #123) for visual attention. */
+ * #123) for visual attention. Uses margin, not transform - see the
+ * `.object-label` comment above for why transform is inert on CSS2DObject
+ * label elements (CSS2DRenderer overwrites it inline every frame). */
 .structure-label {
   color: #9aa7bd;
   font-size: 9px;
@@ -259,5 +299,6 @@ body {
   white-space: nowrap;
   letter-spacing: 0.02em;
   opacity: 0.8;
-  transform: translate(6px, -3px);
+  margin-left: 6px;
+  margin-top: -3px;
 }
