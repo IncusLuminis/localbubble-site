@@ -1,10 +1,17 @@
 import "./style.css";
-import { Raycaster } from "three";
+import { Raycaster, Vector3 } from "three";
 import { createCamera, createControls, deriveMinZoomDistancePc } from "./scene/camera";
 import { createRenderer, createScene } from "./scene/createScene";
 import { createSunMarker, sunCoreRadiusPc } from "./scene/sun";
 import { createGalacticPlane } from "./scene/galacticPlane";
-import { createAxes, createGalacticCenterLabel } from "./scene/axes";
+import {
+  createAxes,
+  createGalacticCenterEdgeIndicator,
+  createGalacticCenterLabel,
+  galacticCenterIndicatorPlacement,
+  galacticCenterLabelPosition,
+  projectToNdc,
+} from "./scene/axes";
 import {
   catalogObjectTypes,
   createCatalogObjectGroup,
@@ -122,8 +129,24 @@ scene.add(axes);
 // direction, spec §6/§27) directly in the scene rather than leaving it to
 // documentation - parented under `axes` itself (like `createGouldBeltLabel`
 // parented under its own structure group) so it travels with the axis line
-// it annotates.
-axes.add(createGalacticCenterLabel(WORLD_EXTENT_PC));
+// it annotates. Issue #149: kept as its own named binding (not inlined into
+// `axes.add(...)`) so `applyGalacticCenterLabelPosition` below can reposition
+// it every frame.
+const galacticCenterLabel = createGalacticCenterLabel(WORLD_EXTENT_PC);
+axes.add(galacticCenterLabel);
+// Issue #154: the Validator found #149's dynamic label still silently
+// vanishes when the camera orbits far from the origin (e.g. searching a
+// distant catalog object like `* 55 Cyg` via "go to object", issue #106) -
+// the +X axis line the label rides can fall entirely outside the frustum,
+// which no distance-along-that-line fix can address. This plain-DOM
+// element (NOT a `CSS2DObject` - see `createGalacticCenterEdgeIndicator`'s
+// docstring for why) is the fallback: an edge-clamped "compass arrow"
+// indicator shown instead of `galacticCenterLabel` whenever the real 3D
+// point isn't on-screen. Appended directly to `app` (mirroring
+// `createLabelRenderer`'s own `container.appendChild`), independent of
+// `labelRenderer`'s DOM subtree, so `CSS2DRenderer` never touches it.
+const galacticCenterEdgeIndicator = createGalacticCenterEdgeIndicator();
+app.appendChild(galacticCenterEdgeIndicator.element);
 
 // Issue #123: the selection reticle + line-to-Sun indicator, a persistent
 // scene object (like `sunMarker` above) that `selectObject`/
@@ -821,6 +844,78 @@ window.addEventListener("resize", onResize);
 // visibility-toggle behavior is untouched, since it doesn't depend on this
 // removed function at all).
 
+/** Scratch vector for `applyGalacticCenterLabelPosition`'s per-frame
+ * `projectToNdc` call - reused rather than allocated fresh every frame,
+ * mirroring `scene/axes.ts`'s own module-level scratch vectors. */
+const _galacticCenterPointScratch = new Vector3();
+
+/**
+ * Issue #149: repositions the "Galactic Center" label along +X every frame
+ * from the camera's *current* distance from the origin
+ * (`camera.position.length()`), replacing #146's single static world-space
+ * point - mirrors this file's other per-frame adaptive patterns
+ * (`applyFovReadout` #125, `applySunCoreScale` #113) rather than computing
+ * the position once at scene-build time. The actual formula/clamping lives
+ * in `scene/axes.ts`'s pure, unit-tested `galacticCenterLabelPosition`; this
+ * is just the thin wrapper supplying the closure-only `camera`/
+ * `galacticCenterLabel` values that function can't see on its own (same
+ * split as `selectedObjectMarkerRadiusPc` above, for the same reason).
+ *
+ * Issue #154 (Validator-flagged gap in #149): #149's fix above only ever
+ * moves the label *along the +X axis line itself*, which stays in the
+ * frustum only while the camera orbits near the origin - true for every
+ * built-in preset, but false once "go to object" search (issue #106)
+ * recenters `controls.target` on a real, distant catalog object (e.g.
+ * `* 55 Cyg`, ~1840pc, mostly along +Y): the whole +X axis line, label
+ * point included, can fall completely outside the frustum, silently
+ * dropping the label exactly like #146's original bug. Fixed here by
+ * checking, every frame, whether the real 3D point is actually on-screen
+ * (`projectToNdc` + `galacticCenterIndicatorPlacement`, both in
+ * `scene/axes.ts`): when it is, behavior is unchanged from #149 (the
+ * anchored `CSS2DObject` shows, positioned/visibility-driven exactly as
+ * before); when it isn't, that `CSS2DObject` is hidden and
+ * `galacticCenterEdgeIndicator` (a plain DOM element, NOT a `CSS2DObject` -
+ * see its own docstring for why) is shown instead, clamped to the edge of
+ * the viewport in the correct on-screen direction - the standard
+ * off-screen compass/radar-arrow pattern, so the label never fully
+ * disappears regardless of where the camera is looking.
+ */
+function applyGalacticCenterLabelPosition(): void {
+  const [x, y, z] = galacticCenterLabelPosition(camera.position.length(), WORLD_EXTENT_PC);
+  galacticCenterLabel.position.set(x, y, z);
+
+  _galacticCenterPointScratch.set(x, y, z);
+  const ndc = projectToNdc(_galacticCenterPointScratch, camera);
+  const placement = galacticCenterIndicatorPlacement(ndc);
+
+  galacticCenterLabel.visible = placement.onScreen;
+
+  if (placement.onScreen) {
+    galacticCenterEdgeIndicator.element.style.display = "none";
+    return;
+  }
+
+  const widthHalf = window.innerWidth / 2;
+  const heightHalf = window.innerHeight / 2;
+  // Same NDC->pixel conversion `CSS2DRenderer.render()` itself uses (see
+  // `node_modules/three/examples/jsm/renderers/CSS2DRenderer.js`), so this
+  // fallback indicator lines up with where the anchored label would have
+  // rendered had it been on-screen.
+  const pixelX = placement.edgeX * widthHalf + widthHalf;
+  const pixelY = -placement.edgeY * heightHalf + heightHalf;
+
+  galacticCenterEdgeIndicator.element.style.display = "";
+  galacticCenterEdgeIndicator.element.style.left = `${pixelX}px`;
+  galacticCenterEdgeIndicator.element.style.top = `${pixelY}px`;
+  // Screen-space angle measured clockwise from "up" (`atan2(x, y)`, not the
+  // usual `atan2(y, x)` from "right") - matches CSS `rotate()`'s clockwise-
+  // positive convention directly against the arrow glyph's own upward
+  // resting orientation ("▲"), with NDC's +y-is-up requiring no pixel-space
+  // flip here (unlike the position conversion above).
+  const angleDeg = Math.atan2(placement.edgeX, placement.edgeY) * (180 / Math.PI);
+  galacticCenterEdgeIndicator.arrow.style.transform = `rotate(${angleDeg}deg)`;
+}
+
 function animate(): void {
   requestAnimationFrame(animate);
   controls.update();
@@ -830,6 +925,7 @@ function animate(): void {
   applyDenseBatchBoundaryVisibility();
   applyBackgroundDimming();
   applyFovReadout();
+  applyGalacticCenterLabelPosition();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }
