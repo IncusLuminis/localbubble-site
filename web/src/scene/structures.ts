@@ -168,8 +168,14 @@ const STRUCTURE_TUBE_OPACITY = 0.35;
  * shared tuning value per-file rather than creating a cross-file import for
  * what is conceptually the same choice. Kept numerically equal to
  * `objects.ts`'s `BACKGROUND_DIM_FACTOR` so every dimmed thing (catalog
- * buckets and structure overlays alike) recedes by the same proportion. */
-const STRUCTURE_DIM_FACTOR = 0.4;
+ * buckets and structure overlays alike) recedes by the same proportion.
+ *
+ * Issue #156: raised the dim from #137's original 0.4 (60% dimmer) to 0.15
+ * (85% dimmer) - see `objects.ts`'s `BACKGROUND_DIM_FACTOR` docstring for the
+ * full rationale (live feedback that 0.4 still left the background
+ * competitive with the spotlighted stars; 0.15 chosen over a full hide to
+ * keep faint spatial context). */
+const STRUCTURE_DIM_FACTOR = 0.15;
 
 /**
  * Issue #124 (optional per the acceptance criteria): a small, unobtrusive

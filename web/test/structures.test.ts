@@ -469,6 +469,22 @@ describe("setGouldBeltDimmed / setRadcliffeWaveDimmed / setLocalBubbleDimmed (is
     expect(material.opacity).toBe(originalOpacity);
   });
 
+  it("dims to roughly 15% of normal opacity (issue #156: strengthened from #137's original 40%)", () => {
+    const gouldGroup = createGouldBeltLayer(GOULD_BELT);
+    const gouldMaterial = (gouldGroup!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const gouldOriginal = gouldMaterial.opacity;
+    setGouldBeltDimmed(gouldGroup, true);
+    expect(gouldMaterial.opacity / gouldOriginal).toBeCloseTo(0.15, 5);
+    expect(gouldMaterial.opacity / gouldOriginal).toBeLessThan(0.2);
+
+    const bubbleGroup = createLocalBubbleLayer(LOCAL_BUBBLE);
+    const bubbleMaterial = (bubbleGroup!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const bubbleOriginal = bubbleMaterial.opacity;
+    setLocalBubbleDimmed(bubbleGroup, true);
+    expect(bubbleMaterial.opacity / bubbleOriginal).toBeCloseTo(0.15, 5);
+    expect(bubbleMaterial.opacity / bubbleOriginal).toBeLessThan(0.2);
+  });
+
   it("is a safe no-op when the layer is null (structure failed to build from missing/malformed data)", () => {
     expect(() => setGouldBeltDimmed(null, true)).not.toThrow();
     expect(() => setRadcliffeWaveDimmed(null, true)).not.toThrow();
