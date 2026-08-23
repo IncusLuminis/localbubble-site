@@ -34,6 +34,17 @@ export interface SceneObject {
   distance_error_pc: number | null;
   size_pc: number | null;
   color_class: string | null;
+  /** Raw SIMBAD spectral-type string (e.g. "G2V", "M5.5Ve", "B2IV"), or
+   * `null` when SIMBAD has none on record. Story #170's addition; Story #173
+   * (`scene/spectralColor.ts`) parses this to color star markers by
+   * OBAFGKM class, and Story #172 surfaces it verbatim in the Inspector. */
+  spectral_type: string | null;
+  /** Absolute magnitude (M_V or equivalent), or `null` when not available.
+   * Lower/more-negative = intrinsically brighter. Story #170's addition;
+   * Story #173 (`scene/magnitudeBrightness.ts`) buckets this into a
+   * brightness multiplier for star markers, and Story #172 surfaces it
+   * verbatim in the Inspector. */
+  absolute_magnitude: number | null;
   group: SceneObjectGroup;
   source: SceneObjectSource;
   notes: string | null;

@@ -7,6 +7,7 @@ import {
   CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
+  instanceColorFor,
   isCatalogObjectVisible,
   isSelectedObjectVisible,
   LOCAL_BUBBLE_OBJECT_ID,
@@ -30,6 +31,9 @@ import {
 import { sunCoreRadiusPc } from "../src/scene/sun";
 import { DENSE_BATCH_GROUP_TAG } from "../src/scene/lod";
 import type { SceneObject } from "../src/scene/sceneTypes";
+import { Color } from "three";
+import { spectralColorFor } from "../src/scene/spectralColor";
+import { absoluteMagnitudeToBrightness } from "../src/scene/magnitudeBrightness";
 
 /**
  * Regression coverage for PR #79 review (the Sun double-render bug) plus
@@ -52,6 +56,8 @@ function makeObject(overrides: Partial<SceneObject>): SceneObject {
     distance_error_pc: null,
     size_pc: null,
     color_class: null,
+    spectral_type: null,
+    absolute_magnitude: null,
     group: { primary: null, secondary: [] },
     source: { reference: "test fixture", url: null, catalog: null },
     notes: null,
@@ -806,6 +812,85 @@ describe("createCatalogObjectGroup (InstancedMesh buckets)", () => {
       expect(scale.y).toBeCloseTo(expectedRadius, 6);
       expect(scale.z).toBeCloseTo(expectedRadius, 6);
     });
+  });
+});
+
+// Issue #173: per-instance star color (spectral class x brightness),
+// scoped to the star bucket's own InstancedMesh.instanceColor buffer.
+describe("createCatalogObjectGroup star-bucket instanceColor (issue #173)", () => {
+  const G_STAR = makeObject({
+    id: "g-star",
+    object_type: "star",
+    position_pc: [1, 0, 0],
+    distance_pc: 1,
+    spectral_type: "G2V",
+    absolute_magnitude: -3,
+  });
+  const M_STAR = makeObject({
+    id: "m-star",
+    object_type: "star",
+    position_pc: [2, 0, 0],
+    distance_pc: 2,
+    spectral_type: "M5.5Ve",
+    absolute_magnitude: 12,
+  });
+  const UNKNOWN_STAR = makeObject({
+    id: "unknown-star",
+    object_type: "star",
+    position_pc: [3, 0, 0],
+    distance_pc: 3,
+    spectral_type: null,
+    absolute_magnitude: null,
+  });
+
+  it("gives the star bucket's mesh a non-null instanceColor buffer", () => {
+    const { buckets } = createCatalogObjectGroup([G_STAR, M_STAR, CLOUD_A]);
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    expect(starBucket.mesh.instanceColor).not.toBeNull();
+  });
+
+  it("leaves non-star buckets without an instanceColor buffer", () => {
+    const { buckets } = createCatalogObjectGroup([G_STAR, CLOUD_A, CLOUD_B]);
+    const cloudBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    expect(cloudBucket.mesh.instanceColor).toBeNull();
+  });
+
+  it("bakes each star instance's color as spectral color x brightness multiplier", () => {
+    const { buckets } = createCatalogObjectGroup([G_STAR, M_STAR]);
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    starBucket.objects.forEach((obj, i) => {
+      const actual = new Color();
+      starBucket.mesh.getColorAt(i, actual);
+      const expected = new Color(spectralColorFor(obj.spectral_type)).multiplyScalar(
+        absoluteMagnitudeToBrightness(obj.absolute_magnitude),
+      );
+      expect(actual.r).toBeCloseTo(expected.r, 6);
+      expect(actual.g).toBeCloseTo(expected.g, 6);
+      expect(actual.b).toBeCloseTo(expected.b, 6);
+    });
+  });
+
+  it("gives a G-type and an M-type star visibly different colors", () => {
+    const gColor = instanceColorFor(G_STAR).clone();
+    const mColor = instanceColorFor(M_STAR).clone();
+    expect(gColor.getHex()).not.toBe(mColor.getHex());
+    // M dwarfs should read redder (higher r relative to b) than a G star.
+    expect(mColor.r / mColor.b).toBeGreaterThan(gColor.r / gColor.b);
+  });
+
+  it("gives a null spectral_type/absolute_magnitude star a non-broken, non-zero color", () => {
+    const color = instanceColorFor(UNKNOWN_STAR).clone();
+    expect(color.r).toBeGreaterThan(0);
+    expect(color.g).toBeGreaterThan(0);
+    expect(color.b).toBeGreaterThan(0);
+  });
+
+  it("does not change the star material's own base color (stays white)", () => {
+    const { buckets } = createCatalogObjectGroup([G_STAR]);
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const material = starBucket.mesh.material as MeshBasicMaterial;
+    expect(material.color.getHex()).toBe(0xffffff);
   });
 });
 

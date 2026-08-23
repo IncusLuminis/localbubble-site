@@ -1,4 +1,5 @@
 import {
+  Color,
   Group,
   InstancedMesh,
   Matrix4,
@@ -12,6 +13,8 @@ import { positionToVector3 } from "./sceneData";
 import { isWithinRadius } from "./radiusFilter";
 import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
 import { sunCoreRadiusPc } from "./sun";
+import { spectralColorFor } from "./spectralColor";
+import { absoluteMagnitudeToBrightness } from "./magnitudeBrightness";
 
 /**
  * Catalog object rendering (spec Idea.md §22/§45, issue #64: "Catalog
@@ -477,6 +480,28 @@ function instanceMatrixFor(obj: SceneObject, radiusPc: number): Matrix4 {
   return scratchMatrix.compose(scratchPosition, IDENTITY_QUATERNION, scratchScale);
 }
 
+/** Issue #173: reused across `instanceColorFor` calls (up to 707 stars) to
+ * avoid allocating a fresh `THREE.Color` per instance, mirroring the
+ * `scratchMatrix`/`scratchPosition`/`scratchScale` pattern above. */
+const scratchColor = new Color();
+
+/** The star bucket's own per-instance color (issue #173): the star's
+ * spectral-class color (`spectralColor.ts`, OBAFGKM blue-to-red, or the
+ * "unknown" gray for null/unparseable `spectral_type`) scaled by its
+ * absolute-magnitude brightness multiplier (`magnitudeBrightness.ts`,
+ * data-fit to this catalog's real distribution). The star bucket's material
+ * base color is plain white (`OBJECT_TYPE_COLORS['star']`, unchanged by this
+ * Story) specifically so `InstancedMesh.instanceColor`'s per-instance value
+ * - which Three.js multiplies against the material's own color - comes
+ * through as this function's exact return value, not further tinted.
+ * Exported for tests; only ever called for `STAR_OBJECT_TYPES` buckets in
+ * `createCatalogObjectGroup` below - every other object type keeps its
+ * single flat `OBJECT_TYPE_COLORS` bucket color, untouched by this Story. */
+export function instanceColorFor(obj: SceneObject): Color {
+  const brightness = absoluteMagnitudeToBrightness(obj.absolute_magnitude);
+  return scratchColor.setHex(spectralColorFor(obj.spectral_type)).multiplyScalar(brightness);
+}
+
 /** One `InstancedMesh` per `object_type` bucket, plus the index -> real
  * `SceneObject` mapping (and the per-object visual radius baked into each
  * instance) that picking (`scene/picking.ts`) and visibility updates need.
@@ -588,6 +613,19 @@ export function createCatalogObjectGroup(objects: SceneObject[]): {
       mesh.setMatrixAt(i, instanceMatrixFor(obj, radiiPc[i]));
     });
     mesh.instanceMatrix.needsUpdate = true;
+
+    // Issue #173: per-instance color, scoped to the star bucket only - every
+    // other object_type keeps sharing one flat `materialFor` color as
+    // before. `setColorAt` lazily allocates `mesh.instanceColor` on first
+    // call, so nothing needs to be pre-created for non-star buckets.
+    if (STAR_OBJECT_TYPES.has(objectType)) {
+      bucketObjects.forEach((obj, i) => {
+        mesh.setColorAt(i, instanceColorFor(obj));
+      });
+      if (mesh.instanceColor) {
+        mesh.instanceColor.needsUpdate = true;
+      }
+    }
 
     group.add(mesh);
     buckets.push({ objectType, mesh, objects: bucketObjects, radiiPc });
