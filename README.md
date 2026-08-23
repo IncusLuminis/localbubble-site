@@ -416,3 +416,73 @@ adapter's fields change again.
 web/public/data/scene.json` (matching the pre-existing file's own
 no-radius-filter convention - it already included all 956 objects, 64 of
 them beyond the CLI's 800 pc default).
+
+## Exoplanet cross-match (Story #171)
+
+Adds confirmed-exoplanet data from a third, separate service - the NASA
+Exoplanet Archive (IPAC/Caltech), not SIMBAD or Gaia - via
+`data_sources/nasa_exoplanet_archive.py`. Architecturally different from
+`SimbadResolver`/`GaiaResolver`: those adapters query and cache one named
+object at a time; this module instead makes exactly ONE live
+`astroquery.ipac.nexsci.nasa_exoplanet_archive.NasaExoplanetArchive
+.query_criteria` pull of the whole `pscomppars` table ("Planetary Systems
+Composite Parameters" - the curated, one-row-per-planet table, not the raw
+multi-row-per-planet `ps` table), caches that single bulk snapshot at
+`data/raw/nasa_exoplanet_archive/pscomppars_bulk.json` (reusing the same
+`CacheRecord`/`write_cache`/`update_manifest` provenance helpers every
+other adapter uses, just keyed by one fixed dataset name instead of one
+cache file per star), and cross-matches every catalog star's existing
+`aliases` against it entirely in local Python afterward - no further
+network round-trips.
+
+Cross-matching tries each catalog star's `aliases` against the archive's
+`hd_name`/`hip_name`/`tic_id`/`gaia_dr3_id`/`gaia_dr2_id` columns, in that
+priority order (`ExoplanetCrossMatcher`/`find_matching_hostname`), and
+attaches planets by the archive's own component-qualified `hostname` (e.g.
+`"eps Ind A"`), never by a substring match on the bare system name - this
+is what keeps multi-star systems correct (e.g. `alf Cen A`/`alf Cen B`,
+`omi02 Eri`/`omi02 Eri B`/`omi02 Eri C` for 40 Eridani A/B/C each have
+their own distinct HD/HIP/TIC/Gaia identifiers in the archive, so an
+identifier match can only ever land on the correct component). One
+column-naming correction found during development: the archive has no
+single `gaia_id` column (requesting it raises `ORA-00904: 'GAIA_ID':
+invalid identifier`) - it splits Gaia cross-match into `gaia_dr2_id` and
+`gaia_dr3_id`, both of which are indexed since a star's SIMBAD-derived
+aliases can carry either release's designator.
+
+New `schema.py` models: `PlanetSummary` (name required; orbital period,
+minimum mass, radius, discovery method/year/facility all optional - `None`
+rather than fabricated when the archive has no usable value, e.g.
+`radius_earth` for a non-transiting RV-only detection) and
+`ExoplanetSummary` (count, planets, source reference/url).
+`AstronomicalObject.exoplanets: ExoplanetSummary | None` is `None` for the
+common case of no confirmed exoplanet on file. `catalog.py`'s
+`to_record`/`from_record` round-trip it through parquet/CSV as a single
+`exoplanets_json` JSON-string column (unlike the plain-scalar `visual_*`
+columns, `exoplanets` nests a variable-length list of sub-objects that is
+absent for the overwhelming majority of rows, which JSON-string storage
+sidesteps more robustly than an Arrow nested-struct column would).
+`scene.py` exports it as its own top-level `"exoplanets"` scene key (same
+flattening convention Story #170 established for `spectral_type`/
+`absolute_magnitude`).
+
+The one-time (repeatable) cross-match run - `scripts/crossmatch_exoplanets.py`
+- merges only the top-level `exoplanets` field into
+`data/normalized/initial_catalog_records.json` for every `object_type:
+"star"` record, leaving everything else untouched. Result against the live
+archive: **35 of the 707 star records** matched a confirmed exoplanet host
+- **34 of those 35 carry the `recons-nearest-100` group tag** (the ~122-star
+RECONS nearest-neighbors subset the research for this Story identified as
+where real coverage concentrates: Proxima Centauri (2 planets), Barnard's
+Star (4), GJ 876 (4), tau Ceti (3), epsilon Eridani, epsilon Indi, 82
+Eridani (4), Teegarden's Star (3), YZ Ceti (3), Wolf 1061 (3), GJ 1061 (3),
+and more), confirming the cross-match is not over- or under-matching. The
+one exception - HD 81817, a K giant at ~305 pc in the 585-star "distant
+giants" subset with two literature-confirmed RV planets (HD 81817 b/c,
+discovered 2020/2022) - is a genuine host, not a false positive (its HD/
+HIP/TIC/Gaia identifiers all agree exactly between the catalog record and
+the archive), consistent with the research's "near-zero, not necessarily
+exactly zero" expectation for that subset.
+`galactic-structures build-catalog` + `galactic-structures export-scene
+--no-radius-filter --output web/public/data/scene.json` regenerated the
+checked-in catalog/scene artifacts (same recipe as Story #170).

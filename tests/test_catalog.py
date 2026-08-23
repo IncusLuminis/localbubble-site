@@ -14,7 +14,9 @@ from local_galactic_structures.schema import (
     Cartesian,
     Coordinates,
     Distance,
+    ExoplanetSummary,
     Group,
+    PlanetSummary,
     Source,
     Visual,
 )
@@ -51,6 +53,37 @@ def _sample_objects() -> list[AstronomicalObject]:
             ),
             visual=Visual(size_pc=4.0, color_class="hot_blue"),
             notes="Sample.",
+        ),
+        AstronomicalObject(
+            id="gj-876",
+            name="GJ 876",
+            aliases=["HIP 113020"],
+            object_type="star",
+            coordinates=Coordinates(
+                ra_deg=343.0, dec_deg=-14.3, galactic_l_deg=50.0, galactic_b_deg=-40.0
+            ),
+            distance=Distance(value_pc=4.67, error_pc=0.01),
+            cartesian=Cartesian(x_pc=1.0, y_pc=2.0, z_pc=3.0),
+            source=Source(reference="SIMBAD astronomical database (CDS)"),
+            # Story #171: a populated `exoplanets` field must round-trip
+            # through parquet/CSV, not just the plain scalar fields the
+            # other two sample objects exercise.
+            exoplanets=ExoplanetSummary(
+                count=1,
+                planets=[
+                    PlanetSummary(
+                        name="GJ 876 b",
+                        orbital_period_days=61.1166,
+                        minimum_mass_earth=723.2235,
+                        radius_earth=13.3,
+                        discovery_method="Radial Velocity",
+                        discovery_year=1998,
+                        discovery_facility="Multiple Observatories",
+                    )
+                ],
+                source_reference="NASA Exoplanet Archive, pscomppars",
+                source_url="https://exoplanetarchive.ipac.caltech.edu",
+            ),
         ),
     ]
 

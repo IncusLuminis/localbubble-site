@@ -46,7 +46,7 @@ from typing import Mapping, Sequence
 
 from pydantic import BaseModel
 
-from .schema import AstronomicalObject
+from .schema import AstronomicalObject, ExoplanetSummary
 
 #: Fixed key set for the `structures` block (spec §21's example enumerates
 #: exactly these three). A model layer that is absent (not passed in
@@ -60,6 +60,26 @@ SCENE_METADATA = {
     "coordinate_system": "heliocentric_galactic_cartesian",
     "distance_unit": "pc",
 }
+
+
+def _exoplanets_to_scene(exoplanets: ExoplanetSummary | None) -> dict | None:
+    """`AstronomicalObject.exoplanets` -> its scene representation
+    (Story #171). `exoplanets` is already a top-level `AstronomicalObject`
+    field (not nested under `Visual`, unlike `spectral_type`/
+    `absolute_magnitude`), so the same "flatten onto the scene object,
+    don't bury it under a sub-object" convention Story #170 established
+    for those two fields is honored here simply by exposing it as its own
+    top-level `"exoplanets"` scene key - `None` (never fabricated) when
+    this star has no cross-matched exoplanets on file.
+    """
+    if exoplanets is None:
+        return None
+    return {
+        "count": exoplanets.count,
+        "planets": [planet.model_dump(mode="json") for planet in exoplanets.planets],
+        "source_reference": exoplanets.source_reference,
+        "source_url": exoplanets.source_url,
+    }
 
 
 def _object_to_scene_entry(obj: AstronomicalObject) -> dict:
@@ -81,6 +101,7 @@ def _object_to_scene_entry(obj: AstronomicalObject) -> dict:
         "color_class": obj.visual.color_class,
         "spectral_type": obj.visual.spectral_type,
         "absolute_magnitude": obj.visual.absolute_magnitude,
+        "exoplanets": _exoplanets_to_scene(obj.exoplanets),
         "group": {
             "primary": obj.group.primary,
             "secondary": list(obj.group.secondary),
