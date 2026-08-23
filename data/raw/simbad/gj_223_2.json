@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 223.2",
-  "retrieved_utc": "2026-08-18T16:43:57+00:00",
+  "retrieved_utc": "2026-08-23T02:10:01+00:00",
   "record_id": "EGGR  45",
   "raw": {
     "main_id": "EGGR  45",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 14.449999809265137,
     "plx_value": 155.2373,
+    "sp_type": "DZ11",
     "plx_err": 0.017500000074505806,
     "otype": "WD*",
     "ids": "TIC 39296409|PSO J088.7916-04.1769|GJ 223.2|GJ 9193|Gaia DR3 3022956969731332096|EGGR  45|8pc 155.00|CNS5 1470|CSI-04-05527|G 106-12|G  99-44|GEN# +9.80099044|LHS    32|LP  658-2|NAME HL 4|NLTT 15811|PM 05526-0409|UBV    6031|UBV M  43006|USNO  20|USNO 702|WD 0552-002|WD 0552-041|Zkh  80|PLX 1363.02|Gaia DR2 3022956969731332096|2MASS J05550948-0410042|WISEA J055509.90-041031.2",

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Hadar",
-  "retrieved_utc": "2026-08-18T07:02:00+00:00",
+  "retrieved_utc": "2026-08-23T01:56:20+00:00",
   "record_id": "* bet Cen",
   "raw": {
     "main_id": "* bet Cen",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 0.5799999833106995,
     "plx_value": 8.32,
-    "otype": "bC*",
+    "sp_type": "B1III",
     "plx_err": 0.5,
+    "otype": "bC*",
     "ids": "TIC 328329822|WISEA J140349.33-602223.1|HIP 68702|PLX 3198|* bet Cen|2E  3163|CD-59  5054|CEL   4298|CPC 20.1  4149|CPD-59  5365|FK5  518|GC 18971|GCRV  8251|HD 122451|HIC  68702|HR  5267|IRAS 14002-6008|N30 3189|NAME Agena|PPM 360515|ROT  2025|SACS 302|SAO 252582|SKY# 25751|TD1 17207|NAME Hadar|UBV   12426|V* bet Cen|[B10]  3615|2MASS J14034938-6022226|ALS 14992|PLX 3198.00|1RXS J140348.7-602242|2E 1400.2-6008|EUVE J1403-60.3|WEB 12025|GEN# +1.00122451|uvby98 100122451|* bet Cen A|TYC 9005-3919-1|** VOU   31A|WDS J14038-6022A|CCDM J14038-6022A|IDS 13568-5953 A|WISE J140349.31-602222.3|** RBT    1|WDS J14038-6022Aa,Ab",
     "matched_id": "NAME Hadar"
   }

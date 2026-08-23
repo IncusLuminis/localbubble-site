@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "CK Lyn",
-  "retrieved_utc": "2026-08-18T06:57:14+00:00",
+  "retrieved_utc": "2026-08-23T02:05:15+00:00",
   "record_id": "V* CK Lyn",
   "raw": {
     "main_id": "V* CK Lyn",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.860000133514404,
     "plx_value": 1.7567,
-    "otype": "LP*",
+    "sp_type": "M0",
     "plx_err": 0.06889999657869339,
+    "otype": "LP*",
     "ids": "TIC 9264019|HIP 38257|Gaia DR3 920715064117897216|AG+39  929|BD+40  1949|DO 13294|GC 10551|GSC 02964-00266|HD  63366|HIC  38257|IRAS 07468+3953|IRC +40187|PPM  73155|SAO  60369|SKY# 14574|TYC 2964-266-1|V* CK Lyn|2MASS J07501352+3946145|Gaia DR1 920715059821301376|Gaia DR2 920715064117897216",
     "matched_id": "V* CK Lyn"
   }

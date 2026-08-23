@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V Pav",
-  "retrieved_utc": "2026-08-18T07:03:22+00:00",
+  "retrieved_utc": "2026-08-23T02:06:54+00:00",
   "record_id": "V* V Pav",
   "raw": {
     "main_id": "V* V Pav",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.672999858856201,
     "plx_value": 1.7925,
-    "otype": "C*",
+    "sp_type": "C6,4",
     "plx_err": 0.1347000002861023,
+    "otype": "C*",
     "ids": "TIC 74742533|WISEA J174318.95-574326.2|HIP 86728|Gaia DR3 5919031976948947328|AAVSO 1734-57|C* 2470|CCDM J17433-5743A|CD-57  6976|CGCS 3861|CPC 20  5668|CPD-57  8687|CSI-57  8687 41|GC 23987|GEN# +1.00160435|GSC 08737-01110|HD 160435|HIC  86728|IDS 17347-5740 A|IRAS 17389-5742|PPM 346244|SAO 244964|SKY# 32028|TYC 8737-1110-1|UBV M  22320|V* V Pav|[LFO93] 1738-57|2MASS J17431893-5743263|SV* HV   116|WDS J17433-5743A|UCAC4 162-192785|WISE J174318.96-574326.3|DENIS J174319.1-574326|Gaia DR2 5919031976948947328",
     "matched_id": "V* V Pav"
   }

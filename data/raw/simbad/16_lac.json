@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "16 Lac",
-  "retrieved_utc": "2026-08-18T06:55:41+00:00",
+  "retrieved_utc": "2026-08-23T01:54:51+00:00",
   "record_id": "*  16 Lac",
   "raw": {
     "main_id": "*  16 Lac",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.586999893188477,
     "plx_value": 2.2387,
-    "otype": "bC*",
+    "sp_type": "B2IVs",
     "plx_err": 0.07360000163316727,
+    "otype": "bC*",
     "ids": "TIC 129538133|Gaia DR3 1931240295282530688|SBC9 1409|*  16 Lac|ADS 16381 A|AG+41 2244|BD+40  4949|CCDM J22564+4136A|CEL   5546|CSI+40  4949  1|GC 31987|GCRV 14401|GEN# +1.00216916A|GSC 03223-03620|HD 216916|HGAM   1096|HIC 113281|HIP 113281|HR  8725|IDS 22518+4104 A|N30 5047|PPM  63602|ROT  3339|SAO  52512|SBC7   936|SKY# 43570|TD1 29470|TYC 3223-3620-1|UBV   21467|UBV M  26727|V* EN Lac|[S78b] 396A|2MASS J22562365+4136139|ALS 16173|WDS J22564+4136A|PMSC 22518+4104A|PMSC 22518+4104Aab|Gaia DR1 1931240290984809984|WEB 20155|Gaia DR2 1931240295282530688",
     "matched_id": "*  16 Lac"
   }

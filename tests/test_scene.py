@@ -168,6 +168,29 @@ def test_scene_object_entry_has_expected_fields(sample_objects, sample_models):
     assert entry["source"]["reference"].startswith("Unit test fixture")
 
 
+def test_scene_object_entry_includes_spectral_type_and_absolute_magnitude(
+    sample_models,
+):
+    # Story #170: scene.py exports the new Visual fields, null when absent.
+    with_data = _make_object(
+        "with-spectral-data", "With Spectral Data", x_pc=10.0, y_pc=0.0, z_pc=0.0
+    )
+    with_data.visual.spectral_type = "G2V"
+    with_data.visual.absolute_magnitude = 4.83
+
+    without_data = _make_object(
+        "without-spectral-data", "Without Spectral Data", x_pc=20.0, y_pc=0.0, z_pc=0.0
+    )
+
+    scene = build_scene([with_data, without_data], sample_models)
+    entries = {e["id"]: e for e in scene["objects"]}
+
+    assert entries["with-spectral-data"]["spectral_type"] == "G2V"
+    assert entries["with-spectral-data"]["absolute_magnitude"] == 4.83
+    assert entries["without-spectral-data"]["spectral_type"] is None
+    assert entries["without-spectral-data"]["absolute_magnitude"] is None
+
+
 def test_scene_works_with_no_objects_and_no_models():
     scene = build_scene([], models=None)
     assert scene["objects"] == []

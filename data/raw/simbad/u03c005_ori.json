@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "π05 Ori",
-  "retrieved_utc": "2026-08-18T07:06:24+00:00",
+  "retrieved_utc": "2026-08-23T02:04:28+00:00",
   "record_id": "* pi.05 Ori",
   "raw": {
     "main_id": "* pi.05 Ori",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.7300000190734863,
     "plx_value": 3.2945,
-    "otype": "SB*",
+    "sp_type": "B2III",
     "plx_err": 0.2632000148296356,
+    "otype": "SB*",
     "ids": "TIC 262435444|HIP 22797|Gaia DR3 3232262786334597888|2MASS J04541509+0226263|PLX 1095|SBC9 288|* pi.05 Ori|*   8 Ori|AAVSO 0449+02|AG+02  505|BD+02   810|FK5  180|GC  5978|GCRV  2896|GEN# +1.00031237|HD  31237|HGAM    348|HIC  22797|HR  1567|IRAS 04516+0221|JP11   944|MCW  280|N30 1046|PMC 90-93   128|PPM 148148|ROT   691|SAO 112197|SBC7   198|SKY#  7646|SRS  30180|TD1  3686|UBV   21300|UBV M  10435|V* pi.05 Ori|[HFE83]  336|[SC93b]  16|ALS 14770|PLX 1095.00|TYC   89-2558-1|uvby98 100031237|WEB  4416|Gaia DR2 3232262786333644160",
     "matched_id": "* pi.05 Ori"
   }

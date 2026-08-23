@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 207119",
-  "retrieved_utc": "2026-08-18T06:59:26+00:00",
+  "retrieved_utc": "2026-08-23T02:00:01+00:00",
   "record_id": "HD 207119",
   "raw": {
     "main_id": "HD 207119",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.36899995803833,
     "plx_value": 1.1986,
-    "otype": "*",
+    "sp_type": "K3IIBa0.5",
     "plx_err": 0.041600000113248825,
+    "otype": "*",
     "ids": "TIC 395451714|Gaia DR3 2173145463437167232|AG+52 1537|BD+51  3135|GC 30471|GEN# +1.00207119|GSC 03616-02835|HD 207119|HIC 107398|HIP 107398|IRAS 21434+5202|IRC +50397|PPM  39827|SAO  33722|SKY# 41473|TYC 3616-2835-1|UBV   18683|UBV M  25925|YZ  52  7253|[L91b] 349|2MASS J21451241+5216030|Gaia DR1 2173145459125648640|Gaia DR2 2173145463413319296",
     "matched_id": "HD 207119"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ξ01 Sgr",
-  "retrieved_utc": "2026-08-18T07:06:13+00:00",
+  "retrieved_utc": "2026-08-23T02:03:37+00:00",
   "record_id": "* ksi01 Sgr",
   "raw": {
     "main_id": "* ksi01 Sgr",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.053999900817871,
     "plx_value": 1.4685,
-    "otype": "*",
+    "sp_type": "B9/A0Ib",
     "plx_err": 0.09319999814033508,
+    "otype": "*",
     "ids": "TIC 442202726|HIP 93057|Gaia DR3 4085003803955277056|PLX 4388|*  36 Sgr|* ksi01 Sgr|BD-20  5339|GC 26012|GCRV 11394|GEN# +1.00175687|GSC 06294-01245|HD 175687|HIC  93057|HR  7145|IRAS 18543-2043|PPM 269124|ROT  2688|SAO 187498|SKY# 34961|TD1 23525|TYC 6294-1245-1|YZ 110  8000|uvby98 100175687|2MASS J18572048-2039230|PLX 4388.00|WEB 16115|Gaia DR2 4085003803955277056",
     "matched_id": "* ksi01 Sgr"
   }

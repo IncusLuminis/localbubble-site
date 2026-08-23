@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LHS 2090",
-  "retrieved_utc": "2026-08-18T16:43:51+00:00",
+  "retrieved_utc": "2026-08-23T02:09:58+00:00",
   "record_id": "LP  368-128",
   "raw": {
     "main_id": "LP  368-128",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 16.100000381469727,
     "plx_value": 157.2686,
+    "sp_type": "M6.5Ve",
     "plx_err": 0.05350000038743019,
     "otype": "PM*",
     "ids": "TIC 203225829|Gaia DR3 685103912857072640|LSPM J0900+2150|UCAC2  39486538|CNS5 2232|LHS  2090|LP  368-128|NLTT 20726|EPIC 212090371|2MASS J09002359+2150054|USNO-B1.0 1118-00189098|WISEA J090023.15+214958.6|Gaia DR2 685103912857072640|Karmn J09003+218",

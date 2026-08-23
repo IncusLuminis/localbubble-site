@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "γ Ara",
-  "retrieved_utc": "2026-08-18T07:05:01+00:00",
+  "retrieved_utc": "2026-08-23T01:57:22+00:00",
   "record_id": "* gam Ara",
   "raw": {
     "main_id": "* gam Ara",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 3.3399999141693115,
     "plx_value": 2.93,
-    "otype": "Be*",
+    "sp_type": "B1Ib",
     "plx_err": 0.1599999964237213,
+    "otype": "Be*",
     "ids": "TIC 325709821|HIP 85267|[JE82]  895|* gam Ara|2E  3895|CCDM J17254-5623A|CPC 20  5567|CPD-56  8225|CSI-56  8225 41|GC 23517|GCRV 10045|GEN# +1.00157246A|GSC 08736-03857|HD 157246|HIC  85267|HR  6462|IDS 17170-5617 A|PPM 345992|ROT  2441|SAO 244726|SKY# 31439|TD1 20322|TYC 8736-3857-1|UBV   14806|UBV M  22143|[B10]  4405|uvby98 100157246 A|ALS 15048|2E 1721.2-5619|EUVE J1725-56.3|2XMM J172523.7-562240|WDS J17254-5623A|AKARI-IRC-V1 J1725236-562239|IRAS 17211-5619|** HJ 4942A|** ANT    5A|2MASS J17252367-5622404|WEB 14396|Gaia DR2 5922299343254265088",
     "matched_id": "* gam Ara"
   }

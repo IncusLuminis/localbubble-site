@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "π02 Oct",
-  "retrieved_utc": "2026-08-18T07:06:20+00:00",
+  "retrieved_utc": "2026-08-23T02:04:25+00:00",
   "record_id": "* pi.02 Oct",
   "raw": {
     "main_id": "* pi.02 Oct",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.644999980926514,
     "plx_value": 2.0741,
-    "otype": "*",
+    "sp_type": "G8Ib",
     "plx_err": 0.042899999767541885,
+    "otype": "*",
     "ids": "TIC 406850268|HIP 73771|Gaia DR3 5771483873053059968|2MASS J15044704-8302180|* pi.02 Oct|CPC 22  1847|CPD-82   636|GC 20145|GCRV  8682|GEN# +1.00131246|GSC 09509-02484|HD 131246|HIC  73771|HR  5545|IRAS 14557-8250|N30 3382|PPM 377777|SAO 258714|SKY# 27344|TYC 9509-2484-1|UBV   12959|UBV M  20425|WEB 12608|Gaia DR2 5771483873053059968",
     "matched_id": "* pi.02 Oct"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V924 Cen",
-  "retrieved_utc": "2026-08-18T07:03:53+00:00",
+  "retrieved_utc": "2026-08-23T02:06:49+00:00",
   "record_id": "V* V924 Cen",
   "raw": {
     "main_id": "V* V924 Cen",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.920000076293945,
     "plx_value": 1.3116,
-    "otype": "AB*",
+    "sp_type": "M1III",
     "plx_err": 0.03240000084042549,
+    "otype": "AB*",
     "ids": "TIC 375627282|HIP 58059|Gaia DR3 5342094895624453504|CD-56  4195|CPC 20  3613|CPD-56  4863|GC 16281|GSC 08639-02140|HD 103426|HIC  58059|IRAS 11519-5641|PPM 340501|SAO 239480|SKY# 22437|TYC 8639-2140-1|V* V924 Cen|2MASS J11542667-5658112|Gaia DR1 5342094891293871360|Gaia DR2 5342094895624453504",
     "matched_id": "V* V924 Cen"
   }

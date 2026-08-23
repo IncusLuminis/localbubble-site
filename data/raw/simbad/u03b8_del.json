@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "θ Del",
-  "retrieved_utc": "2026-08-18T07:05:39+00:00",
+  "retrieved_utc": "2026-08-23T02:04:51+00:00",
   "record_id": "* tet Del",
   "raw": {
     "main_id": "* tet Del",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.710000038146973,
     "plx_value": 1.6865,
-    "otype": "s*r",
+    "sp_type": "K3Ib",
     "plx_err": 0.04500000178813934,
+    "otype": "s*r",
     "ids": "TIC 456714122|Gaia DR3 1756079606122005248|* tet Del|*   8 Del|AG+13 2165|BD+12  4411|DO  6893|GC 28743|GCRV 12923|GEN# +1.00196725|GSC 01100-01721|HD 196725|HIC 101882|HIP 101882|HR  7892|IRAS 20363+1308|IRC +10474|JP11  3261|N30 4561|PPM 138761|SAO 106342|SKY# 39103|TYC 1100-1721-1|UBV   17904|UBV M  25035|YPAC 586|YZ  13  8051|2MASS J20384399+1318544|WEB 18408|Gaia DR2 1756079606122005248",
     "matched_id": "* tet Del"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "η Leo",
-  "retrieved_utc": "2026-08-18T07:05:35+00:00",
+  "retrieved_utc": "2026-08-23T01:57:12+00:00",
   "record_id": "* eta Leo",
   "raw": {
     "main_id": "* eta Leo",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.4100000858306885,
     "plx_value": 1.7965,
-    "otype": "sg*",
+    "sp_type": "A0Ib",
     "plx_err": 0.3050999939441681,
+    "otype": "sg*",
     "ids": "TIC 357308783|HIP 49583|Gaia DR3 622052899598187392|PLX 2380|*  30 Leo|* eta Leo|AG+17 1099|BD+17  2171|FK5  379|GC 13899|GCRV  6405|GSC 01412-01695|HD  87737|HIC  49583|HR  3975|IRAS 10046+1700|JP11  1892|MCW  549|N30 2412|NSV  4738|PMC 90-93   273|PPM 127121|ROT  1531|SAO  98955|SKY# 19483|SRS  30379|TD1 14568|TYC 1412-1695-1|UBV    9435|UBV M  15943|2MASS J10071994+1645455|PLX 2380.00|uvby98 100087737|WEB  9145|Gaia DR2 622052899597361920|GEN# +1.00087737|IDS 10019+1715 A|** WRH   18A|CCDM J10073+1646A|WDS J10073+1646A",
     "matched_id": "* eta Leo"
   }

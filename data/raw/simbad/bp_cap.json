@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "BP Cap",
-  "retrieved_utc": "2026-08-18T06:57:08+00:00",
+  "retrieved_utc": "2026-08-23T02:05:08+00:00",
   "record_id": "V* BP Cap",
   "raw": {
     "main_id": "V* BP Cap",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 7.349999904632568,
     "plx_value": 1.2488,
-    "otype": "LP*",
+    "sp_type": "M2III",
     "plx_err": 0.024700000882148743,
+    "otype": "LP*",
     "ids": "TIC 333075857|Gaia DR3 6844857498093935360|AAVSO 2132-11|BD-12  6044|GSC 05795-00900|HD 205693|HIC 106739|HIP 106739|IRAS 21346-1141|IRC -10568|N30 4766|PPM 239100|SAO 164525|SKY# 41221|TYC 5795-900-1|V* BP Cap|YZC 11  7661|2MASS J21372001-1127386|Gaia DR2 6844857498093935360",
     "matched_id": "V* BP Cap"
   }

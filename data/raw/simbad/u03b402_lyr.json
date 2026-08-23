@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "δ02 Lyr",
-  "retrieved_utc": "2026-08-18T07:05:19+00:00",
+  "retrieved_utc": "2026-08-23T01:56:41+00:00",
   "record_id": "* del02 Lyr",
   "raw": {
     "main_id": "* del02 Lyr",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.300000190734863,
     "plx_value": 4.2352,
-    "otype": "LP*",
+    "sp_type": "M4II",
     "plx_err": 0.29510000348091125,
+    "otype": "LP*",
     "ids": "TIC 237195876|* del Lyr|HIP 92791|Gaia DR3 2093931938472201600|PLX 4385|* del02 Lyr|*  12 Lyr|AAVSO 1851+36|AG+36 1715|BD+36  3319|CSI+36  3319  1|DO 17176|GC 25959|GCRV 11369|GEN# +1.00175588|HD 175588|HIC  92791|HR  7139|IRAS 18527+3650|IRC +40331|JP11  3041|PPM  82016|RAFGL 2278|SAO  67559|SKY# 34818|UBV   16075|UBV M  23319|V* del02 Lyr|[B10]  4800|2MASS J18543027+3653551|PLX 4385.00|TYC 2651-2548-1|WEB 16059",
     "matched_id": "* del02 Lyr"
   }

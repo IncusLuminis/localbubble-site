@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 702 A",
-  "retrieved_utc": "2026-08-18T16:42:39+00:00",
+  "retrieved_utc": "2026-08-23T02:08:55+00:00",
   "record_id": "*  70 Oph A",
   "raw": {
     "main_id": "*  70 Oph A",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": null,
     "plx_value": 195.5674,
+    "sp_type": "K0V",
     "plx_err": 0.1964000016450882,
     "otype": "SB*",
     "ids": "TIC 1674663309|GJ 702 A|Gaia DR3 4468557611984384512|SPOCS 2969|WDS J18055+0230A|ASCC 1153899|USNO-B1.0 0924-00457807|*  70 Oph A|8pc 196.62A|ADS 11046 A|BD+02  3482A|CCDM J18055+0230A|CSI+02  3482 10|GCRV 10531|IDS 18004+0232 A|CNS5 4473|LFT 1390|LHS   458|LTT 15337|NLTT 45899|ROT  3523|TYC  434-5213-1|UBV   15377|USNO 877|Zkh 271|HD 165341A|** STF 2272A|Gaia DR2 4468557611977678336|LSPM J1805+0229A",

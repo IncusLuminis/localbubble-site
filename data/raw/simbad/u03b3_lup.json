@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "γ Lup",
-  "retrieved_utc": "2026-08-18T07:05:03+00:00",
+  "retrieved_utc": "2026-08-23T01:57:27+00:00",
   "record_id": "* gam Lup",
   "raw": {
     "main_id": "* gam Lup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.765000104904175,
     "plx_value": 7.75,
-    "otype": "**",
+    "sp_type": "B2IV",
     "plx_err": 0.5,
+    "otype": "**",
     "ids": "TIC 171611328|WISEA J153508.40-411000.3|HIP 76297|* gam Lup|CCDM J15351-4110AB|CD-40  9760|CEL   4382|CPC  0 13598|CPD-40  7042|CSI-40  9760 21|GC 20926|GCRV  8982|GSC 07840-01432|HD 138690|HGAM   2035|HIC  76297|HR  5776|IDS 15285-4050 AB|JP11  2613|N30 3500|PPM 320744|ROT  2196|SAO 225938|SKY# 28173|TD1 18353|UBV   13314|UBV M  20828|V* gam Lup|[B10]  3950|ALS 15014|WDS J15351-4110AB|** H 4786|** HJ 4786|PMSC 15285-4050|** RIZ   15A|AKARI-IRC-V1 J1535083-411000|IRAS 15318-4100|WISE J153508.36-411000.5|IRAS F15318-4100|uvby98 100138690|WEB 12953|GEN# +1.00138690|UCAC4 245-084138|2MASS J15350842-4110003",
     "matched_id": "* gam Lup"
   }

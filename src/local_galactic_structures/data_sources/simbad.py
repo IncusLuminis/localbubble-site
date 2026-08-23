@@ -15,6 +15,18 @@ distance - per spec §11, no scientific value may appear without a
 traceable origin, and a distance of 0 is reserved for the Sun (spec §6)
 so it cannot be used as an "unknown" placeholder either.
 
+Story #170 additionally requests the `sp_type` (MK spectral type, e.g.
+"G2V") and `V` (apparent V-band magnitude/flux) VOTable fields, and
+derives `visual.absolute_magnitude` from the latter via the standard
+distance modulus (see `absolute_magnitude_from_distance_modulus` below).
+Both are stored as `None` when SIMBAD has no usable value on file - never
+fabricated. Note the votable field name for apparent V magnitude is `V`,
+not the older `flux(V)` syntax some astroquery docs/examples still show:
+verified empirically against the installed astroquery 0.4.11
+(`Simbad.list_votable_fields()` lists `V` as a "filter name" field, and a
+live `query_object` against it returns a `V` column) - `flux(V)` is
+rejected by this version.
+
 Live network access to SIMBAD (https://simbad.cds.unistra.fr) was
 confirmed reachable from this environment during development (see PR
 description for what was tried).
@@ -22,6 +34,7 @@ description for what was tried).
 
 from __future__ import annotations
 
+import math
 from typing import Any
 
 from astroquery.simbad import Simbad as AstroquerySimbad
@@ -34,11 +47,31 @@ from ..schema import (
     Coordinates,
     Distance,
     Source,
+    Visual,
 )
 
 #: mas -> pc, small-angle approximation (standard for parallaxes of this
 #: size; the same relation astropy's own `Distance(parallax=...)` uses).
 _PARALLAX_MAS_TO_PC = 1000.0
+
+
+def absolute_magnitude_from_distance_modulus(
+    apparent_magnitude: float | None, distance_pc: float | None
+) -> float | None:
+    """Standard distance modulus: `M = m - 5*log10(d_pc) + 5`.
+
+    Pure, unit-testable helper (Story #170 acceptance criteria) - no
+    network/IO. Returns `None` (never fabricates a value) when either
+    input is missing, or when `distance_pc` is not strictly positive
+    (`log10` is undefined at/below 0; a distance of exactly 0 is the Sun/
+    origin convention, spec §6, which has no meaningful apparent-magnitude
+    -> absolute-magnitude conversion anyway).
+    """
+    if apparent_magnitude is None or distance_pc is None:
+        return None
+    if not (distance_pc > 0):
+        return None
+    return apparent_magnitude - 5.0 * math.log10(distance_pc) + 5.0
 
 
 class SimbadResolver(CachingObjectResolver):
@@ -63,11 +96,13 @@ class SimbadResolver(CachingObjectResolver):
         self.object_type = object_type
 
     def _dataset_label(self) -> str:
-        return "SIMBAD basic identifier query (ra, dec, parallax)"
+        return "SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)"
 
     def _query_upstream(self, name: str) -> dict[str, Any]:
         client = AstroquerySimbad()
-        client.add_votable_fields("plx_value", "plx_err", "ids", "otype")
+        client.add_votable_fields(
+            "plx_value", "plx_err", "ids", "otype", "sp_type", "V"
+        )
         table = client.query_object(name)
         if table is None or len(table) == 0:
             raise ValueError(f"SIMBAD has no record for {name!r}")
@@ -96,6 +131,15 @@ class SimbadResolver(CachingObjectResolver):
         aliases = [alias.strip() for alias in ids_field.split("|") if alias.strip()]
         aliases = [a for a in aliases if a != raw.get("main_id")]
 
+        # Spectral type: raw SIMBAD string as-is, no normalization/bucketing
+        # (that's a later frontend Story's job) - blank string means "field
+        # present but empty on SIMBAD's side", treated the same as absent.
+        sp_type = raw.get("sp_type") or None
+        apparent_v_mag = raw.get("V")
+        absolute_magnitude = absolute_magnitude_from_distance_modulus(
+            apparent_v_mag, distance_pc
+        )
+
         obj = AstronomicalObject(
             id=slugify(record.record_id),
             name=raw.get("main_id") or name,
@@ -109,6 +153,10 @@ class SimbadResolver(CachingObjectResolver):
             ),
             distance=Distance(value_pc=distance_pc, error_pc=error_pc),
             cartesian=Cartesian(x_pc=0.0, y_pc=0.0, z_pc=0.0),
+            visual=Visual(
+                spectral_type=sp_type,
+                absolute_magnitude=absolute_magnitude,
+            ),
             source=Source(
                 reference=(
                     f"SIMBAD astronomical database (CDS), record "

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 896 A",
-  "retrieved_utc": "2026-08-18T16:43:48+00:00",
+  "retrieved_utc": "2026-08-23T02:09:54+00:00",
   "record_id": "BD+19  5116A",
   "raw": {
     "main_id": "BD+19  5116A",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 10.350000381469727,
     "plx_value": 159.6634,
+    "sp_type": "M3.5Ve",
     "plx_err": 0.0340999998152256,
     "otype": "PM*",
     "ids": "TIC 247985094|AP J23315208+1956142|StKM 2-1738|GJ 896 A|Gaia DR3 2824770686019003904|GJ 896 a|CNS5 5800|CSI+19  5116  1|8pc 160.06A|LSPM J2331+1956N|BD+19  5116A|CCDM J23319+1956A|WDS J23317+1956A|** WIR    1A|** LMP   24A|TYC 1723-23-1|2MASS J23315208+1956142|PMSC 23268+1923A|PMSC 23268+1923Aab|2XMM J233152.3+195614|Gaia DR2 2824770686019003904|WISEA J233152.73+195613.9|UCAC4 550-148507|PM J23318+1956Wn|PM J23318+1956W|Karmn J23318+199E|V* EQ Peg A",

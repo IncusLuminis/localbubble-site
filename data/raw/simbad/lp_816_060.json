@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LP 816-060",
-  "retrieved_utc": "2026-08-18T16:42:59+00:00",
+  "retrieved_utc": "2026-08-23T02:09:15+00:00",
   "record_id": "LP  816-60",
   "raw": {
     "main_id": "LP  816-60",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 11.458000183105469,
     "plx_value": 177.9312,
+    "sp_type": "M4V",
     "plx_err": 0.0364999994635582,
     "otype": "PM*",
     "ids": "TIC 262016943|Gaia DR3 6882963066420161664|CNS5 5161|WISEA J205232.80-165828.7|TYC 6348-400-1|PM J20525-1658|UCAC4 366-181531|8pc 182.15|HIC 103039|HIP 103039|LP  816-60|NLTT 50038|2MASS J20523304-1658289|Gaia DR2 6882963066420161664|Karmn J20525-169",

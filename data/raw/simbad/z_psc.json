@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Z Psc",
-  "retrieved_utc": "2026-08-18T07:04:15+00:00",
+  "retrieved_utc": "2026-08-23T02:07:19+00:00",
   "record_id": "V* Z Psc",
   "raw": {
     "main_id": "V* Z Psc",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.840000152587891,
     "plx_value": 1.5643,
-    "otype": "C*",
+    "sp_type": "C-N5",
     "plx_err": 0.05389999970793724,
+    "otype": "C*",
     "ids": "TIC 16916903|HIP 5914|Gaia DR3 294734094804790400|2MASS J01160504+2546098|AAVSO 0110+25|AG+25  127|BD+25   205|C*   63|CGCS  198|DO  8700|GC  1518|GCRV   728|GEN# +1.00007561|GSC 01750-02134|HD   7561|HIC   5914|IRAS 01133+2530|IRC +30025|LEE 159|N30  259|PPM  90619|RAFGL  188|SAO  74593|SKY#  1918|TYC 1750-2134-1|UBV M   8053|V* Z Psc|YZ   0   391|YZ  25   379|[LFO93] 0113+25|WEB  1343|Gaia DR2 294734094804790400",
     "matched_id": "V* Z Psc"
   }

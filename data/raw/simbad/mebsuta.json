@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Mebsuta",
-  "retrieved_utc": "2026-08-18T07:02:19+00:00",
+  "retrieved_utc": "2026-08-23T01:57:06+00:00",
   "record_id": "* eps Gem",
   "raw": {
     "main_id": "* eps Gem",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.9800000190734863,
     "plx_value": 3.7477,
-    "otype": "*",
+    "sp_type": "G8Ib",
     "plx_err": 0.18400000035762787,
+    "otype": "*",
     "ids": "TIC 332057570|HIP 32246|Gaia DR3 3384529341302871296|WISE J064356.09+250752.9|2MASS J06435593+2507520|* eps Gem|PLX 1567|*  27 Gem|AAVSO 0637+25|ADS  5381 A|AG+25  749|BD+25  1406|CCDM J06440+2508A|CSV 100759|FK5  254|GC  8786|GCRV  4372|GEN# +1.00048329A|GSC 01897-01639|HD  48329|HIC  32246|HR  2473|IDS 06378+2514 A|IRAS 06408+2510|IRC +30164|JP11  1421|N30 1460|NSV  3183|PMC 90-93   183|PPM  96453|RAFGL 1001|ROT  1080|SAO  78682|SKY# 11813|SRS  30254|SV* ZI   569|TD1  7891|TYC 1897-1639-1|UBV    6652|UBV M  12365|UBV M  12373|XZ   9694|YZ  25  3460|[HFE83]  462|uvby98 100048329 A|WDS J06439+2508A|NAME Mebsuta|WEB  6500|Gaia DR2 3384529341302241536",
     "matched_id": "NAME Mebsuta"
   }

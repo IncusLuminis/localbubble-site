@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 845 B",
-  "retrieved_utc": "2026-08-18T16:41:32+00:00",
+  "retrieved_utc": "2026-08-23T02:08:05+00:00",
   "record_id": "* eps Ind B",
   "raw": {
     "main_id": "* eps Ind B",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 24.1200008392334,
     "plx_value": 270.658,
+    "sp_type": "T1V+T6V",
     "plx_err": 0.6895999908447266,
     "otype": "BD*",
     "ids": "TIC 231700016|GJ 845 B|GJ 845 C|Gaia DR3 6412596012146801152|V* CI Ind|* eps Ind B|2MASS J22041052-5646577|CNS5 5452|[B2006] J220410.5-564657|WDS J22034-5647Ba,Bb|WISEP J220415.66-564723.5|** VLK    1|WDS J22034-5647B|** SOZ    1B|WISE J220415.65-564723.6|Gaia DR2 6412596012146094848|WISEA J220415.75-564724.4",

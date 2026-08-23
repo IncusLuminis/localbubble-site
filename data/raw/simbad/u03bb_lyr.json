@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "λ Lyr",
-  "retrieved_utc": "2026-08-18T07:06:01+00:00",
+  "retrieved_utc": "2026-08-23T02:03:50+00:00",
   "record_id": "* lam Lyr",
   "raw": {
     "main_id": "* lam Lyr",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.929999828338623,
     "plx_value": 2.6269,
-    "otype": "*",
+    "sp_type": "K2.5III:Ba0.5",
     "plx_err": 0.09300000220537186,
+    "otype": "*",
     "ids": "TIC 20915111|HIP 93279|PLX 4413|* lam Lyr|*  15 Lyr|AAVSO 1856+32|AG+32 1707|BD+31  3424|DO 17284|GC 26115|GCRV 11455|Gaia DR3 2043600522403619328|GEN# +1.00176670|GSC 02643-03347|HD 176670|HIC  93279|HR  7192|IRAS 18581+3204|IRC +30350|NSV 11641|PPM  82162|RAFGL 5329S|ROT  2704|SAO  67682|SKY# 35070|TYC 2643-3347-1|UBV   16145|UBV M  23403|[L91b] 303|2MASS J19000082+3208438|PLX 4413.00|WEB 16175|Gaia DR2 2043600522402116352",
     "matched_id": "* lam Lyr"
   }

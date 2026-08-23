@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 65662",
-  "retrieved_utc": "2026-08-18T07:01:12+00:00",
+  "retrieved_utc": "2026-08-23T02:02:19+00:00",
   "record_id": "HD  65662",
   "raw": {
     "main_id": "HD  65662",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.7170000076293945,
     "plx_value": 2.3473,
-    "otype": "*",
+    "sp_type": "K3+IIIa",
     "plx_err": 0.04320000112056732,
+    "otype": "*",
     "ids": "TIC 358466601|HIP 38783|Gaia DR3 5290743648127929856|2MASS J07561863-6031352|Cl* NGC 2516    MMU     119|Cl* NGC 2516    DAC       7|CPC 20.1  1982|CPD-60   935|GC 10768|GEN# +2.25160119|GSC 08911-01314|HD  65662|HIC  38783|HR  3120|IRAS 07554-6023|JP11  4052|N30 1821|PPM 356350|SAO 250019|SKY# 14816|TYC 8911-1314-1|UBV    7678|UBV M  33315|uvby98 225160119|Gaia DR2 5290743648127929856",
     "matched_id": "HD  65662"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 36960",
-  "retrieved_utc": "2026-08-18T07:00:14+00:00",
+  "retrieved_utc": "2026-08-23T02:01:01+00:00",
   "record_id": "HD  36960",
   "raw": {
     "main_id": "HD  36960",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.71999979019165,
     "plx_value": 2.6166,
-    "otype": "*",
+    "sp_type": "B0.5V",
     "plx_err": 0.12030000239610672,
+    "otype": "*",
     "ids": "TIC 427373484|Gaia DR3 3017187866581304832|HIP 26199|2MASS J05350268-0600074|PLX 1272|ADS  4182 A|BD-06  1234|CCDM J05350-0600A|CEL    819|CSI-06  1234  1|GC  6926|GCRV  3402|GEN# +9.00010493|HD  36960|HGAM    432|HIC  26199|HR  1887|IDS 05301-0605 A|IRAS 05325-0602|JP11  5643|JP11  5642|MCW  334|PPM 188205|Parenago  1728|ROT   870|SAO 132301|SKY#  9002|UBV    5488|UBV M  51653|WH 266|[GC94b]  76|[TVZ96] 156|uvby98 900010493|ALS 14785|[KSP2003] J053502.72-060011.0|WDS J05350-0600A|TYC 4778-1403-1|Brun 493|Renson 9780|ISOY J053502.68-060007.3|CSI-06  1234  2|UBV    5490|SOXS 135|GEN# +2.19760493|WEB  5108|Gaia DR2 3017187866581304832",
     "matched_id": "HD  36960"
   }

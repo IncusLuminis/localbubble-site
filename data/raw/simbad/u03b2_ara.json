@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "β Ara",
-  "retrieved_utc": "2026-08-18T07:04:53+00:00",
+  "retrieved_utc": "2026-08-23T01:56:17+00:00",
   "record_id": "* bet Ara",
   "raw": {
     "main_id": "* bet Ara",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.8499999046325684,
     "plx_value": 4.5601,
-    "otype": "s*r",
+    "sp_type": "K0/1Ib",
     "plx_err": 0.2076999992132187,
+    "otype": "s*r",
     "ids": "GES J17251797-5531479|TIC 325635393|GALAH 150210005201171|HIP 85258|Gaia DR3 5922444483103229952|PLX 3947|* bet Ara|CPC 19  6834|CPD-55  8100|FK5  645|GC 23515|GCRV 10044|GEN# +1.00157244|GSC 08732-02866|HD 157244|HIC  85258|HR  6461|IRAS 17211-5529|JP11  2849|N30 3875|PPM 345989|SACS 377|SAO 244725|SKY# 31436|TD1 20321|TYC 8732-2866-1|UBV   14805|UBV M  22142|2MASS J17251796-5531477|PLX 3947.00|WEB 14394|Gaia DR2 5922444483086619520",
     "matched_id": "* bet Ara"
   }

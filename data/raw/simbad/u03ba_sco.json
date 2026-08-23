@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "κ Sco",
-  "retrieved_utc": "2026-08-18T07:05:52+00:00",
+  "retrieved_utc": "2026-08-23T02:03:32+00:00",
   "record_id": "* kap Sco",
   "raw": {
     "main_id": "* kap Sco",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.385999917984009,
     "plx_value": 6.75,
-    "otype": "bC*",
+    "sp_type": "B1.5III",
     "plx_err": 0.17000000178813934,
+    "otype": "bC*",
     "ids": "IRAS 17389-3900|1RXS J174229.2-390205|TIC 147868882|HIP 86670|Gaia DR3 5961206940987571200|* kap Sco|CD-38 12137|CEL   4553|CPC 18  8904|CPD-38  6992|EUVE J1742-39.0|FK5  660|GC 23988|GCRV 10217|GEN# +1.00160578|GSC 07885-02065|HD 160578|HIC  86670|HR  6580|JP11  2875|N30 3935|PMC 90-93   469|PPM 296701|ROT  2475|SACS 387|SAO 209163|SKY# 32005|SRS  30660|TD1 20794|TYC 7885-2065-1|UBV M  22326|UBV   15027|V* kap Sco|[B10]  4474|[SC95] ZET 507|[SC96] Mis  616|[SC96] GC 141|2MASS J17422928-3901479|ALS 15051|uvby98 100160578|WEB 14612",
     "matched_id": "* kap Sco"
   }

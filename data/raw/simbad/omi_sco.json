@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "omi Sco",
-  "retrieved_utc": "2026-08-18T07:04:39+00:00",
+  "retrieved_utc": "2026-08-23T02:04:18+00:00",
   "record_id": "* omi Sco",
   "raw": {
     "main_id": "* omi Sco",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.570000171661377,
     "plx_value": 5.692,
-    "otype": "Y*?",
+    "sp_type": "A5II",
     "plx_err": 0.24070000648498535,
+    "otype": "Y*?",
     "ids": "TIC 457965487|HIP 80079|Gaia DR3 6050060708908632960|PLX 3704|*  19 Sco|* omi Sco|CD-23 12849|CPD-23  6363|Elia 2-58|GC 21969|GCRV  9400|GEN# +1.00147084|HD 147084|HIC  80079|HR  6081|IRAS 16176-2403|IRC -20311|JP11  2727|NSV  7632|PMC 90-93  6516|PPM 265428|RAFGL 1844|ROT  2315|SAO 184329|SKY# 29485|TD1 19069|UBV   13855|UBV M  21345|YZ 114 11441|[B10]  4155|uvby98 100147084|2MASS J16203818-2410095|PLX 3704.00|SSTc2d J162038.2-241009|TYC 6794-552-1|[HL2013] 245.15900-24.16919|WEB 13557|Gaia DR2 6050060708908632832",
     "matched_id": "* omi Sco"
   }

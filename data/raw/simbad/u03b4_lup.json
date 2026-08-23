@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "δ Lup",
-  "retrieved_utc": "2026-08-18T07:05:11+00:00",
+  "retrieved_utc": "2026-08-23T01:56:46+00:00",
   "record_id": "* del Lup",
   "raw": {
     "main_id": "* del Lup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.190000057220459,
     "plx_value": 6.7296,
-    "otype": "bC*",
+    "sp_type": "B1.5IV",
     "plx_err": 0.48190000653266907,
+    "otype": "bC*",
     "ids": "TIC 148415949|HIP 75141|Gaia DR3 6005678131793146752|* del Lup|CD-40  9538|CEL   4364|CPC  0 13238|CPD-40  6933|CSV 101496|FK5 1402|GC 20620|GCRV  8871|GEN# +1.00136298|GSC 07839-02803|HD 136298|HGAM   2032|HIC  75141|HR  5695|IRAS 15180-4028|JP11  2592|N30 3450|PPM 320495|ROT  2169|SACS 334|SAO 225691|SKY# 27808|TD1 18138|TYC 7839-2803-1|UBV   13201|UBV M  20698|V* del Lup|[B10]  3896|2MASS J15212233-4038510|ALS 15010|SV* ZI  1116|EUVE J1521-40.6|uvby98 100136298|WEB 12818|Gaia DR2 6005678131786964352",
     "matched_id": "* del Lup"
   }

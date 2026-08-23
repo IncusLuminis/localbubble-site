@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 59610",
-  "retrieved_utc": "2026-08-18T07:00:58+00:00",
+  "retrieved_utc": "2026-08-23T02:02:00+00:00",
   "record_id": "HD  59610",
   "raw": {
     "main_id": "HD  59610",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.679999828338623,
     "plx_value": 1.4452,
-    "otype": "*",
+    "sp_type": "K3III",
     "plx_err": 0.032099999487400055,
+    "otype": "*",
     "ids": "TIC 5236245|HIP 36452|Gaia DR3 5620491823870555904|BD-19  1919|CPD-19  2270|GC 10044|GSC 05987-03118|HD  59610|HIC  36452|IRAS 07278-1925|PPM 218748|SAO 152968|SKY# 13722|TYC 5987-3118-1|YZ 109  3025|2MASS J07300215-1931357|Gaia DR1 5620491819562303872|Gaia DR2 5620491823870555904",
     "matched_id": "HD  59610"
   }

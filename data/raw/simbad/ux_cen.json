@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "UX Cen",
-  "retrieved_utc": "2026-08-18T07:03:15+00:00",
+  "retrieved_utc": "2026-08-23T02:06:09+00:00",
   "record_id": "V* UX Cen",
   "raw": {
     "main_id": "V* UX Cen",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 10.100000381469727,
     "plx_value": 1.3267,
-    "otype": "C*",
+    "sp_type": "C",
     "plx_err": 0.015799999237060547,
+    "otype": "C*",
     "ids": "TIC 449568639|HIP 65242|Gaia DR3 5858901575912034432|AN  157.1907|C* 2082|CD-63   839|CGCS 3374|CPD-63  2720|GEN# +1.00115977|GSC 08998-03018|HD 115977|HIC  65242|IRAS 13188-6357|IRSV 1318-6357|PPM 779438|SV* HV  3001|TYC 8998-3018-1|V* UX Cen|2MASS J13220982-6413078|UCAC3 52-185978|Gaia DR1 5858901571515558272|Gaia DR2 5858901575912034432",
     "matched_id": "V* UX Cen"
   }

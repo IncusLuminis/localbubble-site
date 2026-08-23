@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "J Vel",
-  "retrieved_utc": "2026-08-18T07:02:09+00:00",
+  "retrieved_utc": "2026-08-23T02:03:27+00:00",
   "record_id": "* J Vel",
   "raw": {
     "main_id": "* J Vel",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.510000228881836,
     "plx_value": 2.2692,
-    "otype": "Be*",
+    "sp_type": "B5II",
     "plx_err": 0.1590999960899353,
+    "otype": "Be*",
     "ids": "TIC 464028809|LLNS   936|WISEA J102054.85-560235.7|HIP 50676|Gaia DR3 5354994812705906432|CPD-55  3286|CSI-55  3286 44|HIC  50676|[B10]  2755|TYC 8604-975-1|UCAC4 170-044959|2MASS J10205479-5602356|Gaia DR2 5354994812702994816|[JE82]  476|* J Vel|CCDM J10209-5603A|CEL   3515|CPC 19  3892|CSI-55  3286 41|EM* MWC  201|GC 14220|GCRV  6514|GSC 08604-00975|HD  89890|HR  4074|IDS 10172-5532 A|JP11  1941|PPM 338934|ROT  1561|SAO 237959|SKY# 19884|TD1 14791|UBV    9594|V* MV Vel|ALS 14946|WDS J10209-5603A|** RMK   13A|PMSC 10172-5532A|WEB  9288|GEN# +1.00089890|WISE J102054.83-560235.5|IRAS 10190-5547|AKARI-IRC-V1 J1020547-560236|CD-55  3306|uvby98 100089890",
     "matched_id": "* J Vel"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 9900",
-  "retrieved_utc": "2026-08-18T07:01:57+00:00",
+  "retrieved_utc": "2026-08-23T02:03:13+00:00",
   "record_id": "HD   9900",
   "raw": {
     "main_id": "HD   9900",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.535999774932861,
     "plx_value": 2.4121,
-    "otype": "*",
+    "sp_type": "K0II_CN+2",
     "plx_err": 0.14890000224113464,
+    "otype": "*",
     "ids": "TIC 453305090|HIP 7617|Gaia DR3 508947650286285312|2MASS J01380757+5758395|AG+57  183|BD+57   349|FK5 2108|GC  1965|GCRV   909|GEN# +1.00009900|GSC 03679-02303|HD   9900|HIC   7617|HR   461|IRAS 01348+5743|IRC +60059|JP11   512|PPM  26550|SAO  22456|SKY#  2459|TYC 3679-2303-1|UBV    1663|UBV M   8300|YZ  57  1412|[B10]   355|uvby98 100009900|WEB  1629|Gaia DR2 508947650286285312",
     "matched_id": "HD   9900"
   }

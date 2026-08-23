@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "λ Pav",
-  "retrieved_utc": "2026-08-18T07:06:02+00:00",
+  "retrieved_utc": "2026-08-23T02:03:52+00:00",
   "record_id": "* lam Pav",
   "raw": {
     "main_id": "* lam Pav",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.206999778747559,
     "plx_value": 2.9726,
-    "otype": "Be*",
+    "sp_type": "B2Ve",
     "plx_err": 0.181099995970726,
+    "otype": "Be*",
     "ids": "Gaia DR3 6631708338599353856|TIC 375232307|HIP 92609|[JE82]  993|[JE82]  992|SV* BV   787|* lam Pav|AAVSO 1843-62|CCDM J18522-6212A|CD-62  1254|CPC 20.1  5708|CPD-62  5983|CSI-62  5983 41|EM* MWC  963|FAUST 4333|FK5  704|GC 25823|GCRV 11280|GEN# +1.00173948|GSC 09074-02203|HD 173948|HIC  92609|HR  7074|Hen 3-1727|IDS 18430-6218 A|JP11  3027|N30 4177|PPM 363636|ROT  2667|SACS 416|SAO 254393|SKY# 34721|TD1 23206|TYC 9074-2203-1|UBV   15981|UBV M  23231|V* lam Pav|[B10]  4762|[DBA2001] FN178|2MASS J18521301-6211152|ALS 15062|WDS J18522-6211A|AKARI-IRC-V1 J1852130-621115|IRAS 18476-6214|uvby98 100173948|WEB 16019|Gaia DR2 6631708338599353856",
     "matched_id": "* lam Pav"
   }

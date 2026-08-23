@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V390 Pup",
-  "retrieved_utc": "2026-08-18T07:03:38+00:00",
+  "retrieved_utc": "2026-08-23T02:06:31+00:00",
   "record_id": "V* V390 Pup",
   "raw": {
     "main_id": "V* V390 Pup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.599999904632568,
     "plx_value": 1.6857,
-    "otype": "SB*",
+    "sp_type": "B2II",
     "plx_err": 0.08160000294446945,
+    "otype": "SB*",
     "ids": "TIC 126586580|HIP 37751|Gaia DR3 5614635756227464320|CD-24  5885|CPD-24  2800|GC 10445|GCRV 59062|GEN# +1.00062747|GSC 06544-04211|HD  62747|HIC  37751|HR  3004|PPM 253087|SAO 174433|SKY# 14319|TD1 10927|UBV    7445|UBV M  13596|V* V390 Pup|YZ 114  5427|[GM99b] 50|[N75]  29|uvby98 100062747|2MASS J07443417-2440267|ALS 14895|TYC 6544-4211-1|Gaia DR1 5614635751916796288|WEB  7461|Gaia DR2 5614635756227464320",
     "matched_id": "V* V390 Pup"
   }

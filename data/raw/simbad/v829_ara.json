@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V829 Ara",
-  "retrieved_utc": "2026-08-18T07:03:52+00:00",
+  "retrieved_utc": "2026-08-23T02:06:48+00:00",
   "record_id": "V* V829 Ara",
   "raw": {
     "main_id": "V* V829 Ara",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.105000019073486,
     "plx_value": 1.8119,
-    "otype": "*",
+    "sp_type": "M1/2II/III+A",
     "plx_err": 0.1137000024318695,
+    "otype": "*",
     "ids": "TIC 174065584|HIP 84311|Gaia DR3 5916444551230478848|CD-56  6744|CPC 20  5495|CPD-56  8098|GC 23217|GEN# +1.00155341|GSC 08735-02047|HD 155341|HIC  84311|HR  6384|IRAS 17100-5649|PPM 345803|SAO 244539|SKY# 31060|TYC 8735-2047-1|V* V829 Ara|2MASS J17141342-5653186|Gaia DR2 5916444551230478848",
     "matched_id": "V* V829 Ara"
   }

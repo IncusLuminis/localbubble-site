@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 1128",
-  "retrieved_utc": "2026-08-18T16:44:08+00:00",
+  "retrieved_utc": "2026-08-23T02:10:56+00:00",
   "record_id": "L  100-115",
   "raw": {
     "main_id": "L  100-115",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 12.779999732971191,
     "plx_value": 153.7593,
+    "sp_type": "M4.0V",
     "plx_err": 0.024900000542402267,
     "otype": "PM*",
     "ids": "TIC 370955883|GJ 1128|Gaia DR3 5243594081269535872|GEN# +9.86100115|L  100-115|LFT  680|LHS   271|LTT  3572|CNS5 2402|Zkh 134|[RHG95]  1538|2MASS J09424635-6853060|GSC 09209-00444|NLTT 22480|USNO-B1.0 0211-00198178|UCAC3 43-54282|DENIS J094246.3-685309|WISEA J094246.19-685254.2|GCRV 26262|Gaia DR2 5243594081269535872|PM J09427-6853|PM 09420-6840",

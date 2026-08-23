@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "N Car",
-  "retrieved_utc": "2026-08-18T07:02:28+00:00",
+  "retrieved_utc": "2026-08-23T02:04:02+00:00",
   "record_id": "* N Car",
   "raw": {
     "main_id": "* N Car",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.400000095367432,
     "plx_value": 1.9235,
-    "otype": "*",
+    "sp_type": "A0II",
     "plx_err": 0.09260000288486481,
+    "otype": "*",
     "ids": "TIC 255686390|HIP 31407|Gaia DR3 5501284972198817536|2MASS J06345858-5258319|* N Car|CPC 19  2199|CPD-52   953|FK5 2508|GC  8604|GCRV  4265|GEN# +1.00047306|HD  47306|HIC  31407|HR  2435|IRAS 06338-5255|JP11  1414|N30 1433|PPM 335291|ROT  1067|SAO 234589|SKY# 11418|TD1  7641|UBV    6582|UBV M  12287|uvby98 100047306|ALS 15830|TYC 8535-2126-1|WEB  6287|Gaia DR2 5501284972198817536",
     "matched_id": "* N Car"
   }

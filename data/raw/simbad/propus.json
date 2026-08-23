@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Propus",
-  "retrieved_utc": "2026-08-18T07:02:39+00:00",
+  "retrieved_utc": "2026-08-23T01:57:10+00:00",
   "record_id": "* eta Gem",
   "raw": {
     "main_id": "* eta Gem",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2018yCat.1345....0G",
+    "V": 3.2799999713897705,
     "plx_value": 4.7312,
-    "otype": "RG*",
+    "sp_type": "M2IIIa",
     "plx_err": 1.0206999778747559,
+    "otype": "RG*",
     "ids": "TIC 46117984|4XMM J061452.5+223020|HIP 29655|Gaia DR3 3377072212924335488|2MASS J06145266+2230244|PLX 1444|* eta Gem|*   7 Gem|2E  1623|AAVSO 0608+22|AG+22  665|BD+22  1241|DO 12034|GC  7969|GCRV  3940|GSC 01877-01716|HD  42995|HIC  29655|HR  2216|IRAS 06118+2231|IRC +20139|JP11  1342|N30 1337|PMC 90-93  5710|PPM  95649|RAFGL 4478S|SAO  78135|SKY# 10538|TD1  6430|UBV   21376|UBV M  11886|V* eta Gem|YPAC 413|YZ  22  2261|PLX 1444.00|2E 0611.8+2231|PMSC 06088+2232|NAME Propus|WEB  5839|GEN# +1.00042995|ADS  4841 A|IDS 06088+2232 A|SBC7   271|SBC9 387|* eta Gem A|*   7 Gem A|** BU 1008A|BD+22  1241A|CCDM J06149+2230A|HD  42995A|WDS J06149+2230A|TYC 1877-1716-1|Gaia DR2 3377072212925223424",
     "matched_id": "NAME Propus"
   }

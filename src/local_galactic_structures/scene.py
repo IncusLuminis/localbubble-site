@@ -79,6 +79,8 @@ def _object_to_scene_entry(obj: AstronomicalObject) -> dict:
         "distance_error_pc": obj.distance.error_pc,
         "size_pc": obj.visual.size_pc,
         "color_class": obj.visual.color_class,
+        "spectral_type": obj.visual.spectral_type,
+        "absolute_magnitude": obj.visual.absolute_magnitude,
         "group": {
             "primary": obj.group.primary,
             "secondary": list(obj.group.secondary),

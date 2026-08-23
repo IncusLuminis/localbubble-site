@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "1 Cam B",
-  "retrieved_utc": "2026-08-18T06:55:00+00:00",
+  "retrieved_utc": "2026-08-23T01:54:58+00:00",
   "record_id": "*   1 Cam B",
   "raw": {
     "main_id": "*   1 Cam B",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.802999973297119,
     "plx_value": 1.1211,
-    "otype": "*",
+    "sp_type": "B1IV:",
     "plx_err": 0.04619999974966049,
+    "otype": "*",
     "ids": "TIC 9197722|Gaia DR3 273895291446188160|2MASS J04320092+5354453|ADS  3274 B|AG+53  401|ALS  7982|BD+53   779B|CCDM J04320+5354B|CSI+53   779  2|GC  5491|GCRV  2646|HD  28446B|IDS 04241+5342 B|LS   V +53   23|PPM  29209|ROT  3545|SAO  24670|UBV M  10159|WDS J04320+5355B|** STF  550B|TYC 3732-1027-1|*   1 Cam B|WEB  4068|Gaia DR2 273895291446188160",
     "matched_id": "*   1 Cam B"
   }

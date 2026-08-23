@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V747 Cas",
-  "retrieved_utc": "2026-08-18T07:03:50+00:00",
+  "retrieved_utc": "2026-08-23T02:06:45+00:00",
   "record_id": "V* V747 Cas",
   "raw": {
     "main_id": "V* V747 Cas",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 7.130000114440918,
     "plx_value": 1.3054,
-    "otype": "**",
+    "sp_type": "M5",
     "plx_err": 0.04820000007748604,
+    "otype": "**",
     "ids": "TIC 202645113|HIP 2271|Gaia DR3 391083714634724224|2MASS J00285701+4824492|AG+48   49|AGKR   376|BD+47   113|DO 23365|GC   562|GSC 03252-01369|HD   2486|HIC   2271|IRAS 00262+4808|IRC +50007|PPM  42991|RAFGL   73|SAO  36408|SKY#   794|V* V747 Cas|TYC 3252-1369-1|WDS J00290+4825AB|** HDS   64|Gaia DR1 391083710335685888|Gaia DR2 391083714634724224",
     "matched_id": "V* V747 Cas"
   }

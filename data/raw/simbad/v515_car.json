@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V515 Car",
-  "retrieved_utc": "2026-08-18T07:03:45+00:00",
+  "retrieved_utc": "2026-08-23T02:06:40+00:00",
   "record_id": "V* V515 Car",
   "raw": {
     "main_id": "V* V515 Car",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 8.069999694824219,
     "plx_value": 1.3397,
-    "otype": "LP*",
+    "sp_type": "M3III",
     "plx_err": 0.026900000870227814,
+    "otype": "LP*",
     "ids": "TIC 461029064|LLNS  2058|CPD-59  2355|HIP 52046|Gaia DR3 5254338611990081664|BM    V 226|CD-59  3191|CPC 20.1  2877|CPD-59  2356|GSC 08957-00941|HD  92314|HIC  52046|IRAS 10362-6017|IRSV 1036-6017|PPM 358129|SAO 251040|SRS   9812|V* V515 Car|2MASS J10380711-6032562|TYC 8957-941-1|Gaia DR2 5254338611990081664",
     "matched_id": "V* V515 Car"
   }

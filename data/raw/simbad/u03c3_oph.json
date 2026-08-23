@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "σ Oph",
-  "retrieved_utc": "2026-08-18T07:06:27+00:00",
+  "retrieved_utc": "2026-08-23T02:04:40+00:00",
   "record_id": "* sig Oph",
   "raw": {
     "main_id": "* sig Oph",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.309999942779541,
     "plx_value": 3.7578,
-    "otype": "*",
+    "sp_type": "K2II",
     "plx_err": 0.1559000015258789,
+    "otype": "*",
     "ids": "TIC 328070002|HIP 85355|Gaia DR3 4389237503121158016|PLX 3960|* sig Oph|*  49 Oph|AG+04 2129|BD+04  3422|FK5 1459|GC 23621|GCRV 10081|GEN# +1.00157999|GSC 00409-01922|HD 157999|HIC  85355|HR  6498|IRAS 17240+0410|IRC +00304|JP11  2857|N30 3890|NSV  8664|PMC 90-93  1033|PPM 164002|RAFGL 1969|ROT  2451|SAO 122387|SKY# 31475|TD1 20440|TYC  409-1922-1|UBV   14877|UBV M  22192|YZ   4  5773|uvby98 100157999|2MASS J17263087+0408252|PLX 3960.00|WEB 14413|Gaia DR2 4389237503120493952",
     "matched_id": "* sig Oph"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 6130",
-  "retrieved_utc": "2026-08-18T07:01:03+00:00",
+  "retrieved_utc": "2026-08-23T02:02:06+00:00",
   "record_id": "HD   6130",
   "raw": {
     "main_id": "HD   6130",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.0,
     "plx_value": 1.2096,
-    "otype": "*",
+    "sp_type": "F0II",
     "plx_err": 0.044599998742341995,
+    "otype": "*",
     "ids": "WISEA J010337.03+610429.6|TIC 52187600|AG+60  121|BD+60   157|BSD   8-1031|GC  1263|GCRV   598|GSC 04017-01067|HD   6130|HIC   4962|HR   292|PPM  12695|ROT  6612|SAO  11551|SKY#  1616|UBV     994|uvby98 100006130|WEB   994|UCAC4 756-011150|2MASS J01033700+6104295|WISE J010337.00+610429.5|GEN# +1.00006130|ADS   868 A|IDS 00575+6032 A|HIP 4962|IRAS 01005+6048|IRCO  2669|Gaia DR3 426620514560103552|TYC 4017-1067-1|CCDM J01036+6104A|** BU  396A|WDS J01036+6104A|Gaia DR2 426620514560103552",
     "matched_id": "HD   6130"
   }

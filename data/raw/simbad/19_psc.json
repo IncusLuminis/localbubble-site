@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "19 Psc",
-  "retrieved_utc": "2026-08-18T06:55:44+00:00",
+  "retrieved_utc": "2026-08-23T01:54:54+00:00",
   "record_id": "*  19 Psc",
   "raw": {
     "main_id": "*  19 Psc",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.019999980926514,
     "plx_value": 4.0894,
-    "otype": "C*",
+    "sp_type": "C-N6",
     "plx_err": 0.21240000426769257,
+    "otype": "C*",
     "ids": "TIC 293340820|Gaia DR3 2743004129429424000|PLX 5755|*  19 Psc|AAVSO 2341+02|AG+03 3043|BD+02  4709|C* 3202|CGCS 5928|DO  8058|FK5 3908|GC 32995|GCRV 14882|GEN# +1.00223075|GSC 00589-01671|HD 223075|HIC 117245|HIP 117245|HR  9004|IRAS 23438+0312|IRC +00532|JP11  3653|LEE 154|N30 5214|PPM 174411|RAFGL 3147|SAO 128374|SKY# 44893|SV* ZI  2157|TYC  589-1671-1|UBV   21302|V* TX Psc|YZ   3  8154|[LFO93] 2343+03|2MASS J23462351+0329121|PLX 5755.00|AKARI-IRC-V1 J2346235+032912|WEB 20657|Gaia DR2 2743004129429201664",
     "matched_id": "*  19 Psc"
   }

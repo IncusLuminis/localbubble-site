@@ -45,6 +45,8 @@ def to_record(obj: AstronomicalObject) -> dict:
         "source_catalog": obj.source.catalog,
         "visual_size_pc": obj.visual.size_pc,
         "visual_color_class": obj.visual.color_class,
+        "visual_spectral_type": obj.visual.spectral_type,
+        "visual_absolute_magnitude": obj.visual.absolute_magnitude,
         "notes": obj.notes,
     }
 
@@ -81,6 +83,8 @@ def from_record(record: dict) -> AstronomicalObject:
         visual=Visual(
             size_pc=record.get("visual_size_pc"),
             color_class=record.get("visual_color_class"),
+            spectral_type=record.get("visual_spectral_type"),
+            absolute_magnitude=record.get("visual_absolute_magnitude"),
         ),
         notes=record.get("notes"),
     )

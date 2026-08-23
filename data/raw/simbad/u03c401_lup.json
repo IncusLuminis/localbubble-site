@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "τ01 Lup",
-  "retrieved_utc": "2026-08-18T07:06:29+00:00",
+  "retrieved_utc": "2026-08-23T02:04:42+00:00",
   "record_id": "* tau01 Lup",
   "raw": {
     "main_id": "* tau01 Lup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.552999973297119,
     "plx_value": 3.9564,
-    "otype": "bC*",
+    "sp_type": "B2IV",
     "plx_err": 0.23970000445842743,
+    "otype": "bC*",
     "ids": "Gaia DR3 6099307559847568512|TIC 127025883|HIP 70574|* tau01 Lup|CCDM J14261-4514A|CD-44  9322|CEL   4319|CPC  0 12297|CPD-44  6770|FK5 1377|GC 19453|GCRV  8421|GEN# +1.00126341A|GSC 08277-03280|HD 126341|HIC  70574|HR  5395|IDS 14197-4446 A|IRAS 14229-4459|JP11  2508|N30 3269|PPM 319521|ROT  2070|SACS 312|SAO 224919|SKY# 26303|TD1 17467|TYC 8277-3280-1|UBV   12641|UBV M  20169|V* tau01 Lup|[B10]  3699|[CS62] E6  78|2MASS J14260823-4513169|ALS 14998|PSCz P14229-4459|WDS J14261-4513A|WEB 12236|Gaia DR2 6099307559838681216",
     "matched_id": "* tau01 Lup"
   }

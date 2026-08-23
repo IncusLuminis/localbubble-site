@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ζ Mon",
-  "retrieved_utc": "2026-08-18T07:05:30+00:00",
+  "retrieved_utc": "2026-08-23T02:07:28+00:00",
   "record_id": "* zet Mon",
   "raw": {
     "main_id": "* zet Mon",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.329999923706055,
     "plx_value": 3.245,
-    "otype": "*",
+    "sp_type": "G2Ib",
     "plx_err": 0.12540000677108765,
+    "otype": "*",
     "ids": "TIC 88751083|GEN# +1.00067594|IDS 08036-0242 A|HIP 39863|Gaia DR3 3070413334696277248|PLX 1932|* zet Mon|*  29 Mon|ADS  6617 A|BD-02  2450|CCDM J08086-0259A|CSI-02  2450  1|GC 11051|GCRV  5400|GSC 04851-02878|HD  67594|HIC  39863|HR  3188|IRC +00171|JP11  1630|PPM 191023|ROT  1303|SAO 135551|SKY# 15366|TD1 11838|TYC 4851-2878-1|UBV    7775|YPAC 149|YZ  92  3071|uvby98 100067594 A|2MASS J08083565-0259015|PLX 1932.00|WDS J08086-0259A|AKARI-IRC-V1 J0808356-025902|IRAS 08060-0250|WEB  7771|Gaia DR2 3070413334695525760",
     "matched_id": "* zet Mon"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 191",
-  "retrieved_utc": "2026-08-18T16:41:47+00:00",
+  "retrieved_utc": "2026-08-23T02:08:15+00:00",
   "record_id": "HD  33793",
   "raw": {
     "main_id": "HD  33793",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 8.852999687194824,
     "plx_value": 254.1986,
+    "sp_type": "M1VIp",
     "plx_err": 0.01679999940097332,
     "otype": "PM*",
     "ids": "TIC 200385493|GJ 191|HIP 24186|Gaia DR3 4810594479418041856|PLX 1181|2MASS J05114046-4501051|AC2000 3505363|CD-45  1841|CPC  0  2725|CPD-44   612|Ci 20  319|GC  6369|GCRV  3085|GEN# +1.00033793|GSC 07594-01580|GSC 08078-01749|HD  33793|HIC  24186|TIC 471011170|IRAS 05100-4502|JP11  1005|LFT  395|LHS    29|LTT  2200|NLTT 14668|CNS5 1304|PM 05097-4500|SAO 217223|TYC 8078-1749-1|UBV    4985|UBV M  10717|V* VZ Pic|Zkh  69|[RHG95]   887|PLX 1181.00|NAME Kapteyn's star|Gaia DR2 4810594479417465600|NAME Kapteyn Star|PM J05116-4501|NAME Kapteyn's|uvby98 100033793|WEB  4691",

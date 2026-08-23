@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "8 Lac A",
-  "retrieved_utc": "2026-08-18T06:56:39+00:00",
+  "retrieved_utc": "2026-08-23T01:55:44+00:00",
   "record_id": "*   8 Lac A",
   "raw": {
     "main_id": "*   8 Lac A",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.690000057220459,
     "plx_value": 1.8914,
-    "otype": "Be*",
+    "sp_type": "B1Vne",
     "plx_err": 0.09139999747276306,
+    "otype": "Be*",
     "ids": "TIC 128495470|HD 214168|WISE J223552.27+393803.5|WISEA J223552.25+393803.2|Gaia DR3 1908368597999299840|[JE82] 1122|[JE82] 1121|WDS J22359+3938A|*   8 Lac A|ADS 16095 A|AG+39 2418|BD+38  4808|CCDM J22358+3937A|CEL   5491|CSI+38  4808  1|EM* MWC  390|GC 31551|GCRV 14195|HIC 111546|HIP 111546|HR  8603|IDS 22314+3907 A|N30 4974|PPM  87963|ROT  3292|SAO  72509|TD1 29206|UBV   19324|UBV M  26492|YPAC 215|[S78b] 387A|uvby98 100214168 A|2MASS J22355228+3938034|ALS 14843|WDS J22359+3938Aa,Ab|** STF 2922A|TYC 3205-2482-1|PMSC 22314+3907A|PMSC 22314+3907Aab|** CHR  112|Gaia DR1 1908368593700046208|uvby98 100214167|GEN# +1.00214167|WEB 19939|Gaia DR2 1908368597999299840",
     "matched_id": "*   8 Lac A"
   }

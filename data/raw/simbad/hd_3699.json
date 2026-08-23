@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 3699",
-  "retrieved_utc": "2026-08-18T07:00:15+00:00",
+  "retrieved_utc": "2026-08-23T02:01:02+00:00",
   "record_id": "HD   3699",
   "raw": {
     "main_id": "HD   3699",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 7.210999965667725,
     "plx_value": 1.3527,
-    "otype": "s*r",
+    "sp_type": "M2Ib",
     "plx_err": 0.01940000057220459,
+    "otype": "s*r",
     "ids": "TIC 312058658|HIP 3171|Gaia DR3 425479599451987584|2MASS J00402481+5930497|AG+59   62|BD+58    89|GEN# +1.00003699|GSC 03667-00917|HD   3699|HIC   3171|IRAS 00375+5914|PPM  25576|RAFGL   99|SAO  21608|SKY#  1059|TYC 3667-917-1|UBV M   7547|V* V753 Cas|YZ  59   530|Gaia DR1 425479595151064064|Gaia DR2 425479599451987584",
     "matched_id": "HD   3699"
   }

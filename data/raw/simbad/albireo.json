@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Albireo",
-  "retrieved_utc": "2026-08-18T06:56:49+00:00",
+  "retrieved_utc": "2026-08-23T01:56:14+00:00",
   "record_id": "* bet01 Cyg",
   "raw": {
     "main_id": "* bet01 Cyg",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.0799999237060547,
     "plx_value": 8.9816,
-    "otype": "**",
+    "sp_type": "K3II+B9.5V",
     "plx_err": 0.4474000036716461,
+    "otype": "**",
     "ids": "TIC 112981566|WDS J19307+2758Aa,Ab|WDS J19307+2758Aa,Ad|** BNU   10|HIP 95947|Gaia DR3 2026116260337482112|WISE J193043.45+275736.9|AP J19304330+2757347|PLX 4567|* bet01 Cyg|*   6 Cyg A|* bet Cyg A|ADS 12540 A|AG+27 1969|BD+27  3410|FK5  732|GC 26953|GCRV 11939|GEN# +1.00183912|GSC 02133-02964|HIC  95947|HR  7417|IRAS 19286+2751|IRC +30370|JP11  3109|N30 4327|NAME Albereo|NAME Albireo|NSV 12105|PMC 90-93   521|PPM 109139|RAFGL 2406|ROT  2806|SAO  87301|SKY# 36344|SRS  30732|UBV   16562|YZ  27 10049|2MASS J19304330+2757347|WDS J19307+2758Aa,Ac|CCDM J19307+2758AC|** MCA   55|PMSC 19267+2744Aab|WDS J19307+2758A|** STF 4043A|Gaia DR2 2026116260302988160|WEB 16802",
     "matched_id": "NAME Albireo"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Mintaka",
-  "retrieved_utc": "2026-08-18T07:02:24+00:00",
+  "retrieved_utc": "2026-08-23T01:56:47+00:00",
   "record_id": "* del Ori",
   "raw": {
     "main_id": "* del Ori",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.4100000858306885,
     "plx_value": 4.71,
-    "otype": "**",
+    "sp_type": "O9.5IINwk",
     "plx_err": 0.5799999833106995,
+    "otype": "**",
     "ids": "TIC 50743469|HIP 25930|2MASS J05320040-0017566|SBC9 331|1E 052926+0020.0|2E  1293|ADS  4134 A|AG-00  648|BD-00   983|CEL    764|CGO  92|CSI-00   983  3|CSI-00   983  1|FK5  206|GC  6847|GCRV  3361|GEN# +1.00036486A|GSC 04766-02445|HD  36486|HGAM    419|HIC  25930|HR  1852|IDS 05269-0022 A|IRAS 05294-0020|JP11  1136|MCW  324|N30 1185|PMC 90-93   149|PPM 175888|ROT   839|SAO 132220|SBC7   233|SKY#  8880|UBV   21591|UBV M  11108|UBV   21590|V* del Ori|WH 141|ALS 14779|1ES 0529-00.3|2E 0529.4-0019|EUVE J0532-00.2|Gaia DR3 3220756843825383936|1RXS J053200.8-001755|WDS J05320-0018Aa,Ab|WDS J05320-0018A|** HEI   42|** STF 4014A|PMSC 05269-0022A|NAME Mintaka|* del Ori|*  34 Ori|WEB  5041|* del01 Ori",
     "matched_id": "NAME Mintaka"
   }

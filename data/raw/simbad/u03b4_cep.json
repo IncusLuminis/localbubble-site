@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "δ Cep",
-  "retrieved_utc": "2026-08-18T07:05:10+00:00",
+  "retrieved_utc": "2026-08-23T01:56:43+00:00",
   "record_id": "* del Cep",
   "raw": {
     "main_id": "* del Cep",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.75,
     "plx_value": 3.5551,
-    "otype": "cC*",
+    "sp_type": "F5Iab:+B7-8",
     "plx_err": 0.14749999344348907,
+    "otype": "cC*",
     "ids": "TIC 415741355|AP J22291029+5824549|Gaia DR2 2200153454723522432|UCAC4 743-079541|WISE J222910.75+582452.5|Gaia DR3 2200153454733285248|PLX 5443|*  27 Cep|* del Cep|AAVSO 2225+57|ADS 15987 A|AG+58 1460|BD+57  2548|CCDM J22292+5825A|CEL   5480|CSI+57  2548  1|FK5  847|GC 31421|GCRV 14138|GEN# +1.00213306|GSC 03995-01479|HD 213306|HIC 110991|HIP 110991|HR  8571|IDS 22254+5754 A|IRAS 22273+5809|IRC +60356|N30 4955|PMC 90-93   594|PPM  40731|ROT  3272|SAO  34508|SKY# 42788|TD1 29132|TYC 3995-1479-1|UBV   21546|V* del Cep|2MASS J22291029+5824549|WDS J22292+5825A|uvby98 100213306|WEB 19873",
     "matched_id": "* del Cep"
   }

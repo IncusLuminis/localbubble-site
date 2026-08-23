@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "μ Per",
-  "retrieved_utc": "2026-08-18T07:06:04+00:00",
+  "retrieved_utc": "2026-08-23T02:04:00+00:00",
   "record_id": "* mu. Per",
   "raw": {
     "main_id": "* mu. Per",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.159999847412109,
     "plx_value": 3.9395,
-    "otype": "SB*",
+    "sp_type": "G0Ib",
     "plx_err": 0.2678000032901764,
+    "otype": "SB*",
     "ids": "TIC 104601991|Gaia DR3 246265388874592768|HIP 19812|* mu. Per A|* mu. Per|PLX  929|SBC9 223|*  51 Per|ADS  3071 A|AG+48  484|BD+48  1063|CCDM J04149+4824A|CSI+48  1063  1|CSV   6092|FK5 1117|GC  5099|GCRV  2413|GEN# +1.00026630A|HD  26630|HIC  19812|HR  1303|IRC +50110|JP11   860|N30  869|NSV  1518|PMC 90-93   742|PPM  46912|ROT   618|SAO  39404|SBC7   163|SKY#  6497|TD1  2915|UBV    4092|USNO-B1.0 1384-00111102|YPAC  17|[HFE83]  286|uvby98 100026630 A|SV* SON  8543|WDS J04149+4825A|TYC 3332-2426-1|IRAS 04112+4817|AKARI-IRC-V1 J0414538+482433|PMSC 04076+4809A|PMSC 04076+4809Aab|2MASS J04145385+4824335|WEB  3784|Gaia DR2 246265388873621120|** STT   73A|IDS 04076+4809 A",
     "matched_id": "* mu. Per"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "MZ Pup",
-  "retrieved_utc": "2026-08-18T07:02:18+00:00",
+  "retrieved_utc": "2026-08-23T02:05:36+00:00",
   "record_id": "V* MZ Pup",
   "raw": {
     "main_id": "V* MZ Pup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.119999885559082,
     "plx_value": 0.8126,
-    "otype": "s*r",
+    "sp_type": "M1Iab-Ib",
     "plx_err": 0.10130000114440918,
+    "otype": "s*r",
     "ids": "TIC 419425547|HIP 39487|Gaia DR3 5547686493207863424|2MASS J08041619-3240291|PLX 1919|CD-32  4796|CPC 17  3741|CPD-32  1955|GC 10960|GCRV  5368|GEN# +1.00066888|GSC 07124-03767|HD  66888|HIC  39487|HR  3170|IRAS 08023-3231|IRC -30115|PPM 284752|RAFGL 1224|SAO 198764|SKY# 15195|SRS  41800|TYC 7124-3767-1|UBV M  13969|V* MZ Pup|PLX 1919.00|[L69b] 6  1|WEB  7720|Gaia DR2 5547686493207863424",
     "matched_id": "V* MZ Pup"
   }

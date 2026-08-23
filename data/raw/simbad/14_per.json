@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "14 Per",
-  "retrieved_utc": "2026-08-18T06:55:33+00:00",
+  "retrieved_utc": "2026-08-23T01:54:47+00:00",
   "record_id": "*  14 Per",
   "raw": {
     "main_id": "*  14 Per",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.434999942779541,
     "plx_value": 2.3511,
-    "otype": "*",
+    "sp_type": "G0Ib-IIaCa1",
     "plx_err": 0.09889999777078629,
+    "otype": "*",
     "ids": "TIC 302144515|HIP 12768|Gaia DR3 340647020322856192|2MASS J02440515+4417493|Cl* NGC 1039      W    2230|*  14 Per|AG+44  278|BD+43   566|FK5 1077|GC  3278|GCRV  1539|GEN# +1.00016901|GSC 02857-02226|HD  16901|HIC  12768|HR   800|IRAS 02408+4405|N30  555|PMC 90-93   710|PPM  45426|SAO  38289|SKY#  4104|TYC 2857-2226-1|UBV    2701|UBV M   9114|[B10]   619|uvby98 100016901|WEB  2594|Gaia DR2 340647020322856192",
     "matched_id": "*  14 Per"
   }

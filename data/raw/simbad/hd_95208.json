@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 95208",
-  "retrieved_utc": "2026-08-18T07:01:53+00:00",
+  "retrieved_utc": "2026-08-23T02:03:08+00:00",
   "record_id": "HD  95208",
   "raw": {
     "main_id": "HD  95208",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.122000217437744,
     "plx_value": 1.9825,
-    "otype": "*",
+    "sp_type": "K1II",
     "plx_err": 0.025599999353289604,
+    "otype": "*",
     "ids": "TIC 277556255|HIP 53546|Gaia DR3 5225697708459981440|CPC 21.2  1601|CPD-74   755|FK5 2875|GC 15072|GEN# +1.00095208|GSC 09410-01097|HD  95208|HIC  53546|HR  4279|IRAS 10558-7449|N30 2577|PPM 370914|SAO 256775|SKY# 20944|TYC 9410-1097-1|UBV   10053|UBV M  16687|2MASS J10571579-7505589|Gaia DR2 5225697708459981440",
     "matched_id": "HD  95208"
   }

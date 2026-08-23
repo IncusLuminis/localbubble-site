@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V398 Lyr",
-  "retrieved_utc": "2026-08-18T07:03:40+00:00",
+  "retrieved_utc": "2026-08-23T02:06:33+00:00",
   "record_id": "V* V398 Lyr",
   "raw": {
     "main_id": "V* V398 Lyr",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 7.409999847412109,
     "plx_value": 1.8021,
-    "otype": "LP*",
+    "sp_type": "M3",
     "plx_err": 0.04569999873638153,
+    "otype": "LP*",
     "ids": "TIC 121085912|HIP 93989|Gaia DR3 2100382189073830528|AAVSO 1904+39|AG+39 1894|BD+38  3445|DO 17453|GC 26377|GCRV 11606|GSC 03120-00831|HD 178770|HIC  93989|IRAS 19065+3904|IRC +40338|PPM  82364|RAFGL 2331|SAO  67859|SKY# 35429|TYC 3120-831-1|V* V398 Lyr|2MASS J19081318+3909173|Gaia DR1 2100382184777487104|WEB 16357|Gaia DR2 2100382189073830528",
     "matched_id": "V* V398 Lyr"
   }

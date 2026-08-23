@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "δ Sge",
-  "retrieved_utc": "2026-08-18T07:05:15+00:00",
+  "retrieved_utc": "2026-08-23T01:56:53+00:00",
   "record_id": "* del Sge",
   "raw": {
     "main_id": "* del Sge",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.809999942779541,
     "plx_value": 5.9674,
-    "otype": "SB*",
+    "sp_type": "M2II+B0V",
     "plx_err": 0.2597000002861023,
+    "otype": "SB*",
     "ids": "TIC 386634500|HIP 97365|Gaia DR3 1824534959611831680|PLX 4658|SBC9 1174|* del Sge|*   7 Sge|AAVSO 1942+18|AG+18 1919|BD+18  4240|CCDM J19474+1832AB|CSV 101889|FK5  743|GC 27391|GCRV 12160|HIC  97365|HR  7536|IDS 19429+1817 AB|IRAS 19451+1824|IRC +20433|JP11  3135|N30 4375|PMC 90-93   528|PPM 136976|RAFGL 2456|SAO 105259|SBC7   766|SKY# 36991|SRS  30743|SV* P  5104|TD1 25442|UBV   16847|V* del Sge|VDB 127|YZ  18  7686|[B10]  5052|[HFE83] 1319|WDS J19474+1832AB|TYC 1619-3542-1|2MASS J19472326+1832034|CSI+18  4240  2|GEN# +1.00187076|HD 187076|UBV M  24159|CSI+18  4240  3|GEN# +1.00187077|HD 187077|UBV M  24160|** BLA    6|WEB 17111|Gaia DR2 1824534959598087168",
     "matched_id": "* del Sge"
   }

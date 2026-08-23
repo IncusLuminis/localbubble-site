@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ξ Cyg",
-  "retrieved_utc": "2026-08-18T07:06:08+00:00",
+  "retrieved_utc": "2026-08-23T02:03:39+00:00",
   "record_id": "* ksi Cyg",
   "raw": {
     "main_id": "* ksi Cyg",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.7300000190734863,
     "plx_value": 2.8363,
-    "otype": "SB*",
+    "sp_type": "K4.5Ib-II",
     "plx_err": 0.12690000236034393,
+    "otype": "SB*",
     "ids": "TIC 273546321|Gaia DR3 2162316545207257600|WISE J210455.91+435538.9|PLX 5074|* ksi Cyg|*  62 Cyg|AG+43 1923|BD+43  3800|FK5  792|GC 29459|GCRV 13256|GEN# +1.00200905|GSC 03180-02696|HD 200905|HIC 104060|HIP 104060|HR  8079|IRC +40468|JP11  3306|N30 4658|PMC 90-93   557|PPM  60925|ROT  3074|SAO  50424|SKY# 40075|TD1 27662|TYC 3180-2696-1|UBV   18265|[B10]  5431|uvby98 100200905|PLX 5074.00|2MASS J21045585+4355400|AAVSO 2101+43|NSV 13518|RAFGL 2703|WEB 18956|Gaia DR2 2162316545203102208",
     "matched_id": "* ksi Cyg"
   }
