@@ -95,6 +95,10 @@ function normalizedDirection(v: readonly [number, number, number]): [number, num
   return [v[0] / length, v[1] / length, v[2] / length];
 }
 
+function distanceFromOrigin(v: readonly [number, number, number]): number {
+  return Math.hypot(v[0], v[1], v[2]);
+}
+
 /**
  * "Object-centered" (issue #106, generalizing `sunCenteredPose`): frames an
  * arbitrary catalog object closely, for the search/go-to-object feature
@@ -104,18 +108,87 @@ function normalizedDirection(v: readonly [number, number, number]): [number, num
  * rendering-independent purity (see the module docstring); the caller
  * (`main.ts`) already has that value at hand from the catalog bucket/scene
  * object.
+ *
+ * `maxDistancePc` (issue #207) optionally caps the generic
+ * `OBJECT_FRAME_MIN_DISTANCE_PC`/`OBJECT_FRAME_RADIUS_MULTIPLIER` framing
+ * distance - see `denseBatchObjectFrameMaxDistancePc` below for the one
+ * caller (`main.ts`'s `goToObject`) that actually supplies it, for a RECONS
+ * dense-batch star specifically. Omitted (`undefined`), the distance is
+ * exactly what it always was - this parameter changes nothing for every
+ * other object type, per issue #207's explicit scoping.
  */
 export function objectCenteredPose(
   positionPc: readonly [number, number, number],
   markerRadiusPc: number,
+  maxDistancePc?: number,
 ): CameraPose {
   const [ux, uy, uz] = normalizedDirection(OBJECT_FRAME_DIRECTION);
-  const distance = Math.max(markerRadiusPc * OBJECT_FRAME_RADIUS_MULTIPLIER, OBJECT_FRAME_MIN_DISTANCE_PC);
+  let distance = Math.max(markerRadiusPc * OBJECT_FRAME_RADIUS_MULTIPLIER, OBJECT_FRAME_MIN_DISTANCE_PC);
+  if (maxDistancePc !== undefined) {
+    distance = Math.min(distance, maxDistancePc);
+  }
   const [tx, ty, tz] = positionPc;
   return {
     position: [tx + ux * distance, ty + uy * distance, tz + uz * distance],
     target: [tx, ty, tz],
   };
+}
+
+/** Floor (pc) under `denseBatchObjectFrameMaxDistancePc`'s budget below, so
+ * a dense-batch star sitting almost exactly at the sphere's own outer edge
+ * (`denseBatchRadiusPc`) - where that budget would otherwise be ~0 - still
+ * gets a sane, non-claustrophobic close-up rather than a near-zero-distance
+ * camera. Deliberately much smaller than the generic
+ * `OBJECT_FRAME_MIN_DISTANCE_PC` (25pc) - that floor is tuned for the
+ * ~800pc-scale overall catalog and is exactly what produced issue #207's
+ * bug when applied unchanged to this ~11pc-scale batch. */
+const DENSE_BATCH_OBJECT_FRAME_MIN_DISTANCE_PC = 1;
+
+/**
+ * Issue #207 root-cause fix: the framing-distance CAP `objectCenteredPose`
+ * should use when its target is a RECONS dense-batch member (`lod.ts`'s
+ * `isDenseBatchMember`) specifically.
+ *
+ * Root cause (confirmed live, see the PR description for the actual
+ * `camera.position.length()` values logged at each step of a real
+ * go-to-object jump): `objectCenteredPose`'s generic distance formula is a
+ * flat `max(markerRadiusPc * 6, 25pc)` - at least 25pc for any star, since
+ * `markerRadiusPc` returns the fixed, un-shrunk `STAR_MARKER_RADIUS_PC`
+ * (2pc) for every star regardless of type. That 25pc floor was tuned for
+ * the ~800pc-scale overall catalog and has no idea the target might belong
+ * to a batch that's only ever meant to be viewed within ~11pc of the origin
+ * (`lod.ts`'s `denseBatchCollectionRadiusPc`). Landing the camera ~25-26pc
+ * from the origin leaves it well outside that ~11pc radius but still well
+ * inside `objects.ts`'s `STAR_MARKER_SHRINK_START_MULTIPLIER` (3x) cutoff
+ * (~34pc) - squarely in `starMarkerRadiusPc`'s linear interpolation zone,
+ * so issue #150's selection-freeze captures a reticle radius roughly
+ * 60-70% of the way back up to the full 2pc un-shrunk size instead of the
+ * ~0.02pc floor a manual "fly into the sphere" approach would produce -
+ * this is why the reticle rendered "sphere-sized" rather than the normal
+ * close-up marker a user gets by manually zooming in. NOT a `selectObject`/
+ * `showSelectionIndicatorFor` ordering bug: `goToObject` genuinely calls
+ * `applyCameraPose` before `selectObject`, confirmed live, so the freeze
+ * already sees the post-jump camera distance, not a stale pre-jump one.
+ *
+ * The fix caps the framing distance so that, by the triangle inequality
+ * (`|target + offset| <= |target| + |offset|`), the resulting camera
+ * position can never end up farther from the origin than
+ * `denseBatchRadiusPc` itself by more than this function's own small floor
+ * - i.e. landing (modulo that floor) inside the same "fully zoomed into the
+ * dense-LOD sphere" radius `passesDenseBatchLod`/`starMarkerRadiusPc`
+ * already use, regardless of where within that sphere the target star
+ * itself sits (unlike a fixed fraction of `denseBatchRadiusPc`, which could
+ * still overshoot for a star already near the sphere's own edge). This
+ * reproduces, for any dense-batch star, roughly the same close-up framing
+ * `applyFitNearestStarsPose`'s own "Fit to Nearest-Stars Sphere" button
+ * already lands on when flown to manually.
+ */
+export function denseBatchObjectFrameMaxDistancePc(
+  positionPc: readonly [number, number, number],
+  denseBatchRadiusPc: number,
+): number {
+  const budget = denseBatchRadiusPc - distanceFromOrigin(positionPc);
+  return Math.max(budget, DENSE_BATCH_OBJECT_FRAME_MIN_DISTANCE_PC);
 }
 
 const DEFAULT_FIT_ALL_POSE = perspectivePose();

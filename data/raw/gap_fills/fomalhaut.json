@@ -1,0 +1,94 @@
+{
+  "id": "alf_psa",
+  "name": "* alf PsA",
+  "aliases": [
+    "TIC 47552789",
+    "GJ 881",
+    "GJ 881.0",
+    "PLX 5565",
+    "CNS5 5665",
+    "*  24 PsA",
+    "8pc 130.08",
+    "CD-30 19370",
+    "CEL   5549",
+    "CPC 17 12409",
+    "CPD-30  6685",
+    "FK5  867",
+    "GC 32000",
+    "GCRV 14409",
+    "GEN# +1.00216956",
+    "HD 216956",
+    "HIC 113368",
+    "HIP 113368",
+    "HR  8728",
+    "IRAS 22549-2953",
+    "IRC -30458",
+    "JP11  3556",
+    "LTT  9292",
+    "N30 5050",
+    "NLTT 55380",
+    "NSV 14372",
+    "PMC 90-93   611",
+    "PPM 274426",
+    "RAFGL 2995",
+    "ROT  3340",
+    "SAO 191524",
+    "SKY# 43608",
+    "SRS  30867",
+    "TD1 29476",
+    "UBV   19672",
+    "UBV M  26732",
+    "Zkh 345",
+    "[PS72]  89",
+    "uvby98 100216956",
+    "JCMTSE J225739.4-293726",
+    "JCMTSF J225738.9-293714",
+    "PLX 5565.00",
+    "WDS J22577-2937A",
+    "** SHY  106A",
+    "2MASS J22573901-2937193",
+    "NAME Fomalhaut",
+    "** MAM    1A",
+    "H-ATLAS J225739.6-293730",
+    "TYC 6977-1267-1",
+    "[DML87] 545",
+    "WEB 20167",
+    "*  79 Aqr"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 344.4126927211701,
+    "dec_deg": -29.622237033389442,
+    "galactic_l_deg": 20.488145382149742,
+    "galactic_b_deg": -64.90960177774328
+  },
+  "distance": {
+    "value_pc": 7.7035667514059005,
+    "error_pc": 0.027892122055137556
+  },
+  "cartesian": {
+    "x_pc": 3.0600444240878573,
+    "y_pc": 1.143382149822465,
+    "z_pc": -6.976657227888046
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf PsA, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf PsA",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A4V",
+    "absolute_magnitude": 1.726540716213333,
+    "apparent_magnitude": 1.159999966621399
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-23T17:15:01+00:00; upstream record id: * alf PsA; otype: PM*. Fomalhaut (alpha PsA) was found missing from the catalog entirely (issue #207): not on the Galaxy Map luminous-giants poster batch (too close/insufficiently luminous for that abs-mag < -2.8 selection, Story #87/#88) and, despite being well within RECONS's own \"100 nearest star systems\" distance range, absent from the transcribed data/raw/recons/candidate_stars.json candidate list (Story #104) - it is NOT one of that batch's 13 documented unresolved entries either, this looks like a transcription gap in the original RECONS-table candidate list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

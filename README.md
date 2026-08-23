@@ -58,8 +58,10 @@ the Local Bubble) plus, since v1.2, ~585 individual named stars (see
 star clusters/associations (see
 [Additional star clusters (v1.2)](#additional-star-clusters-v12) below),
 plus, since v1.3, ~122 individual nearby stars from the RECONS census (see
-[Nearby stars & marker LOD (v1.3)](#nearby-stars--marker-lod-v13) below) -
-**956 objects total**. Every record is either resolved live via
+[Nearby stars & marker LOD (v1.3)](#nearby-stars--marker-lod-v13) below),
+plus one standalone gap-fill addition, Fomalhaut (issue #207, see
+`data/raw/gap_fills/README.md`) -
+**957 objects total**. Every record is either resolved live via
 SIMBAD/Gaia/VizieR, or built from a cited literature distance; see each
 record's `source.reference`. No live network access is required to rebuild
 from this checked-in file (spec §14); re-resolving from scratch is a

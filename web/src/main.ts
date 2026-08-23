@@ -70,6 +70,7 @@ import {
 } from "./scene/labels";
 import { DEFAULT_RADIUS_PC, RADIUS_PRESETS_PC, isWithinRadius } from "./scene/radiusFilter";
 import {
+  denseBatchObjectFrameMaxDistancePc,
   edgeOnPose,
   faceOnPose,
   fitAllPose,
@@ -924,9 +925,26 @@ infoToggleButton.addEventListener("click", () => infoDialog.show());
  * on `obj` (via `objectCenteredPose`, distance proportional to the
  * object's own marker radius) and selects it - reusing `selectObject`
  * directly so the Inspector/label-selection highlighting stays exactly as
- * consistent as a manual click-to-select. */
+ * consistent as a manual click-to-select.
+ *
+ * Issue #207: for a RECONS dense-batch member specifically
+ * (`isDenseBatchMember`), the generic `objectCenteredPose` framing distance
+ * is additionally capped via `denseBatchObjectFrameMaxDistancePc` so the
+ * camera lands within (or very close to) the dense-LOD sphere's own
+ * `denseBatchRadiusPc` of the origin - see that function's docstring for
+ * the full root-cause writeup (confirmed live) of why the un-capped generic
+ * distance produced an oversized selection reticle for a dense-batch star
+ * selected from outside the sphere. Every other object type is completely
+ * unaffected - `maxDistancePc` stays `undefined`, `objectCenteredPose`'s
+ * behavior for them is unchanged. */
 function goToObject(obj: SceneObject): void {
-  applyCameraPose(objectCenteredPose(obj.position_pc, markerRadiusPc(obj.size_pc, obj.object_type)));
+  const maxDistancePc =
+    isDenseBatchMember(obj) && denseBatchRadiusPc > 0
+      ? denseBatchObjectFrameMaxDistancePc(obj.position_pc, denseBatchRadiusPc)
+      : undefined;
+  applyCameraPose(
+    objectCenteredPose(obj.position_pc, markerRadiusPc(obj.size_pc, obj.object_type), maxDistancePc),
+  );
   selectObject(obj);
 }
 
