@@ -27,6 +27,8 @@ const VALID_SCENE: Scene = {
       distance_error_pc: 2.1,
       size_pc: 25.0,
       color_class: null,
+      spectral_type: null,
+      absolute_magnitude: null,
       group: { primary: null, secondary: [] },
       source: { reference: "test fixture", url: null, catalog: null },
       notes: null,
