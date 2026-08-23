@@ -544,10 +544,25 @@ body {
    screen, unlike `.panel`'s top-left/top-right anchored positioning used
    elsewhere in this app. Clicking the scrim itself (not the dialog it
    wraps) closes it - see `infoDialog.ts`'s `isScrimClick`. */
+/* Issue #167: CSS2DRenderer (node_modules/three/examples/jsm/renderers/
+   CSS2DRenderer.js's `zOrder()`) sets an inline `z-index` on every
+   star/structure/Galactic-Center label element every frame, ranging from `1`
+   up to the current live CSS2DObject count - which, since #159 removed the
+   dense-LOD label cap, can exceed 100 (~122 dense-batch stars + Sun +
+   structure labels + Galactic Center). The scrim's old `z-index: 10` was
+   comfortably within that range, so labels routinely painted on top of the
+   scrim/dialog instead of being covered by it. `1000` gives orders-of-
+   magnitude headroom over any label count this app could plausibly reach
+   (vs. e.g. `50`, which today's ~130 labels would already exceed), so this
+   class of bug can't recur from ordinary label-count growth. This value is
+   deliberately far above every other z-index in the app (#status/#fov-
+   readout: 1, .panel/#menu-panels: 2, #menu-toggle/#fullscreen-toggle/
+   #info-toggle: 3, #154's edge-indicator: 20) - none of those need to
+   change, since the dialog is meant to be unconditionally topmost. */
 .info-dialog-scrim {
   position: fixed;
   inset: 0;
-  z-index: 10;
+  z-index: 1000;
   display: none;
   align-items: center;
   justify-content: center;
@@ -563,6 +578,7 @@ body {
 .info-dialog {
   position: relative;
   top: auto;
+  z-index: 1;
   width: min(560px, calc(100vw - 48px));
   max-height: calc(100vh - 64px);
   overflow-y: auto;
