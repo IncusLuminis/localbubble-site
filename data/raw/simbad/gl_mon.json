@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GL Mon",
-  "retrieved_utc": "2026-08-18T06:57:23+00:00",
+  "retrieved_utc": "2026-08-23T02:05:21+00:00",
   "record_id": "V* GL Mon",
   "raw": {
     "main_id": "V* GL Mon",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 8.819999694824219,
     "plx_value": 2.4892,
-    "otype": "AB*",
+    "sp_type": "M6III",
     "plx_err": 0.09790000319480896,
+    "otype": "AB*",
     "ids": "TIC 52492351|Gaia DR3 3103451528806278144|2MASS J06354651-0522374|AN  178.1932|BD-05  1699|EIC   142|GSC 04806-03082|HD  46903|IRAS 06333-0520|IRC -10131|PPM 702963|RAFGL  968|SV* P   384|TYC 4806-3082-1|V* GL Mon|Gaia DR2 3103451528806278144",
     "matched_id": "V* GL Mon"
   }

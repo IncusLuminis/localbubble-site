@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 176155",
-  "retrieved_utc": "2026-08-18T06:58:43+00:00",
+  "retrieved_utc": "2026-08-23T02:05:19+00:00",
   "record_id": "V* FF Aql",
   "raw": {
     "main_id": "V* FF Aql",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.380000114440918,
     "plx_value": 1.9057,
-    "otype": "cC*",
+    "sp_type": "F6Ib",
     "plx_err": 0.07119999825954437,
+    "otype": "cC*",
     "ids": "HIP 93124|Gaia DR3 4514145288240593408|AAVSO 1853+17|AG+17 1921|ALS 10073|BD+17  3799|CSI+17  3799  1|GC 26052|GCRV 11417|HD 176155|HIC  93124|HR  7165|IRAS 18560+1717|LS  II +17    3|PLX 4400|PPM 135550|ROT  2695|SAO 104296|SKY# 34986|TD1 23606|UBV M  23365|V* FF Aql|YZ  17  7116|[B10]  4817|PLX 4400.00|WEB 16131|WDS J18582+1722Aa,Ab|SBC7   722|SBC9 1107|** CHR   82|TYC 1589-2551-1|UCAC4 537-084790|2MASS J18581474+1721391|Gaia DR1 4514145283910671744|uvby98 100176155|PMSC 18538+1713A|Gaia DR2 4514145288240593408|TIC 311218292",
     "matched_id": "HD 176155"
   }

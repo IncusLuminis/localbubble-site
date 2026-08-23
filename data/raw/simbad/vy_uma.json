@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "VY UMa",
-  "retrieved_utc": "2026-08-18T07:03:58+00:00",
+  "retrieved_utc": "2026-08-23T02:06:59+00:00",
   "record_id": "V* VY UMa",
   "raw": {
     "main_id": "V* VY UMa",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.949999809265137,
     "plx_value": 2.3813,
-    "otype": "C*",
+    "sp_type": "C-N5",
     "plx_err": 0.07769999653100967,
+    "otype": "C*",
     "ids": "TIC 310965017|HIP 52577|Gaia DR3 1060005766968901376|AAVSO 1038+67|AG+67  480|AGKR  9635|BD+68   617|C* 1736|CGCS 2835|DO 33415|GC 14761|GCRV  6682|GEN# +1.00092839|GSC 04151-01451|HD  92839|HIC  52577|HR  4195|IRAS 10416+6740|IRC +70100|JP11  1985|LEE 299|PPM  17570|RAFGL 1433|SAO  15274|SKY# 20586|SV* ZI   841|TYC 4151-1451-1|UBV   21580|V* VY UMa|[LFO93] 1041+67|[V58] 47|2MASS J10450403+6724409|WEB  9577|Gaia DR2 1060005766968901376",
     "matched_id": "V* VY UMa"
   }

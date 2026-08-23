@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Rigel",
-  "retrieved_utc": "2026-08-18T07:02:50+00:00",
+  "retrieved_utc": "2026-08-23T01:56:29+00:00",
   "record_id": "* bet Ori",
   "raw": {
     "main_id": "* bet Ori",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 0.12999999523162842,
     "plx_value": 3.78,
-    "otype": "s*b",
+    "sp_type": "B8Ia",
     "plx_err": 0.3400000035762787,
+    "otype": "s*b",
     "ids": "TIC 231308237|HIP 24436|2MASS J05143226-0812060|PLX 1191|* bet Ori|*  19 Ori|* bet Ori A|2E  1238|AAVSO 0509-08|ADS  3823 A|BD-08  1063|CCDM J05145-0812A|CEL    579|CSI-08  1063  1|CSV 100463|EM* MWC  487|FK5  194|GC  6410|GCRV  3110|GSC 05331-01752|HD  34085|HGAM    376|HIC  24436|HR  1713|IDS 05097-0819 A|IRAS 05121-0815|IRC -10085|JP11  1014|MCW  291|N30 1120|NSV  1882|PMC 90-93   140|PPM 187839|RAFGL  710|ROT   749|SACS 113|SAO 131907|SKY#  8263|SV* ZI   362|TD1  4253|UBV    5016|UBV M  10750|V* bet Ori|VDB  36|[SC93b] 101|ALS 14772|PLX 1191.00|1RXS J051431.5-081112|2E 0512.1-0814|EUVE J0514-08.1|WDS J05145-0812A|TYC 5331-1752-1|PMSC 05097-0819A|uvby98 100034085|GN 05.04.0|NAME Rigel|WEB  4731",
     "matched_id": "NAME Rigel"
   }

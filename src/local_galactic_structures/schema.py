@@ -66,6 +66,21 @@ class Source(BaseModel):
 class Visual(BaseModel):
     size_pc: float | None = None
     color_class: str | None = None
+    #: Raw SIMBAD `sp_type` string (e.g. "G2V", "M5.5Ve"), stored verbatim -
+    #: no normalization/bucketing into a fixed taxonomy (that is a later,
+    #: frontend-side Story's job). This is a dedicated field rather than a
+    #: reuse of `color_class` above: `color_class` reads as a *normalized*
+    #: bucket a renderer would key a color ramp off of, which is exactly
+    #: the not-yet-built frontend concern this field must NOT preempt: it
+    #: stays unpopulated by this pipeline until that Story defines it.
+    spectral_type: str | None = None
+    #: Absolute V magnitude, derived via the standard distance modulus
+    #: (M = m - 5*log10(d_pc) + 5) from SIMBAD's apparent V magnitude and
+    #: this record's own `distance_pc` - see
+    #: `data_sources.simbad.absolute_magnitude_from_distance_modulus`.
+    #: `None` when SIMBAD has no usable V magnitude on file; never
+    #: fabricated.
+    absolute_magnitude: float | None = None
 
 
 class AstronomicalObject(BaseModel):

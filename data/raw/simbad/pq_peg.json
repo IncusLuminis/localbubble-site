@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "PQ Peg",
-  "retrieved_utc": "2026-08-18T07:02:34+00:00",
+  "retrieved_utc": "2026-08-23T02:05:40+00:00",
   "record_id": "V* PQ Peg",
   "raw": {
     "main_id": "V* PQ Peg",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2018yCat.1345....0G",
+    "V": 7.28000020980835,
     "plx_value": 1.475,
-    "otype": "LP*",
+    "sp_type": "M1/2III",
     "plx_err": 0.20909999310970306,
+    "otype": "LP*",
     "ids": "TIC 265690945|Gaia DR3 2708423247489181056|AAVSO 2212+04|AG+04 3011|AGKR 19943|BD+04  4837|DO  7778|FK5 5966|FKSZ 860|GC 31176|GSC 00565-00340|HD 211516|HIC 110058|HIP 110058|IRAS 22149+0453|IRC +00515|PPM 172871|SAO 127434|SKY# 42475|SRS  17329|TYC  565-340-1|V* PQ Peg|YZ   4  7744|[HFE83] 1496|2MASS J22172976+0508391|Gaia DR1 2708423247489181056|Gaia DR2 2708423247489181056",
     "matched_id": "V* PQ Peg"
   }

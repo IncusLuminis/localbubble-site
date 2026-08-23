@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "70 Aql",
-  "retrieved_utc": "2026-08-18T06:56:36+00:00",
+  "retrieved_utc": "2026-08-23T01:55:40+00:00",
   "record_id": "*  70 Aql",
   "raw": {
     "main_id": "*  70 Aql",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.880000114440918,
     "plx_value": 4.0825,
-    "otype": "*",
+    "sp_type": "K4+IIIBa1",
     "plx_err": 0.10520000010728836,
+    "otype": "*",
     "ids": "TIC 313734322|Gaia DR3 4225681162758186240|PLX 4901|*  70 Aql|BD-03  4961|FK5 3648|GC 28684|GCRV 12889|GEN# +1.00196321|GSC 05180-00338|HD 196321|HIC 101692|HIP 101692|HR  7873|IRAS 20341-0243|IRC +00483|PMC 90-93  1441|PPM 204242|RAFGL 2614|SAO 144624|SKY# 39022|TYC 5180-338-1|UBV   17871|UBV M  24994|YZ  92  7156|[L91b] 326|2MASS J20364363-0233000|PLX 4901.00|WEB 18367|Gaia DR2 4225681162756326656",
     "matched_id": "*  70 Aql"
   }

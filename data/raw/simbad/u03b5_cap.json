@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ε Cap",
-  "retrieved_utc": "2026-08-18T07:05:23+00:00",
+  "retrieved_utc": "2026-08-23T01:56:59+00:00",
   "record_id": "* eps Cap",
   "raw": {
     "main_id": "* eps Cap",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.550000190734863,
     "plx_value": 3.6777,
-    "otype": "Be*",
+    "sp_type": "B3V",
     "plx_err": 0.20020000636577606,
+    "otype": "Be*",
     "ids": "TIC 441027987|WISE J213704.84-192757.5|Gaia DR3 6830611400810571648|[JE82] 1092|* eps Cap|*  39 Cap|AAVSO 2131-19|BD-20  6251|BDS 11077 A|CCDM J21371-1928A|CSI-20  6251  1|CSV   8668|EM* MWC  373|FK5 3724|GC 30252|GCRV 13573|GEN# +1.00205637A|GSC 06370-01176|HD 205637|HIC 106723|HIP 106723|HR  8260|IDS 21315-1955 A|JP11  3364|N30 4764|PHL  1648|PPM 239096|ROT  3140|SAO 164520|SKY# 41213|TD1 28275|TYC 6370-1176-1|UBV   18575|UBV M  25814|V* eps Cap|YZ 109  9249|[TVS94]   8|ALS 16736|WDS J21371-1928A|Renson 57290|AKARI-IRC-V1 J2137048-192757|2MASS J21370483-1927580|IRAS 21342-1941|** H    6A|** BU 9024A|WEB 19295|Gaia DR2 6830611400810571648",
     "matched_id": "* eps Cap"
   }

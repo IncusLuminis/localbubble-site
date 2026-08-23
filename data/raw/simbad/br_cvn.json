@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "BR CVn",
-  "retrieved_utc": "2026-08-18T06:57:10+00:00",
+  "retrieved_utc": "2026-08-23T02:05:11+00:00",
   "record_id": "V* BR CVn",
   "raw": {
     "main_id": "V* BR CVn",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.71999979019165,
     "plx_value": 2.3811,
-    "otype": "LP*",
+    "sp_type": "M4III",
     "plx_err": 0.05790000036358833,
+    "otype": "LP*",
     "ids": "HIP 65309|Gaia DR3 1551188225625002496|AAVSO 1318+47|AG+47 1017|BD+47  2053|DO 34360|GC 18112|GCRV  7950|GSC 03460-02120|HD 116475|HIC  65309|IRAS 13209+4715|IRC +50227|PPM  53523|RAFGL 1618|SAO  44590|SKY# 24701|TYC 3460-2120-1|V* BR CVn|2MASS J13230549+4700071|Gaia DR1 1551188221328165248|WEB 11528|Gaia DR2 1551188225625002496|TIC 165370745",
     "matched_id": "V* BR CVn"
   }

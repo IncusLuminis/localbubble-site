@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "q Car",
-  "retrieved_utc": "2026-08-18T07:04:42+00:00",
+  "retrieved_utc": "2026-08-23T02:04:36+00:00",
   "record_id": "* q Car",
   "raw": {
     "main_id": "* q Car",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.3499999046325684,
     "plx_value": 4.3046,
-    "otype": "LP*",
+    "sp_type": "K2.5II",
     "plx_err": 0.13449999690055847,
+    "otype": "LP*",
     "ids": "TIC 377497406|HIP 50371|Gaia DR3 5253347574087339776|PLX 2418|* q Car|AAVSO 1006-61B|CCDM J10171-6120A|CD-60  3010|CPC 20.1  2768|CPD-60  1817|CSI-60  1817 41|CSV  10115|FK5 1264|GC 14133|GCRV  6487|GEN# +1.00089388|GSC 08943-03447|HD  89388|HIC  50371|HR  4050|IDS 10137-6050 A|IRAS 10154-6104|JP11  1928|N30 2448|PPM 357895|SAO 250905|SKY# 19769|TYC 8943-3447-1|UBV    9547|UBV M  16116|V* V337 Car|uvby98 100089388|2MASS J10170497-6119564|SV* ZI   812|PLX 2418.00|WDS J10171-6120A|WEB  9246|Gaia DR2 5253347574048995584",
     "matched_id": "* q Car"
   }

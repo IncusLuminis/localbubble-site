@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Dschubba",
-  "retrieved_utc": "2026-08-18T06:57:19+00:00",
+  "retrieved_utc": "2026-08-23T01:56:51+00:00",
   "record_id": "* del Sco",
   "raw": {
     "main_id": "* del Sco",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.319999933242798,
     "plx_value": 6.64,
-    "otype": "SB*",
+    "sp_type": "B0.3IV",
     "plx_err": 0.8899999856948853,
+    "otype": "SB*",
     "ids": "TIC 12725034|HIP 78401|SBC9 1837|*   7 Sco|* del Sco|2E  3547|AAVSO 1554-22|BD-22  4068|CD-22 11292|CEL   4410|CPD-22  6106|FK5  594|GC 21489|GCRV  9202|GEN# +1.00143275|GSC 06779-02194|HD 143275|HGAM   2047|HIC  78401|HR  5953|IRAS 15573-2228|IRC -20303|JP11  2695|MCW  556|N30 3589|PMC 90-93   424|PPM 264979|ROT  2261|SAO 184014|SKY# 28887|SRS  30594|TD1 18743|TYC 6779-2194-1|UBV M  21080|UBV   13563|USco 45|[B10]  4066|[SC96] Oph  24|uvby98 100143275|2MASS J16002000-2237180|ALS 14815|1RXS J160018.3-223707|2E 1557.3-2228|EUVE J1600-22.6|RX J160022.9-223724|WDS J16003-2237AB|V* del Sco|** LAB    3|PMSC 15544-2220Aabc|CCDM J16003-2237AB|NAME Dschubba|WEB 13251|[KCS2016] J160020.01-223718.1|WISEA J160019.99-223718.2",
     "matched_id": "NAME Dschubba"
   }

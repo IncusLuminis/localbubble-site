@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "3 Cet",
-  "retrieved_utc": "2026-08-18T06:56:17+00:00",
+  "retrieved_utc": "2026-08-23T01:55:20+00:00",
   "record_id": "*   3 Cet",
   "raw": {
     "main_id": "*   3 Cet",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.923999786376953,
     "plx_value": 1.6457,
-    "otype": "s*r",
+    "sp_type": "K3Ib",
     "plx_err": 0.1096000000834465,
+    "otype": "s*r",
     "ids": "TIC 176283540|HIP 355|Gaia DR3 2428589330539122304|2MASS J00043012-1030344|PLX 5815|*   3 Cet|BD-11  6194|CSV 102299|FK5 2001|GC    36|GCRV    18|GEN# +1.00225212|GSC 05263-01049|HD 225212|HIC    355|HR  9103|IRAS 00019-1047|IRC -10001|NSV    13|PPM 208309|ROT  3480|SAO 147066|SKY#   122|SV* ZI  2169|TYC 5263-1049-1|YZC 11  8336|uvby98 100225212|PLX 5815.00|WEB    51|Gaia DR2 2428589330538817024",
     "matched_id": "*   3 Cet"
   }

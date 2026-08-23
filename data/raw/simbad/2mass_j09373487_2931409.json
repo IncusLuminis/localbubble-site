@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "2MASS J09373487+2931409",
-  "retrieved_utc": "2026-08-18T16:43:44+00:00",
+  "retrieved_utc": "2026-08-23T02:09:50+00:00",
   "record_id": "2MASSI J0937347+293142",
   "raw": {
     "main_id": "2MASSI J0937347+293142",
@@ -12,7 +12,9 @@
     "coo_err_angle": 0,
     "coo_wavelength": "N",
     "coo_bibcode": "2003yCat.2246....0C",
+    "V": null,
     "plx_value": 163.39,
+    "sp_type": "T6",
     "plx_err": 1.7599999904632568,
     "otype": "BD*",
     "ids": "TIC 330794872|CWISE J093735.98+293120.8|EQ J093735.65+293127.2|2MASS J09373487+2931409|2MASSI J0937347+293142|CNS5 2383|WISEP J093735.61+293127.7|WISEA J093735.63+293127.2|EQ J0937+2931|WISE J093735.61+293127.7|SDSS J093735.17+293135.7",

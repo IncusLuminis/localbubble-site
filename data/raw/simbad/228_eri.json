@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "228 Eri",
-  "retrieved_utc": "2026-08-18T06:56:00+00:00",
+  "retrieved_utc": "2026-08-23T01:55:02+00:00",
   "record_id": "* 228 Eri",
   "raw": {
     "main_id": "* 228 Eri",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.409999847412109,
     "plx_value": 2.1159,
-    "otype": "Be*",
+    "sp_type": "B2(V)ne",
     "plx_err": 0.08529999852180481,
+    "otype": "Be*",
     "ids": "TIC 71132174|HIP 20922|Gaia DR3 3177730441273211008|2MASS J04290693-1302542|[JE82]  136|* 228 Eri|BD-13   893|EM* MWC   86|FK5 2332|GC  5458|GCRV  2628|GEN# +1.00028497|GSC 05320-01896|HD  28497|HIC  20922|HR  1423|IRAS 04267-1309|JP11   889|MCW  275|N30  939|PMC 90-93  1229|PPM 214397|ROT   650|SACS  96|SAO 149674|SKY#  6936|TD1  3238|TYC 5320-1896-1|UBV    4330|V* DU Eri|YZC 11  1092|ALS 14766|1ES 0426-13.1|uvby98 100028497|WEB  4020|Gaia DR2 3177730441273211008",
     "matched_id": "* 228 Eri"
   }

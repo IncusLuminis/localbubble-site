@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V809 Cas",
-  "retrieved_utc": "2026-08-18T07:03:51+00:00",
+  "retrieved_utc": "2026-08-23T02:06:46+00:00",
   "record_id": "V* V809 Cas",
   "raw": {
     "main_id": "V* V809 Cas",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.671000003814697,
     "plx_value": 0.9988,
-    "otype": "s*r",
+    "sp_type": "K4.5Ib",
     "plx_err": 0.03920000046491623,
+    "otype": "s*r",
     "ids": "TIC 265186608|Gaia DR3 2015270437079448448|AG+62 1430|AN  507.1934|BD+61  2423|CSV   5702|DO 42891|GC 32479|GCRV 14630|GEN# +1.00219978|GSC 04283-01296|HD 219978|HIC 115141|HIP 115141|IRAS 23172+6227|IRC +60397|IRCO  1322|NSV 14501|PPM  24365|RAFGL 3073|SAO  20558|SKY# 44201|SV* P  5739|TYC 4283-1296-1|UBV   19995|UBV M  26968|V* V809 Cas|2MASS J23192377+6244229|Gaia DR1 2015270432777857664|WEB 20398|Gaia DR2 2015270437079448448",
     "matched_id": "V* V809 Cas"
   }

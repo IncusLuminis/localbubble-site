@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "r Car",
-  "retrieved_utc": "2026-08-18T07:04:43+00:00",
+  "retrieved_utc": "2026-08-23T02:05:41+00:00",
   "record_id": "V* R Car",
   "raw": {
     "main_id": "V* R Car",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.099999904632568,
     "plx_value": 5.5018,
-    "otype": "Mi*",
+    "sp_type": "M5-8",
     "plx_err": 0.3345000147819519,
+    "otype": "Mi*",
     "ids": "TIC 360777242|GEN# +1.00082901|CCDM J09322-6247A|WDS J09322-6247A|** FIN  140A|IDS 09297-6221 A|HIP 46806|Gaia DR3 5250535985379773184|AAVSO 0929-62|CD-62   396|CPC 20.1  2528|CPD-62  1253|GC 13192|GCRV  6189|HD  82901|HIC  46806|HR  3816|IRAS 09309-6234|JP11  1836|PPM 357416|ASAS J093216-6247.5|RAFGL 4095|SAO 250614|SKY# 18449|V* R Car|2MASS J09321459-6247198|TYC 8945-1871-1|WEB  8826|Gaia DR2 5250535985367521920",
     "matched_id": "V* R Car"
   }

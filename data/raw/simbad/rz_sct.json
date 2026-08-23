@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "RZ Sct",
-  "retrieved_utc": "2026-08-18T07:02:47+00:00",
+  "retrieved_utc": "2026-08-23T02:05:49+00:00",
   "record_id": "V* RZ Sct",
   "raw": {
     "main_id": "V* RZ Sct",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 7.53000020980835,
     "plx_value": 1.2161,
-    "otype": "SB*",
+    "sp_type": "B2/3Ib/II",
     "plx_err": 0.020800000056624413,
+    "otype": "SB*",
     "ids": "TIC 385387750|HIP 90382|Gaia DR3 4156190653517727360|SBC9 1052|ALS  9620|AN   35.1908|BD-09  4736|GCRV 10910|GEN# +1.00169753|GSC 05690-00141|HD 169753|HIC  90382|LS  IV -09   12|MCW  688|PPM 201757|ROT  6315|SAO 142317|SBC7   680|SKY# 33684|SV* HV  3077|TD1 22400|TYC 5690-141-1|UBV M  22938|V* RZ Sct|YZ  99  6189|2MASS J18263352-0912060|uvby98 100169753|WEB 15475|Gaia DR2 4156190653517727360",
     "matched_id": "V* RZ Sct"
   }

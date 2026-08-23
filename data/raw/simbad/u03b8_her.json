@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "θ Her",
-  "retrieved_utc": "2026-08-18T07:05:40+00:00",
+  "retrieved_utc": "2026-08-23T02:04:52+00:00",
   "record_id": "* tet Her",
   "raw": {
     "main_id": "* tet Her",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.880000114440918,
     "plx_value": 4.1002,
-    "otype": "*",
+    "sp_type": "K1IIaCN2",
     "plx_err": 0.11840000003576279,
+    "otype": "*",
     "ids": "TIC 159847014|HIP 87808|Gaia DR3 4609802834185436928|PLX 4096|* tet Her|*  91 Her|AG+37 1602|BD+37  2982|FK5  672|GC 24415|GCRV 10385|GEN# +1.00163770|GSC 02620-02298|HD 163770|HIC  87808|HR  6695|IRAS 17545+3715|IRC +40306|JP11  2903|N30 3991|NSV  9890|PMC 90-93   478|PPM  80751|RAFGL 2038|ROT  2508|SAO  66485|SKY# 32504|TD1 21297|TYC 2620-2298-1|UBV   15257|UBV M  22493|uvby98 100163770|2MASS J17561517+3715019|PLX 4096.00|WEB 14820|Gaia DR2 4609802834182565760",
     "matched_id": "* tet Her"
   }

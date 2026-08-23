@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "19 Mon",
-  "retrieved_utc": "2026-08-18T06:55:42+00:00",
+  "retrieved_utc": "2026-08-23T01:54:52+00:00",
   "record_id": "*  19 Mon",
   "raw": {
     "main_id": "*  19 Mon",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.0,
     "plx_value": 2.6167,
-    "otype": "bC*",
+    "sp_type": "B2Vn(e)",
     "plx_err": 0.15279999375343323,
+    "otype": "bC*",
     "ids": "TIC 269087549|Gaia DR3 3101768554465447936|HIP 33971|2MASS J07025476-0414212|*  19 Mon|[JE82]  269|ALS  9256|BD-04  1788|CSV 100797|FK5 2547|GC  9293|GCRV  4632|GEN# +1.00052918|HD  52918|HGAM    564|HIC  33971|HR  2648|JP11  1478|LS  VI -04   20|MCW  499|N30 1533|PPM 189857|ROT  1134|SAO 134106|SKY# 12621|TD1  8920|UBV    6929|UBV M  12774|V* V637 Mon|YZ  94  2459|EUVE J0702-04.2|TYC 4822-3679-1|uvby98 100052918|WEB  6815|Gaia DR2 3101768554465447936",
     "matched_id": "*  19 Mon"
   }

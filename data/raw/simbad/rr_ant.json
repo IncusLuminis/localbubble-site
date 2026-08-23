@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "RR Ant",
-  "retrieved_utc": "2026-08-18T07:02:42+00:00",
+  "retrieved_utc": "2026-08-23T02:05:43+00:00",
   "record_id": "V* RR Ant",
   "raw": {
     "main_id": "V* RR Ant",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 8.380000114440918,
     "plx_value": 1.2536,
-    "otype": "LP*",
+    "sp_type": "M5.5II",
     "plx_err": 0.04529999941587448,
+    "otype": "LP*",
     "ids": "TIC 5851342|HIP 47076|Gaia DR3 5426540068666960256|AAVSO 0931-39|CD-39  5653|CPC 18  4390|CPD-39  3729|GSC 07696-01870|HD  83199|HIC  47076|PPM 286653|SAO 200536|SV* HV  3574|TYC 7696-1870-1|V* RR Ant|2MASS J09353895-3954123|Gaia DR2 5426540068666960256",
     "matched_id": "V* RR Ant"
   }

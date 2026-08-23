@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 588",
-  "retrieved_utc": "2026-08-18T16:43:18+00:00",
+  "retrieved_utc": "2026-08-23T02:09:31+00:00",
   "record_id": "CD-40  9712",
   "raw": {
     "main_id": "CD-40  9712",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 9.310999870300293,
     "plx_value": 168.9965,
+    "sp_type": "M2.5V",
     "plx_err": 0.027000000700354576,
     "otype": "PM*",
     "ids": "TIC 149590989|GJ 588|HIP 76074|Gaia DR3 6002807341299977216|PLX 3501|CD-40  9712|CF 13312|CPD-40  7021|Ci 20  934|HIC  76074|IRAS 15288-4106|LFT 1208|LHS   397|CNS5 3826|LTT  6210|NLTT 40449|NSV  7119|TYC 7844-1976-1|UBV M   6108|Zkh 218|[RHG95]  2446|GEN# -0.04009712|2MASS J15321302-4116314|PLX 3501.00|[KWS97] Non-TTS  7|1RXS J153212.5-411640|RX J1532.2-4116|WISEA J153211.87-411642.7|PM J15322-4116|Gaia DR2 6002807341299977216|PM 15290-4105",

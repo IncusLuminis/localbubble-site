@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "a Vel",
-  "retrieved_utc": "2026-08-18T07:04:17+00:00",
+  "retrieved_utc": "2026-08-23T01:55:48+00:00",
   "record_id": "* a Vel",
   "raw": {
     "main_id": "* a Vel",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.9100000858306885,
     "plx_value": 2.3017,
-    "otype": "*",
+    "sp_type": "A0II",
     "plx_err": 0.17509999871253967,
+    "otype": "*",
     "ids": "TIC 28558389|HIP 43023|Gaia DR3 5329941409468845824|PLX 2101|* a Vel|CD-45  4517|CEL   2878|CPC  0  6493|CPD-45  3014|GC 12109|GCRV  5792|GEN# +1.00075063|GSC 08151-06254|Glazar Vel  24|HD  75063|HIC  43023|HR  3487|IRAS 08443-4551|JP11  1720|PPM 313548|ROT  1385|SAO 220422|SKY# 16834|TD1 13077|TYC 8151-6254-1|UBV    8515|UBV M  14724|uvby98 100075063|2MASS J08460164-4602295|PLX 2101.00|WEB  8312|Gaia DR2 5329941409467286912",
     "matched_id": "* a Vel"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "10 Pup",
-  "retrieved_utc": "2026-08-18T06:55:27+00:00",
+  "retrieved_utc": "2026-08-23T01:54:41+00:00",
   "record_id": "*  10 Pup",
   "raw": {
     "main_id": "*  10 Pup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.689000129699707,
     "plx_value": 1.4691,
-    "otype": "*",
+    "sp_type": "F1Ia",
     "plx_err": 0.045099999755620956,
+    "otype": "*",
     "ids": "TIC 54219164|HIP 38427|Gaia DR3 5719544455591427712|*  10 Pup|ALS   822|BD-14  2250|GC 10640|GCRV  5234|GEN# +1.00064238|GSC 05423-00174|HD  64238|HIC  38427|HR  3073|IRAS 07500-1443|LS  822|PPM 219316|SAO 153520|SKY# 14653|TD1 11231|TYC 5423-174-1|UBV    7591|YZ 104  3000|uvby98 100064238|2MASS J07521888-1450461|Gaia DR1 5719544451287021952|UCAC4 376-042137|WEB  7556|Gaia DR2 5719544455591427712",
     "matched_id": "*  10 Pup"
   }

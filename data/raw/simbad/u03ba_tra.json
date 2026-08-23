@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "κ TrA",
-  "retrieved_utc": "2026-08-18T07:05:53+00:00",
+  "retrieved_utc": "2026-08-23T02:03:33+00:00",
   "record_id": "* kap TrA",
   "raw": {
     "main_id": "* kap TrA",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.0970001220703125,
     "plx_value": 2.9495,
-    "otype": "*",
+    "sp_type": "G5Ib-II",
     "plx_err": 0.061799999326467514,
+    "otype": "*",
     "ids": "TIC 447097898|HIP 77982|Gaia DR3 5820481547175876992|PLX 3586|* kap TrA|CPC 21.1  3031|CPD-68  2585|FK5 3253|GC 21328|GCRV  9145|GEN# +1.00141767|GSC 09260-01772|HD 141767|HIC  77982|HR  5891|IRAS 15505-6827|N30 3568|PPM 361735|SAO 253342|SKY# 28753|TYC 9260-1772-1|UBV   13463|UBV M  20989|uvby98 100141767|2MASS J15552962-6836108|PLX 3586.00|Gaia DR1 5820481542869867520|WEB 13188|Gaia DR2 5820481547175876992",
     "matched_id": "* kap TrA"
   }

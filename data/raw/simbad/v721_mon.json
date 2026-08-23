@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V721 Mon",
-  "retrieved_utc": "2026-08-18T07:03:48+00:00",
+  "retrieved_utc": "2026-08-23T02:06:42+00:00",
   "record_id": "V* V721 Mon",
   "raw": {
     "main_id": "V* V721 Mon",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.133999824523926,
     "plx_value": 1.3719,
-    "otype": "LP*",
+    "sp_type": "K5/M0III",
     "plx_err": 0.08259999752044678,
+    "otype": "LP*",
     "ids": "TIC 443212078|HIP 30407|Gaia DR3 3001626650311480064|2MASS J06233592-0952292|BD-09  1444|GC  8244|GEN# +1.00044816|GSC 05368-01745|HD  44816|HIC  30407|HR  2301|IRAS 06212-0950|IRC -10120|PPM 189122|RAFGL 4490S|SAO 133203|SKY# 10920|TYC 5368-1745-1|UBV    6402|UBV M  12046|V* V721 Mon|YZ  99  1945|Gaia DR2 3001626650311480064",
     "matched_id": "V* V721 Mon"
   }

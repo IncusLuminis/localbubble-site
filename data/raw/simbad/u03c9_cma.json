@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ω CMa",
-  "retrieved_utc": "2026-08-18T07:06:41+00:00",
+  "retrieved_utc": "2026-08-23T02:04:10+00:00",
   "record_id": "* ome CMa",
   "raw": {
     "main_id": "* ome CMa",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.819999933242798,
     "plx_value": 3.561,
-    "otype": "Be*",
+    "sp_type": "B2.5Ve",
     "plx_err": 0.15240000188350677,
+    "otype": "Be*",
     "ids": "Gaia DR3 5610257226031514240|TIC 65903024|HIP 35037|2MASS J07144865-2646214|[JE82]  292|* ome CMa|*  28 CMa|AAVSO 0710-26A|CD-26  4073|CEL   1708|CPD-26  1914|EM* MWC  171|GC  9625|GCRV  4791|GEN# +1.00056139|GSC 06532-05003|HD  56139|HIC  35037|HR  2749|Hen 3-27|IRAS 07127-2641|JP11  1516|N30 1610|PPM 251951|ROT  1163|SAO 173282|SKY# 13094|SRS  41569|TD1  9550|TYC 6532-5003-1|UBV   21659|V* ome CMa|ALS 14882|uvby98 100056139|WEB  7007|Gaia DR2 5610257226031514240",
     "matched_id": "* ome CMa"
   }

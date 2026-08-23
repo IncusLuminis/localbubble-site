@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Saclateni",
-  "retrieved_utc": "2026-08-18T07:02:56+00:00",
+  "retrieved_utc": "2026-08-23T02:07:23+00:00",
   "record_id": "* zet Aur",
   "raw": {
     "main_id": "* zet Aur",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.75,
     "plx_value": 1.4244,
-    "otype": "SB*",
+    "sp_type": "K5II+B7V",
     "plx_err": 0.3050000071525574,
+    "otype": "SB*",
     "ids": "TIC 121815866|HIP 23453|Gaia DR3 200929706966014976|AP J05022869+4104329|2MASS J05022869+4104329|PLX 1127|SBC9 292|* zet Aur|*   8 Aur|AAVSO 0455+40|AG+41  504|BD+40  1142|CEL    510|FK5 1137|GC  6137|GCRV  2976|GEN# +1.00032068|GSC 02899-02236|HD  32068|HD  32069|HIC  23453|HR  1612|IRAS 04589+4100|IRC +40110|JP11   965|LF  7 +40  172|N30 1070|PMC 90-93   761|PPM  47641|RAFGL  674|ROT   709|SAO  39966|SBC7   201|SKY#  7891|TD1  3847|TYC 2899-2236-1|UBV   21465|UBV M  10543|V* zet Aur|PLX 1127.00|WEB  4563|Gaia DR2 200929706962974080|NAME-IAU Saclateni",
     "matched_id": "NAME-IAU Saclateni"
   }

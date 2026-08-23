@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "U Ant",
-  "retrieved_utc": "2026-08-18T07:03:11+00:00",
+  "retrieved_utc": "2026-08-23T02:06:02+00:00",
   "record_id": "V* U Ant",
   "raw": {
     "main_id": "V* U Ant",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.380000114440918,
     "plx_value": 3.6154,
-    "otype": "C*",
+    "sp_type": "C-N3",
     "plx_err": 0.09430000185966492,
+    "otype": "C*",
     "ids": "TIC 106309740|HIP 51821|Gaia DR3 5440991156144997504|AAVSO 1030-39|AN    7.1901|C* 1706|CD-38  6579|CGCS 2793|CPC 18  4907|CPD-38  4227|GC 14552|GCRV  6620|GEN# +1.00091793|GSC 07714-01297|HD  91793|HIC  51821|HR  4153|IRAS 10329-3918|JP11  1968|N30 2512|PPM 287864|SAO 201533|SKY# 20305|SV* HV   144|TYC 7714-1297-1|UBV   21684|V* U Ant|[LFO93] 1032-39|2MASS J10351285-3933453|WEB  9442|Gaia DR2 5440991156144997504",
     "matched_id": "V* U Ant"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "IV Aqr",
-  "retrieved_utc": "2026-08-18T07:02:05+00:00",
+  "retrieved_utc": "2026-08-23T02:05:28+00:00",
   "record_id": "V* IV Aqr",
   "raw": {
     "main_id": "V* IV Aqr",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": null,
     "plx_value": 2.1513,
-    "otype": "LP*",
+    "sp_type": "M4:II:",
     "plx_err": 0.07460000365972519,
+    "otype": "LP*",
     "ids": "TIC 364170026|Gaia DR3 2689988839833890304|AAVSO 2102-00|ADS 14654 A|AG-00 2732|AGKR 18896|BD-00  4163|CCDM J21075-0010A|CSI-00  4163  2|DO  7188|EIC   844|GC 29522|GSC 05193-01280|HD 201098|HIC 104279|HIP 104279|IDS 21024-0034 A|IRAS 21049-0021|IRC +00500|PPM 181188|RAFGL 2712|SAO 145121|SKY# 40172|SRS  16581|TYC 5193-1280-1|V* IV Aqr|YZ  90  5368|2MASS J21073287-0009497|WDS J21075-0010A|** STF 2755A|Gaia DR2 2689988839833890304",
     "matched_id": "V* IV Aqr"
   }

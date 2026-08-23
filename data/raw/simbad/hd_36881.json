@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 36881",
-  "retrieved_utc": "2026-08-18T07:00:12+00:00",
+  "retrieved_utc": "2026-08-23T02:00:58+00:00",
   "record_id": "HD  36881",
   "raw": {
     "main_id": "HD  36881",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.638000011444092,
     "plx_value": 1.9574,
-    "otype": "SB*",
+    "sp_type": "B9IIIp",
     "plx_err": 0.09489999711513519,
+    "otype": "SB*",
     "ids": "TIC 436103335|HIP 26215|Gaia DR3 3339514785504333440|2MASS J05351324+1014244|SBC9 336|AG+10  606|BD+10   818|CEL    815|CSV 100547|GC  6919|GCRV 56353|GSC 00705-02398|HD  36881|HIC  26215|HR  1883|IRAS 05324+1012|NSV  2251|PPM 121138|SAO  94671|SKY#  9012|SV* ZI   398|TD1  4903|UBV    5457|YPAC 385|YZ  10  1701|[SC93b] 299|ALS 16555|Renson 9680|PMSC 05297+1010|uvby98 100036881|WEB  5117|IDS 05297+1011 A|ADS  4181 A|GEN# +1.00036881|HD  36881A|** STT  111A|CCDM J05352+1014A|BD+10   818A|WDS J05352+1014A|TYC  705-2398-1|UCAC4 502-012997|Gaia DR2 3339514785504333440",
     "matched_id": "HD  36881"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "UY Cen",
-  "retrieved_utc": "2026-08-18T07:03:18+00:00",
+  "retrieved_utc": "2026-08-23T02:06:12+00:00",
   "record_id": "V* UY Cen",
   "raw": {
     "main_id": "V* UY Cen",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 7.130000114440918,
     "plx_value": 1.5075,
-    "otype": "S*",
+    "sp_type": "S6/8",
     "plx_err": 0.05290000140666962,
+    "otype": "S*",
     "ids": "TIC 453776506|HIP 64778|Gaia DR3 6088137479477550464|AAVSO 1310-44|AN   64.1911|CD-44  8539|CPC  0 11135|CPD-44  6291|CSS  816|GC 17957|GCRV 27348|GEN# +1.00115236|GSC 07786-02428|HD 115236|HIC  64778|Hen 4-135|IRAS 13136-4426|PPM 318310|S1* 463|SAO 224021|SV* HV  3328|TYC 7786-2428-1|V* UY Cen|2MASS J13163183-4442156|SOPS   IV g-49|Gaia DR2 6088137479477550464",
     "matched_id": "V* UY Cen"
   }

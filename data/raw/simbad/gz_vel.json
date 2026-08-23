@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GZ Vel",
-  "retrieved_utc": "2026-08-18T06:57:26+00:00",
+  "retrieved_utc": "2026-08-23T02:05:25+00:00",
   "record_id": "V* GZ Vel",
   "raw": {
     "main_id": "V* GZ Vel",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.543000221252441,
     "plx_value": 1.8988,
-    "otype": "LP*",
+    "sp_type": "K2.5II",
     "plx_err": 0.11219999939203262,
+    "otype": "LP*",
     "ids": "TIC 463854822|HIP 50555|Gaia DR3 5355253335382594176|PLX 2427|CD-54  3415|CPC 19  3878|CPD-54  3474|CSV   6779|FK5 2830|GC 14185|GCRV  6506|GEN# +1.00089682|GSC 08604-02441|HD  89682|HIC  50555|HR  4063|IRAS 10177-5446|JP11  1934|PPM 338896|SACS 228|SAO 237916|SKY# 19836|TYC 8604-2441-1|UBV    9569|UBV M  16143|V* GZ Vel|2MASS J10193675-5501454|PLX 2427.00|WEB  9273|Gaia DR2 5355253335378307968",
     "matched_id": "V* GZ Vel"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "θ Car",
-  "retrieved_utc": "2026-08-18T07:05:37+00:00",
+  "retrieved_utc": "2026-08-23T02:04:48+00:00",
   "record_id": "* tet Car",
   "raw": {
     "main_id": "* tet Car",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.759999990463257,
     "plx_value": 7.16,
-    "otype": "SB*",
+    "sp_type": "B0Vp",
     "plx_err": 0.20999999344348907,
+    "otype": "SB*",
     "ids": "TIC 390442076|GES J10425736-6423398|HIP 52419|Gaia DR3 5239828735016184448|Cl* IC 2602      W      18|SBC9 631|* tet Car|2E  2309|CEL   3659|CPC 21  2210|CPD-63  1599|FK5  406|GC 14755|GCRV  6678|GEN# +3.26020037|HD  93030|HIC  52419|HR  4199|IC 2602   37|JP11  4482|N30 2542|PPM 358184|ROT  3699|SAO 251083|SKY# 20522|TD1 15097|UBV    9865|UBV M  38864|[B10]  2862|[RSP95]  60|uvby98 326020037|ALS 14951|1RXS J104257.1-642339|2E 1041.1-6407|EUVE J1042-64.3|RX J1042.9-6423|2MASS J10425739-6423400|TYC 8965-1765-1|IRAS 10411-6407|Renson 26850|AKARI-IRC-V1 J1042573-642339|WEB  9545",
     "matched_id": "* tet Car"
   }

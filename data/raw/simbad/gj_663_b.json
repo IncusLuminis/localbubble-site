@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 663 B",
-  "retrieved_utc": "2026-08-18T16:43:27+00:00",
+  "retrieved_utc": "2026-08-23T02:09:36+00:00",
   "record_id": "*  36 Oph B",
   "raw": {
     "main_id": "*  36 Oph B",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.03000020980835,
     "plx_value": 168.1303,
+    "sp_type": "K1V",
     "plx_err": 0.10809999704360962,
     "otype": "PM*",
     "ids": "TIC 1277142190|GJ 663 B|Gaia DR3 4109030160308317312|** SHJ  243B|*  36 Oph B|8pc 167.08B|ADS 10417 B|CCDM J17155-2635B|CD-26 12026B|CPD-26  5858B|CSI-26 12026 22|GC 23274|GCRV  9942|HD 155885|CNS5 4233|HR  6401|IDS 17092-2627 B|IRC -30288|LFT 1331|LHS   438|LTT  6872|NLTT 44416|PM 17123-2632|SAO 185199|Zkh 245|WDS J17153-2636B|Gaia DR2 4109030160308317312|PMSC 17092-2627B|TYC 6820-326-2|PLX 3908.00B|WEB 14248|UCAC4 317-110678",

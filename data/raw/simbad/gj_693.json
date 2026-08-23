@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 693",
-  "retrieved_utc": "2026-08-18T16:43:07+00:00",
+  "retrieved_utc": "2026-08-23T02:09:21+00:00",
   "record_id": "L  205-128",
   "raw": {
     "main_id": "L  205-128",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 10.782999992370605,
     "plx_value": 169.8042,
+    "sp_type": "M3.5V",
     "plx_err": 0.04650000110268593,
     "otype": "PM*",
     "ids": "TIC 75160399|GJ 693|HIP 86990|Gaia DR3 5918660719983560192|PLX 4040|Ci 20 1061|CSI-57-17424|CSV 102836|GEN# +6.10010693|HIC  86990|L  205-128|LFT 1372|LHS   454|LPM 655|LTT  7067|CNS5 4403|NLTT 45375|NSV  9629|UBV M  42973|Zkh 262|[RHG95]  2816|2MASS J17463427-5719081|PLX 4040.00|Smethells 3|UCAC3 66-400760|USNO-B1.0 0326-00966267|TYC 8737-2175-1|DENIS J174634.7-571903|WISEA J174632.81-571922.6|GCRV 26168|PM J17465-5719|CSI-57-17438|Gaia DR2 5918660719981686144",

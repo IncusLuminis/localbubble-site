@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "B Vel",
-  "retrieved_utc": "2026-08-18T06:57:01+00:00",
+  "retrieved_utc": "2026-08-23T01:56:10+00:00",
   "record_id": "* B Vel",
   "raw": {
     "main_id": "* B Vel",
@@ -12,9 +12,11 @@
     "coo_err_angle": 135,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 4.820000171661377,
     "plx_value": 1.9,
-    "otype": "SB*",
+    "sp_type": "B2III",
     "plx_err": 0.3199999928474426,
+    "otype": "SB*",
     "ids": "TIC 388684352|WISEA J082231.71-482925.5|HIP 41039|2MASS J08223170-4829255|* B Vel|ALS  1058|CCDM J08225-4829AB|CD-48  3734|CEL   2443|CPC  0  5828|CPD-48  1642|GC 11450|GCRV  5541|GSC 08153-04761|HD  70930|HIC  41039|HR  3294|IDS 08195-4810 AB|JP11  1668|LS 1058|MCW 1161|PPM 312992|ROT  1330|SAO 219848|SKY# 15898|TD1 12364|UBV    8029|UBV M  14288|[B10]  2226|WDS J08225-4829AB|** I   67|uvby98 100070930|UCAC4 208-021878|WEB  7951|GEN# +1.00070930|Gaia DR2 5515197573870551680|WISE J082231.70-482925.4",
     "matched_id": "* B Vel"
   }

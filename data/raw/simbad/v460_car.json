@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V460 Car",
-  "retrieved_utc": "2026-08-18T07:03:44+00:00",
+  "retrieved_utc": "2026-08-23T02:06:39+00:00",
   "record_id": "V* V460 Car",
   "raw": {
     "main_id": "V* V460 Car",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.179999828338623,
     "plx_value": 2.2335,
-    "otype": "LP*",
+    "sp_type": "M1.5IIb",
     "plx_err": 0.1152999997138977,
+    "otype": "LP*",
     "ids": "TIC 410451502|HIP 39070|Gaia DR3 5290818758516639104|2MASS J07593754-6035134|Cl* NGC 2516    MMU     110|PLX 1914|Cl* NGC 2516    DAC      64|CD-60  2005|CPC 20.1  2029|CPD-60  1018|Cl* NGC 2516    EGG      B|GC 10873|GCRV  5339|GEN# +2.25160110|GSC 08911-03387|HD  66342|HIC  39070|HR  3153|IRAS 07587-6026|JP11  4050|NGC  2516   110|PPM 356417|SAO 250063|SKY# 14978|UBV    7729|UBV M  33307|V* V460 Car|uvby98 225160110|PLX 1914.00|TYC 8911-3387-1|Cl* NGC 2516     AR     260|WEB  7663|Gaia DR2 5290818758516639104",
     "matched_id": "V* V460 Car"
   }

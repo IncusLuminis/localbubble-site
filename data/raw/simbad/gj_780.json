@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 780",
-  "retrieved_utc": "2026-08-18T16:43:40+00:00",
+  "retrieved_utc": "2026-08-23T02:09:48+00:00",
   "record_id": "* del Pav",
   "raw": {
     "main_id": "* del Pav",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.559999942779541,
     "plx_value": 163.9544,
+    "sp_type": "G8IV",
     "plx_err": 0.12219999730587006,
     "otype": "PM*",
     "ids": "TIC 409891396|GALAH 140713003901146|GJ 780|HIP 99240|Gaia DR3 6427464123776727168|PLX 4754|* del Pav|CD-66  2367|CPC 21  4651|CPD-66  3474|CSV   8399|Ci 20 1187|FK5  754|GC 27886|GCRV 12460|GEN# +1.00190248|HD 190248|HIC  99240|HR  7665|JP11  3170|LFT 1520|LHS   485|LPM 722|LTT  7946|N30 4444|NLTT 48721|NSV 12790|CNS5 4994|PM 20038-6619|PPM 364428|SAO 254733|SKY# 37891|SPOCS  876|TD1 25955|TYC 9098-1918-1|UBV   17142|UBV M  24445|Zkh 300|uvby98 100190248|2MASS J20084376-6610563|PLX 4754.00|1E 2003.9-6620|WEB 17675|Gaia DR2 6427464325637241728",

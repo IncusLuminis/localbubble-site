@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "U Cam",
-  "retrieved_utc": "2026-08-18T07:03:12+00:00",
+  "retrieved_utc": "2026-08-23T02:06:04+00:00",
   "record_id": "V* U Cam",
   "raw": {
     "main_id": "V* U Cam",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 11.0,
     "plx_value": 1.6174,
-    "otype": "C*",
+    "sp_type": "C-N5",
     "plx_err": 0.03970000147819519,
+    "otype": "C*",
     "ids": "TIC 392430762|GEN# +1.00022611|HIP 17257|Gaia DR3 486859664266293376|2MASS J03414816+6238541|AAVSO 0333+62A|AG+62  308|BD+62   596|C*  154|CCDM J03418+6241A|CGCS  540|Case  697|DO 27406|GC  4371|GCRV  2023|GSC 04066-01219|HD  22611|HIC  17257|IDS 03332+6219 A|IRAS 03374+6229|IRC +60124|Kiso C5-121|LEE 264|PPM  14440|RAFGL  505|SAO  12870|SKY#  5599|SV* HV    12|TYC 4066-1219-1|UBV M   9613|V* U Cam|[KW97] 16-10|[LFO93] 0337+62|[LMW2001] 749|[LTY2003] NIRS 03375+6229|JCMTSE J034148.1+623856|JCMTSF J034148.1+623856|WDS J03418+6239Aa,Ab|** HDS  470|WEB  3265|Gaia DR2 486859664266293376",
     "matched_id": "V* U Cam"
   }

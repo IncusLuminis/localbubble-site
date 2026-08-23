@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "102 Her",
-  "retrieved_utc": "2026-08-18T06:55:28+00:00",
+  "retrieved_utc": "2026-08-23T01:54:36+00:00",
   "record_id": "* 102 Her",
   "raw": {
     "main_id": "* 102 Her",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.3470001220703125,
     "plx_value": 2.8036,
-    "otype": "*",
+    "sp_type": "B2IV",
     "plx_err": 0.14630000293254852,
+    "otype": "*",
     "ids": "TIC 296081075|Gaia DR3 4528147293916651776|HIP 88886|PLX 4160|* 102 Her|ADS 11102 A|AG+20 1853|BD+20  3674|CCDM J18088+2049A|CSI+20  3674  1|FK5 3443|GC 24740|GCRV 10596|GEN# +1.00166182|GSC 01579-01852|HD 166182|HIC  88886|HR  6787|IDS 18045+2048 A|JP11  2941|N30 4034|PMC 90-93  1407|PPM 106829|ROT  2557|IRAS 18066+2048|AKARI-IRC-V1 J1808454+204852|SAO  85769|SKY# 32986|TD1 21752|TYC 1579-1852-1|UBV   15434|UBV M  22679|[GS83]   6|uvby98 100166182|2MASS J18084548+2048524|ALS 16168|PLX 4160.00|WDS J18088+2049A|WEB 15076|Gaia DR2 4528147293914604160|NAME-IAU Ramus",
     "matched_id": "* 102 Her"
   }

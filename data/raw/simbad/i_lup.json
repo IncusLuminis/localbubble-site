@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "i Lup",
-  "retrieved_utc": "2026-08-18T07:04:30+00:00",
+  "retrieved_utc": "2026-08-23T02:03:16+00:00",
   "record_id": "* i Lup",
   "raw": {
     "main_id": "* i Lup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.918000221252441,
     "plx_value": 1.5243,
-    "otype": "*",
+    "sp_type": "F3III",
     "plx_err": 0.1266999989748001,
+    "otype": "*",
     "ids": "TIC 76504813|HIP 74604|Gaia DR3 6210657748086115328|PLX 3437|* i Lup|*   1 Lup|CD-31 11813|CPC 17  7893|CPD-31  3992|FK5 1399|GC 20480|GCRV  8810|GEN# +1.00135153|GSC 07312-01422|HD 135153|HIC  74604|HR  5660|IRAS 15115-3120|JP11  2582|N30 3428|PMC 90-93   986|PPM 293614|ROT  2156|SAO 206445|SKY# 27618|SRS  31399|TD1 18042|TYC 7312-1422-1|UBV   13128|UBV M  20621|uvby98 100135153|2MASS J15143732-3131088|PLX 3437.00|WEB 12732|Gaia DR2 6210657748086115328",
     "matched_id": "* i Lup"
   }

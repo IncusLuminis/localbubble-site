@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 46709",
-  "retrieved_utc": "2026-08-18T07:00:30+00:00",
+  "retrieved_utc": "2026-08-23T02:01:23+00:00",
   "record_id": "HD  46709",
   "raw": {
     "main_id": "HD  46709",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.88700008392334,
     "plx_value": 2.416,
-    "otype": "*",
+    "sp_type": "K4III",
     "plx_err": 0.05339999869465828,
+    "otype": "*",
     "ids": "TIC 220105906|HIP 31448|Gaia DR3 3327633394136446848|2MASS J06351759+0959179|AG+10  781|BD+10  1186|FK5 2505|GC  8567|GCRV  4244|GEN# +1.00046709|GSC 00737-00882|HD  46709|HIC  31448|HR  2406|IRAS 06325+1001|IRC +10127|PPM 150812|SAO  95870|SKY# 11437|TYC  737-882-1|UBV M  12235|YZ  10  2361|[II78] 12|WEB  6291|Gaia DR2 3327633394136446848",
     "matched_id": "HD  46709"
   }

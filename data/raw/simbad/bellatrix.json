@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Bellatrix",
-  "retrieved_utc": "2026-08-18T06:57:11+00:00",
+  "retrieved_utc": "2026-08-23T01:57:30+00:00",
   "record_id": "* gam Ori",
   "raw": {
     "main_id": "* gam Ori",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 1.6399999856948853,
     "plx_value": 12.92,
-    "otype": "*",
+    "sp_type": "B2III",
     "plx_err": 0.5199999809265137,
+    "otype": "*",
     "ids": "TIC 365572007|HIP 25336|WISE J052507.87+062058.2|PLX 1229|* gam Ori|*  24 Ori|AG+06  574|BD+06   919|CCDM J05252+0620A|CSI+06   919  1|CSV 100483|FK5  201|GC  6668|GCRV  3252|GEN# +1.00035438|GEN# +1.00035468|HD  35468|HGAM    397|HIC  25336|HR  1790|IDS 05198+0615 A|IRC +10084|JP11  1071|MCW  308|N30 1162|NAME Bellatrix|NSV  1972|PMC 90-93   144|PPM 148916|ROT   793|SAO 112740|SKY#  8617|SV* ZI   374|TD1  4558|UBV    5149|UBV M  10933|[HFE83]  375|[SC93b] 179|uvby98 100035468|ALS 14777|PLX 1229.00|1RXS J052507.7+062103|EUVE J0525+06.3|2MASS J05250786+0620589|WDS J05251+0621A|TYC  113-1856-1|IRAS 05224+0618|AKARI-IRC-V1 J0525078+062058|WEB  4913",
     "matched_id": "NAME Bellatrix"
   }

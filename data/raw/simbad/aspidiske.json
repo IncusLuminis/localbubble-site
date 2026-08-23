@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Aspidiske",
-  "retrieved_utc": "2026-08-18T06:56:56+00:00",
+  "retrieved_utc": "2026-08-23T02:03:21+00:00",
   "record_id": "* iot Car",
   "raw": {
     "main_id": "* iot Car",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.259999990463257,
     "plx_value": 4.26,
-    "otype": "*",
+    "sp_type": "A7Ib",
     "plx_err": 0.10000000149011612,
+    "otype": "*",
     "ids": "TIC 386296645|1RXS J091707.8-591619|HIP 45556|Gaia DR3 5300300156538723328|PLX 2222.1|* iot Car|CD-58  2529|CEL   3256|CPC 20  2542|CPD-58  1465|CSV   6705|FK5  351|GC 12831|GCRV  6067|GEN# +1.00080404|GSC 08595-03312|HD  80404|HIC  45556|HR  3699|IRAS 09157-5903|JP11  1797|N30 2212|NSV  4444|PPM 337789|ROT  1461|SAO 236808|SKY# 17914|TD1 13795|TYC 8595-3312-1|UBV    8888|UBV M  15288|uvby98 100080404|2MASS J09170540-5916308|PLX 2222.10|NAME Aspidiske|WEB  8659",
     "matched_id": "NAME Aspidiske"
   }

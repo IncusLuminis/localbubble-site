@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "2MASS J18353790+3259545",
-  "retrieved_utc": "2026-08-18T16:42:57+00:00",
+  "retrieved_utc": "2026-08-23T02:09:12+00:00",
   "record_id": "LSR J1835+3259",
   "raw": {
     "main_id": "LSR J1835+3259",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": null,
     "plx_value": 175.793,
+    "sp_type": "M8.5V",
     "plx_err": 0.046799998730421066,
     "otype": "PM*",
     "ids": "TIC 27858644|Gaia DR3 2091177593123254016|LSPM J1835+3259|USNO-B1.0 1229-00376318|2MUCD 11792|2MASS J18353790+3259545|2MASSI J1835379+325954|CNS5 4601|LSR J1835+3259|[B2006] J183537.9+325955|WISEA J183537.82+325945.4|Gaia DR2 2091177593123254016|Karmn J18356+329",

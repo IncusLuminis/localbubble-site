@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Enif",
-  "retrieved_utc": "2026-08-18T06:57:20+00:00",
+  "retrieved_utc": "2026-08-23T01:57:07+00:00",
   "record_id": "* eps Peg",
   "raw": {
     "main_id": "* eps Peg",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.390000104904175,
     "plx_value": 4.73,
-    "otype": "LP*",
+    "sp_type": "K2Ib-II",
     "plx_err": 0.17000000178813934,
+    "otype": "LP*",
     "ids": "TIC 466337046|IDS 21393+0925 A|* eps Peg|PLX 5242|*   8 Peg|AAVSO 2139+09|ADS 15268 A|AG+09 3049|BD+09  4891|CCDM J21441+0953A|CSI+09  4891  1|FK5  815|GC 30431|GCRV 13654|GEN# +1.00206778A|GSC 01125-02186|HD 206778|HIC 107315|HIP 107315|HR  8308|IRAS 21417+0938|IRC +10503|JP11  3392|MFU 235|N30 4790|NAME Enif|PMC 90-93   572|PPM 172188|RAFGL 2800|ROT  3159|SAO 127029|SKY# 41435|SV* ZI  2039|TD1 28404|TYC 1125-2186-1|UBV   18657|UBV M  25906|V* eps Peg|YZ   9 10916|[HFE83] 1460|[L91b] 347|2MASS J21441114+0952302|PLX 5242.00|WDS J21442+0953A|WEB 19379|Gaia DR2 1765433632573306496",
     "matched_id": "NAME Enif"
   }

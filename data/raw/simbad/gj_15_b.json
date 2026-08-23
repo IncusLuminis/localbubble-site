@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 15 B",
-  "retrieved_utc": "2026-08-18T16:41:30+00:00",
+  "retrieved_utc": "2026-08-23T02:08:03+00:00",
   "record_id": "HD   1326B",
   "raw": {
     "main_id": "HD   1326B",
@@ -12,7 +12,9 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 11.039999961853027,
     "plx_value": 280.6947,
+    "sp_type": "M3.5V",
     "plx_err": 0.027799999341368675,
     "otype": "PM*",
     "ids": "TIC 440109718|AP J00182549+4401376|StKM 2-24b|GJ 15 B|Gaia DR3 385334196532776576|ASCC  373580|2MASS J00182549+4401376|8pc 280.27B|ADS   246 B|CNS5 90|BD+43    44B|CCDM J00184+4401B|CSI+43    44  3|G 171-48|GCRV   162|GEN# +1.00001326C|HD   1326B|TIC 471011162|JP11   171|LFT   32|LHS     4|LTT 10109|NLTT   923|PM 00156+4345|SV* SVS  1804|V* GQ And|Zkh   6|[GS83]  69|[RHG95]    61|LSPM J0018+4401E|WDS J00184+4401B|Gaia DR2 385334196532776576|** GRB   34B|PM J00184+4401|[GKL99] 10|WISEA J001828.65+440141.3|WEB   266|Karmn J00184+440",

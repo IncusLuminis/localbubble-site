@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "P Pup",
-  "retrieved_utc": "2026-08-18T07:02:33+00:00",
+  "retrieved_utc": "2026-08-23T02:04:19+00:00",
   "record_id": "* P Pup",
   "raw": {
     "main_id": "* P Pup",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.110000133514404,
     "plx_value": 3.5065,
-    "otype": "**",
+    "sp_type": "B0III",
     "plx_err": 0.4142000079154968,
+    "otype": "**",
     "ids": "TIC 143199501|HIP 38164|Gaia DR3 5530670107652889344|2MASS J07491431-4622236|* P Pup|CCDM J07493-4622A|CD-46  3458|CEL   2052|CPC  0  4914|CPD-46  1795|GC 10576|GCRV  5217|GEN# +1.00063922A|GSC 08134-03515|HD  63922|HIC  38164|HR  3055|IDS 07462-4607 A|IRAS 07476-4614|JP11  1606|PPM 312195|ROT  1261|SAO 219035|SKY# 14527|TD1 11177|TYC 8134-3515-1|UBV    7569|UBV M  13710|[B10]  2070|uvby98 100063922 A|ALS 14901|XMMSL1 J074913.9-462227|EUVE J0749-46.3|1RXS J074914.7-462219|WDS J07492-4622Aa,Ab|WDS J07492-4622A|** HDS 1106|** JC   11A|WEB  7522|Gaia DR2 5530670107648495104",
     "matched_id": "* P Pup"
   }

@@ -372,3 +372,47 @@ tag every resolved record already carries (`"recons-nearest-100"`):
 Covered by `web/test/lod.test.ts` (the predicate/radius-derivation logic in
 isolation) and the "dense-batch LOD" tests added to `web/test/objects.test.ts`
 (how `objects.ts` composes it with category/radius filtering).
+
+## Spectral type & absolute magnitude (Story #170)
+
+`SimbadResolver` now additionally requests the `sp_type` (MK spectral type,
+e.g. `"G2V"`) and `V` (apparent V-band magnitude) VOTable fields, stored on
+`schema.py`'s `Visual.spectral_type` (raw SIMBAD string, un-normalized - a
+later frontend Story owns bucketing it into a fixed taxonomy) and
+`Visual.absolute_magnitude` (derived via the standard distance modulus,
+`M = m - 5*log10(d_pc) + 5`, from SIMBAD's V magnitude and the record's own
+`distance_pc` - `data_sources.simbad.absolute_magnitude_from_distance_modulus`).
+Either is `None` when SIMBAD has no usable value on file - never fabricated.
+(Note: the votable field name for apparent V magnitude is `V`, not the older
+`flux(V)` syntax - `flux(V)` is rejected by the installed astroquery 0.4.11;
+verified empirically via `Simbad.list_votable_fields()` and a live query.)
+
+Because `CachingObjectResolver.resolve()` reads the on-disk cache under
+`data/raw/simbad/` and skips the network unless `force_refresh=True`, adding
+these fields had no effect on the 707 already-cached star records until they
+were explicitly re-fetched. That one-time (repeatable) re-fetch was done via
+`scripts/refresh_star_spectral_and_magnitude.py`, which recovers each
+record's original SIMBAD query string from its cache file (cache filename is
+`slugify(query)`, while the catalog `id` is `slugify(main_id)` - the script
+reconstructs the mapping from the cache files themselves rather than
+guessing a query from the record's `name`/aliases), re-resolves it with
+`force_refresh=True` (retrying transient failures with backoff, continuing
+past any single star's failure), and merges only the two new `visual.*`
+fields back into `data/normalized/initial_catalog_records.json` - every
+other field (position, distance, aliases, group tags, dual-provenance
+notes) is left untouched. Result of the full run against live SIMBAD:
+**707/707 stars re-fetched with zero failures**; **703/707 (99.4%)** got a
+non-null `spectral_type` and **680/707 (96.2%)** a non-null
+`absolute_magnitude` - the remainder reflects genuine upstream gaps (e.g.
+`Wolf 424 A`/`Wolf 424 B`'s individual SIMBAD entries carry no `sp_type`
+even though the system as a whole is a well-known M dwarf binary), not a
+resolution-method weakness. Re-run it (`python
+scripts/refresh_star_spectral_and_magnitude.py`) any time the SIMBAD
+adapter's fields change again.
+
+`scene.py`'s `_object_to_scene_entry` exports both fields; the checked-in
+`web/public/data/scene.json` was regenerated after the re-fetch via
+`galactic-structures export-scene --no-radius-filter --output
+web/public/data/scene.json` (matching the pre-existing file's own
+no-radius-filter convention - it already included all 956 objects, 64 of
+them beyond the CLI's 800 pc default).

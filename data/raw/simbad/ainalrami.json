@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Ainalrami",
-  "retrieved_utc": "2026-08-18T06:56:46+00:00",
+  "retrieved_utc": "2026-08-23T02:04:04+00:00",
   "record_id": "* nu.01 Sgr",
   "raw": {
     "main_id": "* nu.01 Sgr",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.84499979019165,
     "plx_value": 1.8387,
-    "otype": "*",
+    "sp_type": "K1II",
     "plx_err": 0.10909999907016754,
+    "otype": "*",
     "ids": "TIC 441969141|HIP 92761|Gaia DR3 4075705783885296640|PLX 4361|* nu.01 Sgr|*  32 Sgr|BD-22  4907|CD-22 13399|CSI-22  4907  1|GC 25918|GCRV 11344|GSC 06860-00863|HD 174974|HIC  92761|HR  7116|IRAS 18511-2248|IRC -20526|JP11  3031|PMC 90-93  6580|PPM 269055|SAO 187426|SKY# 34800|TYC 6860-863-1|UBV   16033|YZ 112 13128|2MASS J18541017-2244414|** BU 1033A|ADS 11794 A|GEN# +1.00174974|IDS 18481-2252 A|WDS J18542-2245A|CCDM J18542-2245A|WEB 16051|Gaia DR2 4075705783885296640|NAME-IAU Ainalrami",
     "matched_id": "NAME-IAU Ainalrami"
   }

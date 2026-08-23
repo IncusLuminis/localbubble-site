@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Antares",
-  "retrieved_utc": "2026-08-18T06:56:54+00:00",
+  "retrieved_utc": "2026-08-23T01:56:02+00:00",
   "record_id": "* alf Sco",
   "raw": {
     "main_id": "* alf Sco",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
+    "V": 0.9100000262260437,
     "plx_value": 5.89,
-    "otype": "s*r",
+    "sp_type": "M1.5Iab+B2Vn",
     "plx_err": 1.0,
+    "otype": "s*r",
     "ids": "TIC 175934060|HIP 80763|PLX 3741|* alf Sco|*  21 Sco|CD-26 11359|CMC  184415|CPD-26  5648|CSI-26 11359 21|Elia 2-74|FK5  616|GC 22157|GCRV  9479|GEN# +1.00148478|GSC 06803-02158|HIC  80763|HR  6134|IRAS 16262-2619|IRC -30265|N30 3686|NAME Antares|PMC 90-93   439|PPM 265579|RAFGL 1863|ROT  2345|SAO 184415|SKY# 29714|SRS  30616|UBV M  21449|CSI-26 11359 23|TD1 19208|UBV   21661|2MASS J16292443-2625549|Ced 132|DG 141|LBN  1108|LBN 351.88+15.11|GN 16.26.3|VDB 107|GEN# +1.00148479|TYC 6803-2158-1|ADS 10074 A|CCDM J16294-2626A|WDS J16294-2626A|* alf Sco A|V* alf Sco|AAVSO 1623-26|HD 148478|WEB 13658|IDS 16233-2613 A|** GNT    1A|WISEA J162924.49-262554.8",
     "matched_id": "NAME Antares"
   }

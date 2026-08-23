@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "W CMa",
-  "retrieved_utc": "2026-08-18T07:03:59+00:00",
+  "retrieved_utc": "2026-08-23T02:07:01+00:00",
   "record_id": "V* W CMa",
   "raw": {
     "main_id": "V* W CMa",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 6.559999942779541,
     "plx_value": 1.4527,
-    "otype": "C*",
+    "sp_type": "C-N5",
     "plx_err": 0.05130000039935112,
+    "otype": "C*",
     "ids": "TIC 177590238|HIP 34413|Gaia DR3 3045373881522901632|2MASS J07080343-1155238|AAVSO 0703-11|AN   49.1901|BD-11  1805|C*  676|CGCS 1565|Case   16|GCRV  4698|GEN# +1.00054361A|GSC 05389-00164|HD  54361|HIC  34413|HRW 31|IRAS 07057-1150|IRC -10152|JP11  1497|MSX5C G225.4244-01.7839|PPM 218200|RAFGL 1075|SAO 152427|SKY# 12817|SV* HV   137|TYC 5389-164-1|UBV   21634|V* W CMa|YZC 11  2419|[ELL90]  39|[LFO93] 0705-11|[V58] 24|UCAC3 157-49351|WEB  6895|Gaia DR2 3045373881522901632",
     "matched_id": "V* W CMa"
   }

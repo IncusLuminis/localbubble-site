@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 55832",
-  "retrieved_utc": "2026-08-18T07:00:50+00:00",
+  "retrieved_utc": "2026-08-23T02:01:48+00:00",
   "record_id": "HD  55832",
   "raw": {
     "main_id": "HD  55832",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.881999969482422,
     "plx_value": 1.4158,
-    "otype": "*",
+    "sp_type": "K1III",
     "plx_err": 0.03790000081062317,
+    "otype": "*",
     "ids": "TIC 178479275|HIP 34982|Gaia DR3 3047927737798430848|2MASS J07141552-0956512|BD-09  1921|GC  9600|GCRV  4779|GEN# +1.00055832|GSC 05398-03006|HD  55832|HERZ   892|HIC  34982|HR  2732|IRAS 07118-0951|IRC -10157|PPM 190069|SAO 134395|SKY# 13071|TYC 5398-3006-1|UBV    7042|UBV M  13046|YZ  99  2523|[C74] 196|WEB  6994|Gaia DR2 3047927737798430848",
     "matched_id": "HD  55832"
   }

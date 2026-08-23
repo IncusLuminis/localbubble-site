@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "57 Ori",
-  "retrieved_utc": "2026-08-18T06:56:28+00:00",
+  "retrieved_utc": "2026-08-23T01:55:28+00:00",
   "record_id": "*  57 Ori",
   "raw": {
     "main_id": "*  57 Ori",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.894000053405762,
     "plx_value": 1.6307,
-    "otype": "SB*",
+    "sp_type": "B2V",
     "plx_err": 0.08399999886751175,
+    "otype": "SB*",
     "ids": "TIC 118904985|HIP 27965|Gaia DR3 3398961874526273920|2MASS J05545668+1944584|SBC9 361|*  57 Ori|AG+19  500|BD+19  1126|FK5 2447|GC  7436|GCRV  3672|GEN# +1.00039698|GSC 01320-01695|HD  39698|HGAM    482|HIC  27965|HR  2052|PPM 121581|ROT   943|SAO  94986|SBC7   252|SKY#  9790|TD1  5567|TYC 1320-1695-1|UBV    6013|UBV M  11599|YPAC 241|YZ  19  1758|[HFE83]  411|uvby98 100039698|ALS 16515|WEB  5479|Gaia DR2 3398961874526273920",
     "matched_id": "*  57 Ori"
   }

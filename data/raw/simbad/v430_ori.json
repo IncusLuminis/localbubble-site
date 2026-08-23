@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V430 Ori",
-  "retrieved_utc": "2026-08-18T07:03:43+00:00",
+  "retrieved_utc": "2026-08-23T02:06:37+00:00",
   "record_id": "V* V430 Ori",
   "raw": {
     "main_id": "V* V430 Ori",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 8.600000381469727,
     "plx_value": 1.4678,
-    "otype": "AB*",
+    "sp_type": "M4III",
     "plx_err": 0.043800000101327896,
+    "otype": "AB*",
     "ids": "TIC 455032522|Gaia DR3 3227813784330143744|2MASS J05063612+0032545|AAVSO 0501+00|AG+00  494|BD+00   944|DO   972|EIC    80|GSC 00098-00897|HD  32910|IRAS 05040+0028|IRC +00067|PPM 148450|RAFGL 4391S|TYC   98-897-1|V* V430 Ori|SV* WR    64|Gaia DR2 3227813784330143744",
     "matched_id": "V* V430 Ori"
   }

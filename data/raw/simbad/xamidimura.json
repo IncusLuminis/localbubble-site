@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Xamidimura",
-  "retrieved_utc": "2026-08-18T07:04:10+00:00",
+  "retrieved_utc": "2026-08-23T02:03:58+00:00",
   "record_id": "* mu.01 Sco",
   "raw": {
     "main_id": "* mu.01 Sco",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.9800000190734863,
     "plx_value": 1.8732,
-    "otype": "Be*",
+    "sp_type": "B1V+B",
     "plx_err": 0.7354999780654907,
+    "otype": "Be*",
     "ids": "TIC 338104678|HIP 82514|Gaia DR3 5971289565647972608|SBC9 922|* mu.01 Sco|CD-37 11033|CPC 18  8337|CPD-37  6761|FK5 1439|GC 22677|GCRV  9682|GEN# +1.00151890|GSC 07868-01821|HD 151890|HGAM   2060|HIC  82514|HR  6247|JP11  2793|MCW  564|N30 3763|PMC 90-93  1016|PPM 295564|ROT  2385|SAO 208102|SBC7   590|SKY# 30353|SRS  31439|SV* P  1125|TD1 19587|TYC 7868-1821-1|UBV   21681|UBV M  21706|V* mu.01 Sco|[B10]  4277|2MASS J16515223-3802504|ALS 14821|WDS J16519-3803A|NAME-IAU Xamidimura|uvby98 100151890|WEB 13932|Gaia DR2 5971289565609165056",
     "matched_id": "NAME-IAU Xamidimura"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "2MASS J09393548-2448279",
-  "retrieved_utc": "2026-08-18T16:42:48+00:00",
+  "retrieved_utc": "2026-08-23T02:09:04+00:00",
   "record_id": "2MASS J09393548-2448279",
   "raw": {
     "main_id": "2MASS J09393548-2448279",
@@ -12,7 +12,9 @@
     "coo_err_angle": 17,
     "coo_wavelength": "N",
     "coo_bibcode": "2003yCat.2246....0C",
+    "V": null,
     "plx_value": 196.0,
+    "sp_type": "T8",
     "plx_err": 10.399999618530273,
     "otype": "BD*",
     "ids": "TIC 314997365|CWISE J093936.13-244844.3|EQ J0939-2448|EQ J093936.13-244844.0|2MASS J09393548-2448279|CNS5 2389|WISEA J093935.93-244838.9|WISE J093935.91-244838.5",

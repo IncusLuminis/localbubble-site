@@ -35,7 +35,10 @@ from local_galactic_structures.data_sources.literature import (
     LiteratureResolver,
     build_object_from_literature,
 )
-from local_galactic_structures.data_sources.simbad import SimbadResolver
+from local_galactic_structures.data_sources.simbad import (
+    SimbadResolver,
+    absolute_magnitude_from_distance_modulus,
+)
 from local_galactic_structures.data_sources.vizier import VizierResolver
 from local_galactic_structures.schema import AstronomicalObject
 
@@ -344,6 +347,27 @@ _SIMBAD_PLEIADES_RAW = {
         "Cl Melotte   22"
     ),
     "otype": "OpC",
+    # Real-shaped sp_type/V fields (Story #170) - a cluster's aggregate
+    # entry has neither on file, which is the common/expected case for
+    # non-stellar SIMBAD records and exercises the "field absent" path.
+    "sp_type": None,
+    "V": None,
+}
+
+# Real-shaped single-star response (captured from a live `query_object`
+# against astroquery 0.4.11 during Story #170 development - see module
+# docstring / PR description) with both new fields present.
+_SIMBAD_SIRIUS_RAW = {
+    "main_id": "* alf CMa",
+    "ra": 101.28715533333335,
+    "dec": -16.71611586111111,
+    "coo_bibcode": "2007A&A...474..653V",
+    "plx_value": 379.21,
+    "plx_err": 1.58,
+    "ids": "* alf CMa|NAME Sirius|HD  48915",
+    "otype": "SB*",
+    "sp_type": "A0mA1Va",
+    "V": -1.46,
 }
 
 
@@ -417,6 +441,134 @@ class TestSimbadResolver:
         resolver.resolve("Pleiades")
         resolver.resolve("Pleiades")
         assert len(calls) == 1
+
+    # -- Story #170: spectral_type / absolute_magnitude -------------------
+
+    def test_resolve_populates_spectral_type_and_absolute_magnitude_when_present(
+        self, tmp_path: Path, monkeypatch
+    ):
+        resolver = self._resolver(tmp_path)
+        monkeypatch.setattr(
+            resolver, "_query_upstream", lambda name: dict(_SIMBAD_SIRIUS_RAW)
+        )
+        obj = resolver.resolve("Sirius")
+        assert obj.visual.spectral_type == "A0mA1Va"
+        # M = m - 5*log10(d_pc) + 5, d_pc = 1000 / 379.21
+        import math
+
+        distance_pc = 1000.0 / 379.21
+        expected = -1.46 - 5.0 * math.log10(distance_pc) + 5.0
+        assert obj.visual.absolute_magnitude == pytest.approx(expected)
+
+    def test_resolve_nulls_spectral_type_and_absolute_magnitude_when_absent(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # _SIMBAD_PLEIADES_RAW has sp_type=None, V=None - the common case
+        # for a non-stellar/aggregate SIMBAD record with neither on file.
+        resolver = self._resolver(tmp_path)
+        monkeypatch.setattr(
+            resolver, "_query_upstream", lambda name: dict(_SIMBAD_PLEIADES_RAW)
+        )
+        obj = resolver.resolve("Pleiades")
+        assert obj.visual.spectral_type is None
+        assert obj.visual.absolute_magnitude is None
+
+    def test_resolve_nulls_absolute_magnitude_when_only_v_mag_missing(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # sp_type present, V absent - the two fields must fail independently,
+        # never fail (or fabricate) the whole record.
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_SIRIUS_RAW)
+        raw["V"] = None
+        monkeypatch.setattr(resolver, "_query_upstream", lambda name: raw)
+        obj = resolver.resolve("Sirius")
+        assert obj.visual.spectral_type == "A0mA1Va"
+        assert obj.visual.absolute_magnitude is None
+
+    def test_resolve_nulls_spectral_type_when_blank_string(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # SIMBAD can return an empty string rather than an absent column -
+        # treated the same as "no spectral type on file", not a real value.
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_SIRIUS_RAW)
+        raw["sp_type"] = ""
+        monkeypatch.setattr(resolver, "_query_upstream", lambda name: raw)
+        obj = resolver.resolve("Sirius")
+        assert obj.visual.spectral_type is None
+
+    def test_query_upstream_requests_sp_type_and_v_votable_fields(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # Confirms the exact votable field names this Story settled on
+        # (spec §170: `flux(V)` is rejected by the installed astroquery
+        # version - `V` is the working name, verified empirically) without
+        # hitting the network: monkeypatch AstroquerySimbad itself and
+        # inspect what add_votable_fields was called with.
+        import local_galactic_structures.data_sources.simbad as simbad_module
+
+        recorded_fields = []
+
+        class FakeClient:
+            def add_votable_fields(self, *fields):
+                recorded_fields.extend(fields)
+
+            def query_object(self, name):
+                return None
+
+        monkeypatch.setattr(
+            simbad_module, "AstroquerySimbad", lambda: FakeClient()
+        )
+        resolver = self._resolver(tmp_path)
+        with pytest.raises(ValueError, match="no record"):
+            resolver._query_upstream("Sirius")
+        assert "sp_type" in recorded_fields
+        assert "V" in recorded_fields
+
+
+# ---------------------------------------------------------------------------
+# absolute_magnitude_from_distance_modulus (Story #170, pure function)
+# ---------------------------------------------------------------------------
+
+
+class TestAbsoluteMagnitudeFromDistanceModulus:
+    def test_matches_known_value_for_sirius(self):
+        # Sirius: V = -1.46, parallax 379.21 mas -> d_pc = 1000/379.21.
+        # Known real absolute magnitude of Sirius A is ~1.4.
+        distance_pc = 1000.0 / 379.21
+        result = absolute_magnitude_from_distance_modulus(-1.46, distance_pc)
+        assert result == pytest.approx(1.43, abs=0.05)
+
+    def test_ten_parsecs_is_a_no_op(self):
+        # By definition, M == m at exactly 10 pc.
+        assert absolute_magnitude_from_distance_modulus(
+            7.5, 10.0
+        ) == pytest.approx(7.5)
+
+    def test_returns_none_when_apparent_magnitude_missing(self):
+        assert absolute_magnitude_from_distance_modulus(None, 10.0) is None
+
+    def test_returns_none_when_distance_missing(self):
+        assert absolute_magnitude_from_distance_modulus(5.0, None) is None
+
+    def test_returns_none_when_both_missing(self):
+        assert absolute_magnitude_from_distance_modulus(None, None) is None
+
+    def test_returns_none_rather_than_raising_for_zero_distance(self):
+        # 0 pc is the Sun/origin convention (spec §6); log10(0) is
+        # undefined, so this must degrade to None, not raise.
+        assert absolute_magnitude_from_distance_modulus(5.0, 0.0) is None
+
+    def test_returns_none_rather_than_raising_for_negative_distance(self):
+        assert absolute_magnitude_from_distance_modulus(5.0, -3.0) is None
+
+    def test_farther_distance_yields_brighter_negative_absolute_magnitude(self):
+        # Same apparent brightness at a farther distance implies the star
+        # is intrinsically more luminous (a more negative M).
+        near = absolute_magnitude_from_distance_modulus(5.0, 10.0)
+        far = absolute_magnitude_from_distance_modulus(5.0, 100.0)
+        assert far < near
 
 
 # ---------------------------------------------------------------------------

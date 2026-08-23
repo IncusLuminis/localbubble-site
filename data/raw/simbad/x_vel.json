@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "X Vel",
-  "retrieved_utc": "2026-08-18T07:04:06+00:00",
+  "retrieved_utc": "2026-08-23T02:07:08+00:00",
   "record_id": "V* X Vel",
   "raw": {
     "main_id": "V* X Vel",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 10.300000190734863,
     "plx_value": 1.5801,
-    "otype": "C*",
+    "sp_type": "C-N3",
     "plx_err": 0.03310000151395798,
+    "otype": "C*",
     "ids": "TIC 45602275|WISEA J095526.12-413512.8|HIP 48662|Gaia DR3 5419161761530143872|AAVSO 0951-41|AN    6.1901|C* 1583|CD-40  5616|CF  6884|CGCS 2661|CPD-40  4018|GC 13668|GCRV  6344|GEN# +1.00086111|GSC 07702-01098|HD  86111|HIC  48662|IRAS 09533-4120|PPM 314820|SAO 221606|SV* HV   143|TYC 7702-1098-1|V* X Vel|[ELL90] 101|[LFO93] 0953-41|2MASS J09552611-4135127|WISE J095526.15-413512.9|DENIS J095526.2-413512|Gaia DR1 5419161757229747456|WEB  9054|Gaia DR2 5419161761530143872",
     "matched_id": "V* X Vel"
   }

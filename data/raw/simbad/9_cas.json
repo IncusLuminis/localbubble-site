@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "9 Cas",
-  "retrieved_utc": "2026-08-18T06:56:40+00:00",
+  "retrieved_utc": "2026-08-23T01:55:45+00:00",
   "record_id": "*   9 Cas",
   "raw": {
     "main_id": "*   9 Cas",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 5.883999824523926,
     "plx_value": 1.3781,
-    "otype": "*",
+    "sp_type": "A1II-III",
     "plx_err": 0.02370000071823597,
+    "otype": "*",
     "ids": "TIC 283025123|HIP 330|Gaia DR3 429929219935781248|*   9 Cas|AG+62    2|ALS  6012|BD+61  2586|BDS 12727 A|CCDM J00042+6217A|CEL     10|CSI+61  2586  1|GC    30|GCRV    14|GEN# +1.00225180|GSC 04018-03891|HD 225180|HIC    330|HR  9100|IDS 23590+6144 A|LS   I +62   61|NSV 15009|PPM  11903|SAO  10954|SKY#   116|TYC 4018-3891-1|UBV   20685|UBV M  27439|uvby98 100225180|WDS J00042+6217A|2MASS J00041364+6217156|AKARI-IRC-V1 J0004136+621715|IRAS 00016+6200|Gaia DR1 429929215626859648|WEB    47|Gaia DR2 429929219935781248",
     "matched_id": "*   9 Cas"
   }

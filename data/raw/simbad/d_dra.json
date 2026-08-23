@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "d Dra",
-  "retrieved_utc": "2026-08-18T07:04:22+00:00",
+  "retrieved_utc": "2026-08-23T01:56:38+00:00",
   "record_id": "* d Dra",
   "raw": {
     "main_id": "* d Dra",
@@ -12,9 +12,11 @@
     "coo_err_angle": 90,
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
+    "V": 4.761000156402588,
     "plx_value": 1.02,
-    "otype": "*",
+    "sp_type": "F8Ib-II",
     "plx_err": 0.05829999968409538,
+    "otype": "*",
     "ids": "TIC 399788684|HIP 90905|Gaia DR3 2148205378601490688|PLX 4276|* d Dra|*  45 Dra|AG+57 1174|BD+56  2113|FK5 3475|GC 25362|GCRV 11025|GEN# +1.00171635|GSC 03913-02269|HD 171635|HIC  90905|HR  6978|IRAS 18317+5700|JP11  2992|N30 4121|PPM  36692|ROT  2626|SAO  31039|SKY# 33933|TD1 22766|TYC 3913-2269-1|UBV   15810|UBV M  23079|YZ  57  9856|uvby98 100171635|2MASS J18323449+5702442|PLX 4276.00|Gaia DR1 2148205374305424256|WEB 15592|Gaia DR2 2148205378601490688",
     "matched_id": "* d Dra"
   }
