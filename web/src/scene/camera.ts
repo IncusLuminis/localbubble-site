@@ -131,6 +131,39 @@ export function dollyPosition(
   return [tx + dx * scale, ty + dy * scale, tz + dz * scale];
 }
 
+/**
+ * Issue #201: applies `dollyPosition`'s step `steps` times in a row, for the
+ * "fit" buttons' extra zoom-out padding (Show All +3, Fit to Local Bubble
+ * +2, Fit to Nearest-Stars Sphere +6 - `main.ts`'s
+ * `applyCameraPoseWithExtraZoomOut`). Deliberately reuses `dollyPosition`
+ * itself (one call per step, each re-clamped to `[minDistance,
+ * maxDistance]`) rather than reimplementing the step math as a single
+ * "distance * factor^steps" computation - this way it can never drift out of
+ * sync with what `steps` real "-" button clicks would actually produce
+ * (`main.ts`'s `zoomBy`), and behaves identically to that under clamping:
+ * once a single step saturates at `minDistance`/`maxDistance`, every
+ * subsequent step is also computed from (and clamped to) that same
+ * saturated distance, exactly as repeated live clicks would.
+ *
+ * `steps <= 0` is a no-op (returns `position` unchanged) - callers only ever
+ * pass positive counts today, but this keeps the function total rather than
+ * silently reversing direction for a negative count.
+ */
+export function dollyPositionSteps(
+  position: readonly [number, number, number],
+  target: readonly [number, number, number],
+  factor: number,
+  minDistance: number,
+  maxDistance: number,
+  steps: number,
+): [number, number, number] {
+  let result: [number, number, number] = [position[0], position[1], position[2]];
+  for (let i = 0; i < steps; i++) {
+    result = dollyPosition(result, target, factor, minDistance, maxDistance);
+  }
+  return result;
+}
+
 export function createControls(
   camera: PerspectiveCamera,
   domElement: HTMLElement,
