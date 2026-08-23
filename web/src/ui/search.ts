@@ -1,5 +1,6 @@
 import type { SceneObject } from "../scene/sceneTypes";
 import { searchObjects } from "../scene/search";
+import { properNameFor } from "../scene/labels";
 
 /**
  * The search / go-to-object control (issue #106, spec §2.6): "type a name
@@ -71,8 +72,28 @@ export function createSearchBox(options: SearchBoxOptions): SearchBox {
 
   function commit(obj: SceneObject): void {
     options.onSelect(obj);
-    input.value = obj.name;
+    // Issue #205: blank the input (rather than #203's original `input.value =
+    // obj.name`) so the NEXT time this box is shown it's ready for a fresh
+    // query. #203 retained the committed object's designation here, but the
+    // modal auto-closes on commit (see `onSelect` in `main.ts`), so that text
+    // was never actually visible to the user until they reopened Search to
+    // look for something else - at which point it silently prefixed/mixed
+    // into whatever they typed next (e.g. clicking at the end of "* alf CMa"
+    // and typing "Vega" produced the query "* alf CMaVega", matching
+    // nothing), making a second search look completely broken. Clearing here
+    // means every reopen starts from a blank, ready-to-type field instead.
+    input.value = "";
     clearResults();
+  }
+
+  /** Issue #205: `"Sirius (* alf CMa)"` when `properNameFor` (issue #189,
+   * `scene/labels.ts` - reused rather than reimplemented) finds a proper/
+   * common name for `obj`, otherwise just the plain designation (`obj.name`),
+   * unchanged. Display-only - `obj` itself and `commit(obj)` are untouched,
+   * so selecting a proper-named result still resolves/navigates identically. */
+  function resultLabelFor(obj: SceneObject): string {
+    const properName = properNameFor(obj);
+    return properName ? `${properName} (${obj.name})` : obj.name;
   }
 
   function renderResults(): void {
@@ -80,7 +101,7 @@ export function createSearchBox(options: SearchBoxOptions): SearchBox {
     for (const obj of currentMatches.slice(0, MAX_RESULTS)) {
       const item = document.createElement("li");
       item.className = "search-result-row";
-      item.textContent = obj.name;
+      item.textContent = resultLabelFor(obj);
       item.addEventListener("click", () => commit(obj));
       resultsList.appendChild(item);
     }

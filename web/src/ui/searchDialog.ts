@@ -34,12 +34,19 @@ export { isEscapeKey, isScrimClick };
  *     also calling `hide()`, not a change to `createSearchBox`'s own
  *     commit logic (out of scope per #203).
  *
- * Design choice (documented per #203's "implementer's call" on this
- * point): re-opening the button does NOT clear the previous query - the
+ * Issue #205 (correcting #203's original "implementer's call" here): the
  * same `createSearchBox` instance/element is shown and hidden in place
- * (never rebuilt), so whatever the user last typed/selected is still
- * there. This mirrors `InfoDialog`, which likewise never resets its own
- * scroll position/state between opens.
+ * (never rebuilt) across opens, same as `InfoDialog` never resets its own
+ * scroll position/state between opens - but unlike `InfoDialog`'s scroll
+ * position, a leftover query string is actively harmful, not just stale
+ * cosmetic state: #203 had `commit()` leave the just-selected object's
+ * designation sitting in the input, and since the modal auto-closes
+ * immediately on commit, that text was invisible until the NEXT open, where
+ * it silently combined with whatever the user typed next (e.g. clicking at
+ * the end of "* alf CMa" and typing "Vega" produced "* alf CMaVega", zero
+ * matches), making a second search look completely broken. `commit()`
+ * (`ui/search.ts`) now blanks the input instead, so this dialog always
+ * reopens ready for a fresh query - no change needed in this class itself.
  */
 export class SearchDialog {
   readonly element: HTMLDivElement;
