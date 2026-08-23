@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { formatAbsoluteMagnitude, formatExoplanets, formatSpectralType } from "../src/ui/inspector";
+import {
+  formatAbsoluteMagnitude,
+  formatDistance,
+  formatExoplanets,
+  formatNameTypeDistance,
+  formatSpectralType,
+} from "../src/ui/inspector";
 import type { SceneExoplanetSummary, ScenePlanetSummary } from "../src/scene/sceneTypes";
 
 /**
@@ -10,6 +16,53 @@ import type { SceneExoplanetSummary, ScenePlanetSummary } from "../src/scene/sce
  * cover the exported pure formatting functions `Inspector.show()` uses,
  * which carry all of this Story's actual display logic/decisions.
  */
+
+describe("formatDistance", () => {
+  it("shows a bare figure when there is no error bar", () => {
+    expect(formatDistance({ distance_pc: 6.0, distance_error_pc: null })).toBe("6.0 pc");
+  });
+
+  it("shows the error bar when present", () => {
+    expect(formatDistance({ distance_pc: 37.42, distance_error_pc: 0.26 })).toBe(
+      "37.4 ± 0.3 pc",
+    );
+  });
+});
+
+describe("formatNameTypeDistance", () => {
+  it("combines display name, humanized type, and distance into one line", () => {
+    expect(
+      formatNameTypeDistance({
+        name: "* 82 Eri",
+        object_type: "star",
+        distance_pc: 6.04,
+        distance_error_pc: null,
+      }),
+    ).toBe("* 82 Eri · Star · 6.0 pc");
+  });
+
+  it("strips a leading 'NAME ' prefix via displayName, and includes the error bar when present", () => {
+    expect(
+      formatNameTypeDistance({
+        name: "NAME Proxima Centauri",
+        object_type: "star",
+        distance_pc: 1.301,
+        distance_error_pc: 0.002,
+      }),
+    ).toBe("Proxima Centauri · Star · 1.3 ± 0.0 pc");
+  });
+
+  it("humanizes multi-word/underscored object types", () => {
+    expect(
+      formatNameTypeDistance({
+        name: "Local Bubble",
+        object_type: "molecular_cloud",
+        distance_pc: 150,
+        distance_error_pc: null,
+      }),
+    ).toBe("Local Bubble · Molecular Cloud · 150.0 pc");
+  });
+});
 
 describe("formatSpectralType", () => {
   it("returns the raw SIMBAD string verbatim", () => {
