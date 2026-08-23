@@ -1,13 +1,22 @@
-import type { SceneObject } from "../scene/sceneTypes";
+import type { SceneExoplanetSummary, SceneObject, ScenePlanetSummary } from "../scene/sceneTypes";
 import { cartesianToGalacticLB } from "../scene/galacticCoords";
 import { displayName } from "../scene/labels";
+import { STAR_OBJECT_TYPES } from "../scene/objects";
 
 /**
  * The object inspector panel (spec Idea.md §24): "Clicking or selecting an
  * object should display its metadata" - name, type, distance, Galactic l/b,
- * Cartesian XYZ, source, per the spec's own worked example (Pleiades).
+ * Cartesian XYZ, source, per the spec's own worked example (Pleiades). Story
+ * #172 adds three more rows - spectral type, absolute magnitude, and known
+ * exoplanets - shown only for `star`-type objects (clusters/structures don't
+ * carry these fields), using `STAR_OBJECT_TYPES` as the single source of
+ * truth for "is this star-like" per issue #130.
  *
  * Plain DOM, no framework (spec §31), consistent with the rest of the app.
+ * This module's `format*` helpers are exported and unit-tested directly
+ * (see `test/inspector.test.ts`); `Inspector` itself isn't, since
+ * `vitest.config.ts` runs with `environment: "node"` and `document` isn't
+ * available there (same constraint noted in `infoDialog.ts`).
  */
 
 function formatNumber(value: number, digits = 2): string {
@@ -19,6 +28,42 @@ function humanizeType(objectType: string): string {
     .split("_")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+}
+
+/** Story #172: SIMBAD's raw spectral-type string, verbatim, or "Unknown"
+ * when SIMBAD has none on record (per issue #172's acceptance criteria -
+ * unlike `distance_error_pc` in `show()` below, this field gets an explicit
+ * fallback label rather than a silently reshaped row, since there's no
+ * "with error"/"without error" variant to fall back between). */
+export function formatSpectralType(spectralType: string | null): string {
+  return spectralType ?? "Unknown";
+}
+
+/** Story #172: absolute magnitude to one decimal place with a brief label
+ * so a lone number (which could otherwise read as almost anything) is
+ * legible as what it is, or "Unknown" when not available. */
+export function formatAbsoluteMagnitude(absoluteMagnitude: number | null): string {
+  return absoluteMagnitude !== null ? `M = ${formatNumber(absoluteMagnitude, 1)}` : "Unknown";
+}
+
+function formatPlanetSummary(planet: ScenePlanetSummary): string {
+  return planet.orbital_period_days !== null
+    ? `${planet.name} (${formatNumber(planet.orbital_period_days, 1)} d)`
+    : planet.name;
+}
+
+/** Story #172: renders the known-exoplanets summary as a single "N known:
+ * list" value, or `null` when there is nothing to show (no `exoplanets`
+ * block, i.e. none on record for this star - the overwhelming majority, per
+ * issue #172 - or a present-but-empty `planets` list) - the Inspector omits
+ * the whole row in that case rather than adding a "None known" row to every
+ * star, since exoplanets are the exception rather than the rule here. */
+export function formatExoplanets(exoplanets: SceneExoplanetSummary | null): string | null {
+  if (exoplanets === null || exoplanets.count === 0 || exoplanets.planets.length === 0) {
+    return null;
+  }
+  const list = exoplanets.planets.map(formatPlanetSummary).join(", ");
+  return `${exoplanets.count} known: ${list}`;
 }
 
 export class Inspector {
@@ -70,6 +115,15 @@ export class Inspector {
       ],
       ["Source", obj.source.reference],
     ];
+
+    if (STAR_OBJECT_TYPES.has(obj.object_type)) {
+      rows.push(["Spectral Type", formatSpectralType(obj.spectral_type)]);
+      rows.push(["Absolute Magnitude", formatAbsoluteMagnitude(obj.absolute_magnitude)]);
+      const exoplanets = formatExoplanets(obj.exoplanets);
+      if (exoplanets !== null) {
+        rows.push(["Exoplanets", exoplanets]);
+      }
+    }
 
     for (const [label, value] of rows) {
       const row = document.createElement("div");
