@@ -3,6 +3,7 @@ import {
   edgeOnPose,
   faceOnPose,
   fitAllPose,
+  fitSpherePose,
   objectCenteredPose,
   perspectivePose,
   sunCenteredPose,
@@ -155,5 +156,71 @@ describe("fitAllPose", () => {
       pose.position[2] - pose.target[2],
     );
     expect(distance).toBeGreaterThan(0);
+  });
+
+  it("matches fitSpherePose given the same centroid/bounding radius (issue #197 refactor)", () => {
+    const positions: [number, number, number][] = [
+      [100, 0, 0],
+      [-100, 0, 0],
+      [0, 100, 0],
+      [0, -100, 0],
+    ];
+    const allPose = fitAllPose(positions);
+    const spherePose = fitSpherePose([0, 0, 0], 100);
+    expect(allPose).toEqual(spherePose);
+  });
+});
+
+describe("fitSpherePose", () => {
+  it("targets the given center, not the origin", () => {
+    const pose = fitSpherePose([120, -30, 15], 25);
+    expect(pose.target).toEqual([120, -30, 15]);
+  });
+
+  it("moves the camera further away as the given radius grows", () => {
+    const small = fitSpherePose([0, 0, 0], 20);
+    const large = fitSpherePose([0, 0, 0], 500);
+    const smallDistance = Math.hypot(...small.position);
+    const largeDistance = Math.hypot(...large.position);
+    expect(largeDistance).toBeGreaterThan(smallDistance);
+  });
+
+  it("floors a point-like (near-zero radius) sphere at a sane non-zero viewing distance", () => {
+    const pose = fitSpherePose([0, 0, 0], 0);
+    const distance = Math.hypot(...pose.position);
+    expect(distance).toBeGreaterThan(0);
+  });
+
+  it("views along the same default direction as fitAllPose/perspectivePose, just re-centered", () => {
+    const centered = fitSpherePose([0, 0, 0], 200);
+    const offset = fitSpherePose([500, -500, 500], 200);
+    const centeredOffset: [number, number, number] = [
+      centered.position[0] - centered.target[0],
+      centered.position[1] - centered.target[1],
+      centered.position[2] - centered.target[2],
+    ];
+    const offsetOffset: [number, number, number] = [
+      offset.position[0] - offset.target[0],
+      offset.position[1] - offset.target[1],
+      offset.position[2] - offset.target[2],
+    ];
+    expect(offsetOffset[0]).toBeCloseTo(centeredOffset[0], 9);
+    expect(offsetOffset[1]).toBeCloseTo(centeredOffset[1], 9);
+    expect(offsetOffset[2]).toBeCloseTo(centeredOffset[2], 9);
+  });
+
+  it("frames a Local-Bubble-scale sphere (real center_pc/semi_axes_pc shape, issue #197)", () => {
+    // Representative real-world magnitudes (Alves et al. 2018-style), not
+    // the actual scene.json values - just checking the call shape works.
+    const center: [number, number, number] = [-2.5, 20.7, -21.3];
+    const radius = Math.max(56, 112, 152); // max(semi_axes_pc)
+    const pose = fitSpherePose(center, radius);
+    expect(pose.target).toEqual(center);
+    const distance = Math.hypot(
+      pose.position[0] - pose.target[0],
+      pose.position[1] - pose.target[1],
+      pose.position[2] - pose.target[2],
+    );
+    expect(distance).toBeGreaterThan(radius);
   });
 });

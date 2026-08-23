@@ -92,6 +92,45 @@ export function deriveMinZoomDistancePc(objects: SceneObject[]): number {
   return nearestPc + MIN_ZOOM_MARGIN_PC;
 }
 
+/**
+ * Issue #197: pure dolly-distance computation for the bottom-left toolbar's
+ * Zoom In (+) / Zoom Out (-) buttons - moves `position` along the existing
+ * camera->target line by `factor` (values below 1 move closer/"zoom in",
+ * above 1 move away/"zoom out"), clamping the resulting distance to
+ * `[minDistance, maxDistance]` the same way `OrbitControls`' own scroll-wheel
+ * zoom already respects `controls.minDistance`/`maxDistance` (`createControls`
+ * above). Kept free of `THREE`/`OrbitControls` (plain tuples in, plain tuple
+ * out) so it's unit-testable without a WebGL context (spec §38) - `main.ts`'s
+ * zoom button handlers are thin wrappers supplying the live
+ * `camera.position`/`controls.target`/`controls.minDistance`/`maxDistance`
+ * and writing the result back onto the real `camera.position` themselves.
+ *
+ * Degenerate case: if `position` and `target` already coincide (zero
+ * current distance), there is no direction to scale along - returns
+ * `position` unchanged rather than producing a `NaN` result.
+ */
+export function dollyPosition(
+  position: readonly [number, number, number],
+  target: readonly [number, number, number],
+  factor: number,
+  minDistance: number,
+  maxDistance: number,
+): [number, number, number] {
+  const [px, py, pz] = position;
+  const [tx, ty, tz] = target;
+  const dx = px - tx;
+  const dy = py - ty;
+  const dz = pz - tz;
+  const currentDistance = Math.hypot(dx, dy, dz);
+  if (currentDistance === 0) {
+    return [px, py, pz];
+  }
+  const desiredDistance = currentDistance * factor;
+  const clampedDistance = Math.min(Math.max(desiredDistance, minDistance), maxDistance);
+  const scale = clampedDistance / currentDistance;
+  return [tx + dx * scale, ty + dy * scale, tz + dz * scale];
+}
+
 export function createControls(
   camera: PerspectiveCamera,
   domElement: HTMLElement,
