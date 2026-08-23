@@ -288,6 +288,15 @@ body {
   padding: 2px 4px;
 }
 
+/* Story #187: merged Name/Type/Distance heading (replaces the three
+   separate rows those used to be), e.g. "* 82 Eri · Star · 6.0 pc". */
+.inspector-heading {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  word-break: break-word;
+}
+
 .inspector-row {
   display: flex;
   flex-direction: column;
@@ -304,6 +313,37 @@ body {
 .inspector-value {
   font-size: 13px;
   word-break: break-word;
+}
+
+/* Story #187: embedded Aladin Lite sky viewer, star-only, immediately
+ * below the merged Name/Type/Distance heading. `.sky-view-viewer`'s actual
+ * pixel size is set inline from `ui/skyView.ts`'s `SKY_VIEW_SIZE_PX` (kept
+ * in JS since Aladin needs a concrete container size to initialize
+ * against) - it matches `#inspector`'s CSS content width (240px panel -
+ * 2x14px padding). `.sky-view-placeholder` is shown instead, at the same
+ * size, while loading or if every Sesame resolution attempt fails. */
+.sky-view {
+  margin-bottom: 10px;
+}
+
+.sky-view-viewer {
+  border-radius: 4px;
+  overflow: hidden;
+  background: #05070d;
+}
+
+.sky-view-placeholder {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px dashed rgba(143, 163, 200, 0.3);
+  color: #8fa3c8;
+  font-size: 12px;
+  font-style: italic;
 }
 
 /* Story #182: exoplanet orbit schematic, appended below the row list above

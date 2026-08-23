@@ -3,6 +3,7 @@ import { cartesianToGalacticLB } from "../scene/galacticCoords";
 import { displayName } from "../scene/labels";
 import { STAR_OBJECT_TYPES } from "../scene/objects";
 import { createOrbitDiagramElement } from "./orbitDiagram";
+import { createSkyViewElement, updateSkyView } from "./skyView";
 
 /**
  * The object inspector panel (spec Idea.md §24): "Clicking or selecting an
@@ -22,6 +23,13 @@ import { createOrbitDiagramElement } from "./orbitDiagram";
  * Story #182 appends a visual orbit schematic (`ui/orbitDiagram.ts`) below
  * the row list above, for stars with `exoplanets.count > 0` - purely
  * additive, the existing text-based "Exoplanets" row above is unchanged.
+ *
+ * Story #187 does two things: (1) merges the former separate Name/Type/
+ * Distance rows into one compact heading line (`formatNameTypeDistance`
+ * below) to reclaim vertical space, and (2) for `star`-type objects only,
+ * inserts an embedded Aladin Lite sky viewer (`ui/skyView.ts`) immediately
+ * below that heading, before the Galactic l/b row - real DSS imagery of
+ * the selected star, targeted by its SIMBAD `name`.
  */
 
 function formatNumber(value: number, digits = 2): string {
@@ -33,6 +41,28 @@ function humanizeType(objectType: string): string {
     .split("_")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+}
+
+/** Distance display, unchanged from the pre-#187 "Distance" row's own
+ * formatting - with error bars when SIMBAD/the catalog has one on record,
+ * or a bare figure otherwise. Factored out so `formatNameTypeDistance`
+ * below doesn't duplicate it. */
+export function formatDistance(
+  obj: Pick<SceneObject, "distance_pc" | "distance_error_pc">,
+): string {
+  return obj.distance_error_pc !== null
+    ? `${formatNumber(obj.distance_pc, 1)} ± ${formatNumber(obj.distance_error_pc, 1)} pc`
+    : `${formatNumber(obj.distance_pc, 1)} pc`;
+}
+
+/** Story #187: the former separate "Name"/"Type"/"Distance" rows merged
+ * into one compact heading line (e.g. "* 82 Eri · Star · 6.0 pc"), to
+ * reclaim vertical space for the new sky-view panel below it. All other
+ * rows are unaffected. */
+export function formatNameTypeDistance(
+  obj: Pick<SceneObject, "name" | "object_type" | "distance_pc" | "distance_error_pc">,
+): string {
+  return `${displayName(obj.name)} · ${humanizeType(obj.object_type)} · ${formatDistance(obj)}`;
 }
 
 /** Story #172: SIMBAD's raw spectral-type string, verbatim, or "Unknown"
@@ -104,15 +134,29 @@ export class Inspector {
     const { l_deg, b_deg } = cartesianToGalacticLB(x, y, z);
 
     this.content.replaceChildren();
+
+    // Story #187: merged Name/Type/Distance heading line, first thing in
+    // the panel (replacing the three separate rows this used to be).
+    const heading = document.createElement("div");
+    heading.className = "inspector-heading";
+    heading.textContent = formatNameTypeDistance(obj);
+    this.content.appendChild(heading);
+
+    const isStar = STAR_OBJECT_TYPES.has(obj.object_type);
+
+    // Story #187: embedded Aladin sky viewer, star-only, immediately below
+    // the heading above and before the Galactic l/b row - the single
+    // shared instance is retargeted (not recreated) on every star
+    // selection; see `ui/skyView.ts` for why. Non-star objects get no
+    // panel at all (the element is simply never appended for them), and
+    // the Inspector's own display:none (see `hide()`) keeps it from
+    // rendering/querying while the panel is closed.
+    if (isStar) {
+      this.content.appendChild(createSkyViewElement());
+      updateSkyView(obj);
+    }
+
     const rows: [string, string][] = [
-      ["Name", displayName(obj.name)],
-      ["Type", humanizeType(obj.object_type)],
-      [
-        "Distance",
-        obj.distance_error_pc !== null
-          ? `${formatNumber(obj.distance_pc, 1)} ± ${formatNumber(obj.distance_error_pc, 1)} pc`
-          : `${formatNumber(obj.distance_pc, 1)} pc`,
-      ],
       ["Galactic l, b", `l = ${formatNumber(l_deg, 1)}°, b = ${formatNumber(b_deg, 1)}°`],
       [
         "Cartesian X, Y, Z",
@@ -121,7 +165,7 @@ export class Inspector {
       ["Source", obj.source.reference],
     ];
 
-    if (STAR_OBJECT_TYPES.has(obj.object_type)) {
+    if (isStar) {
       rows.push(["Spectral Type", formatSpectralType(obj.spectral_type)]);
       rows.push(["Absolute Magnitude", formatAbsoluteMagnitude(obj.absolute_magnitude)]);
       const exoplanets = formatExoplanets(obj.exoplanets);
@@ -149,7 +193,7 @@ export class Inspector {
     // is non-null for ~5% of stars (Story #171) and never set on
     // non-star object types, matching the same `STAR_OBJECT_TYPES` gate
     // used for the Spectral Type/Absolute Magnitude/Exoplanets rows above.
-    if (STAR_OBJECT_TYPES.has(obj.object_type) && obj.exoplanets !== null && obj.exoplanets.count > 0) {
+    if (isStar && obj.exoplanets !== null && obj.exoplanets.count > 0) {
       const diagram = createOrbitDiagramElement(obj.exoplanets, obj.spectral_type);
       if (diagram !== null) {
         this.content.appendChild(diagram);
