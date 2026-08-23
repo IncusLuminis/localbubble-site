@@ -227,9 +227,44 @@ function ensureInstance(): AladinInstance {
       showCooGridControl: false,
       showProjectionControl: false,
       showContextMenu: false,
-      // Issue #187: no custom survey-toggle UI is built - Aladin's own
-      // built-in layer control already lets a curious user switch surveys.
-      showLayersControl: true,
+      // Issue #195: the human owner asked for ALL remaining default-`true`
+      // interactive chrome removed, leaving just the bare DSS image - this
+      // Inspector panel is a small illustrative view, not an interactive
+      // sky-browsing widget, so losing manual layer/goto/reticle controls
+      // is intended here (superseding #187's earlier "keep the built-in
+      // layer control" rationale for `showLayersControl`).
+      showLayersControl: false,
+      // Issue #195 lists `showGotoControl` as the flag expected to hide the
+      // "search field with coordinates" the human owner reported. Verified
+      // live (before/after screenshot in the PR) that this is NOT a real
+      // Aladin Lite v3 init option - the CDS API reference
+      // (https://cds-astro.github.io/aladin-lite/global.html) has no
+      // `showGotoControl`/`gotoControl` entry, only the unrelated
+      // `gotoObject`/`gotoPosition`/`gotoRaDec` *methods* this module
+      // already calls. It's kept here anyway (harmless no-op key, matches
+      // the issue's literal list verbatim) alongside the option that
+      // actually controls that element: `showCooLocation` below.
+      showGotoControl: false,
+      // Issue #195: this is the option that actually hides the element the
+      // human owner saw - a coordinate readout with a copy button that
+      // doubles as a search-by-name-or-coordinates box (CSS class
+      // `aladin-location`, confirmed live via devtools). In Aladin Lite v3
+      // this single `showCooLocation`-gated widget covers both the
+      // "search field" and "coordinates" the human owner described -
+      // there's no separate goto icon/control in this version to toggle.
+      showCooLocation: false,
+      // Issue #195: hides the field-of-view readout (e.g. "30.00' x
+      // 30.00'") in the opposite corner - confirmed live as the "other
+      // field/control slightly below" the human owner also flagged, once
+      // `showCooLocation` removed the coordinate box above it. Not in the
+      // issue's literal flag list (which named `showProjectionControl`/
+      // zoom/layers/fullscreen as candidates instead - none of those was
+      // actually it, per live verification), but required to satisfy the
+      // Story's stated goal of nothing overlaid but the bare DSS image.
+      showFov: false,
+      // Issue #195: hides the small crosshair/reticle marker Aladin draws
+      // at the view center.
+      showReticle: false,
       // Issue #193: hides Aladin's coordinate-frame indicator - a small
       // "ICRS" dropdown in the top-left corner of the viewer for switching
       // the displayed coordinate reference frame (ICRS/Galactic/etc, i.e.
