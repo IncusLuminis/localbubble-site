@@ -424,6 +424,17 @@ body {
   font-size: 14px;
   margin-left: 20px;
   margin-top: -13px;
+  /* Issue #185: CSS2DRenderer's `zOrder()` (see the #167 comment on
+     `.info-dialog-scrim` below) overwrites every label's inline
+     `style.zIndex` every frame based on camera distance, so a sibling
+     star's ordinary label can end up with a higher inline z-index than
+     the selected label and visually cover it (common in close binaries
+     like Alpha Centauri A/B). `!important` is required here to win over
+     that per-frame inline style. `500` is comfortably above the current
+     live label count (~130, per #167) with room to grow, while staying
+     well under `.info-dialog-scrim`'s `1000` so the selected label never
+     paints over an open Info dialog. */
+  z-index: 500 !important;
 }
 
 /* Structure-overlay labels ("Gould Belt" / "Radcliffe Wave", issue #124) -
