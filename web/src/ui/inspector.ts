@@ -37,6 +37,15 @@ import { createSkyViewElement, updateSkyView } from "./skyView";
  * shown, above the sky view; (3) adds a star-only "Visual Magnitude" row
  * (SIMBAD's apparent V magnitude, `formatVisualMagnitude` below) between
  * Spectral Type and Absolute Magnitude.
+ *
+ * Story #209 decouples the sky view from `isStar`: it's now shown for every
+ * object type reaching this panel via a catalog-object click (clusters,
+ * associations, and the diffuse structure types too), since they're real,
+ * individually SIMBAD-resolved catalog objects just like stars -
+ * `updateSkyView` itself was already type-agnostic (`ui/skyView.ts` only
+ * ever needed `name`/`aliases`). The genuinely star-specific rows (Spectral
+ * Type, Visual Magnitude, Absolute Magnitude, Exoplanets, orbit diagram)
+ * remain gated on `isStar`/`STAR_OBJECT_TYPES`, unchanged.
  */
 
 function formatNumber(value: number, digits = 2): string {
@@ -164,17 +173,26 @@ export class Inspector {
       }
     }
 
-    // Story #187: embedded Aladin sky viewer, star-only, second thing in
-    // the panel (after the Star Name row above, before the row list
-    // below) - the single shared instance is retargeted (not recreated) on
-    // every star selection; see `ui/skyView.ts` for why. Non-star objects
-    // get no panel at all (the element is simply never appended for them),
-    // and the Inspector's own display:none (see `hide()`) keeps it from
-    // rendering/querying while the panel is closed.
-    if (isStar) {
-      this.content.appendChild(createSkyViewElement());
-      updateSkyView(obj);
-    }
+    // Story #187: embedded Aladin sky viewer, second thing in the panel
+    // (after the star-only Star Name row above, before the row list below)
+    // - the single shared instance is retargeted (not recreated) on every
+    // selection; see `ui/skyView.ts` for why. The Inspector's own
+    // display:none (see `hide()`) keeps it from rendering/querying while
+    // the panel is closed.
+    //
+    // Story #209: shown for EVERY object type reaching the Inspector via a
+    // catalog-object click, not just stars - clusters/associations and the
+    // diffuse structure types (molecular_cloud/hii_region/
+    // star_forming_region/supernova_remnant/bubble) are real,
+    // individually SIMBAD-resolved catalog objects with genuine
+    // designations, so `updateSkyView` (already type-agnostic - see its own
+    // `Pick<SceneObject, "name" | "aliases">` signature) resolves and
+    // frames them exactly like it does for stars. Only this panel's gating
+    // changes; the genuinely star-specific rows below (Spectral Type,
+    // Visual Magnitude, Absolute Magnitude, Exoplanets, orbit diagram)
+    // remain gated on `isStar`.
+    this.content.appendChild(createSkyViewElement());
+    updateSkyView(obj);
 
     // Story #189: reverted back to separate rows (from #187's merged
     // heading), "Name" renamed "Designation", in this exact order.
