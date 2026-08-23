@@ -93,10 +93,15 @@ body {
   z-index: 600 !important;
 }
 
-/* Issue #106 (repositioned by #143): search / go-to-object panel - now
-   stacked above the Structures panel inside `#menu-panels` (top-left),
-   rather than top-center on its own. Issue #145: width now matches
-   `#controls` (240px, was 260px) so the two panels align when stacked. */
+/* Issue #106: search / go-to-object panel content (input, results list,
+   status line) - issue #143 repositioned its container to sit atop the
+   Structures panel inside `#menu-panels`; issue #203 moved it again, into
+   its own modal (`.search-dialog` below) opened by `#search-toggle`. Issue
+   #145's 240px width (matching `#controls`, so the two aligned when
+   stacked) is superseded inside the modal by `.search-dialog`'s own width
+   below - `.search-dialog .panel` (below) neutralizes this element's box
+   chrome entirely there, so this rule now only matters if `#search` is ever
+   rendered outside a `.search-dialog` wrapper again. */
 #search {
   width: 240px;
 }
@@ -111,12 +116,13 @@ body {
    #197 moved that button down into `#bottom-left-toolbar` (below). Issue
    #164's `#info-toggle` also shared this row/sizing at one point, but #201
    relocated that button into `#bottom-left-toolbar` too (its own 44x44px
-   sizing now) - so this rule is `#menu-toggle`-only, and the top-left row
-   is just the hamburger. */
-#menu-toggle {
+   sizing now). Issue #203 added `#search-toggle` as this rule's other
+   sibling - same 68x68px box styling, positioned immediately to its right -
+   so this top-left row is now the hamburger plus the Search button. */
+#menu-toggle,
+#search-toggle {
   position: absolute;
   top: 12px;
-  left: 12px;
   z-index: 3;
   width: 68px;
   height: 68px;
@@ -124,13 +130,31 @@ body {
   border: 1px solid rgba(143, 163, 200, 0.35);
   border-radius: 8px;
   color: #dfe6f3;
-  font-size: 32px;
-  line-height: 1;
   cursor: pointer;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
-#menu-toggle:hover {
+#menu-toggle {
+  left: 12px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+/* Issue #203: 12px (left edge) + 68px (`#menu-toggle` width) + 8px gap,
+   mirroring `#menu-panels`'s own "88px = button top + height + gap" math
+   just below for the same reason - keeps the two top-left buttons a
+   consistent 8px apart. The SVG icon (`main.ts`'s `SEARCH_ICON_SVG`) is
+   centered via flex rather than a `font-size`-driven glyph like
+   `#menu-toggle`'s "☰". */
+#search-toggle {
+  left: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#menu-toggle:hover,
+#search-toggle:hover {
   background: #24304a;
 }
 
@@ -740,7 +764,14 @@ body {
    `align-items`/`justify-content: center` is what centers `.info-dialog` on
    screen, unlike `.panel`'s top-left/top-right anchored positioning used
    elsewhere in this app. Clicking the scrim itself (not the dialog it
-   wraps) closes it - see `infoDialog.ts`'s `isScrimClick`. */
+   wraps) closes it - see `infoDialog.ts`'s `isScrimClick`.
+
+   Issue #203: `.search-dialog-scrim` shares this exact rule (same
+   full-viewport dimmed centering, same `SearchDialog.show`/`hide`-toggled
+   `display: none`/`flex`, and the same `isScrimClick`/`isEscapeKey` predicates
+   imported from `infoDialog.ts` into `searchDialog.ts` rather than
+   reimplemented) - genuinely identical behavior, so combined into one
+   selector rather than duplicated. */
 /* Issue #167: CSS2DRenderer (node_modules/three/examples/jsm/renderers/
    CSS2DRenderer.js's `zOrder()`) sets an inline `z-index` on every
    star/structure/Galactic-Center label element every frame, ranging from `1`
@@ -753,11 +784,16 @@ body {
    (vs. e.g. `50`, which today's ~130 labels would already exceed), so this
    class of bug can't recur from ordinary label-count growth. This value is
    deliberately far above every other z-index in the app (#status/#fov-
-   readout: 1, .panel/#menu-panels: 2, #menu-toggle/#bottom-left-toolbar
-   (incl. #info-toggle, #201): 3, #154's edge-indicator: 20) - none of those
-   need to
-   change, since the dialog is meant to be unconditionally topmost. */
-.info-dialog-scrim {
+   readout: 1, .panel/#menu-panels: 2, #menu-toggle/#search-toggle (#203)/
+   #bottom-left-toolbar (incl. #info-toggle, #201): 3, #154's edge-indicator:
+   20) - none of those need to change, since a modal is meant to be
+   unconditionally topmost. Issue #203's search modal reuses this same
+   `1000` (both modals are "primary action" modals per that issue's brief) -
+   they aren't expected to be open simultaneously, but since DOM order alone
+   then decides which one paints on top of the other at equal z-index, that
+   can't crash or misbehave either way. */
+.info-dialog-scrim,
+.search-dialog-scrim {
   position: fixed;
   inset: 0;
   z-index: 1000;
@@ -772,18 +808,51 @@ body {
    scrim's flex centering above rather than `.panel`'s own `position:
    absolute; top: 12px`, so those are neutralized here - mirrors how
    `#menu-panels .panel` neutralizes the same properties for a different
-   reason (stacking inside a flex container instead of centering). */
-.info-dialog {
+   reason (stacking inside a flex container instead of centering). Issue
+   #203's `.search-dialog` shares every property here except `width` (kept
+   narrower, below, since it only ever holds a search input/results list,
+   not the Info dialog's prose). */
+.info-dialog,
+.search-dialog {
   position: relative;
   top: auto;
   z-index: 1;
-  width: min(560px, calc(100vw - 48px));
   max-height: calc(100vh - 64px);
   overflow-y: auto;
   padding: 20px 24px;
 }
 
-.info-dialog-close {
+.info-dialog {
+  width: min(560px, calc(100vw - 48px));
+}
+
+.search-dialog {
+  width: min(360px, calc(100vw - 48px));
+}
+
+/* Issue #203: `createSearchBox`'s own `#search` element (built by
+   `ui/search.ts`, unchanged by this issue) keeps its `.panel` class from
+   its previous docked-in-`#menu-panels` life - mounted directly inside
+   `.search-dialog` (itself already `.panel`-styled) here, so its own nested
+   `.panel` box chrome (position/background/border/shadow/padding/z-index)
+   is neutralized, the same way `#menu-panels .panel` neutralizes it for
+   that other placement - otherwise the two `.panel` boxes would visibly
+   double up (nested border/background/shadow) and the inner one's
+   `position: absolute` would fight the outer dialog's `position: relative`. */
+.search-dialog .panel {
+  position: static;
+  top: auto;
+  max-height: none;
+  overflow-y: visible;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  z-index: auto;
+}
+
+.info-dialog-close,
+.search-dialog-close {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -797,7 +866,8 @@ body {
   cursor: pointer;
 }
 
-.info-dialog-close:hover {
+.info-dialog-close:hover,
+.search-dialog-close:hover {
   color: #ffffff;
 }
 
