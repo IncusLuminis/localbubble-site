@@ -85,6 +85,7 @@ import { exportSceneAsPng } from "./scene/pngExport";
 import { createControlPanel } from "./ui/controls";
 import { Inspector } from "./ui/inspector";
 import { InfoDialog } from "./ui/infoDialog";
+import { SearchDialog } from "./ui/searchDialog";
 import { createSearchBox } from "./ui/search";
 import { createFovReadout } from "./ui/fovReadout";
 import { createFullscreenToggle } from "./ui/fullscreenToggle";
@@ -184,12 +185,16 @@ app.appendChild(fovReadout.element);
 // Issue #143: a single hamburger button, always present (created here at
 // top-level startup, not inside `loadScene().then(...)` below, so it's
 // visible even before scene data loads), toggling a shared container that
-// holds both the Search box (#106) and the Structures control panel
-// (`createControlPanel`, previously always-visible top-left). Both panels
-// are appended into `menuPanels` once they're created below (they're built
-// asynchronously, after the scene data loads) - `menuPanels` itself starts
-// empty and hidden, so toggling before the scene has loaded is a harmless
-// no-op (nothing inside it yet).
+// holds the Structures control panel (`createControlPanel`, previously
+// always-visible top-left). `menuPanels` itself starts empty and hidden, so
+// toggling before the scene has loaded is a harmless no-op (nothing inside
+// it yet).
+//
+// Issue #203: the Search box (#106) that used to also live inside this same
+// container (stacked above the Structures panel) has moved out into its own
+// dedicated button + modal (`searchToggle`/`searchDialog` below) - this
+// panel now holds only Structures, and its toggle button's aria-label below
+// no longer mentions Search.
 const menuPanels = document.createElement("div");
 menuPanels.id = "menu-panels";
 app.appendChild(menuPanels);
@@ -198,13 +203,48 @@ const menuToggle = document.createElement("button");
 menuToggle.id = "menu-toggle";
 menuToggle.type = "button";
 menuToggle.textContent = "☰";
-menuToggle.setAttribute("aria-label", "Toggle Search and Structures panels");
+menuToggle.setAttribute("aria-label", "Toggle Structures panel");
 menuToggle.setAttribute("aria-expanded", "false");
 menuToggle.addEventListener("click", () => {
   const open = menuPanels.classList.toggle("open");
   menuToggle.setAttribute("aria-expanded", String(open));
 });
 app.appendChild(menuToggle);
+
+/** Issue #203: magnifying-glass inline SVG for the new Search button,
+ * mirroring #199's inline-SVG icon pattern (`stroke="currentColor"`, so it
+ * inherits `#search-toggle`'s own `color` for free) rather than a colored
+ * Unicode/emoji glyph (e.g. "🔍") - keeps the button reading as a clean
+ * monochrome icon consistent with `#menu-toggle`'s "☰" glyph, verified live
+ * to render crisply at the shared 68x68px button size. */
+const SEARCH_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="10.5" cy="10.5" r="6.5" />
+    <path d="M15.5 15.5 L21 21" />
+  </svg>
+`;
+
+// Issue #203: dedicated Search button, top-left row next to the hamburger,
+// same 68x68px sizing (`#search-toggle` shares `#menu-toggle`'s box styling
+// in `style.css`). Opens `searchDialog` (built just below) - entirely
+// independent of `menuToggle`/`menuPanels`'s own open/closed state, per this
+// issue's explicit acceptance criterion that the two are unrelated.
+const searchToggle = document.createElement("button");
+searchToggle.id = "search-toggle";
+searchToggle.type = "button";
+searchToggle.innerHTML = SEARCH_ICON_SVG;
+searchToggle.setAttribute("aria-label", "Search objects");
+app.appendChild(searchToggle);
+
+// Issue #203: the modal shell (scrim + panel + close button) is built here,
+// at top-level startup like `infoDialog` below, so the button is clickable
+// immediately - `createSearchBox`'s own element (built once the scene loads,
+// inside `loadScene().then(...)` below, since it needs the live catalog) is
+// mounted into it later via `searchDialog.appendContent(...)`.
+const searchDialog = new SearchDialog();
+app.appendChild(searchDialog.element);
+searchToggle.addEventListener("click", () => searchDialog.show());
 
 // Issue #164 introduced the "i" (Info) button in this top-left row, next to
 // `#menu-toggle`. Issue #201 moved the button itself (and its click wiring)
@@ -1038,17 +1078,25 @@ loadScene()
       },
     });
 
+    // Issue #203: `onSelect` now also closes the search modal after
+    // `goToObject` moves the camera, so the user immediately sees the 3D
+    // result instead of the result staying hidden behind the still-open
+    // dialog (unlike the Info dialog, which has no "action" to complete and
+    // so stays open until explicitly dismissed). `createSearchBox`'s own
+    // commit logic (click/Enter-to-commit) is unchanged - this is purely
+    // the call site's own callback, same as `goToObject` itself already was.
     const searchBox = createSearchBox({
       getObjects: () => catalogObjects,
-      onSelect: goToObject,
+      onSelect: (obj) => {
+        goToObject(obj);
+        searchDialog.hide();
+      },
     });
+    searchDialog.appendContent(searchBox.element);
 
-    // Issue #143: both panels live inside the shared `menuPanels` toggle
-    // container (top-left) instead of directly in `#app` - Search first
-    // (top), Structures panel below it (bottom), per the human owner's
-    // requested stacking order. Neither panel's own internal
-    // content/behavior changes - only where it's mounted.
-    menuPanels.appendChild(searchBox.element);
+    // Issue #143 (Structures panel only, since #203 moved Search out into
+    // its own modal above): lives inside the `menuPanels` toggle container
+    // (top-left).
     menuPanels.appendChild(panel);
 
     applyCatalogVisibility();
