@@ -6770,3 +6770,10 @@ sources:
   retrieved: '2026-08-23T06:43:01+00:00'
   record_id: 6354 pscomppars rows
   cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-181/local-galactic-structures/data/raw/nasa_exoplanet_archive/pscomppars_bulk.json
+- id: simbad:Fomalhaut
+  source: simbad
+  query: Fomalhaut
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
+  retrieved: '2026-08-23T17:15:01+00:00'
+  record_id: '* alf PsA'
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-207/local-galactic-structures/data/raw/simbad/fomalhaut.json

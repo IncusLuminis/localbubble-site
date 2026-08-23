@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  denseBatchObjectFrameMaxDistancePc,
   edgeOnPose,
   faceOnPose,
   fitAllPose,
@@ -103,6 +104,78 @@ describe("objectCenteredPose", () => {
     const distance = Math.hypot(...pose.position);
     const perspectiveDistance = Math.hypot(...perspectivePose().position);
     expect(distance).toBeLessThan(perspectiveDistance);
+  });
+
+  // Issue #207: `maxDistancePc` caps the generic distance formula - the
+  // fix for the oversized dense-batch-star selection reticle (see
+  // `denseBatchObjectFrameMaxDistancePc`'s own describe block below for the
+  // actual cap value used in production).
+  it("caps the framing distance when maxDistancePc is smaller than the generic distance", () => {
+    const uncapped = objectCenteredPose([0, 0, 0], 45); // generic distance well above 5
+    const capped = objectCenteredPose([0, 0, 0], 45, 5);
+    const uncappedDistance = Math.hypot(...uncapped.position);
+    const cappedDistance = Math.hypot(...capped.position);
+    expect(uncappedDistance).toBeGreaterThan(5);
+    expect(cappedDistance).toBeCloseTo(5, 6);
+  });
+
+  it("leaves the generic distance unchanged when maxDistancePc is larger than it", () => {
+    const withoutCap = objectCenteredPose([0, 0, 0], 4);
+    const withLargeCap = objectCenteredPose([0, 0, 0], 4, 1000);
+    expect(withLargeCap).toEqual(withoutCap);
+  });
+
+  it("leaves the generic distance unchanged when maxDistancePc is omitted", () => {
+    const pose = objectCenteredPose([10, 20, 30], 4); // MIN_MARKER_RADIUS_PC-scale object
+    const distance = Math.hypot(
+      pose.position[0] - pose.target[0],
+      pose.position[1] - pose.target[1],
+      pose.position[2] - pose.target[2],
+    );
+    expect(distance).toBeCloseTo(25, 6); // OBJECT_FRAME_MIN_DISTANCE_PC floor, unaffected
+  });
+});
+
+describe("denseBatchObjectFrameMaxDistancePc", () => {
+  // Issue #207 root-cause fix: caps `objectCenteredPose`'s framing distance
+  // for a dense-batch star so the resulting camera position, by the
+  // triangle inequality, can never end up farther from the origin than
+  // `denseBatchRadiusPc` by more than the function's own small floor -
+  // landing inside the same radius `starMarkerRadiusPc`/`passesDenseBatchLod`
+  // already treat as "fully zoomed into the dense-LOD sphere", regardless of
+  // where in that sphere the target itself sits.
+  it("returns denseBatchRadiusPc minus the target's own distance from the origin, for a target near the origin", () => {
+    // Alpha Centauri A's real position_pc is close to [0.9, -0.9, -0.02]
+    // (distance from origin ~1.3pc); with a ~11.26pc denseBatchRadiusPc
+    // (this batch's real collection radius), the safe budget is ~9.96pc.
+    const distanceFromOrigin = Math.hypot(0.9, -0.9, -0.02);
+    const denseBatchRadiusPc = 11.26;
+    const result = denseBatchObjectFrameMaxDistancePc([0.9, -0.9, -0.02], denseBatchRadiusPc);
+    expect(result).toBeCloseTo(denseBatchRadiusPc - distanceFromOrigin, 6);
+  });
+
+  it("guarantees (via the triangle inequality) the resulting camera position stays within denseBatchRadiusPc of the origin", () => {
+    const denseBatchRadiusPc = 11.26;
+    const positionPc: [number, number, number] = [3, -4, 2]; // distance from origin = sqrt(29) ~5.39pc
+    const maxDistancePc = denseBatchObjectFrameMaxDistancePc(positionPc, denseBatchRadiusPc);
+    const pose = objectCenteredPose(positionPc, 2, maxDistancePc);
+    const cameraDistanceFromOrigin = Math.hypot(...pose.position);
+    expect(cameraDistanceFromOrigin).toBeLessThanOrEqual(denseBatchRadiusPc + 1e-9);
+  });
+
+  it("falls back to a small positive floor rather than ~0 for a target already at the sphere's own edge", () => {
+    const denseBatchRadiusPc = 11.26;
+    // A target sitting exactly at the collection radius from the origin.
+    const positionPc: [number, number, number] = [denseBatchRadiusPc, 0, 0];
+    const result = denseBatchObjectFrameMaxDistancePc(positionPc, denseBatchRadiusPc);
+    expect(result).toBeGreaterThan(0);
+  });
+
+  it("scales down as the target's own distance from the origin grows", () => {
+    const denseBatchRadiusPc = 11.26;
+    const near = denseBatchObjectFrameMaxDistancePc([1, 0, 0], denseBatchRadiusPc);
+    const far = denseBatchObjectFrameMaxDistancePc([8, 0, 0], denseBatchRadiusPc);
+    expect(far).toBeLessThan(near);
   });
 });
 
