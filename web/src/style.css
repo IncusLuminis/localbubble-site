@@ -306,6 +306,67 @@ body {
   word-break: break-word;
 }
 
+/* Story #182: exoplanet orbit schematic, appended below the row list above
+ * for stars with known exoplanets. `.orbit-diagram-svg` sizing comes from
+ * its own `viewBox`/width/height attributes (`ui/orbitDiagram.ts`'s
+ * `DIAGRAM_SIZE_PX`), not CSS - only visual styling (color/stroke) lives
+ * here. */
+.orbit-diagram {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(143, 163, 200, 0.2);
+}
+
+.orbit-diagram-svg {
+  display: block;
+  margin: 0 auto;
+}
+
+.orbit-diagram-ring {
+  fill: none;
+  stroke: rgba(143, 163, 200, 0.45);
+  stroke-width: 1;
+}
+
+.orbit-diagram-star {
+  stroke: rgba(0, 0, 0, 0.4);
+  stroke-width: 0.5;
+}
+
+.orbit-diagram-marker {
+  fill: rgba(10, 14, 24, 0.9);
+  stroke: #dfe6f3;
+  stroke-width: 1;
+}
+
+.orbit-diagram-marker-label {
+  fill: #dfe6f3;
+  font-size: 8px;
+}
+
+.orbit-diagram-legend {
+  margin-top: 6px;
+}
+
+.orbit-diagram-legend-row {
+  font-size: 12px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.orbit-diagram-note {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #8fa3c8;
+  font-style: italic;
+}
+
+.orbit-diagram-caption {
+  margin-top: 6px;
+  font-size: 11px;
+  color: #8fa3c8;
+}
+
 /* CSS2DRenderer labels (spec §25).
  *
  * Issue #132: the offset below is deliberately generous (up from the

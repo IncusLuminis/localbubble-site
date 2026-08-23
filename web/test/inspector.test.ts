@@ -42,6 +42,8 @@ function makePlanet(overrides: Partial<ScenePlanetSummary> = {}): ScenePlanetSum
     discovery_method: null,
     discovery_year: null,
     discovery_facility: null,
+    semi_major_axis_au: null,
+    orbital_eccentricity: null,
     ...overrides,
   };
 }

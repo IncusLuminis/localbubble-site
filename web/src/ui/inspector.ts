@@ -2,6 +2,7 @@ import type { SceneExoplanetSummary, SceneObject, ScenePlanetSummary } from "../
 import { cartesianToGalacticLB } from "../scene/galacticCoords";
 import { displayName } from "../scene/labels";
 import { STAR_OBJECT_TYPES } from "../scene/objects";
+import { createOrbitDiagramElement } from "./orbitDiagram";
 
 /**
  * The object inspector panel (spec Idea.md §24): "Clicking or selecting an
@@ -17,6 +18,10 @@ import { STAR_OBJECT_TYPES } from "../scene/objects";
  * (see `test/inspector.test.ts`); `Inspector` itself isn't, since
  * `vitest.config.ts` runs with `environment: "node"` and `document` isn't
  * available there (same constraint noted in `infoDialog.ts`).
+ *
+ * Story #182 appends a visual orbit schematic (`ui/orbitDiagram.ts`) below
+ * the row list above, for stars with `exoplanets.count > 0` - purely
+ * additive, the existing text-based "Exoplanets" row above is unchanged.
  */
 
 function formatNumber(value: number, digits = 2): string {
@@ -136,6 +141,19 @@ export class Inspector {
       valueEl.textContent = value;
       row.append(labelEl, valueEl);
       this.content.appendChild(row);
+    }
+
+    // Story #182: the orbit schematic, appended after the row list above
+    // rather than folded into it (it's a diagram, not a label/value row).
+    // Only for stars with at least one known exoplanet - `obj.exoplanets`
+    // is non-null for ~5% of stars (Story #171) and never set on
+    // non-star object types, matching the same `STAR_OBJECT_TYPES` gate
+    // used for the Spectral Type/Absolute Magnitude/Exoplanets rows above.
+    if (STAR_OBJECT_TYPES.has(obj.object_type) && obj.exoplanets !== null && obj.exoplanets.count > 0) {
+      const diagram = createOrbitDiagramElement(obj.exoplanets, obj.spectral_type);
+      if (diagram !== null) {
+        this.content.appendChild(diagram);
+      }
     }
 
     this.element.style.display = "block";

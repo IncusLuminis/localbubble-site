@@ -57,7 +57,14 @@ export interface SceneObject {
   notes: string | null;
 }
 
-/** One entry of a star's `exoplanets.planets` array (Story #171 / #172). */
+/** One entry of a star's `exoplanets.planets` array (Story #171 / #172).
+ * Story #181 (E1) added `semi_major_axis_au`/`orbital_eccentricity` to the
+ * export pipeline's output - backend-only at the time, so this interface
+ * didn't yet declare them; Story #182's orbit schematic
+ * (`ui/orbitDiagram.ts`) is their first consumer, hence adding them here
+ * now. Both are `number | null` like every other NASA Exoplanet
+ * Archive-sourced field on this interface: some older radial-velocity
+ * discoveries lack a fitted semi-major axis or eccentricity. */
 export interface ScenePlanetSummary {
   name: string;
   orbital_period_days: number | null;
@@ -66,6 +73,13 @@ export interface ScenePlanetSummary {
   discovery_method: string | null;
   discovery_year: number | null;
   discovery_facility: string | null;
+  /** Semi-major axis in AU, or `null` when not on record. `ui/orbitDiagram.ts`
+   * log-scales this to an on-screen orbit ring radius. */
+  semi_major_axis_au: number | null;
+  /** Orbital eccentricity (0 = circular), or `null` when not on record.
+   * `ui/orbitDiagram.ts` optionally draws a slightly elliptical orbit ring
+   * when this is meaningfully nonzero. */
+  orbital_eccentricity: number | null;
 }
 
 /** A star's `exoplanets` block (Story #171 / #172): a NASA Exoplanet
