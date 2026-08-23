@@ -97,10 +97,13 @@ SOURCE_URL = (
     "nph-tblView?app=ExoTbls&config=PSCompPars"
 )
 
-#: Columns pulled from `pscomppars` (spec Story #171): stellar cross-match
-#: keys plus the per-planet fields `PlanetSummary` needs. See module
-#: docstring for why this is `gaia_dr2_id`/`gaia_dr3_id`, not a single
-#: `gaia_id` column.
+#: Columns pulled from `pscomppars` (spec Story #171, extended by #181):
+#: stellar cross-match keys plus the per-planet fields `PlanetSummary`
+#: needs. See module docstring for why this is `gaia_dr2_id`/
+#: `gaia_dr3_id`, not a single `gaia_id` column. `pl_orbsmax`/`pl_orbeccen`
+#: (Story #181) are the same "unwrap-or-None, never fabricate" numeric
+#: cells as `pl_orbper`/`pl_bmasse`/`pl_rade` - `_row_value_to_python`
+#: already handles them with no changes needed.
 SELECT_COLUMNS = (
     "hostname",
     "hd_name",
@@ -112,6 +115,8 @@ SELECT_COLUMNS = (
     "pl_orbper",
     "pl_bmasse",
     "pl_rade",
+    "pl_orbsmax",
+    "pl_orbeccen",
     "discoverymethod",
     "disc_year",
     "disc_facility",
@@ -284,6 +289,8 @@ def _planet_from_row(row: dict[str, Any]) -> PlanetSummary:
         orbital_period_days=row.get("pl_orbper"),
         minimum_mass_earth=row.get("pl_bmasse"),
         radius_earth=row.get("pl_rade"),
+        semi_major_axis_au=row.get("pl_orbsmax"),
+        orbital_eccentricity=row.get("pl_orbeccen"),
         discovery_method=row.get("discoverymethod") or None,
         discovery_year=row.get("disc_year"),
         discovery_facility=row.get("disc_facility") or None,

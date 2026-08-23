@@ -812,6 +812,8 @@ _GJ876_ROWS = [
         "pl_orbper": 61.1166,
         "pl_bmasse": 723.2235,
         "pl_rade": 13.3,
+        "pl_orbsmax": 0.2083,
+        "pl_orbeccen": 0.0324,
         "discoverymethod": "Radial Velocity",
         "disc_year": 1998,
         "disc_facility": "Multiple Observatories",
@@ -827,6 +829,9 @@ _GJ876_ROWS = [
         "pl_orbper": 30.0881,
         "pl_bmasse": 226.9846,
         "pl_rade": 14.0,
+        # Story #181: verified live against the archive.
+        "pl_orbsmax": 0.12959,
+        "pl_orbeccen": 0.25591,
         "discoverymethod": "Radial Velocity",
         "disc_year": 2000,
         "disc_facility": "Multiple Observatories",
@@ -842,6 +847,8 @@ _GJ876_ROWS = [
         "pl_orbper": 1.93778,
         "pl_bmasse": 6.83,
         "pl_rade": 2.51,
+        "pl_orbsmax": 0.02080,
+        "pl_orbeccen": 0.207,
         "discoverymethod": "Radial Velocity",
         "disc_year": 2005,
         "disc_facility": "W. M. Keck Observatory",
@@ -857,6 +864,8 @@ _GJ876_ROWS = [
         "pl_orbper": 124.26,
         "pl_bmasse": 14.6,
         "pl_rade": 3.92,
+        "pl_orbsmax": 0.3343,
+        "pl_orbeccen": 0.055,
         "discoverymethod": "Radial Velocity",
         "disc_year": 2010,
         "disc_facility": "W. M. Keck Observatory",
@@ -875,6 +884,8 @@ _PROXIMA_ROWS = [
         "pl_orbper": 11.18465,
         "pl_bmasse": 1.055,
         "pl_rade": 1.02,
+        "pl_orbsmax": 0.04856,
+        "pl_orbeccen": 0.109,
         "discoverymethod": "Radial Velocity",
         "disc_year": 2016,
         "disc_facility": "European Southern Observatory",
@@ -890,6 +901,8 @@ _PROXIMA_ROWS = [
         "pl_orbper": 5.12338,
         "pl_bmasse": 0.26,
         "pl_rade": None,  # non-transiting - real, common case
+        "pl_orbsmax": 0.02885,
+        "pl_orbeccen": None,  # not well-constrained for this detection
         "discoverymethod": "Radial Velocity",
         "disc_year": 2025,
         "disc_facility": "La Silla Observatory",
@@ -915,6 +928,8 @@ _ALF_CEN_ROWS = [
         "pl_orbper": 3.2357,
         "pl_bmasse": 1.13,
         "pl_rade": None,
+        "pl_orbsmax": 0.04,
+        "pl_orbeccen": None,
         "discoverymethod": "Radial Velocity",
         "disc_year": 2012,
         "disc_facility": "La Silla Observatory",
@@ -975,6 +990,23 @@ class TestNasaExoplanetArchiveCrossMatching:
         assert by_name["Proxima Cen d"].radius_earth is None
         assert by_name["Proxima Cen b"].radius_earth == 1.02
 
+    def test_semi_major_axis_and_eccentricity_are_matched(self):
+        # Story #181: verified live values for GJ 876 c.
+        aliases = ["TIC 188580272", "GJ 876", "HIP 113020"]
+        summary = match_exoplanets(aliases, _GJ876_ROWS)
+        by_name = {p.name: p for p in summary.planets}
+        assert by_name["GJ 876 c"].semi_major_axis_au == 0.12959
+        assert by_name["GJ 876 c"].orbital_eccentricity == 0.25591
+
+    def test_null_eccentricity_is_preserved_when_not_well_constrained(self):
+        # Story #181: pl_orbeccen can be null even when pl_orbsmax is
+        # populated - null, never fabricated.
+        aliases = ["HIP 70890"]
+        summary = match_exoplanets(aliases, _PROXIMA_ROWS)
+        by_name = {p.name: p for p in summary.planets}
+        assert by_name["Proxima Cen d"].semi_major_axis_au == 0.02885
+        assert by_name["Proxima Cen d"].orbital_eccentricity is None
+
     def test_matches_multi_planet_host_returns_all_planets(self):
         aliases = ["TIC 188580272", "GJ 876", "HIP 113020"]
         summary = match_exoplanets(aliases, _GJ876_ROWS)
@@ -1009,6 +1041,8 @@ class TestNasaExoplanetArchiveCrossMatching:
                 "pl_orbper": 18.315,
                 "pl_bmasse": 2.7,
                 "pl_rade": None,
+                "pl_orbsmax": 0.1207,
+                "pl_orbeccen": None,
                 "discoverymethod": "Radial Velocity",
                 "disc_year": 2011,
                 "disc_facility": "European Southern Observatory",

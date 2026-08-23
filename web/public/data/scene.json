@@ -21773,6 +21773,8 @@
             "orbital_period_days": 1021.20159,
             "minimum_mass_earth": 7668.5638041,
             "radius_earth": 12.0,
+            "semi_major_axis_au": 3.233,
+            "orbital_eccentricity": 0.097,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "Bohyunsan Optical Astronomical Observatory"
@@ -21782,6 +21784,8 @@
             "orbital_period_days": 622.97802,
             "minimum_mass_earth": 7185.78245386,
             "radius_earth": 12.0,
+            "semi_major_axis_au": 2.325,
+            "orbital_eccentricity": 0.095,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2022,
             "discovery_facility": "Multiple Observatories"
@@ -42573,6 +42577,8 @@
             "orbital_period_days": 5.12338,
             "minimum_mass_earth": 0.26,
             "radius_earth": 0.692,
+            "semi_major_axis_au": 0.02881,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2025,
             "discovery_facility": "La Silla Observatory"
@@ -42582,6 +42588,8 @@
             "orbital_period_days": 11.18465,
             "minimum_mass_earth": 1.055,
             "radius_earth": 1.02,
+            "semi_major_axis_au": 0.04848,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2016,
             "discovery_facility": "European Southern Observatory"
@@ -42806,6 +42814,8 @@
             "orbital_period_days": 2.3402,
             "minimum_mass_earth": 0.263,
             "radius_earth": 0.694,
+            "semi_major_axis_au": 0.0188,
+            "orbital_eccentricity": 0.04,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2025,
             "discovery_facility": "Gemini Observatory"
@@ -42815,6 +42825,8 @@
             "orbital_period_days": 4.1244,
             "minimum_mass_earth": 0.335,
             "radius_earth": 0.743,
+            "semi_major_axis_au": 0.0274,
+            "orbital_eccentricity": 0.08,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2025,
             "discovery_facility": "Gemini Observatory"
@@ -42824,6 +42836,8 @@
             "orbital_period_days": 3.1542,
             "minimum_mass_earth": 0.299,
             "radius_earth": 0.72,
+            "semi_major_axis_au": 0.0229,
+            "orbital_eccentricity": 0.03,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2024,
             "discovery_facility": "Paranal Observatory"
@@ -42833,6 +42847,8 @@
             "orbital_period_days": 6.7392,
             "minimum_mass_earth": 0.193,
             "radius_earth": 0.637,
+            "semi_major_axis_au": 0.0381,
+            "orbital_eccentricity": 0.04,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2025,
             "discovery_facility": "Gemini Observatory"
@@ -43027,6 +43043,8 @@
             "orbital_period_days": 12.9394,
             "minimum_mass_earth": 2.69,
             "radius_earth": 1.45,
+            "semi_major_axis_au": 0.07879,
+            "orbital_eccentricity": 0.063,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2019,
             "discovery_facility": "Haute-Provence Observatory"
@@ -43036,6 +43054,8 @@
             "orbital_period_days": 2946.0,
             "minimum_mass_earth": 13.6,
             "radius_earth": 3.76,
+            "semi_major_axis_au": 2.94,
+            "orbital_eccentricity": 0.132,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2021,
             "discovery_facility": "Multiple Observatories"
@@ -43585,6 +43605,8 @@
             "orbital_period_days": 2680.0,
             "minimum_mass_earth": 317.828407,
             "radius_earth": 13.8,
+            "semi_major_axis_au": 3.53,
+            "orbital_eccentricity": 0.06,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2000,
             "discovery_facility": "Multiple Observatories"
@@ -43673,6 +43695,8 @@
             "orbital_period_days": 4.4249,
             "minimum_mass_earth": 1.46,
             "radius_earth": 1.12,
+            "semi_major_axis_au": 0.0417,
+            "orbital_eccentricity": null,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2026,
             "discovery_facility": "Multiple Observatories"
@@ -43682,6 +43706,8 @@
             "orbital_period_days": 21.784,
             "minimum_mass_earth": 6.5,
             "radius_earth": 2.43,
+            "semi_major_axis_au": 0.121,
+            "orbital_eccentricity": 0.17,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "La Silla Observatory"
@@ -43691,6 +43717,8 @@
             "orbital_period_days": 9.2619,
             "minimum_mass_earth": 3.9,
             "radius_earth": 1.8,
+            "semi_major_axis_au": 0.0683,
+            "orbital_eccentricity": 0.14,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "La Silla Observatory"
@@ -43700,6 +43728,8 @@
             "orbital_period_days": 50.77,
             "minimum_mass_earth": 6.1,
             "radius_earth": 2.34,
+            "semi_major_axis_au": 0.212,
+            "orbital_eccentricity": null,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2026,
             "discovery_facility": "Multiple Observatories"
@@ -43804,6 +43834,8 @@
             "orbital_period_days": 9.8658,
             "minimum_mass_earth": 1.4,
             "radius_earth": 1.11,
+            "semi_major_axis_au": 0.0496,
+            "orbital_eccentricity": 0.116,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -44249,6 +44281,8 @@
             "orbital_period_days": 11.2201,
             "minimum_mass_earth": 2.78,
             "radius_earth": 1.48,
+            "semi_major_axis_au": 0.068,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2025,
             "discovery_facility": "Multiple Observatories"
@@ -44343,6 +44377,8 @@
             "orbital_period_days": 37.9,
             "minimum_mass_earth": 3.4,
             "radius_earth": 1.66,
+            "semi_major_axis_au": 0.139,
+            "orbital_eccentricity": null,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2026,
             "discovery_facility": "Mauna Kea Observatory"
@@ -44450,6 +44486,8 @@
             "orbital_period_days": 11.4407,
             "minimum_mass_earth": 3.03,
             "radius_earth": 1.55,
+            "semi_major_axis_au": 0.072,
+            "orbital_eccentricity": 0.094,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2014,
             "discovery_facility": "W. M. Keck Observatory"
@@ -44459,6 +44497,8 @@
             "orbital_period_days": 7600.0,
             "minimum_mass_earth": 36.0,
             "radius_earth": 6.67,
+            "semi_major_axis_au": 5.4,
+            "orbital_eccentricity": 0.27,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2018,
             "discovery_facility": "Roque de los Muchachos Observatory"
@@ -44624,6 +44664,8 @@
             "orbital_period_days": 25450.0,
             "minimum_mass_earth": 2065.8846455,
             "radius_earth": 12.7,
+            "semi_major_axis_au": 15.76,
+            "orbital_eccentricity": 0.25,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2019,
             "discovery_facility": "La Silla Observatory"
@@ -44831,6 +44873,8 @@
             "orbital_period_days": 20.0,
             "minimum_mass_earth": 1.75,
             "radius_earth": 1.18,
+            "semi_major_axis_au": 0.133,
+            "orbital_eccentricity": 0.06,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "Multiple Observatories"
@@ -44840,6 +44884,8 @@
             "orbital_period_days": 636.13,
             "minimum_mass_earth": 3.93,
             "radius_earth": 1.81,
+            "semi_major_axis_au": 1.334,
+            "orbital_eccentricity": 0.16,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "Multiple Observatories"
@@ -44849,6 +44895,8 @@
             "orbital_period_days": 49.41,
             "minimum_mass_earth": 1.83,
             "radius_earth": 1.19,
+            "semi_major_axis_au": 0.243,
+            "orbital_eccentricity": 0.23,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "Multiple Observatories"
@@ -44915,6 +44963,8 @@
             "orbital_period_days": 13.066,
             "minimum_mass_earth": 1.67,
             "radius_earth": 1.16,
+            "semi_major_axis_au": 0.054,
+            "orbital_eccentricity": 0.04,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "La Silla Observatory"
@@ -44924,6 +44974,8 @@
             "orbital_period_days": 3.2073,
             "minimum_mass_earth": 1.11,
             "radius_earth": 1.04,
+            "semi_major_axis_au": 0.021,
+            "orbital_eccentricity": 0.05,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "La Silla Observatory"
@@ -44933,6 +44985,8 @@
             "orbital_period_days": 6.6821,
             "minimum_mass_earth": 1.81,
             "radius_earth": 1.19,
+            "semi_major_axis_au": 0.0342,
+            "orbital_eccentricity": 0.02,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "La Silla Observatory"
@@ -45019,6 +45073,8 @@
             "orbital_period_days": 2.02087,
             "minimum_mass_earth": 0.7,
             "radius_earth": 0.913,
+            "semi_major_axis_au": 0.01634,
+            "orbital_eccentricity": 0.06,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -45028,6 +45084,8 @@
             "orbital_period_days": 3.05989,
             "minimum_mass_earth": 1.14,
             "radius_earth": 1.05,
+            "semi_major_axis_au": 0.02156,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -45037,6 +45095,8 @@
             "orbital_period_days": 4.65626,
             "minimum_mass_earth": 1.09,
             "radius_earth": 1.03,
+            "semi_major_axis_au": 0.02851,
+            "orbital_eccentricity": 0.07,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -45129,6 +45189,8 @@
             "orbital_period_days": 18.6498,
             "minimum_mass_earth": 2.89,
             "radius_earth": 1.51,
+            "semi_major_axis_au": 0.091101,
+            "orbital_eccentricity": 0.1,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -45138,6 +45200,8 @@
             "orbital_period_days": 4.7234,
             "minimum_mass_earth": 1.18,
             "radius_earth": 1.06,
+            "semi_major_axis_au": 0.036467,
+            "orbital_eccentricity": 0.17,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -45201,6 +45265,8 @@
             "orbital_period_days": 11.416,
             "minimum_mass_earth": 1.05,
             "radius_earth": 1.02,
+            "semi_major_axis_au": 0.0455,
+            "orbital_eccentricity": 0.04,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2019,
             "discovery_facility": "Calar Alto Observatory"
@@ -45210,6 +45276,8 @@
             "orbital_period_days": 26.13,
             "minimum_mass_earth": 0.82,
             "radius_earth": 0.954,
+            "semi_major_axis_au": 0.0791,
+            "orbital_eccentricity": 0.07,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2024,
             "discovery_facility": "Multiple Observatories"
@@ -45219,6 +45287,8 @@
             "orbital_period_days": 4.90634,
             "minimum_mass_earth": 1.16,
             "radius_earth": 1.05,
+            "semi_major_axis_au": 0.0259,
+            "orbital_eccentricity": 0.03,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2019,
             "discovery_facility": "Calar Alto Observatory"
@@ -45306,6 +45376,8 @@
             "orbital_period_days": 121.54,
             "minimum_mass_earth": 7.0,
             "radius_earth": 2.54,
+            "semi_major_axis_au": 0.311,
+            "orbital_eccentricity": 0.23,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2014,
             "discovery_facility": "Multiple Observatories"
@@ -45664,6 +45736,8 @@
             "orbital_period_days": 4.8869,
             "minimum_mass_earth": 1.91,
             "radius_earth": 1.21,
+            "semi_major_axis_au": 0.0375,
+            "orbital_eccentricity": 0.15,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "La Silla Observatory"
@@ -45673,6 +45747,8 @@
             "orbital_period_days": 17.8719,
             "minimum_mass_earth": 3.41,
             "radius_earth": 1.66,
+            "semi_major_axis_au": 0.089,
+            "orbital_eccentricity": 0.11,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "La Silla Observatory"
@@ -45682,6 +45758,8 @@
             "orbital_period_days": 217.21,
             "minimum_mass_earth": 7.7,
             "radius_earth": 2.69,
+            "semi_major_axis_au": 0.47,
+            "orbital_eccentricity": 0.55,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "La Silla Observatory"
@@ -45993,6 +46071,8 @@
             "orbital_period_days": 771.36,
             "minimum_mass_earth": 66.74396547,
             "radius_earth": 9.6,
+            "semi_major_axis_au": 0.88,
+            "orbital_eccentricity": 0.46,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "Multiple Observatories"
@@ -46089,6 +46169,8 @@
             "orbital_period_days": 38.142,
             "minimum_mass_earth": 17.2,
             "radius_earth": 4.32,
+            "semi_major_axis_au": 0.163,
+            "orbital_eccentricity": 0.17,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2014,
             "discovery_facility": "Lick Observatory"
@@ -46098,6 +46180,8 @@
             "orbital_period_days": 727.562,
             "minimum_mass_earth": 16.0,
             "radius_earth": 4.14,
+            "semi_major_axis_au": 1.165,
+            "orbital_eccentricity": 0.4,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "Multiple Observatories"
@@ -46351,6 +46435,8 @@
             "orbital_period_days": 4.6938,
             "minimum_mass_earth": 11.09,
             "radius_earth": 3.33,
+            "semi_major_axis_au": 0.039,
+            "orbital_eccentricity": 0.2,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2007,
             "discovery_facility": "La Silla Observatory"
@@ -46513,6 +46599,8 @@
             "orbital_period_days": 30.0881,
             "minimum_mass_earth": 226.9846,
             "radius_earth": 14.0,
+            "semi_major_axis_au": 0.12959,
+            "orbital_eccentricity": 0.25591,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2000,
             "discovery_facility": "Multiple Observatories"
@@ -46522,6 +46610,8 @@
             "orbital_period_days": 61.1166,
             "minimum_mass_earth": 723.2235,
             "radius_earth": 13.3,
+            "semi_major_axis_au": 0.208317,
+            "orbital_eccentricity": 0.0324,
             "discovery_method": "Radial Velocity",
             "discovery_year": 1998,
             "discovery_facility": "Multiple Observatories"
@@ -46531,6 +46621,8 @@
             "orbital_period_days": 1.93778,
             "minimum_mass_earth": 6.83,
             "radius_earth": 2.51,
+            "semi_major_axis_au": 0.02080665,
+            "orbital_eccentricity": 0.207,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2005,
             "discovery_facility": "W. M. Keck Observatory"
@@ -46540,6 +46632,8 @@
             "orbital_period_days": 124.26,
             "minimum_mass_earth": 14.6,
             "radius_earth": 3.92,
+            "semi_major_axis_au": 0.3343,
+            "orbital_eccentricity": 0.055,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2010,
             "discovery_facility": "W. M. Keck Observatory"
@@ -46610,6 +46704,8 @@
             "orbital_period_days": 10.3465,
             "minimum_mass_earth": 1.08,
             "radius_earth": 1.03,
+            "semi_major_axis_au": 0.0457,
+            "orbital_eccentricity": null,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2022,
             "discovery_facility": "Multiple Observatories"
@@ -46619,6 +46715,8 @@
             "orbital_period_days": 21.202,
             "minimum_mass_earth": 1.36,
             "radius_earth": 1.1,
+            "semi_major_axis_au": 0.0738,
+            "orbital_eccentricity": null,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2022,
             "discovery_facility": "Multiple Observatories"
@@ -47105,6 +47203,8 @@
             "orbital_period_days": 3853.0,
             "minimum_mass_earth": 314.65012293,
             "radius_earth": 13.8,
+            "semi_major_axis_au": 3.7,
+            "orbital_eccentricity": 0.05,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2008,
             "discovery_facility": "Anglo-Australian Telescope"
@@ -47540,6 +47640,8 @@
             "orbital_period_days": 57.32,
             "minimum_mass_earth": 8.7,
             "radius_earth": 2.89,
+            "semi_major_axis_au": 0.176,
+            "orbital_eccentricity": 0.1,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2014,
             "discovery_facility": "Multiple Observatories"
@@ -47549,6 +47651,8 @@
             "orbital_period_days": 17.478,
             "minimum_mass_earth": 4.4,
             "radius_earth": 1.93,
+            "semi_major_axis_au": 0.08,
+            "orbital_eccentricity": 0.08,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2014,
             "discovery_facility": "Multiple Observatories"
@@ -47980,6 +48084,8 @@
             "orbital_period_days": 5.3636,
             "minimum_mass_earth": 2.02,
             "radius_earth": 1.23,
+            "semi_major_axis_au": 0.03282,
+            "orbital_eccentricity": 0.23,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -47989,6 +48095,8 @@
             "orbital_period_days": 40.54,
             "minimum_mass_earth": 2.31,
             "radius_earth": 1.32,
+            "semi_major_axis_au": 0.1264,
+            "orbital_eccentricity": 0.17,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -48392,6 +48500,8 @@
             "orbital_period_days": 53.647,
             "minimum_mass_earth": 3.88,
             "radius_earth": 1.8,
+            "semi_major_axis_au": 0.196,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2025,
             "discovery_facility": "Multiple Observatories"
@@ -48401,6 +48511,8 @@
             "orbital_period_days": 14.237,
             "minimum_mass_earth": 3.85,
             "radius_earth": 1.79,
+            "semi_major_axis_au": 0.0808,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "W. M. Keck Observatory"
@@ -48995,6 +49107,8 @@
             "orbital_period_days": 105.911,
             "minimum_mass_earth": 12.214,
             "radius_earth": 3.53,
+            "semi_major_axis_au": 0.343,
+            "orbital_eccentricity": 0.101,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2018,
             "discovery_facility": "Calar Alto Observatory"
@@ -50087,6 +50201,8 @@
             "orbital_period_days": 647.6,
             "minimum_mass_earth": 5.82,
             "radius_earth": 2.28,
+            "semi_major_axis_au": 1.3541,
+            "orbital_eccentricity": 0.45,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2025,
             "discovery_facility": "Multiple Observatories"
@@ -50096,6 +50212,8 @@
             "orbital_period_days": 89.68,
             "minimum_mass_earth": 4.8,
             "radius_earth": 2.04,
+            "semi_major_axis_au": 0.3625,
+            "orbital_eccentricity": 0.077,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2011,
             "discovery_facility": "La Silla Observatory"
@@ -50105,6 +50223,8 @@
             "orbital_period_days": 18.314,
             "minimum_mass_earth": 2.7,
             "radius_earth": 1.45,
+            "semi_major_axis_au": 0.1257,
+            "orbital_eccentricity": 0.064,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2011,
             "discovery_facility": "La Silla Observatory"
@@ -50114,6 +50234,8 @@
             "orbital_period_days": 147.02,
             "minimum_mass_earth": 4.77,
             "radius_earth": 2.03,
+            "semi_major_axis_au": 0.509,
+            "orbital_eccentricity": 0.29,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "La Silla Observatory"
@@ -50349,6 +50471,8 @@
             "orbital_period_days": 24.422,
             "minimum_mass_earth": 10.6,
             "radius_earth": 3.25,
+            "semi_major_axis_au": 0.142,
+            "orbital_eccentricity": 0.109,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2020,
             "discovery_facility": "Calar Alto Observatory"
@@ -50707,6 +50831,8 @@
             "orbital_period_days": 36.116,
             "minimum_mass_earth": 5.46,
             "radius_earth": 2.2,
+            "semi_major_axis_au": 0.1417,
+            "orbital_eccentricity": 0.079,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2023,
             "discovery_facility": "Calar Alto Observatory"
@@ -50779,6 +50905,8 @@
             "orbital_period_days": 284.39,
             "minimum_mass_earth": 718.29219982,
             "radius_earth": 13.3,
+            "semi_major_axis_au": 0.63965,
+            "orbital_eccentricity": 0.35,
             "discovery_method": "Astrometry",
             "discovery_year": 2022,
             "discovery_facility": "Very Long Baseline Array"
@@ -50929,6 +51057,8 @@
             "orbital_period_days": 5.3686,
             "minimum_mass_earth": 20.5,
             "radius_earth": 4.79,
+            "semi_major_axis_au": 0.0399,
+            "orbital_eccentricity": 0.0342,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2005,
             "discovery_facility": "La Silla Observatory"
@@ -50938,6 +51068,8 @@
             "orbital_period_days": 12.9211,
             "minimum_mass_earth": 6.81,
             "radius_earth": 2.5,
+            "semi_major_axis_au": 0.0718,
+            "orbital_eccentricity": 0.032,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2007,
             "discovery_facility": "La Silla Observatory"
@@ -50947,6 +51079,8 @@
             "orbital_period_days": 3.1481,
             "minimum_mass_earth": 2.48,
             "radius_earth": 1.38,
+            "semi_major_axis_au": 0.02799,
+            "orbital_eccentricity": 0.012,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2009,
             "discovery_facility": "La Silla Observatory"
@@ -51479,6 +51613,8 @@
             "orbital_period_days": 14.628,
             "minimum_mass_earth": 2.82,
             "radius_earth": 1.49,
+            "semi_major_axis_au": 0.078361,
+            "orbital_eccentricity": 0.13,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2017,
             "discovery_facility": "Multiple Observatories"
@@ -51697,6 +51833,8 @@
             "orbital_period_days": 2247.0,
             "minimum_mass_earth": 108.0622,
             "radius_earth": 12.7,
+            "semi_major_axis_au": 3.11,
+            "orbital_eccentricity": 0.06,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "Roque de los Muchachos Observatory"
@@ -51706,6 +51844,8 @@
             "orbital_period_days": 94.2,
             "minimum_mass_earth": 10.80622,
             "radius_earth": 3.28,
+            "semi_major_axis_au": 0.3753,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "Multiple Observatories"
@@ -51715,6 +51855,8 @@
             "orbital_period_days": 3.092926,
             "minimum_mass_earth": 4.74,
             "radius_earth": 1.602,
+            "semi_major_axis_au": 0.03876,
+            "orbital_eccentricity": 0.0,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "Roque de los Muchachos Observatory"
@@ -51724,6 +51866,8 @@
             "orbital_period_days": 46.859,
             "minimum_mass_earth": 16.17,
             "radius_earth": 1.61,
+            "semi_major_axis_au": 0.237,
+            "orbital_eccentricity": 0.138,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "Roque de los Muchachos Observatory"
@@ -51733,6 +51877,8 @@
             "orbital_period_days": 22.717,
             "minimum_mass_earth": 7.3,
             "radius_earth": 1.31,
+            "semi_major_axis_au": 0.1463,
+            "orbital_eccentricity": 0.148,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "Multiple Observatories"
@@ -51742,6 +51888,8 @@
             "orbital_period_days": 6.76458,
             "minimum_mass_earth": 4.36,
             "radius_earth": 1.511,
+            "semi_major_axis_au": 0.0653,
+            "orbital_eccentricity": 0.062,
             "discovery_method": "Radial Velocity",
             "discovery_year": 2015,
             "discovery_facility": "Roque de los Muchachos Observatory"

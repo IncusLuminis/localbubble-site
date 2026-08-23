@@ -95,6 +95,14 @@ class PlanetSummary(BaseModel):
     #: Minimum mass (m*sin(i) for RV-only detections, `pl_bmasse`).
     minimum_mass_earth: float | None = None
     radius_earth: float | None = None
+    #: Semi-major axis in AU (`pl_orbsmax`, Story #181). `None` when the
+    #: archive has no well-constrained value on file (some older RV-only
+    #: discoveries lack one), never fabricated.
+    semi_major_axis_au: float | None = None
+    #: Orbital eccentricity, dimensionless (`pl_orbeccen`, Story #181).
+    #: `None` when the archive has no well-constrained value on file, same
+    #: convention as every other optional field here.
+    orbital_eccentricity: float | None = None
     discovery_method: str | None = None
     discovery_year: int | None = None
     discovery_facility: str | None = None

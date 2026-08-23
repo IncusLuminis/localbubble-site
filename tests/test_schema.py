@@ -114,6 +114,8 @@ class TestPlanetSummaryOptionality:
         assert planet.orbital_period_days is None
         assert planet.minimum_mass_earth is None
         assert planet.radius_earth is None
+        assert planet.semi_major_axis_au is None
+        assert planet.orbital_eccentricity is None
         assert planet.discovery_method is None
         assert planet.discovery_year is None
         assert planet.discovery_facility is None
@@ -124,6 +126,8 @@ class TestPlanetSummaryOptionality:
             orbital_period_days=61.1166,
             minimum_mass_earth=723.2235,
             radius_earth=13.3,
+            semi_major_axis_au=0.2083,
+            orbital_eccentricity=0.0324,
             discovery_method="Radial Velocity",
             discovery_year=1998,
             discovery_facility="Multiple Observatories",
@@ -131,6 +135,8 @@ class TestPlanetSummaryOptionality:
         assert planet.orbital_period_days == 61.1166
         assert planet.minimum_mass_earth == 723.2235
         assert planet.radius_earth == 13.3
+        assert planet.semi_major_axis_au == 0.2083
+        assert planet.orbital_eccentricity == 0.0324
         assert planet.discovery_method == "Radial Velocity"
         assert planet.discovery_year == 1998
         assert planet.discovery_facility == "Multiple Observatories"
@@ -140,6 +146,27 @@ class TestPlanetSummaryOptionality:
         # common case, not a data error.
         planet = PlanetSummary(name="Proxima Cen b", radius_earth=None)
         assert planet.radius_earth is None
+
+    def test_semi_major_axis_and_eccentricity_can_be_null(self):
+        # Story #181: some older RV-only discoveries lack a
+        # well-constrained pl_orbsmax/pl_orbeccen - null, never fabricated.
+        planet = PlanetSummary(
+            name="Some Old RV Planet b",
+            semi_major_axis_au=None,
+            orbital_eccentricity=None,
+        )
+        assert planet.semi_major_axis_au is None
+        assert planet.orbital_eccentricity is None
+
+    def test_semi_major_axis_and_eccentricity_round_trip(self):
+        # Story #181: verified live values for GJ 876 c.
+        planet = PlanetSummary(
+            name="GJ 876 c",
+            semi_major_axis_au=0.12959,
+            orbital_eccentricity=0.25591,
+        )
+        assert planet.semi_major_axis_au == 0.12959
+        assert planet.orbital_eccentricity == 0.25591
 
 
 class TestExoplanetsOptionality:
