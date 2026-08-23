@@ -45,9 +45,37 @@ export interface SceneObject {
    * brightness multiplier for star markers, and Story #172 surfaces it
    * verbatim in the Inspector. */
   absolute_magnitude: number | null;
+  /** Known exoplanets orbiting this star, or `null` when none are on record
+   * (~95% of stars, per Story #171). Story #172 surfaces this in the
+   * Inspector. Non-star object types never carry this field in practice,
+   * but it is typed as optional-via-null on `SceneObject` rather than moved
+   * to a star-specific subtype, matching how `spectral_type`/
+   * `absolute_magnitude` are already modeled above. */
+  exoplanets: SceneExoplanetSummary | null;
   group: SceneObjectGroup;
   source: SceneObjectSource;
   notes: string | null;
+}
+
+/** One entry of a star's `exoplanets.planets` array (Story #171 / #172). */
+export interface ScenePlanetSummary {
+  name: string;
+  orbital_period_days: number | null;
+  minimum_mass_earth: number | null;
+  radius_earth: number | null;
+  discovery_method: string | null;
+  discovery_year: number | null;
+  discovery_facility: string | null;
+}
+
+/** A star's `exoplanets` block (Story #171 / #172): a NASA Exoplanet
+ * Archive-sourced summary of known planets, or absent entirely (`null` on
+ * `SceneObject.exoplanets`) when SIMBAD/the archive has none on record. */
+export interface SceneExoplanetSummary {
+  count: number;
+  planets: ScenePlanetSummary[];
+  source_reference: string;
+  source_url: string | null;
 }
 
 export interface SceneMetadata {
