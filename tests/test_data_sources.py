@@ -35,6 +35,15 @@ from local_galactic_structures.data_sources.literature import (
     LiteratureResolver,
     build_object_from_literature,
 )
+from local_galactic_structures.data_sources.nasa_exoplanet_archive import (
+    ExoplanetCrossMatcher,
+    _build_identifier_index,
+    _normalize_identifier,
+    _row_value_to_python,
+    find_matching_hostname,
+    load_or_fetch_pscomppars_rows,
+    match_exoplanets,
+)
 from local_galactic_structures.data_sources.simbad import (
     SimbadResolver,
     absolute_magnitude_from_distance_modulus,
@@ -776,6 +785,409 @@ class TestVizierResolver:
         resolver = self._resolver(tmp_path)
         raw = {"recno": 42}
         assert resolver._extract_record_id("Test Star", raw) == "I/355/gaiadr3:42"
+
+
+# ---------------------------------------------------------------------------
+# NasaExoplanetArchive adapter (Story #171): bulk-fetch-then-local-match
+# architecture + cross-matching logic, including the multi-component-system
+# case (spec AC3). None of the tests below (other than the one explicitly
+# gated behind LGS_RUN_NETWORK_TESTS=1) touch the network - the bulk fetch
+# is isolated in `fetch_pscomppars_rows`, monkeypatched here exactly like
+# every other adapter's `_query_upstream`.
+# ---------------------------------------------------------------------------
+
+# Real-shaped rows (columns matching SELECT_COLUMNS) captured from manual
+# live `query_criteria` pulls against `pscomppars` during development (see
+# PR description) - GJ 876's four confirmed planets, and Proxima
+# Centauri's two.
+_GJ876_ROWS = [
+    {
+        "hostname": "GJ 876",
+        "hd_name": "",
+        "hip_name": "HIP 113020",
+        "tic_id": "TIC 188580272",
+        "gaia_dr2_id": "Gaia DR2 2603090003484152064",
+        "gaia_dr3_id": "Gaia DR3 2603090003484152064",
+        "pl_name": "GJ 876 b",
+        "pl_orbper": 61.1166,
+        "pl_bmasse": 723.2235,
+        "pl_rade": 13.3,
+        "discoverymethod": "Radial Velocity",
+        "disc_year": 1998,
+        "disc_facility": "Multiple Observatories",
+    },
+    {
+        "hostname": "GJ 876",
+        "hd_name": "",
+        "hip_name": "HIP 113020",
+        "tic_id": "TIC 188580272",
+        "gaia_dr2_id": "Gaia DR2 2603090003484152064",
+        "gaia_dr3_id": "Gaia DR3 2603090003484152064",
+        "pl_name": "GJ 876 c",
+        "pl_orbper": 30.0881,
+        "pl_bmasse": 226.9846,
+        "pl_rade": 14.0,
+        "discoverymethod": "Radial Velocity",
+        "disc_year": 2000,
+        "disc_facility": "Multiple Observatories",
+    },
+    {
+        "hostname": "GJ 876",
+        "hd_name": "",
+        "hip_name": "HIP 113020",
+        "tic_id": "TIC 188580272",
+        "gaia_dr2_id": "Gaia DR2 2603090003484152064",
+        "gaia_dr3_id": "Gaia DR3 2603090003484152064",
+        "pl_name": "GJ 876 d",
+        "pl_orbper": 1.93778,
+        "pl_bmasse": 6.83,
+        "pl_rade": 2.51,
+        "discoverymethod": "Radial Velocity",
+        "disc_year": 2005,
+        "disc_facility": "W. M. Keck Observatory",
+    },
+    {
+        "hostname": "GJ 876",
+        "hd_name": "",
+        "hip_name": "HIP 113020",
+        "tic_id": "TIC 188580272",
+        "gaia_dr2_id": "Gaia DR2 2603090003484152064",
+        "gaia_dr3_id": "Gaia DR3 2603090003484152064",
+        "pl_name": "GJ 876 e",
+        "pl_orbper": 124.26,
+        "pl_bmasse": 14.6,
+        "pl_rade": 3.92,
+        "discoverymethod": "Radial Velocity",
+        "disc_year": 2010,
+        "disc_facility": "W. M. Keck Observatory",
+    },
+]
+
+_PROXIMA_ROWS = [
+    {
+        "hostname": "Proxima Cen",
+        "hd_name": "",
+        "hip_name": "HIP 70890",
+        "tic_id": "TIC 388857263",
+        "gaia_dr2_id": "Gaia DR2 5853498713160606720",
+        "gaia_dr3_id": "Gaia DR3 5853498713190525696",
+        "pl_name": "Proxima Cen b",
+        "pl_orbper": 11.18465,
+        "pl_bmasse": 1.055,
+        "pl_rade": 1.02,
+        "discoverymethod": "Radial Velocity",
+        "disc_year": 2016,
+        "disc_facility": "European Southern Observatory",
+    },
+    {
+        "hostname": "Proxima Cen",
+        "hd_name": "",
+        "hip_name": "HIP 70890",
+        "tic_id": "TIC 388857263",
+        "gaia_dr2_id": "Gaia DR2 5853498713160606720",
+        "gaia_dr3_id": "Gaia DR3 5853498713190525696",
+        "pl_name": "Proxima Cen d",
+        "pl_orbper": 5.12338,
+        "pl_bmasse": 0.26,
+        "pl_rade": None,  # non-transiting - real, common case
+        "discoverymethod": "Radial Velocity",
+        "disc_year": 2025,
+        "disc_facility": "La Silla Observatory",
+    },
+]
+
+# Synthetic (but archive-shaped) multi-star-component system - spec AC3's
+# scenario: two SIMBAD-distinct catalog stars ("Alf Cen A" and "Alf Cen B")
+# that share a bare system name but are separate physical components with
+# their own distinct HD/HIP/TIC/Gaia identifiers in the archive, only one
+# of which (B) has a confirmed planet on file. A substring match on the
+# bare "Alf Cen" name would incorrectly attach B's planet to A as well;
+# an identifier match must not.
+_ALF_CEN_ROWS = [
+    {
+        "hostname": "Alf Cen B",
+        "hd_name": "HD 128621",
+        "hip_name": "HIP 71681",
+        "tic_id": "TIC 471011144",
+        "gaia_dr2_id": "Gaia DR2 5853087267337602880",
+        "gaia_dr3_id": "Gaia DR3 5853087262742454272",
+        "pl_name": "Alf Cen B b",
+        "pl_orbper": 3.2357,
+        "pl_bmasse": 1.13,
+        "pl_rade": None,
+        "discoverymethod": "Radial Velocity",
+        "disc_year": 2012,
+        "disc_facility": "La Silla Observatory",
+    },
+]
+
+_ALF_CEN_A_ALIASES = [
+    "GJ 559 A",
+    "HD 128620",
+    "HIP 71683",
+    "TIC 471011145",
+    "Gaia DR3 5853087267337600128",
+]
+_ALF_CEN_B_ALIASES = [
+    "GJ 559 B",
+    "HD  128621",  # SIMBAD-style double-space padding
+    "HIP 71681",
+    "TIC 471011144",
+    "Gaia DR2 5853087267337602880",
+]
+
+
+class TestNasaExoplanetArchiveNormalization:
+    def test_normalize_identifier_collapses_whitespace_and_uppercases(self):
+        assert _normalize_identifier("HD  20794") == "HD 20794"
+        assert _normalize_identifier("hd 20794") == "HD 20794"
+        assert _normalize_identifier("  HIP   15510  ") == "HIP 15510"
+
+    def test_row_value_to_python_returns_plain_values_unchanged(self):
+        assert _row_value_to_python("HD 2039") == "HD 2039"
+        assert _row_value_to_python(2002) == 2002
+        assert _row_value_to_python(None) is None
+
+
+class TestNasaExoplanetArchiveCrossMatching:
+    def test_matches_single_planet_host_by_hip(self):
+        # Proxima Centauri's real aliases (from web/public/data/scene.json)
+        # carry no HD designation, only HIP/TIC/Gaia - HIP is next in
+        # priority order.
+        aliases = [
+            "TIC 388857263",
+            "GJ 551",
+            "HIP 70890",
+            "Gaia DR3 5853498713190525696",
+        ]
+        summary = match_exoplanets(aliases, _PROXIMA_ROWS)
+        assert summary is not None
+        assert summary.count == 2
+        assert {p.name for p in summary.planets} == {
+            "Proxima Cen b",
+            "Proxima Cen d",
+        }
+
+    def test_null_radius_is_preserved_for_non_transiting_planet(self):
+        aliases = ["HIP 70890"]
+        summary = match_exoplanets(aliases, _PROXIMA_ROWS)
+        by_name = {p.name: p for p in summary.planets}
+        assert by_name["Proxima Cen d"].radius_earth is None
+        assert by_name["Proxima Cen b"].radius_earth == 1.02
+
+    def test_matches_multi_planet_host_returns_all_planets(self):
+        aliases = ["TIC 188580272", "GJ 876", "HIP 113020"]
+        summary = match_exoplanets(aliases, _GJ876_ROWS)
+        assert summary is not None
+        assert summary.count == 4
+        assert {p.name for p in summary.planets} == {
+            "GJ 876 b",
+            "GJ 876 c",
+            "GJ 876 d",
+            "GJ 876 e",
+        }
+
+    def test_no_match_returns_none(self):
+        # The common case (spec: ~97% of the 707 stars) - a star with real
+        # aliases that simply has no confirmed exoplanet on file.
+        aliases = ["HD 48915", "HIP 32349", "NAME Sirius"]
+        assert match_exoplanets(aliases, _GJ876_ROWS) is None
+
+    def test_hd_alias_whitespace_padding_is_normalized(self):
+        # SIMBAD pads HD numbers to a fixed field width with extra internal
+        # spaces ("HD  20794", two spaces) - the archive's own hd_name
+        # ("HD 20794", one space) must still match.
+        rows = [
+            {
+                "hostname": "HD 20794",
+                "hd_name": "HD 20794",
+                "hip_name": "HIP 15510",
+                "tic_id": "",
+                "gaia_dr2_id": "",
+                "gaia_dr3_id": "",
+                "pl_name": "HD 20794 b",
+                "pl_orbper": 18.315,
+                "pl_bmasse": 2.7,
+                "pl_rade": None,
+                "discoverymethod": "Radial Velocity",
+                "disc_year": 2011,
+                "disc_facility": "European Southern Observatory",
+            }
+        ]
+        summary = match_exoplanets(["HD  20794", "*  82 Eri"], rows)
+        assert summary is not None
+        assert summary.count == 1
+
+    def test_falls_through_to_lower_priority_identifier_when_higher_absent(self):
+        # A star's aliases may carry no HD designation at all (real case:
+        # GJ 876/GJ 1061 have none) - matching must fall through to
+        # HIP/TIC/Gaia rather than giving up.
+        aliases = ["TIC 188580272"]  # no HD, no HIP alias supplied here
+        summary = match_exoplanets(aliases, _GJ876_ROWS)
+        assert summary is not None
+        assert summary.count == 4
+
+    def test_empty_identifier_columns_are_never_indexed(self):
+        # `hd_name: ""` (the real shape for a star with no HD number, per
+        # the live archive) must not become a spurious index entry that
+        # some other star's blank/absent alias could accidentally match.
+        index = _build_identifier_index(_GJ876_ROWS)
+        assert "" not in index["HD"]
+
+    def test_unmatched_prefix_does_not_short_circuit_the_whole_lookup(self):
+        # A star can have an HD alias present that simply isn't in the
+        # archive's index (e.g. it's a real HD number but this particular
+        # star has no confirmed planet) while a *different* identifier
+        # type does match a real host - the HD miss must not cause the
+        # whole lookup to give up before trying HIP/TIC/Gaia.
+        aliases = ["HD 999999", "HIP 113020"]
+        summary = match_exoplanets(aliases, _GJ876_ROWS)
+        assert summary is not None
+        assert summary.count == 4
+
+    # -- Multi-component systems (spec AC3) --------------------------------
+
+    def test_multi_component_system_attaches_planet_to_correct_component_only(self):
+        # Alf Cen A and Alf Cen B are distinct catalog stars that happen to
+        # share a bare system name; only B has a confirmed planet in the
+        # archive, attached to hostname "Alf Cen B" specifically.
+        summary_b = match_exoplanets(_ALF_CEN_B_ALIASES, _ALF_CEN_ROWS)
+        assert summary_b is not None
+        assert summary_b.count == 1
+        assert summary_b.planets[0].name == "Alf Cen B b"
+
+    def test_multi_component_system_does_not_leak_planet_to_sibling_component(self):
+        # Regression guard for the exact bug spec AC3 calls out: a naive
+        # substring match on "Alf Cen" would match *both* components since
+        # both catalog stars' names contain that substring. Identifier
+        # matching must not - Alf Cen A's own HD/HIP/TIC/Gaia ids are all
+        # absent from _ALF_CEN_ROWS (only B's are present), so A must get
+        # no exoplanets at all.
+        summary_a = match_exoplanets(_ALF_CEN_A_ALIASES, _ALF_CEN_ROWS)
+        assert summary_a is None
+
+    def test_find_matching_hostname_is_component_qualified(self):
+        index = _build_identifier_index(_ALF_CEN_ROWS)
+        assert find_matching_hostname(_ALF_CEN_B_ALIASES, index) == "Alf Cen B"
+        assert find_matching_hostname(_ALF_CEN_A_ALIASES, index) is None
+
+
+class TestExoplanetCrossMatcherReusesIndex:
+    def test_matcher_built_once_matches_many_stars(self):
+        rows = _GJ876_ROWS + _PROXIMA_ROWS + _ALF_CEN_ROWS
+        matcher = ExoplanetCrossMatcher(rows)
+
+        gj876 = matcher.match(["TIC 188580272"])
+        proxima = matcher.match(["HIP 70890"])
+        alf_cen_a = matcher.match(_ALF_CEN_A_ALIASES)
+        alf_cen_b = matcher.match(_ALF_CEN_B_ALIASES)
+        no_match = matcher.match(["HD 48915"])
+
+        assert gj876.count == 4
+        assert proxima.count == 2
+        assert alf_cen_a is None
+        assert alf_cen_b.count == 1
+        assert no_match is None
+
+
+class TestLoadOrFetchPscompparsRows:
+    """Bulk-fetch-then-local-match architecture (spec AC1): one cached
+    snapshot, reusing CacheRecord/write_cache/update_manifest, no
+    per-star network round-trips. Mirrors
+    TestCachingObjectResolverOrchestration's shape but for the bulk
+    (not per-object) fetch path.
+    """
+
+    def _cache_path(self, tmp_path: Path) -> Path:
+        return tmp_path / "raw" / "nasa_exoplanet_archive" / "pscomppars_bulk.json"
+
+    def test_first_call_fetches_and_writes_cache_and_manifest(
+        self, tmp_path: Path, monkeypatch
+    ):
+        import local_galactic_structures.data_sources.nasa_exoplanet_archive as nea
+
+        calls = []
+
+        def fake_fetch():
+            calls.append(1)
+            return list(_GJ876_ROWS)
+
+        monkeypatch.setattr(nea, "fetch_pscomppars_rows", fake_fetch)
+
+        rows = nea.load_or_fetch_pscomppars_rows(
+            cache_path=self._cache_path(tmp_path),
+            manifest_path=tmp_path / "data_manifest.yaml",
+        )
+        assert len(calls) == 1
+        assert rows == _GJ876_ROWS
+        assert self._cache_path(tmp_path).exists()
+
+        manifest = yaml.safe_load((tmp_path / "data_manifest.yaml").read_text())
+        assert manifest["sources"][0]["id"] == "nasa_exoplanet_archive:pscomppars_bulk"
+        assert manifest["sources"][0]["source"] == "nasa_exoplanet_archive"
+
+    def test_second_call_reuses_cache_without_refetching(
+        self, tmp_path: Path, monkeypatch
+    ):
+        import local_galactic_structures.data_sources.nasa_exoplanet_archive as nea
+
+        calls = []
+        monkeypatch.setattr(
+            nea, "fetch_pscomppars_rows", lambda: (calls.append(1), list(_GJ876_ROWS))[1]
+        )
+
+        cache_path = self._cache_path(tmp_path)
+        manifest_path = tmp_path / "data_manifest.yaml"
+        nea.load_or_fetch_pscomppars_rows(cache_path=cache_path, manifest_path=manifest_path)
+        nea.load_or_fetch_pscomppars_rows(cache_path=cache_path, manifest_path=manifest_path)
+
+        assert len(calls) == 1
+
+    def test_force_refresh_refetches_and_overwrites_cache(
+        self, tmp_path: Path, monkeypatch
+    ):
+        import local_galactic_structures.data_sources.nasa_exoplanet_archive as nea
+
+        calls = []
+        monkeypatch.setattr(
+            nea, "fetch_pscomppars_rows", lambda: (calls.append(1), list(_GJ876_ROWS))[1]
+        )
+
+        cache_path = self._cache_path(tmp_path)
+        manifest_path = tmp_path / "data_manifest.yaml"
+        nea.load_or_fetch_pscomppars_rows(cache_path=cache_path, manifest_path=manifest_path)
+        nea.load_or_fetch_pscomppars_rows(
+            cache_path=cache_path, manifest_path=manifest_path, force_refresh=True
+        )
+
+        assert len(calls) == 2
+
+    def test_cache_content_preserves_provenance_fields(self, tmp_path: Path, monkeypatch):
+        import local_galactic_structures.data_sources.nasa_exoplanet_archive as nea
+
+        monkeypatch.setattr(nea, "fetch_pscomppars_rows", lambda: list(_GJ876_ROWS))
+        cache_path = self._cache_path(tmp_path)
+        nea.load_or_fetch_pscomppars_rows(
+            cache_path=cache_path, manifest_path=tmp_path / "data_manifest.yaml"
+        )
+        record = read_cache(cache_path)
+        assert record.source == "nasa_exoplanet_archive"
+        assert record.retrieved_utc
+        assert "4" in record.record_id  # "4 pscomppars rows"
+
+
+@network
+def test_nasa_exoplanet_archive_live_smoke(tmp_path: Path):
+    rows = load_or_fetch_pscomppars_rows(
+        cache_path=tmp_path / "pscomppars_bulk.json",
+        manifest_path=tmp_path / "data_manifest.yaml",
+    )
+    assert len(rows) > 1000  # real table has thousands of confirmed planets
+    summary = match_exoplanets(
+        ["TIC 188580272", "GJ 876", "HIP 113020"], rows
+    )
+    assert summary is not None
+    assert summary.count >= 4  # GJ 876 b/c/d/e are all confirmed
 
 
 # ---------------------------------------------------------------------------

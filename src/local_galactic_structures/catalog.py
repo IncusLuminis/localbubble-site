@@ -17,10 +17,33 @@ from .schema import (
     Cartesian,
     Coordinates,
     Distance,
+    ExoplanetSummary,
     Group,
     Source,
     Visual,
 )
+
+
+def _exoplanets_to_json(exoplanets: ExoplanetSummary | None) -> str | None:
+    """`exoplanets` -> a single JSON-string column (`exoplanets_json`).
+
+    Unlike `aliases`/`group_secondary` (lists of plain scalars, which
+    parquet/Arrow stores natively), `exoplanets` is a nested optional
+    object containing a variable-length list of sub-objects
+    (`ExoplanetSummary.planets: list[PlanetSummary]`) that is `None` for
+    ~97% of rows - storing it pre-serialized as JSON avoids Arrow schema
+    inference edge cases for a nested struct column that is null almost
+    everywhere, and keeps this field's round-trip exercised by the exact
+    same plain-value flat-dict shape every other `to_record` field uses.
+    """
+    return exoplanets.model_dump_json() if exoplanets is not None else None
+
+
+def _exoplanets_from_json(value: str | None) -> ExoplanetSummary | None:
+    if not value:
+        return None
+    return ExoplanetSummary.model_validate_json(value)
+
 
 def to_record(obj: AstronomicalObject) -> dict:
     """Flatten an `AstronomicalObject` into a flat dict (one catalog row)."""
@@ -47,6 +70,7 @@ def to_record(obj: AstronomicalObject) -> dict:
         "visual_color_class": obj.visual.color_class,
         "visual_spectral_type": obj.visual.spectral_type,
         "visual_absolute_magnitude": obj.visual.absolute_magnitude,
+        "exoplanets_json": _exoplanets_to_json(obj.exoplanets),
         "notes": obj.notes,
     }
 
@@ -86,6 +110,7 @@ def from_record(record: dict) -> AstronomicalObject:
             spectral_type=record.get("visual_spectral_type"),
             absolute_magnitude=record.get("visual_absolute_magnitude"),
         ),
+        exoplanets=_exoplanets_from_json(record.get("exoplanets_json")),
         notes=record.get("notes"),
     )
 

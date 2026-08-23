@@ -36,7 +36,9 @@ from local_galactic_structures.schema import (
     Cartesian,
     Coordinates,
     Distance,
+    ExoplanetSummary,
     Group,
+    PlanetSummary,
     Source,
     Visual,
 )
@@ -189,6 +191,59 @@ def test_scene_object_entry_includes_spectral_type_and_absolute_magnitude(
     assert entries["with-spectral-data"]["absolute_magnitude"] == 4.83
     assert entries["without-spectral-data"]["spectral_type"] is None
     assert entries["without-spectral-data"]["absolute_magnitude"] is None
+
+
+def test_scene_object_entry_includes_exoplanets(sample_models):
+    # Story #171: scene.py exports the new AstronomicalObject.exoplanets
+    # field, as its own top-level scene key (same "flatten onto the scene
+    # object" convention as spectral_type/absolute_magnitude), null when
+    # absent.
+    with_data = _make_object(
+        "with-exoplanets", "With Exoplanets", x_pc=10.0, y_pc=0.0, z_pc=0.0
+    )
+    with_data.exoplanets = ExoplanetSummary(
+        count=2,
+        planets=[
+            PlanetSummary(name="GJ 876 b", orbital_period_days=61.1166),
+            PlanetSummary(name="GJ 876 c", orbital_period_days=30.0881),
+        ],
+        source_reference="NASA Exoplanet Archive, pscomppars",
+        source_url="https://exoplanetarchive.ipac.caltech.edu",
+    )
+
+    without_data = _make_object(
+        "without-exoplanets", "Without Exoplanets", x_pc=20.0, y_pc=0.0, z_pc=0.0
+    )
+
+    scene = build_scene([with_data, without_data], sample_models)
+    entries = {e["id"]: e for e in scene["objects"]}
+
+    assert entries["with-exoplanets"]["exoplanets"] == {
+        "count": 2,
+        "planets": [
+            {
+                "name": "GJ 876 b",
+                "orbital_period_days": 61.1166,
+                "minimum_mass_earth": None,
+                "radius_earth": None,
+                "discovery_method": None,
+                "discovery_year": None,
+                "discovery_facility": None,
+            },
+            {
+                "name": "GJ 876 c",
+                "orbital_period_days": 30.0881,
+                "minimum_mass_earth": None,
+                "radius_earth": None,
+                "discovery_method": None,
+                "discovery_year": None,
+                "discovery_facility": None,
+            },
+        ],
+        "source_reference": "NASA Exoplanet Archive, pscomppars",
+        "source_url": "https://exoplanetarchive.ipac.caltech.edu",
+    }
+    assert entries["without-exoplanets"]["exoplanets"] is None
 
 
 def test_scene_works_with_no_objects_and_no_models():

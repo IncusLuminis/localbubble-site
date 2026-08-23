@@ -6761,3 +6761,12 @@ sources:
   retrieved: '2026-08-23T02:11:00+00:00'
   record_id: LP  914-54
   cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-170/local-galactic-structures/data/raw/simbad/lhs_3003.json
+- id: nasa_exoplanet_archive:pscomppars_bulk
+  source: nasa_exoplanet_archive
+  query: pscomppars_bulk
+  dataset: NASA Exoplanet Archive pscomppars bulk snapshot (hostname, hd_name, hip_name,
+    tic_id, gaia_dr2_id, gaia_dr3_id, pl_name, pl_orbper, pl_bmasse, pl_rade, discoverymethod,
+    disc_year, disc_facility)
+  retrieved: '2026-08-23T02:37:38+00:00'
+  record_id: 6354 pscomppars rows
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-171/local-galactic-structures/data/raw/nasa_exoplanet_archive/pscomppars_bulk.json

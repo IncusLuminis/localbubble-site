@@ -25135,7 +25135,32 @@
       "spectral_type": "K3II-III",
       "absolute_magnitude": -3.165630667000686
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T07:01:37+00:00; upstream record id: HD  81817; otype: SB*. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:01:37+00:00; upstream record id: HD  81817; otype: SB*. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "HD 81817 b",
+          "orbital_period_days": 1021.20159,
+          "minimum_mass_earth": 7668.5638041,
+          "radius_earth": 12.0,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "Bohyunsan Optical Astronomical Observatory"
+        },
+        {
+          "name": "HD 81817 c",
+          "orbital_period_days": 622.97802,
+          "minimum_mass_earth": 7185.78245386,
+          "radius_earth": 12.0,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2022,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "hd_81949",
@@ -49565,7 +49590,32 @@
       "spectral_type": "M5.5Ve",
       "absolute_magnitude": 15.556994231087767
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:40:53+00:00; upstream record id: NAME Proxima Centauri; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:40:53+00:00; upstream record id: NAME Proxima Centauri; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "Proxima Cen d",
+          "orbital_period_days": 5.12338,
+          "minimum_mass_earth": 0.26,
+          "radius_earth": 0.692,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2025,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "Proxima Cen b",
+          "orbital_period_days": 11.18465,
+          "minimum_mass_earth": 1.055,
+          "radius_earth": 1.02,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2016,
+          "discovery_facility": "European Southern Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "alf_cen_a",
@@ -49801,7 +49851,50 @@
       "spectral_type": "M4V",
       "absolute_magnitude": 13.200840637305804
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:40:57+00:00; upstream record id: NAME Barnard's star; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:40:57+00:00; upstream record id: NAME Barnard's star; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 4,
+      "planets": [
+        {
+          "name": "Barnard d",
+          "orbital_period_days": 2.3402,
+          "minimum_mass_earth": 0.263,
+          "radius_earth": 0.694,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2025,
+          "discovery_facility": "Gemini Observatory"
+        },
+        {
+          "name": "Barnard c",
+          "orbital_period_days": 4.1244,
+          "minimum_mass_earth": 0.335,
+          "radius_earth": 0.743,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2025,
+          "discovery_facility": "Gemini Observatory"
+        },
+        {
+          "name": "Barnard b",
+          "orbital_period_days": 3.1542,
+          "minimum_mass_earth": 0.299,
+          "radius_earth": 0.72,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2024,
+          "discovery_facility": "Paranal Observatory"
+        },
+        {
+          "name": "Barnard e",
+          "orbital_period_days": 6.7392,
+          "minimum_mass_earth": 0.193,
+          "radius_earth": 0.637,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2025,
+          "discovery_facility": "Gemini Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "wolf_359",
@@ -49998,7 +50091,32 @@
       "spectral_type": "M2+V",
       "absolute_magnitude": 10.490596983214738
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:40:59+00:00; upstream record id: HD  95735; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:40:59+00:00; upstream record id: HD  95735; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 411 b",
+          "orbital_period_days": 12.9394,
+          "minimum_mass_earth": 2.69,
+          "radius_earth": 1.45,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2019,
+          "discovery_facility": "Haute-Provence Observatory"
+        },
+        {
+          "name": "HD 95735 c",
+          "orbital_period_days": 2946.0,
+          "minimum_mass_earth": 13.6,
+          "radius_earth": 3.76,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2021,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "alf_cma",
@@ -50595,7 +50713,23 @@
       "spectral_type": "K2V",
       "absolute_magnitude": 6.190848569580821
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:08+00:00; upstream record id: * eps Eri; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:08+00:00; upstream record id: * eps Eri; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "eps Eri b",
+          "orbital_period_days": 2680.0,
+          "minimum_mass_earth": 317.828407,
+          "radius_earth": 13.8,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2000,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "hd_217987",
@@ -50677,7 +50811,50 @@
       "spectral_type": "M2V",
       "absolute_magnitude": 9.805334731591177
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:10+00:00; upstream record id: HD 217987; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:10+00:00; upstream record id: HD 217987; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 4,
+      "planets": [
+        {
+          "name": "GJ 887 e",
+          "orbital_period_days": 4.4249,
+          "minimum_mass_earth": 1.46,
+          "radius_earth": 1.12,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2026,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "GJ 887 c",
+          "orbital_period_days": 21.784,
+          "minimum_mass_earth": 6.5,
+          "radius_earth": 2.43,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 887 b",
+          "orbital_period_days": 9.2619,
+          "minimum_mass_earth": 3.9,
+          "radius_earth": 1.8,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 887 d",
+          "orbital_period_days": 50.77,
+          "minimum_mass_earth": 6.1,
+          "radius_earth": 2.34,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2026,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "ross_128",
@@ -50775,7 +50952,23 @@
       "spectral_type": "dM4",
       "absolute_magnitude": 13.511696976709764
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:12+00:00; upstream record id: Ross  128; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:12+00:00; upstream record id: Ross  128; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "Ross 128 b",
+          "orbital_period_days": 9.8658,
+          "minimum_mass_earth": 1.4,
+          "radius_earth": 1.11,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "v_ez_aqr",
@@ -51250,7 +51443,23 @@
       "spectral_type": "M3V",
       "absolute_magnitude": 11.195369060967774
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:26+00:00; upstream record id: HD 173739; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:26+00:00; upstream record id: HD 173739; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "Gl 725 A b",
+          "orbital_period_days": 11.2201,
+          "minimum_mass_earth": 2.78,
+          "radius_earth": 1.48,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2025,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "hd_173740",
@@ -51338,7 +51547,23 @@
       "spectral_type": "M3.5V",
       "absolute_magnitude": 12.045350892916872
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:27+00:00; upstream record id: HD 173740; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:27+00:00; upstream record id: HD 173740; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "Gl 725 B c",
+          "orbital_period_days": 37.9,
+          "minimum_mass_earth": 3.4,
+          "radius_earth": 1.66,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2026,
+          "discovery_facility": "Mauna Kea Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "hd_1326",
@@ -51439,7 +51664,32 @@
       "spectral_type": "M2V",
       "absolute_magnitude": 10.381265010105684
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:28+00:00; upstream record id: HD   1326; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:28+00:00; upstream record id: HD   1326; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 15 A b",
+          "orbital_period_days": 11.4407,
+          "minimum_mass_earth": 3.03,
+          "radius_earth": 1.55,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2014,
+          "discovery_facility": "W. M. Keck Observatory"
+        },
+        {
+          "name": "GJ 15 A c",
+          "orbital_period_days": 7600.0,
+          "minimum_mass_earth": 36.0,
+          "radius_earth": 6.67,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2018,
+          "discovery_facility": "Roque de los Muchachos Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "hd_1326b",
@@ -51607,7 +51857,23 @@
       "spectral_type": "K5V",
       "absolute_magnitude": 6.885424249093216
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:31+00:00; upstream record id: * eps Ind; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:31+00:00; upstream record id: * eps Ind; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "eps Ind A b",
+          "orbital_period_days": 25450.0,
+          "minimum_mass_earth": 2065.8846455,
+          "radius_earth": 12.7,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2019,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "eps_ind_b",
@@ -51826,7 +52092,41 @@
       "spectral_type": "G8V",
       "absolute_magnitude": 5.687244147073397
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:36+00:00; upstream record id: * tau Cet; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:36+00:00; upstream record id: * tau Cet; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 3,
+      "planets": [
+        {
+          "name": "tau Cet g",
+          "orbital_period_days": 20.0,
+          "minimum_mass_earth": 1.75,
+          "radius_earth": 1.18,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "tau Cet f",
+          "orbital_period_days": 636.13,
+          "minimum_mass_earth": 3.93,
+          "radius_earth": 1.81,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "tau Cet h",
+          "orbital_period_days": 49.41,
+          "minimum_mass_earth": 1.83,
+          "radius_earth": 1.19,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "l_372_58",
@@ -51886,7 +52186,41 @@
       "spectral_type": "M5.5V",
       "absolute_magnitude": 15.244133144125382
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:37+00:00; upstream record id: L  372-58; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:37+00:00; upstream record id: L  372-58; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 3,
+      "planets": [
+        {
+          "name": "GJ 1061 d",
+          "orbital_period_days": 13.066,
+          "minimum_mass_earth": 1.67,
+          "radius_earth": 1.16,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 1061 b",
+          "orbital_period_days": 3.2073,
+          "minimum_mass_earth": 1.11,
+          "radius_earth": 1.04,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 1061 c",
+          "orbital_period_days": 6.6821,
+          "minimum_mass_earth": 1.81,
+          "radius_earth": 1.19,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "v_yz_cet",
@@ -51966,7 +52300,41 @@
       "spectral_type": "M4.0Ve",
       "absolute_magnitude": 14.223224257177044
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:38+00:00; upstream record id: V* YZ Cet; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:38+00:00; upstream record id: V* YZ Cet; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 3,
+      "planets": [
+        {
+          "name": "YZ Cet b",
+          "orbital_period_days": 2.02087,
+          "minimum_mass_earth": 0.7,
+          "radius_earth": 0.913,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "YZ Cet c",
+          "orbital_period_days": 3.05989,
+          "minimum_mass_earth": 1.14,
+          "radius_earth": 1.05,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "YZ Cet d",
+          "orbital_period_days": 4.65626,
+          "minimum_mass_earth": 1.09,
+          "radius_earth": 1.03,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "bd_05_1668",
@@ -52052,7 +52420,32 @@
       "spectral_type": "M3.5V",
       "absolute_magnitude": 11.98106291147125
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:40+00:00; upstream record id: BD+05  1668; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:40+00:00; upstream record id: BD+05  1668; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 273 b",
+          "orbital_period_days": 18.6498,
+          "minimum_mass_earth": 2.89,
+          "radius_earth": 1.51,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 273 c",
+          "orbital_period_days": 4.7234,
+          "minimum_mass_earth": 1.18,
+          "radius_earth": 1.06,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "name_teegarden_s_star",
@@ -52109,7 +52502,41 @@
       "spectral_type": "dM6",
       "absolute_magnitude": 17.223106367984563
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:46+00:00; upstream record id: NAME Teegarden's Star; otype: LM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:46+00:00; upstream record id: NAME Teegarden's Star; otype: LM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 3,
+      "planets": [
+        {
+          "name": "Teegarden's Star c",
+          "orbital_period_days": 11.416,
+          "minimum_mass_earth": 1.05,
+          "radius_earth": 1.02,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2019,
+          "discovery_facility": "Calar Alto Observatory"
+        },
+        {
+          "name": "Teegarden's Star d",
+          "orbital_period_days": 26.13,
+          "minimum_mass_earth": 0.82,
+          "radius_earth": 0.954,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2024,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "Teegarden's Star b",
+          "orbital_period_days": 4.90634,
+          "minimum_mass_earth": 1.16,
+          "radius_earth": 1.05,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2019,
+          "discovery_facility": "Calar Alto Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "hd_33793",
@@ -52190,7 +52617,23 @@
       "spectral_type": "M1VIp",
       "absolute_magnitude": 10.878865458923068
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:47+00:00; upstream record id: HD  33793; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:47+00:00; upstream record id: HD  33793; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "Kapteyn c",
+          "orbital_period_days": 121.54,
+          "minimum_mass_earth": 7.0,
+          "radius_earth": 2.54,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2014,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "v_ax_mic",
@@ -52578,7 +53021,41 @@
       "spectral_type": "M3V",
       "absolute_magnitude": 11.900740096219895
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:59+00:00; upstream record id: BD-12  4523; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:59+00:00; upstream record id: BD-12  4523; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 3,
+      "planets": [
+        {
+          "name": "Wolf 1061 b",
+          "orbital_period_days": 4.8869,
+          "minimum_mass_earth": 1.91,
+          "radius_earth": 1.21,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "Wolf 1061 c",
+          "orbital_period_days": 17.8719,
+          "minimum_mass_earth": 3.41,
+          "radius_earth": 1.66,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "Wolf 1061 d",
+          "orbital_period_days": 217.21,
+          "minimum_mass_earth": 7.7,
+          "radius_earth": 2.69,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "wolf_28",
@@ -52919,7 +53396,23 @@
       "spectral_type": "M4.5V",
       "absolute_magnitude": 14.046641830891264
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:07+00:00; upstream record id: G   3-33; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:07+00:00; upstream record id: G   3-33; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "GJ 9066 c",
+          "orbital_period_days": 771.36,
+          "minimum_mass_earth": 66.74396547,
+          "radius_earth": 9.6,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "bd_68_946",
@@ -53009,7 +53502,32 @@
       "spectral_type": "M3.0V",
       "absolute_magnitude": null
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:08+00:00; upstream record id: BD+68   946; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:08+00:00; upstream record id: BD+68   946; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 687 b",
+          "orbital_period_days": 38.142,
+          "minimum_mass_earth": 17.2,
+          "radius_earth": 4.32,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2014,
+          "discovery_facility": "Lick Observatory"
+        },
+        {
+          "name": "GJ 687 c",
+          "orbital_period_days": 727.562,
+          "minimum_mass_earth": 16.0,
+          "radius_earth": 4.14,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "lp_731_58",
@@ -53283,7 +53801,23 @@
       "spectral_type": "M3V",
       "absolute_magnitude": 11.115619047300584
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:16+00:00; upstream record id: CD-46 11540; otype: LM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:16+00:00; upstream record id: CD-46 11540; otype: LM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "GJ 674 b",
+          "orbital_period_days": 4.6938,
+          "minimum_mass_earth": 11.09,
+          "radius_earth": 3.33,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2007,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "lawd_37",
@@ -53448,7 +53982,50 @@
       "spectral_type": "M3.5V",
       "absolute_magnitude": 11.844454810173328
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:19+00:00; upstream record id: BD-15  6290; otype: **. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:19+00:00; upstream record id: BD-15  6290; otype: **. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 4,
+      "planets": [
+        {
+          "name": "GJ 876 c",
+          "orbital_period_days": 30.0881,
+          "minimum_mass_earth": 226.9846,
+          "radius_earth": 14.0,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2000,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "GJ 876 b",
+          "orbital_period_days": 61.1166,
+          "minimum_mass_earth": 723.2235,
+          "radius_earth": 13.3,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 1998,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "GJ 876 d",
+          "orbital_period_days": 1.93778,
+          "minimum_mass_earth": 6.83,
+          "radius_earth": 2.51,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2005,
+          "discovery_facility": "W. M. Keck Observatory"
+        },
+        {
+          "name": "GJ 876 e",
+          "orbital_period_days": 124.26,
+          "minimum_mass_earth": 14.6,
+          "radius_earth": 3.92,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2010,
+          "discovery_facility": "W. M. Keck Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "g_158_27",
@@ -53512,7 +54089,32 @@
       "spectral_type": "M5.5V",
       "absolute_magnitude": 15.410022259255651
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:20+00:00; upstream record id: G 158-27; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:20+00:00; upstream record id: G 158-27; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 1002 b",
+          "orbital_period_days": 10.3465,
+          "minimum_mass_earth": 1.08,
+          "radius_earth": 1.03,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2022,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "GJ 1002 c",
+          "orbital_period_days": 21.202,
+          "minimum_mass_earth": 1.36,
+          "radius_earth": 1.1,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2022,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "l_143_23",
@@ -54037,7 +54639,23 @@
       "spectral_type": "M1.5V",
       "absolute_magnitude": 10.191490627337785
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:28+00:00; upstream record id: HD 204961; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:28+00:00; upstream record id: HD 204961; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "GJ 832 b",
+          "orbital_period_days": 3853.0,
+          "minimum_mass_earth": 314.65012293,
+          "radius_earth": 13.8,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2008,
+          "discovery_facility": "Anglo-Australian Telescope"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "lp_944_20",
@@ -54511,7 +55129,32 @@
       "spectral_type": "M3.5V",
       "absolute_magnitude": 12.447829530115534
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:38+00:00; upstream record id: CD-44 11909; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:38+00:00; upstream record id: CD-44 11909; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 682 c",
+          "orbital_period_days": 57.32,
+          "minimum_mass_earth": 8.7,
+          "radius_earth": 2.89,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2014,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "GJ 682 b",
+          "orbital_period_days": 17.478,
+          "minimum_mass_earth": 4.4,
+          "radius_earth": 1.93,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2014,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "70_oph_a",
@@ -54990,7 +55633,32 @@
       "spectral_type": "M4.0Ve",
       "absolute_magnitude": 13.544108787693064
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:47+00:00; upstream record id: LP  656-38; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:47+00:00; upstream record id: LP  656-38; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 3323 b",
+          "orbital_period_days": 5.3636,
+          "minimum_mass_earth": 2.02,
+          "radius_earth": 1.23,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 3323 c",
+          "orbital_period_days": 40.54,
+          "minimum_mass_earth": 2.31,
+          "radius_earth": 1.32,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "2mass_j09393548_2448279",
@@ -55432,7 +56100,32 @@
       "spectral_type": "M3V",
       "absolute_magnitude": null
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:55+00:00; upstream record id: HD 265866; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:42:55+00:00; upstream record id: HD 265866; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 2,
+      "planets": [
+        {
+          "name": "GJ 251 c",
+          "orbital_period_days": 53.647,
+          "minimum_mass_earth": 3.88,
+          "radius_earth": 1.8,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2025,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "GJ 251 b",
+          "orbital_period_days": 14.237,
+          "minimum_mass_earth": 3.85,
+          "radius_earth": 1.79,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "W. M. Keck Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "lsr_j1835_3259",
@@ -56092,7 +56785,23 @@
       "spectral_type": "M3-V",
       "absolute_magnitude": 10.2552233608144
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:08+00:00; upstream record id: HD 180617; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:08+00:00; upstream record id: HD 180617; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "HD 180617 b",
+          "orbital_period_days": 105.911,
+          "minimum_mass_earth": 12.214,
+          "radius_earth": 3.53,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2018,
+          "discovery_facility": "Calar Alto Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "vb_10",
@@ -57304,7 +58013,50 @@
       "spectral_type": "G6V",
       "absolute_magnitude": 5.3643074687098995
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:34+00:00; upstream record id: * e Eri; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:34+00:00; upstream record id: * e Eri; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 4,
+      "planets": [
+        {
+          "name": "HD 20794 f",
+          "orbital_period_days": 647.6,
+          "minimum_mass_earth": 5.82,
+          "radius_earth": 2.28,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2025,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "HD 20794 d",
+          "orbital_period_days": 89.68,
+          "minimum_mass_earth": 4.8,
+          "radius_earth": 2.04,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2011,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "HD 20794 b",
+          "orbital_period_days": 18.314,
+          "minimum_mass_earth": 2.7,
+          "radius_earth": 1.45,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2011,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "HD 20794 e",
+          "orbital_period_days": 147.02,
+          "minimum_mass_earth": 4.77,
+          "radius_earth": 2.03,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "eggr_372",
@@ -57551,7 +58303,23 @@
       "spectral_type": "M0V",
       "absolute_magnitude": null
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:38+00:00; upstream record id: HD  79211; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:38+00:00; upstream record id: HD  79211; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "GJ 338 B b",
+          "orbital_period_days": 24.422,
+          "minimum_mass_earth": 10.6,
+          "radius_earth": 3.25,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2020,
+          "discovery_facility": "Calar Alto Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "del_pav",
@@ -57939,7 +58707,23 @@
       "spectral_type": "M3.5V",
       "absolute_magnitude": 12.336548240613602
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:46+00:00; upstream record id: BD-11  3759; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:46+00:00; upstream record id: BD-11  3759; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "HN Lib b",
+          "orbital_period_days": 36.116,
+          "minimum_mass_earth": 5.46,
+          "radius_earth": 2.2,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2023,
+          "discovery_facility": "Calar Alto Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "bd_19_5116a",
@@ -58005,7 +58789,23 @@
       "spectral_type": "M3.5Ve",
       "absolute_magnitude": 11.366027247705592
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:48+00:00; upstream record id: BD+19  5116A; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:48+00:00; upstream record id: BD+19  5116A; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "GJ 896 A b",
+          "orbital_period_days": 284.39,
+          "minimum_mass_earth": 718.29219982,
+          "radius_earth": 13.3,
+          "discovery_method": "Astrometry",
+          "discovery_year": 2022,
+          "discovery_facility": "Very Long Baseline Array"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "bd_19_5116b",
@@ -58158,7 +58958,41 @@
       "spectral_type": "M3V",
       "absolute_magnitude": 11.563135435584647
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:50+00:00; upstream record id: BD-07  4003; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:43:50+00:00; upstream record id: BD-07  4003; otype: BY*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 3,
+      "planets": [
+        {
+          "name": "GJ 581 b",
+          "orbital_period_days": 5.3686,
+          "minimum_mass_earth": 20.5,
+          "radius_earth": 4.79,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2005,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 581 c",
+          "orbital_period_days": 12.9211,
+          "minimum_mass_earth": 6.81,
+          "radius_earth": 2.5,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2007,
+          "discovery_facility": "La Silla Observatory"
+        },
+        {
+          "name": "GJ 581 e",
+          "orbital_period_days": 3.1481,
+          "minimum_mass_earth": 2.48,
+          "radius_earth": 1.38,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2009,
+          "discovery_facility": "La Silla Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "lp_368_128",
@@ -58747,7 +59581,23 @@
       "spectral_type": "M1.5V",
       "absolute_magnitude": 11.01253708445959
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:44:06+00:00; upstream record id: G 202-48; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:44:06+00:00; upstream record id: G 202-48; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 1,
+      "planets": [
+        {
+          "name": "GJ 625 b",
+          "orbital_period_days": 14.628,
+          "minimum_mass_earth": 2.82,
+          "radius_earth": 1.49,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2017,
+          "discovery_facility": "Multiple Observatories"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "l_100_115",
@@ -58977,7 +59827,68 @@
       "spectral_type": "K3V",
       "absolute_magnitude": 6.491526269677676
     },
-    "notes": "Retrieved from SIMBAD on 2026-08-18T16:44:10+00:00; upstream record id: HD 219134; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance."
+    "notes": "Retrieved from SIMBAD on 2026-08-18T16:44:10+00:00; upstream record id: HD 219134; otype: PM*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance.",
+    "exoplanets": {
+      "count": 6,
+      "planets": [
+        {
+          "name": "HD 219134 h",
+          "orbital_period_days": 2247.0,
+          "minimum_mass_earth": 108.0622,
+          "radius_earth": 12.7,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "Roque de los Muchachos Observatory"
+        },
+        {
+          "name": "HD 219134 g",
+          "orbital_period_days": 94.2,
+          "minimum_mass_earth": 10.80622,
+          "radius_earth": 3.28,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "HD 219134 b",
+          "orbital_period_days": 3.092926,
+          "minimum_mass_earth": 4.74,
+          "radius_earth": 1.602,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "Roque de los Muchachos Observatory"
+        },
+        {
+          "name": "HD 219134 d",
+          "orbital_period_days": 46.859,
+          "minimum_mass_earth": 16.17,
+          "radius_earth": 1.61,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "Roque de los Muchachos Observatory"
+        },
+        {
+          "name": "HD 219134 f",
+          "orbital_period_days": 22.717,
+          "minimum_mass_earth": 7.3,
+          "radius_earth": 1.31,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "Multiple Observatories"
+        },
+        {
+          "name": "HD 219134 c",
+          "orbital_period_days": 6.76458,
+          "minimum_mass_earth": 4.36,
+          "radius_earth": 1.511,
+          "discovery_method": "Radial Velocity",
+          "discovery_year": 2015,
+          "discovery_facility": "Roque de los Muchachos Observatory"
+        }
+      ],
+      "source_reference": "NASA Exoplanet Archive, Planetary Systems Composite Parameters (pscomppars) table, operated by Caltech/IPAC under contract with NASA",
+      "source_url": "https://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&config=PSCompPars"
+    }
   },
   {
     "id": "lp_914_54",

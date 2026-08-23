@@ -83,6 +83,34 @@ class Visual(BaseModel):
     absolute_magnitude: float | None = None
 
 
+class PlanetSummary(BaseModel):
+    """One confirmed planet from the NASA Exoplanet Archive's `pscomppars`
+    table (Story #171). Only `name` is required - every physical quantity
+    is `None` when the archive has no usable value on file (e.g.
+    `radius_earth` for a non-transiting, RV-only detection), never
+    fabricated, matching this pipeline's spec §11 convention."""
+
+    name: str
+    orbital_period_days: float | None = None
+    #: Minimum mass (m*sin(i) for RV-only detections, `pl_bmasse`).
+    minimum_mass_earth: float | None = None
+    radius_earth: float | None = None
+    discovery_method: str | None = None
+    discovery_year: int | None = None
+    discovery_facility: str | None = None
+
+
+class ExoplanetSummary(BaseModel):
+    """A star's cross-matched exoplanet complement (Story #171), built by
+    `data_sources.nasa_exoplanet_archive` from one bulk NASA Exoplanet
+    Archive `pscomppars` snapshot - never fetched per-star."""
+
+    count: int
+    planets: list[PlanetSummary] = Field(default_factory=list)
+    source_reference: str
+    source_url: str
+
+
 class AstronomicalObject(BaseModel):
     id: str
     name: str
@@ -94,4 +122,11 @@ class AstronomicalObject(BaseModel):
     group: Group = Field(default_factory=Group)
     source: Source
     visual: Visual = Field(default_factory=Visual)
+    #: Confirmed exoplanets cross-matched from the NASA Exoplanet Archive
+    #: (Story #171) - `None` is the expected common case (~97% of the 707
+    #: star records: real coverage concentrates in the ~122-star RECONS
+    #: nearest-neighbors subset). A separate top-level field rather than
+    #: nested under `visual` - exoplanets are not a rendering/visual
+    #: attribute of the star itself.
+    exoplanets: ExoplanetSummary | None = None
     notes: str | None = None
