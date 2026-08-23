@@ -204,8 +204,18 @@ def test_scene_object_entry_includes_exoplanets(sample_models):
     with_data.exoplanets = ExoplanetSummary(
         count=2,
         planets=[
-            PlanetSummary(name="GJ 876 b", orbital_period_days=61.1166),
-            PlanetSummary(name="GJ 876 c", orbital_period_days=30.0881),
+            PlanetSummary(
+                name="GJ 876 b",
+                orbital_period_days=61.1166,
+                semi_major_axis_au=0.2083,
+                orbital_eccentricity=0.0324,
+            ),
+            PlanetSummary(
+                name="GJ 876 c",
+                orbital_period_days=30.0881,
+                semi_major_axis_au=0.12959,
+                orbital_eccentricity=0.25591,
+            ),
         ],
         source_reference="NASA Exoplanet Archive, pscomppars",
         source_url="https://exoplanetarchive.ipac.caltech.edu",
@@ -226,6 +236,8 @@ def test_scene_object_entry_includes_exoplanets(sample_models):
                 "orbital_period_days": 61.1166,
                 "minimum_mass_earth": None,
                 "radius_earth": None,
+                "semi_major_axis_au": 0.2083,
+                "orbital_eccentricity": 0.0324,
                 "discovery_method": None,
                 "discovery_year": None,
                 "discovery_facility": None,
@@ -235,6 +247,8 @@ def test_scene_object_entry_includes_exoplanets(sample_models):
                 "orbital_period_days": 30.0881,
                 "minimum_mass_earth": None,
                 "radius_earth": None,
+                "semi_major_axis_au": 0.12959,
+                "orbital_eccentricity": 0.25591,
                 "discovery_method": None,
                 "discovery_year": None,
                 "discovery_facility": None,

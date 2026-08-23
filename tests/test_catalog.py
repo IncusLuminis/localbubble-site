@@ -76,6 +76,8 @@ def _sample_objects() -> list[AstronomicalObject]:
                         orbital_period_days=61.1166,
                         minimum_mass_earth=723.2235,
                         radius_earth=13.3,
+                        semi_major_axis_au=0.2083,
+                        orbital_eccentricity=0.0324,
                         discovery_method="Radial Velocity",
                         discovery_year=1998,
                         discovery_facility="Multiple Observatories",
