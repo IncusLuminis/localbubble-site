@@ -303,6 +303,29 @@ body {
   margin-bottom: 8px;
 }
 
+/* Story #191: compact variant for short scalar fields (Star Name,
+   Designation, Type, Distance, Spectral Type, Visual Magnitude, Absolute
+   Magnitude) - label and value share one line instead of stacking, to
+   reclaim vertical space in the narrow (212-240px) Inspector column.
+   `justify-content: space-between` pins the label left/value right with
+   a minimum gap; `min-width: 0` on both children lets `word-break` below
+   actually kick in for a long value instead of overflowing the row. */
+.inspector-row--inline {
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.inspector-row--inline .inspector-label {
+  flex-shrink: 0;
+}
+
+.inspector-row--inline .inspector-value {
+  min-width: 0;
+  text-align: right;
+}
+
 .inspector-label {
   font-size: 11px;
   text-transform: uppercase;
