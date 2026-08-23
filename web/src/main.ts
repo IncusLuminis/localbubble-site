@@ -833,21 +833,25 @@ function zoomBy(factor: number): void {
   controls.update();
 }
 
-/** Issue #201: applies `steps` applications of the same zoom-out step the
- * toolbar's own Zoom Out ("-") button uses (`ZOOM_OUT_STEP_FACTOR` +
- * `dollyPosition`, via the pure `dollyPositionSteps` in `scene/camera.ts`)
- * to a computed `CameraPose`'s position, before calling `applyCameraPose` -
- * the "fit" buttons' extra zoom-out padding (acceptance criterion #1).
- * Thin wrapper supplying the live `controls.minDistance`/`maxDistance`
- * `dollyPositionSteps` can't see on its own, same read-live-state/write-back
- * split as `zoomBy` above (this only reads, `applyCameraPose` does the
- * writing). `pose.target` is left untouched - only the distance from it
- * changes, exactly as a live "-" click would leave `controls.target` alone. */
-function applyCameraPoseWithExtraZoomOut(pose: CameraPose, steps: number): void {
+/** Issue #205 (fixing #201/#202's regression): applies `steps` applications
+ * of the same zoom-IN step the toolbar's own Zoom In ("+") button uses
+ * (`ZOOM_IN_STEP_FACTOR` + `dollyPosition`, via the pure `dollyPositionSteps`
+ * in `scene/camera.ts`) to a computed `CameraPose`'s position, before calling
+ * `applyCameraPose` - the "fit" buttons' extra zoom-in padding (acceptance
+ * criterion #1). #201/#202 originally wired this to `ZOOM_OUT_STEP_FACTOR`,
+ * which was backwards: "+N zoom levels" means zoom IN (closer), not out - the
+ * human owner confirmed live that the buttons ended up more zoomed OUT than
+ * before when they should end up more zoomed IN. Thin wrapper supplying the
+ * live `controls.minDistance`/`maxDistance` `dollyPositionSteps` can't see on
+ * its own, same read-live-state/write-back split as `zoomBy` above (this only
+ * reads, `applyCameraPose` does the writing). `pose.target` is left untouched
+ * - only the distance from it changes, exactly as a live "+" click would
+ * leave `controls.target` alone. */
+function applyCameraPoseWithExtraZoomIn(pose: CameraPose, steps: number): void {
   const position = dollyPositionSteps(
     pose.position,
     pose.target,
-    ZOOM_OUT_STEP_FACTOR,
+    ZOOM_IN_STEP_FACTOR,
     controls.minDistance,
     controls.maxDistance,
     steps,
@@ -855,15 +859,16 @@ function applyCameraPoseWithExtraZoomOut(pose: CameraPose, steps: number): void 
   applyCameraPose({ position, target: pose.target });
 }
 
-/** Number of extra zoom-out-button-equivalent steps (`ZOOM_OUT_STEP_FACTOR`
- * applications, via `applyCameraPoseWithExtraZoomOut`) each "fit" button
+/** Number of extra zoom-in-button-equivalent steps (`ZOOM_IN_STEP_FACTOR`
+ * applications, via `applyCameraPoseWithExtraZoomIn`) each "fit" button
  * applies beyond its own pose-computation function's (`fitAllPose`/
- * `fitSpherePose`) plain framing, per issue #201's acceptance criteria -
- * the human owner tested live and wanted each pulled back further by
- * exactly this many "-" clicks' worth of padding. */
-const SHOW_ALL_EXTRA_ZOOM_OUT_STEPS = 3;
-const FIT_LOCAL_BUBBLE_EXTRA_ZOOM_OUT_STEPS = 2;
-const FIT_NEAREST_STARS_EXTRA_ZOOM_OUT_STEPS = 6;
+ * `fitSpherePose`) plain framing, per issue #201's acceptance criteria as
+ * corrected by #205 - the human owner tested live and wanted each pulled in
+ * closer by exactly this many "+" clicks' worth of padding (same step
+ * counts as #201/#202, just the opposite direction). */
+const SHOW_ALL_EXTRA_ZOOM_IN_STEPS = 3;
+const FIT_LOCAL_BUBBLE_EXTRA_ZOOM_IN_STEPS = 2;
+const FIT_NEAREST_STARS_EXTRA_ZOOM_IN_STEPS = 6;
 
 /** Issue #197: "Fit to Local Bubble" - frames the Local Bubble's real
  * ellipsoid extent (`local_bubble.center_pc`, and `max(semi_axes_pc)` as a
@@ -872,28 +877,28 @@ const FIT_NEAREST_STARS_EXTRA_ZOOM_OUT_STEPS = 6;
  * scene has no Local Bubble layer - `fitLocalBubbleButton` is also disabled
  * in that case (see `applyLocalBubbleButtonState` below) so this path
  * shouldn't normally be reachable, but stays a safe no-op rather than
- * erroring either way (spec §38). Issue #201: the resulting pose gets
- * `FIT_LOCAL_BUBBLE_EXTRA_ZOOM_OUT_STEPS` (2) extra zoom-out steps applied
+ * erroring either way (spec §38). Issue #201/#205: the resulting pose gets
+ * `FIT_LOCAL_BUBBLE_EXTRA_ZOOM_IN_STEPS` (2) extra zoom-in steps applied
  * as post-processing, not a change to `fitSpherePose`'s own math. */
 function applyFitLocalBubblePose(): void {
   if (!localBubbleStructure) return;
   const { x_pc, y_pc, z_pc } = localBubbleStructure.center_pc;
   const { a_pc, b_pc, c_pc } = localBubbleStructure.semi_axes_pc;
-  applyCameraPoseWithExtraZoomOut(
+  applyCameraPoseWithExtraZoomIn(
     fitSpherePose([x_pc, y_pc, z_pc], Math.max(a_pc, b_pc, c_pc)),
-    FIT_LOCAL_BUBBLE_EXTRA_ZOOM_OUT_STEPS,
+    FIT_LOCAL_BUBBLE_EXTRA_ZOOM_IN_STEPS,
   );
 }
 
 /** Issue #197: "Fit to Nearest-Stars Sphere" - frames the RECONS dense-LOD
  * collection sphere (`denseBatchRadiusPc`, already computed from the loaded
- * scene per issue #104), centered on the Sun/origin. Issue #201: the
- * resulting pose gets `FIT_NEAREST_STARS_EXTRA_ZOOM_OUT_STEPS` (6) extra
- * zoom-out steps applied as post-processing. */
+ * scene per issue #104), centered on the Sun/origin. Issue #201/#205: the
+ * resulting pose gets `FIT_NEAREST_STARS_EXTRA_ZOOM_IN_STEPS` (6) extra
+ * zoom-in steps applied as post-processing. */
 function applyFitNearestStarsPose(): void {
-  applyCameraPoseWithExtraZoomOut(
+  applyCameraPoseWithExtraZoomIn(
     fitSpherePose([0, 0, 0], denseBatchRadiusPc),
-    FIT_NEAREST_STARS_EXTRA_ZOOM_OUT_STEPS,
+    FIT_NEAREST_STARS_EXTRA_ZOOM_IN_STEPS,
   );
 }
 
@@ -952,11 +957,11 @@ function applyCameraPreset(key: string): void {
       applyCameraPose(sunCenteredPose());
       break;
     case "fit-all":
-      // Issue #201: +3 extra zoom-out steps beyond `fitAllPose`'s own
-      // framing (see `SHOW_ALL_EXTRA_ZOOM_OUT_STEPS`).
-      applyCameraPoseWithExtraZoomOut(
+      // Issue #201/#205: +3 extra zoom-in steps beyond `fitAllPose`'s own
+      // framing (see `SHOW_ALL_EXTRA_ZOOM_IN_STEPS`).
+      applyCameraPoseWithExtraZoomIn(
         fitAllPose(currentlyVisiblePositions()),
-        SHOW_ALL_EXTRA_ZOOM_OUT_STEPS,
+        SHOW_ALL_EXTRA_ZOOM_IN_STEPS,
       );
       break;
     default:
