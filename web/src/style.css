@@ -74,6 +74,18 @@ body {
 #inspector {
   right: 12px;
   width: 240px;
+  /* Issue #193: same root cause as #185's `.object-label.selected` fix
+     above - CSS2DRenderer's `zOrder()` sets an inline `style.zIndex` on
+     every star/structure label every frame based on camera distance,
+     topping out around the current live label count (100-200+ since
+     #159 uncapped dense-LOD labels). `.panel`'s shared `z-index: 2`
+     (below) is far below that, so labels visually float on top of the
+     open Inspector. `!important` is required to win over the per-frame
+     inline style. `600` sits above every ordinary label and the
+     selected label's `500 !important`, while staying below
+     `.info-dialog-scrim`'s `1000` so an open Info dialog still wins
+     over an open Inspector. */
+  z-index: 600 !important;
 }
 
 /* Issue #106 (repositioned by #143): search / go-to-object panel - now

@@ -185,7 +185,9 @@ export class Inspector {
     // render label+value on one line via `.inspector-row--inline`;
     // `false` (the default, via `appendRow`'s own default) for the
     // longer/multi-part fields (Galactic l/b, Cartesian X/Y/Z,
-    // Exoplanets, Source) that keep the original stacked layout.
+    // Exoplanets) that keep the original stacked layout. Story #193:
+    // "Source" is no longer part of this list - it's appended as its own
+    // row after the orbit diagram below, so it always ends up last.
     const rows: [string, string, boolean][] = [
       ["Designation", displayName(obj.name), true],
       ["Type", humanizeType(obj.object_type), true],
@@ -218,8 +220,6 @@ export class Inspector {
       }
     }
 
-    rows.push(["Source", obj.source.reference, false]);
-
     for (const [label, value, inline] of rows) {
       this.appendRow(label, value, inline);
     }
@@ -236,6 +236,12 @@ export class Inspector {
         this.content.appendChild(diagram);
       }
     }
+
+    // Story #193: "Source" now renders as its own row after the orbit
+    // diagram (rather than as part of the row list above), so it always
+    // ends up last - with a diagram in between for stars with exoplanets,
+    // directly after Exoplanets for everything else.
+    this.appendRow("Source", obj.source.reference, false);
 
     this.element.style.display = "block";
   }
