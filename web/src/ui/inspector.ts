@@ -1,6 +1,6 @@
 import type { SceneExoplanetSummary, SceneObject, ScenePlanetSummary } from "../scene/sceneTypes";
 import { cartesianToGalacticLB } from "../scene/galacticCoords";
-import { displayName } from "../scene/labels";
+import { displayName, properNameFor } from "../scene/labels";
 import { STAR_OBJECT_TYPES } from "../scene/objects";
 import { createOrbitDiagramElement } from "./orbitDiagram";
 import { createSkyViewElement, updateSkyView } from "./skyView";
@@ -24,12 +24,19 @@ import { createSkyViewElement, updateSkyView } from "./skyView";
  * the row list above, for stars with `exoplanets.count > 0` - purely
  * additive, the existing text-based "Exoplanets" row above is unchanged.
  *
- * Story #187 does two things: (1) merges the former separate Name/Type/
- * Distance rows into one compact heading line (`formatNameTypeDistance`
- * below) to reclaim vertical space, and (2) for `star`-type objects only,
- * inserts an embedded Aladin Lite sky viewer (`ui/skyView.ts`) immediately
- * below that heading, before the Galactic l/b row - real DSS imagery of
- * the selected star, targeted by its SIMBAD `name`.
+ * Story #187 merged the former separate Name/Type/Distance rows into one
+ * compact heading line and inserted an embedded Aladin Lite sky viewer
+ * (`ui/skyView.ts`) below it, for `star`-type objects only, targeted by the
+ * selected star's SIMBAD `name`.
+ *
+ * Story #189 reorganizes the panel again, per the human owner's request:
+ * (1) reverts #187's merged heading back into separate "Designation"/"Type"/
+ * "Distance" rows (each field visible again, "Name" renamed "Designation");
+ * (2) adds a star-only "Star Name" row (the common/proper name, via
+ * `properNameFor` - omitted when the star has none) as the very first thing
+ * shown, above the sky view; (3) adds a star-only "Visual Magnitude" row
+ * (SIMBAD's apparent V magnitude, `formatVisualMagnitude` below) between
+ * Spectral Type and Absolute Magnitude.
  */
 
 function formatNumber(value: number, digits = 2): string {
@@ -43,26 +50,14 @@ function humanizeType(objectType: string): string {
     .join(" ");
 }
 
-/** Distance display, unchanged from the pre-#187 "Distance" row's own
- * formatting - with error bars when SIMBAD/the catalog has one on record,
- * or a bare figure otherwise. Factored out so `formatNameTypeDistance`
- * below doesn't duplicate it. */
+/** Distance display for the "Distance" row - with error bars when SIMBAD/
+ * the catalog has one on record, or a bare figure otherwise. */
 export function formatDistance(
   obj: Pick<SceneObject, "distance_pc" | "distance_error_pc">,
 ): string {
   return obj.distance_error_pc !== null
     ? `${formatNumber(obj.distance_pc, 1)} ± ${formatNumber(obj.distance_error_pc, 1)} pc`
     : `${formatNumber(obj.distance_pc, 1)} pc`;
-}
-
-/** Story #187: the former separate "Name"/"Type"/"Distance" rows merged
- * into one compact heading line (e.g. "* 82 Eri · Star · 6.0 pc"), to
- * reclaim vertical space for the new sky-view panel below it. All other
- * rows are unaffected. */
-export function formatNameTypeDistance(
-  obj: Pick<SceneObject, "name" | "object_type" | "distance_pc" | "distance_error_pc">,
-): string {
-  return `${displayName(obj.name)} · ${humanizeType(obj.object_type)} · ${formatDistance(obj)}`;
 }
 
 /** Story #172: SIMBAD's raw spectral-type string, verbatim, or "Unknown"
@@ -79,6 +74,14 @@ export function formatSpectralType(spectralType: string | null): string {
  * legible as what it is, or "Unknown" when not available. */
 export function formatAbsoluteMagnitude(absoluteMagnitude: number | null): string {
   return absoluteMagnitude !== null ? `M = ${formatNumber(absoluteMagnitude, 1)}` : "Unknown";
+}
+
+/** Story #189: SIMBAD's apparent (visual) V magnitude to one decimal place
+ * with a brief label, same formatting convention as
+ * `formatAbsoluteMagnitude` above (e.g. "V = 1.6"), or "Unknown" when not
+ * available. */
+export function formatVisualMagnitude(apparentMagnitude: number | null): string {
+  return apparentMagnitude !== null ? `V = ${formatNumber(apparentMagnitude, 1)}` : "Unknown";
 }
 
 function formatPlanetSummary(planet: ScenePlanetSummary): string {
@@ -129,62 +132,83 @@ export class Inspector {
     this.element.appendChild(closeButton);
   }
 
+  private appendRow(label: string, value: string): void {
+    const row = document.createElement("div");
+    row.className = "inspector-row";
+    const labelEl = document.createElement("span");
+    labelEl.className = "inspector-label";
+    labelEl.textContent = label;
+    const valueEl = document.createElement("span");
+    valueEl.className = "inspector-value";
+    valueEl.textContent = value;
+    row.append(labelEl, valueEl);
+    this.content.appendChild(row);
+  }
+
   show(obj: SceneObject): void {
     const [x, y, z] = obj.position_pc;
     const { l_deg, b_deg } = cartesianToGalacticLB(x, y, z);
 
     this.content.replaceChildren();
 
-    // Story #187: merged Name/Type/Distance heading line, first thing in
-    // the panel (replacing the three separate rows this used to be).
-    const heading = document.createElement("div");
-    heading.className = "inspector-heading";
-    heading.textContent = formatNameTypeDistance(obj);
-    this.content.appendChild(heading);
-
     const isStar = STAR_OBJECT_TYPES.has(obj.object_type);
 
-    // Story #187: embedded Aladin sky viewer, star-only, immediately below
-    // the heading above and before the Galactic l/b row - the single
-    // shared instance is retargeted (not recreated) on every star
-    // selection; see `ui/skyView.ts` for why. Non-star objects get no
-    // panel at all (the element is simply never appended for them), and
-    // the Inspector's own display:none (see `hide()`) keeps it from
+    // Story #189: "Star Name" row (the common/proper name, e.g.
+    // "Bellatrix") is the very first thing shown, star-only, omitted
+    // entirely when the star has none on record (most stars - see
+    // `properNameFor`'s own docstring for coverage).
+    if (isStar) {
+      const properName = properNameFor(obj);
+      if (properName !== null) {
+        this.appendRow("Star Name", properName);
+      }
+    }
+
+    // Story #187: embedded Aladin sky viewer, star-only, second thing in
+    // the panel (after the Star Name row above, before the row list
+    // below) - the single shared instance is retargeted (not recreated) on
+    // every star selection; see `ui/skyView.ts` for why. Non-star objects
+    // get no panel at all (the element is simply never appended for them),
+    // and the Inspector's own display:none (see `hide()`) keeps it from
     // rendering/querying while the panel is closed.
     if (isStar) {
       this.content.appendChild(createSkyViewElement());
       updateSkyView(obj);
     }
 
+    // Story #189: reverted back to separate rows (from #187's merged
+    // heading), "Name" renamed "Designation", in this exact order.
     const rows: [string, string][] = [
+      ["Designation", displayName(obj.name)],
+      ["Type", humanizeType(obj.object_type)],
+      ["Distance", formatDistance(obj)],
+    ];
+
+    if (isStar) {
+      rows.push(["Spectral Type", formatSpectralType(obj.spectral_type)]);
+      rows.push(["Visual Magnitude", formatVisualMagnitude(obj.apparent_magnitude)]);
+      rows.push(["Absolute Magnitude", formatAbsoluteMagnitude(obj.absolute_magnitude)]);
+    }
+
+    rows.push(
       ["Galactic l, b", `l = ${formatNumber(l_deg, 1)}°, b = ${formatNumber(b_deg, 1)}°`],
       [
         "Cartesian X, Y, Z",
         `X = ${formatNumber(x)} pc, Y = ${formatNumber(y)} pc, Z = ${formatNumber(z)} pc`,
       ],
-      ["Source", obj.source.reference],
-    ];
+    );
 
     if (isStar) {
-      rows.push(["Spectral Type", formatSpectralType(obj.spectral_type)]);
-      rows.push(["Absolute Magnitude", formatAbsoluteMagnitude(obj.absolute_magnitude)]);
       const exoplanets = formatExoplanets(obj.exoplanets);
       if (exoplanets !== null) {
         rows.push(["Exoplanets", exoplanets]);
       }
     }
 
+    rows.push(["Source", obj.source.reference]);
+
     for (const [label, value] of rows) {
-      const row = document.createElement("div");
-      row.className = "inspector-row";
-      const labelEl = document.createElement("span");
-      labelEl.className = "inspector-label";
-      labelEl.textContent = label;
-      const valueEl = document.createElement("span");
-      valueEl.className = "inspector-value";
-      valueEl.textContent = value;
-      row.append(labelEl, valueEl);
-      this.content.appendChild(row);
+      this.appendRow(label, value);
     }
 
     // Story #182: the orbit schematic, appended after the row list above

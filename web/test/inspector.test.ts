@@ -3,8 +3,8 @@ import {
   formatAbsoluteMagnitude,
   formatDistance,
   formatExoplanets,
-  formatNameTypeDistance,
   formatSpectralType,
+  formatVisualMagnitude,
 } from "../src/ui/inspector";
 import type { SceneExoplanetSummary, ScenePlanetSummary } from "../src/scene/sceneTypes";
 
@@ -29,41 +29,6 @@ describe("formatDistance", () => {
   });
 });
 
-describe("formatNameTypeDistance", () => {
-  it("combines display name, humanized type, and distance into one line", () => {
-    expect(
-      formatNameTypeDistance({
-        name: "* 82 Eri",
-        object_type: "star",
-        distance_pc: 6.04,
-        distance_error_pc: null,
-      }),
-    ).toBe("* 82 Eri · Star · 6.0 pc");
-  });
-
-  it("strips a leading 'NAME ' prefix via displayName, and includes the error bar when present", () => {
-    expect(
-      formatNameTypeDistance({
-        name: "NAME Proxima Centauri",
-        object_type: "star",
-        distance_pc: 1.301,
-        distance_error_pc: 0.002,
-      }),
-    ).toBe("Proxima Centauri · Star · 1.3 ± 0.0 pc");
-  });
-
-  it("humanizes multi-word/underscored object types", () => {
-    expect(
-      formatNameTypeDistance({
-        name: "Local Bubble",
-        object_type: "molecular_cloud",
-        distance_pc: 150,
-        distance_error_pc: null,
-      }),
-    ).toBe("Local Bubble · Molecular Cloud · 150.0 pc");
-  });
-});
-
 describe("formatSpectralType", () => {
   it("returns the raw SIMBAD string verbatim", () => {
     expect(formatSpectralType("K3II-III")).toBe("K3II-III");
@@ -83,6 +48,17 @@ describe("formatAbsoluteMagnitude", () => {
 
   it("falls back to 'Unknown' for null (not 'null'/blank)", () => {
     expect(formatAbsoluteMagnitude(null)).toBe("Unknown");
+  });
+});
+
+describe("formatVisualMagnitude", () => {
+  it("formats to one decimal place with a brief 'V =' label", () => {
+    expect(formatVisualMagnitude(1.64)).toBe("V = 1.6");
+    expect(formatVisualMagnitude(-1.46)).toBe("V = -1.5");
+  });
+
+  it("falls back to 'Unknown' for null (not 'null'/blank)", () => {
+    expect(formatVisualMagnitude(null)).toBe("Unknown");
   });
 });
 

@@ -307,6 +307,48 @@ export function displayName(name: string): string {
   return name.startsWith(prefix) ? name.slice(prefix.length) : name;
 }
 
+/**
+ * Returns `obj`'s actual proper/common name string (e.g. "Bellatrix"), or
+ * `null` if it has none - for the Inspector's "Star Name" row (issue #189).
+ *
+ * Broader than `hasProperName` above on purpose: this is a DISPLAY-only
+ * helper, not a ranking heuristic, so it also recognizes the IAU's
+ * "NAME-IAU " convention (distinct from SIMBAD's older "NAME " tag -
+ * `hasProperName`'s own docstring explains why it deliberately excludes
+ * "NAME-IAU " for its #114/#159 label-ranking purposes). Checked in this
+ * order, first match wins:
+ *   1. `name` itself "NAME "-prefixed (rare - e.g. `name_proxima_centauri`).
+ *   2. An alias "NAME "-prefixed (e.g. Bellatrix: `name = "* gam Ori"`,
+ *      alias `"NAME Bellatrix"`).
+ *   3. An alias "NAME-IAU "-prefixed (the IAU official-name convention,
+ *      not covered by `hasProperName`).
+ * Returns `null` when none of the above match (the common case - most
+ * stars carry only a bare catalog designation).
+ *
+ * The matched prefix is stripped from the returned string, same convention
+ * as `displayName` above (which only handles the "NAME " case, for the
+ * unrelated main-`name`-on-screen display path).
+ */
+export function properNameFor(
+  obj: Pick<SceneObject, "name" | "aliases">,
+): string | null {
+  const NAME_PREFIX = "NAME ";
+  const NAME_IAU_PREFIX = "NAME-IAU ";
+
+  if (obj.name.startsWith(NAME_PREFIX)) {
+    return obj.name.slice(NAME_PREFIX.length);
+  }
+  const namedAlias = obj.aliases.find((alias) => alias.startsWith(NAME_PREFIX));
+  if (namedAlias) {
+    return namedAlias.slice(NAME_PREFIX.length);
+  }
+  const iauAlias = obj.aliases.find((alias) => alias.startsWith(NAME_IAU_PREFIX));
+  if (iauAlias) {
+    return iauAlias.slice(NAME_IAU_PREFIX.length);
+  }
+  return null;
+}
+
 export interface CatalogLabel {
   /** The scene object this label belongs to. */
   object: SceneObject;

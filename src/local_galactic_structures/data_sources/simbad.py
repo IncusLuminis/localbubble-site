@@ -156,6 +156,7 @@ class SimbadResolver(CachingObjectResolver):
             visual=Visual(
                 spectral_type=sp_type,
                 absolute_magnitude=absolute_magnitude,
+                apparent_magnitude=apparent_v_mag,
             ),
             source=Source(
                 reference=(

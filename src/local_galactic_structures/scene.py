@@ -101,6 +101,7 @@ def _object_to_scene_entry(obj: AstronomicalObject) -> dict:
         "color_class": obj.visual.color_class,
         "spectral_type": obj.visual.spectral_type,
         "absolute_magnitude": obj.visual.absolute_magnitude,
+        "apparent_magnitude": obj.visual.apparent_magnitude,
         "exoplanets": _exoplanets_to_scene(obj.exoplanets),
         "group": {
             "primary": obj.group.primary,

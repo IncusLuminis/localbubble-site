@@ -48,11 +48,19 @@ import type { SceneObject } from "../scene/sceneTypes";
 
 const ALADIN_SCRIPT_URL = "https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js";
 const ALADIN_SURVEY = "P/DSS2/color";
-/** Square viewer side (px), matching `#inspector`'s CSS content width
- * (240px panel width - 2x14px padding, see `style.css`) so the viewer
- * fills the panel without overflowing it - the same box `orbitDiagram.ts`
- * sizes its own diagram against. */
-const SKY_VIEW_SIZE_PX = 212;
+/** Square viewer side (px), matching `#inspector`'s actual CSS content
+ * width so the viewer fills the panel edge-to-edge without overflowing it.
+ *
+ * Story #189 correction: `.panel`'s `width: 240px` (`style.css`) is a
+ * content-box width (no `box-sizing: border-box` override on `.panel`),
+ * so it already IS the content width - the padding (`12px 14px`) is added
+ * on top of it, not carved out of it. The pre-#189 value here (212 =
+ * 240 - 2x14) double-subtracted the padding, leaving a visible ~28px gap
+ * on the right edge and letting Aladin's own overlay chrome (coordinate
+ * readout, target-name/FoV labels) overflow past the narrower box's right
+ * and bottom edges - confirmed live via devtools (`getBoundingClientRect`)
+ * against a real selection before fixing this. */
+const SKY_VIEW_SIZE_PX = 240;
 /** Degrees - a reasonably tight framing on a single star without being so
  * zoomed in that a small positional/resolution mismatch pushes it out of
  * frame. */
