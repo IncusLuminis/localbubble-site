@@ -6,6 +6,7 @@ import {
   effectiveMaxLabelDistancePc,
   hasProperName,
   LABEL_DISTANCE_CAMERA_SCALE_FACTOR,
+  properNameFor,
   selectDenseBatchLabels,
   selectNearestLabels,
   shouldShowLabel,
@@ -352,6 +353,60 @@ describe("hasProperName", () => {
 
   it("requires the 'NAME ' prefix at the start of the string, not merely present somewhere", () => {
     expect(hasProperName({ name: "GJ 551", aliases: ["V* NAME something"] })).toBe(false);
+  });
+});
+
+/**
+ * Issue #189: `properNameFor` returns the actual proper-name STRING for the
+ * Inspector's "Star Name" row - broader than `hasProperName` above (which
+ * stays unchanged, scoped to its own #114/#159 ranking purpose) since this
+ * is a display-only helper that also recognizes the IAU's "NAME-IAU "
+ * convention. Verified against real catalog data.
+ */
+describe("properNameFor", () => {
+  it("strips a leading 'NAME ' prefix from the primary name (Proxima Centauri)", () => {
+    expect(
+      properNameFor({
+        name: "NAME Proxima Centauri",
+        aliases: ["GJ 551", "HIP 70890"],
+      }),
+    ).toBe("Proxima Centauri");
+  });
+
+  it("finds a 'NAME '-prefixed alias when the primary name is a bare designation (Bellatrix / gam_ori)", () => {
+    expect(
+      properNameFor({
+        name: "* gam Ori",
+        aliases: ["HIP 25336", "HD  35468", "NAME Bellatrix", "HR  1790"],
+      }),
+    ).toBe("Bellatrix");
+  });
+
+  it("falls back to a 'NAME-IAU '-prefixed alias when there is no plain 'NAME ' anywhere (102 Her / Ramus)", () => {
+    expect(
+      properNameFor({
+        name: "* 102 Her",
+        aliases: ["HIP 88886", "HD 166182", "NAME-IAU Ramus"],
+      }),
+    ).toBe("Ramus");
+  });
+
+  it("prefers a plain 'NAME ' alias over a 'NAME-IAU ' alias when both are present", () => {
+    expect(
+      properNameFor({
+        name: "* alf Cen A",
+        aliases: ["NAME-IAU Rigil Kentaurus", "NAME Rigil Kentaurus"],
+      }),
+    ).toBe("Rigil Kentaurus");
+  });
+
+  it("returns null for a bare catalog designation with neither convention (Wolf 359)", () => {
+    expect(
+      properNameFor({
+        name: "Wolf  359",
+        aliases: ["GJ 406", "PLX 2553", "LHS    36", "LTT 12923"],
+      }),
+    ).toBeNull();
   });
 });
 

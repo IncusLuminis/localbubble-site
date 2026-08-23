@@ -81,6 +81,12 @@ class Visual(BaseModel):
     #: `None` when SIMBAD has no usable V magnitude on file; never
     #: fabricated.
     absolute_magnitude: float | None = None
+    #: Apparent (visual) V magnitude, as fetched directly from SIMBAD
+    #: (`raw.get("V")` in `data_sources.simbad._normalize`) - the same
+    #: already-cached raw value `absolute_magnitude` above is derived from,
+    #: now also persisted verbatim. `None` when SIMBAD has no usable V
+    #: magnitude on file; never fabricated.
+    apparent_magnitude: float | None = None
 
 
 class PlanetSummary(BaseModel):

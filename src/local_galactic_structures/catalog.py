@@ -70,6 +70,7 @@ def to_record(obj: AstronomicalObject) -> dict:
         "visual_color_class": obj.visual.color_class,
         "visual_spectral_type": obj.visual.spectral_type,
         "visual_absolute_magnitude": obj.visual.absolute_magnitude,
+        "visual_apparent_magnitude": obj.visual.apparent_magnitude,
         "exoplanets_json": _exoplanets_to_json(obj.exoplanets),
         "notes": obj.notes,
     }
@@ -109,6 +110,7 @@ def from_record(record: dict) -> AstronomicalObject:
             color_class=record.get("visual_color_class"),
             spectral_type=record.get("visual_spectral_type"),
             absolute_magnitude=record.get("visual_absolute_magnitude"),
+            apparent_magnitude=record.get("visual_apparent_magnitude"),
         ),
         exoplanets=_exoplanets_from_json(record.get("exoplanets_json")),
         notes=record.get("notes"),

@@ -45,6 +45,12 @@ export interface SceneObject {
    * brightness multiplier for star markers, and Story #172 surfaces it
    * verbatim in the Inspector. */
   absolute_magnitude: number | null;
+  /** Apparent (visual) V magnitude, as fetched directly from SIMBAD, or
+   * `null` when not available. Higher = dimmer as seen from Earth (unlike
+   * `absolute_magnitude`, this is distance-dependent, not intrinsic).
+   * Story #189's addition; surfaced verbatim in the Inspector's "Visual
+   * Magnitude" row. */
+  apparent_magnitude: number | null;
   /** Known exoplanets orbiting this star, or `null` when none are on record
    * (~95% of stars, per Story #171). Story #172 surfaces this in the
    * Inspector. Non-star object types never carry this field in practice,

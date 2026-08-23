@@ -58,6 +58,7 @@ function makeObject(overrides: Partial<SceneObject>): SceneObject {
     color_class: null,
     spectral_type: null,
     absolute_magnitude: null,
+    apparent_magnitude: null,
     exoplanets: null,
     group: { primary: null, secondary: [] },
     source: { reference: "test fixture", url: null, catalog: null },
