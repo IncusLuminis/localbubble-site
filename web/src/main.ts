@@ -1,6 +1,6 @@
 import "./style.css";
 import { Raycaster, Vector3 } from "three";
-import { createCamera, createControls, deriveMinZoomDistancePc } from "./scene/camera";
+import { createCamera, createControls, deriveMinZoomDistancePc, dollyPosition } from "./scene/camera";
 import { createRenderer, createScene } from "./scene/createScene";
 import { createSunMarker, sunCoreRadiusPc } from "./scene/sun";
 import { createGalacticPlane } from "./scene/galacticPlane";
@@ -67,6 +67,7 @@ import {
   edgeOnPose,
   faceOnPose,
   fitAllPose,
+  fitSpherePose,
   objectCenteredPose,
   perspectivePose,
   sunCenteredPose,
@@ -82,7 +83,7 @@ import { createSearchBox } from "./ui/search";
 import { createFovReadout } from "./ui/fovReadout";
 import { createFullscreenToggle } from "./ui/fullscreenToggle";
 import { fovExtentPc } from "./scene/fov";
-import type { SceneObject } from "./scene/sceneTypes";
+import type { LocalBubbleStructure, SceneObject } from "./scene/sceneTypes";
 
 /**
  * Application entry point (spec Idea.md §22, Story #65). Extends Story
@@ -199,18 +200,12 @@ menuToggle.addEventListener("click", () => {
 });
 app.appendChild(menuToggle);
 
-// Issue #163: Expand/Collapse fullscreen toggle, immediately right of
-// `#menu-toggle` in the same top-left button row (see
-// `ui/fullscreenToggle.ts` for the Fullscreen API wiring/state-sync).
-// Entirely independent of `menuToggle`/`menuPanels` above - it toggles
-// browser fullscreen on `app` itself, not the Search/Structures panels.
-const fullscreenToggle = createFullscreenToggle(app);
-app.appendChild(fullscreenToggle.element);
-
 // Issue #164: "i" (Info) button, same top-left row/sizing/style as
-// `#menu-toggle`/`#fullscreen-toggle` - placed after #163's Expand/Collapse
-// button (final left-to-right order settled by this rebase: hamburger,
-// Expand/Collapse, Info).
+// `#menu-toggle` - placed immediately after it. Issue #197 moved the
+// Expand/Collapse fullscreen toggle (formerly here, per #163) down into the
+// new bottom-left toolbar below, so the top-left row is now just hamburger +
+// Info ("три блина и i" per the human owner's #197 request), and this
+// button shifts left accordingly (see `style.css`'s `#info-toggle` rule).
 const infoDialog = new InfoDialog();
 app.appendChild(infoDialog.element);
 
@@ -221,6 +216,45 @@ infoToggle.textContent = "i";
 infoToggle.setAttribute("aria-label", "About Local Galactic Structures");
 infoToggle.addEventListener("click", () => infoDialog.show());
 app.appendChild(infoToggle);
+
+// Issue #197: new bottom-left toolbar - smaller/secondary utility row,
+// mirroring `#status`'s bottom-left corner (see `style.css`'s
+// `#bottom-left-toolbar` rule, which also pushes `#status`'s text up out of
+// the way so the two never collide). First button is the Expand/Collapse
+// fullscreen toggle relocated from the top-left row above (its own
+// `ui/fullscreenToggle.ts` Fullscreen API logic/state-sync is entirely
+// unchanged - only its container/position/size move here), followed by
+// Zoom In/Out, Show All, Fit to Local Bubble, and Fit to Nearest-Stars
+// Sphere (wired further below, once `applyCameraPose`/`denseBatchRadiusPc`
+// exist).
+const bottomLeftToolbar = document.createElement("div");
+bottomLeftToolbar.id = "bottom-left-toolbar";
+app.appendChild(bottomLeftToolbar);
+
+const fullscreenToggle = createFullscreenToggle(app);
+bottomLeftToolbar.appendChild(fullscreenToggle.element);
+
+function createToolbarButton(id: string, label: string, ariaLabel: string): HTMLButtonElement {
+  const button = document.createElement("button");
+  button.id = id;
+  button.type = "button";
+  button.className = "toolbar-button";
+  button.textContent = label;
+  button.title = ariaLabel;
+  button.setAttribute("aria-label", ariaLabel);
+  bottomLeftToolbar.appendChild(button);
+  return button;
+}
+
+const zoomInButton = createToolbarButton("zoom-in-toggle", "+", "Zoom in");
+const zoomOutButton = createToolbarButton("zoom-out-toggle", "−", "Zoom out");
+const showAllButton = createToolbarButton("show-all-toggle", "All", "Show all objects");
+const fitLocalBubbleButton = createToolbarButton("fit-local-bubble-toggle", "LB", "Fit to Local Bubble");
+const fitNearestStarsButton = createToolbarButton(
+  "fit-nearest-stars-toggle",
+  "NS",
+  "Fit to nearest-stars sphere",
+);
 
 const raycaster = new Raycaster();
 
@@ -259,6 +293,17 @@ let denseBatchBoundaryMesh: ReturnType<typeof createDenseBatchBoundaryLayer> | n
  * hide every dense-batch member until the real radius is known, which is
  * the correct "not loaded yet" state anyway. */
 let denseBatchRadiusPc = 0;
+
+/** Issue #197: the loaded scene's `structures.local_bubble` (if present),
+ * kept as its own module binding (mirroring `denseBatchRadiusPc` above) so
+ * the "Fit to Local Bubble" toolbar button's click handler - wired below,
+ * well before `loadScene()`'s own `.then()` resolves - can read whatever is
+ * current at click time rather than capturing a value up front. Stays
+ * `null` before the scene loads, and stays `null` thereafter if the scene
+ * has no Local Bubble layer (spec §38: an optional structure layer being
+ * absent must not error) - either way, `fitLocalBubbleButton` is disabled
+ * whenever this is `null` (see `applyLocalBubbleButtonState` below). */
+let localBubbleStructure: LocalBubbleStructure | null = null;
 
 function applyCatalogVisibility(): void {
   updateCatalogVisibility(
@@ -639,6 +684,73 @@ function applyCameraPose(pose: CameraPose): void {
   controls.update();
 }
 
+/** Issue #197: fixed dolly step factor for the Zoom In/Out toolbar buttons -
+ * ~20% closer per Zoom In click, and its exact reciprocal for Zoom Out, so a
+ * Zoom In followed immediately by a Zoom Out returns to (approximately) the
+ * same camera distance rather than drifting. Actual clamping to
+ * `controls.minDistance`/`maxDistance` lives in the pure, unit-tested
+ * `dollyPosition` (`scene/camera.ts`) - this is just the factor constant. */
+const ZOOM_IN_STEP_FACTOR = 0.8;
+const ZOOM_OUT_STEP_FACTOR = 1 / ZOOM_IN_STEP_FACTOR;
+
+/** Issue #197: shared dolly-toward/away-from-target handler for the Zoom
+ * In (+) / Zoom Out (-) toolbar buttons - thin wrapper around the pure
+ * `dollyPosition` supplying the live `camera.position`/`controls.target`/
+ * `controls.minDistance`/`controls.maxDistance` that function can't see on
+ * its own (same split as `selectedObjectMarkerRadiusPc` above), then writes
+ * the clamped result back onto the real camera and calls `controls.update()`
+ * per the issue's acceptance criteria. */
+function zoomBy(factor: number): void {
+  const newPosition = dollyPosition(
+    [camera.position.x, camera.position.y, camera.position.z],
+    [controls.target.x, controls.target.y, controls.target.z],
+    factor,
+    controls.minDistance,
+    controls.maxDistance,
+  );
+  camera.position.set(...newPosition);
+  controls.update();
+}
+
+/** Issue #197: "Fit to Local Bubble" - frames the Local Bubble's real
+ * ellipsoid extent (`local_bubble.center_pc`, and `max(semi_axes_pc)` as a
+ * conservative bounding-sphere radius covering the whole ellipsoid,
+ * including its longest axis) via the new `fitSpherePose`. No-op if the
+ * scene has no Local Bubble layer - `fitLocalBubbleButton` is also disabled
+ * in that case (see `applyLocalBubbleButtonState` below) so this path
+ * shouldn't normally be reachable, but stays a safe no-op rather than
+ * erroring either way (spec §38). */
+function applyFitLocalBubblePose(): void {
+  if (!localBubbleStructure) return;
+  const { x_pc, y_pc, z_pc } = localBubbleStructure.center_pc;
+  const { a_pc, b_pc, c_pc } = localBubbleStructure.semi_axes_pc;
+  applyCameraPose(fitSpherePose([x_pc, y_pc, z_pc], Math.max(a_pc, b_pc, c_pc)));
+}
+
+/** Issue #197: "Fit to Nearest-Stars Sphere" - frames the RECONS dense-LOD
+ * collection sphere (`denseBatchRadiusPc`, already computed from the loaded
+ * scene per issue #104), centered on the Sun/origin. */
+function applyFitNearestStarsPose(): void {
+  applyCameraPose(fitSpherePose([0, 0, 0], denseBatchRadiusPc));
+}
+
+/** Issue #197: keeps `fitLocalBubbleButton` disabled whenever the loaded
+ * scene has no Local Bubble layer (`localBubbleStructure === null`, either
+ * because the scene hasn't loaded yet or because that optional layer was
+ * absent/malformed - spec §38) rather than leaving it clickable into a
+ * no-op or, worse, an error. */
+function applyLocalBubbleButtonState(): void {
+  fitLocalBubbleButton.disabled = localBubbleStructure === null;
+}
+
+applyLocalBubbleButtonState();
+
+zoomInButton.addEventListener("click", () => zoomBy(ZOOM_IN_STEP_FACTOR));
+zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
+showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
+fitLocalBubbleButton.addEventListener("click", applyFitLocalBubblePose);
+fitNearestStarsButton.addEventListener("click", applyFitNearestStarsPose);
+
 /** Search / go-to-object (issue #106, spec §2.6): frames the camera closely
  * on `obj` (via `objectCenteredPose`, distance proportional to the
  * object's own marker radius) and selects it - reusing `selectObject`
@@ -734,6 +846,13 @@ loadScene()
 
     localBubbleGroup = createLocalBubbleLayer(sceneData.structures.local_bubble);
     if (localBubbleGroup) scene.add(localBubbleGroup);
+
+    // Issue #197: populate the "Fit to Local Bubble" toolbar button's data
+    // source and (re)apply its enabled/disabled state now that the scene's
+    // actual `structures.local_bubble` presence is known - `?? null` since
+    // `SceneStructures.local_bubble` is `undefined` (not `null`) when absent.
+    localBubbleStructure = sceneData.structures.local_bubble ?? null;
+    applyLocalBubbleButtonState();
 
     const categories = catalogObjectTypes(sceneData.objects);
     for (const category of categories) {

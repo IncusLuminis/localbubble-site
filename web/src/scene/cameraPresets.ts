@@ -121,13 +121,54 @@ export function objectCenteredPose(
 const DEFAULT_FIT_ALL_POSE = perspectivePose();
 
 /**
+ * Issue #197: generalizes `fitAllPose`'s own bounding-sphere-fit math (below)
+ * to an arbitrary, caller-supplied sphere (`center`/`radius`) rather than one
+ * derived from a list of positions - the shared building block for the
+ * bottom-left toolbar's "Fit to Local Bubble" (the Local Bubble's real
+ * `center_pc`/`max(semi_axes_pc)` extent) and "Fit to Nearest-Stars Sphere"
+ * (origin-centered, `denseBatchRadiusPc`) buttons, neither of which starts
+ * from a list of object positions the way "Fit all"/"Show All" does.
+ *
+ * Places the camera back along the same default "Perspective" viewing
+ * direction `fitAllPose` uses (for visual consistency between every
+ * bounding-sphere-style fit in the app), scaled so `radius` fits within the
+ * camera's vertical field of view, with the same non-zero-radius floor
+ * `fitAllPose` applies for a single/point-like target.
+ */
+export function fitSpherePose(
+  center: readonly [number, number, number],
+  radius: number,
+  verticalFovDeg = 50,
+  paddingFactor = 1.35,
+): CameraPose {
+  const [cx, cy, cz] = center;
+  // A point-like sphere (radius 0, or very small) still needs a sane,
+  // non-zero viewing distance.
+  const effectiveRadius = Math.max(radius, 10);
+
+  const halfFovRad = (verticalFovDeg / 2) * (Math.PI / 180);
+  const distance = (effectiveRadius / Math.sin(halfFovRad)) * paddingFactor;
+
+  // Reuse the default perspective's viewing direction (normalized), just
+  // rescaled to the fit distance and re-centered on the given center.
+  const [px, py, pz] = DEFAULT_FIT_ALL_POSE.position;
+  const dirLength = Math.sqrt(px * px + py * py + pz * pz);
+  const [dx, dy, dz] = [px / dirLength, py / dirLength, pz / dirLength];
+
+  return {
+    position: [cx + dx * distance, cy + dy * distance, cz + dz * distance],
+    target: [cx, cy, cz],
+  };
+}
+
+/**
  * "Fit all" (spec §29): frame the given set of currently-visible object
  * positions (already radius/layer-filtered by the caller). Computes an
  * axis-aligned bounding-sphere-ish radius (max distance from the centroid
- * to any point, which is a valid - if not minimal - bounding radius) and
- * places the camera back along the default "Perspective" viewing direction,
- * scaled so the bounding radius fits within the camera's vertical field of
- * view.
+ * to any point, which is a valid - if not minimal - bounding radius) around
+ * that centroid, then delegates to `fitSpherePose` above for the actual
+ * camera placement (issue #197 refactor - signature/observable behavior
+ * unchanged from before that refactor).
  *
  * Falls back to the default Perspective pose when `positions` is empty
  * (e.g. every layer toggled off / radius filtered to nothing) rather than
@@ -164,21 +205,6 @@ export function fitAllPose(
       boundingRadius = dist;
     }
   }
-  // A single object (boundingRadius === 0) still needs a sane, non-zero
-  // viewing distance.
-  const effectiveRadius = Math.max(boundingRadius, 10);
 
-  const halfFovRad = (verticalFovDeg / 2) * (Math.PI / 180);
-  const distance = (effectiveRadius / Math.sin(halfFovRad)) * paddingFactor;
-
-  // Reuse the default perspective's viewing direction (normalized), just
-  // rescaled to the fit distance and re-centered on the target centroid.
-  const [px, py, pz] = DEFAULT_FIT_ALL_POSE.position;
-  const dirLength = Math.sqrt(px * px + py * py + pz * pz);
-  const [dx, dy, dz] = [px / dirLength, py / dirLength, pz / dirLength];
-
-  return {
-    position: [cx + dx * distance, cy + dy * distance, cz + dz * distance],
-    target: [cx, cy, cz],
-  };
+  return fitSpherePose([cx, cy, cz], boundingRadius, verticalFovDeg, paddingFactor);
 }

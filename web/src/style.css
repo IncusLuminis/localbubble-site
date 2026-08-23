@@ -22,10 +22,15 @@ body {
   display: block;
 }
 
+/* Issue #197: shifted up from the original `bottom: 10px` to clear the new
+   `#bottom-left-toolbar` (below), which now occupies the actual bottom-left
+   corner (12px bottom + 44px button height + 8px gap = 64px) - the issue's
+   explicit "mirrors #status's corner, but don't collide with its text"
+   requirement. */
 #status {
   position: absolute;
   left: 12px;
-  bottom: 10px;
+  bottom: 64px;
   color: #8fa3c8;
   font-size: 12px;
   opacity: 0.7;
@@ -102,14 +107,15 @@ body {
    from the original 34x34px (too small/easy to lose track of) to 68x68px,
    with `font-size` scaled by the same ~2x factor (16px -> 32px) so the ☰
    glyph fills the bigger button rather than looking lost in empty space.
-   Issue #163: this sizing/visual-style rule is now shared with
-   `#fullscreen-toggle` (and #164's `#info-toggle` below) so all three read
-   as one consistent top-left button row rather than each having its own
-   visual language; only positioning (`left`) differs between them. */
-#menu-toggle,
-#fullscreen-toggle {
+   Issue #163 originally shared this rule with `#fullscreen-toggle`; issue
+   #197 moved that button down into `#bottom-left-toolbar` (below), so this
+   rule is now `#menu-toggle`-only again (still shared visual language with
+   #164's `#info-toggle`, just via separate matching rules rather than one
+   shared selector). */
+#menu-toggle {
   position: absolute;
   top: 12px;
+  left: 12px;
   z-index: 3;
   width: 68px;
   height: 68px;
@@ -123,20 +129,7 @@ body {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
-#menu-toggle {
-  left: 12px;
-}
-
-/* Issue #163: Expand/Collapse fullscreen toggle, immediately right of
-   `#menu-toggle` (12px left + 68px width + 8px gap = 88px), leaving room
-   for #164's Info button to its right. Behavior lives in
-   `ui/fullscreenToggle.ts`. */
-#fullscreen-toggle {
-  left: 88px;
-}
-
-#menu-toggle:hover,
-#fullscreen-toggle:hover {
+#menu-toggle:hover {
   background: #24304a;
 }
 
@@ -659,13 +652,15 @@ body {
 }
 
 /* Issue #164: "i" (Info) button - same top-left row/size/visual style as
-   `#menu-toggle`/`#fullscreen-toggle` (see that shared rule above), placed
-   after #163's Expand/Collapse button (12px + 68px + 8px + 68px + 8px =
-   164px) - final left-to-right order: hamburger, Expand/Collapse, Info. */
+   `#menu-toggle` (see that rule above), placed immediately after it (12px
+   left + 68px width + 8px gap = 88px). Issue #197: was `left: 164px`
+   (after #163's Expand/Collapse button, previously here too) - now that
+   Expand/Collapse has moved to `#bottom-left-toolbar` below, the top-left
+   row is just hamburger + Info ("три блина и i"), so this shifts left. */
 #info-toggle {
   position: absolute;
   top: 12px;
-  left: 164px;
+  left: 88px;
   z-index: 3;
   width: 68px;
   height: 68px;
@@ -683,6 +678,68 @@ body {
 
 #info-toggle:hover {
   background: #24304a;
+}
+
+/* Issue #197: bottom-left toolbar - a secondary/utility button row,
+   deliberately smaller (44x44px) than the top-left row's 68x68px so it
+   reads as a lesser-prominence toolbar rather than competing with the
+   primary hamburger/Info row. Occupies the actual bottom-left corner
+   (`#status`'s `bottom` was shifted up above it, see that rule). First
+   child is the relocated `#fullscreen-toggle` (`ui/fullscreenToggle.ts`,
+   moved here from the top-left row per #163/#197); the rest are plain
+   `.toolbar-button`s built in `main.ts`. */
+#bottom-left-toolbar {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+#bottom-left-toolbar #fullscreen-toggle,
+#bottom-left-toolbar .toolbar-button {
+  width: 44px;
+  height: 44px;
+  background: rgba(10, 14, 24, 0.82);
+  border: 1px solid rgba(143, 163, 200, 0.35);
+  border-radius: 6px;
+  color: #dfe6f3;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* `#fullscreen-toggle`'s glyphs (⤢/⤡) read a little small at the toolbar's
+   shared 18px - bumped up specifically for it, same way the top-left row
+   scaled its own glyph size to its button size. */
+#bottom-left-toolbar #fullscreen-toggle {
+  font-size: 22px;
+}
+
+/* The abbreviation-style labels ("All"/"LB"/"NS") need a smaller font than
+   the single-glyph buttons to comfortably fit inside 44px - full meaning is
+   in each button's `title`/`aria-label`, per the issue's tooltip
+   requirement. */
+#bottom-left-toolbar .toolbar-button {
+  font-size: 13px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+#bottom-left-toolbar #fullscreen-toggle:hover,
+#bottom-left-toolbar .toolbar-button:hover {
+  background: #24304a;
+}
+
+#bottom-left-toolbar .toolbar-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+#bottom-left-toolbar .toolbar-button:disabled:hover {
+  background: rgba(10, 14, 24, 0.82);
 }
 
 /* Issue #164: dimmed full-viewport scrim behind the centered Info dialog.
