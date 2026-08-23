@@ -22,15 +22,15 @@ body {
   display: block;
 }
 
-/* Issue #197: shifted up from the original `bottom: 10px` to clear the new
-   `#bottom-left-toolbar` (below), which now occupies the actual bottom-left
-   corner (12px bottom + 44px button height + 8px gap = 64px) - the issue's
-   explicit "mirrors #status's corner, but don't collide with its text"
-   requirement. */
+/* Issue #201: swapped back to the actual bottom-left corner (12px, same as
+   #197's original `#bottom-left-toolbar` value below) - the human owner
+   wanted the object-count text in the true corner and the toolbar sitting
+   above it, inverting #197's original stacking (see
+   `#bottom-left-toolbar`'s rule below for the other half of this swap). */
 #status {
   position: absolute;
   left: 12px;
-  bottom: 64px;
+  bottom: 12px;
   color: #8fa3c8;
   font-size: 12px;
   opacity: 0.7;
@@ -108,10 +108,11 @@ body {
    with `font-size` scaled by the same ~2x factor (16px -> 32px) so the ☰
    glyph fills the bigger button rather than looking lost in empty space.
    Issue #163 originally shared this rule with `#fullscreen-toggle`; issue
-   #197 moved that button down into `#bottom-left-toolbar` (below), so this
-   rule is now `#menu-toggle`-only again (still shared visual language with
-   #164's `#info-toggle`, just via separate matching rules rather than one
-   shared selector). */
+   #197 moved that button down into `#bottom-left-toolbar` (below). Issue
+   #164's `#info-toggle` also shared this row/sizing at one point, but #201
+   relocated that button into `#bottom-left-toolbar` too (its own 44x44px
+   sizing now) - so this rule is `#menu-toggle`-only, and the top-left row
+   is just the hamburger. */
 #menu-toggle {
   position: absolute;
   top: 12px;
@@ -651,47 +652,30 @@ body {
   letter-spacing: 0.03em;
 }
 
-/* Issue #164: "i" (Info) button - same top-left row/size/visual style as
-   `#menu-toggle` (see that rule above), placed immediately after it (12px
-   left + 68px width + 8px gap = 88px). Issue #197: was `left: 164px`
-   (after #163's Expand/Collapse button, previously here too) - now that
-   Expand/Collapse has moved to `#bottom-left-toolbar` below, the top-left
-   row is just hamburger + Info ("три блина и i"), so this shifts left. */
-#info-toggle {
-  position: absolute;
-  top: 12px;
-  left: 88px;
-  z-index: 3;
-  width: 68px;
-  height: 68px;
-  background: rgba(10, 14, 24, 0.82);
-  border: 1px solid rgba(143, 163, 200, 0.35);
-  border-radius: 8px;
-  color: #dfe6f3;
-  font-size: 32px;
-  font-style: italic;
-  font-family: Georgia, "Times New Roman", serif;
-  line-height: 1;
-  cursor: pointer;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
-}
-
-#info-toggle:hover {
-  background: #24304a;
-}
+/* Issue #164's standalone `#info-toggle` top-left-row rule (68x68px,
+   Georgia-italic "i") lived here. Issue #201 moved that button into
+   `#bottom-left-toolbar` as its last button, sized identically to its
+   44x44px neighbors via the shared `.toolbar-button` rule below - so this
+   top-left-specific sizing is retired rather than kept as dead CSS. */
 
 /* Issue #197: bottom-left toolbar - a secondary/utility button row,
-   deliberately smaller (44x44px) than the top-left row's 68x68px so it
-   reads as a lesser-prominence toolbar rather than competing with the
-   primary hamburger/Info row. Occupies the actual bottom-left corner
-   (`#status`'s `bottom` was shifted up above it, see that rule). First
-   child is the relocated `#fullscreen-toggle` (`ui/fullscreenToggle.ts`,
-   moved here from the top-left row per #163/#197); the rest are plain
+   deliberately smaller (44x44px) than the top-left row's original 68x68px
+   Info-button sizing so it reads as a lesser-prominence toolbar rather than
+   competing with the primary hamburger row. Issue #201 swapped this row's
+   stacking with `#status` (see that rule above): `#status` now occupies the
+   actual bottom-left corner, so this toolbar sits directly above it instead
+   - `bottom: 36px` clears `#status`'s 12px own offset plus its text's
+   rendered line height (12px font, ~14-16px line box) plus an 8px gap
+   (mirroring #197's original 12px + 44px button + 8px gap = 64px reasoning,
+   just inverted and against text height instead of button height). Last
+   child is now `main.ts`'s relocated Info ("i") button (#201, formerly the
+   standalone top-left `#info-toggle`); first child is still the
+   `#fullscreen-toggle` relocated here per #163/#197; the rest are plain
    `.toolbar-button`s built in `main.ts`. */
 #bottom-left-toolbar {
   position: absolute;
   left: 12px;
-  bottom: 12px;
+  bottom: 36px;
   z-index: 3;
   display: flex;
   flex-direction: row;
@@ -769,8 +753,9 @@ body {
    (vs. e.g. `50`, which today's ~130 labels would already exceed), so this
    class of bug can't recur from ordinary label-count growth. This value is
    deliberately far above every other z-index in the app (#status/#fov-
-   readout: 1, .panel/#menu-panels: 2, #menu-toggle/#fullscreen-toggle/
-   #info-toggle: 3, #154's edge-indicator: 20) - none of those need to
+   readout: 1, .panel/#menu-panels: 2, #menu-toggle/#bottom-left-toolbar
+   (incl. #info-toggle, #201): 3, #154's edge-indicator: 20) - none of those
+   need to
    change, since the dialog is meant to be unconditionally topmost. */
 .info-dialog-scrim {
   position: fixed;

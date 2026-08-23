@@ -1,6 +1,12 @@
 import "./style.css";
 import { Raycaster, Vector3 } from "three";
-import { createCamera, createControls, deriveMinZoomDistancePc, dollyPosition } from "./scene/camera";
+import {
+  createCamera,
+  createControls,
+  deriveMinZoomDistancePc,
+  dollyPosition,
+  dollyPositionSteps,
+} from "./scene/camera";
 import { createRenderer, createScene } from "./scene/createScene";
 import { createSunMarker, sunCoreRadiusPc } from "./scene/sun";
 import { createGalacticPlane } from "./scene/galacticPlane";
@@ -200,22 +206,14 @@ menuToggle.addEventListener("click", () => {
 });
 app.appendChild(menuToggle);
 
-// Issue #164: "i" (Info) button, same top-left row/sizing/style as
-// `#menu-toggle` - placed immediately after it. Issue #197 moved the
-// Expand/Collapse fullscreen toggle (formerly here, per #163) down into the
-// new bottom-left toolbar below, so the top-left row is now just hamburger +
-// Info ("три блина и i" per the human owner's #197 request), and this
-// button shifts left accordingly (see `style.css`'s `#info-toggle` rule).
+// Issue #164 introduced the "i" (Info) button in this top-left row, next to
+// `#menu-toggle`. Issue #201 moved the button itself (and its click wiring)
+// down into `#bottom-left-toolbar` as that toolbar's last button (built
+// alongside the other `createToolbarButton` calls below) - only the dialog
+// instance/container stay created here, since nothing else in this row
+// depends on it.
 const infoDialog = new InfoDialog();
 app.appendChild(infoDialog.element);
-
-const infoToggle = document.createElement("button");
-infoToggle.id = "info-toggle";
-infoToggle.type = "button";
-infoToggle.textContent = "i";
-infoToggle.setAttribute("aria-label", "About Local Galactic Structures");
-infoToggle.addEventListener("click", () => infoDialog.show());
-app.appendChild(infoToggle);
 
 // Issue #197: new bottom-left toolbar - smaller/secondary utility row,
 // mirroring `#status`'s bottom-left corner (see `style.css`'s
@@ -330,6 +328,14 @@ const fitNearestStarsButton = createToolbarButton(
   "Fit to nearest-stars sphere",
   true,
 );
+
+// Issue #201: the Info ("i") button, relocated here (from the top-left row,
+// #164) as the toolbar's LAST button - same `createToolbarButton` sizing
+// (44x44px) as its neighbors, rather than the old top-left row's standalone
+// 68x68px `#info-toggle` styling (removed from `style.css`). Glyph,
+// aria-label, and click behavior (`infoDialog.show()`) are unchanged from
+// #164 - only its container/position/size moved.
+const infoToggleButton = createToolbarButton("info-toggle", "i", "About Local Galactic Structures");
 
 const raycaster = new Raycaster();
 
@@ -787,6 +793,38 @@ function zoomBy(factor: number): void {
   controls.update();
 }
 
+/** Issue #201: applies `steps` applications of the same zoom-out step the
+ * toolbar's own Zoom Out ("-") button uses (`ZOOM_OUT_STEP_FACTOR` +
+ * `dollyPosition`, via the pure `dollyPositionSteps` in `scene/camera.ts`)
+ * to a computed `CameraPose`'s position, before calling `applyCameraPose` -
+ * the "fit" buttons' extra zoom-out padding (acceptance criterion #1).
+ * Thin wrapper supplying the live `controls.minDistance`/`maxDistance`
+ * `dollyPositionSteps` can't see on its own, same read-live-state/write-back
+ * split as `zoomBy` above (this only reads, `applyCameraPose` does the
+ * writing). `pose.target` is left untouched - only the distance from it
+ * changes, exactly as a live "-" click would leave `controls.target` alone. */
+function applyCameraPoseWithExtraZoomOut(pose: CameraPose, steps: number): void {
+  const position = dollyPositionSteps(
+    pose.position,
+    pose.target,
+    ZOOM_OUT_STEP_FACTOR,
+    controls.minDistance,
+    controls.maxDistance,
+    steps,
+  );
+  applyCameraPose({ position, target: pose.target });
+}
+
+/** Number of extra zoom-out-button-equivalent steps (`ZOOM_OUT_STEP_FACTOR`
+ * applications, via `applyCameraPoseWithExtraZoomOut`) each "fit" button
+ * applies beyond its own pose-computation function's (`fitAllPose`/
+ * `fitSpherePose`) plain framing, per issue #201's acceptance criteria -
+ * the human owner tested live and wanted each pulled back further by
+ * exactly this many "-" clicks' worth of padding. */
+const SHOW_ALL_EXTRA_ZOOM_OUT_STEPS = 3;
+const FIT_LOCAL_BUBBLE_EXTRA_ZOOM_OUT_STEPS = 2;
+const FIT_NEAREST_STARS_EXTRA_ZOOM_OUT_STEPS = 6;
+
 /** Issue #197: "Fit to Local Bubble" - frames the Local Bubble's real
  * ellipsoid extent (`local_bubble.center_pc`, and `max(semi_axes_pc)` as a
  * conservative bounding-sphere radius covering the whole ellipsoid,
@@ -794,19 +832,29 @@ function zoomBy(factor: number): void {
  * scene has no Local Bubble layer - `fitLocalBubbleButton` is also disabled
  * in that case (see `applyLocalBubbleButtonState` below) so this path
  * shouldn't normally be reachable, but stays a safe no-op rather than
- * erroring either way (spec §38). */
+ * erroring either way (spec §38). Issue #201: the resulting pose gets
+ * `FIT_LOCAL_BUBBLE_EXTRA_ZOOM_OUT_STEPS` (2) extra zoom-out steps applied
+ * as post-processing, not a change to `fitSpherePose`'s own math. */
 function applyFitLocalBubblePose(): void {
   if (!localBubbleStructure) return;
   const { x_pc, y_pc, z_pc } = localBubbleStructure.center_pc;
   const { a_pc, b_pc, c_pc } = localBubbleStructure.semi_axes_pc;
-  applyCameraPose(fitSpherePose([x_pc, y_pc, z_pc], Math.max(a_pc, b_pc, c_pc)));
+  applyCameraPoseWithExtraZoomOut(
+    fitSpherePose([x_pc, y_pc, z_pc], Math.max(a_pc, b_pc, c_pc)),
+    FIT_LOCAL_BUBBLE_EXTRA_ZOOM_OUT_STEPS,
+  );
 }
 
 /** Issue #197: "Fit to Nearest-Stars Sphere" - frames the RECONS dense-LOD
  * collection sphere (`denseBatchRadiusPc`, already computed from the loaded
- * scene per issue #104), centered on the Sun/origin. */
+ * scene per issue #104), centered on the Sun/origin. Issue #201: the
+ * resulting pose gets `FIT_NEAREST_STARS_EXTRA_ZOOM_OUT_STEPS` (6) extra
+ * zoom-out steps applied as post-processing. */
 function applyFitNearestStarsPose(): void {
-  applyCameraPose(fitSpherePose([0, 0, 0], denseBatchRadiusPc));
+  applyCameraPoseWithExtraZoomOut(
+    fitSpherePose([0, 0, 0], denseBatchRadiusPc),
+    FIT_NEAREST_STARS_EXTRA_ZOOM_OUT_STEPS,
+  );
 }
 
 /** Issue #197: keeps `fitLocalBubbleButton` disabled whenever the loaded
@@ -825,6 +873,7 @@ zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
 showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
 fitLocalBubbleButton.addEventListener("click", applyFitLocalBubblePose);
 fitNearestStarsButton.addEventListener("click", applyFitNearestStarsPose);
+infoToggleButton.addEventListener("click", () => infoDialog.show());
 
 /** Search / go-to-object (issue #106, spec §2.6): frames the camera closely
  * on `obj` (via `objectCenteredPose`, distance proportional to the
@@ -863,7 +912,12 @@ function applyCameraPreset(key: string): void {
       applyCameraPose(sunCenteredPose());
       break;
     case "fit-all":
-      applyCameraPose(fitAllPose(currentlyVisiblePositions()));
+      // Issue #201: +3 extra zoom-out steps beyond `fitAllPose`'s own
+      // framing (see `SHOW_ALL_EXTRA_ZOOM_OUT_STEPS`).
+      applyCameraPoseWithExtraZoomOut(
+        fitAllPose(currentlyVisiblePositions()),
+        SHOW_ALL_EXTRA_ZOOM_OUT_STEPS,
+      );
       break;
     default:
       console.warn(`Unknown camera preset '${key}'`);
