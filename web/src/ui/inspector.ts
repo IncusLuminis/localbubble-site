@@ -132,9 +132,9 @@ export class Inspector {
     this.element.appendChild(closeButton);
   }
 
-  private appendRow(label: string, value: string): void {
+  private appendRow(label: string, value: string, inline = false): void {
     const row = document.createElement("div");
-    row.className = "inspector-row";
+    row.className = inline ? "inspector-row inspector-row--inline" : "inspector-row";
     const labelEl = document.createElement("span");
     labelEl.className = "inspector-label";
     labelEl.textContent = label;
@@ -160,7 +160,7 @@ export class Inspector {
     if (isStar) {
       const properName = properNameFor(obj);
       if (properName !== null) {
-        this.appendRow("Star Name", properName);
+        this.appendRow("Star Name", properName, true);
       }
     }
 
@@ -178,37 +178,50 @@ export class Inspector {
 
     // Story #189: reverted back to separate rows (from #187's merged
     // heading), "Name" renamed "Designation", in this exact order.
-    const rows: [string, string][] = [
-      ["Designation", displayName(obj.name)],
-      ["Type", humanizeType(obj.object_type)],
-      ["Distance", formatDistance(obj)],
+    //
+    // Story #191: each row now carries an `inline` flag - `true` for the
+    // short scalar fields (Designation, Type, Distance, Spectral Type,
+    // Visual Magnitude, Absolute Magnitude, plus "Star Name" above) that
+    // render label+value on one line via `.inspector-row--inline`;
+    // `false` (the default, via `appendRow`'s own default) for the
+    // longer/multi-part fields (Galactic l/b, Cartesian X/Y/Z,
+    // Exoplanets, Source) that keep the original stacked layout.
+    const rows: [string, string, boolean][] = [
+      ["Designation", displayName(obj.name), true],
+      ["Type", humanizeType(obj.object_type), true],
+      ["Distance", formatDistance(obj), true],
     ];
 
     if (isStar) {
-      rows.push(["Spectral Type", formatSpectralType(obj.spectral_type)]);
-      rows.push(["Visual Magnitude", formatVisualMagnitude(obj.apparent_magnitude)]);
-      rows.push(["Absolute Magnitude", formatAbsoluteMagnitude(obj.absolute_magnitude)]);
+      rows.push(["Spectral Type", formatSpectralType(obj.spectral_type), true]);
+      rows.push(["Visual Magnitude", formatVisualMagnitude(obj.apparent_magnitude), true]);
+      rows.push(["Absolute Magnitude", formatAbsoluteMagnitude(obj.absolute_magnitude), true]);
     }
 
     rows.push(
-      ["Galactic l, b", `l = ${formatNumber(l_deg, 1)}°, b = ${formatNumber(b_deg, 1)}°`],
+      [
+        "Galactic l, b",
+        `l = ${formatNumber(l_deg, 1)}°, b = ${formatNumber(b_deg, 1)}°`,
+        false,
+      ],
       [
         "Cartesian X, Y, Z",
         `X = ${formatNumber(x)} pc, Y = ${formatNumber(y)} pc, Z = ${formatNumber(z)} pc`,
+        false,
       ],
     );
 
     if (isStar) {
       const exoplanets = formatExoplanets(obj.exoplanets);
       if (exoplanets !== null) {
-        rows.push(["Exoplanets", exoplanets]);
+        rows.push(["Exoplanets", exoplanets, false]);
       }
     }
 
-    rows.push(["Source", obj.source.reference]);
+    rows.push(["Source", obj.source.reference, false]);
 
-    for (const [label, value] of rows) {
-      this.appendRow(label, value);
+    for (const [label, value, inline] of rows) {
+      this.appendRow(label, value, inline);
     }
 
     // Story #182: the orbit schematic, appended after the row list above
