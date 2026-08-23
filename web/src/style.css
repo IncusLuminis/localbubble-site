@@ -719,13 +719,22 @@ body {
   font-size: 22px;
 }
 
-/* The abbreviation-style labels ("All"/"LB"/"NS") need a smaller font than
-   the single-glyph buttons to comfortably fit inside 44px - full meaning is
-   in each button's `title`/`aria-label`, per the issue's tooltip
-   requirement. */
 #bottom-left-toolbar .toolbar-button {
   font-size: 13px;
   font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Issue #199: the "All"/"LB"/"NS" text abbreviations above are now inline
+   SVG icons (`main.ts`'s `SHOW_ALL_ICON_SVG`/`FIT_LOCAL_BUBBLE_ICON_SVG`/
+   `FIT_NEAREST_STARS_ICON_SVG`) - `display: flex` centers the `<svg>` inside
+   the 44x44px button both axes, same as the other toolbar buttons' text
+   glyphs already read centered by default. The icons themselves already
+   `stroke="currentColor"`, so they inherit this button's `color: #dfe6f3`
+   above without any extra rule needed. */
+#bottom-left-toolbar .toolbar-button--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #bottom-left-toolbar #fullscreen-toggle:hover,
