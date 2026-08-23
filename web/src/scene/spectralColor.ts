@@ -9,7 +9,7 @@
  *
  * SIMBAD's `spectral_type` strings are messy free text, not a clean
  * enumeration - confirmed against the actual current `scene.json`
- * (2026-08-22, 707 stars, 703 with a non-null `spectral_type`): alongside the
+ * (2026-08-23, 707 stars, 703 with a non-null `spectral_type`): alongside the
  * expected "G2V"/"M5.5Ve"-style OBAFGKM strings, real values in this catalog
  * include white-dwarf ("DA3", 12 stars), carbon-star ("C-N5", 30), S-type
  * ("S5,5", 4), Wolf-Rayet ("WN...", 1), and brown-dwarf ("T...", 6) notations
@@ -19,9 +19,25 @@
  * classifications, just not on the main sequence's OBAFGKM ladder this Story
  * scopes to, and forcing e.g. a carbon star into "M" (reddest bucket) just
  * because both are cool stars would misrepresent data this module has no
- * real basis to classify. That leaves 650 of 707 stars (92%) resolving to a
- * real OBAFGKM color and 57 (8%) - the 4 null plus 53 non-OBAFGKM-letter
- * strings - falling back to unknown.
+ * real basis to classify.
+ *
+ * Story #177 follow-up (Validator review of #173): two more real patterns in
+ * this catalog needed handling before the leading-letter match, checked
+ * against all 703 non-null values:
+ *  - 5 stars (Wolf 359, Ross 128, Teegarden's Star, AD Leo, BR Psc) use
+ *    SIMBAD's lowercase dwarf-notation prefix ("dM6", "dM3", "dM4", "dM1") -
+ *    stripped below so they resolve to their real `M` class instead of
+ *    falling to unknown. `sd`/`esd` (subdwarf/extreme subdwarf) are the same
+ *    convention and are stripped too, though no current catalog value uses
+ *    them.
+ *  - nu Herculis's "kA9hF2mF2(IV)" (a composite Am-type peculiar notation -
+ *    not related to spectral class K) was a genuine *false positive*: its
+ *    leading lowercase "k" case-insensitively matched class K. Detected and
+ *    excluded below as `UNKNOWN` rather than any real class.
+ *
+ * That leaves 654 of 707 stars (92.5%) resolving to a real OBAFGKM color and
+ * 53 (7.5%) - the 4 null plus 49 non-OBAFGKM strings (including nu Herculis)
+ * - falling back to unknown.
  */
 
 export enum SpectralClass {
@@ -70,18 +86,51 @@ const LETTER_TO_SPECTRAL_CLASS: Record<string, SpectralClass> = {
   M: SpectralClass.M,
 };
 
+/** SIMBAD's lowercase dwarf/subdwarf MK luminosity-class prefixes ("d",
+ * "sd", "esd") ahead of the real class letter, e.g. "dM6", "sdB". Matched
+ * case-SENSITIVELY on purpose and only when immediately followed by an
+ * actual OBAFGKM letter: an uppercase leading "D" is a wholly different
+ * thing - the white-dwarf spectral class ("DA3", "DQ", "DZ7.5", ...) - and
+ * must NOT be stripped as if it were this dwarf prefix, or a white dwarf
+ * would be wrongly repainted as e.g. class A. */
+const DWARF_PREFIX_PATTERN = /^(esd|sd|d)(?=[OBAFGKM])/;
+
+function stripDwarfPrefix(spectralType: string): string {
+  return spectralType.replace(DWARF_PREFIX_PATTERN, "");
+}
+
+/** Composite/peculiar MK notations - chemically peculiar Am-type stars in
+ * particular, like nu Herculis's "kA9hF2mF2(IV)" - encode multiple
+ * line-based sub-classifications in one string: lowercase "k" (Ca II K-line
+ * type), "h" (hydrogen-line type), "m" (metallic-line type), each followed
+ * by its own class-letter-plus-subclass component. These lowercase letters
+ * are component markers, not a case-insensitive spelling of a real OBAFGKM
+ * class - naively matching the first character (as if "k" meant "K") is a
+ * genuine wrong-class misclassification, not a safe "unknown" fallback.
+ * Recognized by the repeating <lowercase-marker><UPPERCASE-letter><digit>
+ * shape (at least two occurrences): a single stray lowercase letter, like a
+ * hypothetically lowercase-typed "g2v", has only one such group and still
+ * falls through to the normal case-insensitive match below. */
+const PECULIAR_COMPOSITE_PATTERN = /^[a-z][A-Z]\d.*[a-z][A-Z]\d/;
+
 /** Exported for tests - parses a raw SIMBAD `spectral_type` string down to
  * one of the 7 OBAFGKM classes, or `UNKNOWN` for null/empty/anything whose
  * leading letter isn't one of the 7 (white dwarfs, carbon stars, S-type,
- * Wolf-Rayet, brown dwarfs, and genuinely malformed strings alike - see this
- * module's docstring). Only the leading letter matters: subclass digits,
+ * Wolf-Rayet, brown dwarfs, composite/peculiar notations, and genuinely
+ * malformed strings alike - see this module's docstring). Dwarf/subdwarf
+ * prefixes ("d", "sd", "esd") are stripped before matching the leading
+ * letter. Otherwise, only the leading letter matters: subclass digits,
  * luminosity class suffixes, decimals, etc. ("G2V", "M5.5Ve", "B2IV") are all
  * irrelevant to which of the 8 marker colors is used. */
 export function classifySpectralType(spectralType: string | null): SpectralClass {
   if (spectralType === null) {
     return SpectralClass.UNKNOWN;
   }
-  const match = spectralType.trim().match(/^[A-Za-z]/);
+  const trimmed = spectralType.trim();
+  if (PECULIAR_COMPOSITE_PATTERN.test(trimmed)) {
+    return SpectralClass.UNKNOWN;
+  }
+  const match = stripDwarfPrefix(trimmed).match(/^[A-Za-z]/);
   if (!match) {
     return SpectralClass.UNKNOWN;
   }
