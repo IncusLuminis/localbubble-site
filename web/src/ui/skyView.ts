@@ -230,6 +230,16 @@ function ensureInstance(): AladinInstance {
       // Issue #187: no custom survey-toggle UI is built - Aladin's own
       // built-in layer control already lets a curious user switch surveys.
       showLayersControl: true,
+      // Issue #193: hides Aladin's coordinate-frame indicator - a small
+      // "ICRS" dropdown in the top-left corner of the viewer for switching
+      // the displayed coordinate reference frame (ICRS/Galactic/etc, i.e.
+      // "coordinate system markings" covering the whole celestial sphere).
+      // The human owner asked for this specific widget removed. Verified
+      // live with a before/after screenshot (in the PR) that `showFrame:
+      // false` removes exactly this dropdown and nothing else - the copy-
+      // coordinates control, layers control, and DSS imagery are all still
+      // present and working.
+      showFrame: false,
     });
   }
   return aladinInstance;
