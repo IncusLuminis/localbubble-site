@@ -234,12 +234,81 @@ app.appendChild(bottomLeftToolbar);
 const fullscreenToggle = createFullscreenToggle(app);
 bottomLeftToolbar.appendChild(fullscreenToggle.element);
 
-function createToolbarButton(id: string, label: string, ariaLabel: string): HTMLButtonElement {
+/** Issue #199: inline SVG replacements for the "All"/"LB"/"NS" text-
+ * abbreviation glyphs #197 originally shipped (no obvious single Unicode
+ * character existed for any of the three). All three share the existing
+ * toolbar glyph styling (`stroke="currentColor"`, so they pick up
+ * `#bottom-left-toolbar .toolbar-button`'s `color: #dfe6f3` for free, same
+ * as the other glyphs) and a 24x24 viewBox at a smaller-than-button render
+ * size so they sit comfortably inside the 44x44px buttons alongside the
+ * existing `⤢`/`⤡`/`+`/`−` glyphs.
+ *
+ * `SHOW_ALL_ICON_SVG`: four separate cardinal-direction (up/down/left/right)
+ * arrows radiating outward from a deliberately empty center - reads as "fit
+ * everything into view" - and stays visually distinct from
+ * `fullscreenToggle.ts`'s diagonal-corner `⤢`/`⤡` glyphs, which point along
+ * the other two (NE/SW-ish) axes entirely.
+ *
+ * `FIT_LOCAL_BUBBLE_ICON_SVG`/`FIT_NEAREST_STARS_ICON_SVG`: both a circle
+ * outline plus horizontal ellipses (lines of latitude) and vertical
+ * ellipses (lines of longitude) crossing through the center - the classic
+ * simple "globe" icon. The Local Bubble icon draws exactly one of each
+ * (the equator + one meridian), matching its plain single-layer fit
+ * behavior; the Nearest-Stars icon draws three of each at varying
+ * rx/ry - a denser wireframe - so the two read as clearly related (same
+ * icon family) but distinguishable at a glance, per the issue's explicit
+ * "not so subtle they look identical" requirement. */
+const SHOW_ALL_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+       stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 11 V3 M9 6 L12 3 L15 6" />
+    <path d="M12 13 V21 M9 18 L12 21 L15 18" />
+    <path d="M11 12 H3 M6 9 L3 12 L6 15" />
+    <path d="M13 12 H21 M18 9 L21 12 L18 15" />
+  </svg>
+`;
+
+const FIT_LOCAL_BUBBLE_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+       stroke-width="1.4" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <ellipse cx="12" cy="12" rx="9" ry="3" />
+    <ellipse cx="12" cy="12" rx="3" ry="9" />
+  </svg>
+`;
+
+const FIT_NEAREST_STARS_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+       stroke-width="1.1" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <ellipse cx="12" cy="12" rx="9" ry="2.5" />
+    <ellipse cx="12" cy="12" rx="9" ry="5.5" />
+    <ellipse cx="12" cy="12" rx="9" ry="8" />
+    <ellipse cx="12" cy="12" rx="2.5" ry="9" />
+    <ellipse cx="12" cy="12" rx="5.5" ry="9" />
+    <ellipse cx="12" cy="12" rx="8" ry="9" />
+  </svg>
+`;
+
+/** `content` is treated as trusted inline SVG markup (rather than escaped
+ * text) whenever `isIcon` is `true` - safe here since every caller passes
+ * one of this module's own `*_ICON_SVG` constants above, never
+ * user-supplied data. */
+function createToolbarButton(
+  id: string,
+  content: string,
+  ariaLabel: string,
+  isIcon = false,
+): HTMLButtonElement {
   const button = document.createElement("button");
   button.id = id;
   button.type = "button";
-  button.className = "toolbar-button";
-  button.textContent = label;
+  button.className = isIcon ? "toolbar-button toolbar-button--icon" : "toolbar-button";
+  if (isIcon) {
+    button.innerHTML = content;
+  } else {
+    button.textContent = content;
+  }
   button.title = ariaLabel;
   button.setAttribute("aria-label", ariaLabel);
   bottomLeftToolbar.appendChild(button);
@@ -248,12 +317,18 @@ function createToolbarButton(id: string, label: string, ariaLabel: string): HTML
 
 const zoomInButton = createToolbarButton("zoom-in-toggle", "+", "Zoom in");
 const zoomOutButton = createToolbarButton("zoom-out-toggle", "−", "Zoom out");
-const showAllButton = createToolbarButton("show-all-toggle", "All", "Show all objects");
-const fitLocalBubbleButton = createToolbarButton("fit-local-bubble-toggle", "LB", "Fit to Local Bubble");
+const showAllButton = createToolbarButton("show-all-toggle", SHOW_ALL_ICON_SVG, "Show all objects", true);
+const fitLocalBubbleButton = createToolbarButton(
+  "fit-local-bubble-toggle",
+  FIT_LOCAL_BUBBLE_ICON_SVG,
+  "Fit to Local Bubble",
+  true,
+);
 const fitNearestStarsButton = createToolbarButton(
   "fit-nearest-stars-toggle",
-  "NS",
+  FIT_NEAREST_STARS_ICON_SVG,
   "Fit to nearest-stars sphere",
+  true,
 );
 
 const raycaster = new Raycaster();
