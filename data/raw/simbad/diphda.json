@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Diphda",
+  "retrieved_utc": "2026-08-24T04:19:47+00:00",
+  "record_id": "* bet Cet",
+  "raw": {
+    "main_id": "* bet Cet",
+    "ra": 10.897378736003901,
+    "dec": -17.98660631592891,
+    "coo_err_maj": 1.5803560018539429,
+    "coo_err_min": 1.0568348169326782,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.009999990463257,
+    "sp_type": "G9.5IIICH-1",
+    "otype": "PM*",
+    "plx_value": 33.86,
+    "plx_err": 0.1599999964237213,
+    "ids": "TIC 114434141|GJ 31|HIP 3419|2MASS J00433536-1759117|PLX  134|* bet Cet|*  16 Cet|1AXG J004337-1759|2E   163|2E 0041.0-1815|2RE J004335-175907|2RE J0043-175|BD-18   115|CSV 100058|FK5   22|GC   865|GCRV   396|GEN# +1.00004128|HD   4128|HIC   3419|HR   188|IRAS 00410-1815|IRC -20010|JP11   410|LTT   398|N30  146|NLTT  2380|NSV   272|PMC 90-93    16|PPM 209214|RAFGL  106|RBS   103|RE J0043-175|RE J004335-175912|ROT   127|SACS  11|SAO 147420|SKY#  1137|SV* ZI    38|TD1   399|UBV     582|YZ 108   175|PLX  134.00|1ES 0041-18.2|1RXS J004335.3-175911|2EUVE J0043-17.9|EUVE J0043-17.9|RX J0043.5-1759|TYC 5847-2333-1|NAME Diphda|WEB   604",
+    "matched_id": "NAME Diphda"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "g_uma",
+  "name": "* g UMa",
+  "aliases": [
+    "Gaia DR3 1565090003967879424",
+    "GJ 3785",
+    "HIP 65477",
+    "CNS5 3306",
+    "PLX 3066",
+    "*  80 UMa",
+    "AG+55  887",
+    "BD+55  1603",
+    "CCDM J13240+5456D",
+    "CEL   4258",
+    "CSV 101383",
+    "GC 18155",
+    "GCRV  7966",
+    "GEN# +1.00116842",
+    "GSC 03850-01384",
+    "HD 116842",
+    "HGAM    624",
+    "HIC  65477",
+    "HR  5062",
+    "IRAS 13232+5514",
+    "IRAS F13232+5514",
+    "JP11  2393",
+    "NSV  6238",
+    "PPM  34021",
+    "ROT  1965",
+    "SAO  28751",
+    "SKY# 24753",
+    "SV* ZI  1001",
+    "TD1 16842",
+    "TYC 3850-1384-1",
+    "UBV   12110",
+    "UBV M  19376",
+    "uvby98 100116842",
+    "PLX 3066.00",
+    "WDS J13239+5456Ca,Cb",
+    "2MASS J13251353+5459165",
+    "NAME Alcor",
+    "** PSF    1",
+    "** SHY  248C",
+    "2RXP J132513.9+545914",
+    "1RXS J132513.8+545920",
+    "WEB 11557",
+    "Gaia DR2 1565090003969283968",
+    "TIC 159191044"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 201.30640763875,
+    "dec_deg": 54.98795966138889,
+    "galactic_l_deg": 112.76885950766327,
+    "galactic_b_deg": 61.46858408737983
+  },
+  "distance": {
+    "value_pc": 25.056376847907796,
+    "error_pc": 0.08161685970307939
+  },
+  "cartesian": {
+    "x_pc": -4.631766891468477,
+    "y_pc": 11.035323478149358,
+    "z_pc": 22.013413909252495
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * g UMa, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* g UMa",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A5V+M3-4V",
+    "absolute_magnitude": 2.015408867801952,
+    "apparent_magnitude": 4.010000228881836
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:39+00:00; upstream record id: * g UMa; otype: **; Alcor was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

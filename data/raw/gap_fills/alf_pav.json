@@ -1,0 +1,78 @@
+{
+  "id": "alf_pav",
+  "name": "* alf Pav",
+  "aliases": [
+    "TIC 219974785",
+    "SBC9 1234",
+    "CCDM J20257-5644A",
+    "CPC 20  6489",
+    "CPD-57  9674",
+    "CSI-57  9674 41",
+    "FK5  764",
+    "GC 28374",
+    "GCRV 12742",
+    "GEN# +1.00193924A",
+    "GSC 08785-01898",
+    "HD 193924",
+    "HIC 100751",
+    "HIP 100751",
+    "HR  7790",
+    "IDS 20178-5703 A",
+    "JP11  3235",
+    "N30 4510",
+    "NAME Peacock",
+    "PPM 348537",
+    "ROT  2969",
+    "SACS 447",
+    "SAO 246574",
+    "SBC7   810",
+    "SKY# 38611",
+    "TD1 26602",
+    "TYC 8785-1898-1",
+    "UBV   17659",
+    "UBV M  24775",
+    "uvby98 100193924 A",
+    "2MASS J20253886-5644062",
+    "ALS 16177",
+    "WDS J20256-5644A",
+    "AKARI-IRC-V1 J2025388-564406",
+    "IRAS 20217-5653",
+    "WEB 18206"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 306.4119043651986,
+    "dec_deg": -56.73508972631689,
+    "galactic_l_deg": 340.9043246920715,
+    "galactic_b_deg": -35.19310696664593
+  },
+  "distance": {
+    "value_pc": 54.824561403508774,
+    "error_pc": 1.5629808598754957
+  },
+  "cartesian": {
+    "x_pc": 42.338042189035704,
+    "y_pc": -14.657282808670603,
+    "z_pc": -31.597259016458754
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Pav, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Pav",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B2IV",
+    "absolute_magnitude": -1.7768758472041508,
+    "apparent_magnitude": 1.9179999828338623
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:20:05+00:00; upstream record id: * alf Pav; otype: SB*; Peacock was found missing from the catalog (issue #213, Borderline): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

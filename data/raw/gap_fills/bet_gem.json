@@ -1,0 +1,100 @@
+{
+  "id": "bet_gem",
+  "name": "* bet Gem",
+  "aliases": [
+    "TIC 423088367",
+    "GJ 286",
+    "HIP 37826",
+    "PLX 1826",
+    "LSPM J0745+2801",
+    "ASCC  674757",
+    "USNO-B1.0 1180-00191173",
+    "*  78 Gem",
+    "2E  1872",
+    "ADS  6335 A",
+    "AG+28  833",
+    "BD+28  1463",
+    "CCDM J07454+2802A",
+    "CSI+28  1463  1",
+    "CSV 100892",
+    "CTI 074434.0+280331",
+    "Ci 20  437",
+    "FK5  295",
+    "CNS5 1912",
+    "GC 10438",
+    "GCRV  5166",
+    "HD  62509",
+    "HIC  37826",
+    "HR  2990",
+    "IDS 07392+2816 A",
+    "IRAS 07422+2808",
+    "TIC 471011546",
+    "IRC +30194",
+    "JP11  1588",
+    "LFT  548",
+    "LHS  1945",
+    "LTT 12065",
+    "N30 1758",
+    "NLTT 18379",
+    "NSV  3712",
+    "PM 07423+2809",
+    "PMC 90-93   216",
+    "PPM  97924",
+    "RAFGL 1183",
+    "ROT  1249",
+    "SAO  79666",
+    "SKY# 14351",
+    "SRS  30295",
+    "SV* ZI   656",
+    "TD1 10866",
+    "UBV    7418",
+    "UBV M  13566",
+    "2MASS J07451891+2801340",
+    "PLX 1826.00",
+    "2E 0742.2+2808",
+    "1RXS J074519.3+280123",
+    "WDS J07453+2802A",
+    "TYC 1920-2194-1",
+    "uvby98 100062509",
+    "NAME Pollux",
+    "WEB  7472",
+    "** BU  580A",
+    "GEN# +1.00062509"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 116.32895777437875,
+    "dec_deg": 28.02619889009357,
+    "galactic_l_deg": 192.22928776725973,
+    "galactic_b_deg": 23.406268896737615
+  },
+  "distance": {
+    "value_pc": 10.358400662937642,
+    "error_pc": 0.02897004651053186
+  },
+  "cartesian": {
+    "x_pc": -9.290306924306487,
+    "y_pc": -2.0136069036736908,
+    "z_pc": 4.1148570793658745
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Gem, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Gem",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K0IIIb",
+    "absolute_magnitude": 1.063536458108251,
+    "apparent_magnitude": 1.1399999856948853
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:31+00:00; upstream record id: * bet Gem; otype: PM*; Pollux was found missing from the catalog (issue #213, Tier 1): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

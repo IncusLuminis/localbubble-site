@@ -1,0 +1,86 @@
+{
+  "id": "alf_hya",
+  "name": "* alf Hya",
+  "aliases": [
+    "TIC 46799297",
+    "HIP 46390",
+    "Gaia DR2 5741512800984781824",
+    "PLX 2247",
+    "*  30 Hya",
+    "BD-08  2680",
+    "CCDM J09277-0841A",
+    "CSI-08  2680  1",
+    "CSV 101049",
+    "FK5  354",
+    "GC 13044",
+    "GCRV  6136",
+    "GEN# +1.00081797",
+    "GSC 05460-01592",
+    "HD  81797",
+    "HIC  46390",
+    "HR  3748",
+    "IDS 09227-0814 A",
+    "IRAS 09251-0826",
+    "IRC -10217",
+    "JP11  1813",
+    "N30 2249",
+    "NAME Alphard",
+    "NSV  4496",
+    "PMC 90-93   253",
+    "PPM 192393",
+    "RAFGL 1353",
+    "ROT  1471",
+    "SACS 209",
+    "SAO 136871",
+    "SKY# 18272",
+    "SV* SVS    75",
+    "SV* P   621",
+    "TD1 13937",
+    "TYC 5460-1592-1",
+    "UBV    9023",
+    "UBV M  15411",
+    "YZ  98  3683",
+    "[HFE83]  657",
+    "[L91b] 151",
+    "2MASS J09273524-0839308",
+    "PLX 2247.00",
+    "WDS J09276-0840A",
+    "WEB  8768"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 141.89684459585948,
+    "dec_deg": -8.658599531745583,
+    "galactic_l_deg": 241.4881420985039,
+    "galactic_b_deg": 29.045453748416076
+  },
+  "distance": {
+    "value_pc": 55.2791597567717,
+    "error_pc": 0.5500414124713249
+  },
+  "cartesian": {
+    "x_pc": -23.06842461159861,
+    "y_pc": -42.46579184409569,
+    "z_pc": 26.8382155220426
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Hya, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Hya",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K3IIIa",
+    "absolute_magnitude": -1.7428071370907006,
+    "apparent_magnitude": 1.9700000286102295
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:20:04+00:00; upstream record id: * alf Hya; otype: *; Alphard was found missing from the catalog (issue #213, Borderline): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

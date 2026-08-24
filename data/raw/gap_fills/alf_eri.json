@@ -1,0 +1,78 @@
+{
+  "id": "alf_eri",
+  "name": "* alf Eri",
+  "aliases": [
+    "TIC 230981971",
+    "HIP 7588",
+    "TYC 8478-1395-1",
+    "2MASS J01374284-5714119",
+    "PLX  344",
+    "[JE82]   39",
+    "CD-57   316",
+    "GSC 08478-01395",
+    "NSV 15353",
+    "CPC 20   447",
+    "CPD-57   334",
+    "EM* CDS  176",
+    "FK5   54",
+    "GC  1979",
+    "GCRV   916",
+    "GEN# +1.00010144",
+    "HD  10144",
+    "HIC   7588",
+    "HR   472",
+    "IRAS 01358-5729",
+    "JP11   517",
+    "N30  335",
+    "PPM 331199",
+    "ROT   233",
+    "SAO 232481",
+    "SKY#  2444",
+    "TD1   938",
+    "UBV    1700",
+    "UBV M   8330",
+    "uvby98 100010144",
+    "ALS 16724",
+    "PLX  344.00",
+    "2XMM J013742.5-571413",
+    "V* alf Eri",
+    "NAME Achernar",
+    "WEB  1623"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 24.428522833333336,
+    "dec_deg": -57.236752805555554,
+    "galactic_l_deg": 290.8412416940021,
+    "galactic_b_deg": -58.792009689633566
+  },
+  "distance": {
+    "value_pc": 42.75331338178709,
+    "error_pc": 1.041872095845366
+  },
+  "cartesian": {
+    "x_pc": 7.881400752526384,
+    "y_pc": -20.70303076655788,
+    "z_pc": -36.56656730373153
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Eri, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Eri",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B6Vpe",
+    "absolute_magnitude": -2.694848882609584,
+    "apparent_magnitude": 0.46000000834465027
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:20:02+00:00; upstream record id: * alf Eri; otype: Be*; Achernar was found missing from the catalog (issue #213, Borderline): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

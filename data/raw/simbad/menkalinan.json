@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Menkalinan",
+  "retrieved_utc": "2026-08-24T04:19:41+00:00",
+  "record_id": "* bet Aur",
+  "raw": {
+    "main_id": "* bet Aur",
+    "ra": 89.88217886833333,
+    "dec": 44.94743257194444,
+    "coo_err_maj": 0.20000000298023224,
+    "coo_err_min": 0.10999999940395355,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 1.899999976158142,
+    "sp_type": "A1IV-Vp",
+    "otype": "SB*",
+    "plx_value": 40.21,
+    "plx_err": 0.23000000417232513,
+    "ids": "TIC 440388263|** H   88A|** KOE    1|GJ 3375|HIP 28360|2MASS J05593172+4456508|PLX 1373|SBC9 366|* bet Aur|*  34 Aur|ADS  4556 A|AG+44  608|BD+44  1328|CCDM J05596+4457A|CSI+44  1328  1|CNS5 1489|FK5  227|GC  7543|GCRV  3730|GEN# +1.00040183|GSC 02924-02742|HD  40183|HGAM    489|HIC  28360|HR  2088|IDS 05522+4456 A|IRAS 05558+4456|IRC +40148|JP11  1292|N30 1278|NAME Menkalinan|PMC 90-93   165|PPM  48617|ROT   951|SAO  40750|SBC7   256|SKY#  9950|TD1  5675|TYC 2924-2742-1|UBV   21477|UBV M  11650|V* bet Aur|WDS J05595+4457Aa,Ab|Renson 10720|uvby98 100040183|WEB  5543|Gaia DR2 196656661174768512",
+    "matched_id": "NAME Menkalinan"
+  }
+}

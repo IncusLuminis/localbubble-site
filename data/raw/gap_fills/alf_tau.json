@@ -1,0 +1,101 @@
+{
+  "id": "alf_tau",
+  "name": "* alf Tau",
+  "aliases": [
+    "TIC 245873777",
+    "AP J04355524+1630331",
+    "GALAH 141102003801353",
+    "GES J04355530+1630309",
+    "GJ 171.1 A",
+    "GJ 9159 A",
+    "HIP 21421",
+    "2MASS J04355524+1630331",
+    "PLX 1014",
+    "LSPM J0435+1630",
+    "ASCC  838711",
+    "USNO-B1.0 1065-00048822",
+    "*  87 Tau",
+    "ADS  3321 A",
+    "AG+16  400",
+    "BD+16   629",
+    "CCDM J04359+1631A",
+    "CEL    436",
+    "CNS5 1142",
+    "CSI+16   629  1",
+    "CSV   6116",
+    "FK5  168",
+    "GC  5605",
+    "GCRV  2689",
+    "GEN# +1.00029139",
+    "HD  29139",
+    "HIC  21421",
+    "HR  1457",
+    "IDS 04302+1619 A",
+    "IRAS 04330+1624",
+    "TIC 471011442",
+    "IRC +20087",
+    "JP11   898",
+    "LTT 11462",
+    "N30  962",
+    "NAME Aldebaran",
+    "NLTT 13584",
+    "PMC 90-93   119",
+    "PPM 120061",
+    "RAFGL  601",
+    "ROT   655",
+    "SAO  94027",
+    "SKY#  7128",
+    "SRS  30168",
+    "TD1  3349",
+    "UBV    4426",
+    "UBV M  10223",
+    "V* alf Tau",
+    "YZ  16  1233",
+    "[B10]  1077",
+    "TYC 1266-1416-1",
+    "GSC 01266-01416",
+    "WDS J04359+1631A",
+    "GAT 1331",
+    "** BU  550A",
+    "** BU 1031A",
+    "** STF 4002A",
+    "uvby98 100029139",
+    "WEB  4111"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 68.9801627900154,
+    "dec_deg": 16.5093023507718,
+    "galactic_l_deg": 180.97191141694378,
+    "galactic_b_deg": -20.248296660569792
+  },
+  "distance": {
+    "value_pc": 20.43318348998774,
+    "error_pc": 0.3214865324388745
+  },
+  "cartesian": {
+    "x_pc": -19.167687922061024,
+    "y_pc": -0.3251737199841224,
+    "z_pc": -7.071703423491015
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Tau, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Tau",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K5+III",
+    "absolute_magnitude": -0.6916801606160341,
+    "apparent_magnitude": 0.8600000143051147
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:28+00:00; upstream record id: * alf Tau; otype: LP?; Aldebaran was found missing from the catalog (issue #213, Tier 1): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

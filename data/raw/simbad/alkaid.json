@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Alkaid",
+  "retrieved_utc": "2026-08-24T04:19:37+00:00",
+  "record_id": "* eta UMa",
+  "raw": {
+    "main_id": "* eta UMa",
+    "ra": 206.88515734206297,
+    "dec": 49.31326672942533,
+    "coo_err_maj": 1.4995853900909424,
+    "coo_err_min": 1.3199455738067627,
+    "coo_err_angle": 89,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 1.8600000143051147,
+    "sp_type": "B3V",
+    "otype": "PM*",
+    "plx_value": 31.38,
+    "plx_err": 0.23999999463558197,
+    "ids": "HIP 67301|WISE J134732.18+491849.4|Gaia DR3 1510374147844219904|PLX 3147|* eta UMa|*  85 UMa|AG+49 1116|BD+50  2027|CEL   4281|CSV 101406|FK5  509|GC 18643|GCRV  8142|GEN# +1.00120315|GSC 03467-01257|HD 120315|HGAM    626|HIC  67301|HR  5191|IRAS 13455+4933|IRC +50233|JP11  2433|N30 3141|NSV  6450|PMC 90-93   362|PPM  53742|RAFGL 4916S|ROT  1999|SAO  44752|SKY# 25304|SV* ZI  1023|TD1 17067|TYC 3467-1257-1|UBV   12316|UBV M  19728|[HFE83]  974|uvby98 100120315|2MASS J13473244+4918477|PLX 3147.00|EUVE J1347+49.2|NAME Alkaid|NAME Alcaid|TIC 219033887|WEB 11841|TIC 1001113022|TIC 471011845|Gaia DR2 1510374147841192960",
+    "matched_id": "NAME Alkaid"
+  }
+}

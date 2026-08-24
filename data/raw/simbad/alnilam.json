@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Alnilam",
+  "retrieved_utc": "2026-08-24T04:20:08+00:00",
+  "record_id": "* eps Ori",
+  "raw": {
+    "main_id": "* eps Ori",
+    "ra": 84.05338894077023,
+    "dec": -1.2019191358333312,
+    "coo_err_maj": 3.689786434173584,
+    "coo_err_min": 1.6733218431472778,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 1.690000057220459,
+    "sp_type": "B0Ia",
+    "otype": "s*b",
+    "plx_value": 1.65,
+    "plx_err": 0.44999998807907104,
+    "ids": "TIC 427451176|1RXS J053619.2-011312|HIP 26311|2MASS J05361280-0112070|PLX 1283|* eps Ori|*  46 Ori|2E  1411|AG-01  596|BD-01   969|CCDM J05363-0112A|CEL    852|CSI-01   969  1|EM* MWC  504|FK5  210|GC  6960|GCRV  3454|GEN# +1.00037128|HD  37128|HGAM    449|HIC  26311|HR  1903|IDS 05311-0116 A|IRAS 05336-0113|IRC +00079|JP11  1181|MCW  342|N30 1204|NAME Alnilam|PMC 90-93   151|PPM 175945|RAFGL 4428S|ROT   885|SAO 132346|SKY#  9067|TD1  4963|UBV    5563|UBV M  11224|V* eps Ori|WH 328|[HFE83]  386|[SC93b] 326|ALS 14791|PLX 1283.00|1E 0533.6-0113|1RXS J053612.8-011201|2E 0533.6-0113|EUVE J0536-01.1|[KSP2003] J053612.85-011208.3|WDS J05362-0112A|TYC 4766-2450-1|Ced  55h|uvby98 100037128|WEB  5173",
+    "matched_id": "NAME Alnilam"
+  }
+}

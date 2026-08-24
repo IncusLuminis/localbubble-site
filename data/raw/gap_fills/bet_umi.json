@@ -1,0 +1,86 @@
+{
+  "id": "bet_umi",
+  "name": "* bet UMi",
+  "aliases": [
+    "TIC 229540730",
+    "HIP 72607",
+    "PLX 3373",
+    "*   7 UMi",
+    "AG+74  412",
+    "BD+74   595",
+    "CCDM J14506+7410A",
+    "CSI+74   595  1",
+    "CSV 101477",
+    "FK5  550",
+    "GC 20029",
+    "GCRV  8646",
+    "GSC 04416-01799",
+    "HD 131873",
+    "HIC  72607",
+    "HR  5563",
+    "IDS 14510+7434 A",
+    "IRAS 14508+7421",
+    "IRC +70125",
+    "JP11  2549",
+    "N30 3361",
+    "NAME Kochab",
+    "NSV  6846",
+    "PMC 90-93   390",
+    "PPM   8758",
+    "RAFGL 1740",
+    "ROT  2127",
+    "SAO   8102",
+    "SKY# 26960",
+    "SV* ZI  1097",
+    "TD1 17825",
+    "TYC 4416-1799-1",
+    "UBV   12983",
+    "UBV M  20451",
+    "USNO 853",
+    "[HFE83] 1055",
+    "[L91b] 244",
+    "2MASS J14504235+7409199",
+    "PLX 3373.00",
+    "WDS J14507+7409A",
+    "uvby98 100131873",
+    "WEB 12482",
+    "** BUP  159A",
+    "GEN# +1.00131873"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 222.67635749796767,
+    "dec_deg": 74.15550393675127,
+    "galactic_l_deg": 112.64721268502129,
+    "galactic_b_deg": 40.502635101323825
+  },
+  "distance": {
+    "value_pc": 40.14452027298274,
+    "error_pc": 0.1933898966311495
+  },
+  "cartesian": {
+    "x_pc": -11.75380678099168,
+    "y_pc": 28.171254804575444,
+    "z_pc": 26.073184248164257
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet UMi, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet UMi",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K4-III",
+    "absolute_magnitude": -0.9381314386114123,
+    "apparent_magnitude": 2.0799999237060547
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:46+00:00; upstream record id: * bet UMi; otype: *; Kochab was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Miaplacidus",
+  "retrieved_utc": "2026-08-24T04:20:06+00:00",
+  "record_id": "* bet Car",
+  "raw": {
+    "main_id": "* bet Car",
+    "ra": 138.29990608310192,
+    "dec": -69.71720759721548,
+    "coo_err_maj": 1.2299288511276245,
+    "coo_err_min": 0.9676808714866638,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 1.690000057220459,
+    "sp_type": "A1III-",
+    "otype": "PM*",
+    "plx_value": 28.82,
+    "plx_err": 0.10999999940395355,
+    "ids": "TIC 290374453|GJ 339.2|GJ 9292|HIP 45238|PLX 2213|* bet Car|CD-69   600|CEL   3237|CPC 21.1  1479|CPD-69  1023|FK5  348|GC 12764|GCRV  6042|GEN# +1.00080007|HD  80007|HIC  45238|HR  3685|IRAS 09126-6930|JP11  1790|N30 2196|NLTT 21307|PPM 357200|ROT  1459|SAO 250495|SKY# 17778|TD1 13760|UBV    8872|UBV M  15259|uvby98 100080007|2MASS J09131197-6943017|PLX 2213.00|TYC 9200-2603-1|NAME Miaplacidus|WEB  8622",
+    "matched_id": "NAME Miaplacidus"
+  }
+}

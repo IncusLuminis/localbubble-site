@@ -1,0 +1,84 @@
+{
+  "id": "sig_sgr",
+  "name": "* sig Sgr",
+  "aliases": [
+    "TIC 91093307",
+    "UCAC4 319-206211",
+    "WISE J185515.72-261750.5",
+    "HIP 92855",
+    "*  34 Sgr",
+    "CCDM J18552-2618A",
+    "CD-26 13595",
+    "CPD-26  6590",
+    "FK5  706",
+    "GC 25941",
+    "GCRV 11359",
+    "GEN# +1.00175191",
+    "GSC 06868-01829",
+    "HD 175191",
+    "HIC  92855",
+    "HR  7121",
+    "IDS 18491-2625 A",
+    "IRAS 18521-2621",
+    "IRC -30396",
+    "JP11  3036",
+    "N30 4193",
+    "NAME Nunki",
+    "PMC 90-93   501",
+    "PPM 269078",
+    "ROT  2679",
+    "SAO 187448",
+    "SKY# 34848",
+    "SRS  30706",
+    "TD1 23447",
+    "TYC 6868-1829-1",
+    "UBV   16048",
+    "UBV M  23293",
+    "[B10]  4784",
+    "uvby98 100175191 A",
+    "2MASS J18551592-2617481",
+    "ALS 15063",
+    "PLX 4365.01",
+    "WDS J18553-2618Aa,Ab",
+    "WEB 16074",
+    "** BED    1",
+    "** SMY    4A",
+    "WDS J18553-2618A"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 283.81636040649323,
+    "dec_deg": -26.29672411476388,
+    "galactic_l_deg": 9.555918749930584,
+    "galactic_b_deg": -12.435156747096626
+  },
+  "distance": {
+    "value_pc": 69.83240223463687,
+    "error_pc": 1.4142036358462093
+  },
+  "cartesian": {
+    "x_pc": 67.24789865630156,
+    "y_pc": 11.320919461663756,
+    "z_pc": -15.037330571428924
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * sig Sgr, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* sig Sgr",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B2.5V",
+    "absolute_magnitude": -2.1532849978788526,
+    "apparent_magnitude": 2.066999912261963
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:56+00:00; upstream record id: * sig Sgr; otype: **; Nunki was found missing from the catalog (issue #213, Tier 3): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

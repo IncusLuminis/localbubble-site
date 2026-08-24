@@ -1,0 +1,88 @@
+{
+  "id": "alf_gru",
+  "name": "* alf Gru",
+  "aliases": [
+    "TIC 279316667",
+    "Gaia DR2 6560604777053880704",
+    "GJ 848.2",
+    "GJ 9767",
+    "Gaia DR3 6560604777055249536",
+    "PLX 5339",
+    "CCDM J22082-4658A",
+    "CD-47 14063",
+    "CEL   5438",
+    "CPC  0 19748",
+    "CPD-47  9830",
+    "CSI-47 14063 21",
+    "CSV 103076",
+    "FK5  829",
+    "GC 30942",
+    "GCRV 13901",
+    "GEN# +1.00209952",
+    "HD 209952",
+    "HIC 109268",
+    "HIP 109268",
+    "HR  8425",
+    "IDS 22019-4727 A",
+    "IRAS 22051-4712",
+    "JP11  3451",
+    "LTT  8869",
+    "N30 4875",
+    "NAME Alnair",
+    "NLTT 52990",
+    "NSV 14040",
+    "PPM 327928",
+    "ROT  3215",
+    "SACS 483",
+    "SAO 230992",
+    "SKY# 42171",
+    "TD1 28783",
+    "UBV   18893",
+    "UBV M  26132",
+    "[CS62] E9  70",
+    "uvby98 100209952",
+    "2MASS J22081397-4657393",
+    "ALS 15069",
+    "PLX 5339.00",
+    "EXO 2205.1-4712",
+    "WDS J22082-4658A",
+    "TYC 8438-1959-1",
+    "WEB 19636"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 332.05826969609114,
+    "dec_deg": -46.96097438191952,
+    "galactic_l_deg": 349.9984856461432,
+    "galactic_b_deg": -52.473743232939604
+  },
+  "distance": {
+    "value_pc": 30.96934035305048,
+    "error_pc": 0.20141100251129707
+  },
+  "cartesian": {
+    "x_pc": 18.577521228933136,
+    "y_pc": -3.2762245083203725,
+    "z_pc": -24.560987355208248
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Gru, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Gru",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B6V",
+    "absolute_magnitude": -0.7446597367672192,
+    "apparent_magnitude": 1.7100000381469727
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:57+00:00; upstream record id: * alf Gru; otype: PM*; Alnair was found missing from the catalog (issue #213, Tier 3): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

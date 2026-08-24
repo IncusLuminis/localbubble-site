@@ -1,0 +1,83 @@
+{
+  "id": "bet_lib",
+  "name": "* bet Lib",
+  "aliases": [
+    "TIC 79391147",
+    "WISEA J151700.34-092258.6",
+    "HIP 74785",
+    "Gaia DR3 6319542659461082752",
+    "PLX 3450",
+    "*  27 Lib",
+    "BD-08  3935",
+    "FK5  564",
+    "GC 20539",
+    "GCRV  8838",
+    "GEN# +1.00135742",
+    "GSC 05585-01014",
+    "HD 135742",
+    "HIC  74785",
+    "HR  5685",
+    "IRAS 15142-0911",
+    "IRC -10315",
+    "JP11  2586",
+    "N30 3439",
+    "NSV  7009",
+    "PMC 90-93   399",
+    "PPM 198424",
+    "ROT  2165",
+    "SAO 140430",
+    "SKY# 27682",
+    "TD1 18099",
+    "TYC 5585-1014-1",
+    "UBV   13171",
+    "UBV M  20667",
+    "[HFE83] 1088",
+    "uvby98 100135742",
+    "2MASS J15170043-0922584",
+    "PLX 3450.00",
+    "NAME Zubeneschamali",
+    "IRAS F15143-0912",
+    "WISE J151700.43-092258.9",
+    "AKARI-IRC-V1 J1517003-092258",
+    "WEB 12758",
+    "IRAS F15143-0912A",
+    "Gaia DR2 6319542659459349120",
+    "TIC 1179719919"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 229.25172424914246,
+    "dec_deg": -9.382914410334685,
+    "galactic_l_deg": 352.02211356330594,
+    "galactic_b_deg": 39.23424918072216
+  },
+  "distance": {
+    "value_pc": 56.75368898978433,
+    "error_pc": 0.5153569827127403
+  },
+  "cartesian": {
+    "x_pc": 43.53405605791699,
+    "y_pc": -6.101179468738033,
+    "z_pc": 35.8962781662048
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Lib, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Lib",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B8Vn",
+    "absolute_magnitude": -1.1499705940607718,
+    "apparent_magnitude": 2.619999885559082
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:20:01+00:00; upstream record id: * bet Lib; otype: PM*; Zubeneschamali was found missing from the catalog (issue #213, Tier 3): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

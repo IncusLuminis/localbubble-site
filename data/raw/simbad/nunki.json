@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Nunki",
+  "retrieved_utc": "2026-08-24T04:19:56+00:00",
+  "record_id": "* sig Sgr",
+  "raw": {
+    "main_id": "* sig Sgr",
+    "ra": 283.81636040649323,
+    "dec": -26.29672411476388,
+    "coo_err_maj": 2.5518240928649902,
+    "coo_err_min": 1.6692532300949097,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.066999912261963,
+    "sp_type": "B2.5V",
+    "otype": "**",
+    "plx_value": 14.32,
+    "plx_err": 0.28999999165534973,
+    "ids": "TIC 91093307|UCAC4 319-206211|WISE J185515.72-261750.5|HIP 92855|* sig Sgr|*  34 Sgr|CCDM J18552-2618A|CD-26 13595|CPD-26  6590|FK5  706|GC 25941|GCRV 11359|GEN# +1.00175191|GSC 06868-01829|HD 175191|HIC  92855|HR  7121|IDS 18491-2625 A|IRAS 18521-2621|IRC -30396|JP11  3036|N30 4193|NAME Nunki|PMC 90-93   501|PPM 269078|ROT  2679|SAO 187448|SKY# 34848|SRS  30706|TD1 23447|TYC 6868-1829-1|UBV   16048|UBV M  23293|[B10]  4784|uvby98 100175191 A|2MASS J18551592-2617481|ALS 15063|PLX 4365.01|WDS J18553-2618Aa,Ab|WEB 16074|** BED    1|** SMY    4A|WDS J18553-2618A",
+    "matched_id": "NAME Nunki"
+  }
+}

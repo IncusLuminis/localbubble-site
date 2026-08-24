@@ -43,13 +43,27 @@ MAX_PLAUSIBLE_STAR_DISTANCE_PC = 2500
 #: against records that were never sourced from the poster.
 RECONS_BATCH_TAG = "recons-nearest-100"
 
+#: Issues #207/#208 and #213 added standalone single-star "gap-fill"
+#: records (Fomalhaut, Arcturus/Vega/etc.) resolved live via SimbadResolver
+#: but never claimed as members of either the Galaxy Map poster batch or
+#: the RECONS batch - see `data/raw/gap_fills/README.md` and
+#: `test_gap_fill_stars.py`. Excluded here for the same reason
+#: RECONS_BATCH_TAG is: this module's dual-provenance check specifically
+#: asserts Galaxy-Map-poster provenance text, which gap-fill records never
+#: claim (Alnilam's notes happen to mention "Galaxy Map" as context for why
+#: it's a likely missed import from that batch, but it is not itself a
+#: resolved poster-candidate record either).
+GAP_FILL_TAGS = {"nearby-bright-star-gap-fill", "luminous-poster-gap-fill"}
+
 
 @pytest.fixture(scope="module")
 def star_objects(catalog_objects):
     return [
         obj
         for obj in catalog_objects
-        if obj.object_type == "star" and RECONS_BATCH_TAG not in obj.group.secondary
+        if obj.object_type == "star"
+        and RECONS_BATCH_TAG not in obj.group.secondary
+        and not GAP_FILL_TAGS.intersection(obj.group.secondary)
     ]
 
 

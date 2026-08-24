@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Denebola",
+  "retrieved_utc": "2026-08-24T04:19:33+00:00",
+  "record_id": "* bet Leo",
+  "raw": {
+    "main_id": "* bet Leo",
+    "ra": 177.26490975591017,
+    "dec": 14.572058064829658,
+    "coo_err_maj": 7.631628513336182,
+    "coo_err_min": 3.8624603748321533,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.130000114440918,
+    "sp_type": "A3Va",
+    "otype": "dS*",
+    "plx_value": 90.91,
+    "plx_err": 0.5199999809265137,
+    "ids": "TIC 14725877|GJ 448|GJ 448.0|HIP 57632|PLX 2738|LSPM J1149+1434|ASCC  952815|2MASS J11490366+1434197|USNO-B1.0 1045-00205720|* bet Leo|*  94 Leo|ADS  8314 A|AG+14 1239|BD+15  2383|CCDM J11490+1433A|CSI+15  2383  1|CSV 101225|Ci 20  663|FK5  444|GC 16189|GCRV  7151|GEN# +1.00102647|CNS5 2899|HD 102647|HGAM    606|HIC  57632|HR  4534|IDS 11440+1508 A|TIC 471011722|IRAS 11464+1451|IRC +10247|JP11  2102|LFT  853|LHS  2462|LTT 13249|N30 2755|NAME Denebola|NLTT 28642|NSV  5349|PM 11465+1451|PMC 90-93   319|PPM 128576|ROT  1752|SAO  99809|SKY# 22318|SV* ZI   900|TD1 15885|UBV   10637|UBV M  17408|V* bet Leo|[HFE83]  827|PLX 2738.00|WDS J11491+1434A|TYC  870-988-1|uvby98 100102647|WEB 10349",
+    "matched_id": "NAME Denebola"
+  }
+}

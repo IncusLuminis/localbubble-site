@@ -1,0 +1,92 @@
+{
+  "id": "bet_cet",
+  "name": "* bet Cet",
+  "aliases": [
+    "TIC 114434141",
+    "GJ 31",
+    "HIP 3419",
+    "2MASS J00433536-1759117",
+    "PLX  134",
+    "*  16 Cet",
+    "1AXG J004337-1759",
+    "2E   163",
+    "2E 0041.0-1815",
+    "2RE J004335-175907",
+    "2RE J0043-175",
+    "BD-18   115",
+    "CSV 100058",
+    "FK5   22",
+    "GC   865",
+    "GCRV   396",
+    "GEN# +1.00004128",
+    "HD   4128",
+    "HIC   3419",
+    "HR   188",
+    "IRAS 00410-1815",
+    "IRC -20010",
+    "JP11   410",
+    "LTT   398",
+    "N30  146",
+    "NLTT  2380",
+    "NSV   272",
+    "PMC 90-93    16",
+    "PPM 209214",
+    "RAFGL  106",
+    "RBS   103",
+    "RE J0043-175",
+    "RE J004335-175912",
+    "ROT   127",
+    "SACS  11",
+    "SAO 147420",
+    "SKY#  1137",
+    "SV* ZI    38",
+    "TD1   399",
+    "UBV     582",
+    "YZ 108   175",
+    "PLX  134.00",
+    "1ES 0041-18.2",
+    "1RXS J004335.3-175911",
+    "2EUVE J0043-17.9",
+    "EUVE J0043-17.9",
+    "RX J0043.5-1759",
+    "TYC 5847-2333-1",
+    "NAME Diphda",
+    "WEB   604"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 10.897378736003901,
+    "dec_deg": -17.98660631592891,
+    "galactic_l_deg": 111.33025659621462,
+    "galactic_b_deg": -80.68107455866807
+  },
+  "distance": {
+    "value_pc": 29.533372711163615,
+    "error_pc": 0.13955521347213842
+  },
+  "cartesian": {
+    "x_pc": -1.7395408903520355,
+    "y_pc": 4.4547393401865065,
+    "z_pc": -29.143599616352986
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Cet, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Cet",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G9.5IIICH-1",
+    "absolute_magnitude": -0.34156524067216054,
+    "apparent_magnitude": 2.009999990463257
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:47+00:00; upstream record id: * bet Cet; otype: PM*; Diphda was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

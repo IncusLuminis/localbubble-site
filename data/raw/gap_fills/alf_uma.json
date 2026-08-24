@@ -1,0 +1,90 @@
+{
+  "id": "alf_uma",
+  "name": "* alf UMa",
+  "aliases": [
+    "TIC 99843265",
+    "HIP 54061",
+    "PLX 2575",
+    "SBC9 648",
+    "LSPM J1103+6145",
+    "ASCC  128139",
+    "USNO-B1.0 1517-00189768",
+    "*  50 UMa",
+    "ADS  8035 AB",
+    "AG+62  691",
+    "BD+62  1161",
+    "CCDM J11037+6145AB",
+    "CSI+62  1161  1",
+    "CSV 101174",
+    "FK5  417",
+    "GC 15185",
+    "GCRV  6819",
+    "HD  95689",
+    "HIC  54061",
+    "HR  4301",
+    "IRAS 11006+6201",
+    "TIC 471011681",
+    "IRC +60208",
+    "JP11  2021",
+    "N30 2598",
+    "NAME Dubhe",
+    "NSV  5070",
+    "PMC 90-93   299",
+    "PPM  17705",
+    "RAFGL 1454",
+    "ROT  1650",
+    "SAO  15384",
+    "SBC7   421",
+    "SKY# 21122",
+    "SV* ZI   866",
+    "TD1 15325",
+    "UBV M  16729",
+    "UBV   10086",
+    "USNO 838",
+    "[HFE83]  772",
+    "2MASS J11034364+6145034",
+    "PLX 2575.00",
+    "WDS J11037+6145AB",
+    "PMSC 10576+6217",
+    "** BU 1077AB",
+    "uvby98 100095689",
+    "WEB  9776",
+    "GEN# +1.00095689"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 165.9319646738126,
+    "dec_deg": 61.751034687818226,
+    "galactic_l_deg": 142.84873691416595,
+    "galactic_b_deg": 51.00859152219226
+  },
+  "distance": {
+    "value_pc": 37.67897513187641,
+    "error_pc": 0.6814584649227254
+  },
+  "cartesian": {
+    "x_pc": -18.896122819446912,
+    "y_pc": 14.31762020828566,
+    "z_pc": 29.285618671153735
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf UMa, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf UMa",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G9III+A7.5",
+    "absolute_magnitude": -1.0904954455048896,
+    "apparent_magnitude": 1.7899999618530273
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:35+00:00; upstream record id: * alf UMa; otype: SB*; Dubhe was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

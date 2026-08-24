@@ -1,0 +1,91 @@
+{
+  "id": "alf02_lib",
+  "name": "* alf02 Lib",
+  "aliases": [
+    "TIC 386886963",
+    "GJ 564.1",
+    "GJ 9499",
+    "HIP 72622",
+    "Gaia DR3 6309703507861332736",
+    "PLX 3351",
+    "*   9 Lib",
+    "BD-15  3966",
+    "BDS  7018 A",
+    "CCDM J14508-1602A",
+    "FK5  548",
+    "GC 19975",
+    "GCRV  8623",
+    "GEN# +1.00130841",
+    "CNS5 3671",
+    "GSC 06155-01210",
+    "HD 130841",
+    "HIC  72622",
+    "HR  5531",
+    "IDS 14453-1537 A",
+    "IRAS 14481-1550",
+    "IRC -20271",
+    "JP11  2543",
+    "N30 3351",
+    "NSV  6827",
+    "PMC 90-93   389",
+    "PPM 229372",
+    "ROT  2118",
+    "SACS 320",
+    "SAO 158840",
+    "SKY# 26964",
+    "TYC 6155-1210-1",
+    "UBV   12928",
+    "UBV M  20396",
+    "uvby98 100130841",
+    "2MASS J14505274-1602302",
+    "PLX 3351.00",
+    "WDS J14509-1603A",
+    "Renson 37210",
+    "* alf Lib A",
+    "NAME Zubenelgenubi",
+    "WEB 12484",
+    "* alf Lib",
+    "** AOT   53A",
+    "** DSG   17",
+    "WDS J14509-1603Aa,Ab",
+    "** SHJ  186A",
+    "** CAB    1A",
+    "** ALP   30A"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 222.7196378915803,
+    "dec_deg": -16.041776519834446,
+    "galactic_l_deg": 340.3257740647969,
+    "galactic_b_deg": 38.008283028278235
+  },
+  "distance": {
+    "value_pc": 23.2396002788752,
+    "error_pc": 0.10261501272551159
+  },
+  "cartesian": {
+    "x_pc": 17.242029200075855,
+    "y_pc": -6.164791097432573,
+    "z_pc": 14.310373891364375
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf02 Lib, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf02 Lib",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "kA2hA5mA4IV-V",
+    "absolute_magnitude": 0.9188567304127782,
+    "apparent_magnitude": 2.75
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:55+00:00; upstream record id: * alf02 Lib; otype: SB*; Zubenelgenubi was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}
