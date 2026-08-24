@@ -10,6 +10,7 @@ import {
   instanceColorFor,
   isCatalogObjectVisible,
   isSelectedObjectVisible,
+  isStarMarkerShrinkEligible,
   LOCAL_BUBBLE_OBJECT_ID,
   markerOpacityFor,
   markerRadiusPc,
@@ -988,6 +989,115 @@ describe("setInstanceVisibility (zero-scale hide mechanism)", () => {
       // a hypothetical future non-star dense-batch member).
       expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
     });
+
+    /**
+     * Issue #211 regression: Fomalhaut (`alf_psa`, 7.70pc) is genuinely
+     * close to the Sun but deliberately NOT tagged `recons-nearest-100`
+     * (#207/#208 - it wasn't on the original RECONS candidate list). Before
+     * #211, `setInstanceVisibility` gated the shrink on that tag alone, so
+     * Fomalhaut stayed at its fixed, oversized overview radius even at a
+     * close camera distance where its true RECONS-tagged neighbors
+     * correctly shrink. This models that exact case with an untagged star.
+     */
+    it("issue #211: shrinks a genuinely-close star even without the recons-nearest-100 tag", () => {
+      const fomalhautLike = makeObject({
+        id: "alf_psa",
+        object_type: "star",
+        position_pc: [7.7, 0, 0],
+        distance_pc: 7.7,
+        group: { primary: null, secondary: ["nearby-bright-star-gap-fill"] },
+      });
+      const { buckets } = createCatalogObjectGroup([fomalhautLike]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, true, 0, collectionRadiusPc);
+
+      expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(STAR_MARKER_MIN_RADIUS_PC, 6);
+    });
+
+    it("issue #211: leaves a genuinely-far, untagged star's radius untouched (no performance regression)", () => {
+      const farUntaggedStar = makeObject({
+        id: "far-star",
+        object_type: "star",
+        position_pc: [76.6, 0, 0],
+        distance_pc: 76.6,
+      });
+      const { buckets } = createCatalogObjectGroup([farUntaggedStar]);
+      const bucket = buckets[0];
+
+      // Camera close enough in that a genuinely-close star would shrink to
+      // its LOD floor - this star's own distance is far beyond the
+      // shrink-start threshold, so it must stay at its static baked-in
+      // (unshrunk) radius regardless of camera position.
+      setInstanceVisibility(bucket, 0, true, 0, collectionRadiusPc);
+
+      expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
+    });
+  });
+});
+
+/**
+ * Issue #211: `isStarMarkerShrinkEligible` is the decoupled, distance-based
+ * eligibility check that replaced the old `isDenseBatchMember`
+ * (`recons-nearest-100`-tag) gate for the star-marker shrink. These tests
+ * exercise it directly, independent of `setInstanceVisibility`/
+ * `updateDenseBatchLod`.
+ */
+describe("isStarMarkerShrinkEligible (issue #211)", () => {
+  const collectionRadiusPc = 11.26;
+
+  it("is true for a close star, regardless of the recons-nearest-100 tag", () => {
+    const untaggedCloseStar = makeObject({
+      id: "alf_psa",
+      object_type: "star",
+      distance_pc: 7.7,
+      group: { primary: null, secondary: ["nearby-bright-star-gap-fill"] },
+    });
+    expect(isStarMarkerShrinkEligible(untaggedCloseStar, collectionRadiusPc)).toBe(true);
+  });
+
+  it("is true for every recons-nearest-100-tagged star (superset of the old eligibility)", () => {
+    const taggedStar = makeObject({
+      id: "proxima",
+      object_type: "star",
+      distance_pc: collectionRadiusPc, // the batch's own farthest member
+      group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+    });
+    expect(isStarMarkerShrinkEligible(taggedStar, collectionRadiusPc)).toBe(true);
+  });
+
+  it("is false for a genuinely-far, untagged star", () => {
+    expect(isStarMarkerShrinkEligible(STAR_B, collectionRadiusPc)).toBe(false);
+  });
+
+  it("is false for a non-star object, even if it's close and tagged", () => {
+    const closeCluster = makeObject({
+      id: "close-cluster",
+      object_type: "star_cluster",
+      distance_pc: 1.7,
+      group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+    });
+    expect(isStarMarkerShrinkEligible(closeCluster, collectionRadiusPc)).toBe(false);
+  });
+
+  it("is false when denseBatchRadiusPc is 0 (scene not loaded yet)", () => {
+    expect(isStarMarkerShrinkEligible(STAR_A, 0)).toBe(false);
+  });
+
+  it("is exactly at the shrink-start boundary: eligible just inside, ineligible just outside", () => {
+    const shrinkStartPc = collectionRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    const justInside = makeObject({
+      id: "just-inside",
+      object_type: "star",
+      distance_pc: shrinkStartPc - 0.001,
+    });
+    const justOutside = makeObject({
+      id: "just-outside",
+      object_type: "star",
+      distance_pc: shrinkStartPc + 0.001,
+    });
+    expect(isStarMarkerShrinkEligible(justInside, collectionRadiusPc)).toBe(true);
+    expect(isStarMarkerShrinkEligible(justOutside, collectionRadiusPc)).toBe(false);
   });
 });
 
@@ -1203,19 +1313,45 @@ describe("dense-batch LOD (isCatalogObjectVisible / updateDenseBatchLod)", () =>
     expect(shownScale).toBeLessThan(bucket.radiiPc[0]);
   });
 
-  it("updateDenseBatchLod never touches a non-dense-batch star's radius, even at a close camera distance where the shrink would otherwise apply", () => {
+  /**
+   * Issue #211: pre-#211, `updateDenseBatchLod` skipped every non-tagged
+   * star outright (the `isDenseBatchMember` guard alone), which meant a
+   * genuinely-close but untagged star (like the real Fomalhaut, or STAR_A
+   * here at 8.66pc - well inside the 33.78pc shrink-start threshold at this
+   * collection radius) never got its radius recomputed and stayed at its
+   * fixed, oversized overview radius. It must now shrink exactly like a
+   * tagged dense-batch member at the same camera distance, since
+   * eligibility is based on real distance, not the `recons-nearest-100` tag.
+   */
+  it("updateDenseBatchLod shrinks a genuinely-close, non-dense-batch star's radius just like a tagged member (issue #211)", () => {
     const { buckets } = createCatalogObjectGroup([NEARBY_STAR, STAR_A]);
     const bucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
     const otherIndex = bucket.objects.findIndex((o) => o.id === "star-a");
 
-    // Camera close enough in that the dense-batch member (proxima) would
-    // shrink to its LOD floor - STAR_A is not a dense-batch member, so its
-    // radius must stay exactly as `createCatalogObjectGroup` baked it,
-    // regardless of camera distance (this function only ever touches
-    // dense-batch instances at all - see the `isDenseBatchMember` guard).
     updateDenseBatchLod(buckets, ALL_ON, null, 5, collectionRadiusPc);
-    expect(decomposeInstanceMatrix(bucket, otherIndex).scale.x).toBeCloseTo(
-      bucket.radiiPc[otherIndex],
+
+    const shrunkScale = decomposeInstanceMatrix(bucket, otherIndex).scale.x;
+    expect(shrunkScale).toBeCloseTo(starMarkerRadiusPc(5, collectionRadiusPc), 6);
+    expect(shrunkScale).toBeLessThan(bucket.radiiPc[otherIndex]);
+  });
+
+  /**
+   * The genuinely-far, non-dense-batch stars (~585 in the real catalog,
+   * closest ~76.6pc) must stay unaffected - this is what keeps
+   * `updateDenseBatchLod`'s per-frame walk a performance no-op for them,
+   * even though eligibility is no longer gated by the tag alone.
+   */
+  it("updateDenseBatchLod never touches a genuinely-far, non-dense-batch star's radius, even at a close camera distance", () => {
+    const { buckets } = createCatalogObjectGroup([NEARBY_STAR, STAR_B]);
+    const bucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const farIndex = bucket.objects.findIndex((o) => o.id === "star-b");
+
+    // STAR_B (50pc) sits beyond this collection radius's 33.78pc
+    // shrink-start threshold, so it must stay exactly as
+    // `createCatalogObjectGroup` baked it, regardless of camera distance.
+    updateDenseBatchLod(buckets, ALL_ON, null, 5, collectionRadiusPc);
+    expect(decomposeInstanceMatrix(bucket, farIndex).scale.x).toBeCloseTo(
+      bucket.radiiPc[farIndex],
       6,
     );
   });
