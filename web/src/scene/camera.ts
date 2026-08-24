@@ -2,7 +2,7 @@ import { PerspectiveCamera, Vector3 } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { SceneObject } from "./sceneTypes";
 import { excludeDedicatedMarkerObjects } from "./objects";
-import { SUN_CORE_MIN_RADIUS_PC } from "./sun";
+import { SUN_CORE_FLOOR_RADIUS_PC } from "./sun";
 
 /**
  * Camera + orbit controls (spec Idea.md §22: "orbit-style camera control;
@@ -47,15 +47,33 @@ const FALLBACK_MIN_DISTANCE_PC = 5;
 
 /** How far beyond the nearest real (non-Sun, non-dedicated-marker) catalog
  * object's distance the close-zoom floor should sit, issue #134. Chosen as
- * `SUN_CORE_MIN_RADIUS_PC` (0.15pc, `scene/sun.ts`) rather than an
- * independent margin constant: that's exactly the Sun core's own
- * fully-shrunk radius at this close a zoom (see `sunCoreRadiusPc`'s
- * docstring - any camera distance this close is already within the RECONS
- * dense batch's collection radius, issue #104, so the core has finished
- * shrinking to its point-like floor). Anchoring the margin to that value
- * guarantees the camera can never be closer to the origin than the Sun's
- * own marker's edge, without needing a second, separately-tuned number. */
-const MIN_ZOOM_MARGIN_PC = SUN_CORE_MIN_RADIUS_PC;
+ * `SUN_CORE_FLOOR_RADIUS_PC` (`scene/sun.ts`'s single floor radius for the
+ * Sun's own marker, deliberately not hard-coded here so this margin tracks
+ * that constant automatically) rather than an independent margin constant:
+ * that's exactly the Sun core's own fully-shrunk radius at this close a
+ * zoom (see `sunCoreRadiusPc`'s docstring - any camera distance this close
+ * is already within the RECONS dense batch's collection radius, issue #104,
+ * so the core is already flat at its point-like floor). Anchoring the
+ * margin to that value guarantees the camera can never be closer to the
+ * origin than the Sun's own marker's edge, without needing a second,
+ * separately-tuned number.
+ *
+ * Issue #217 (scope expansion): previously aliased to `SUN_CORE_MIN_RADIUS_PC`,
+ * which - despite the name - was actually issue #136's "MID" breakpoint value
+ * (0.5pc), not the curve's true minimum (that distinction only made sense
+ * back when the Sun's curve had an extra segment past the RECONS boundary,
+ * bottoming out at a smaller, separate floor only right at the camera's
+ * exact `minDistance`). Now that `sunCoreRadiusPc` is flat at a single floor
+ * for the Sun's ENTIRE inside-the-boundary range (see that function's
+ * docstring), this margin correctly derives from that same single floor
+ * (`SUN_CORE_FLOOR_RADIUS_PC`, 0.02pc) instead - shrinking from 0.5pc to
+ * 0.02pc. This does not change what this constant is FOR (still just "how
+ * far past the nearest object the enforced zoom floor sits, so the camera
+ * can't clip inside the Sun's own marker") - it lets the camera zoom in
+ * measurably closer than before, which is the correct behavior now that the
+ * Sun's marker at that same close range is itself smaller (0.02pc, matching
+ * a fully-shrunk star, rather than the old 0.5pc "stay prominent" value). */
+const MIN_ZOOM_MARGIN_PC = SUN_CORE_FLOOR_RADIUS_PC;
 
 /**
  * Issue #134: the OrbitControls close-zoom floor (pc), derived from the

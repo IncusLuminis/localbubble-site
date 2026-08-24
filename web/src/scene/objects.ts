@@ -15,6 +15,25 @@ import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
 import { sunCoreRadiusPc } from "./sun";
 import { spectralColorFor } from "./spectralColor";
 import { absoluteMagnitudeToBrightness } from "./magnitudeBrightness";
+import {
+  STAR_MARKER_RADIUS_PC,
+  STAR_MARKER_NEAR_SUN_RADIUS_PC,
+  STAR_MARKER_MIN_RADIUS_PC,
+  STAR_MARKER_SHRINK_START_MULTIPLIER,
+  starMarkerRadiusPc,
+} from "./starMarkerScale";
+
+// Issue #217: re-exported so existing callers/tests that import these from
+// `objects.ts` (their original home) keep working unchanged - the values
+// (and, per the scope expansion, `starMarkerRadiusPc` itself) now live in
+// `starMarkerScale.ts` (see that module's docstring) so `sun.ts` can reuse
+// them too without a module cycle.
+export {
+  STAR_MARKER_NEAR_SUN_RADIUS_PC,
+  STAR_MARKER_MIN_RADIUS_PC,
+  STAR_MARKER_SHRINK_START_MULTIPLIER,
+  starMarkerRadiusPc,
+};
 
 /**
  * Catalog object rendering (spec Idea.md §22/§45, issue #64: "Catalog
@@ -173,8 +192,11 @@ const DEFAULT_COLOR = 0xaab4c8;
  * The three ranges - `STAR_MARKER_RADIUS_PC` / `[CLUSTER_MIN, CLUSTER_MAX]`
  * / `[STRUCTURE_MIN, STRUCTURE_MAX]` - are constructed not to overlap
  * (2 < [5, 9] < [10, 45]), so `star < cluster < structure` holds for *every*
- * possible `size_pc`, not just today's catalog values. */
-const STAR_MARKER_RADIUS_PC = 2;
+ * possible `size_pc`, not just today's catalog values.
+ *
+ * Issue #217: the value itself now lives in `starMarkerScale.ts` (imported
+ * above) so `scene/sun.ts` can reuse it for its own overview tier without a
+ * module cycle - see that module's docstring. */
 
 const CLUSTER_MIN_RADIUS_PC = 5;
 const CLUSTER_MAX_RADIUS_PC = 9;
@@ -217,8 +239,12 @@ export const CLUSTER_OBJECT_TYPES: ReadonlySet<string> = new Set([
  * space" ceiling (unambiguously smaller, never confusable with an
  * unshrunk marker), while staying well clear of `STAR_MARKER_MIN_RADIUS_PC`
  * (0.02pc) so the existing camera-zoom shrink (#119/#211) still has a
- * meaningful range left to shrink through as the camera approaches. */
-export const STAR_MARKER_NEAR_SUN_RADIUS_PC = 0.5;
+ * meaningful range left to shrink through as the camera approaches.
+ *
+ * Issue #217: the value itself now lives in `starMarkerScale.ts` (imported
+ * above, re-exported here for existing callers) so `scene/sun.ts` can reuse
+ * it for its own mid tier without a module cycle - see that module's
+ * docstring. */
 
 /**
  * Issue #215: a star's baseline marker ceiling (pc), graduated by the star's
@@ -331,7 +357,9 @@ export function markerRadiusPc(
  * inside the RECONS dense batch's own collection radius
  * (`lod.ts`'s `denseBatchCollectionRadiusPc`) - i.e. the close-zoom end of
  * `starMarkerRadiusPc` below, mirroring `scene/sun.ts`'s
- * `SUN_CORE_MIN_RADIUS_PC` for the same LOD volume.
+ * `SUN_CORE_FLOOR_RADIUS_PC` for the same LOD volume (issue #217: the two
+ * are now the exact same value, and `sunCoreRadiusPc` calls this module's
+ * `starMarkerRadiusPc` directly - see `sun.ts`'s docstring).
  *
  * `STAR_MARKER_RADIUS_PC` (2pc, the unshrunk/overview radius) is already
  * bigger than the real separation between the Sun's nearest neighbors:
@@ -343,91 +371,18 @@ export function markerRadiusPc(
  * distinct even at that tightest real gap: `2 * STAR_MARKER_MIN_RADIUS_PC`
  * (0.04pc) leaves comfortable clearance under the 0.068pc Proxima-to-Alpha-
  * Centauri-AB separation, while still reading as "small, point-like" rather
- * than literally zero/invisible (matching `SUN_CORE_MIN_RADIUS_PC`'s own
+ * than literally zero/invisible (matching `SUN_CORE_FLOOR_RADIUS_PC`'s own
  * "not literally zero" reasoning, issue #113). Alpha Centauri A and B
  * themselves (~0.0001pc apart, a genuinely-unresolvable-at-this-scale real
  * binary) are expected to still render as a single coincident point at this
  * floor - the issue's own acceptance criteria only asks that Proxima and
  * "Alpha Centauri A/B" (as a system) read as distinct, not that A and B
- * resolve from each other. */
-export const STAR_MARKER_MIN_RADIUS_PC = 0.02;
-
-/** How far out (as a multiple of the dense batch's own collection radius)
- * the star radius starts shrinking from `STAR_MARKER_RADIUS_PC`, reaching
- * `STAR_MARKER_MIN_RADIUS_PC` exactly at the collection radius itself -
- * the same multiplier `scene/sun.ts` uses for `SUN_CORE_SHRINK_START_MULTIPLIER`,
- * so both LOD-driven shrinks (Sun core, star markers) finish shrinking to
- * their point-like floor at the same camera distance rather than visibly
- * lagging/leading each other. */
-export const STAR_MARKER_SHRINK_START_MULTIPLIER = 3;
-
-/**
- * The star marker's camera-distance-dependent radius (pc), issue #119:
- * fixes the same class of scale bug #113 already fixed for the Sun's own
- * marker, this time for individual stars - the fixed `STAR_MARKER_RADIUS_PC`
- * (2pc, tuned for legibility at the ~800pc overview) is bigger than the real
- * distance between the Sun and its nearest neighbors, so at
- * solar-neighborhood zoom Proxima Centauri's and Alpha Centauri A/B's
- * markers visually overlap/engulf the Sun's position instead of reading as
- * distinct nearby stars.
+ * resolve from each other.
  *
- * Deliberately mirrors `scene/sun.ts`'s `sunCoreRadiusPc` exactly - same
- * signature shape (current camera distance from the origin, plus the
- * data-derived `denseBatchRadiusPc` reference point from `lod.ts`'s
- * `denseBatchCollectionRadiusPc`), same continuous/monotonic linear-shrink
- * curve between the same kind of max/min radius pair and the same
- * `*_SHRINK_START_MULTIPLIER` shape. Only the actual max/min radius values
- * differ (star markers are smaller than the Sun's core to begin with, and
- * need a much smaller floor - see `STAR_MARKER_MIN_RADIUS_PC`'s docstring).
- *
- * Stays at `maxRadiusPc` for any camera distance at or beyond
- * `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc` (no regression
- * to the ~800pc overview, where 2pc was already tuned to be visible), and
- * clamps to `STAR_MARKER_MIN_RADIUS_PC` once the camera is at or inside
- * `denseBatchRadiusPc` itself. `denseBatchRadiusPc <= 0` (scene not loaded
- * yet) has nothing to shrink toward, so this simply returns `maxRadiusPc`,
- * matching pre-#119 appearance.
- *
- * Issue #215: `maxRadiusPc` (the shrink's un-shrunk ceiling, defaulting to
- * the flat `STAR_MARKER_RADIUS_PC` for backward compatibility) is now
- * expected to be the CALLING star's own `starBaselineRadiusPc` result, not
- * always the flat constant - a close star's baseline is already smaller than
- * 2pc at far zoom (per its own real distance), and this shrink still takes
- * it the rest of the way down to the same `STAR_MARKER_MIN_RADIUS_PC` floor
- * as the camera itself approaches. This is not a contradiction: the shrink
- * range is simply narrower for stars that already start closer to the floor.
- *
- * This is only ever applied to shrink-eligible star instances (see
- * `isStarMarkerShrinkEligible` below, and `setInstanceVisibility`) - stars
- * whose own `distance_pc` is genuinely far from the Sun (beyond
- * `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`) are always
- * ineligible, and this formula would return `maxRadiusPc` unchanged for them
- * regardless of camera position anyway; skipping those instances is a pure
- * performance win with no visual difference, mirroring #104's own
- * dense-batch-only scoping rationale (`lod.ts`'s module docstring) - just
- * keyed off real distance now instead of RECONS provenance (issue #211, see
- * `isStarMarkerShrinkEligible`'s docstring).
- */
-export function starMarkerRadiusPc(
-  cameraDistanceFromOriginPc: number,
-  denseBatchRadiusPc: number,
-  maxRadiusPc: number = STAR_MARKER_RADIUS_PC,
-): number {
-  if (denseBatchRadiusPc <= 0) {
-    return maxRadiusPc;
-  }
-
-  const shrinkStartPc = denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
-  if (cameraDistanceFromOriginPc >= shrinkStartPc) {
-    return maxRadiusPc;
-  }
-  if (cameraDistanceFromOriginPc <= denseBatchRadiusPc) {
-    return STAR_MARKER_MIN_RADIUS_PC;
-  }
-
-  const t = (cameraDistanceFromOriginPc - denseBatchRadiusPc) / (shrinkStartPc - denseBatchRadiusPc);
-  return STAR_MARKER_MIN_RADIUS_PC + t * (maxRadiusPc - STAR_MARKER_MIN_RADIUS_PC);
-}
+ * Issue #217: the value itself now lives in `starMarkerScale.ts` (imported
+ * above, re-exported here for existing callers) so `scene/sun.ts` can reuse
+ * it for its own close-zoom floor tier without a module cycle - see that
+ * module's docstring. */
 
 /**
  * Issue #211: is `obj` eligible for `starMarkerRadiusPc`'s camera-distance-
@@ -492,12 +447,15 @@ export function isStarMarkerShrinkEligible(obj: SceneObject, denseBatchRadiusPc:
  * can be unit tested without needing a real `THREE.PerspectiveCamera` or
  * `main.ts`'s own module-level scene state.
  *
- * `minZoomDistancePc` (issue #136) is passed straight through to
- * `sunCoreRadiusPc` for the Sun branch - the same `controls.minDistance`
- * value `main.ts`'s per-frame `applySunCoreScale` already uses - so the
- * selection reticle around the Sun (issue #123) always matches its actual
- * rendered core radius, including at the extended close-zoom range #136
- * added. Unused for the other two branches.
+ * Issue #217 (scope expansion): used to also take an explicit
+ * `minZoomDistancePc` parameter (issue #136), threaded through to
+ * `sunCoreRadiusPc` for the Sun branch - that parameter no longer exists on
+ * either function. `sunCoreRadiusPc`'s curve was simplified to the same
+ * two-segment shape `starMarkerRadiusPc` already uses (see `sun.ts`'s
+ * docstring): both now bottom out at a single flat floor for any camera
+ * distance at or inside `denseBatchRadiusPc`, with nothing left that varies
+ * by the camera's *actual* real-time minimum-zoom distance - so there is no
+ * longer anything for a `minZoomDistancePc` parameter to do.
  *
  * `bubbleOuterRadiusPc` (issue #215) is threaded through to both the
  * shrink-eligible branch (as `starMarkerRadiusPc`'s new per-star ceiling,
@@ -509,11 +467,10 @@ export function selectedMarkerRadiusPc(
   sunObjectId: string,
   cameraDistanceFromOriginPc: number,
   denseBatchRadiusPc: number,
-  minZoomDistancePc: number,
   bubbleOuterRadiusPc: number | null = null,
 ): number {
   if (obj.id === sunObjectId) {
-    return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, minZoomDistancePc);
+    return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
   }
   if (isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) {
     const baselineRadiusPc = starBaselineRadiusPc(obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
