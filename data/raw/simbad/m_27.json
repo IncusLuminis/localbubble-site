@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "M 27",
+  "retrieved_utc": "2026-08-24T16:08:53+00:00",
+  "record_id": "M  27",
+  "raw": {
+    "main_id": "M  27",
+    "ra": 299.90151327087,
+    "dec": 22.721197794319995,
+    "coo_err_maj": 0.021900000050663948,
+    "coo_err_min": 0.02810000069439411,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 14.08899974822998,
+    "plx_value": 2.57,
+    "otype": "PN",
+    "plx_err": 0.037300001829862595,
+    "sp_type": "DAO.6",
+    "ids": "Gaia DR3 1827256624493300096|2MASX J19593637+2243157|PLX 4735|2E  4308|BD+22  3878|CSI+22-19572|GCRV 12336|Hen 2-452|IRAS 19574+2234|M  27|NGC  6853|PK 060-03  1|PK 060-03|PN G060.8-03.6|PN VV'  521|PN VV  246|RE J1959+224|RE J195935+224359|WD 1957+225|PN ARO   14|PLX 4735.00|1RXS J195936.2+224309|2E 1957.4+2235|2EUVE J1959+22.7|EUVE J1959+22.7|RX J1959.6+2243|NAME Diabolo Nebula|NAME Dumbbell Nebula|Gaia DR2 1827256624493300096|TIC 1849363609|TIC 256044519|2MASS J19593637+2243159|TIC 10001625973",
+    "matched_id": "M  27"
+  }
+}

@@ -30,6 +30,36 @@ rejected by this version.
 Live network access to SIMBAD (https://simbad.cds.unistra.fr) was
 confirmed reachable from this environment during development (see PR
 description for what was tried).
+
+Issue #221 (10 popular Messier nebulae) surfaced two further SIMBAD/
+astroquery quirks, both handled here rather than by any caller:
+
+1. Requesting the `V` votable field turns the underlying query into a
+   join that returns *zero rows* for any object with no cataloged
+   apparent V magnitude - previously documented (`data/raw/gap_fills/
+   README.md`) as a "Mizar-specific alias quirk", but empirically it is
+   not alias-specific at all: several bright, well-known extended
+   objects (M1/the Crab Nebula, M42/the Orion Nebula, M8, M16, M17, M20)
+   hit the exact same zero-row join failure, purely because they are
+   diffuse nebulae with no single point-source V magnitude on file, not
+   because the identifier itself is unresolvable. `_query_upstream` now
+   retries once without `V` whenever the first attempt returns zero
+   rows; a genuinely unresolvable name still returns zero rows on the
+   retry too and falls through to the same honest `ValueError` as
+   before.
+2. Extended/diffuse objects are not point sources and typically have no
+   measured trigonometric parallax at all (`plx_value` absent), even
+   once resolved - true for every one of the six objects above. Rather
+   than failing resolution outright, `_query_upstream` falls back to
+   SIMBAD's own `mesDistance` table (literature-cited distances "by
+   several means", still a real, traceable SIMBAD-served value, never
+   fabricated) when `plx_value` is unusable, preferring a `mesDistance`
+   row whose bibcode is `2020A&A...633A..51Z` (Zucker et al. 2020) when
+   present - the same paper this catalog's own `literature.py`-sourced
+   molecular clouds already cite (`data/normalized/
+   initial_catalog_records.json`'s `taurus-molecular-cloud` etc.), for
+   consistency - and otherwise the first row SIMBAD returns. See
+   `_query_mes_distance`/`_normalize` below.
 """
 
 from __future__ import annotations
@@ -53,6 +83,31 @@ from ..schema import (
 #: mas -> pc, small-angle approximation (standard for parallaxes of this
 #: size; the same relation astropy's own `Distance(parallax=...)` uses).
 _PARALLAX_MAS_TO_PC = 1000.0
+
+#: `mesDistance` bibcode preferred when a record has more than one
+#: measurement on file (module docstring, quirk 2) - Zucker et al. 2020,
+#: already this catalog's own citation for its other literature-sourced
+#: extended structures (molecular clouds), so reusing it here keeps
+#: distance provenance consistent across the catalog rather than picking
+#: an arbitrary different paper per object.
+_PREFERRED_MESDISTANCE_BIBCODE = "2020A&A...633A..51Z"
+
+#: `mesDistance.unit` -> parsec multiplier. SIMBAD's own three units for
+#: this table (values arrive with trailing whitespace, e.g. `"pc  "`,
+#: hence the `.strip()` at the call site).
+_MESDISTANCE_UNIT_TO_PC = {"pc": 1.0, "kpc": 1_000.0, "mpc": 1_000_000.0}
+
+
+def _mes_distance_to_pc(value: float, unit: str | None) -> float | None:
+    """Convert one `mesDistance.dist` value to parsecs given its
+    `mesDistance.unit`. Returns `None` (never fabricates/guesses) for an
+    unrecognized or missing unit."""
+    if unit is None:
+        return None
+    factor = _MESDISTANCE_UNIT_TO_PC.get(unit.strip().lower())
+    if factor is None:
+        return None
+    return value * factor
 
 
 def absolute_magnitude_from_distance_modulus(
@@ -98,15 +153,75 @@ class SimbadResolver(CachingObjectResolver):
     def _dataset_label(self) -> str:
         return "SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)"
 
-    def _query_upstream(self, name: str) -> dict[str, Any]:
+    def _query_object_with_fields(
+        self, name: str, *, include_v: bool
+    ) -> dict[str, Any] | None:
+        """One `query_object` call for the standard field set, optionally
+        without `V` (see module docstring, quirk 1). Returns `None` (never
+        raises) on zero rows, so `_query_upstream` can decide whether to
+        retry or give up."""
         client = AstroquerySimbad()
-        client.add_votable_fields(
-            "plx_value", "plx_err", "ids", "otype", "sp_type", "V"
-        )
+        fields = ["plx_value", "plx_err", "ids", "otype", "sp_type"]
+        if include_v:
+            fields.append("V")
+        client.add_votable_fields(*fields)
         table = client.query_object(name)
         if table is None or len(table) == 0:
-            raise ValueError(f"SIMBAD has no record for {name!r}")
+            return None
         return table_row_to_dict(table, 0)
+
+    def _query_mes_distance(self, name: str) -> dict[str, Any] | None:
+        """Fallback distance lookup via SIMBAD's `mesDistance` table (see
+        module docstring, quirk 2) - only ever called when the standard
+        query already returned a record but with no usable `plx_value`.
+        Returns `None` (never fabricates) if SIMBAD has no `mesDistance`
+        measurement on file either."""
+        client = AstroquerySimbad()
+        client.add_votable_fields("mesDistance")
+        table = client.query_object(name)
+        if table is None or len(table) == 0:
+            return None
+        rows = [table_row_to_dict(table, i) for i in range(len(table))]
+        preferred = next(
+            (r for r in rows if r.get("mesdistance.bibcode") == _PREFERRED_MESDISTANCE_BIBCODE),
+            None,
+        )
+        row = preferred or rows[0]
+        dist = row.get("mesdistance.dist")
+        if dist is None:
+            return None
+        distance_pc = _mes_distance_to_pc(dist, row.get("mesdistance.unit"))
+        if distance_pc is None:
+            return None
+        method = (row.get("mesdistance.method") or "").strip() or None
+        return {
+            "pc": distance_pc,
+            "bibcode": row.get("mesdistance.bibcode"),
+            "method": method,
+        }
+
+    def _query_upstream(self, name: str) -> dict[str, Any]:
+        raw = self._query_object_with_fields(name, include_v=True)
+        if raw is None:
+            # Quirk 1 (module docstring): a zero-row result with `V`
+            # requested can mean either "no such object" or "object
+            # exists but has no cataloged V magnitude". Retry without `V`
+            # to tell the two apart honestly.
+            raw = self._query_object_with_fields(name, include_v=False)
+        if raw is None:
+            raise ValueError(f"SIMBAD has no record for {name!r}")
+
+        plx_mas = raw.get("plx_value")
+        if plx_mas is None or plx_mas <= 0:
+            # Quirk 2 (module docstring): no usable parallax - try the
+            # mesDistance fallback rather than failing resolution outright.
+            # `_normalize` still raises if this also comes back empty.
+            mes = self._query_mes_distance(name)
+            if mes is not None:
+                raw["mesdistance_pc"] = mes["pc"]
+                raw["mesdistance_bibcode"] = mes["bibcode"]
+                raw["mesdistance_method"] = mes["method"]
+        return raw
 
     def _extract_record_id(self, name: str, raw: dict[str, Any]) -> str:
         return str(raw.get("main_id") or name)
@@ -114,18 +229,42 @@ class SimbadResolver(CachingObjectResolver):
     def _normalize(self, name: str, record: CacheRecord) -> AstronomicalObject:
         raw = record.raw
         plx_mas = raw.get("plx_value")
-        if plx_mas is None or plx_mas <= 0:
+        mesdistance_pc = raw.get("mesdistance_pc")
+        mesdistance_note = ""
+        mesdistance_bibcode = None
+        if plx_mas is not None and plx_mas > 0:
+            distance_pc = _PARALLAX_MAS_TO_PC / plx_mas
+            plx_err_mas = raw.get("plx_err")
+            error_pc = (
+                distance_pc * (plx_err_mas / plx_mas)
+                if plx_err_mas is not None
+                else None
+            )
+        elif mesdistance_pc is not None:
+            # Quirk 2 (module docstring): no usable parallax on file - this
+            # is the common case for extended/diffuse objects, which are
+            # not point sources. Fall back to SIMBAD's own `mesDistance`
+            # table instead of failing resolution outright. No error
+            # estimate is available from this source (unlike the
+            # parallax-derived path above), so `error_pc` stays `None`
+            # rather than fabricating one.
+            distance_pc = mesdistance_pc
+            error_pc = None
+            mesdistance_bibcode = raw.get("mesdistance_bibcode")
+            method = raw.get("mesdistance_method")
+            mesdistance_note = (
+                f" No usable SIMBAD parallax on file; distance instead "
+                f"taken from SIMBAD's mesDistance table (bibcode "
+                f"{mesdistance_bibcode}"
+                + (f", method {method}" if method else "")
+                + ")."
+            )
+        else:
             raise ValueError(
                 f"SIMBAD record for {name!r} has no usable parallax "
-                "(plx_value) - cannot derive a distance without one."
+                "(plx_value) and no mesDistance fallback - cannot derive "
+                "a distance."
             )
-        distance_pc = _PARALLAX_MAS_TO_PC / plx_mas
-        plx_err_mas = raw.get("plx_err")
-        error_pc = (
-            distance_pc * (plx_err_mas / plx_mas)
-            if plx_err_mas is not None
-            else None
-        )
 
         ids_field = raw.get("ids") or ""
         aliases = [alias.strip() for alias in ids_field.split("|") if alias.strip()]
@@ -163,6 +302,11 @@ class SimbadResolver(CachingObjectResolver):
                     f"SIMBAD astronomical database (CDS), record "
                     f"{record.record_id}"
                     + (f", coo_bibcode {raw['coo_bibcode']}" if raw.get("coo_bibcode") else "")
+                    + (
+                        f", mesDistance bibcode {mesdistance_bibcode}"
+                        if mesdistance_bibcode
+                        else ""
+                    )
                 ),
                 url=f"https://simbad.cds.unistra.fr/simbad/sim-id?Ident={record.record_id}",
                 catalog="SIMBAD",
@@ -171,6 +315,7 @@ class SimbadResolver(CachingObjectResolver):
                 f"Retrieved from SIMBAD on {record.retrieved_utc}; "
                 f"upstream record id: {record.record_id}; "
                 f"otype: {raw.get('otype')}."
+                f"{mesdistance_note}"
             ),
         )
         return derive_galactic_coordinates(obj)

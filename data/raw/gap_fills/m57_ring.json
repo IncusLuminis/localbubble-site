@@ -1,0 +1,76 @@
+{
+  "id": "m57_ring",
+  "name": "M  57",
+  "aliases": [
+    "Gaia DR3 2090486618786534784",
+    "PLX 4377",
+    "BD+32  3246",
+    "CSI+32-18517",
+    "GCRV 11366",
+    "GSC2 N0223131306",
+    "HD 175353",
+    "IRAS 18517+3257",
+    "NGC  6720",
+    "PK 063+13  1",
+    "PK 063+13",
+    "PN G063.1+13.9",
+    "PN ARO    9",
+    "PN VV  214",
+    "PN VV'  466",
+    "WD 1851+329",
+    "[LFO93] 1851+32",
+    "PLX 4377.00",
+    "NAME Ring Nebula",
+    "[D71] 1851+32",
+    "[FA87] 1851+329",
+    "[A86] 1851+329",
+    "B2.1 1851+32",
+    "BWE 1851+3257",
+    "GB6 B1851+3257",
+    "MITG J185334+3301",
+    "MITG J185337+3301",
+    "NVSS J185335+330145",
+    "WB 1851+3257",
+    "87GB 185143.8+325740",
+    "WN B1851.7+3257",
+    "WEB 16043",
+    "Gaia DR2 2090486618786534784",
+    "TIC 1714951233"
+  ],
+  "object_type": "planetary_nebula",
+  "coordinates": {
+    "ra_deg": 283.39623652463,
+    "dec_deg": 33.029134246539996,
+    "galactic_l_deg": 63.170086182598,
+    "galactic_b_deg": 13.97809550262823
+  },
+  "distance": {
+    "value_pc": 787.6496534341525,
+    "error_pc": 27.173168635969407
+  },
+  "cartesian": {
+    "x_pc": 344.97351502858214,
+    "y_pc": 682.0464296860911,
+    "z_pc": 190.25750507199615
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M  57, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M  57",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "DA(O?)",
+    "absolute_magnitude": 6.287334622139721,
+    "apparent_magnitude": 15.769000053405762
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T16:08:54+00:00; upstream record id: M  57; otype: PN. Added as a curated Messier-catalog gap-fill (issue #221): M57 (Ring Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

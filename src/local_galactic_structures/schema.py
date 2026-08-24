@@ -22,6 +22,7 @@ KNOWN_OBJECT_TYPES = {
     "star_forming_region",
     "hii_region",
     "supernova_remnant",
+    "planetary_nebula",
     "bubble",
     "reference_point",
 }

@@ -149,6 +149,12 @@ const OBJECT_TYPE_COLORS: Record<string, number> = {
   star_forming_region: 0xff7fb0,
   hii_region: 0xb07fff,
   supernova_remnant: 0xff5f5f,
+  // Issue #221: teal/green, distinct from `bubble`'s cyan (0x5fffe0) and
+  // `hii_region`'s violet (0xb07fff) - real planetary nebulae commonly
+  // show doubly-ionized oxygen (OIII) emission at ~500.7nm, which reads
+  // visually as teal/green, so this color is also physically apt, not
+  // just distinguishable.
+  planetary_nebula: 0x7dffa0,
   bubble: 0x5fffe0,
   reference_point: 0x9aa7bd,
 };

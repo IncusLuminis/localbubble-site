@@ -1,0 +1,59 @@
+{
+  "id": "m16_eagle",
+  "name": "M  16",
+  "aliases": [
+    "Villafranca O-019",
+    "C 1816-138",
+    "CTB 51",
+    "LBN 016.96+00.78",
+    "LBN    67",
+    "LMH 22",
+    "MM 21",
+    "NGC  6611",
+    "NRL 14",
+    "OCISM  10",
+    "OCl   54",
+    "[KPR2004b] 441",
+    "IC 4703",
+    "GRS G017.00 +00.30",
+    "[KPS2012] MWSC 2886",
+    "NAME Eagle Nebula",
+    "NAME Star Queen"
+  ],
+  "object_type": "hii_region",
+  "coordinates": {
+    "ra_deg": 274.688,
+    "dec_deg": -13.792,
+    "galactic_l_deg": 16.96145407025122,
+    "galactic_b_deg": 0.8105715158054541
+  },
+  "distance": {
+    "value_pc": 1766.78445229682,
+    "error_pc": 18.72916396806698
+  },
+  "cartesian": {
+    "x_pc": 1689.7623981193767,
+    "y_pc": 515.3694140379583,
+    "z_pc": 24.99411638356144
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M  16, coo_bibcode 2021A&A...647A..19T",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M  16",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": null,
+    "absolute_magnitude": null,
+    "apparent_magnitude": null
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T17:15:42+00:00; upstream record id: M  16; otype: OpC. Added as a curated Messier-catalog gap-fill (issue #221): M16 (Eagle Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

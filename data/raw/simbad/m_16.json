@@ -1,0 +1,22 @@
+{
+  "source": "simbad",
+  "query": "M 16",
+  "retrieved_utc": "2026-08-24T17:15:42+00:00",
+  "record_id": "M  16",
+  "raw": {
+    "main_id": "M  16",
+    "ra": 274.688,
+    "dec": -13.792,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "sp_type": "",
+    "plx_value": 0.566,
+    "otype": "OpC",
+    "plx_err": 0.006000000052154064,
+    "ids": "Villafranca O-019|C 1816-138|CTB 51|LBN 016.96+00.78|LBN    67|LMH 22|M  16|MM 21|NGC  6611|NRL 14|OCISM  10|OCl   54|[KPR2004b] 441|IC 4703|GRS G017.00 +00.30|[KPS2012] MWSC 2886|NAME Eagle Nebula|NAME Star Queen",
+    "matched_id": "M  16"
+  }
+}
