@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "M 76",
+  "retrieved_utc": "2026-08-24T16:08:55+00:00",
+  "record_id": "M  76",
+  "raw": {
+    "main_id": "M  76",
+    "ra": 25.58189905342,
+    "dec": 51.57542638057,
+    "coo_err_maj": 0.1257999986410141,
+    "coo_err_min": 0.13249999284744263,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 17.479999542236328,
+    "plx_value": 0.2945,
+    "otype": "PN",
+    "plx_err": 0.20260000228881836,
+    "sp_type": "DOZ",
+    "ids": "Gaia DR3 406328443354164480|BWE 0139+5119|CSI+51-01391|GB6 B0139+5119|GCRV   950|HD  10346|IRAS F01391+5119|IRAS 01391+5119|M  76|NAME Barbell Nebula|NAME Cork Nebula|NGC   651|NGC   650|NVSS J014219+513431|PK 130-10  1|PN G130.9-10.5|PN VV'    9|PN ARO    2|PN VV    6|WB 0139+5119|WD 0139+513|87GB 013909.6+511935|WN B0139.1+5119|PSCz P01391+5119|[KP98] 1|NAME Little Dumbbell Nebula|WEB  1707|Gaia DR2 406328439057955968|GALEX J014219.5+513431",
+    "matched_id": "M  76"
+  }
+}

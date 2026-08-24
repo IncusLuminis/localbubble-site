@@ -1,0 +1,71 @@
+{
+  "id": "m17_omega",
+  "name": "NGC  6618",
+  "aliases": [
+    "[KC2019] Theia  846",
+    "Villafranca O-009",
+    "1E 1818.0-1610",
+    "C 1817-162",
+    "CTB 52",
+    "LBN    60",
+    "LBN 015.28-00.67",
+    "LMH 21",
+    "M  17",
+    "MM 20",
+    "NAME NGC 6618 Horseshoe",
+    "NRL  4",
+    "OCISM   9",
+    "OCl   44",
+    "OCl   44.0",
+    "[BDB2003] G015.05-00.69",
+    "[KPR2004b] 444",
+    "[PT56] 41",
+    "GRS G015.00 -00.70",
+    "[KPS2012] MWSC 2896",
+    "BD-16  4820",
+    "GCRV 10811",
+    "HD 168520",
+    "W 38",
+    "NAME Checkmark Nebula",
+    "NAME Lobster Nebula",
+    "NAME omega Nebula",
+    "NAME Swan Nebula",
+    "WEB 15351"
+  ],
+  "object_type": "hii_region",
+  "coordinates": {
+    "ra_deg": 275.1958333333333,
+    "dec_deg": -16.171666666666663,
+    "galactic_l_deg": 15.09525046947039,
+    "galactic_b_deg": -0.7453624425132884
+  },
+  "distance": {
+    "value_pc": 1666.6666666666667,
+    "error_pc": 111.11110862758426
+  },
+  "cartesian": {
+    "x_pc": 1609.0208759943293,
+    "y_pc": 434.0040646858002,
+    "z_pc": -21.681103025905475
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record NGC  6618, coo_bibcode 2009MNRAS.399.2146W",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC  6618",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": null,
+    "absolute_magnitude": null,
+    "apparent_magnitude": null
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T17:15:44+00:00; upstream record id: NGC  6618; otype: OpC. Added as a curated Messier-catalog gap-fill (issue #221): M17 (Omega Nebula (Swan Nebula)) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

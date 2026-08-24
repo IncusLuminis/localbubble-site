@@ -1,0 +1,74 @@
+{
+  "id": "m27_dumbbell",
+  "name": "M  27",
+  "aliases": [
+    "Gaia DR3 1827256624493300096",
+    "2MASX J19593637+2243157",
+    "PLX 4735",
+    "2E  4308",
+    "BD+22  3878",
+    "CSI+22-19572",
+    "GCRV 12336",
+    "Hen 2-452",
+    "IRAS 19574+2234",
+    "NGC  6853",
+    "PK 060-03  1",
+    "PK 060-03",
+    "PN G060.8-03.6",
+    "PN VV'  521",
+    "PN VV  246",
+    "RE J1959+224",
+    "RE J195935+224359",
+    "WD 1957+225",
+    "PN ARO   14",
+    "PLX 4735.00",
+    "1RXS J195936.2+224309",
+    "2E 1957.4+2235",
+    "2EUVE J1959+22.7",
+    "EUVE J1959+22.7",
+    "RX J1959.6+2243",
+    "NAME Diabolo Nebula",
+    "NAME Dumbbell Nebula",
+    "Gaia DR2 1827256624493300096",
+    "TIC 1849363609",
+    "TIC 256044519",
+    "2MASS J19593637+2243159",
+    "TIC 10001625973"
+  ],
+  "object_type": "planetary_nebula",
+  "coordinates": {
+    "ra_deg": 299.90151327087,
+    "dec_deg": 22.721197794319995,
+    "galactic_l_deg": 60.8361408924108,
+    "galactic_b_deg": -3.6962713634175404
+  },
+  "distance": {
+    "value_pc": 389.1050583657588,
+    "error_pc": 5.647322719475329
+  },
+  "cartesian": {
+    "x_pc": 189.21994165681218,
+    "y_pc": 339.0712669131259,
+    "z_pc": -25.084578512319187
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M  27, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M  27",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "DAO.6",
+    "absolute_magnitude": 6.138665364886453,
+    "apparent_magnitude": 14.08899974822998
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T16:08:53+00:00; upstream record id: M  27; otype: PN. Added as a curated Messier-catalog gap-fill (issue #221): M27 (Dumbbell Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

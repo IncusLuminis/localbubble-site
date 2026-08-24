@@ -1,4 +1,4 @@
-# Standalone gap-fill additions (issues #207, #213)
+# Standalone gap-fill additions (issues #207, #213, #221)
 
 Occasionally a well-known, bright, nearby star turns out to be missing from
 *every* existing curated batch - not because resolution failed, but because
@@ -121,3 +121,92 @@ values, no cross-match errors.
 Not part of this Story: auditing for even more missing bright stars beyond
 this list, or changing the RECONS/Galaxy Map batch transcription process
 itself - both explicitly out of scope for issue #213.
+
+## 10 popular Messier nebulae: Crab, Ring, Orion, and the rest (issue #221)
+
+Before this fix, the catalog had zero Messier-catalog objects at all and
+zero `hii_region`/`star_forming_region` members, and the schema itself had
+no home for planetary nebulae (`KNOWN_OBJECT_TYPES` had no
+`planetary_nebula` entry, added in `schema.py` alongside this batch). This
+batch adds 10 well-known Messier nebulae across all three affected object
+types, all resolved live via `SimbadResolver`, one object at a time:
+
+- **Supernova remnant** (pre-existing `supernova_remnant` type): M1 (Crab
+  Nebula, `m1_crab`).
+- **Planetary nebulae** (new `planetary_nebula` type): M27 (Dumbbell,
+  `m27_dumbbell`), M57 (Ring, `m57_ring`), M76 (Little Dumbbell,
+  `m76_little_dumbbell`), M97 (Owl, `m97_owl`).
+- **HII regions** (pre-existing `hii_region` type, previously zero
+  members): M42 (Orion Nebula, `m42_orion`), M8 (Lagoon, `m8_lagoon`), M16
+  (Eagle, `m16_eagle`), M17 (Omega/Swan, `m17_omega`), M20 (Trifid,
+  `m20_trifid`).
+
+All 10 carry `group.secondary: ["messier-nebula-gap-fill"]` - a distinct
+tag from both `nearby-bright-star-gap-fill` above and the RECONS/Galaxy
+Map batch tags, since these are curated Messier additions, not from either
+existing candidate list.
+
+**Result: 10 of 10 attempted resolutions succeeded**, zero fabricated or
+skipped entries. Catalog grew from 992 to 1002 objects;
+`galactic-structures build-catalog` + `galactic-structures export-scene
+--no-radius-filter --output web/public/data/scene.json` regenerated the
+checked-in catalog/scene artifacts, run from this worktree's `.venv`
+(pyarrow 25.0.1, matching the version the test suite runs against - see
+this repo's `Regenerate catalog.parquet with current pyarrow` commit for
+why that match matters).
+
+**Two SIMBAD/astroquery quirks surfaced by this batch** (both handled
+inside `data_sources/simbad.py`, not worked around by hand per object -
+see that module's docstring for the full detail):
+
+1. Diffuse/extended objects with no cataloged apparent V magnitude return
+   zero rows from `query_object` when the `V` votable field is requested
+   at all (true for M1, M42, M8, M16, M17, M20) - `_query_upstream` now
+   retries once without `V` before giving up.
+2. The same diffuse/extended objects typically have no measured
+   trigonometric parallax (`plx_value`) on file - `_query_upstream`/
+   `_normalize` fall back to SIMBAD's own `mesDistance` table (a real,
+   traceable, literature-cited SIMBAD value, never fabricated) instead of
+   failing resolution. M1's 2000 pc distance, for example, comes from this
+   fallback (`mesDistance` bibcode `1973PASP...85..579T`); the four
+   planetary nebulae all had usable central-star parallaxes and did not
+   need it.
+
+**otype quirk, not worked around** (documented honestly instead): SIMBAD's
+own `otype` classification for M8, M16, M17, and M20 is `OpC` (open
+cluster) rather than a nebula type - for these four, SIMBAD's "M n" query
+resolves to the embedded open star cluster's catalog entry (e.g. M17's
+`main_id` comes back as `NGC 6618`, with `M 17` retained as an alias)
+rather than a standalone nebula entry. Only M42 resolves directly to
+SIMBAD's own `HII` otype. The RA/Dec/distance data pulled this way still
+correctly locates the nebula itself (an embedded cluster shares the
+nebula's position to well within a degree - verified against public
+figures in the spot-check table below), and `object_type: "hii_region"`
+is still the correct, issue-specified classification for what these
+objects visually/scientifically are; only SIMBAD's own internal type tag
+differs, and that raw `otype` value is preserved verbatim in each
+record's `notes` field for transparency rather than hidden.
+
+Spot-checked against public data (one from each of the three categories,
+plus two more for coverage):
+
+| Object | Distance (resolved) | Public figure | SIMBAD otype | Notes |
+| --- | --- | --- | --- | --- |
+| M1 (Crab Nebula, SNR) | 2000 pc | ~6500 ly = 1994 pc (widely cited) | SNR | mesDistance fallback, matches exactly |
+| M57 (Ring Nebula, PN) | 787.6 pc | ~2000-2500 ly cited range = 610-770 pc (older); recent Gaia-based ~700-830 pc | PN | consistent with recent Gaia-era figures |
+| M42 (Orion Nebula, HII) | 433.0 pc | 414 +/- 7 pc (VLBA maser parallax, Menten et al. 2007; widely adopted) | HII | within ~5% |
+| M27 (Dumbbell Nebula, PN) | 389.1 pc | ~380-460 pc (recent Gaia central-star parallax literature) | PN | consistent |
+| M16 (Eagle Nebula, HII) | 1766.8 pc | ~1700-2000 pc commonly cited (~5700 ly - 6500 ly) | OpC (embedded cluster; nebula position confirmed via RA/Dec) | consistent |
+
+All five consistent with commonly cited public figures - no fabricated
+values. (M76's distance, `mesDistance`/parallax notwithstanding, has an
+unusually wide literature range and a large resolved error bar,
+`error_pc` ~2336 pc on ~3396 pc; flagged here rather than silently
+smoothed over, not treated as disqualifying since the schema's own
+`distance.error_pc` field exists precisely to carry that uncertainty
+forward honestly.)
+
+Not part of this Story: the remaining ~100 Messier objects (this is a
+curated "greatest hits" batch, not a full import), or new billboard-sprite
+rendering for nebulae (a separate, later Story per issue #221's own scope
+note).

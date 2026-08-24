@@ -1,0 +1,61 @@
+{
+  "id": "m8_lagoon",
+  "name": "M   8",
+  "aliases": [
+    "Villafranca O-018",
+    "CTB 46",
+    "Kes 58",
+    "LBN 006.06-01.23",
+    "LBN    25",
+    "LMH 11",
+    "MM 10",
+    "Mol  37",
+    "NAME Lagoon",
+    "NAME Lagoon Nebula",
+    "NRL 11",
+    "OCISM   1",
+    "PMN J1803-2422",
+    "SH  2-25",
+    "[KC97c] G006.0-01.2",
+    "[L89b]   5.973-01.178",
+    "GRS G006.00 -01.20",
+    "GRS G006.20 -01.20",
+    "W 29"
+  ],
+  "object_type": "hii_region",
+  "coordinates": {
+    "ra_deg": 270.90416666666664,
+    "dec_deg": -24.386666666666667,
+    "galactic_l_deg": 5.957518413637774,
+    "galactic_b_deg": -1.166682729067755
+  },
+  "distance": {
+    "value_pc": 1272.0,
+    "error_pc": null
+  },
+  "cartesian": {
+    "x_pc": 1264.8678145577455,
+    "y_pc": 131.9948498925266,
+    "z_pc": -25.899252841747025
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M   8, mesDistance bibcode 2020A&A...633A..51Z",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M   8",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": null,
+    "absolute_magnitude": null,
+    "apparent_magnitude": null
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T17:15:39+00:00; upstream record id: M   8; otype: OpC. No usable SIMBAD parallax on file; distance instead taken from SIMBAD's mesDistance table (bibcode 2020A&A...633A..51Z, method plx). Added as a curated Messier-catalog gap-fill (issue #221): M8 (Lagoon Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

@@ -1,0 +1,62 @@
+{
+  "id": "m20_trifid",
+  "name": "M  20",
+  "aliases": [
+    "C 1759-230",
+    "CSI-23-17593  1",
+    "CTB 45",
+    "LBN 006.99-00.17",
+    "LBN    27",
+    "LMH 12",
+    "MM 11",
+    "MSH 17-2-16",
+    "NAME Trifid Nebula",
+    "NGC  6514",
+    "NRL 10",
+    "OCISM   2",
+    "OCl   23.0",
+    "[DGW65]  99",
+    "[KPR2004b] 425",
+    "[SC95] M 208",
+    "[SC95] M 215",
+    "Cl Collinder  360",
+    "GRS G007.00 -00.30",
+    "[KPS2012] MWSC 2789"
+  ],
+  "object_type": "hii_region",
+  "coordinates": {
+    "ra_deg": 270.675,
+    "dec_deg": -22.971666666666664,
+    "galactic_l_deg": 7.085893637515021,
+    "galactic_b_deg": -0.28732648471726907
+  },
+  "distance": {
+    "value_pc": 1265.8227848101264,
+    "error_pc": 80.11536732103518
+  },
+  "cartesian": {
+    "x_pc": 1256.139064286144,
+    "y_pc": 156.14633838343093,
+    "z_pc": -6.347812870541948
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M  20, coo_bibcode 2009MNRAS.399.2146W",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M  20",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": null,
+    "absolute_magnitude": null,
+    "apparent_magnitude": null
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T17:15:47+00:00; upstream record id: M  20; otype: OpC. Added as a curated Messier-catalog gap-fill (issue #221): M20 (Trifid Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "M 97",
+  "retrieved_utc": "2026-08-24T16:08:56+00:00",
+  "record_id": "M  97",
+  "raw": {
+    "main_id": "M  97",
+    "ra": 168.69880122825,
+    "dec": 55.01902300891,
+    "coo_err_maj": 0.02669999934732914,
+    "coo_err_min": 0.031099999323487282,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 15.777000427246094,
+    "plx_value": 1.2347,
+    "otype": "PN",
+    "plx_err": 0.04610000178217888,
+    "sp_type": "",
+    "ids": "TIC 309863161|WN B1111.8+5517A|WN B1111.8+5517B|NVSS J111443+550045|NVSS J111450+550126|Gaia DR3 843950873117830528|2EUVE J1114+55.0|87GB 111154.0+551728|AG82 135|BWE 1111+5517|CSI+55-11119|EUVE J1114+55.0|GCRV  6897|IRAS F11118+5517|IRAS 11119+5517|LJHY   9|M  97|NAME Owl Nebula|NGC  3587|PK 148+57  1|PN G148.4+57.0|PN VV   59|PN VV'  107|PN ARO   25|GB6 B1111+5517|PSCz P11119+5517|WD 1111+552|SDSS J111447.71+550108.4|SDSS J111447.70+550108.7|2MASS J11144772+5501085|Gaia DR2 843950873117830528|RX J111447.9+550106",
+    "matched_id": "M  97"
+  }
+}

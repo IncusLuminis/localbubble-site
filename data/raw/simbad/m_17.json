@@ -1,0 +1,22 @@
+{
+  "source": "simbad",
+  "query": "M 17",
+  "retrieved_utc": "2026-08-24T17:15:44+00:00",
+  "record_id": "NGC  6618",
+  "raw": {
+    "main_id": "NGC  6618",
+    "ra": 275.1958333333333,
+    "dec": -16.171666666666663,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2009MNRAS.399.2146W",
+    "sp_type": "",
+    "plx_value": 0.6,
+    "otype": "OpC",
+    "plx_err": 0.03999999910593033,
+    "ids": "[KC2019] Theia  846|Villafranca O-009|1E 1818.0-1610|C 1817-162|CTB 52|LBN    60|LBN 015.28-00.67|LMH 21|M  17|MM 20|NAME NGC 6618 Horseshoe|NGC  6618|NRL  4|OCISM   9|OCl   44|OCl   44.0|[BDB2003] G015.05-00.69|[KPR2004b] 444|[PT56] 41|GRS G015.00 -00.70|[KPS2012] MWSC 2896|BD-16  4820|GCRV 10811|HD 168520|W 38|NAME Checkmark Nebula|NAME Lobster Nebula|NAME omega Nebula|NAME Swan Nebula|WEB 15351",
+    "matched_id": "M  17"
+  }
+}

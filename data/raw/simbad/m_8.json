@@ -1,0 +1,25 @@
+{
+  "source": "simbad",
+  "query": "M 8",
+  "retrieved_utc": "2026-08-24T17:15:39+00:00",
+  "record_id": "M   8",
+  "raw": {
+    "main_id": "M   8",
+    "ra": 270.90416666666664,
+    "dec": -24.386666666666667,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "sp_type": "",
+    "plx_value": null,
+    "otype": "OpC",
+    "plx_err": null,
+    "ids": "Villafranca O-018|CTB 46|Kes 58|LBN 006.06-01.23|LBN    25|LMH 11|M   8|MM 10|Mol  37|NAME Lagoon|NAME Lagoon Nebula|NRL 11|OCISM   1|PMN J1803-2422|SH  2-25|[KC97c] G006.0-01.2|[L89b]   5.973-01.178|GRS G006.00 -01.20|GRS G006.20 -01.20|W 29",
+    "matched_id": "M   8",
+    "mesdistance_pc": 1272.0,
+    "mesdistance_bibcode": "2020A&A...633A..51Z",
+    "mesdistance_method": "plx"
+  }
+}

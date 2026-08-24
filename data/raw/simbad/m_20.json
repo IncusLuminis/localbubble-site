@@ -1,0 +1,22 @@
+{
+  "source": "simbad",
+  "query": "M 20",
+  "retrieved_utc": "2026-08-24T17:15:47+00:00",
+  "record_id": "M  20",
+  "raw": {
+    "main_id": "M  20",
+    "ra": 270.675,
+    "dec": -22.971666666666664,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2009MNRAS.399.2146W",
+    "sp_type": "",
+    "plx_value": 0.79,
+    "otype": "OpC",
+    "plx_err": 0.05000000074505806,
+    "ids": "C 1759-230|CSI-23-17593  1|CTB 45|LBN 006.99-00.17|LBN    27|LMH 12|M  20|MM 11|MSH 17-2-16|NAME Trifid Nebula|NGC  6514|NRL 10|OCISM   2|OCl   23.0|[DGW65]  99|[KPR2004b] 425|[SC95] M 208|[SC95] M 215|Cl Collinder  360|GRS G007.00 -00.30|[KPS2012] MWSC 2789",
+    "matched_id": "M  20"
+  }
+}

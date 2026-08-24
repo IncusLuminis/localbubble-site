@@ -1,0 +1,63 @@
+{
+  "id": "m42_orion",
+  "name": "M  42",
+  "aliases": [
+    "SRGA J053516.8-052315",
+    "3C 145",
+    "4C -05.21",
+    "CTA  37",
+    "LBN 209.13-19.35",
+    "LBN   974",
+    "MSH 05-0-11",
+    "Mills 05+0A",
+    "NAME Great Orion Nebula",
+    "NAME Ori Nebula",
+    "NAME Orion Nebula",
+    "NGC  1976",
+    "NRL  6",
+    "PKS 0532-054",
+    "PKS 0532-05",
+    "XSS J05351-0519",
+    "[DGW65]  26",
+    "[PT56]  6",
+    "[WCO2009] J053517-052326",
+    "GAL 209.01-19.4",
+    "[KPS2012] MWSC 0582"
+  ],
+  "object_type": "hii_region",
+  "coordinates": {
+    "ra_deg": 83.8201,
+    "dec_deg": -5.3876,
+    "galactic_l_deg": 209.00947950388093,
+    "galactic_b_deg": -19.381774282431568
+  },
+  "distance": {
+    "value_pc": 433.0,
+    "error_pc": null
+  },
+  "cartesian": {
+    "x_pc": -357.2153955583126,
+    "y_pc": -198.08499414943006,
+    "z_pc": -143.6958463872156
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M  42, coo_bibcode 2022A&A...661A..38P, mesDistance bibcode 2020A&A...633A..51Z",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M  42",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": null,
+    "absolute_magnitude": null,
+    "apparent_magnitude": null
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T17:15:37+00:00; upstream record id: M  42; otype: HII. No usable SIMBAD parallax on file; distance instead taken from SIMBAD's mesDistance table (bibcode 2020A&A...633A..51Z, method plx). Added as a curated Messier-catalog gap-fill (issue #221): M42 (Orion Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

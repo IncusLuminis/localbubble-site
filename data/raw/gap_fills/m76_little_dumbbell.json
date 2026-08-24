@@ -1,0 +1,70 @@
+{
+  "id": "m76_little_dumbbell",
+  "name": "M  76",
+  "aliases": [
+    "Gaia DR3 406328443354164480",
+    "BWE 0139+5119",
+    "CSI+51-01391",
+    "GB6 B0139+5119",
+    "GCRV   950",
+    "HD  10346",
+    "IRAS F01391+5119",
+    "IRAS 01391+5119",
+    "NAME Barbell Nebula",
+    "NAME Cork Nebula",
+    "NGC   651",
+    "NGC   650",
+    "NVSS J014219+513431",
+    "PK 130-10  1",
+    "PN G130.9-10.5",
+    "PN VV'    9",
+    "PN ARO    2",
+    "PN VV    6",
+    "WB 0139+5119",
+    "WD 0139+513",
+    "87GB 013909.6+511935",
+    "WN B0139.1+5119",
+    "PSCz P01391+5119",
+    "[KP98] 1",
+    "NAME Little Dumbbell Nebula",
+    "WEB  1707",
+    "Gaia DR2 406328439057955968",
+    "GALEX J014219.5+513431"
+  ],
+  "object_type": "planetary_nebula",
+  "coordinates": {
+    "ra_deg": 25.58189905342,
+    "dec_deg": 51.57542638057,
+    "galactic_l_deg": 130.93352704487182,
+    "galactic_b_deg": -10.503954507780504
+  },
+  "distance": {
+    "value_pc": 3395.585738539898,
+    "error_pc": 2335.978534465407
+  },
+  "cartesian": {
+    "x_pc": -2187.4487358863034,
+    "y_pc": 2522.2760304406165,
+    "z_pc": -619.0267861003032
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M  76, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M  76",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "DOZ",
+    "absolute_magnitude": 4.82542603785193,
+    "apparent_magnitude": 17.479999542236328
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T16:08:55+00:00; upstream record id: M  76; otype: PN. Added as a curated Messier-catalog gap-fill (issue #221): M76 (Little Dumbbell Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}

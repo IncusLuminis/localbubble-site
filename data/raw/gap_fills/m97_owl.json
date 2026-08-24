@@ -1,0 +1,73 @@
+{
+  "id": "m97_owl",
+  "name": "M  97",
+  "aliases": [
+    "TIC 309863161",
+    "WN B1111.8+5517A",
+    "WN B1111.8+5517B",
+    "NVSS J111443+550045",
+    "NVSS J111450+550126",
+    "Gaia DR3 843950873117830528",
+    "2EUVE J1114+55.0",
+    "87GB 111154.0+551728",
+    "AG82 135",
+    "BWE 1111+5517",
+    "CSI+55-11119",
+    "EUVE J1114+55.0",
+    "GCRV  6897",
+    "IRAS F11118+5517",
+    "IRAS 11119+5517",
+    "LJHY   9",
+    "NAME Owl Nebula",
+    "NGC  3587",
+    "PK 148+57  1",
+    "PN G148.4+57.0",
+    "PN VV   59",
+    "PN VV'  107",
+    "PN ARO   25",
+    "GB6 B1111+5517",
+    "PSCz P11119+5517",
+    "WD 1111+552",
+    "SDSS J111447.71+550108.4",
+    "SDSS J111447.70+550108.7",
+    "2MASS J11144772+5501085",
+    "Gaia DR2 843950873117830528",
+    "RX J111447.9+550106"
+  ],
+  "object_type": "planetary_nebula",
+  "coordinates": {
+    "ra_deg": 168.69880122825,
+    "dec_deg": 55.01902300891,
+    "galactic_l_deg": 148.48953456818478,
+    "galactic_b_deg": 57.04995615810279
+  },
+  "distance": {
+    "value_pc": 809.9133392726978,
+    "error_pc": 30.239739518815764
+  },
+  "cartesian": {
+    "x_pc": -375.5613034636972,
+    "y_pc": 230.23863242027812,
+    "z_pc": 679.6348259276743
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "messier-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record M  97, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M  97",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": null,
+    "absolute_magnitude": 6.234807667970955,
+    "apparent_magnitude": 15.777000427246094
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T16:08:56+00:00; upstream record id: M  97; otype: PN. Added as a curated Messier-catalog gap-fill (issue #221): M97 (Owl Nebula) was verified absent from the catalog entirely before this fix (no Messier objects were present at all) - it is not from either existing curated candidate list (RECONS's nearest-100 stellar census, data/raw/recons/, or the Galaxy Map luminous-poster batch, data/raw/galaxy_map/), so it carries its own distinct provenance tag (group.secondary: [\"messier-nebula-gap-fill\"]) rather than implying membership in either of those batches - see data/raw/gap_fills/README.md."
+}
