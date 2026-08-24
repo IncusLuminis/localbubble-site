@@ -280,14 +280,16 @@ export const STAR_MARKER_SHRINK_START_MULTIPLIER = 3;
  * yet) has nothing to shrink toward, so this simply returns the overview
  * radius, matching pre-#119 appearance.
  *
- * This is only ever applied to RECONS dense-batch star instances (see
- * `setInstanceVisibility` below) - non-dense-batch stars are always far
- * enough from the Sun (closest is ~76.6pc, well outside even
- * `denseBatchRadiusPc`'s ~11.26pc collection radius times the shrink-start
- * multiplier) that this formula would return `STAR_MARKER_RADIUS_PC`
- * unchanged for them anyway; skipping those ~585 instances is a pure
- * performance win with no visual difference, mirroring #104's own
- * dense-batch-only scoping rationale (`lod.ts`'s module docstring).
+ * This is only ever applied to shrink-eligible star instances (see
+ * `isStarMarkerShrinkEligible` below, and `setInstanceVisibility`) - stars
+ * whose own `distance_pc` is genuinely far from the Sun (beyond
+ * `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`) are always
+ * ineligible, and this formula would return `STAR_MARKER_RADIUS_PC`
+ * unchanged for them regardless of camera position anyway; skipping those
+ * instances is a pure performance win with no visual difference, mirroring
+ * #104's own dense-batch-only scoping rationale (`lod.ts`'s module
+ * docstring) - just keyed off real distance now instead of RECONS
+ * provenance (issue #211, see `isStarMarkerShrinkEligible`'s docstring).
  */
 export function starMarkerRadiusPc(
   cameraDistanceFromOriginPc: number,
@@ -307,6 +309,57 @@ export function starMarkerRadiusPc(
 
   const t = (cameraDistanceFromOriginPc - denseBatchRadiusPc) / (shrinkStartPc - denseBatchRadiusPc);
   return STAR_MARKER_MIN_RADIUS_PC + t * (STAR_MARKER_RADIUS_PC - STAR_MARKER_MIN_RADIUS_PC);
+}
+
+/**
+ * Issue #211: is `obj` eligible for `starMarkerRadiusPc`'s camera-distance-
+ * dependent shrink - decoupled from `lod.ts`'s `isDenseBatchMember`
+ * (`recons-nearest-100`) tag, which issue #119 originally (and only ever
+ * incidentally) used as this eligibility gate. That tag is a *provenance*
+ * fact (was this object resolved from the original RECONS "100 nearest
+ * systems" candidate list) - a completely different concern from "is this
+ * star geometrically close enough to the Sun that the shrink formula
+ * produces a different, meaningful result for it." The two happened to
+ * coincide for every star in today's catalog except one: Fomalhaut
+ * (`alf_psa`, 7.70pc, tagged `nearby-bright-star-gap-fill` per #207/#208,
+ * deliberately NOT `recons-nearest-100` since it wasn't actually on the
+ * original RECONS list) is genuinely close to the Sun but was silently
+ * excluded from the shrink purely because it lacked the tag - rendering at
+ * a fixed, oversized `STAR_MARKER_RADIUS_PC` while its true RECONS-tagged
+ * neighbors correctly shrink alongside it.
+ *
+ * Eligibility is now purely geometric: `obj.distance_pc` compared against
+ * `starMarkerRadiusPc`'s own shrink-start threshold
+ * (`STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`) - the same
+ * distance beyond which `starMarkerRadiusPc` returns the unshrunk
+ * `STAR_MARKER_RADIUS_PC` for ANY camera position anyway. This is a
+ * superset of the old tag-based eligibility, not a behavior change for
+ * existing tagged stars: `denseBatchRadiusPc` (`lod.ts`'s
+ * `denseBatchCollectionRadiusPc`, untouched by this issue - still keyed
+ * off `recons-nearest-100` only) is BY DEFINITION the max `distance_pc`
+ * among `recons-nearest-100`-tagged objects, so every one of those ~122
+ * stars automatically satisfies `distance_pc <= denseBatchRadiusPc <
+ * shrinkStartPc` (the multiplier is > 1) and stays eligible exactly as
+ * before. Fomalhaut (7.70pc) now also satisfies it. The ~585 other
+ * non-tagged stars remain far outside it (closest is ~76.6pc, well beyond
+ * an ~11.26pc collection radius's 3x shrink-start line) and stay
+ * ineligible, so they're unaffected - same as pre-#211, just verified by
+ * real distance instead of assumed from the tag's absence.
+ *
+ * `denseBatchRadiusPc <= 0` (scene not loaded yet) has nothing to compare
+ * against, so nothing is eligible - matching `starMarkerRadiusPc`'s own
+ * "return the overview radius" fallback for that case. The check itself is
+ * a single numeric comparison (plus a `Set.has` for the object-type guard)
+ * - cheap enough to evaluate for every catalog object, including the ~585
+ * genuinely-far stars, with no meaningful per-frame cost even though it's
+ * no longer gated behind the tag-membership array check first (see
+ * `updateDenseBatchLod`'s docstring for the per-frame-walk performance
+ * reasoning). */
+export function isStarMarkerShrinkEligible(obj: SceneObject, denseBatchRadiusPc: number): boolean {
+  if (!STAR_OBJECT_TYPES.has(obj.object_type) || denseBatchRadiusPc <= 0) {
+    return false;
+  }
+  return obj.distance_pc < denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
 }
 
 /** Issue #123's selection-reticle radius resolution, extracted (issue #130)
@@ -337,7 +390,7 @@ export function selectedMarkerRadiusPc(
   if (obj.id === sunObjectId) {
     return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, minZoomDistancePc);
   }
-  if (STAR_OBJECT_TYPES.has(obj.object_type) && isDenseBatchMember(obj)) {
+  if (isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) {
     return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
   }
   return markerRadiusPc(obj.size_pc, obj.object_type);
@@ -544,19 +597,26 @@ export function isCatalogObjectVisible(
  * without touching instance count/order - the standard
  * `InstancedMesh`-has-no-per-instance-`.visible` workaround (issue #89).
  *
- * Issue #119: when the instance being shown is both a RECONS dense-batch
- * member (`lod.ts`'s `isDenseBatchMember`) and a `star`-type object, its
+ * Issue #119 (eligibility decoupled from RECONS provenance by #211): when
+ * the instance being shown is shrink-eligible (`isStarMarkerShrinkEligible`
+ * above - a `star`-type object genuinely close to the Sun, no longer
+ * limited to `lod.ts`'s `isDenseBatchMember`/`recons-nearest-100` tag), its
  * baked-in `bucket.radiiPc[index]` (the fixed overview radius) is replaced
  * by `starMarkerRadiusPc`'s camera-distance-dependent value instead - the
- * same LOD-gated subset `updateDenseBatchLod` below already recomputes every
- * frame for visibility, now also getting its radius recomputed in the same
- * pass. Every other instance (non-dense-batch, or dense-batch but not a
- * star - not the case in today's data, see `starMarkerRadiusPc`'s
- * docstring, but checked explicitly rather than assumed) keeps using its
- * static baked-in radius, unaffected. `cameraDistanceFromOriginPc`/
- * `denseBatchRadiusPc` default to `Number.POSITIVE_INFINITY`, under which
- * `starMarkerRadiusPc` always returns the unshrunk overview radius anyway -
- * i.e. any existing caller that doesn't pass them sees no behavior change. */
+ * same close-in subset `updateDenseBatchLod` below already recomputes every
+ * frame (for dense-batch visibility, and now also for any shrink-eligible
+ * star's radius) gets its radius recomputed in the same pass. Every other
+ * instance (not shrink-eligible - too far from the Sun, or not a star) keeps
+ * using its static baked-in radius, unaffected. `cameraDistanceFromOriginPc`/
+ * `denseBatchRadiusPc` both default to `Number.POSITIVE_INFINITY` ("no LOD
+ * gating"); a star can still test shrink-eligible under that sentinel (any
+ * finite `distance_pc` is "less than" an infinite threshold), but
+ * `starMarkerRadiusPc` itself resolves an infinite `denseBatchRadiusPc` to
+ * an infinite shrink-start distance too, so it always falls into its own
+ * "camera at/beyond shrink-start" branch and returns the unshrunk
+ * `STAR_MARKER_RADIUS_PC` regardless - i.e. any existing caller that
+ * doesn't pass real values sees no behavior change, just a redundant
+ * (still-cheap) recomputation of the same radius. */
 export function setInstanceVisibility(
   bucket: CatalogBucket,
   index: number,
@@ -566,7 +626,7 @@ export function setInstanceVisibility(
 ): void {
   const obj = bucket.objects[index];
   let radiusPc = bucket.radiiPc[index];
-  if (visible && STAR_OBJECT_TYPES.has(obj.object_type) && isDenseBatchMember(obj)) {
+  if (visible && isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) {
     radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
   }
   const effectiveRadiusPc = visible ? radiusPc : HIDDEN_INSTANCE_SCALE;
@@ -667,26 +727,38 @@ export function updateCatalogVisibility(
 }
 
 /**
- * Per-frame LOD-only visibility update (issue #104): unlike
- * `updateCatalogVisibility` (called once per category/radius filter
- * change, touching every instance), this is cheap enough to call every
- * frame from the render loop - it walks every bucket's objects but only
- * ever touches the instance matrix of objects that are actually members of
- * the LOD-gated dense batch (`lod.ts`'s `isDenseBatchMember`), skipping
- * everything else with a single cheap array-membership check. Still
- * defers to `isCatalogObjectVisible` for the full visibility decision, so
- * a dense-batch member that's also currently category-off or outside the
- * radius filter stays hidden regardless of camera distance - the two
- * mechanisms can never disagree about what's on screen.
+ * Per-frame LOD-only update (issue #104): unlike `updateCatalogVisibility`
+ * (called once per category/radius filter change, touching every
+ * instance), this is cheap enough to call every frame from the render loop
+ * - it walks every bucket's objects but only ever touches the instance
+ * matrix of objects that actually need per-frame recomputation: members of
+ * the LOD-gated dense batch (`lod.ts`'s `isDenseBatchMember`, for
+ * visibility gating via `isCatalogObjectVisible`/`passesDenseBatchLod`), OR
+ * any star that's shrink-eligible by real distance
+ * (`isStarMarkerShrinkEligible`, issue #211 - for radius only, since
+ * `passesDenseBatchLod` always leaves non-dense-batch objects visible
+ * regardless of camera position). Everything else is skipped with two
+ * cheap checks (an array-membership test, a numeric comparison) - still
+ * negligible per-object cost even now that it's evaluated for all ~707
+ * catalog objects every frame instead of short-circuiting on the tag
+ * alone, since neither check allocates or does more than constant work.
+ * Still defers to `isCatalogObjectVisible` for the full visibility
+ * decision, so a dense-batch member that's also currently category-off or
+ * outside the radius filter stays hidden regardless of camera distance -
+ * the two mechanisms can never disagree about what's on screen. A
+ * shrink-eligible non-dense-batch star (Fomalhaut today) is never gated by
+ * `passesDenseBatchLod`, so it only ever gets its radius refreshed here,
+ * never hidden/shown by this pass.
  *
- * Issue #119: this same per-frame pass now also carries the dense batch's
- * `star`-type instances' camera-distance-dependent radius
- * (`starMarkerRadiusPc`, via `setInstanceVisibility`'s
- * `cameraDistanceFromOriginPc`/`denseBatchRadiusPc` passthrough) - piggy-
- * backing on the exact same already-cheap subset/pass rather than adding a
- * second full-catalog or second dense-batch-only walk, since both concerns
- * (LOD visibility, LOD radius) only ever apply to the same ~122-instance
- * dense batch and are cheapest to recompute together. */
+ * Issue #119: this same per-frame pass carries every eligible `star`-type
+ * instance's camera-distance-dependent radius (`starMarkerRadiusPc`, via
+ * `setInstanceVisibility`'s `cameraDistanceFromOriginPc`/
+ * `denseBatchRadiusPc` passthrough) - piggy-backing on the exact same
+ * already-cheap subset/pass rather than adding a second full-catalog or
+ * second dense-batch-only walk, since both concerns (LOD visibility, LOD
+ * radius) only ever apply to the same small (~122, now ~123 with
+ * Fomalhaut) set of close-in stars and are cheapest to recompute
+ * together. */
 export function updateDenseBatchLod(
   buckets: CatalogBucket[],
   categoryVisibility: ReadonlyMap<string, boolean>,
@@ -696,7 +768,7 @@ export function updateDenseBatchLod(
 ): void {
   for (const bucket of buckets) {
     bucket.objects.forEach((obj, i) => {
-      if (!isDenseBatchMember(obj)) return;
+      if (!isDenseBatchMember(obj) && !isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) return;
       setInstanceVisibility(
         bucket,
         i,
