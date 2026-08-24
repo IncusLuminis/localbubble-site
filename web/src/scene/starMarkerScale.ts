@@ -124,3 +124,72 @@ export function starMarkerRadiusPc(
   const t = (cameraDistanceFromOriginPc - denseBatchRadiusPc) / (shrinkStartPc - denseBatchRadiusPc);
   return STAR_MARKER_MIN_RADIUS_PC + t * (maxRadiusPc - STAR_MARKER_MIN_RADIUS_PC);
 }
+
+/**
+ * Issue #215 (hoisted here by #219 - see this module's own docstring for why
+ * `sun.ts` can't import straight from `objects.ts`): a star's baseline
+ * marker ceiling (pc), graduated by the star's own real radial `distancePc`
+ * from the Sun - independent of camera zoom (that's `starMarkerRadiusPc`
+ * above, which uses THIS function's result as its own ceiling rather than
+ * the flat `STAR_MARKER_RADIUS_PC`, for the star tier).
+ *
+ * Deliberately uses plain radial distance, not the Local Bubble's true
+ * off-centered/tilted ellipsoid shape (`center_pc`/`semi_axes_pc`/
+ * `orientation`) - replicating that full geometry as a continuous per-star
+ * gradient is a much bigger undertaking than a diffuse visual effect like
+ * this justifies (per issue #215). `objects.ts`'s `bubbleOuterRadiusPcFrom`
+ * is expected to be the STAR tier's `bubbleOuterRadiusPc` input, derived
+ * from the bubble's two shorter, roughly-equal semi-axes (`a_pc`/`b_pc`,
+ * both 60pc in the current model) rather than its elongated `c_pc` (162pc)
+ * long axis, which would make a simple radial gradient wildly
+ * direction-dependent - see that function's own docstring.
+ *
+ * Issue #219 reuses this exact function (not a re-derived copy) for
+ * `sun.ts`'s own camera-distance-driven taper too - see `sunCoreRadiusPc`'s
+ * docstring for why passing the CAMERA's distance from the origin in place
+ * of a star's real `distancePc` (with a different, camera-scale-appropriate
+ * pair of bounds, not the star tier's own `denseBatchRadiusPc`/
+ * `bubbleOuterRadiusPc`) is a meaningful, correct reuse of this same shape
+ * rather than a coincidental one: both are "how close is the relevant thing
+ * to the Sun, on a scale from the RECONS boundary to the Local-Bubble-ish
+ * outer edge" - a star's OWN position for a star, the CAMERA's position for
+ * the Sun (whose own real position is always the origin, so it has no
+ * "distance from itself" to graduate by).
+ *
+ * - `distancePc >= outerRadiusPc` ("open space", relative to whichever
+ *   scale the caller's `outerRadiusPc` represents): the unchanged flat
+ *   `STAR_MARKER_RADIUS_PC` (2pc).
+ * - `distancePc <= innerRadiusPc` (at/inside the caller's own "near-Sun"
+ *   scale): `STAR_MARKER_NEAR_SUN_RADIUS_PC` (0.5pc).
+ * - In between: linear interpolation between those two values.
+ *
+ * `outerRadiusPc === null` (no graduated-sizing scale available - e.g. the
+ * loaded scene has no `structures.local_bubble`, per issue #215's AC) or a
+ * degenerate/nonpositive `innerRadiusPc`/`outerRadiusPc` (scene not loaded
+ * yet, or the inner bound isn't strictly inside the outer one) both fall
+ * back to the unchanged flat `STAR_MARKER_RADIUS_PC` for every input - no
+ * graduated sizing, but never an error or a NaN/negative-`t` extrapolation.
+ */
+export function starBaselineRadiusPc(
+  distancePc: number,
+  innerRadiusPc: number,
+  outerRadiusPc: number | null,
+): number {
+  if (
+    outerRadiusPc === null ||
+    !Number.isFinite(outerRadiusPc) ||
+    innerRadiusPc <= 0 ||
+    outerRadiusPc <= innerRadiusPc
+  ) {
+    return STAR_MARKER_RADIUS_PC;
+  }
+  if (distancePc >= outerRadiusPc) {
+    return STAR_MARKER_RADIUS_PC;
+  }
+  if (distancePc <= innerRadiusPc) {
+    return STAR_MARKER_NEAR_SUN_RADIUS_PC;
+  }
+
+  const t = (distancePc - innerRadiusPc) / (outerRadiusPc - innerRadiusPc);
+  return STAR_MARKER_NEAR_SUN_RADIUS_PC + t * (STAR_MARKER_RADIUS_PC - STAR_MARKER_NEAR_SUN_RADIUS_PC);
+}
