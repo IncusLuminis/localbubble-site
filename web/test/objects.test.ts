@@ -3,6 +3,7 @@ import { Matrix4, Quaternion, Vector3 } from "three";
 import type { InstancedMesh, MeshBasicMaterial } from "three";
 import {
   backgroundBucketOpacity,
+  bubbleOuterRadiusPcFrom,
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
@@ -17,7 +18,9 @@ import {
   selectedMarkerRadiusPc,
   setInstanceVisibility,
   shouldDimBackground,
+  starBaselineRadiusPc,
   STAR_MARKER_MIN_RADIUS_PC,
+  STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
   STAR_OBJECT_TYPES,
@@ -205,6 +208,26 @@ describe("markerRadiusPc (issue #103 three-tier hierarchy)", () => {
     expect(markerRadiusPc(hugeSize * 10, "star_cluster")).toBe(clusterMax);
     expect(markerRadiusPc(hugeSize * 10, "molecular_cloud")).toBe(structureMax);
   });
+
+  // Issue #215: the star tier's ceiling is now `starBaselineRadiusPc`,
+  // graduated by the star's own real distance - these three extra params
+  // default to "no graduated sizing" (unchanged pre-#215 flat behavior)
+  // when omitted, matching every test above that calls `markerRadiusPc`
+  // with just (sizePc, objectType).
+  it("wires distancePc/denseBatchRadiusPc/bubbleOuterRadiusPc into the star tier's graduated baseline", () => {
+    const denseBatchRadiusPc = 11.26;
+    const bubbleOuterRadiusPc = 60;
+    expect(markerRadiusPc(null, "star", 400, denseBatchRadiusPc, bubbleOuterRadiusPc)).toBe(
+      markerRadiusPc(null, "star"),
+    );
+    const nearSun = markerRadiusPc(null, "star", 5, denseBatchRadiusPc, bubbleOuterRadiusPc);
+    expect(nearSun).toBe(STAR_MARKER_NEAR_SUN_RADIUS_PC);
+    expect(nearSun).toBeLessThan(markerRadiusPc(null, "star"));
+  });
+
+  it("non-star tiers are unaffected by the extra distance/bubble params", () => {
+    expect(markerRadiusPc(11.6, "star_cluster", 5, 11.26, 60)).toBe(markerRadiusPc(11.6, "star_cluster"));
+  });
 });
 
 /**
@@ -312,6 +335,134 @@ describe("starMarkerRadiusPc (issue #119)", () => {
     // 1.302pc Sun-Proxima gap.
     const sunCoreMinRadiusPc = 0.15;
     expect(sunCoreMinRadiusPc + shrunkRadius).toBeLessThan(proximaToSunPc);
+  });
+});
+
+/**
+ * Issue #215: a star's baseline marker ceiling, graduated by its own real
+ * `distance_pc` from the Sun - `STAR_MARKER_RADIUS_PC` (2pc, "open space")
+ * outside the Local Bubble, `STAR_MARKER_NEAR_SUN_RADIUS_PC` (the new,
+ * smaller "near-Sun" floor) at/inside the RECONS dense-batch sphere's edge,
+ * linearly interpolated in between.
+ */
+describe("starBaselineRadiusPc (issue #215)", () => {
+  const DENSE_BATCH_RADIUS_PC = 11.26; // realistic RECONS collection radius
+  const BUBBLE_OUTER_RADIUS_PC = 60; // Local Bubble semi_axes_pc.a_pc/b_pc
+
+  it("is the flat open-space radius at or beyond the bubble's outer radius", () => {
+    expect(starBaselineRadiusPc(BUBBLE_OUTER_RADIUS_PC, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC)).toBe(
+      markerRadiusPc(null, "star"),
+    );
+    expect(starBaselineRadiusPc(400, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC)).toBe(
+      markerRadiusPc(null, "star"),
+    );
+  });
+
+  it("is the near-Sun baseline at or inside the RECONS dense-batch sphere's edge", () => {
+    expect(starBaselineRadiusPc(DENSE_BATCH_RADIUS_PC, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC)).toBe(
+      STAR_MARKER_NEAR_SUN_RADIUS_PC,
+    );
+    expect(starBaselineRadiusPc(0, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC)).toBe(
+      STAR_MARKER_NEAR_SUN_RADIUS_PC,
+    );
+  });
+
+  it("the near-Sun baseline is strictly smaller than the open-space radius but strictly above the camera-zoom shrink floor", () => {
+    expect(STAR_MARKER_NEAR_SUN_RADIUS_PC).toBeLessThan(markerRadiusPc(null, "star"));
+    expect(STAR_MARKER_NEAR_SUN_RADIUS_PC).toBeGreaterThan(STAR_MARKER_MIN_RADIUS_PC);
+  });
+
+  it("interpolates continuously and monotonically between the two bounds", () => {
+    const midpointPc = (DENSE_BATCH_RADIUS_PC + BUBBLE_OUTER_RADIUS_PC) / 2;
+    const atMidpoint = starBaselineRadiusPc(midpointPc, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+    expect(atMidpoint).toBeCloseTo((STAR_MARKER_NEAR_SUN_RADIUS_PC + markerRadiusPc(null, "star")) / 2, 5);
+
+    const samples = Array.from({ length: 11 }, (_, i) =>
+      starBaselineRadiusPc(
+        DENSE_BATCH_RADIUS_PC + (i / 10) * (BUBBLE_OUTER_RADIUS_PC - DENSE_BATCH_RADIUS_PC),
+        DENSE_BATCH_RADIUS_PC,
+        BUBBLE_OUTER_RADIUS_PC,
+      ),
+    );
+    for (let i = 1; i < samples.length; i++) {
+      expect(samples[i]).toBeGreaterThanOrEqual(samples[i - 1]);
+    }
+  });
+
+  it("falls back to the flat open-space radius, for any distance, when bubbleOuterRadiusPc is null (no Local Bubble in the loaded scene)", () => {
+    expect(starBaselineRadiusPc(5, DENSE_BATCH_RADIUS_PC, null)).toBe(markerRadiusPc(null, "star"));
+    expect(starBaselineRadiusPc(40, DENSE_BATCH_RADIUS_PC, null)).toBe(markerRadiusPc(null, "star"));
+    expect(starBaselineRadiusPc(400, DENSE_BATCH_RADIUS_PC, null)).toBe(markerRadiusPc(null, "star"));
+  });
+
+  it("falls back to the flat open-space radius when denseBatchRadiusPc is 0 (scene not loaded yet)", () => {
+    expect(starBaselineRadiusPc(5, 0, BUBBLE_OUTER_RADIUS_PC)).toBe(markerRadiusPc(null, "star"));
+  });
+
+  it("falls back to the flat open-space radius for a degenerate bound ordering (outer radius not strictly outside the inner one)", () => {
+    expect(starBaselineRadiusPc(5, DENSE_BATCH_RADIUS_PC, DENSE_BATCH_RADIUS_PC)).toBe(
+      markerRadiusPc(null, "star"),
+    );
+    expect(starBaselineRadiusPc(5, DENSE_BATCH_RADIUS_PC, 1)).toBe(markerRadiusPc(null, "star"));
+  });
+});
+
+describe("bubbleOuterRadiusPcFrom (issue #215)", () => {
+  it("averages a_pc/b_pc from a real Local Bubble structure", () => {
+    expect(
+      bubbleOuterRadiusPcFrom({
+        representation: "ellipsoid",
+        center_pc: { x_pc: 10.2, y_pc: 33.6, z_pc: 0 },
+        semi_axes_pc: { a_pc: 60, b_pc: 60, c_pc: 162 },
+      }),
+    ).toBe(60);
+  });
+
+  it("averages unequal a_pc/b_pc rather than requiring them equal", () => {
+    expect(
+      bubbleOuterRadiusPcFrom({
+        representation: "ellipsoid",
+        center_pc: { x_pc: 0, y_pc: 0, z_pc: 0 },
+        semi_axes_pc: { a_pc: 50, b_pc: 70, c_pc: 200 },
+      }),
+    ).toBe(60);
+  });
+
+  it("returns null when the structure itself is null", () => {
+    expect(bubbleOuterRadiusPcFrom(null)).toBeNull();
+  });
+
+  it("returns null when semi_axes_pc is missing or has a non-finite axis", () => {
+    expect(
+      bubbleOuterRadiusPcFrom({
+        representation: "ellipsoid",
+        center_pc: { x_pc: 0, y_pc: 0, z_pc: 0 },
+        semi_axes_pc: undefined as unknown as { a_pc: number; b_pc: number; c_pc: number },
+      }),
+    ).toBeNull();
+  });
+});
+
+/** Issue #215's third acceptance criterion: `starMarkerRadiusPc`'s own
+ * camera-zoom shrink now takes the per-star baseline as its ceiling
+ * (`maxRadiusPc`) instead of always the flat `STAR_MARKER_RADIUS_PC` -
+ * verifying the parameter directly (on top of the existing #119 suite above,
+ * which exercises the pre-#215-compatible default). */
+describe("starMarkerRadiusPc's maxRadiusPc parameter (issue #215)", () => {
+  const DENSE_BATCH_RADIUS_PC = 11.26;
+
+  it("uses the supplied maxRadiusPc as the un-shrunk ceiling instead of the flat overview radius", () => {
+    const smallBaseline = 0.9;
+    expect(starMarkerRadiusPc(1087, DENSE_BATCH_RADIUS_PC, smallBaseline)).toBe(smallBaseline);
+  });
+
+  it("still shrinks toward the same STAR_MARKER_MIN_RADIUS_PC floor regardless of the ceiling", () => {
+    const smallBaseline = 0.9;
+    expect(starMarkerRadiusPc(0, DENSE_BATCH_RADIUS_PC, smallBaseline)).toBe(STAR_MARKER_MIN_RADIUS_PC);
+  });
+
+  it("defaults to the flat STAR_MARKER_RADIUS_PC ceiling when maxRadiusPc is omitted (backward compatible)", () => {
+    expect(starMarkerRadiusPc(1087, DENSE_BATCH_RADIUS_PC)).toBe(markerRadiusPc(null, "star"));
   });
 });
 
@@ -814,6 +965,47 @@ describe("createCatalogObjectGroup (InstancedMesh buckets)", () => {
       expect(scale.x).toBeCloseTo(expectedRadius, 6);
       expect(scale.y).toBeCloseTo(expectedRadius, 6);
       expect(scale.z).toBeCloseTo(expectedRadius, 6);
+    });
+  });
+
+  // Issue #215: when `denseBatchRadiusPc`/`bubbleOuterRadiusPc` are supplied,
+  // each star instance's baked-in radius must reflect ITS OWN real
+  // `distance_pc`, not the flat overview radius - verified across a star
+  // outside the bubble, one mid-bubble, and one at the RECONS sphere's edge.
+  it("bakes a graduated, per-star baseline radius into each star instance when the bubble/dense-batch radii are known", () => {
+    const denseBatchRadiusPc = 11.26;
+    const bubbleOuterRadiusPc = 60;
+    const farStar = makeObject({ id: "far", object_type: "star", distance_pc: 400 });
+    const midBubbleStar = makeObject({ id: "mid", object_type: "star", distance_pc: 43 }); // ~Achernar
+    const edgeStar = makeObject({ id: "edge", object_type: "star", distance_pc: 11 }); // near RECONS edge
+
+    const { buckets } = createCatalogObjectGroup(
+      [farStar, midBubbleStar, edgeStar],
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+    );
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const radiusOf = (id: string) => {
+      const i = starBucket.objects.findIndex((o) => o.id === id);
+      return decomposeInstanceMatrix(starBucket, i).scale.x;
+    };
+
+    const farRadius = radiusOf("far");
+    const midRadius = radiusOf("mid");
+    const edgeRadius = radiusOf("edge");
+
+    expect(farRadius).toBe(markerRadiusPc(null, "star")); // unchanged flat 2pc, outside the bubble
+    expect(edgeRadius).toBeCloseTo(STAR_MARKER_NEAR_SUN_RADIUS_PC, 5); // at the RECONS edge
+    // A visibly graduated falloff, not an abrupt jump: far > mid > edge.
+    expect(farRadius).toBeGreaterThan(midRadius);
+    expect(midRadius).toBeGreaterThan(edgeRadius);
+  });
+
+  it("leaves star instances at the flat overview radius when denseBatchRadiusPc/bubbleOuterRadiusPc are omitted (no regression)", () => {
+    const { buckets } = createCatalogObjectGroup([STAR_A, STAR_B]);
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    starBucket.objects.forEach((_, i) => {
+      expect(decomposeInstanceMatrix(starBucket, i).scale.x).toBe(markerRadiusPc(null, "star"));
     });
   });
 });

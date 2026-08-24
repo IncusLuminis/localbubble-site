@@ -8,7 +8,7 @@ import {
   SphereGeometry,
   Vector3,
 } from "three";
-import type { SceneObject } from "./sceneTypes";
+import type { LocalBubbleStructure, SceneObject } from "./sceneTypes";
 import { positionToVector3 } from "./sceneData";
 import { isWithinRadius } from "./radiusFilter";
 import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
@@ -199,14 +199,122 @@ export const CLUSTER_OBJECT_TYPES: ReadonlySet<string> = new Set([
   "stellar_association",
 ]);
 
+/** Issue #215: the star baseline's "near-Sun" floor (pc) - the smaller end
+ * of `starBaselineRadiusPc`'s gradient, reached once a star's own real
+ * `distance_pc` is at or inside the RECONS dense-batch sphere's edge
+ * (`denseBatchRadiusPc`, ~11.26pc). Chosen by live visual iteration in the
+ * running viewer, at the default ~1087pc "Perspective" overview: with every
+ * non-star category and structure layer toggled off (isolating star
+ * markers), stars inside the Local Bubble wireframe read as clearly, legibly
+ * smaller spheres than the uniform ~2pc markers outside it - confirming the
+ * graduated falloff is visible at a glance, not just on paper. 0.3pc, 0.5pc,
+ * and 0.8pc (spanning the issue's suggested range) were each tried live via
+ * hot-reload at that same fixed zoom; the differences among the three are
+ * subtle at overview scale (the absolute pc deltas are small relative to the
+ * ~1087pc camera distance), so no single value in that range stood out as
+ * obviously better purely from the overview. 0.5pc was settled on as the
+ * balanced middle choice: a clean 4x reduction from the flat 2pc "open
+ * space" ceiling (unambiguously smaller, never confusable with an
+ * unshrunk marker), while staying well clear of `STAR_MARKER_MIN_RADIUS_PC`
+ * (0.02pc) so the existing camera-zoom shrink (#119/#211) still has a
+ * meaningful range left to shrink through as the camera approaches. */
+export const STAR_MARKER_NEAR_SUN_RADIUS_PC = 0.5;
+
+/**
+ * Issue #215: a star's baseline marker ceiling (pc), graduated by the star's
+ * own real radial `distance_pc` from the Sun - independent of camera zoom
+ * (that's `starMarkerRadiusPc` below, which now uses THIS function's result
+ * as its own ceiling rather than the flat `STAR_MARKER_RADIUS_PC`).
+ *
+ * Deliberately uses plain radial distance, not the Local Bubble's true
+ * off-centered/tilted ellipsoid shape (`center_pc`/`semi_axes_pc`/
+ * `orientation`) - replicating that full geometry as a continuous per-star
+ * gradient is a much bigger undertaking than a diffuse visual effect like
+ * this justifies (per the issue). `bubbleOuterRadiusPc` is expected to be
+ * derived from the bubble's two shorter, roughly-equal semi-axes
+ * (`semi_axes_pc.a_pc`/`b_pc`, both 60pc in the current model; see
+ * `bubbleOuterRadiusPcFrom` below) rather than its elongated `c_pc` (162pc)
+ * long axis, which would make a simple radial gradient wildly
+ * direction-dependent.
+ *
+ * - `distancePc >= bubbleOuterRadiusPc` (outside the Local Bubble, "open
+ *   space"): the unchanged flat `STAR_MARKER_RADIUS_PC` (2pc).
+ * - `distancePc <= denseBatchRadiusPc` (at/inside the RECONS dense-LOD
+ *   sphere): `STAR_MARKER_NEAR_SUN_RADIUS_PC` (see its own docstring).
+ * - In between (inside the Local Bubble, outside the RECONS sphere): linear
+ *   interpolation between those two values.
+ *
+ * `bubbleOuterRadiusPc === null` (the loaded scene has no
+ * `structures.local_bubble`, per issue #215's AC) or a degenerate/nonpositive
+ * `denseBatchRadiusPc`/`bubbleOuterRadiusPc` (scene not loaded yet, or the
+ * inner bound isn't strictly inside the outer one) both fall back to the
+ * unchanged flat `STAR_MARKER_RADIUS_PC` for every star - no graduated
+ * sizing, but never an error or a NaN/negative-`t` extrapolation. */
+export function starBaselineRadiusPc(
+  distancePc: number,
+  denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null,
+): number {
+  if (
+    bubbleOuterRadiusPc === null ||
+    !Number.isFinite(bubbleOuterRadiusPc) ||
+    denseBatchRadiusPc <= 0 ||
+    bubbleOuterRadiusPc <= denseBatchRadiusPc
+  ) {
+    return STAR_MARKER_RADIUS_PC;
+  }
+  if (distancePc >= bubbleOuterRadiusPc) {
+    return STAR_MARKER_RADIUS_PC;
+  }
+  if (distancePc <= denseBatchRadiusPc) {
+    return STAR_MARKER_NEAR_SUN_RADIUS_PC;
+  }
+
+  const t = (distancePc - denseBatchRadiusPc) / (bubbleOuterRadiusPc - denseBatchRadiusPc);
+  return STAR_MARKER_NEAR_SUN_RADIUS_PC + t * (STAR_MARKER_RADIUS_PC - STAR_MARKER_NEAR_SUN_RADIUS_PC);
+}
+
+/** Issue #215: derives `starBaselineRadiusPc`'s `bubbleOuterRadiusPc` input
+ * from the loaded scene's own `structures.local_bubble.semi_axes_pc`
+ * (averaging `a_pc`/`b_pc` - the bubble's two shorter, roughly-equal axes;
+ * `c_pc`, the elongated long axis, is deliberately excluded, see
+ * `starBaselineRadiusPc`'s docstring) rather than hard-coding a duplicate of
+ * that number. Returns `null` (never throws) when `structure` is absent or
+ * malformed - `structure ?? null` at the `main.ts` call site already handles
+ * "no Local Bubble layer in this scene"; this additionally guards against a
+ * structurally-present-but-incomplete `semi_axes_pc`, matching this module's
+ * existing "missing optional data degrades gracefully" convention (spec
+ * §38). */
+export function bubbleOuterRadiusPcFrom(structure: LocalBubbleStructure | null): number | null {
+  const axes = structure?.semi_axes_pc;
+  if (!axes || !Number.isFinite(axes.a_pc) || !Number.isFinite(axes.b_pc)) {
+    return null;
+  }
+  return (axes.a_pc + axes.b_pc) / 2;
+}
+
 /** Exported for tests - the same visual-radius derivation, per object, that
  * gets baked into each instance's transform matrix below. Type-aware
  * (issue #103): `objectType` picks which of the three tiers above applies;
  * only the cluster/structure tiers then also look at `sizePc`, clamped to
- * that tier's own range. */
-export function markerRadiusPc(sizePc: number | null, objectType: string): number {
+ * that tier's own range.
+ *
+ * Issue #215: the star tier's flat ceiling is now `starBaselineRadiusPc`,
+ * graduated by the star's own real `distancePc` - `distancePc`,
+ * `denseBatchRadiusPc`, and `bubbleOuterRadiusPc` all default to values that
+ * make this a no-op fallback to the original flat `STAR_MARKER_RADIUS_PC`
+ * (matching `starBaselineRadiusPc`'s own "scene/bubble not loaded" fallback),
+ * so every pre-#215 caller that doesn't pass them - the cluster/structure
+ * tiers never needed them either - keeps its exact previous behavior. */
+export function markerRadiusPc(
+  sizePc: number | null,
+  objectType: string,
+  distancePc = 0,
+  denseBatchRadiusPc = 0,
+  bubbleOuterRadiusPc: number | null = null,
+): number {
   if (STAR_OBJECT_TYPES.has(objectType)) {
-    return STAR_MARKER_RADIUS_PC;
+    return starBaselineRadiusPc(distancePc, denseBatchRadiusPc, bubbleOuterRadiusPc);
   }
 
   const [minRadiusPc, maxRadiusPc] = CLUSTER_OBJECT_TYPES.has(objectType)
@@ -272,43 +380,53 @@ export const STAR_MARKER_SHRINK_START_MULTIPLIER = 3;
  * differ (star markers are smaller than the Sun's core to begin with, and
  * need a much smaller floor - see `STAR_MARKER_MIN_RADIUS_PC`'s docstring).
  *
- * Stays at `STAR_MARKER_RADIUS_PC` for any camera distance at or beyond
+ * Stays at `maxRadiusPc` for any camera distance at or beyond
  * `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc` (no regression
  * to the ~800pc overview, where 2pc was already tuned to be visible), and
  * clamps to `STAR_MARKER_MIN_RADIUS_PC` once the camera is at or inside
  * `denseBatchRadiusPc` itself. `denseBatchRadiusPc <= 0` (scene not loaded
- * yet) has nothing to shrink toward, so this simply returns the overview
- * radius, matching pre-#119 appearance.
+ * yet) has nothing to shrink toward, so this simply returns `maxRadiusPc`,
+ * matching pre-#119 appearance.
+ *
+ * Issue #215: `maxRadiusPc` (the shrink's un-shrunk ceiling, defaulting to
+ * the flat `STAR_MARKER_RADIUS_PC` for backward compatibility) is now
+ * expected to be the CALLING star's own `starBaselineRadiusPc` result, not
+ * always the flat constant - a close star's baseline is already smaller than
+ * 2pc at far zoom (per its own real distance), and this shrink still takes
+ * it the rest of the way down to the same `STAR_MARKER_MIN_RADIUS_PC` floor
+ * as the camera itself approaches. This is not a contradiction: the shrink
+ * range is simply narrower for stars that already start closer to the floor.
  *
  * This is only ever applied to shrink-eligible star instances (see
  * `isStarMarkerShrinkEligible` below, and `setInstanceVisibility`) - stars
  * whose own `distance_pc` is genuinely far from the Sun (beyond
  * `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`) are always
- * ineligible, and this formula would return `STAR_MARKER_RADIUS_PC`
- * unchanged for them regardless of camera position anyway; skipping those
- * instances is a pure performance win with no visual difference, mirroring
- * #104's own dense-batch-only scoping rationale (`lod.ts`'s module
- * docstring) - just keyed off real distance now instead of RECONS
- * provenance (issue #211, see `isStarMarkerShrinkEligible`'s docstring).
+ * ineligible, and this formula would return `maxRadiusPc` unchanged for them
+ * regardless of camera position anyway; skipping those instances is a pure
+ * performance win with no visual difference, mirroring #104's own
+ * dense-batch-only scoping rationale (`lod.ts`'s module docstring) - just
+ * keyed off real distance now instead of RECONS provenance (issue #211, see
+ * `isStarMarkerShrinkEligible`'s docstring).
  */
 export function starMarkerRadiusPc(
   cameraDistanceFromOriginPc: number,
   denseBatchRadiusPc: number,
+  maxRadiusPc: number = STAR_MARKER_RADIUS_PC,
 ): number {
   if (denseBatchRadiusPc <= 0) {
-    return STAR_MARKER_RADIUS_PC;
+    return maxRadiusPc;
   }
 
   const shrinkStartPc = denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
   if (cameraDistanceFromOriginPc >= shrinkStartPc) {
-    return STAR_MARKER_RADIUS_PC;
+    return maxRadiusPc;
   }
   if (cameraDistanceFromOriginPc <= denseBatchRadiusPc) {
     return STAR_MARKER_MIN_RADIUS_PC;
   }
 
   const t = (cameraDistanceFromOriginPc - denseBatchRadiusPc) / (shrinkStartPc - denseBatchRadiusPc);
-  return STAR_MARKER_MIN_RADIUS_PC + t * (STAR_MARKER_RADIUS_PC - STAR_MARKER_MIN_RADIUS_PC);
+  return STAR_MARKER_MIN_RADIUS_PC + t * (maxRadiusPc - STAR_MARKER_MIN_RADIUS_PC);
 }
 
 /**
@@ -379,21 +497,29 @@ export function isStarMarkerShrinkEligible(obj: SceneObject, denseBatchRadiusPc:
  * value `main.ts`'s per-frame `applySunCoreScale` already uses - so the
  * selection reticle around the Sun (issue #123) always matches its actual
  * rendered core radius, including at the extended close-zoom range #136
- * added. Unused for the other two branches. */
+ * added. Unused for the other two branches.
+ *
+ * `bubbleOuterRadiusPc` (issue #215) is threaded through to both the
+ * shrink-eligible branch (as `starMarkerRadiusPc`'s new per-star ceiling,
+ * via `starBaselineRadiusPc`) and the generic `markerRadiusPc` fallback, so
+ * the reticle around ANY star - shrink-eligible or not - matches that same
+ * star's graduated baseline, not just the flat overview radius. */
 export function selectedMarkerRadiusPc(
   obj: SceneObject,
   sunObjectId: string,
   cameraDistanceFromOriginPc: number,
   denseBatchRadiusPc: number,
   minZoomDistancePc: number,
+  bubbleOuterRadiusPc: number | null = null,
 ): number {
   if (obj.id === sunObjectId) {
     return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, minZoomDistancePc);
   }
   if (isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) {
-    return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
+    const baselineRadiusPc = starBaselineRadiusPc(obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
+    return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc);
   }
-  return markerRadiusPc(obj.size_pc, obj.object_type);
+  return markerRadiusPc(obj.size_pc, obj.object_type, obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
 }
 
 /** Issue #115: opacity tiers for the same generic catalog-object markers
@@ -613,21 +739,28 @@ export function isCatalogObjectVisible(
  * finite `distance_pc` is "less than" an infinite threshold), but
  * `starMarkerRadiusPc` itself resolves an infinite `denseBatchRadiusPc` to
  * an infinite shrink-start distance too, so it always falls into its own
- * "camera at/beyond shrink-start" branch and returns the unshrunk
- * `STAR_MARKER_RADIUS_PC` regardless - i.e. any existing caller that
- * doesn't pass real values sees no behavior change, just a redundant
- * (still-cheap) recomputation of the same radius. */
+ * "camera at/beyond shrink-start" branch and returns its `maxRadiusPc`
+ * regardless - i.e. any existing caller that doesn't pass real values sees
+ * no behavior change, just a redundant (still-cheap) recomputation of the
+ * same radius.
+ *
+ * Issue #215: `bubbleOuterRadiusPc` (defaulting to `null`, i.e. "no
+ * graduated sizing") feeds `starBaselineRadiusPc` to compute THIS star's own
+ * per-distance ceiling, which is then passed as `starMarkerRadiusPc`'s
+ * `maxRadiusPc` instead of the flat `STAR_MARKER_RADIUS_PC`. */
 export function setInstanceVisibility(
   bucket: CatalogBucket,
   index: number,
   visible: boolean,
   cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
   denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
+  bubbleOuterRadiusPc: number | null = null,
 ): void {
   const obj = bucket.objects[index];
   let radiusPc = bucket.radiiPc[index];
   if (visible && isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) {
-    radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
+    const baselineRadiusPc = starBaselineRadiusPc(obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
+    radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc);
   }
   const effectiveRadiusPc = visible ? radiusPc : HIDDEN_INSTANCE_SCALE;
   bucket.mesh.setMatrixAt(index, instanceMatrixFor(obj, effectiveRadiusPc));
@@ -638,8 +771,18 @@ export function setInstanceVisibility(
  * (excluding dedicated-marker entries, see `DEDICATED_MARKER_OBJECT_IDS`), all
  * parented under a returned `Group`, plus the `CatalogBucket[]` mapping
  * `main.ts`/`scene/picking.ts` need to resolve instances back to real
- * `SceneObject`s and to drive visibility. */
-export function createCatalogObjectGroup(objects: SceneObject[]): {
+ * `SceneObject`s and to drive visibility.
+ *
+ * Issue #215: `denseBatchRadiusPc`/`bubbleOuterRadiusPc` (both defaulting to
+ * "no graduated sizing", matching `markerRadiusPc`'s own defaults) are
+ * forwarded into each star instance's baked-in `radiiPc` entry via
+ * `markerRadiusPc`, so a star's OWN baseline radius - not just the flat
+ * `STAR_MARKER_RADIUS_PC` - is what gets baked in at scene-load time. */
+export function createCatalogObjectGroup(
+  objects: SceneObject[],
+  denseBatchRadiusPc = 0,
+  bubbleOuterRadiusPc: number | null = null,
+): {
   group: Group;
   buckets: CatalogBucket[];
 } {
@@ -668,7 +811,9 @@ export function createCatalogObjectGroup(objects: SceneObject[]): {
     );
     mesh.name = `catalog-${objectType}`;
 
-    const radiiPc = bucketObjects.map((obj) => markerRadiusPc(obj.size_pc, obj.object_type));
+    const radiiPc = bucketObjects.map((obj) =>
+      markerRadiusPc(obj.size_pc, obj.object_type, obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc),
+    );
     bucketObjects.forEach((obj, i) => {
       mesh.setMatrixAt(i, instanceMatrixFor(obj, radiiPc[i]));
     });
@@ -706,6 +851,7 @@ export function updateCatalogVisibility(
   radiusPc: number | null,
   cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
   denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
+  bubbleOuterRadiusPc: number | null = null,
 ): void {
   for (const bucket of buckets) {
     bucket.objects.forEach((obj, i) => {
@@ -721,6 +867,7 @@ export function updateCatalogVisibility(
         ),
         cameraDistanceFromOriginPc,
         denseBatchRadiusPc,
+        bubbleOuterRadiusPc,
       );
     });
   }
@@ -765,6 +912,7 @@ export function updateDenseBatchLod(
   radiusPc: number | null,
   cameraDistanceFromOriginPc: number,
   denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null = null,
 ): void {
   for (const bucket of buckets) {
     bucket.objects.forEach((obj, i) => {
@@ -781,6 +929,7 @@ export function updateDenseBatchLod(
         ),
         cameraDistanceFromOriginPc,
         denseBatchRadiusPc,
+        bubbleOuterRadiusPc,
       );
     });
   }
