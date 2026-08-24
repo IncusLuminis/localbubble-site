@@ -1,12 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   createSunMarker,
+  SUN_BUBBLE_VIEW_OUTER_RADIUS_PC,
   SUN_CORE_FLOOR_RADIUS_PC,
   SUN_CORE_MAX_RADIUS_PC,
   sunCoreRadiusPc,
 } from "../src/scene/sun";
 import {
   STAR_MARKER_MIN_RADIUS_PC,
+  STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
@@ -42,6 +44,16 @@ import {
  * byte-for-byte identical to `starMarkerRadiusPc`'s output for the Sun's
  * own ceiling, since that equivalence (not just equal endpoint constants)
  * is the actual fix.
+ *
+ * Issue #219 adds a further, camera-driven taper stage between the RECONS
+ * shrink-start threshold and `SUN_BUBBLE_VIEW_OUTER_RADIUS_PC` (see
+ * `sun.ts`'s `sunCoreRadiusPc` docstring for the full rationale and the
+ * live-verified "Fit to Local Bubble" camera distance that motivated it).
+ * That means several assertions below that used to hold for "any distance
+ * at or beyond the shrink-start threshold" now only hold at or beyond the
+ * NEW, farther-out `SUN_BUBBLE_VIEW_OUTER_RADIUS_PC` bound - updated
+ * in place, with the old shrink-start-relative behavior re-tested as the
+ * new taper's own inner endpoint instead of the old flat ceiling.
  */
 
 // The actual RECONS dense-batch collection radius is ~11.26pc
@@ -59,12 +71,16 @@ describe("sunCoreRadiusPc", () => {
     expect(sunCoreRadiusPc(800, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(SUN_CORE_MAX_RADIUS_PC);
   });
 
-  it("is the max radius at any distance at or beyond the shrink-start threshold", () => {
-    const shrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
-    expect(sunCoreRadiusPc(shrinkStartPc, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(SUN_CORE_MAX_RADIUS_PC);
-    expect(sunCoreRadiusPc(shrinkStartPc + 1000, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(
+  it("is the max radius at any distance at or beyond SUN_BUBBLE_VIEW_OUTER_RADIUS_PC (issue #219)", () => {
+    // Pre-#219, this held at or beyond the much closer shrink-start
+    // threshold (~34pc for this realistic radius) - see the "Local Bubble
+    // taper stage" describe block below for that now-tapered range.
+    expect(sunCoreRadiusPc(SUN_BUBBLE_VIEW_OUTER_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(
       SUN_CORE_MAX_RADIUS_PC,
     );
+    expect(
+      sunCoreRadiusPc(SUN_BUBBLE_VIEW_OUTER_RADIUS_PC + 1000, REALISTIC_DENSE_BATCH_RADIUS_PC),
+    ).toBe(SUN_CORE_MAX_RADIUS_PC);
   });
 
   it("is the floor radius (SUN_CORE_FLOOR_RADIUS_PC) exactly at the dense batch's own collection radius", () => {
@@ -73,7 +89,7 @@ describe("sunCoreRadiusPc", () => {
     );
   });
 
-  it("interpolates continuously and monotonically between the shrink-start threshold and the collection radius", () => {
+  it("interpolates continuously and monotonically between the shrink-start threshold and the collection radius, now capped at the near-Sun floor (issue #219)", () => {
     const shrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
     const midpointPc = (shrinkStartPc + REALISTIC_DENSE_BATCH_RADIUS_PC) / 2;
 
@@ -81,14 +97,19 @@ describe("sunCoreRadiusPc", () => {
     const atMidpoint = sunCoreRadiusPc(midpointPc, REALISTIC_DENSE_BATCH_RADIUS_PC);
     const atBoundary = sunCoreRadiusPc(REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC);
 
-    expect(atStart).toBe(SUN_CORE_MAX_RADIUS_PC);
+    // Pre-#219, `atStart` was `SUN_CORE_MAX_RADIUS_PC` (2pc) - #219's new
+    // taper stage (see below) now makes the ceiling fed into this same
+    // close-in shrink `STAR_MARKER_NEAR_SUN_RADIUS_PC` (0.5pc) by the time
+    // the camera reaches the shrink-start threshold, continuous with that
+    // new stage's own inner endpoint.
+    expect(atStart).toBe(STAR_MARKER_NEAR_SUN_RADIUS_PC);
     expect(atBoundary).toBe(SUN_CORE_FLOOR_RADIUS_PC);
     // Strictly between the two clamped bounds, roughly at the linear
     // midpoint - not asserting an exact formula here so the test doesn't
     // just re-implement the function, only that it's continuous/monotonic.
     expect(atMidpoint).toBeLessThan(atStart);
     expect(atMidpoint).toBeGreaterThan(atBoundary);
-    expect(atMidpoint).toBeCloseTo((SUN_CORE_MAX_RADIUS_PC + SUN_CORE_FLOOR_RADIUS_PC) / 2, 5);
+    expect(atMidpoint).toBeCloseTo((STAR_MARKER_NEAR_SUN_RADIUS_PC + SUN_CORE_FLOOR_RADIUS_PC) / 2, 5);
 
     // Sample a denser sweep to check monotonicity holds throughout the
     // interpolated region, not just at one midpoint.
@@ -126,19 +147,23 @@ describe("sunCoreRadiusPc", () => {
     expect(SUN_CORE_FLOOR_RADIUS_PC).toBe(STAR_MARKER_MIN_RADIUS_PC);
   });
 
-  it("issue #217: matches starMarkerRadiusPc's own output exactly at every sampled camera distance - the whole point of the fix", () => {
-    // Not just equal endpoint constants - the same function call, so the two
-    // curves are mathematically incapable of disagreeing about shape.
-    const shrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+  it("issue #217: matches starMarkerRadiusPc's own output exactly at every sampled camera distance at/inside the RECONS boundary or at/beyond the open-space bound - the confirmed-correct zones this issue must not disturb", () => {
+    // Not just equal endpoint constants - the same function call (with the
+    // Sun's own flat ceiling), so the two curves are mathematically
+    // incapable of disagreeing about shape in these two zones. Issue #219
+    // narrows this sample set to only the confirmed-correct
+    // open-space/far-overview and at/inside-RECONS-boundary zones - values
+    // strictly between the shrink-start threshold and
+    // `SUN_BUBBLE_VIEW_OUTER_RADIUS_PC` are now DELIBERATELY smaller than
+    // `starMarkerRadiusPc(., ., SUN_CORE_MAX_RADIUS_PC)` would give, per the
+    // new Local Bubble taper stage tested in its own describe block below.
     const samplePc = [
       0,
       1,
       1.3, // Proxima Centauri's real distance.
       REALISTIC_DENSE_BATCH_RADIUS_PC, // The RECONS boundary itself.
-      REALISTIC_DENSE_BATCH_RADIUS_PC + 5, // Strictly between the boundary and shrink-start - the exact gap the Validator found.
-      (REALISTIC_DENSE_BATCH_RADIUS_PC + shrinkStartPc) / 2,
-      shrinkStartPc,
-      800,
+      SUN_BUBBLE_VIEW_OUTER_RADIUS_PC,
+      SUN_BUBBLE_VIEW_OUTER_RADIUS_PC + 200,
       1087,
     ];
     for (const cameraDistancePc of samplePc) {
@@ -161,6 +186,100 @@ describe("sunCoreRadiusPc", () => {
   it("stays at the max radius regardless of camera distance when denseBatchRadiusPc is 0 (not loaded yet)", () => {
     expect(sunCoreRadiusPc(0, 0)).toBe(SUN_CORE_MAX_RADIUS_PC);
     expect(sunCoreRadiusPc(1087, 0)).toBe(SUN_CORE_MAX_RADIUS_PC);
+  });
+});
+
+/**
+ * Issue #219: the Sun's marker read too large next to graduated bubble-area
+ * stars specifically when the camera was positioned to view the Local
+ * Bubble (e.g. via "Fit to Local Bubble") - #215 already made a STAR's own
+ * baseline ceiling taper down (independent of camera zoom) across that same
+ * region, but the Sun's ceiling stayed flat at `SUN_CORE_MAX_RADIUS_PC`
+ * until the camera got much closer (the old shrink-start threshold, only
+ * ~34pc for a realistic RECONS radius - much nearer than where "Fit to
+ * Local Bubble" actually frames the camera).
+ *
+ * Fix: `sunCoreRadiusPc` now derives its ceiling from
+ * `starMarkerScale.ts`'s `starBaselineRadiusPc` - the exact same
+ * interpolation shape issue #215 already established for stars - fed the
+ * CAMERA's distance from the origin (in place of a star's own real
+ * distance, since the Sun's real distance from itself is always 0), bounded
+ * by the RECONS shrink-start threshold (inner) and
+ * `SUN_BUBBLE_VIEW_OUTER_RADIUS_PC` (outer, see that constant's own
+ * docstring for why 800pc rather than the star tier's own
+ * `bubbleOuterRadiusPc`, ~60pc, was chosen after live verification).
+ *
+ * Live verification (issue #219, against the shipped scene's real Local
+ * Bubble data): the "Fit to Local Bubble" toolbar button lands the camera
+ * at a real distance of ~317.7pc from the origin (not the ~500pc a naive
+ * `fitSpherePose` calculation alone would suggest, due to #201/#205's extra
+ * zoom-in-step padding) - `REALISTIC_FIT_LOCAL_BUBBLE_CAMERA_DISTANCE_PC`
+ * below reuses that exact observed value so this test exercises the same
+ * scenario the human owner will actually see, not an arbitrary sample.
+ */
+describe("sunCoreRadiusPc - Local Bubble camera-driven taper stage (issue #219)", () => {
+  const shrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+
+  // The real camera distance (pc) "Fit to Local Bubble" lands at for the
+  // shipped scene's actual Local Bubble structure - verified live in the
+  // running dev build (`camera.position.length()` immediately after
+  // clicking the button), not assumed from `fitSpherePose`'s raw math.
+  const REALISTIC_FIT_LOCAL_BUBBLE_CAMERA_DISTANCE_PC = 317.7;
+
+  it("is unaffected (stays at the max radius) at the confirmed-correct open-space/far-overview distances", () => {
+    expect(sunCoreRadiusPc(SUN_BUBBLE_VIEW_OUTER_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(
+      SUN_CORE_MAX_RADIUS_PC,
+    );
+    expect(sunCoreRadiusPc(1087, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(SUN_CORE_MAX_RADIUS_PC);
+  });
+
+  it("is unaffected (stays at the shared floor) at the confirmed-correct nearest-stars-sphere distances", () => {
+    expect(sunCoreRadiusPc(REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(
+      SUN_CORE_FLOOR_RADIUS_PC,
+    );
+    expect(sunCoreRadiusPc(1.3, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(SUN_CORE_FLOOR_RADIUS_PC);
+  });
+
+  it("reads meaningfully smaller than the open-space ceiling, and meaningfully larger than the near-Sun floor, at the real 'Fit to Local Bubble' camera distance", () => {
+    const radiusAtFitLocalBubble = sunCoreRadiusPc(
+      REALISTIC_FIT_LOCAL_BUBBLE_CAMERA_DISTANCE_PC,
+      REALISTIC_DENSE_BATCH_RADIUS_PC,
+    );
+    expect(radiusAtFitLocalBubble).toBeLessThan(SUN_CORE_MAX_RADIUS_PC);
+    expect(radiusAtFitLocalBubble).toBeGreaterThan(STAR_MARKER_NEAR_SUN_RADIUS_PC);
+    // Roughly halfway down the new taper, not just barely nudged off the
+    // ceiling - this is the actual bug being fixed (issue #219's root
+    // cause: the Sun sat at full 2pc while its bubble neighbors were
+    // already visibly smaller).
+    expect(radiusAtFitLocalBubble).toBeCloseTo(1.06, 1);
+  });
+
+  it("is flat at the max radius at or beyond SUN_BUBBLE_VIEW_OUTER_RADIUS_PC, and tapers continuously down to the near-Sun floor by the shrink-start threshold", () => {
+    expect(sunCoreRadiusPc(SUN_BUBBLE_VIEW_OUTER_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(
+      SUN_CORE_MAX_RADIUS_PC,
+    );
+    expect(sunCoreRadiusPc(shrinkStartPc, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(
+      STAR_MARKER_NEAR_SUN_RADIUS_PC,
+    );
+
+    // Dense monotonic sweep across the whole new taper range.
+    const samples = Array.from({ length: 21 }, (_, i) =>
+      sunCoreRadiusPc(
+        shrinkStartPc + (i / 20) * (SUN_BUBBLE_VIEW_OUTER_RADIUS_PC - shrinkStartPc),
+        REALISTIC_DENSE_BATCH_RADIUS_PC,
+      ),
+    );
+    for (let i = 1; i < samples.length; i++) {
+      expect(samples[i]).toBeGreaterThanOrEqual(samples[i - 1]);
+    }
+    expect(samples[0]).toBe(STAR_MARKER_NEAR_SUN_RADIUS_PC);
+    expect(samples[samples.length - 1]).toBe(SUN_CORE_MAX_RADIUS_PC);
+  });
+
+  it("falls back to the flat max radius for every camera distance when denseBatchRadiusPc is 0 (scene not loaded yet)", () => {
+    // Mirrors the pre-#219 "not loaded yet" fallback exactly - no graduated
+    // taper without a real RECONS radius to anchor the inner bound to.
+    expect(sunCoreRadiusPc(REALISTIC_FIT_LOCAL_BUBBLE_CAMERA_DISTANCE_PC, 0)).toBe(SUN_CORE_MAX_RADIUS_PC);
   });
 });
 

@@ -16,23 +16,27 @@ import { sunCoreRadiusPc } from "./sun";
 import { spectralColorFor } from "./spectralColor";
 import { absoluteMagnitudeToBrightness } from "./magnitudeBrightness";
 import {
-  STAR_MARKER_RADIUS_PC,
   STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_MIN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
+  starBaselineRadiusPc,
 } from "./starMarkerScale";
 
 // Issue #217: re-exported so existing callers/tests that import these from
 // `objects.ts` (their original home) keep working unchanged - the values
 // (and, per the scope expansion, `starMarkerRadiusPc` itself) now live in
 // `starMarkerScale.ts` (see that module's docstring) so `sun.ts` can reuse
-// them too without a module cycle.
+// them too without a module cycle. Issue #219: `starBaselineRadiusPc`
+// (issue #215's own baseline-shape function) joins them for the same
+// reason - `sun.ts`'s new camera-driven taper stage reuses it directly,
+// see `starMarkerScale.ts`'s docstring on that function.
 export {
   STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_MIN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
+  starBaselineRadiusPc,
 };
 
 /**
@@ -245,60 +249,6 @@ export const CLUSTER_OBJECT_TYPES: ReadonlySet<string> = new Set([
  * above, re-exported here for existing callers) so `scene/sun.ts` can reuse
  * it for its own mid tier without a module cycle - see that module's
  * docstring. */
-
-/**
- * Issue #215: a star's baseline marker ceiling (pc), graduated by the star's
- * own real radial `distance_pc` from the Sun - independent of camera zoom
- * (that's `starMarkerRadiusPc` below, which now uses THIS function's result
- * as its own ceiling rather than the flat `STAR_MARKER_RADIUS_PC`).
- *
- * Deliberately uses plain radial distance, not the Local Bubble's true
- * off-centered/tilted ellipsoid shape (`center_pc`/`semi_axes_pc`/
- * `orientation`) - replicating that full geometry as a continuous per-star
- * gradient is a much bigger undertaking than a diffuse visual effect like
- * this justifies (per the issue). `bubbleOuterRadiusPc` is expected to be
- * derived from the bubble's two shorter, roughly-equal semi-axes
- * (`semi_axes_pc.a_pc`/`b_pc`, both 60pc in the current model; see
- * `bubbleOuterRadiusPcFrom` below) rather than its elongated `c_pc` (162pc)
- * long axis, which would make a simple radial gradient wildly
- * direction-dependent.
- *
- * - `distancePc >= bubbleOuterRadiusPc` (outside the Local Bubble, "open
- *   space"): the unchanged flat `STAR_MARKER_RADIUS_PC` (2pc).
- * - `distancePc <= denseBatchRadiusPc` (at/inside the RECONS dense-LOD
- *   sphere): `STAR_MARKER_NEAR_SUN_RADIUS_PC` (see its own docstring).
- * - In between (inside the Local Bubble, outside the RECONS sphere): linear
- *   interpolation between those two values.
- *
- * `bubbleOuterRadiusPc === null` (the loaded scene has no
- * `structures.local_bubble`, per issue #215's AC) or a degenerate/nonpositive
- * `denseBatchRadiusPc`/`bubbleOuterRadiusPc` (scene not loaded yet, or the
- * inner bound isn't strictly inside the outer one) both fall back to the
- * unchanged flat `STAR_MARKER_RADIUS_PC` for every star - no graduated
- * sizing, but never an error or a NaN/negative-`t` extrapolation. */
-export function starBaselineRadiusPc(
-  distancePc: number,
-  denseBatchRadiusPc: number,
-  bubbleOuterRadiusPc: number | null,
-): number {
-  if (
-    bubbleOuterRadiusPc === null ||
-    !Number.isFinite(bubbleOuterRadiusPc) ||
-    denseBatchRadiusPc <= 0 ||
-    bubbleOuterRadiusPc <= denseBatchRadiusPc
-  ) {
-    return STAR_MARKER_RADIUS_PC;
-  }
-  if (distancePc >= bubbleOuterRadiusPc) {
-    return STAR_MARKER_RADIUS_PC;
-  }
-  if (distancePc <= denseBatchRadiusPc) {
-    return STAR_MARKER_NEAR_SUN_RADIUS_PC;
-  }
-
-  const t = (distancePc - denseBatchRadiusPc) / (bubbleOuterRadiusPc - denseBatchRadiusPc);
-  return STAR_MARKER_NEAR_SUN_RADIUS_PC + t * (STAR_MARKER_RADIUS_PC - STAR_MARKER_NEAR_SUN_RADIUS_PC);
-}
 
 /** Issue #215: derives `starBaselineRadiusPc`'s `bubbleOuterRadiusPc` input
  * from the loaded scene's own `structures.local_bubble.semi_axes_pc`
