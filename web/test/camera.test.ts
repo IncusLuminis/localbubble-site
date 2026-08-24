@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { deriveMinZoomDistancePc, dollyPosition, dollyPositionSteps } from "../src/scene/camera";
-import { SUN_CORE_MIN_RADIUS_PC } from "../src/scene/sun";
+import { SUN_CORE_FLOOR_RADIUS_PC } from "../src/scene/sun";
 import { SUN_OBJECT_ID, LOCAL_BUBBLE_OBJECT_ID } from "../src/scene/objects";
 import type { SceneObject } from "../src/scene/sceneTypes";
 
@@ -45,14 +45,14 @@ const ALPHA_CEN_A = makeObject({ id: "alf-cen-a", distance_pc: 1.347490971810488
 const FAR_STAR = makeObject({ id: "far-star", distance_pc: 95 });
 
 describe("deriveMinZoomDistancePc", () => {
-  it("is the nearest non-Sun, non-dedicated-marker object's distance plus the Sun core's min radius margin", () => {
+  it("is the nearest non-Sun, non-dedicated-marker object's distance plus the Sun core's floor radius margin", () => {
     const result = deriveMinZoomDistancePc([SUN, LOCAL_BUBBLE, PROXIMA, ALPHA_CEN_A, FAR_STAR]);
-    expect(result).toBeCloseTo(PROXIMA.distance_pc + SUN_CORE_MIN_RADIUS_PC, 10);
+    expect(result).toBeCloseTo(PROXIMA.distance_pc + SUN_CORE_FLOOR_RADIUS_PC, 10);
   });
 
   it("ignores the Sun's own (0pc) distance - otherwise the floor would collapse to ~0", () => {
     const result = deriveMinZoomDistancePc([SUN, FAR_STAR]);
-    expect(result).toBeCloseTo(FAR_STAR.distance_pc + SUN_CORE_MIN_RADIUS_PC, 10);
+    expect(result).toBeCloseTo(FAR_STAR.distance_pc + SUN_CORE_FLOOR_RADIUS_PC, 10);
   });
 
   it("ignores the Local Bubble centroid the same way the generic catalog render loop does", () => {

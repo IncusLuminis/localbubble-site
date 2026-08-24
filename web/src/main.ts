@@ -478,26 +478,22 @@ function applyDenseBatchLod(): void {
   );
 }
 
-/** Issue #113 (extended by #136): rescales the Sun's opaque core each
- * frame/camera-move so it doesn't visually engulf the RECONS dense batch's
- * own nearby markers once the camera approaches solar-neighborhood scale -
- * see `scene/sun.ts`'s `sunCoreRadiusPc` docstring for the actual
- * distance->radius curve. Reuses the same `denseBatchRadiusPc` (populated
- * once the scene loads, `0` until then) that `applyDenseBatchLod` above
- * already benchmarks against, so the two LOD effects stay consistent with
- * each other.
+/** Issue #113 (simplified by #217's scope expansion, removing #136's extra
+ * breakpoint): rescales the Sun's opaque core each frame/camera-move so it
+ * doesn't visually engulf the RECONS dense batch's own nearby markers once
+ * the camera approaches solar-neighborhood scale - see `scene/sun.ts`'s
+ * `sunCoreRadiusPc` docstring for the actual distance->radius curve. Reuses
+ * the same `denseBatchRadiusPc` (populated once the scene loads, `0` until
+ * then) that `applyDenseBatchLod` above already benchmarks against, so the
+ * two LOD effects stay consistent with each other.
  *
- * Issue #136: also passes `controls.minDistance` - #134's data-derived
- * close-zoom floor, updated in place once the scene loads (see
- * `loadScene().then(...)` below) - as the curve's new inner anchor, so the
- * core keeps shrinking all the way to the camera's actual enforced zoom
- * limit instead of freezing at the dense-batch boundary. `controls` is the
- * literal enforced limit itself, so this can never drift out of sync with
- * it the way a separately-hardcoded guess could. */
+ * Issue #217: no longer passes `controls.minDistance` - `sunCoreRadiusPc`'s
+ * curve is now flat at its single floor for the entire range at or inside
+ * `denseBatchRadiusPc` (mirroring `starMarkerRadiusPc` exactly), so there is
+ * no longer a third, closer inner anchor for the camera's actual enforced
+ * zoom limit to feed into. */
 function applySunCoreScale(): void {
-  sunMarker.core.scale.setScalar(
-    sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc, controls.minDistance),
-  );
+  sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc));
 }
 
 /** Issue #138: toggles the dense-batch collection-radius boundary shell's
@@ -579,15 +575,16 @@ function applyBackgroundDimming(): void {
  * Issue #130: the actual branch logic now lives in `objects.ts`'s exported,
  * pure `selectedMarkerRadiusPc` (real unit test coverage there) - this stays
  * a thin wrapper that just supplies the closure-only values (`camera`,
- * `denseBatchRadiusPc`, and #136's `controls.minDistance`) that function
- * can't see on its own. */
+ * `denseBatchRadiusPc`) that function can't see on its own. Issue #217's
+ * scope expansion dropped the `controls.minDistance` argument this used to
+ * pass through - `sunCoreRadiusPc`'s curve no longer has a segment that
+ * depends on it, see that function's docstring. */
 function selectedObjectMarkerRadiusPc(obj: SceneObject): number {
   return selectedMarkerRadiusPc(
     obj,
     SUN_OBJECT_ID,
     camera.position.length(),
     denseBatchRadiusPc,
-    controls.minDistance,
     bubbleOuterRadiusPc,
   );
 }
