@@ -1,0 +1,95 @@
+{
+  "id": "alf_ser",
+  "name": "* alf Ser",
+  "aliases": [
+    "TIC 296856546",
+    "GJ 596.2",
+    "GJ 9528",
+    "HIP 77070",
+    "PLX 3557",
+    "*  24 Ser",
+    "AAVSO 1539+06",
+    "ADS  9765 A",
+    "AG+06 1833",
+    "BD+06  3088",
+    "CCDM J15442+0626A",
+    "CSI+06  3088  1",
+    "EIC   443",
+    "FK5  582",
+    "GC 21158",
+    "GCRV  9079",
+    "GSC 00363-01135",
+    "HD 140573",
+    "HIC  77070",
+    "HR  5854",
+    "IDS 15393+0644 A",
+    "CNS5 3874",
+    "IRAS 15418+0634",
+    "IRC +10294",
+    "JP11  2639",
+    "N30 3536",
+    "NAME Unukalhai",
+    "NSV 20391",
+    "PMC 90-93   413",
+    "PPM 161854",
+    "RAFGL 1794",
+    "ROT  2218",
+    "SAO 121157",
+    "SKY# 28456",
+    "TD1 18514",
+    "TYC  363-1135-1",
+    "UBV   13403",
+    "UBV M  20939",
+    "USNO 859",
+    "YZ   6  7063",
+    "[GS83] 134",
+    "[HFE83] 1136",
+    "uvby98 100140573",
+    "2MASS J15441605+0625324",
+    "PLX 3557.00",
+    "1E 1541.8+0633",
+    "WDS J15443+0626A",
+    "GEN# +1.00140573",
+    "WEB 13072",
+    "Gaia DR2 4429785739601541504",
+    "Gaia DR3 4429785739602747392",
+    "UCAC4 483-060001",
+    "WISE J154416.15+062532.0"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 236.0669754565879,
+    "dec_deg": 6.425630220244722,
+    "galactic_l_deg": 14.202869307342954,
+    "galactic_b_deg": 44.07897731047567
+  },
+  "distance": {
+    "value_pc": 22.755717373990215,
+    "error_pc": 0.24213387576830994
+  },
+  "cartesian": {
+    "x_pc": 15.847601917048165,
+    "y_pc": 4.010904227571531,
+    "z_pc": 15.829997914116715
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Ser, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Ser",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K2IIIbCN1",
+    "absolute_magnitude": 0.8445474584820944,
+    "apparent_magnitude": 2.630000114440918
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:52+00:00; upstream record id: * alf Ser; otype: PM*; Unukalhai was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

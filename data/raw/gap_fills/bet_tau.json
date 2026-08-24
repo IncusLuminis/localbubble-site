@@ -1,0 +1,92 @@
+{
+  "id": "bet_tau",
+  "name": "* bet Tau",
+  "aliases": [
+    "TIC 285473140",
+    "1RXS J052619.9+283621",
+    "2MASS J05261751+2836271",
+    "PLX 1231",
+    "LSPM J0526+2836",
+    "ASCC  661203",
+    "USNO-B1.0 1186-00083031",
+    "* gam Aur",
+    "* 112 Tau",
+    "AG+28  516",
+    "BD+28   795",
+    "CCDM J05263+2836A",
+    "CEL    688",
+    "CSI+28   795  1",
+    "FK5  202",
+    "GC  6681",
+    "GCRV  3257",
+    "GEN# +1.00035497",
+    "GSC 01859-01470",
+    "HD  35497",
+    "HGAM    398",
+    "HIC  25428",
+    "HIP 25428",
+    "HR  1791",
+    "IDS 05200+2831 A",
+    "TIC 471011468",
+    "IRC +30112",
+    "JP11  1072",
+    "N30 1163",
+    "NAME Elnath",
+    "PMC 90-93   145",
+    "PPM  94361",
+    "ROT   794",
+    "SAO  77168",
+    "SKY#  8655",
+    "SRS  30202",
+    "TD1  4565",
+    "TYC 1859-1470-1",
+    "UBV    3965",
+    "UBV    5151",
+    "UBV M  10935",
+    "uvby98 100035497",
+    "ALS 15829",
+    "PLX 1231.00",
+    "WDS J05263+2836A",
+    "Renson 9110",
+    "AKARI-IRC-V1 J0526175+283625",
+    "IRAS 05231+2833",
+    "WEB  4928",
+    "*  23 Aur"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 81.57297133176498,
+    "dec_deg": 28.607451724998228,
+    "galactic_l_deg": 177.99440339906636,
+    "galactic_b_deg": -3.74540398289089
+  },
+  "distance": {
+    "value_pc": 41.050903119868636,
+    "error_pc": 0.5729600659919871
+  },
+  "cartesian": {
+    "x_pc": -40.93813169393584,
+    "y_pc": 1.4335947507543143,
+    "z_pc": -2.6815716394335234
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Tau, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Tau",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B7III",
+    "absolute_magnitude": -1.4166136040376696,
+    "apparent_magnitude": 1.649999976158142
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:20:00+00:00; upstream record id: * bet Tau; otype: PM*; Elnath was found missing from the catalog (issue #213, Tier 3): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

@@ -1,0 +1,76 @@
+{
+  "id": "alf_gem",
+  "name": "* alf Gem",
+  "aliases": [
+    "TIC 239187687",
+    "GJ 278.0",
+    "HIP 36850",
+    "WDS J07346+3153AB",
+    "NLTT 18087",
+    "*  66 Gem",
+    "ADS  6175 AB",
+    "AG+31  789",
+    "BD+32  1581",
+    "CCDM J07346+3153AB",
+    "CSI+32  1581  1",
+    "FK5  287",
+    "CNS5 1879",
+    "GC 10120",
+    "HIC  36850",
+    "IRAS 07314+3159",
+    "IRC +30188",
+    "LTT 12038",
+    "NAME Castor",
+    "NAME Castor AB",
+    "PMC 90-93   208",
+    "PPM  72938",
+    "RAFGL 1144",
+    "SAO  60198",
+    "SRS  30287",
+    "TD1 10405",
+    "UBV    7277",
+    "[HFE83]  521",
+    "2MASS J07343598+3153184",
+    "** STF 1110AB",
+    "2XMM J073435.6+315318",
+    "PLX 1785",
+    "PLX 1785.00",
+    "GEN# +1.00060179"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 113.64947163976585,
+    "dec_deg": 31.88828221646326,
+    "galactic_l_deg": 187.4409981714943,
+    "galactic_b_deg": 22.47926805831133
+  },
+  "distance": {
+    "value_pc": 15.595757953836555,
+    "error_pc": 0.9121037480799606
+  },
+  "cartesian": {
+    "x_pc": -14.28940353863217,
+    "y_pc": -1.8662677575447921,
+    "z_pc": 5.963024175863372
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Gem, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Gem",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A1V+A2Vm",
+    "absolute_magnitude": 0.6149676113258797,
+    "apparent_magnitude": 1.5800000429153442
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:32+00:00; upstream record id: * alf Gem; otype: **; Castor was found missing from the catalog (issue #213, Tier 1): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

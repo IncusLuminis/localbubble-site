@@ -1,0 +1,91 @@
+{
+  "id": "alf_cep",
+  "name": "* alf Cep",
+  "aliases": [
+    "TIC 417604820",
+    "GJ 826",
+    "Gaia DR3 2193192137376175488",
+    "CNS5 5253",
+    "*   5 Cep",
+    "PLX 5139",
+    "LSPM J2118+6235",
+    "ASCC  144910",
+    "2MASS J21183475+6235081",
+    "AAVSO 2116+62",
+    "ADS 14858 A",
+    "AG+62 1226",
+    "BD+61  2111",
+    "CCDM J21186+6236A",
+    "CEL   5294",
+    "CSI+61  2111  1",
+    "FK5  803",
+    "GC 29848",
+    "GCRV 13408",
+    "HD 203280",
+    "HIC 105199",
+    "HIP 105199",
+    "HR  8162",
+    "IDS 21162+6210 A",
+    "IRC +60310",
+    "JP11  3335",
+    "N30 4712",
+    "NAME Alderamin",
+    "NSV 13660",
+    "PMC 90-93   563",
+    "PPM  22755",
+    "ROT  3108",
+    "SAO  19302",
+    "SKY# 40575",
+    "TD1 27973",
+    "UBV   18421",
+    "UBV M  25623",
+    "[HFE83] 1431",
+    "USNO-B1.0 1525-00356034",
+    "PLX 5139.00",
+    "WDS J21186+6235A",
+    "AKARI-IRC-V1 J2118349+623508",
+    "IRAS 21174+6222",
+    "uvby98 100203280",
+    "TYC 4252-1870-1",
+    "WEB 19106",
+    "1RXS J211837.1+623513",
+    "GEN# +1.00203280",
+    "** BU 1502A"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 319.6448846972256,
+    "dec_deg": 62.5855744637194,
+    "galactic_l_deg": 100.99897698438909,
+    "galactic_b_deg": 9.171928715589505
+  },
+  "distance": {
+    "value_pc": 15.037593984962406,
+    "error_pc": 0.024874215479440003
+  },
+  "cartesian": {
+    "x_pc": -2.8323624048588565,
+    "y_pc": 14.572630539433092,
+    "z_pc": 2.396955407449522
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Cep, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Cep",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A8Vn",
+    "absolute_magnitude": 1.5741082646624953,
+    "apparent_magnitude": 2.4600000381469727
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:42+00:00; upstream record id: * alf Cep; otype: PM*; Alderamin was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

@@ -1,0 +1,95 @@
+{
+  "id": "eps_ori",
+  "name": "* eps Ori",
+  "aliases": [
+    "TIC 427451176",
+    "1RXS J053619.2-011312",
+    "HIP 26311",
+    "2MASS J05361280-0112070",
+    "PLX 1283",
+    "*  46 Ori",
+    "2E  1411",
+    "AG-01  596",
+    "BD-01   969",
+    "CCDM J05363-0112A",
+    "CEL    852",
+    "CSI-01   969  1",
+    "EM* MWC  504",
+    "FK5  210",
+    "GC  6960",
+    "GCRV  3454",
+    "GEN# +1.00037128",
+    "HD  37128",
+    "HGAM    449",
+    "HIC  26311",
+    "HR  1903",
+    "IDS 05311-0116 A",
+    "IRAS 05336-0113",
+    "IRC +00079",
+    "JP11  1181",
+    "MCW  342",
+    "N30 1204",
+    "NAME Alnilam",
+    "PMC 90-93   151",
+    "PPM 175945",
+    "RAFGL 4428S",
+    "ROT   885",
+    "SAO 132346",
+    "SKY#  9067",
+    "TD1  4963",
+    "UBV    5563",
+    "UBV M  11224",
+    "V* eps Ori",
+    "WH 328",
+    "[HFE83]  386",
+    "[SC93b] 326",
+    "ALS 14791",
+    "PLX 1283.00",
+    "1E 0533.6-0113",
+    "1RXS J053612.8-011201",
+    "2E 0533.6-0113",
+    "EUVE J0536-01.1",
+    "[KSP2003] J053612.85-011208.3",
+    "WDS J05362-0112A",
+    "TYC 4766-2450-1",
+    "Ced  55h",
+    "uvby98 100037128",
+    "WEB  5173"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 84.05338894077023,
+    "dec_deg": -1.2019191358333312,
+    "galactic_l_deg": 205.21207149732675,
+    "galactic_b_deg": -17.241728929072167
+  },
+  "distance": {
+    "value_pc": 606.0606060606061,
+    "error_pc": 165.2892518196772
+  },
+  "cartesian": {
+    "x_pc": -523.6854011254487,
+    "y_pc": -246.5624229459792,
+    "z_pc": -179.6386107094873
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "luminous-poster-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * eps Ori, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Ori",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B0Ia",
+    "absolute_magnitude": -7.222580221710009,
+    "apparent_magnitude": 1.690000057220459
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:20:08+00:00; upstream record id: * eps Ori; otype: s*b; Alnilam (epsilon Orionis) was found missing from the catalog (issue #213): a likely missed import from the Galaxy Map luminous-giants poster batch (Story #87/#88, abs-mag < -2.8 selection) - not a proximity issue (it is a distant blue supergiant, not a Local Bubble member), and distinct from the RECONS-gap stories above since its Belt neighbors Alnitak (zeta Orionis) and Mintaka (delta Orionis) are both already present in the catalog under that same batch. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"luminous-poster-gap-fill\"]) via the same SimbadResolver/acquire mechanism, distinct from the proximity-driven gap-fill batch above - see data/raw/gap_fills/README.md."
+}

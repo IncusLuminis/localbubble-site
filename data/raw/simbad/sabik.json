@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Sabik",
+  "retrieved_utc": "2026-08-24T04:19:53+00:00",
+  "record_id": "* eta Oph",
+  "raw": {
+    "main_id": "* eta Oph",
+    "ra": 257.5945287106208,
+    "dec": -15.724906641710527,
+    "coo_err_maj": 9.325584411621094,
+    "coo_err_min": 3.432499885559082,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.4200000762939453,
+    "sp_type": "A2IV-V",
+    "otype": "**",
+    "plx_value": 36.91,
+    "plx_err": 0.800000011920929,
+    "ids": "TIC 400036304|GEN# +1.00155125|HIP 84012|PLX 3895|* eta Oph|*  35 Oph|ADS 10374 AB|BD-15  4467|CSI-15  4467  1|GC 23158|GCRV  9900|HD 155125|HGAM    661|HIC  84012|HR  6378|IRC -20348|JP11  2819|N30 3829|PPM 232699|ROT  2416|SAO 160332|SKY# 30949|TD1 20015|UBV   14447|UBV M  21934|2MASS J17102267-1543298|WDS J17104-1544AB|** BU 1118|** BU 1118AB|IRAS 17075-1539|AKARI-IRC-V1 J1710226-154329|NAME Sabik|uvby98 100155125|WEB 14194",
+    "matched_id": "NAME Sabik"
+  }
+}

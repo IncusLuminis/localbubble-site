@@ -1,0 +1,90 @@
+{
+  "id": "zet01_uma",
+  "name": "* zet01 UMa",
+  "aliases": [
+    "UCAC4 725-051078",
+    "2MASS J13235563+5455292",
+    "GJ 3783",
+    "Gaia DR3 1563590579347125632",
+    "HIP 65378A",
+    "CNS5 3300",
+    "PLX 3062",
+    "SBC9 764",
+    "* zet UMa A",
+    "*  79 UMa A",
+    "ADS  8891 A",
+    "AG+55  884",
+    "CCDM J13240+5456AB",
+    "CEL   4252",
+    "CSI+55  1598  1",
+    "CSV 101381",
+    "FK5  497",
+    "GC 18133",
+    "GCRV  7958",
+    "HD 116656",
+    "HGAM    622",
+    "HR  5054",
+    "N30 3065",
+    "NSV  6224",
+    "PMC 90-93   353",
+    "PPM  34007",
+    "ROT  3516",
+    "SAO  28737",
+    "SBC7   485",
+    "SKY# 24722",
+    "SV* ZI  1000",
+    "TYC 3850-1385-1",
+    "UBV   12100",
+    "[HFE83]  949",
+    "WDS J13239+5456Aa,Ab",
+    "** STF 1744A",
+    "Renson 33650",
+    "BD+55  1598A",
+    "** PEA    1",
+    "WDS J13239+5456A",
+    "WISE J132355.98+545527.5",
+    "PMSC 13199+5527A",
+    "PMSC 13199+5527Aab",
+    "NAME Mizar A",
+    "WEB 11538",
+    "GEN# +1.00116656",
+    "TIC 1001230963",
+    "Gaia DR2 1563590579345330944"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 200.98142616882203,
+    "dec_deg": 54.925359883302775,
+    "galactic_l_deg": 113.1104990148973,
+    "galactic_b_deg": 61.57906427134101
+  },
+  "distance": {
+    "value_pc": 24.86739461819846,
+    "error_pc": 0.2858804573617365
+  },
+  "cartesian": {
+    "x_pc": -4.645511346906743,
+    "y_pc": 10.885721110977439,
+    "z_pc": 21.870244976153923
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * zet01 UMa, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* zet01 UMa",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A1.5Vas",
+    "absolute_magnitude": 0.24184859767911426,
+    "apparent_magnitude": 2.2200000286102295
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:23:02+00:00; upstream record id: * zet01 UMa; otype: SB*.; Mizar (zeta UMa, SIMBAD main id \"* zet01 UMa\", the bright, historically famous naked-eye/telescopic double component of the Mizar-Alcor system) was found missing from the catalog (issue #213, Tier 2): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Note: the plain query \"Mizar\" returns zero rows from SIMBAD once the V (apparent magnitude) votable field is requested - an upstream join quirk specific to that alias, confirmed by testing each votable field individually - so this record was resolved via SIMBAD's own preferred main identifier for the bright, visible component, \"zet01 UMa\" (aliases include \"NAME Mizar A\"), which resolves cleanly with full photometry. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

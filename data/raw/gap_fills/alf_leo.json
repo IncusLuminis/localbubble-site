@@ -1,0 +1,97 @@
+{
+  "id": "alf_leo",
+  "name": "* alf Leo",
+  "aliases": [
+    "TIC 357348164",
+    "AP J10082229+1158018",
+    "GJ 9316 A",
+    "HIP 49669",
+    "PLX 2384",
+    "LSPM J1008+1158",
+    "ASCC  949713",
+    "USNO-B1.0 1019-00203254",
+    "*  32 Leo",
+    "2E  2231",
+    "ADS  7654 A",
+    "AG+12 1199",
+    "BD+12  2149",
+    "CCDM J10083+1159A",
+    "CSI+12  2149  1",
+    "CSV 101099",
+    "FK5  380",
+    "GC 13926",
+    "GCRV  6417",
+    "GEN# +1.00087901A",
+    "CNS5 2491",
+    "HD  87901",
+    "HGAM    596",
+    "HIC  49669",
+    "HR  3982",
+    "IRAS 10056+1212",
+    "TIC 471011645",
+    "IRC +10226",
+    "JP11  1896",
+    "LTT 12716",
+    "N30 2414",
+    "NAME Regulus",
+    "NLTT 23490",
+    "NSV  4750",
+    "PMC 90-93   274",
+    "PPM 127140",
+    "RAFGL 4771S",
+    "ROT  1536",
+    "SAO  98967",
+    "SKY# 19511",
+    "SRS  30380",
+    "SV* ZI   793",
+    "TD1 14585",
+    "UBV    9452",
+    "UBV M  15960",
+    "YPAC  43",
+    "[HFE83]  708",
+    "uvby98 100087901 A",
+    "2MASS J10082229+1158018",
+    "WDS J10084+1158A",
+    "2E 1005.5+1213",
+    "TYC  833-1381-1",
+    "PMSC 10030+1227A",
+    "** STF 5006A",
+    "WEB  9160"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 152.09296243828146,
+    "dec_deg": 11.967208776100023,
+    "galactic_l_deg": 226.42735280726842,
+    "galactic_b_deg": 48.93420887413583
+  },
+  "distance": {
+    "value_pc": 24.313153415998052,
+    "error_pc": 0.20689529663704426
+  },
+  "cartesian": {
+    "x_pc": -11.00902748057464,
+    "y_pc": -11.571674463808785,
+    "z_pc": 18.331041788873986
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "nearby-bright-star-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Leo, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Leo",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B8IVn",
+    "absolute_magnitude": -0.5292064762959825,
+    "apparent_magnitude": 1.399999976158142
+  },
+  "exoplanets": null,
+  "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:29+00:00; upstream record id: * alf Leo; otype: PM*; Regulus was found missing from the catalog (issue #213, Tier 1): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md."
+}

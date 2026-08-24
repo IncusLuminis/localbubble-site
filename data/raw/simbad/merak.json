@@ -1,0 +1,23 @@
+{
+  "source": "simbad",
+  "query": "Merak",
+  "retrieved_utc": "2026-08-24T04:19:36+00:00",
+  "record_id": "* bet UMa",
+  "raw": {
+    "main_id": "* bet UMa",
+    "ra": 165.46033229797294,
+    "dec": 56.382433649496384,
+    "coo_err_maj": 0.5127999782562256,
+    "coo_err_min": 0.5072000026702881,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.369999885559082,
+    "sp_type": "A1IVps",
+    "otype": "PM*",
+    "plx_value": 38.6031,
+    "plx_err": 1.128499984741211,
+    "ids": "TIC 141120277|Gaia DR3 856096765753549056|GJ 9343|HIP 53910|CNS5 2693|PLX 2567|*  48 UMa|* bet UMa|AAVSO 1055+56|AG+56  832|BD+57  1302|CEL   3775|CSV 101172|FK5  416|GC 15145|GCRV  6809|GEN# +1.00095418|GSC 03827-01079|HD  95418|HGAM    601|HIC  53910|HR  4295|IRAS 10588+5639|TIC 471011677|IRC +60206|JP11  2018|N30 2593|NAME Merak|NSV  5053|PMC 90-93   298|PPM  32912|ROT  1646|SAO  27876|SKY# 21076|SV* ZI   863|TD1 15303|TYC 3827-1079-1|UBV   10075|UBV M  16711|[HFE83]  770|uvby98 100095418|2MASS J11015046+5622566|PLX 2567.00|Renson 27493|WEB  9758|Gaia DR2 856096765752993280",
+    "matched_id": "NAME Merak"
+  }
+}
