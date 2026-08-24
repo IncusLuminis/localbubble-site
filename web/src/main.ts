@@ -20,6 +20,7 @@ import {
   projectToNdc,
 } from "./scene/axes";
 import {
+  bubbleOuterRadiusPcFrom,
   catalogObjectTypes,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
@@ -427,6 +428,17 @@ let denseBatchRadiusPc = 0;
  * whenever this is `null` (see `applyLocalBubbleButtonState` below). */
 let localBubbleStructure: LocalBubbleStructure | null = null;
 
+/** Issue #215: the Local Bubble's representative outer radius (pc) for the
+ * per-star baseline-size gradient (`objects.ts`'s `starBaselineRadiusPc`),
+ * derived from `localBubbleStructure` above (see `bubbleOuterRadiusPcFrom`)
+ * rather than duplicated as a separate hardcoded value. Recomputed once
+ * alongside `localBubbleStructure` when the scene loads; stays `null` before
+ * that (or thereafter if the scene has no Local Bubble layer), which is
+ * exactly the sentinel every `objects.ts` function taking this parameter
+ * already treats as "fall back to the flat, unchanged `STAR_MARKER_RADIUS_PC`
+ * behavior" (spec §38: an absent optional structure must not error). */
+let bubbleOuterRadiusPc: number | null = null;
+
 function applyCatalogVisibility(): void {
   updateCatalogVisibility(
     catalogBuckets,
@@ -434,6 +446,7 @@ function applyCatalogVisibility(): void {
     radiusPc,
     camera.position.length(),
     denseBatchRadiusPc,
+    bubbleOuterRadiusPc,
   );
   updateCatalogSizeScale(catalogBuckets, sizeScale);
   refreshSelectionVisibility();
@@ -461,6 +474,7 @@ function applyDenseBatchLod(): void {
     radiusPc,
     camera.position.length(),
     denseBatchRadiusPc,
+    bubbleOuterRadiusPc,
   );
 }
 
@@ -574,6 +588,7 @@ function selectedObjectMarkerRadiusPc(obj: SceneObject): number {
     camera.position.length(),
     denseBatchRadiusPc,
     controls.minDistance,
+    bubbleOuterRadiusPc,
   );
 }
 
@@ -943,7 +958,11 @@ function goToObject(obj: SceneObject): void {
       ? denseBatchObjectFrameMaxDistancePc(obj.position_pc, denseBatchRadiusPc)
       : undefined;
   applyCameraPose(
-    objectCenteredPose(obj.position_pc, markerRadiusPc(obj.size_pc, obj.object_type), maxDistancePc),
+    objectCenteredPose(
+      obj.position_pc,
+      markerRadiusPc(obj.size_pc, obj.object_type, obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc),
+      maxDistancePc,
+    ),
   );
   selectObject(obj);
 }
@@ -1005,7 +1024,22 @@ loadScene()
     denseBatchBoundaryMesh = createDenseBatchBoundaryLayer(denseBatchRadiusPc);
     if (denseBatchBoundaryMesh) scene.add(denseBatchBoundaryMesh);
 
-    const catalogLayer = createCatalogObjectGroup(sceneData.objects);
+    // Issue #215: `localBubbleStructure`/`bubbleOuterRadiusPc` are populated
+    // here, before `createCatalogObjectGroup` below, rather than at their
+    // pre-#215 spot further down (right before the Local Bubble structure
+    // layer itself) - `createCatalogObjectGroup` needs `bubbleOuterRadiusPc`
+    // to bake each star's graduated baseline radius into its instance matrix
+    // at scene-load time, so it must be known by the time that call runs.
+    // `?? null` since `SceneStructures.local_bubble` is `undefined` (not
+    // `null`) when absent.
+    localBubbleStructure = sceneData.structures.local_bubble ?? null;
+    bubbleOuterRadiusPc = bubbleOuterRadiusPcFrom(localBubbleStructure);
+
+    const catalogLayer = createCatalogObjectGroup(
+      sceneData.objects,
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+    );
     catalogBuckets = catalogLayer.buckets;
     scene.add(catalogLayer.group);
 
@@ -1039,11 +1073,11 @@ loadScene()
     localBubbleGroup = createLocalBubbleLayer(sceneData.structures.local_bubble);
     if (localBubbleGroup) scene.add(localBubbleGroup);
 
-    // Issue #197: populate the "Fit to Local Bubble" toolbar button's data
-    // source and (re)apply its enabled/disabled state now that the scene's
-    // actual `structures.local_bubble` presence is known - `?? null` since
-    // `SceneStructures.local_bubble` is `undefined` (not `null`) when absent.
-    localBubbleStructure = sceneData.structures.local_bubble ?? null;
+    // Issue #197: (re)apply the "Fit to Local Bubble" toolbar button's
+    // enabled/disabled state now that the scene's actual
+    // `structures.local_bubble` presence is known - `localBubbleStructure`
+    // itself is already populated further up (issue #215, before
+    // `createCatalogObjectGroup` needed it).
     applyLocalBubbleButtonState();
 
     const categories = catalogObjectTypes(sceneData.objects);
