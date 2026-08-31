@@ -67,6 +67,13 @@ import {
   starPositionAtTime,
 } from "./scene/motionPlayer";
 import {
+  createMotionTrailsLayer,
+  isTrailVisible,
+  starTrailPositionsPc,
+  updateStarTrail,
+  type StarTrail,
+} from "./scene/motionTrail";
+import {
   createGouldBeltLabel,
   createGouldBeltLayer,
   createLocalBubbleLayer,
@@ -549,6 +556,16 @@ let animatedStars: SceneObject[] = [];
 let objectIndexLookup: Map<string, CatalogObjectRef> = new Map();
 let labelById: Map<string, CatalogLabel> = new Map();
 
+/** Story #240: the motion-trails layer built once alongside `animatedStars`
+ * above, once the scene loads (`createMotionTrailsLayer`'s own docstring) -
+ * `motionTrailsGroup` stays `null` until then, mirroring every other
+ * scene-load-gated `let ... | null` binding in this file (e.g.
+ * `velocityVectorsGroup`). `trailByObjectId` is the same-shape `id ->
+ * StarTrail` lookup `applyPlayerAnimation` below uses so it never scans the
+ * ~127-entry pool linearly, matching `labelById`'s own precedent. */
+let motionTrailsGroup: ReturnType<typeof createMotionTrailsLayer>["group"] | null = null;
+let trailByObjectId: Map<string, StarTrail> = new Map();
+
 /** Story #239: the Structures control panel's lock/unlock handle
  * (`ui/controls.ts`'s `createControlPanel` return value) - `null` until the
  * scene loads and the panel is actually built (mirrors every other
@@ -847,6 +864,17 @@ function applyPlayerAnimation(deltaSeconds: number): void {
 
   forceVelocityVectorsOffIfAwayFromToday();
 
+  // Story #240: the whole trails group's visibility is gated on
+  // `isTrailVisible` (exactly `playerTimeYears !== 0`) BEFORE the per-star
+  // loop below - this alone already guarantees "return to Today fully
+  // clears all trails" (AC), independent of anything the loop does per
+  // star; the loop's own per-line visibility check further below is a
+  // belt-and-suspenders match to each star's actual catalog visibility.
+  const trailsVisible = motionTrailsGroup ? isTrailVisible(playerTimeYears) : false;
+  if (motionTrailsGroup) {
+    motionTrailsGroup.visible = trailsVisible;
+  }
+
   // Move the ~127 animated stars' markers (and, per this Story's chosen
   // label-tracking approach - see the PR description - their name labels)
   // to their time-extrapolated position. `isCatalogObjectVisible` is the
@@ -877,6 +905,20 @@ function applyPlayerAnimation(deltaSeconds: number): void {
     const label = labelById.get(obj.id);
     if (label) {
       label.css2dObject.position.set(positionPc[0], positionPc[1], positionPc[2]);
+    }
+
+    // Story #240: rebuild this star's trail fresh from its real
+    // `position_pc`/`velocity` every frame (never a frame-by-frame history
+    // buffer) - the SAME `starPositionAtTime` calls, via
+    // `starTrailPositionsPc`, that just positioned the marker above, so a
+    // manual scrub jump rebuilds the trail correctly for the new time
+    // rather than showing positions never actually animated through.
+    const trail = trailByObjectId.get(obj.id);
+    if (trail) {
+      trail.line.visible = trailsVisible && visible;
+      if (trailsVisible) {
+        updateStarTrail(trail, starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears));
+      }
     }
   }
 
@@ -1536,6 +1578,17 @@ loadScene()
     // `starsWithVelocityInSphere`, reused directly rather than
     // reimplemented, per this Story's explicit instruction.
     animatedStars = starsWithVelocityInSphere(sceneData.objects, denseBatchRadiusPc);
+
+    // Story #240: one trail `Line` per animated star, built once now that
+    // `animatedStars` (the SAME pool, never reimplemented) is known. Starts
+    // hidden (`createMotionTrailsLayer`'s own `visible = false` default);
+    // `applyPlayerAnimation`'s own per-frame hook is what shows/updates it
+    // from here on - no second RAF hook, per this Story's explicit
+    // instruction to reuse Story #239's existing one.
+    const motionTrailsLayer = createMotionTrailsLayer(animatedStars);
+    motionTrailsGroup = motionTrailsLayer.group;
+    trailByObjectId = motionTrailsLayer.trails;
+    scene.add(motionTrailsGroup);
 
     labelsInfo = createLabelsLayer(catalogObjects);
     scene.add(labelsInfo.group);
