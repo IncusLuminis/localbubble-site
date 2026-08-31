@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 664",
-  "retrieved_utc": "2026-08-23T02:09:37+00:00",
+  "retrieved_utc": "2026-08-31T06:04:16+00:00",
   "record_id": "V* V2215 Oph",
   "raw": {
     "main_id": "V* V2215 Oph",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.340000152587891,
+    "pmra": -479.573,
+    "plx_err": 0.031099999323487282,
+    "pmdec": -1124.332,
+    "otype": "RS*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018A&A...619A..81H",
     "plx_value": 167.9617,
     "sp_type": "K5V",
-    "plx_err": 0.031099999323487282,
-    "otype": "RS*",
+    "rvz_radvel": -0.09,
     "ids": "TIC 79841001|GJ 664|GJ 664.0|HIP 84478|Gaia DR3 4109034455276324608|PLX 3913|*  36 Oph C|8pc 167.56C|CCDM J17155-2635C|CD-26 12036C|CD-26 12036|CMC  206583|CMC  185213|CPD-26  5863|Ci 20 1027|GC 23298|GCRV  9951|GEN# +1.00156026|HD 156026|CNS5 4238|HIC  84478|IRAS 17133-2627|JP11  2833|LFT 1332|LHS   439|LPM 634|LTT  6874|NLTT 44446|PM 17131-2629|PPM 266626|SAO 185213|SKY# 31121|TYC 6820-293-1|UBV M  22025|UBV   14597|V* V2215 Oph|YZ 116 11925|Zkh 246|[B10]  4372|1RXS J171613.8-263236|2MASS J17161340-2632444|PLX 3913.00|2EUVE J1716-26.5|EUVE J1716-26.5|WDS J17153-2636C|** SHJ  243C|WISEA J171612.98-263257.3|uvby98 100156026|WEB 14259|Gaia DR2 4109034455276324608|*  30 Sco",
     "matched_id": "GJ 664"
   }

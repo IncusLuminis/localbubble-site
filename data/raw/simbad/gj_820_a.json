@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 820 A",
-  "retrieved_utc": "2026-08-23T02:07:55+00:00",
+  "retrieved_utc": "2026-08-31T06:02:33+00:00",
   "record_id": "*  61 Cyg A",
   "raw": {
     "main_id": "*  61 Cyg A",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.210000038146973,
+    "pmra": 4164.209,
+    "plx_err": 0.05990000069141388,
+    "pmdec": 3249.614,
+    "otype": "BY*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018A&A...619A..81H",
     "plx_value": 285.9949,
     "sp_type": "K5V",
-    "plx_err": 0.05990000069141388,
-    "otype": "BY*",
+    "rvz_radvel": -65.82,
     "ids": "TIC 165602000|GJ 820 A|Gaia DR3 1872046609345556480|CNS5 5217|PPM  86045|PLX 5077|LSPM J2106+3844N|ASCC  531487|2MASS J21065341+3844529|USNO-B1.0 1287-00443357|*  61 Cyg A|2RE J210651+384359|2RE J2106+384|8pc 287.13A|ADS 14636 A|AG+38 2138|BD+38  4343|CCDM J21069+3844A|CSI+38  4343  1|Ci 20 1259|GC 29509|GCRV 13272|GEN# +1.00201091A|HD 201091|HIC 104214|HIP 104214|HR  8085|TIC 471012097|IRC +40469|JP11  3309|LFT 1604|LHS    62|LTT 16179|NLTT 50559|NSV 13543|ROT  3077|SAO  70919|SKY# 40143|UBV   18285|USNO 900|V* V1803 Cyg|Zkh 315|[B10]  5433|[GKL99] 398|[RHG95]  3300|1E 2104.8+3831|2EUVE J2106+38.7|EUVE J2106+38.7|RX J2106.8+3844|WDS J21069+3845A|TYC 3168-2800-1|WEB 18980|Gaia DR2 1872046574983507456|Karmn J21068+387",
     "matched_id": "GJ 820 A"
   }

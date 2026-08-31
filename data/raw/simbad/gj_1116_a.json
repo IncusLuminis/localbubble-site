@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 1116 A",
-  "retrieved_utc": "2026-08-23T02:08:59+00:00",
+  "retrieved_utc": "2026-08-31T06:03:38+00:00",
   "record_id": "G   9-38A",
   "raw": {
     "main_id": "G   9-38A",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 13.930000305175781,
+    "pmra": -767.06,
+    "plx_err": 0.12280000001192093,
+    "pmdec": -100.176,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2014AJ....147...20N",
     "plx_value": 194.1443,
     "sp_type": "M8Ve",
-    "plx_err": 0.12280000001192093,
-    "otype": "PM*",
+    "rvz_radvel": 14.0,
     "ids": "GJ 1116 A|Gaia DR3 660597997696173440|CNS5 2210|G   9-38A|WDS J08582+1945A|** LDS 3836A|NLTT 20638|8pc 191.20A|Zkh 123|LHS  2076|[GKL99] 192|Gaia DR2 660597997696173440|LSPM J0858+1945A|TIC 800884690",
     "matched_id": "GJ 1116 A"
   }

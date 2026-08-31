@@ -20,6 +20,7 @@ from .schema import (
     ExoplanetSummary,
     Group,
     Source,
+    Velocity,
     Visual,
 )
 
@@ -43,6 +44,23 @@ def _exoplanets_from_json(value: str | None) -> ExoplanetSummary | None:
     if not value:
         return None
     return ExoplanetSummary.model_validate_json(value)
+
+
+def _velocity_to_json(velocity: Velocity | None) -> str | None:
+    """`velocity` -> a single JSON-string column (`velocity_json`), same
+    convention as `_exoplanets_to_json` above (Story #230): `Velocity` is a
+    nested optional object, `None` for the overwhelming majority of rows
+    (everything outside the ~127-star in-sphere set), so pre-serialized
+    JSON storage sidesteps Arrow nested-struct-column edge cases the same
+    way it already does for `exoplanets`.
+    """
+    return velocity.model_dump_json() if velocity is not None else None
+
+
+def _velocity_from_json(value: str | None) -> Velocity | None:
+    if not value:
+        return None
+    return Velocity.model_validate_json(value)
 
 
 def to_record(obj: AstronomicalObject) -> dict:
@@ -72,6 +90,7 @@ def to_record(obj: AstronomicalObject) -> dict:
         "visual_absolute_magnitude": obj.visual.absolute_magnitude,
         "visual_apparent_magnitude": obj.visual.apparent_magnitude,
         "exoplanets_json": _exoplanets_to_json(obj.exoplanets),
+        "velocity_json": _velocity_to_json(obj.velocity),
         "notes": obj.notes,
     }
 
@@ -113,6 +132,7 @@ def from_record(record: dict) -> AstronomicalObject:
             apparent_magnitude=record.get("visual_apparent_magnitude"),
         ),
         exoplanets=_exoplanets_from_json(record.get("exoplanets_json")),
+        velocity=_velocity_from_json(record.get("velocity_json")),
         notes=record.get("notes"),
     )
 

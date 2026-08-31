@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 1111",
-  "retrieved_utc": "2026-08-23T02:08:07+00:00",
+  "retrieved_utc": "2026-08-31T06:02:45+00:00",
   "record_id": "G  51-15",
   "raw": {
     "main_id": "G  51-15",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": null,
+    "pmra": -1113.694,
+    "plx_err": 0.06369999796152115,
+    "pmdec": -612.191,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 279.2496,
     "sp_type": "M6.5Ve",
-    "plx_err": 0.06369999796152115,
-    "otype": "PM*",
+    "rvz_radvel": 10.62,
     "ids": "TIC 3664898|AP J08294949+2646348|GJ 1111|Gaia DR3 703790044252850688|PLX 2016.0|LSPM J0829+2646|UCAC2  41191231|2MASS J08294949+2646348|USNO-B1.0 1167-00167383|8pc 275.80|G  51-15|CNS5 2093|GEN# +9.80051015|JP11  5934|JP11  5935|LHS   248|LTT 18058|NLTT 19635|PM 08269+2657|USNO 311|V* DX Cnc|Zkh 118|[GKL99] 181|[RHG95]  1326|PLX 2016.01|UCAC4 584-042341|PM J08298+2646|Gaia DR2 703790044252850688|Karmn J08298+267",
     "matched_id": "GJ 1111"
   }

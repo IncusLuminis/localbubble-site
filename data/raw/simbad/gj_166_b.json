@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 166 B",
-  "retrieved_utc": "2026-08-23T02:08:50+00:00",
+  "retrieved_utc": "2026-08-31T06:03:28+00:00",
   "record_id": "* omi02 Eri B",
   "raw": {
     "main_id": "* omi02 Eri B",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 9.529999732971191,
+    "pmra": -2236.169,
+    "plx_err": 0.05119999870657921,
+    "pmdec": -3338.955,
+    "otype": "WD*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "1979IAUS...30...57E",
     "plx_value": 199.6911,
     "sp_type": "DA2.9",
-    "plx_err": 0.05119999870657921,
-    "otype": "WD*",
+    "rvz_radvel": -21.0,
     "ids": "2MASS J04152196-0739254|GJ 166 B|Gaia DR3 3195919254111315712|* omi02 Eri B|*  40 Eri B|2E   957|8pc 198.24B|AAVSO 0410-07C|ADS  3093 B|BD-07   781|CNS5 1053|CCDM J04153-0739B|CSI-07   781  1|Ci 20  289|EGGR  33|G 160-60|GC  5140|GCRV  2441|GEN# +1.00026976B|HD  26976|LFT  339|LHS    24|LP    7-781 A|LPM 182|LTT  1908|NLTT 12868|SAO 131065|UBV    4141|UBV M  10045|UCAC2  29035414|WD 0413-07|WD 0413-077|WD 0413-074|Zkh  59|2E 0412.9-0745|WDS J04153-0739B|** STF  518B|PMSC 04107-0748B|WEB  3795|Gaia DR2 3195919254110817408",
     "matched_id": "GJ 166 B"
   }

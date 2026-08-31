@@ -489,3 +489,80 @@ exactly zero" expectation for that subset.
 `galactic-structures build-catalog` + `galactic-structures export-scene
 --no-radius-filter --output web/public/data/scene.json` regenerated the
 checked-in catalog/scene artifacts (same recipe as Story #170).
+
+## Stellar space-velocity data (Story #230)
+
+Idea #3 of Epic #229 (velocity vectors). Adds each nearby star's real 3D
+space velocity - heliocentric Galactic Cartesian `vx`/`vy`/`vz` km/s, the
+same axis convention `cartesian.{x,y,z}_pc` already uses for position - so
+a later Story (#231, frontend) can draw a directional arrow starting at
+each star's own position.
+
+`SimbadResolver` now additionally requests the `pmra`/`pmdec` (proper
+motion, mas/yr - `pmra` is already SIMBAD's own cos(dec)-corrected
+convention) and `rvz_radvel` (radial velocity, km/s) VOTable fields, plus
+`pm_bibcode`/`rvz_bibcode` for provenance. `coordinates.galactic_velocity_kms`
+derives the Cartesian vector via the identical astropy ICRS -> Galactic
+transform already applied to position (`SkyCoord(..., pm_ra_cosdec=...,
+pm_dec=..., radial_velocity=...).galactic.velocity`). New `schema.py`
+model: `Velocity` (`vx_kms`/`vy_kms`/`vz_kms`, `radial_velocity_known`,
+its own `source`), exposed as a top-level `AstronomicalObject.velocity:
+Velocity | None` field - NOT nested under `visual`, mirroring
+`exoplanets`' own precedent (physical/kinematic data, not a rendering
+style).
+
+Two distinct "never fabricate" cases (spec §11), both in
+`data_sources.simbad._derive_velocity`:
+
+* `pmra`/`pmdec` themselves absent - the whole velocity is unresolvable,
+  `velocity: None` entirely (never a fabricated zero vector).
+* `pmra`/`pmdec` present but `rvz_radvel` absent - astropy silently
+  defaults radial velocity to 0 km/s rather than erroring, so the result is
+  a *tangential-only* vector; `radial_velocity_known: False` flags this so
+  it is never presented as a complete 3D space velocity.
+
+Pipeline scope (Epic #229): velocity is fetched only for stars within the
+current RECONS-dense-batch sphere, by REAL `distance_pc` - not the
+`recons-nearest-100` group tag, which 5 genuinely-in-range gap-fill stars
+(Fomalhaut, Arcturus, Vega, Pollux, Denebola; #211's deliberate provenance
+exclusion) are missing from. `scripts/backfill_velocity.py` derives the
+sphere's radius from the data itself - the max `distance.value_pc` among
+currently `recons-nearest-100`-tagged records, mirroring the frontend's own
+`lod.ts` `denseBatchCollectionRadiusPc` derivation exactly - rather than a
+hard-coded constant, then re-fetches (`force_refresh=True`, since every
+in-scope star's SIMBAD cache predates these fields) each in-scope star and
+merges only the top-level `velocity` field back into
+`data/normalized/initial_catalog_records.json`, leaving everything else
+untouched (same non-destructive convention as Story #170/#171's own
+scripts).
+
+Result against live SIMBAD: **127/127 in-scope stars resolved, 0
+failures** - **118 (92.9%) got a full 3D vector** (`radial_velocity_known:
+true`), **9 (7.1%) came back tangential-only** (`radial_velocity_known:
+false` - SIMBAD had `pmra`/`pmdec` but no `rvz_radvel`), and **0 were
+entirely unresolvable** (every one of the 127 had `pmra`/`pmdec` on file).
+
+Sanity gate (spot-checked against literature during development, not just
+against the issue's own quoted number): Barnard's Star derives to a total
+space velocity of **142.3 km/s** (literature: ~142 km/s); Proxima Centauri
+derives to **~31.5 km/s** (literature, Kervella et al. 2017, for the whole
+alpha Centauri system relative to the Sun: ~32.4 km/s); 61 Cygni A - one of
+the best-known "flying stars" - derives to **~109.5 km/s**, consistent with
+its historical reputation for unusually high proper motion.
+
+`scene.py` exports `velocity` verbatim as its own top-level scene key
+(same flattening convention as `spectral_type`/`absolute_magnitude`/
+`exoplanets`), `null` when absent (never null-padded). `catalog.py` rounds
+it through parquet/CSV as a `velocity_json` JSON-string column, same
+convention `exoplanets_json` established (a nested optional object that is
+`None` for the overwhelming majority of rows).
+`galactic-structures build-catalog` + `galactic-structures export-scene
+--no-radius-filter --output web/public/data/scene.json` regenerated the
+checked-in catalog/scene artifacts from a clean venv matching the
+test-runtime pyarrow version (standing lesson from PR #183).
+
+Frontend rendering (vector arrows, sphere-gated toggle) is explicitly out
+of scope for this Story - Story #231's job. `web/src/scene/sceneTypes.ts`
+is intentionally untouched; the extra `velocity` key in `scene.json` is
+additive and does not affect the existing (untyped-at-runtime) frontend
+pipeline or its own test suite (495/495 passing, `tsc --noEmit` clean).

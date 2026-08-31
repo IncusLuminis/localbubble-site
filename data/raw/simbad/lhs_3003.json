@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LHS 3003",
-  "retrieved_utc": "2026-08-23T02:11:00+00:00",
+  "retrieved_utc": "2026-08-31T06:04:52+00:00",
   "record_id": "LP  914-54",
   "raw": {
     "main_id": "LP  914-54",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 17.141000747680664,
+    "pmra": -490.285,
+    "plx_err": 0.0617000013589859,
+    "pmdec": -843.482,
+    "otype": "Em*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2015ApJS..220...18B",
     "plx_value": 141.7891,
     "sp_type": "M7.0Ve",
-    "plx_err": 0.0617000013589859,
-    "otype": "Em*",
+    "rvz_radvel": 1.0,
     "ids": "GJ 3877|Gaia DR3 6224387727748521344|2MUCD 11264|2MASS J14563831-2809473|2MASSI J1456383-280947|CNS5 3697|LHS  3003|LP  914-54|NLTT 38829|[GKL99] 310|[RHG95]  2363|PLX 3372.03|[B2006] J145638.3-280947|WISEA J145637.87-280957.3|Gaia DR2 6224387727748521344|8pc 156.30",
     "matched_id": "LHS  3003"
   }

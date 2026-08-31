@@ -18,6 +18,7 @@ from local_galactic_structures.schema import (
     Group,
     PlanetSummary,
     Source,
+    Velocity,
     Visual,
 )
 
@@ -85,6 +86,17 @@ def _sample_objects() -> list[AstronomicalObject]:
                 ],
                 source_reference="NASA Exoplanet Archive, pscomppars",
                 source_url="https://exoplanetarchive.ipac.caltech.edu",
+            ),
+            # Story #230: a populated `velocity` field must also round-trip
+            # through parquet/CSV, same convention as `exoplanets` above.
+            velocity=Velocity(
+                vx_kms=-28.31,
+                vy_kms=0.67,
+                vz_kms=13.74,
+                radial_velocity_known=True,
+                source=Source(
+                    reference="SIMBAD astronomical database (CDS), record GJ 876"
+                ),
             ),
         ),
     ]

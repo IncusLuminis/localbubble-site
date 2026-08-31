@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 273",
-  "retrieved_utc": "2026-08-23T02:08:12+00:00",
+  "retrieved_utc": "2026-08-31T06:02:50+00:00",
   "record_id": "BD+05  1668",
   "raw": {
     "main_id": "BD+05  1668",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 9.871999740600586,
+    "pmra": 571.232,
+    "plx_err": 0.04129999876022339,
+    "pmdec": -3691.487,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 264.1269,
     "sp_type": "M3.5V",
-    "plx_err": 0.04129999876022339,
-    "otype": "PM*",
+    "rvz_radvel": 18.36,
     "ids": "AP J07272450+0513329|MCC 17|GJ 273|HIP 36208|Gaia DR3 3139847906307949696|PLX 1755|LSPM J0727+0513|ASCC 1029189|UCAC2  33555673|USNO-B1.0 0952-00140898|8pc 263.26|AC2000  282902|BD+05  1668|CNS5 1843|G 112-17|G  89-19|GAT 1092|GCRV  4954|GEN# +0.00501668|GSC 00173-01124|HIC  36208|IRAS 07247+0520|JP11    25|LFT  527|LHS    33|LTT 12021|NAME Luyten's star|NLTT 17881|PM 07247+0522|RAFGL  273|TYC  173-3208-1|UBV    7206|UBV M    272|VVO 207|Zkh 102|[HFE83]  515|[JHC84]  57|[RHG95]  1168|2MASS J07272450+0513329|PLX 1755.00|PM J07274+0513|WEB  7213|Gaia DR2 3139847906304421632|Karmn J07274+052|** WDK    2A|WDS J07274+0514A|TIC 318686860",
     "matched_id": "GJ 273"
   }

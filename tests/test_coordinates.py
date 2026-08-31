@@ -7,6 +7,7 @@ from local_galactic_structures.coordinates import (
     CoordinateDerivationError,
     derive_galactic_coordinates,
     derive_galactic_coordinates_batch,
+    galactic_velocity_kms,
     radec_distance_to_galactic_xyz,
 )
 from local_galactic_structures.schema import (
@@ -309,3 +310,64 @@ def test_batch_fails_fast_without_returning_partial_results():
             # The call raised rather than returning; there is no partial
             # list handed back to inspect here, by design.
             pass
+
+
+# ---------------------------------------------------------------------------
+# galactic_velocity_kms (Story #230, schema.py's Velocity)
+# ---------------------------------------------------------------------------
+
+
+class TestGalacticVelocityKms:
+    def test_zero_proper_motion_and_radial_velocity_yields_zero_vector(self):
+        # No motion in any of the three astrometric inputs -> the fixed
+        # ICRS -> Galactic rotation of a zero vector is still zero. A basic
+        # sanity check that the transform doesn't introduce any spurious
+        # constant offset (e.g. accidentally including the Sun's own LSR
+        # motion, which this Story's heliocentric convention must not).
+        vx, vy, vz = galactic_velocity_kms(
+            ra_deg=100.0,
+            dec_deg=20.0,
+            distance_pc=10.0,
+            pmra_mas_yr=0.0,
+            pmdec_mas_yr=0.0,
+            radial_velocity_kms=0.0,
+        )
+        assert vx == pytest.approx(0.0, abs=1e-9)
+        assert vy == pytest.approx(0.0, abs=1e-9)
+        assert vz == pytest.approx(0.0, abs=1e-9)
+
+    def test_barnards_star_matches_known_literature_space_velocity(self):
+        # Real SIMBAD-shaped values for Barnard's Star (live-verified during
+        # Story #230 development - see PR description). Known literature
+        # total space velocity relative to the Sun is ~142 km/s (one of the
+        # highest-proper-motion stars known) - this is the Story's own
+        # documented sanity gate.
+        ra_deg = 269.4520769586187
+        dec_deg = 4.693364966576667
+        plx_mas = 546.9759
+        distance_pc = 1000.0 / plx_mas
+        pmra = -801.551
+        pmdec = 10362.394
+        rv = -110.11
+
+        vx, vy, vz = galactic_velocity_kms(
+            ra_deg, dec_deg, distance_pc, pmra, pmdec, rv
+        )
+        magnitude = (vx**2 + vy**2 + vz**2) ** 0.5
+        assert magnitude == pytest.approx(142.3, abs=1.0)
+
+    def test_returns_plain_python_floats(self):
+        # Not numpy/astropy Quantity scalars - schema.Velocity's fields are
+        # plain `float`, and the caller (simbad.py's _derive_velocity)
+        # relies on this to construct it directly.
+        vx, vy, vz = galactic_velocity_kms(
+            ra_deg=10.0,
+            dec_deg=10.0,
+            distance_pc=10.0,
+            pmra_mas_yr=100.0,
+            pmdec_mas_yr=-50.0,
+            radial_velocity_kms=5.0,
+        )
+        assert isinstance(vx, float)
+        assert isinstance(vy, float)
+        assert isinstance(vz, float)

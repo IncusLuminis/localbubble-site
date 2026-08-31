@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 1",
-  "retrieved_utc": "2026-08-23T02:08:24+00:00",
+  "retrieved_utc": "2026-08-31T06:03:02+00:00",
   "record_id": "HD 225213",
   "raw": {
     "main_id": "HD 225213",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.562000274658203,
+    "pmra": 5633.438,
+    "plx_err": 0.03620000183582306,
+    "pmdec": -2334.721,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018A&A...616A...7S",
     "plx_value": 230.097,
     "sp_type": "M2V",
-    "plx_err": 0.03620000183582306,
-    "otype": "PM*",
+    "rvz_radvel": 25.534,
     "ids": "TIC 120461526|GJ 1|HIP 439|Gaia DR3 2306965202564744064|PLX 5817|CNS5 19|AC2000 3152964|CD-37 15492|CPC 18    15|CPD-37  9435|Ci 20    3|Ci 18 3161|G 267-25|GC    49|GCRV    31|GEN# +1.00225213|HD 225213|HIC    439|IRAS 00027-3737|JP11  3677|LFT    5|LHS     1|LPM 904|LTT    23|NLTT   134|NSV 15017|PM 00025-3736|SAO 192348|TYC 6995-1264-1|UBV   20691|UBV M  27443|YZC 29    15|Zkh   2|[RHG95]     6|PLX 5817.00|2MASS J00052423-3721257|PM J00054-3721|[GKL99] 1|WISEA J000529.35-372151.0|WEB    60|Gaia DR2 2306965202564506752",
     "matched_id": "GJ 1"
   }

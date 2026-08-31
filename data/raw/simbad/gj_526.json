@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 526",
-  "retrieved_utc": "2026-08-23T02:09:07+00:00",
+  "retrieved_utc": "2026-08-31T06:03:46+00:00",
   "record_id": "HD 119850",
   "raw": {
     "main_id": "HD 119850",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.5,
+    "pmra": 1776.006,
+    "plx_err": 0.025299999862909317,
+    "pmdec": -1455.156,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 183.9962,
     "sp_type": "M2V",
-    "plx_err": 0.025299999862909317,
-    "otype": "PM*",
+    "rvz_radvel": 15.74,
     "ids": "Karmn J13457+148|TIC 72465347|AP J13454354+1453317|MCC 308|StKM 2-980|GJ 526|HIP 67155|Gaia DR3 3741297293732404352|PLX 3135|LSPM J1345+1453|ASCC  956176|2MASS J13454354+1453317|USNO-B1.0 1048-00224136|8pc 184.13|AG+15 1400|BD+15  2620|Ci 20  803|DO 14803|G  63-53|G 150-35|GAT  972|GC 18602|GCRV  8123|GEN# +1.00119850|CNS5 3403|HD 119850|HIC  67155|IRAS 13432+1508|JP11  2422|LAL 25372|LFT 1034|LHS    47|LTT 14011|NLTT 35133|NSV  6431|PM 13432+1510|PPM 130055|SAO 100695|TYC  899-789-1|UBV M  19692|UBV   12290|Wolf  498|YZ  15  5003|YZC 18  5003|Zkh 204|[GKL99] 286|[RHG95]  2176|uvby98 100119850|PLX 3135.00|WEB 11822|Gaia DR2 3741297293732404352|PM J13457+1453",
     "matched_id": "GJ 526"
   }

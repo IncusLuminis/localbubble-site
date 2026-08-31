@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 555",
-  "retrieved_utc": "2026-08-23T02:09:53+00:00",
+  "retrieved_utc": "2026-08-31T06:04:32+00:00",
   "record_id": "BD-11  3759",
   "raw": {
     "main_id": "BD-11  3759",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 11.317000389099121,
+    "pmra": -355.138,
+    "plx_err": 0.05460000038146973,
+    "pmdec": 593.04,
+    "otype": "BY*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 159.9225,
     "sp_type": "M3.5V",
-    "plx_err": 0.05460000038146973,
-    "otype": "BY*",
+    "rvz_radvel": -1.28,
     "ids": "TIC 294401924|HIP 71253|Gaia DR3 6324325225803432320|CNS5 3614|WISEA J143416.56-123104.1|TYC 5572-804-1|PM J14342-1231|UCAC4 388-063886|PLX 3296|8pc 163.51|BD-11  3759|GJ 555|Ci 20  870|GEN# -0.01103759|GSC 05572-00804|HIC  71253|JP11   280|LFT 1120|LHS  2945|LPM 532|LTT  5759|NLTT 37751|NSV  6707|PM 14316-1219|UBV   12727|UBV M   5328|V* HN Lib|Wolf 1481|Zkh 208|[RHG95]  2310|2MASS J14341683-1231106|PLX 3296.00|Gaia DR2 6324325225803432320|Karmn J14342-125",
     "matched_id": "GJ 555"
   }

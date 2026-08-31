@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 559 B",
-  "retrieved_utc": "2026-08-23T02:07:37+00:00",
+  "retrieved_utc": "2026-08-31T06:02:15+00:00",
   "record_id": "* alf Cen B",
   "raw": {
     "main_id": "* alf Cen B",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.3300000429153442,
+    "pmra": -3614.39,
+    "plx_err": 1.399999976158142,
+    "pmdec": 802.98,
+    "otype": "PM*",
+    "pm_bibcode": "2007A&A...474..653V",
+    "rvz_bibcode": "2018A&A...616A...7S",
     "plx_value": 742.12,
     "sp_type": "K1V",
-    "plx_err": 1.399999976158142,
-    "otype": "PM*",
+    "rvz_radvel": -22.586,
     "ids": "RAVE J143935.1-605014|TIC 471011144|GJ 559 B|HIP 71681|* alf Cen B|* alf02 Cen|CCDM J14396-6050B|CPD-60  5483B|CSI-60  5483 42|GCRV  8518|GEN# +1.00128621|HD 128621|HIC  71681|HR  5460|IDS 14328-6025 B|LFT 1128|LHS    51|LTT  5807|NLTT 37985|PM 14362-6038B|SKY# 26644|SPOCS  609|Zkh 210|[AOP94]  7|WDS J14396-6050B|TYC 9007-5848-1|PMSC 14328-6025B|** RHD    1B|CD-60  5293B|NAME Toliman",
     "matched_id": "GJ 559 B"
   }

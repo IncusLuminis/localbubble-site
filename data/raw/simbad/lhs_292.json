@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LHS 292",
-  "retrieved_utc": "2026-08-23T02:08:30+00:00",
+  "retrieved_utc": "2026-08-31T06:03:09+00:00",
   "record_id": "LP  731-58",
   "raw": {
     "main_id": "LP  731-58",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 15.784000396728516,
+    "pmra": 579.019,
+    "plx_err": 0.06019999831914902,
+    "pmdec": -1530.076,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 219.3302,
     "sp_type": "M6.5V",
-    "plx_err": 0.06019999831914902,
-    "otype": "PM*",
+    "rvz_radvel": 2.18,
     "ids": "GJ 3622|AP J10481258-1120082|TIC 55099399|Gaia DR3 3757613049856225792|CNS5 2648|LHS   292|LP  731-58|NLTT 25392|USNO 835|[GKL99] 223|[RHG95]  1679|2MASS J10481258-1120082|2MASSI J1048126-112009|PLX 2516.02|8pc 220.30|USNO-B1.0 0786-00215012|UCAC3 158-112504|UCAC2  27842586|Gaia DR2 3757613049856225792|DENIS J104812.6-112009|WISEA J104813.03-112025.9|UCAC4 394-049480|PM J10482-1120|Karmn J10482-113",
     "matched_id": "LHS   292"
   }

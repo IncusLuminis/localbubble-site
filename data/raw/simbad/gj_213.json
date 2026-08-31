@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 213",
-  "retrieved_utc": "2026-08-23T02:09:20+00:00",
+  "retrieved_utc": "2026-08-31T06:03:59+00:00",
   "record_id": "Ross   47",
   "raw": {
     "main_id": "Ross   47",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 11.508999824523926,
+    "pmra": 1997.342,
+    "plx_err": 0.028599999845027924,
+    "pmdec": -1569.355,
+    "otype": "BY*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 172.6762,
     "sp_type": "M4V",
-    "plx_err": 0.028599999845027924,
-    "otype": "BY*",
+    "rvz_radvel": 106.24,
     "ids": "TIC 247463344|AP J05420897+1229252|GJ 213|HIP 26857|Gaia DR3 3340477717172813568|PLX 1305|LSPM J0542+1229|ASCC  925208|UCAC2  36065524|2MASS J05420897+1229252|USNO-B1.0 1024-00080397|2E  1517|8pc 172.78|CNS5 1415|CSI+12-05392|Ci 20  344|G 102-22|GCRV  3530|GEN# +6.10010213|GSC 00722-00455|HIC  26857|TIC 471011171|JP11  5114|JP11  5183|JP11  5116|JP11  5115|LFT  425|LHS    31|LTT 11704|NLTT 15489|PM 05392+1229|Ross   47|TYC  722-455-1|V* V1352 Ori|Zkh  73|[RHG95]   959|PLX 1305.00|1E 0539.2+1228|1RXS J054208.6+122925|2E 0539.2+1228|GAT  893|WISEA J054210.65+122905.4|PM J05421+1229|WEB  5291|Gaia DR2 3340477717172813568|Karmn J05421+124",
     "matched_id": "GJ 213"
   }
