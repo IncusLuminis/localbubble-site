@@ -38,6 +38,7 @@ import {
 import {
   denseBatchCollectionRadiusPc,
   isCameraInsideDenseBatchSphere,
+  isCameraInsideLocalBubble,
   isDenseBatchMember,
   passesDenseBatchLod,
 } from "./scene/lod";
@@ -517,9 +518,15 @@ function applyDenseBatchBoundaryVisibility(): void {
 /** Issue #137: tracks whether the camera was inside the RECONS dense
  * batch's own collection sphere as of the last frame this ran, so
  * `applyBackgroundDimming` below only touches materials on the frame the
- * camera actually crosses the boundary (in either direction) rather than
- * redundantly reassigning the same material reference every single frame. */
+ * camera actually crosses either boundary (in either direction) rather than
+ * redundantly reassigning the same material reference every single frame.
+ *
+ * Issue #227: `cameraWasInsideLocalBubble` alongside it tracks the same
+ * thing for the new, larger Local Bubble boundary - both are checked so a
+ * crossing of EITHER boundary (not just the sphere's) triggers a re-apply
+ * below. */
 let cameraWasInsideDenseBatchSphere = false;
+let cameraWasInsideLocalBubble = false;
 
 /**
  * Issue #137: dims the "background" - every non-star catalog bucket
@@ -530,16 +537,26 @@ let cameraWasInsideDenseBatchSphere = false;
  * restores normal opacity once it exits, so the RECONS nearby-star
  * neighborhood reads as clearly spotlighted against everything else.
  *
+ * Issue #227: now also computes `insideBubble` (`lod.ts`'s
+ * `isCameraInsideLocalBubble`, the much larger ~60pc Local Bubble radius)
+ * alongside the original `insideSphere`, and passes BOTH through to
+ * `updateBackgroundDimming`/`setGouldBeltDimmed`/`setRadcliffeWaveDimmed` so
+ * those can each resolve their own three-tier opacity. `setLocalBubbleDimmed`
+ * still only ever receives `insideSphere`, unchanged - the Local Bubble's own
+ * overlay stays tied only to the sphere trigger (see that function's
+ * docstring for why).
+ *
  * Threshold-snap, not a smooth per-frame ramp: `lod.ts`'s own dense-batch
  * visibility gate (`passesDenseBatchLod`/`isDenseBatchMember`) already snaps
- * hard at this exact same radius, so a matching hard snap here keeps every
- * "inside the sphere" effect in this app agreeing on where the boundary is,
- * and keeps this a single boolean decision to test/reason about rather than
- * a second continuous curve alongside `sunCoreRadiusPc`'s/
- * `starMarkerRadiusPc`'s existing ramps (which shrink *radius*, a different
- * concern, for a different reason - see those functions' own docstrings).
- * Only does any work on the frame the boolean actually flips (see
- * `cameraWasInsideDenseBatchSphere` above), so this is cheap enough to call
+ * hard at this exact same radius, so a matching hard snap here (for both
+ * boundaries) keeps every "inside" effect in this app agreeing on where its
+ * boundary is, and keeps this a small set of boolean decisions to test/
+ * reason about rather than a second continuous curve alongside
+ * `sunCoreRadiusPc`'s/`starMarkerRadiusPc`'s existing ramps (which shrink
+ * *radius*, a different concern, for a different reason - see those
+ * functions' own docstrings). Only does any work on the frame either
+ * boolean actually flips (see `cameraWasInsideDenseBatchSphere`/
+ * `cameraWasInsideLocalBubble` above), so this is cheap enough to call
  * unconditionally every frame alongside `applyDenseBatchLod`/
  * `applySunCoreScale`.
  *
@@ -549,13 +566,21 @@ let cameraWasInsideDenseBatchSphere = false;
  * this function, satisfying #137's explicit constraint against any
  * per-instance star-opacity change. */
 function applyBackgroundDimming(): void {
-  const insideSphere = isCameraInsideDenseBatchSphere(camera.position.length(), denseBatchRadiusPc);
-  if (insideSphere === cameraWasInsideDenseBatchSphere) return;
+  const cameraDistancePc = camera.position.length();
+  const insideSphere = isCameraInsideDenseBatchSphere(cameraDistancePc, denseBatchRadiusPc);
+  const insideBubble = isCameraInsideLocalBubble(cameraDistancePc, bubbleOuterRadiusPc);
+  if (
+    insideSphere === cameraWasInsideDenseBatchSphere &&
+    insideBubble === cameraWasInsideLocalBubble
+  ) {
+    return;
+  }
   cameraWasInsideDenseBatchSphere = insideSphere;
+  cameraWasInsideLocalBubble = insideBubble;
 
-  updateBackgroundDimming(catalogBuckets, insideSphere);
-  setGouldBeltDimmed(gouldBeltGroup, insideSphere);
-  setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere);
+  updateBackgroundDimming(catalogBuckets, insideSphere, insideBubble);
+  setGouldBeltDimmed(gouldBeltGroup, insideSphere, insideBubble);
+  setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere, insideBubble);
   setLocalBubbleDimmed(localBubbleGroup, insideSphere);
 }
 

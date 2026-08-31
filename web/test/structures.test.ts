@@ -505,3 +505,77 @@ describe("setGouldBeltDimmed / setRadcliffeWaveDimmed / setLocalBubbleDimmed (is
     expect(material.opacity).toBeLessThan(originalOpacity);
   });
 });
+
+/**
+ * Issue #227: the new, gentler, earlier-triggering Local Bubble dim tier -
+ * applies to the Gould Belt and Radcliffe Wave overlays (via a new
+ * `insideBubble` parameter) but deliberately NOT to the Local Bubble's own
+ * overlay, whose dimming stays tied only to the RECONS sphere trigger.
+ */
+describe("setGouldBeltDimmed / setRadcliffeWaveDimmed - Local Bubble tier (issue #227)", () => {
+  it("dims the Gould Belt tube gently when inside the bubble but outside the sphere", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    setGouldBeltDimmed(group, false, true);
+    expect(material.opacity).toBeLessThan(originalOpacity);
+    expect(material.opacity).toBeGreaterThan(0);
+  });
+
+  it("dims the Radcliffe Wave tube gently when inside the bubble but outside the sphere", () => {
+    const group = createRadcliffeWaveLayer(RADCLIFFE_WAVE);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    setRadcliffeWaveDimmed(group, false, true);
+    expect(material.opacity).toBeLessThan(originalOpacity);
+    expect(material.opacity).toBeGreaterThan(0);
+  });
+
+  it("the bubble tier dims less strongly than the sphere tier", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+
+    setGouldBeltDimmed(group, false, true);
+    const bubbleOpacity = material.opacity;
+
+    setGouldBeltDimmed(group, true, true);
+    const sphereOpacity = material.opacity;
+
+    expect(bubbleOpacity).toBeGreaterThan(sphereOpacity);
+  });
+
+  it("the sphere tier wins when both insideSphere and insideBubble are true", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+
+    setGouldBeltDimmed(group, true, false);
+    const sphereOnlyOpacity = material.opacity;
+
+    setGouldBeltDimmed(group, true, true);
+    expect(material.opacity).toBe(sphereOnlyOpacity);
+  });
+
+  it("restores to full opacity when outside both boundaries", () => {
+    const group = createGouldBeltLayer(GOULD_BELT);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    setGouldBeltDimmed(group, false, true);
+    setGouldBeltDimmed(group, false, false);
+    expect(material.opacity).toBe(originalOpacity);
+  });
+
+  it("does NOT apply the bubble tier to the Local Bubble's own overlay - setLocalBubbleDimmed stays a plain sphere-only boolean", () => {
+    const group = createLocalBubbleLayer(LOCAL_BUBBLE);
+    const material = (group!.children[0] as Mesh).material as import("three").MeshBasicMaterial;
+    const originalOpacity = material.opacity;
+
+    // setLocalBubbleDimmed only ever takes one boolean - there is no
+    // insideBubble parameter to even pass here, by design (issue #227's
+    // "do NOT apply the new bubble-tier to the Local Bubble's own overlay").
+    setLocalBubbleDimmed(group, false);
+    expect(material.opacity).toBe(originalOpacity);
+  });
+});

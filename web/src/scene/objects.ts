@@ -503,6 +503,26 @@ export function markerOpacityFor(objectType: string): number {
  */
 const BACKGROUND_DIM_FACTOR = 0.15;
 
+/**
+ * Issue #227: the gentler, EARLIER dim tier - applied once the camera is
+ * inside the much larger Local Bubble (`lod.ts`'s `isCameraInsideLocalBubble`,
+ * ~60pc) but not yet inside the RECONS dense-batch sphere (~11.26pc, which
+ * still uses `BACKGROUND_DIM_FACTOR` above, unchanged). Since the sphere
+ * always sits geometrically inside the bubble, this makes background
+ * dimming a three-zone system: full opacity outside the bubble -> this
+ * gentler factor inside the bubble (outside the sphere) -> the existing
+ * stronger `BACKGROUND_DIM_FACTOR` inside the sphere.
+ *
+ * 0.6 (40% dimmer) - live-tuned within the issue's suggested 0.5-0.7
+ * starting range: gentle enough to read as clearly distinct from
+ * `BACKGROUND_DIM_FACTOR`'s much stronger 0.15 (so the RECONS sphere
+ * crossing still reads as a second, bigger step down, not a redundant
+ * one), while still being visibly darker than full opacity the moment the
+ * camera crosses into the bubble - checked live via hot-reload flying the
+ * camera in from open space.
+ */
+const BUBBLE_BACKGROUND_DIM_FACTOR = 0.6;
+
 /** True for every catalog bucket type EXCEPT `STAR_OBJECT_TYPES` - i.e. the
  * "background" this issue dims. Exported so `main.ts`/tests can reason about
  * which buckets are affected without re-deriving the partition themselves. */
@@ -510,22 +530,39 @@ export function shouldDimBackground(objectType: string): boolean {
   return !STAR_OBJECT_TYPES.has(objectType);
 }
 
-/** Exported for tests - the pure "what opacity should this bucket's
- * material use right now" decision, independent of any `THREE.Material`/
- * `InstancedMesh` plumbing. Returns the bucket's normal, undimmed
- * `markerOpacityFor` value whenever `cameraInsideDenseBatchSphere` is
- * `false`, or `objectType` is the star bucket (never dimmed, regardless of
- * camera position) - only actually applies `BACKGROUND_DIM_FACTOR` in the
- * remaining case (a non-star bucket, camera inside the sphere). */
+/**
+ * Exported for tests - the pure "what opacity should this bucket's material
+ * use right now" decision, independent of any `THREE.Material`/
+ * `InstancedMesh` plumbing.
+ *
+ * Issue #227: now a three-way decision instead of #137's original two-way
+ * one. Returns the bucket's normal, undimmed `markerOpacityFor` value
+ * whenever `objectType` is the star bucket (never dimmed, regardless of
+ * camera position) or the camera is outside both boundaries. Otherwise
+ * `cameraInsideDenseBatchSphere` takes priority over
+ * `cameraInsideLocalBubble` (the sphere is always inside the bubble, so
+ * both can legitimately be `true` at once - the strongest applicable tier
+ * should win, not whichever happens to be checked first) and applies
+ * `BACKGROUND_DIM_FACTOR`; only when the camera is inside the bubble but
+ * NOT inside the sphere does the gentler `BUBBLE_BACKGROUND_DIM_FACTOR`
+ * apply.
+ */
 export function backgroundBucketOpacity(
   objectType: string,
   cameraInsideDenseBatchSphere: boolean,
+  cameraInsideLocalBubble = false,
 ): number {
   const baseOpacity = markerOpacityFor(objectType);
-  if (!cameraInsideDenseBatchSphere || !shouldDimBackground(objectType)) {
+  if (!shouldDimBackground(objectType)) {
     return baseOpacity;
   }
-  return baseOpacity * BACKGROUND_DIM_FACTOR;
+  if (cameraInsideDenseBatchSphere) {
+    return baseOpacity * BACKGROUND_DIM_FACTOR;
+  }
+  if (cameraInsideLocalBubble) {
+    return baseOpacity * BUBBLE_BACKGROUND_DIM_FACTOR;
+  }
+  return baseOpacity;
 }
 
 /** Cached by `color`+`opacity` together (not color alone) since #115 - two
@@ -891,10 +928,15 @@ export function updateCatalogSizeScale(buckets: CatalogBucket[], sizeScale: numb
 export function updateBackgroundDimming(
   buckets: CatalogBucket[],
   cameraInsideDenseBatchSphere: boolean,
+  cameraInsideLocalBubble = false,
 ): void {
   for (const bucket of buckets) {
     const color = OBJECT_TYPE_COLORS[bucket.objectType] ?? DEFAULT_COLOR;
-    const opacity = backgroundBucketOpacity(bucket.objectType, cameraInsideDenseBatchSphere);
+    const opacity = backgroundBucketOpacity(
+      bucket.objectType,
+      cameraInsideDenseBatchSphere,
+      cameraInsideLocalBubble,
+    );
     bucket.mesh.material = materialFor(color, opacity);
   }
 }
