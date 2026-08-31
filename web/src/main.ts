@@ -46,8 +46,11 @@ import { createDenseBatchBoundaryLayer, isDenseBatchBoundaryVisible } from "./sc
 import { createSelectionIndicator } from "./scene/selectionIndicator";
 import { loadScene } from "./scene/sceneData";
 import {
+  createVelocitySpeedLabelsLayer,
   createVelocityVectorsLayer,
   nextVelocityVectorsToggleOn,
+  selectVisibleVelocitySpeedLabelIds,
+  VELOCITY_SPEED_LABEL_MAX_VISIBLE,
   velocityVectorsVisible,
 } from "./scene/velocityVectors";
 import {
@@ -452,6 +455,13 @@ let denseBatchBoundaryMesh: ReturnType<typeof createDenseBatchBoundaryLayer> | n
  * `| null` convention) - `null` here only means "scene hasn't loaded yet". */
 let velocityVectorsGroup: ReturnType<typeof createVelocityVectorsLayer> | null = null;
 
+/** Issue #236: the density-controlled per-arrow speed labels ("31.5 km/s")
+ * - built once, right alongside `velocityVectorsGroup` above, once the
+ * scene has loaded. `null` only means "scene hasn't loaded yet"; once built,
+ * `updateLabelVisibility` drives which subset (if any) is actually visible
+ * each frame - see that function's own new speed-label block. */
+let velocitySpeedLabelsInfo: ReturnType<typeof createVelocitySpeedLabelsLayer> | null = null;
+
 /** Issue #231: the user's own ON/OFF intent for the velocity-vectors toggle
  * - distinct from whether the toggle is currently *enabled* (that's the
  * camera-position-driven `velocityVectorsButton.disabled`, applied by
@@ -802,6 +812,45 @@ function updateLabelVisibility(): void {
   // labels-enabled toggle, independent of whether the catalog has finished
   // loading (`labelsInfo`, checked just below).
   sunLabel.visible = shouldShowSunLabel(labelsEnabled);
+
+  // Issue #236: velocity-arrow speed labels ("31.5 km/s") - a completely
+  // independent pool from the catalog/Sun labels above/below, so this block
+  // runs regardless of `labelsInfo`'s own null-check just below (speed
+  // labels have nothing to do with the general "labels" toggle/pool; their
+  // own gate is `velocityVectorsGroup.visible` itself, which already
+  // implements issue #231's exact "toggle ON AND camera inside sphere" rule
+  // via `velocityVectorsVisible` - reusing that live boolean directly here,
+  // rather than re-deriving `insideSphere` a second time, guarantees speed
+  // labels can never be visible while their arrows aren't (no orphans) and
+  // always recompute on this same per-frame `animate()` cadence the arrows'
+  // own visibility already does, with no second RAF hook).
+  if (velocitySpeedLabelsInfo) {
+    // The actual candidate/cap-selection decision is the pure, independently
+    // unit-tested `selectVisibleVelocitySpeedLabelIds` (`velocityVectors.ts`)
+    // - itself built on `labels.ts`'s reused `selectNearestLabels`, through
+    // the NEW, independent, FINITE `VELOCITY_SPEED_LABEL_MAX_VISIBLE` cap
+    // (NOT `DENSE_BATCH_MAX_VISIBLE_LABELS`, which issue #159 deliberately
+    // set to `Number.POSITIVE_INFINITY` for star NAME labels specifically -
+    // see that function's docstring for why reusing it here would show all
+    // ~127 speed labels at once). This call site only supplies the two
+    // things that function can't see on its own: each label's current
+    // camera distance, and whether the arrows themselves are visible right
+    // now (`velocityVectorsGroup.visible` - the same `velocityVectorsVisible`
+    // toggle-ON-AND-inside-sphere gate the arrows use, reused directly so
+    // speed labels can never be visible while their arrows aren't).
+    const speedLabelCandidates = velocitySpeedLabelsInfo.labels.map((label) => ({
+      objectId: label.objectId,
+      cameraDistancePc: camera.position.distanceTo(label.css2dObject.position),
+    }));
+    const visibleSpeedLabelIds = selectVisibleVelocitySpeedLabelIds(
+      speedLabelCandidates,
+      velocityVectorsGroup?.visible ?? false,
+      VELOCITY_SPEED_LABEL_MAX_VISIBLE,
+    );
+    for (const label of velocitySpeedLabelsInfo.labels) {
+      label.css2dObject.visible = visibleSpeedLabelIds.has(label.objectId);
+    }
+  }
 
   if (!labelsInfo) return;
 
@@ -1155,6 +1204,14 @@ loadScene()
     // in `animate()`, is what turns it on/off from here on.
     velocityVectorsGroup = createVelocityVectorsLayer(sceneData.objects, denseBatchRadiusPc);
     scene.add(velocityVectorsGroup);
+
+    // Issue #236: the speed-label pool for those same arrows - built once
+    // here too. Every label starts life un-toggled either way (visibility
+    // is driven entirely by `updateLabelVisibility`'s new speed-label block,
+    // called right after this `.then()` finishes below, before the first
+    // real frame renders).
+    velocitySpeedLabelsInfo = createVelocitySpeedLabelsLayer(sceneData.objects, denseBatchRadiusPc);
+    scene.add(velocitySpeedLabelsInfo.group);
 
     // Issue #215: `localBubbleStructure`/`bubbleOuterRadiusPc` are populated
     // here, before `createCatalogObjectGroup` below, rather than at their
