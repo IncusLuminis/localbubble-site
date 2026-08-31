@@ -1031,7 +1031,18 @@ body {
   padding: 6px 10px;
   background: rgba(10, 14, 24, 0.6);
   font-size: 11px;
-  z-index: 2;
+  /* Issue #251: same root cause as #193's `#inspector` fix and #185's
+     `.object-label.selected` fix above - CSS2DRenderer's `zOrder()` sets an
+     inline `style.zIndex` on every star/structure label every frame based on
+     camera distance, topping out around the current live label count
+     (100-200+ since #159 uncapped dense-LOD labels). `.panel`'s shared
+     `z-index: 2` (above) is far below that, so labels visually float on top
+     of the open player panel. `!important` is required to win over the
+     per-frame inline style. `600` sits above every ordinary label and the
+     selected label's `500 !important`, while staying below
+     `.info-dialog-scrim`'s `1000` so an open Info dialog still wins over an
+     open player panel - mirrors `#inspector`'s own value exactly. */
+  z-index: 600 !important;
 }
 
 #player-panel.open {
