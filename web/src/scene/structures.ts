@@ -177,6 +177,21 @@ const STRUCTURE_TUBE_OPACITY = 0.35;
  * keep faint spatial context). */
 const STRUCTURE_DIM_FACTOR = 0.15;
 
+/** Issue #227: the gentler, earlier-triggering counterpart to
+ * `STRUCTURE_DIM_FACTOR` above, applied to the Gould Belt/Radcliffe Wave
+ * overlays once the camera is inside the Local Bubble but not yet inside
+ * the RECONS dense-batch sphere. Own constant, not imported from
+ * `objects.ts`, matching this file's existing convention (see
+ * `STRUCTURE_DIM_FACTOR`'s own docstring) - kept numerically equal to
+ * `objects.ts`'s `BUBBLE_BACKGROUND_DIM_FACTOR` so every dimmed thing
+ * (catalog buckets and these two structure overlays alike) recedes by the
+ * same proportion at this tier too. Deliberately NOT applied to
+ * `setLocalBubbleDimmed` below - the Local Bubble's own boundary shell
+ * dimming stays tied only to the sphere trigger, unchanged (dimming the
+ * bubble's own shell while the camera is inside that same bubble would be
+ * self-referential and visually wrong, per the issue). */
+const BUBBLE_STRUCTURE_DIM_FACTOR = 0.6;
+
 /**
  * Issue #124 (optional per the acceptance criteria): a small, unobtrusive
  * `CSS2DObject` label for a structure overlay, positioned at one
@@ -471,43 +486,99 @@ function structureLayerMesh(group: Group | null): Mesh | null {
 
 /**
  * Issue #137: dims (or restores) a structure-layer overlay's own mesh
- * opacity in place. Unlike `objects.ts`'s `updateBackgroundDimming` (which
- * swaps `InstancedMesh.material` between cached instances rather than
- * mutating one in place, because that cache is a module-level singleton
- * shared across independent `createCatalogObjectGroup` calls), each call to
+ * opacity in place, to `baseOpacity * factor`. Unlike `objects.ts`'s
+ * `updateBackgroundDimming` (which swaps `InstancedMesh.material` between
+ * cached instances rather than mutating one in place, because that cache is
+ * a module-level singleton shared across independent
+ * `createCatalogObjectGroup` calls), each call to
  * `createGouldBeltLayer`/`createRadcliffeWaveLayer`/`createLocalBubbleLayer`
  * builds a brand-new, NOT-cached `MeshBasicMaterial` (see `tubeFromPoints`/
  * `createLocalBubbleLayer` above - no `materialFor`-style cache in this
  * file) - so there is no other owner of this exact material instance to
  * leak a mutation into, and in-place `.opacity` mutation is both simpler and
  * safe here. Restoring always resets to the same known `baseOpacity`
- * constant (never derived from the current, possibly-dimmed value), so
- * repeated dim/restore cycles can never drift.
+ * constant times a `factor` of `1` (never derived from the current,
+ * possibly-dimmed value), so repeated dim/restore cycles can never drift.
+ *
+ * Issue #227: took a plain `dimmed: boolean` before; now takes the already-
+ * resolved `factor` directly (`1` / `BUBBLE_STRUCTURE_DIM_FACTOR` /
+ * `STRUCTURE_DIM_FACTOR`) so this one shared helper can serve both the
+ * three-tier callers below (`setGouldBeltDimmed`/`setRadcliffeWaveDimmed`)
+ * and the still-two-tier `setLocalBubbleDimmed` without duplicating the
+ * material-mutation logic itself.
  */
-function setStructureLayerDimmed(group: Group | null, baseOpacity: number, dimmed: boolean): void {
+function setStructureLayerOpacityFactor(
+  group: Group | null,
+  baseOpacity: number,
+  factor: number,
+): void {
   const mesh = structureLayerMesh(group);
   if (!mesh) {
     return;
   }
   const material = mesh.material as MeshBasicMaterial;
-  material.opacity = dimmed ? baseOpacity * STRUCTURE_DIM_FACTOR : baseOpacity;
+  material.opacity = baseOpacity * factor;
 }
 
-/** Dims/restores the Gould Belt tube overlay (issue #137). No-op if the
- * layer wasn't built (`createGouldBeltLayer` returned `null`). */
-export function setGouldBeltDimmed(group: Group | null, dimmed: boolean): void {
-  setStructureLayerDimmed(group, STRUCTURE_TUBE_OPACITY, dimmed);
+/** Issue #227: resolves the two "inside" booleans `main.ts`'s
+ * `applyBackgroundDimming` computes each frame into the single opacity
+ * factor `setStructureLayerOpacityFactor` above needs, for the two overlays
+ * (Gould Belt, Radcliffe Wave) that now get the full three-tier treatment.
+ * `insideSphere` takes priority over `insideBubble` (the sphere always sits
+ * inside the bubble, so both can be `true` at once - the strongest
+ * applicable tier should win), mirroring `objects.ts`'s
+ * `backgroundBucketOpacity` priority exactly so every dimmed thing in the
+ * scene agrees on which tier wins when both are true. */
+function structureLayerDimFactor(insideSphere: boolean, insideBubble: boolean): number {
+  if (insideSphere) {
+    return STRUCTURE_DIM_FACTOR;
+  }
+  if (insideBubble) {
+    return BUBBLE_STRUCTURE_DIM_FACTOR;
+  }
+  return 1;
 }
 
-/** Dims/restores the Radcliffe Wave tube overlay (issue #137). No-op if the
- * layer wasn't built (`createRadcliffeWaveLayer` returned `null`). */
-export function setRadcliffeWaveDimmed(group: Group | null, dimmed: boolean): void {
-  setStructureLayerDimmed(group, STRUCTURE_TUBE_OPACITY, dimmed);
+/** Dims/restores the Gould Belt tube overlay (issue #137; three-tier since
+ * issue #227). No-op if the layer wasn't built (`createGouldBeltLayer`
+ * returned `null`). `insideBubble` defaults to `false` so existing
+ * sphere-only callers/tests (`setGouldBeltDimmed(group, true)`) keep
+ * behaving exactly as before. */
+export function setGouldBeltDimmed(
+  group: Group | null,
+  insideSphere: boolean,
+  insideBubble = false,
+): void {
+  setStructureLayerOpacityFactor(
+    group,
+    STRUCTURE_TUBE_OPACITY,
+    structureLayerDimFactor(insideSphere, insideBubble),
+  );
+}
+
+/** Dims/restores the Radcliffe Wave tube overlay (issue #137; three-tier
+ * since issue #227). No-op if the layer wasn't built
+ * (`createRadcliffeWaveLayer` returned `null`). Same `insideBubble` default
+ * as `setGouldBeltDimmed` above, for the same reason. */
+export function setRadcliffeWaveDimmed(
+  group: Group | null,
+  insideSphere: boolean,
+  insideBubble = false,
+): void {
+  setStructureLayerOpacityFactor(
+    group,
+    STRUCTURE_TUBE_OPACITY,
+    structureLayerDimFactor(insideSphere, insideBubble),
+  );
 }
 
 /** Dims/restores the Local Bubble wireframe ellipsoid overlay (issue #137).
  * No-op if the layer wasn't built (`createLocalBubbleLayer` returned
- * `null`). */
+ * `null`). Issue #227: deliberately stays a plain two-tier `dimmed: boolean`
+ * tied only to the RECONS sphere trigger, unchanged - the bubble's own
+ * boundary shell dimming itself as the camera enters that very bubble would
+ * be self-referential and visually wrong, so this never gets the new
+ * bubble-tier treatment `setGouldBeltDimmed`/`setRadcliffeWaveDimmed` do. */
 export function setLocalBubbleDimmed(group: Group | null, dimmed: boolean): void {
-  setStructureLayerDimmed(group, LOCAL_BUBBLE_OPACITY, dimmed);
+  setStructureLayerOpacityFactor(group, LOCAL_BUBBLE_OPACITY, dimmed ? STRUCTURE_DIM_FACTOR : 1);
 }

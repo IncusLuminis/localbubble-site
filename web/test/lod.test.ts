@@ -3,6 +3,7 @@ import {
   DENSE_BATCH_GROUP_TAG,
   denseBatchCollectionRadiusPc,
   isCameraInsideDenseBatchSphere,
+  isCameraInsideLocalBubble,
   isDenseBatchMember,
   passesDenseBatchLod,
 } from "../src/scene/lod";
@@ -153,5 +154,45 @@ describe("isCameraInsideDenseBatchSphere", () => {
   it("is false at a 0 collection radius (e.g. before scene load), regardless of camera distance", () => {
     expect(isCameraInsideDenseBatchSphere(0, 0)).toBe(false);
     expect(isCameraInsideDenseBatchSphere(1087, 0)).toBe(false);
+  });
+});
+
+/**
+ * Issue #227: the analogous "is the camera inside the Local Bubble at all"
+ * boolean, one tier out from `isCameraInsideDenseBatchSphere` above - same
+ * hard `<=` threshold shape, but gated on `bubbleOuterRadiusPc` (~60pc)
+ * instead of the RECONS sphere's own, much smaller collection radius.
+ */
+describe("isCameraInsideLocalBubble", () => {
+  const bubbleOuterRadiusPc = 60;
+
+  it("is true when the camera is well within the bubble", () => {
+    expect(isCameraInsideLocalBubble(30, bubbleOuterRadiusPc)).toBe(true);
+  });
+
+  it("is false when the camera is well outside the bubble", () => {
+    expect(isCameraInsideLocalBubble(1087, bubbleOuterRadiusPc)).toBe(false);
+  });
+
+  it("treats the bubble radius as inclusive (camera exactly at the boundary counts as inside)", () => {
+    expect(isCameraInsideLocalBubble(bubbleOuterRadiusPc, bubbleOuterRadiusPc)).toBe(true);
+  });
+
+  it("is false just outside the boundary", () => {
+    expect(isCameraInsideLocalBubble(bubbleOuterRadiusPc + 0.01, bubbleOuterRadiusPc)).toBe(false);
+  });
+
+  it("is true well inside the boundary even at RECONS-sphere-scale distances (the sphere always sits inside the bubble)", () => {
+    expect(isCameraInsideLocalBubble(5, bubbleOuterRadiusPc)).toBe(true);
+  });
+
+  it("is false when bubbleOuterRadiusPc is null (no Local Bubble layer in the loaded scene), regardless of camera distance", () => {
+    expect(isCameraInsideLocalBubble(0, null)).toBe(false);
+    expect(isCameraInsideLocalBubble(1087, null)).toBe(false);
+  });
+
+  it("is false at a 0 or negative bubble radius, regardless of camera distance", () => {
+    expect(isCameraInsideLocalBubble(0, 0)).toBe(false);
+    expect(isCameraInsideLocalBubble(1087, 0)).toBe(false);
   });
 });

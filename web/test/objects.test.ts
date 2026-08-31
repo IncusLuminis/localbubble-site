@@ -751,6 +751,50 @@ describe("backgroundBucketOpacity (issue #137)", () => {
   });
 });
 
+/**
+ * Issue #227: the new, earlier-triggering, gentler dim tier - the camera is
+ * inside the much larger Local Bubble but not yet inside the RECONS dense
+ * batch sphere. Covers the three-way `backgroundBucketOpacity` decision
+ * (full / bubble-tier / sphere-tier), the sphere-takes-priority rule for
+ * when both booleans are true (which they always are once the camera is
+ * inside the RECONS sphere, since that sphere always sits inside the
+ * bubble), and that the star bucket still stays untouched at every tier.
+ */
+describe("backgroundBucketOpacity - Local Bubble tier (issue #227)", () => {
+  it("returns the normal, undimmed opacity when the camera is outside both boundaries", () => {
+    expect(backgroundBucketOpacity("star_cluster", false, false)).toBe(
+      markerOpacityFor("star_cluster"),
+    );
+  });
+
+  it("never dims the star bucket, even when inside the bubble", () => {
+    expect(backgroundBucketOpacity("star", false, true)).toBe(markerOpacityFor("star"));
+  });
+
+  it("dims a non-star bucket gently when inside the bubble but outside the sphere", () => {
+    const dimmed = backgroundBucketOpacity("star_cluster", false, true);
+    expect(dimmed).toBeLessThan(markerOpacityFor("star_cluster"));
+    expect(dimmed).toBeGreaterThan(0);
+  });
+
+  it("the bubble tier is gentler than the sphere tier (dims less strongly)", () => {
+    const bubbleDimmed = backgroundBucketOpacity("star_cluster", false, true);
+    const sphereDimmed = backgroundBucketOpacity("star_cluster", true, true);
+    expect(bubbleDimmed).toBeGreaterThan(sphereDimmed);
+    expect(bubbleDimmed).toBeLessThan(markerOpacityFor("star_cluster"));
+  });
+
+  it("the sphere tier wins when both booleans are true (sphere is always inside the bubble)", () => {
+    const bothTrue = backgroundBucketOpacity("star_cluster", true, true);
+    const sphereOnly = backgroundBucketOpacity("star_cluster", true, false);
+    expect(bothTrue).toBe(sphereOnly);
+  });
+
+  it("cameraInsideLocalBubble defaults to false when omitted, matching pre-#227 callers", () => {
+    expect(backgroundBucketOpacity("star_cluster", false)).toBe(markerOpacityFor("star_cluster"));
+  });
+});
+
 describe("updateBackgroundDimming (issue #137 integration)", () => {
   it("dims non-star bucket materials but leaves the star bucket's material completely untouched", () => {
     const cluster = makeObject({ id: "cluster-a", object_type: "star_cluster" });
@@ -799,6 +843,30 @@ describe("updateBackgroundDimming (issue #137 integration)", () => {
 
   it("is a safe no-op on an empty bucket list (scene not loaded yet)", () => {
     expect(() => updateBackgroundDimming([], true)).not.toThrow();
+  });
+
+  it("issue #227: applies the gentler bubble-tier opacity, and still leaves the star bucket untouched", () => {
+    const cluster = makeObject({ id: "cluster-a", object_type: "star_cluster" });
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, cluster, STAR_A]);
+
+    const structureBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    const clusterBucket = buckets.find((b) => b.objectType === "star_cluster") as CatalogBucket;
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    const starMaterialBefore = starBucket.mesh.material;
+
+    updateBackgroundDimming(buckets, false, true);
+
+    expect(starBucket.mesh.material).toBe(starMaterialBefore);
+    const clusterOpacity = (clusterBucket.mesh.material as MeshBasicMaterial).opacity;
+    const structureOpacity = (structureBucket.mesh.material as MeshBasicMaterial).opacity;
+    expect(clusterOpacity).toBeLessThan(markerOpacityFor("star_cluster"));
+    expect(structureOpacity).toBeLessThan(markerOpacityFor("molecular_cloud"));
+
+    // Gentler than the sphere tier's ~15% factor.
+    updateBackgroundDimming(buckets, true, true);
+    const sphereClusterOpacity = (clusterBucket.mesh.material as MeshBasicMaterial).opacity;
+    expect(sphereClusterOpacity).toBeLessThan(clusterOpacity);
   });
 });
 

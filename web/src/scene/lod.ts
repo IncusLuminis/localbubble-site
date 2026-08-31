@@ -108,3 +108,35 @@ export function isCameraInsideDenseBatchSphere(
   }
   return cameraDistanceFromOriginPc <= collectionRadiusPc;
 }
+
+/**
+ * Issue #227: the analogous "is the camera currently inside the Local
+ * Bubble at all" boolean, one tier out from `isCameraInsideDenseBatchSphere`
+ * above - the RECONS dense-batch sphere (~11.26pc) always sits geometrically
+ * inside the much larger Local Bubble (~60pc, the same `bubbleOuterRadiusPc`
+ * radial simplification already established by #215/#219's
+ * `objects.ts`'s `bubbleOuterRadiusPcFrom`), so together these two
+ * predicates give `main.ts` a three-zone read on the camera's position:
+ * outside both / inside the bubble only / inside both.
+ *
+ * Deliberately mirrors `isCameraInsideDenseBatchSphere`'s exact shape - a
+ * hard `<=` threshold snap, not a smooth ramp, and the same "nothing to be
+ * inside of yet" guard - so the two trigger boundaries behave consistently
+ * and neither introduces a different transition feel than the other.
+ * `bubbleOuterRadiusPc` is `number | null` (unlike `collectionRadiusPc`,
+ * which is always a plain number defaulting to `0`) because `main.ts`
+ * already carries it that way - `bubbleOuterRadiusPcFrom` returns `null`
+ * before the scene loads, or thereafter if the loaded scene has no
+ * `structures.local_bubble` layer at all (spec §38: an absent optional
+ * structure must not error) - so `null` is treated the same as a
+ * non-positive radius here: nothing to be inside of.
+ */
+export function isCameraInsideLocalBubble(
+  cameraDistanceFromOriginPc: number,
+  bubbleOuterRadiusPc: number | null,
+): boolean {
+  if (bubbleOuterRadiusPc === null || bubbleOuterRadiusPc <= 0) {
+    return false;
+  }
+  return cameraDistanceFromOriginPc <= bubbleOuterRadiusPc;
+}
