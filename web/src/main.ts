@@ -63,8 +63,11 @@ import {
   clampPlayerTimeYears,
   isUiLockedForPlayerTime,
   logSpeedSliderToYearsPerSecond,
+  nextPlayerPlaybackStateForDirectionButton,
   nextPlayerStateForSphere,
   starPositionAtTime,
+  stepPlayerTimeYears,
+  type PlayerDirection,
 } from "./scene/motionPlayer";
 import {
   createMotionTrailsLayer,
@@ -532,14 +535,25 @@ let playerTimeYears = 0;
 let playerPlaying = false;
 let playerPanelOpen = false;
 
-/** Story #239: default speed-slider position (`[-1, 1]`, positive = forward)
- * - a moderate forward rate so the very first Play press already shows
- * clearly visible motion within a couple of seconds without the user
- * needing to touch the slider first. Live-tuned in the running viewer
- * alongside `motionPlayer.ts`'s `MIN_YEARS_PER_REAL_SECOND`/
+/** Story #243: which way the player is currently playing, or would resume
+ * playing in if a direction button were pressed again while paused - the
+ * ONE source of truth for playback direction now that the speed slider is
+ * magnitude-only (see `logSpeedSliderToYearsPerSecond`'s updated docstring).
+ * Defaults to forward, matching the toolbar Play button's own
+ * first-press-plays-forward behavior below. Every write site routes through
+ * `nextPlayerPlaybackStateForDirectionButton` (the `<`/`>` buttons) or is
+ * left untouched (pause/step/scrub never change direction, only whether/
+ * where the player is playing). */
+let playerDirection: PlayerDirection = 1;
+
+/** Story #239 (Story #243: now a MAGNITUDE, `[0, 1]`, direction removed) -
+ * default speed-slider position: a moderate rate so the very first Play
+ * press already shows clearly visible motion within a couple of seconds
+ * without the user needing to touch the slider first. Live-tuned in the
+ * running viewer alongside `motionPlayer.ts`'s `MIN_YEARS_PER_REAL_SECOND`/
  * `MAX_YEARS_PER_REAL_SECOND` anchors themselves - see the PR description. */
-const DEFAULT_PLAYER_SPEED_SLIDER_VALUE = 0.55;
-let playerSpeedSliderValue = DEFAULT_PLAYER_SPEED_SLIDER_VALUE;
+const DEFAULT_PLAYER_SPEED_MAGNITUDE = 0.55;
+let playerSpeedMagnitude = DEFAULT_PLAYER_SPEED_MAGNITUDE;
 
 /** Story #239: the ~127 in-sphere stars with velocity data (Epic #229's
  * `starsWithVelocityInSphere`, reused directly - never reimplemented),
@@ -587,19 +601,20 @@ let uiLocked = false;
  * Structures panel), mirroring `inspector`/`searchDialog`/`infoDialog`'s own
  * "always exists, shown/hidden via a method call" convention. */
 const playerPanelHandle = createPlayerPanel({
-  onTogglePlayPause: () => togglePlayerPlaying(),
+  onPlayDirection: (direction) => handlePlayerDirectionButton(direction),
+  onStep: (direction) => handlePlayerStepButton(direction),
   onScrub: (tYears) => {
     setPlayerPlaying(false);
     playerTimeYears = clampPlayerTimeYears(tYears);
   },
   onSpeedChange: (sliderValue) => {
-    playerSpeedSliderValue = sliderValue;
+    playerSpeedMagnitude = sliderValue;
   },
   onToday: () => {
     setPlayerPlaying(false);
     playerTimeYears = 0;
   },
-  defaultSpeedSliderValue: DEFAULT_PLAYER_SPEED_SLIDER_VALUE,
+  defaultSpeedMagnitude: DEFAULT_PLAYER_SPEED_MAGNITUDE,
 });
 app.appendChild(playerPanelHandle.element);
 
@@ -744,17 +759,52 @@ function applyVelocityVectorsButtonState(insideSphere: boolean): void {
 }
 
 /** Story #239: the single writer for the player's play/pause state - shared
- * by the toolbar button's click handler and the panel's own play/pause
- * control (`onTogglePlayPause` above) so the two can never disagree about
+ * by the toolbar button's click handler and (Story #243) the panel's own
+ * transport-button handlers below, so all of them can never disagree about
  * whether the player is currently playing, mirroring how
  * `applyVelocityVectorsButtonState` is the single writer for that toggle's
- * `aria-pressed`/`.active` state. */
+ * `aria-pressed`/`.active` state. Never writes `playerDirection` itself -
+ * that's `handlePlayerDirectionButton`'s own job, since pausing/resuming via
+ * this function alone (the toolbar button, a step, a scrub, Today) must
+ * never silently change which direction the player would next resume in. */
 function setPlayerPlaying(next: boolean): void {
   playerPlaying = next;
   playerButton.setAttribute("aria-pressed", String(playerPlaying));
   playerButton.classList.toggle("active", playerPlaying);
 }
 
+/** Story #243: the panel's `<`/`>` continuous-play button handler - resolves
+ * the full "toggle-off same direction / reverse-and-keep-playing opposite
+ * direction / start playing from paused" rule via `motionPlayer.ts`'s pure
+ * `nextPlayerPlaybackStateForDirectionButton`, then applies both resulting
+ * fields (`playerDirection` directly, `playing` via `setPlayerPlaying` so
+ * the toolbar button's own state never drifts out of sync). */
+function handlePlayerDirectionButton(direction: PlayerDirection): void {
+  const next = nextPlayerPlaybackStateForDirectionButton(
+    { playing: playerPlaying, direction: playerDirection },
+    direction,
+  );
+  playerDirection = next.direction;
+  setPlayerPlaying(next.playing);
+}
+
+/** Story #243: the panel's `|<`/`>|` step-button handler - AC: "pressing a
+ * step button while continuous play is active pauses first, then applies
+ * the step; pressing while already paused just steps and stays paused" - so
+ * this unconditionally pauses (a no-op if already paused) before applying
+ * `stepPlayerTimeYears`'s single fixed nudge, never leaving playback running
+ * afterward either way. Does not touch `playerDirection` - a step in either
+ * direction has no bearing on which way a SUBSEQUENT `<`/`>` press should
+ * resume playing. */
+function handlePlayerStepButton(direction: PlayerDirection): void {
+  setPlayerPlaying(false);
+  playerTimeYears = stepPlayerTimeYears(playerTimeYears, direction);
+}
+
+/** Story #239: the toolbar Play/Pause button's own toggle - unlike the
+ * panel's `<`/`>` buttons (Story #243's `handlePlayerDirectionButton`), this
+ * one never changes `playerDirection`: pausing/resuming from the toolbar
+ * always resumes in whichever direction was last active. */
 function togglePlayerPlaying(): void {
   setPlayerPlaying(!playerPlaying);
 }
@@ -823,6 +873,14 @@ function applyPlayerSphereState(insideSphere: boolean): void {
   playerTimeYears = next.timeYears;
   playerPlaying = next.playing;
   playerPanelOpen = next.panelOpen;
+  // Story #243: `PlayerState` (the pure `nextPlayerStateForSphere` above)
+  // doesn't carry direction, so reset it here alongside the other three
+  // force-reset fields - a fresh session re-entering the sphere should
+  // always default back to forward, not silently resume whichever direction
+  // happened to be active when a PREVIOUS session left the sphere.
+  if (!insideSphere) {
+    playerDirection = 1;
+  }
 
   playerButton.disabled = !insideSphere;
   playerButton.setAttribute("aria-pressed", String(playerPlaying));
@@ -851,7 +909,10 @@ function applyPlayerSphereState(insideSphere: boolean): void {
  */
 function applyPlayerAnimation(deltaSeconds: number): void {
   if (playerPlaying) {
-    const yearsPerRealSecond = logSpeedSliderToYearsPerSecond(playerSpeedSliderValue);
+    // Story #243: the slider now yields an unsigned RATE MAGNITUDE only -
+    // `playerDirection` (the single source of truth for direction, owned by
+    // the `<`/`>` transport buttons) supplies the sign.
+    const yearsPerRealSecond = playerDirection * logSpeedSliderToYearsPerSecond(playerSpeedMagnitude);
     const result = advancePlayerTimeYears(playerTimeYears, deltaSeconds, yearsPerRealSecond);
     playerTimeYears = result.timeYears;
     if (result.reachedToday) {
@@ -915,14 +976,18 @@ function applyPlayerAnimation(deltaSeconds: number): void {
     // rather than showing positions never actually animated through.
     const trail = trailByObjectId.get(obj.id);
     if (trail) {
-      trail.line.visible = trailsVisible && visible;
+      trail.mesh.visible = trailsVisible && visible;
       if (trailsVisible) {
-        updateStarTrail(trail, starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears));
+        updateStarTrail(
+          trail,
+          starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears),
+          camera.position,
+        );
       }
     }
   }
 
-  playerPanelHandle.update({ tYears: playerTimeYears, playing: playerPlaying });
+  playerPanelHandle.update({ tYears: playerTimeYears, playing: playerPlaying, direction: playerDirection });
   syncUiLock();
 }
 

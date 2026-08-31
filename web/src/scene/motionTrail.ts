@@ -1,10 +1,13 @@
 import {
   BufferGeometry,
   Color,
+  DoubleSide,
   Float32BufferAttribute,
   Group,
-  Line,
-  LineBasicMaterial,
+  Mesh,
+  MeshBasicMaterial,
+  Uint16BufferAttribute,
+  Vector3,
 } from "three";
 import { clampPlayerTimeYears, starPositionAtTime } from "./motionPlayer";
 import type { SceneObject, SceneVelocity } from "./sceneTypes";
@@ -23,6 +26,31 @@ import type { SceneObject, SceneVelocity } from "./sceneTypes";
  * `starTrailPositionsPc`/`isTrailVisible`) is directly unit-testable under
  * this repo's `environment: "node"` Vitest config; `createMotionTrailsLayer`/
  * `updateStarTrail` below that touch Three.js are not.
+ *
+ * Story #243 Part 3 (polish, post-merge): the original plain `THREE.Line`
+ * rendering read as too faint/thin against the starfield (human owner's own
+ * live-testing complaint - see the PR description). Root cause: plain
+ * `THREE.Line`/`LineBasicMaterial` renders through `gl.LINES`, which every
+ * major browser's ANGLE/WebGL backend caps at a hard 1-CSS-pixel width
+ * regardless of `material.linewidth` (a decade-old, still-unfixed WebGL
+ * limitation, NOT a three.js bug - three.js's own `Line2`/`LineMaterial`
+ * fat-line solution exists specifically to work around it). Rather than pull
+ * in `Line2`/`LineGeometry`/`LineMaterial` (which would need a `resolution`
+ * uniform kept in sync with the renderer's pixel size across ~127 per-star
+ * materials, AND doesn't support the original's per-vertex alpha fade -
+ * `LineMaterial` only exposes a single scalar `opacity` uniform, not a
+ * `vColor` alpha channel), `createMotionTrailsLayer`/`updateStarTrail` below
+ * now build each trail as a small camera-facing RIBBON MESH (a
+ * `MeshBasicMaterial` triangle strip, billboarded per vertex toward the
+ * camera every frame) - real triangle geometry with a genuinely
+ * configurable width, no `gl.LINES` 1px ceiling involved at all, and it
+ * keeps the original's per-vertex RGBA fade working exactly as before (a
+ * `vec4` vertex-color attribute IS supported for ordinary meshes). This
+ * also matches this app's own established "small purpose-built geometry
+ * over library shortcuts" convention (`structures.ts`,
+ * `denseBatchBoundary.ts`, `sunMarker` all build their own small meshes
+ * rather than reaching for a three.js examples/ helper) more closely than
+ * pulling in the `lines/` example module would.
  */
 
 /**
@@ -48,21 +76,50 @@ import type { SceneObject, SceneVelocity } from "./sceneTypes";
 export const TRAIL_WINDOW_YEARS = 60_000;
 
 /**
- * Number of line segments per trail (so `TRAIL_SEGMENT_COUNT + 1` sampled
- * positions/vertices) - smooth enough to read as a curved recent path
- * (velocity is extrapolated linearly per star, but many stars' trails will
- * still show a visibly straight line at this scale; segments matter mainly
- * for a clean, even opacity gradient) while staying cheap: `127 stars *
- * (TRAIL_SEGMENT_COUNT + 1)` position evaluations per frame is trivial
- * (~3,175 at this value), and per-star `Line` objects (not a shared
- * InstancedMesh/batched buffer) match `velocityVectors.ts`'s own precedent
- * of not forcing ~127 objects into an instanced system, per this Story's AC.
+ * Number of ribbon segments per trail (so `TRAIL_SEGMENT_COUNT + 1` sampled
+ * cross-sections, each `2` mesh vertices wide - Story #243 Part 3) - smooth
+ * enough to read as a curved recent path (velocity is extrapolated linearly
+ * per star, but many stars' trails will still show a visibly straight line
+ * at this scale; segments matter mainly for a clean, even opacity gradient)
+ * while staying cheap: `127 stars * (TRAIL_SEGMENT_COUNT + 1)` position
+ * evaluations per frame is trivial (~3,175 at this value), and per-star
+ * `Mesh` objects (not a shared InstancedMesh/batched buffer) match
+ * `velocityVectors.ts`'s own precedent of not forcing ~127 objects into an
+ * instanced system, per this Story's AC.
  */
 export const TRAIL_SEGMENT_COUNT = 24;
 
-/** Opacity at the trail's oldest (tail) vertex - fully transparent, so the
- * trail visibly fades to nothing rather than ending in a hard cut. */
-const MIN_TRAIL_OPACITY = 0;
+/**
+ * Story #243 Part 3: the ribbon's angular half-width (radians), applied as
+ * `halfWidthPc = TRAIL_ANGULAR_HALF_WIDTH_RAD * distanceFromCameraPc` at
+ * each vertex (`updateStarTrail` below) - scaling with camera distance
+ * (rather than a single fixed pc width) keeps the trail reading as a
+ * consistent, clearly-visible ribbon at both the app's close-up and
+ * zoomed-out camera presets, the same way `Line2`'s screen-space width
+ * would, without needing a `resolution` uniform. `0.004` rad (~0.23 degrees
+ * of half-angle, ~0.46 degrees full width) was live-tuned in the running
+ * viewer: an initial `0.01` read as clearly visible but too heavy at
+ * typical dense-batch-sphere zoom (fast movers' multi-parsec-long trails
+ * came out as thick, label-width bars that started to visually compete with
+ * the star markers and crowd the view when several were on screen at once);
+ * this value keeps the same "definitely no longer a 1px hairline" win while
+ * reading as a genuinely thin ribbon/streak - see the PR description for
+ * the before/after screenshots this was checked against.
+ */
+export const TRAIL_ANGULAR_HALF_WIDTH_RAD = 0.004;
+
+/**
+ * Opacity at the trail's oldest (tail) vertex - Story #243 Part 3: raised
+ * from `0` (fully transparent) to a visible floor, per the issue's own
+ * "a higher opacity floor... may help regardless of line width" suggestion -
+ * the human owner's complaint was that trails "get lost" against the
+ * starfield, and a tail that fades all the way to nothing was part of that
+ * (the oldest, most sparsely-sampled stretch of a fast-moving star's trail
+ * could read as barely-there even before it visually reached the true tail
+ * cutoff). Still well below `MAX_TRAIL_OPACITY` so the fade gradient (and
+ * the "which end is the current position" cue it gives) is clearly
+ * preserved - only the FLOOR moved, not the fade itself. */
+const MIN_TRAIL_OPACITY = 0.25;
 
 /** Opacity at the trail's newest (front) vertex, exactly at the star's
  * current animated marker position - near-solid, deliberately just below
@@ -73,14 +130,19 @@ const MIN_TRAIL_OPACITY = 0;
  * principle). */
 const MAX_TRAIL_OPACITY = 0.85;
 
-/** A warm gold/amber, chosen to read as a light streak distinct from every
- * other color already in this app's palette: `velocityVectors.ts`'s green
+/**
+ * Story #243 Part 3: a brighter, more saturated amber than the original
+ * `0xffcc66` gold - the same warm hue (still reads as a distinct "light
+ * streak" color, not confusable with `velocityVectors.ts`'s green
  * (0x39ff6a)/coral (0xff5c3d), `structures.ts`'s orange Gould Belt/cyan
- * Radcliffe Wave/violet Local Bubble, `denseBatchBoundary.ts`'s blue-grey -
- * and from the OBAFGKM star marker colors themselves (`spectralColor.ts`,
- * all blue/white/yellow/orange/red), so a trail never reads as "just
- * another star color" any more than a velocity arrow does. */
-const TRAIL_COLOR = 0xffcc66;
+ * Radcliffe Wave/violet Local Bubble, `denseBatchBoundary.ts`'s blue-grey,
+ * or the OBAFGKM star marker colors themselves), just pushed toward a
+ * hotter, higher-contrast amber so it doesn't wash out against the
+ * starfield's own whites/blues at typical brightness - live-verified
+ * against a starfield screenshot alongside the width/opacity changes above
+ * (see the PR description).
+ */
+const TRAIL_COLOR = 0xffb833;
 
 /**
  * The trail's window start (years) given the player's current absolute
@@ -188,36 +250,52 @@ export function isTrailVisible(currentTimeYears: number): boolean {
 }
 
 /** One animated star's trail: the `SceneObject.id` it belongs to, the
- * `Line` added to the scene graph, and its position/color buffer attributes
- * - `updateStarTrail` below writes fresh positions into `positionAttr` every
- * frame; `colorAttr` (the fade gradient) is written once at construction
- * and never changes. */
+ * ribbon `Mesh` added to the scene graph (Story #243 Part 3 - previously a
+ * plain `Line`), and its position buffer attribute - `updateStarTrail`
+ * below writes fresh, camera-billboarded positions into `positionAttr`
+ * every frame; the color attribute (the fade gradient) and the index buffer
+ * (the ribbon's triangle pattern) are both written once at construction and
+ * never change. */
 export interface StarTrail {
   objectId: string;
-  line: Line;
+  mesh: Mesh;
   positionAttr: Float32BufferAttribute;
+  /** Number of sampled cross-sections along the trail
+   * (`TRAIL_SEGMENT_COUNT + 1`) - NOT the mesh's actual vertex count (`2x`
+   * this: one pair of left/right ribbon-edge vertices per cross-section) -
+   * `updateStarTrail` iterates this many `positionsPc` entries. */
+  sampleCount: number;
 }
 
 /**
- * Builds the full motion-trails layer: one `Line` per Story #239's
+ * Builds the full motion-trails layer: one ribbon `Mesh` per Story #239's
  * `starsWithVelocityInSphere` result (passed in as `animatedStars`, reused
  * directly - never reimplemented), each with `TRAIL_SEGMENT_COUNT + 1`
- * vertices and a baked-once RGBA vertex-color fade gradient (transparent at
- * the oldest end to `MAX_TRAIL_OPACITY` at the newest/current-position end)
- * - a plain fading-vertex-colors `Line` per the issue's own suggested
- * approach over a custom shader. Positions start at the origin (all zero);
- * `main.ts`'s `applyPlayerAnimation` writes real positions via
- * `updateStarTrail` every frame before anything is ever visible (the group
- * starts `visible = false`, matching `velocityVectors.ts`'s own
- * `createVelocityVectorsLayer` convention), so no stale/zero geometry is
- * ever shown.
+ * sampled cross-sections (`2` mesh vertices each, the ribbon's left/right
+ * edges) and a baked-once RGBA vertex-color fade gradient (`MIN_TRAIL_OPACITY`
+ * at the oldest end to `MAX_TRAIL_OPACITY` at the newest/current-position
+ * end, the same value duplicated across both edge vertices at a given
+ * cross-section). The index buffer (two triangles per segment, the ribbon's
+ * quad strip) is also static and identical for every trail - built once
+ * from `TRAIL_SEGMENT_COUNT` alone and shared read-only across every
+ * geometry, since only each trail's POSITIONS differ. Positions start at
+ * the origin (all zero); `main.ts`'s `applyPlayerAnimation` writes real,
+ * camera-billboarded positions via `updateStarTrail` every frame before
+ * anything is ever visible (the group starts `visible = false`, matching
+ * `velocityVectors.ts`'s own `createVelocityVectorsLayer` convention), so
+ * no stale/zero geometry is ever shown.
  *
- * `line.frustumCulled = false` on each trail: the geometry's bounding
+ * `mesh.frustumCulled = false` on each trail: the geometry's bounding
  * sphere is never recomputed after construction (cheap to skip for ~127
  * short trails updated every frame; recomputing it every frame for every
  * trail would be needless per-frame CPU work for a purely visual effect),
  * so leaving frustum culling on could incorrectly cull a trail against its
- * stale (all-zero, at construction time) bounding sphere.
+ * stale (all-zero, at construction time) bounding sphere. `side: DoubleSide`:
+ * the ribbon is billboarded toward the camera every frame
+ * (`updateStarTrail` below), so it should normally always face the camera,
+ * but rendering both faces is cheap insurance against a one-frame flicker
+ * from a fast camera pan/orbit catching a ribbon from behind before the
+ * next update.
  *
  * Always returns a real (possibly empty) group, same "never null"
  * convention as `createVelocityVectorsLayer`/`createVelocitySpeedLabelsLayer`.
@@ -230,8 +308,26 @@ export function createMotionTrailsLayer(
   group.visible = false;
 
   const trails = new Map<string, StarTrail>();
-  const vertexCount = TRAIL_SEGMENT_COUNT + 1;
+  const sampleCount = TRAIL_SEGMENT_COUNT + 1;
+  const vertexCount = sampleCount * 2;
   const trailColor = new Color(TRAIL_COLOR);
+
+  // Every trail shares this exact triangle-strip-as-triangles index
+  // pattern - built once and reused (read-only) across every mesh's
+  // geometry, rather than rebuilt per star.
+  const indices = new Uint16Array(TRAIL_SEGMENT_COUNT * 6);
+  for (let i = 0; i < TRAIL_SEGMENT_COUNT; i++) {
+    const a = i * 2;
+    const b = i * 2 + 1;
+    const c = i * 2 + 2;
+    const d = i * 2 + 3;
+    indices[i * 6] = a;
+    indices[i * 6 + 1] = b;
+    indices[i * 6 + 2] = c;
+    indices[i * 6 + 3] = b;
+    indices[i * 6 + 4] = d;
+    indices[i * 6 + 5] = c;
+  }
 
   for (const obj of animatedStars) {
     if (!obj.velocity) {
@@ -240,57 +336,130 @@ export function createMotionTrailsLayer(
 
     const positions = new Float32Array(vertexCount * 3);
     const colors = new Float32Array(vertexCount * 4);
-    for (let i = 0; i < vertexCount; i++) {
-      const fraction = i / (vertexCount - 1);
+    for (let i = 0; i < sampleCount; i++) {
+      const fraction = i / (sampleCount - 1);
       const opacity = MIN_TRAIL_OPACITY + (MAX_TRAIL_OPACITY - MIN_TRAIL_OPACITY) * fraction;
-      colors[i * 4] = trailColor.r;
-      colors[i * 4 + 1] = trailColor.g;
-      colors[i * 4 + 2] = trailColor.b;
-      colors[i * 4 + 3] = opacity;
+      // Both ribbon-edge vertices at this cross-section get the same
+      // color/opacity - the fade runs along the trail's LENGTH, not across
+      // its width.
+      for (let edge = 0; edge < 2; edge++) {
+        const v = i * 2 + edge;
+        colors[v * 4] = trailColor.r;
+        colors[v * 4 + 1] = trailColor.g;
+        colors[v * 4 + 2] = trailColor.b;
+        colors[v * 4 + 3] = opacity;
+      }
     }
 
     const geometry = new BufferGeometry();
     const positionAttr = new Float32BufferAttribute(positions, 3);
     geometry.setAttribute("position", positionAttr);
     geometry.setAttribute("color", new Float32BufferAttribute(colors, 4));
+    geometry.setIndex(new Uint16BufferAttribute(indices, 1));
 
-    const material = new LineBasicMaterial({
+    const material = new MeshBasicMaterial({
       vertexColors: true,
       transparent: true,
       depthWrite: false,
+      side: DoubleSide,
     });
-    const line = new Line(geometry, material);
-    line.name = `motion-trail-${obj.id}`;
-    line.frustumCulled = false;
-    line.visible = false;
-    group.add(line);
+    const mesh = new Mesh(geometry, material);
+    mesh.name = `motion-trail-${obj.id}`;
+    mesh.frustumCulled = false;
+    mesh.visible = false;
+    group.add(mesh);
 
-    trails.set(obj.id, { objectId: obj.id, line, positionAttr });
+    trails.set(obj.id, { objectId: obj.id, mesh, positionAttr, sampleCount });
   }
 
   return { group, trails };
 }
 
+/** Reused scratch vectors for `updateStarTrail`'s per-vertex billboard math
+ * below - module-scoped rather than allocated fresh per call/per vertex,
+ * since `main.ts`'s animation loop calls this ~127 times every frame and
+ * per-frame GC churn from throwaway `Vector3`s would be wasteful for a
+ * purely visual effect. Safe to share across every trail and frame: each is
+ * fully overwritten before being read on every use, never carries state
+ * between calls. */
+const scratchTangent = new Vector3();
+const scratchToCamera = new Vector3();
+const scratchRight = new Vector3();
+
 /**
  * Writes `positionsPc` (oldest first, newest/current-marker-position last -
- * `starTrailPositionsPc`'s own ordering) into `trail`'s position buffer and
- * flags it for a GPU re-upload. A `positionsPc` shorter than the buffer
- * (only possible at exactly Today, where `starTrailPositionsPc` returns an
- * empty array - `main.ts` skips calling this at all in that case, hiding
- * the trail instead, but this guards defensively) leaves the remaining
- * buffer entries untouched rather than throwing.
+ * `starTrailPositionsPc`'s own ordering) into `trail`'s ribbon position
+ * buffer and flags it for a GPU re-upload.
+ *
+ * Story #243 Part 3: each sampled position becomes TWO mesh vertices (the
+ * ribbon's left/right edges), offset from the sampled point along a
+ * per-vertex camera-billboarded `right` vector (`tangent x toCamera`, so
+ * the ribbon stays camera-facing under any viewing angle rather than a
+ * single flat plane that could go edge-on and vanish), scaled by
+ * `TRAIL_ANGULAR_HALF_WIDTH_RAD * distanceFromCameraPc` - distance-scaled so
+ * the ribbon reads as a consistently visible width whether the camera is
+ * zoomed in close or pulled far out, the same visual goal `Line2`'s
+ * screen-space width serves. `tangent` at each sample is the (normalized)
+ * direction from its previous to its next neighbor (a plain forward/
+ * backward difference at the two endpoints); a near-zero tangent, or a
+ * `toCamera` direction nearly parallel to it (the ribbon viewed almost
+ * end-on), both fall back to an arbitrary perpendicular rather than
+ * producing a degenerate (zero-length/NaN) `right` vector for that vertex.
+ *
+ * A `positionsPc` shorter than `trail.sampleCount` (only possible at
+ * exactly Today, where `starTrailPositionsPc` returns an empty array -
+ * `main.ts` skips calling this at all in that case, hiding the trail
+ * instead, but this guards defensively) leaves the remaining buffer entries
+ * untouched rather than throwing.
  */
 export function updateStarTrail(
   trail: StarTrail,
   positionsPc: ReadonlyArray<readonly [number, number, number]>,
+  cameraPositionPc: Vector3,
 ): void {
   const array = trail.positionAttr.array as Float32Array;
-  const count = Math.min(positionsPc.length, trail.positionAttr.count);
+  const count = Math.min(positionsPc.length, trail.sampleCount);
+
   for (let i = 0; i < count; i++) {
-    const [x, y, z] = positionsPc[i];
-    array[i * 3] = x;
-    array[i * 3 + 1] = y;
-    array[i * 3 + 2] = z;
+    const p = positionsPc[i];
+    const prev = positionsPc[Math.max(0, i - 1)];
+    const next = positionsPc[Math.min(positionsPc.length - 1, i + 1)];
+
+    scratchTangent.set(next[0] - prev[0], next[1] - prev[1], next[2] - prev[2]);
+    if (scratchTangent.lengthSq() < 1e-12) {
+      scratchTangent.set(1, 0, 0);
+    } else {
+      scratchTangent.normalize();
+    }
+
+    const dx = cameraPositionPc.x - p[0];
+    const dy = cameraPositionPc.y - p[1];
+    const dz = cameraPositionPc.z - p[2];
+    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+    scratchToCamera.set(dx / distance, dy / distance, dz / distance);
+
+    scratchRight.crossVectors(scratchTangent, scratchToCamera);
+    if (scratchRight.lengthSq() < 1e-12) {
+      // The ribbon's tangent and the view direction are (near-)parallel at
+      // this vertex - fall back to an arbitrary perpendicular to the
+      // tangent so the ribbon edge stays stable rather than collapsing to
+      // zero width for a frame.
+      scratchRight.set(-scratchTangent.y, scratchTangent.x, 0);
+      if (scratchRight.lengthSq() < 1e-12) {
+        scratchRight.set(0, -scratchTangent.z, scratchTangent.y);
+      }
+    }
+    scratchRight.normalize();
+
+    const halfWidth = TRAIL_ANGULAR_HALF_WIDTH_RAD * distance;
+    const leftIndex = i * 2;
+    const rightIndex = i * 2 + 1;
+    array[leftIndex * 3] = p[0] - scratchRight.x * halfWidth;
+    array[leftIndex * 3 + 1] = p[1] - scratchRight.y * halfWidth;
+    array[leftIndex * 3 + 2] = p[2] - scratchRight.z * halfWidth;
+    array[rightIndex * 3] = p[0] + scratchRight.x * halfWidth;
+    array[rightIndex * 3 + 1] = p[1] + scratchRight.y * halfWidth;
+    array[rightIndex * 3 + 2] = p[2] + scratchRight.z * halfWidth;
   }
   trail.positionAttr.needsUpdate = true;
 }

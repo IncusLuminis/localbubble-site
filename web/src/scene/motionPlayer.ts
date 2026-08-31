@@ -17,6 +17,13 @@ import type { SceneVelocity } from "./sceneTypes";
  * `velocityVectors.ts`'s exported `starsWithVelocityInSphere` directly, per
  * both this Story's and Epic #238's explicit instruction not to reimplement
  * that selection (see `test/velocityVectors.test.ts` for its own coverage).
+ *
+ * Story #243 (polish on this Epic, post-merge): replaced the single
+ * play/pause toggle's implicit direction (the speed slider's sign) with the
+ * classic `|< < > >|` transport scheme - see `PlayerDirection`,
+ * `nextPlayerPlaybackStateForDirectionButton`, `PLAYER_STEP_YEARS`, and
+ * `stepPlayerTimeYears` below, and `logSpeedSliderToYearsPerSecond`'s
+ * updated (now magnitude-only) docstring.
  */
 
 /**
@@ -171,12 +178,10 @@ export const MIN_YEARS_PER_REAL_SECOND = 1_000;
 export const MAX_YEARS_PER_REAL_SECOND = 150_000;
 
 /**
- * Maps a speed-slider control value (`[-1, 1]`, sign = direction - negative
- * plays backward in time, positive forward, matching NASA Eyes' own
- * center-is-slow / ends-are-fast time-rate control) to a signed
- * years-per-real-second playback rate, logarithmic in magnitude between
- * `MIN_YEARS_PER_REAL_SECOND` (`|sliderValue|` at or near 0) and
- * `MAX_YEARS_PER_REAL_SECOND` (`|sliderValue| = 1`).
+ * Maps a speed-slider control value (`[0, 1]`, MAGNITUDE only - see Story
+ * #243) to an unsigned years-per-real-second playback RATE, logarithmic
+ * between `MIN_YEARS_PER_REAL_SECOND` (`sliderValue` at or near 0) and
+ * `MAX_YEARS_PER_REAL_SECOND` (`sliderValue = 1`).
  *
  * Logarithmic (not linear) interpolation is the entire point of this
  * function (Epic #238's explicit "NASA Eyes-on-Solar-System style" log-speed
@@ -186,19 +191,105 @@ export const MAX_YEARS_PER_REAL_SECOND = 150_000;
  * fast end - small movements read as "gentle" near slow, "a lot" near fast,
  * per Story #239's own live-verification AC.
  *
- * `sliderValue` is clamped to `[-1, 1]` defensively (a scrub event or
+ * Story #243 changed this from a SIGNED `[-1, 1]` input (sign = direction)
+ * to an unsigned `[0, 1]` magnitude: with the new |</></>| transport buttons,
+ * direction is owned exclusively by which of `<`/`>` is currently active
+ * (see `nextPlayerPlaybackStateForDirectionButton` below) - having the slider
+ * ALSO carry a sign would be a second, potentially-disagreeing source of
+ * truth for direction, which Story #243's AC explicitly calls out to avoid.
+ * Callers (`main.ts`'s `applyPlayerAnimation`) multiply this unsigned rate by
+ * the separately-tracked `PlayerDirection` (`1` or `-1`) to get the signed
+ * rate `advancePlayerTimeYears` actually wants.
+ *
+ * `sliderValue` is clamped to `[0, 1]` defensively (a scrub event or
  * malformed input could otherwise hand this a wildly out-of-range value);
- * every normal caller (the panel's own `<input type="range" min="-1"
+ * every normal caller (the panel's own `<input type="range" min="0"
  * max="1">`) never produces one outside that range in the first place.
  */
 export function logSpeedSliderToYearsPerSecond(sliderValue: number): number {
-  const clamped = Math.max(-1, Math.min(1, sliderValue));
-  const sign = clamped < 0 ? -1 : 1;
-  const magnitude = Math.abs(clamped);
+  const magnitude = Math.max(0, Math.min(1, sliderValue));
   const logMin = Math.log(MIN_YEARS_PER_REAL_SECOND);
   const logMax = Math.log(MAX_YEARS_PER_REAL_SECOND);
   const logValue = logMin + magnitude * (logMax - logMin);
-  return sign * Math.exp(logValue);
+  return Math.exp(logValue);
+}
+
+/**
+ * Story #243: which way the player currently plays (or would resume playing
+ * in, if paused) - the ONE source of truth for playback direction, now that
+ * `logSpeedSliderToYearsPerSecond` above is magnitude-only. `1` is forward
+ * (matching the classic transport-bar `>` glyph), `-1` is backward (`<`).
+ */
+export type PlayerDirection = 1 | -1;
+
+/**
+ * Story #243: the fixed, discrete time step (years) the `|<`/`>|` step
+ * buttons apply - a single nudge, not continuous playback. `20,000` sits
+ * near the middle of the issue's own suggested 10,000-50,000-year starting
+ * range: at the default forward speed-slider position it's a small fraction
+ * of a second of continuous play, so it reads as a distinct, fine-grained
+ * nudge rather than a big jump, while still being large enough (over 1% of
+ * the trail's own 60,000-year `TRAIL_WINDOW_YEARS`, `motionTrail.ts`) to
+ * visibly move the animated stars in a single press. Live-tuned in the
+ * running viewer - see the PR description.
+ */
+export const PLAYER_STEP_YEARS = 20_000;
+
+/**
+ * One press of a step (`|<`/`>|`) button: advances `currentTimeYears` by a
+ * single fixed `stepYears` in `direction`, reusing `advancePlayerTimeYears`
+ * (with `deltaRealSeconds = 1`, `yearsPerRealSecond = direction * stepYears`)
+ * rather than reimplementing its clamp-to-range/snap-exactly-to-zero-on-
+ * crossing behavior a second time - a step that would cross or land on
+ * Today snaps bit-exactly to `0`, exactly like a continuous-play frame that
+ * does the same (Story #239's own settled "always land exactly on Today"
+ * rule applies here too, not just during continuous play). The caller
+ * (`main.ts`) is responsible for pausing first, per Story #243's AC ("press
+ * a step button while playing pauses first, then steps") - this function
+ * itself makes no decision about `playing` state, only about the resulting
+ * `timeYears`.
+ */
+export function stepPlayerTimeYears(
+  currentTimeYears: number,
+  direction: PlayerDirection,
+  stepYears: number = PLAYER_STEP_YEARS,
+): number {
+  return advancePlayerTimeYears(currentTimeYears, 1, direction * stepYears).timeYears;
+}
+
+/**
+ * Story #243: the player's own playing/direction pair - `main.ts` is the
+ * single source of truth for this, mirroring `PlayerState` above but kept as
+ * its own smaller interface (this Story deliberately doesn't touch
+ * `timeYears`/`panelOpen`, so folding this into `PlayerState` would make
+ * `nextPlayerPlaybackStateForDirectionButton` below look like it decides
+ * about fields it never touches).
+ */
+export interface PlayerPlaybackState {
+  playing: boolean;
+  direction: PlayerDirection;
+}
+
+/**
+ * Story #243's core interaction rule for the `<`/`>` continuous-play
+ * buttons, as a single pure decision: pressing the button matching the
+ * CURRENTLY playing direction pauses (standard toggle-off); pressing the
+ * OPPOSITE direction's button - whether currently playing the other way, or
+ * already paused - (re)starts playing in the pressed direction, reversing
+ * without requiring a separate pause click first. Also covers "paused, press
+ * either button" (not currently playing, so `current.direction ===
+ * pressedDirection` is false regardless of the paused-at direction) - that
+ * case simply starts playing in the pressed direction too, per the same
+ * "else" branch.
+ */
+export function nextPlayerPlaybackStateForDirectionButton(
+  current: PlayerPlaybackState,
+  pressedDirection: PlayerDirection,
+): PlayerPlaybackState {
+  if (current.playing && current.direction === pressedDirection) {
+    return { playing: false, direction: current.direction };
+  }
+  return { playing: true, direction: pressedDirection };
 }
 
 /**

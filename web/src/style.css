@@ -993,21 +993,44 @@ body {
   background: rgba(95, 201, 255, 0.3);
 }
 
-/* Story #239: the player's own control panel - play/pause, time readout,
-   Today button, scrubber, speed slider. Docked bottom-center (unlike
-   `.panel`'s default top-anchored position) so it reads as a persistent
-   transport bar, not another stacked corner panel, and doesn't collide with
-   `#bottom-left-toolbar`/`#status` (bottom-left) or `#inspector` (top-right).
-   Hidden by default (`display: none`); `.open` (toggled by
-   `ui/playerPanel.ts`'s `setVisible`, driven from `main.ts`) reveals it -
-   same on/off convention as `#menu-panels.open`. */
+/* Story #239: the player's own control panel - transport buttons, time
+   readout, Today button, scrubber, speed slider. Docked bottom-center
+   (unlike `.panel`'s default top-anchored position) so it reads as a
+   persistent transport bar, not another stacked corner panel, and doesn't
+   collide with `#bottom-left-toolbar`/`#status` (bottom-left) or
+   `#inspector` (top-right). Hidden by default (`display: none`); `.open`
+   (toggled by `ui/playerPanel.ts`'s `setVisible`, driven from `main.ts`)
+   reveals it - same on/off convention as `#menu-panels.open`.
+
+   Story #243 Part 1: shrunk noticeably from its original size (520px wide,
+   `.panel`'s default 12px/14px padding, 0.82 background opacity) - at
+   typical "zoomed into the sphere" framing the old size read as too large/
+   opaque, visibly blocking the Sun/nearby stars that often sit right at
+   bottom-center. Narrower max-width (360px), tighter padding (6px/10px) and
+   row spacing, smaller fonts, and a lower background opacity (0.6, vs.
+   `.panel`'s shared 0.82) all combine to make it read as a slim,
+   unobtrusive transport bar rather than another stacked panel - tuned live
+   in the running viewer per the issue's own "doesn't feel like it's
+   covering meaningful scene area" bar (not a specific pixel target). Stays
+   bottom-docked, unmoved - this is a size/opacity change only. */
 #player-panel {
   display: none;
   position: absolute;
   left: 50%;
-  bottom: 12px;
+  /* `.panel`'s shared `top: 12px` (above) would otherwise combine with this
+     rule's own `bottom` to STRETCH the panel's height to fill the entire
+     viewport (the standard CSS behavior for an absolutely positioned
+     element with both `top` and `bottom` set and no explicit `height`) -
+     exactly the opposite of Part 1's compaction goal. `top: auto` cancels
+     that inherited `top`, so height goes back to its natural, content-sized
+     `auto` and the panel hugs the bottom edge instead of stretching to it. */
+  top: auto;
+  bottom: 10px;
   transform: translateX(-50%);
-  width: min(520px, calc(100vw - 24px));
+  width: min(360px, calc(100vw - 24px));
+  padding: 6px 10px;
+  background: rgba(10, 14, 24, 0.6);
+  font-size: 11px;
   z-index: 2;
 }
 
@@ -1015,31 +1038,59 @@ body {
   display: block;
 }
 
+/* Story #243: the player panel's own buttons (transport buttons + Today)
+   read noticeably smaller than the shared `.panel button` default (5px 8px
+   padding, 12px font) - part of Part 1's overall compaction. */
+#player-panel button {
+  padding: 3px 6px;
+  font-size: 11px;
+}
+
 .player-panel-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 }
 
 .player-panel-top {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
-.player-play-pause {
+/* Story #243: the 4-button `|< < > >|` transport scheme, replacing the old
+   single `.player-play-pause` toggle - same small square shape, just four
+   of them in a row. */
+.player-transport {
   flex: 0 0 auto;
-  width: 34px;
-  height: 34px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Story #243: highlights whichever of `<`/`>` is the actively playing
+   direction (`ui/playerPanel.ts`'s `update()` toggles this) - reuses the
+   toolbar player-toggle's own blue-cyan accent (`#bottom-left-toolbar
+   #player-toggle.active` above) so "the player is running" reads
+   consistently in both places. */
+.player-transport.active {
+  background: rgba(95, 201, 255, 0.22);
+  border-color: rgba(95, 201, 255, 0.65);
+  color: #5fc9ff;
+}
+
+.player-transport.active:hover {
+  background: rgba(95, 201, 255, 0.3);
 }
 
 .player-time-readout {
   flex: 1 1 auto;
   text-align: center;
   font-variant-numeric: tabular-nums;
-  font-size: 13px;
+  font-size: 11px;
   color: #dfe6f3;
 }
 
@@ -1050,15 +1101,16 @@ body {
 .player-scrubber {
   width: 100%;
   display: block;
+  height: 14px;
 }
 
 .player-speed-row {
-  margin-top: 10px;
+  margin-top: 6px;
 }
 
 .player-speed-label {
   flex: 0 0 auto;
-  font-size: 11px;
+  font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #8fa3c8;
