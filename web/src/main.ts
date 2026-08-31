@@ -46,6 +46,11 @@ import { createDenseBatchBoundaryLayer, isDenseBatchBoundaryVisible } from "./sc
 import { createSelectionIndicator } from "./scene/selectionIndicator";
 import { loadScene } from "./scene/sceneData";
 import {
+  createVelocityVectorsLayer,
+  nextVelocityVectorsToggleOn,
+  velocityVectorsVisible,
+} from "./scene/velocityVectors";
+import {
   createGouldBeltLabel,
   createGouldBeltLayer,
   createLocalBubbleLayer,
@@ -331,6 +336,20 @@ const FIT_NEAREST_STARS_ICON_SVG = `
   </svg>
 `;
 
+/** Issue #231: "Show velocity vectors" toggle glyph - a dot (the star's own
+ * marker position) with a diagonal shaft and small chevron head (the
+ * velocity arrow itself), reading as a distinct "vector" icon alongside the
+ * toolbar's other glyphs above. `stroke`/`fill="currentColor"` throughout so
+ * it inherits the button's own color like every other toolbar icon here. */
+const VELOCITY_VECTORS_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+       stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none" />
+    <path d="M5 19 L18 6" />
+    <path d="M18 6 L11.5 6.5 M18 6 L17.5 12.5" />
+  </svg>
+`;
+
 /** `content` is treated as trusted inline SVG markup (rather than escaped
  * text) whenever `isIcon` is `true` - safe here since every caller passes
  * one of this module's own `*_ICON_SVG` constants above, never
@@ -372,6 +391,22 @@ const fitNearestStarsButton = createToolbarButton(
   true,
 );
 
+/** Issue #231: "Show velocity vectors" toggle - grouped right after the
+ * nearest-stars-sphere button above since both concern the same RECONS
+ * dense-batch sphere. Unlike its toolbar neighbors (all momentary actions -
+ * zoom, fit, show-all), this one is a persistent ON/OFF toggle, so it also
+ * carries `aria-pressed` (mirroring `fullscreenToggle.ts`'s own
+ * `aria-pressed` convention) and an `.active` CSS class for a visible
+ * pressed state - see `style.css`'s `#velocity-vectors-toggle[aria-pressed=
+ * "true"]` rule. */
+const velocityVectorsButton = createToolbarButton(
+  "velocity-vectors-toggle",
+  VELOCITY_VECTORS_ICON_SVG,
+  "Show velocity vectors",
+  true,
+);
+velocityVectorsButton.setAttribute("aria-pressed", "false");
+
 // Issue #201: the Info ("i") button, relocated here (from the top-left row,
 // #164) as the toolbar's LAST button - same `createToolbarButton` sizing
 // (44x44px) as its neighbors, rather than the old top-left row's standalone
@@ -409,6 +444,22 @@ let localBubbleGroup: ReturnType<typeof createLocalBubbleLayer> | null = null;
  * way `sunMarker.core` does). `null` until the scene loads, and stays
  * `null` thereafter if no dense-batch member was present (radius 0). */
 let denseBatchBoundaryMesh: ReturnType<typeof createDenseBatchBoundaryLayer> | null = null;
+
+/** Issue #231: the velocity-vectors layer - built once, right alongside
+ * `denseBatchBoundaryMesh` above, once the scene has loaded. Always a real
+ * (possibly empty) `Group` once built (see `createVelocityVectorsLayer`'s
+ * docstring for why this differs from the optional `structures.*` layers'
+ * `| null` convention) - `null` here only means "scene hasn't loaded yet". */
+let velocityVectorsGroup: ReturnType<typeof createVelocityVectorsLayer> | null = null;
+
+/** Issue #231: the user's own ON/OFF intent for the velocity-vectors toggle
+ * - distinct from whether the toggle is currently *enabled* (that's the
+ * camera-position-driven `velocityVectorsButton.disabled`, applied by
+ * `applyVelocityVectorsButtonState` below). Forced back to `false` whenever
+ * the camera leaves the sphere while `true` (AC #3 - see
+ * `nextVelocityVectorsToggleOn`'s docstring), so this can never be `true`
+ * while the button is disabled. */
+let velocityVectorsOn = false;
 
 /** Issue #104: the dense RECONS batch's own collection radius (pc),
  * derived once from the loaded scene data (`lod.ts`'s
@@ -528,6 +579,28 @@ function applyDenseBatchBoundaryVisibility(): void {
 let cameraWasInsideDenseBatchSphere = false;
 let cameraWasInsideLocalBubble = false;
 
+/** Issue #231: syncs the velocity-vectors toggle button's enabled/disabled
+ * state (and, per AC #3, forces the toggle itself - and so the layer's
+ * visibility - back OFF if the camera has just left the sphere) to
+ * `insideSphere`. Called ONLY from `applyBackgroundDimming` below, on the
+ * same actual-boundary-crossing frames that function already isolates via
+ * `cameraWasInsideDenseBatchSphere` change-detection - per this issue's own
+ * explicit instruction, this hooks into that existing per-frame call site
+ * rather than duplicating a second independent RAF-driven check. Safe to
+ * call before the scene has loaded (`velocityVectorsGroup` still `null`) or
+ * before `velocityVectorsButton` exists in that ordering - in practice
+ * `applyBackgroundDimming` itself is only ever invoked from `animate()`,
+ * well after both are constructed at module-init time. */
+function applyVelocityVectorsButtonState(insideSphere: boolean): void {
+  velocityVectorsOn = nextVelocityVectorsToggleOn(velocityVectorsOn, insideSphere);
+  velocityVectorsButton.disabled = !insideSphere;
+  velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
+  velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
+  if (velocityVectorsGroup) {
+    velocityVectorsGroup.visible = velocityVectorsVisible(velocityVectorsOn, insideSphere);
+  }
+}
+
 /**
  * Issue #137: dims the "background" - every non-star catalog bucket
  * (clusters, associations, extended structures - `objects.ts`'s
@@ -582,6 +655,12 @@ function applyBackgroundDimming(): void {
   setGouldBeltDimmed(gouldBeltGroup, insideSphere, insideBubble);
   setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere, insideBubble);
   setLocalBubbleDimmed(localBubbleGroup, insideSphere);
+  // Issue #231: the velocity-vectors toggle's enabled/disabled (and
+  // forced-off-on-exit) state is also gated on this exact same sphere
+  // boundary crossing - reuses this function's own change-detection above
+  // rather than a second independent per-frame check (see
+  // `applyVelocityVectorsButtonState`'s docstring).
+  applyVelocityVectorsButtonState(insideSphere);
 }
 
 /** Issue #123: the selection reticle's scale should track the *same*
@@ -950,12 +1029,34 @@ function applyLocalBubbleButtonState(): void {
 }
 
 applyLocalBubbleButtonState();
+// Issue #231: disabled until the scene loads and the camera is confirmed
+// inside the sphere (`denseBatchRadiusPc` is still 0 here, so
+// `isCameraInsideDenseBatchSphere` would report `false` regardless - passed
+// explicitly rather than computed, mirroring `applyLocalBubbleButtonState`'s
+// own startup call just above).
+applyVelocityVectorsButtonState(false);
 
 zoomInButton.addEventListener("click", () => zoomBy(ZOOM_IN_STEP_FACTOR));
 zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
 showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
 fitLocalBubbleButton.addEventListener("click", applyFitLocalBubblePose);
 fitNearestStarsButton.addEventListener("click", applyFitNearestStarsPose);
+// Issue #231: the button is only ever clickable (native `disabled`) while
+// `cameraWasInsideDenseBatchSphere` is `true` - already kept in sync with
+// this exact click-time camera state by `applyBackgroundDimming`'s
+// crossing-detection, called every frame - so it's reused directly here
+// rather than recomputing `isCameraInsideDenseBatchSphere` again.
+velocityVectorsButton.addEventListener("click", () => {
+  velocityVectorsOn = !velocityVectorsOn;
+  velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
+  velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
+  if (velocityVectorsGroup) {
+    velocityVectorsGroup.visible = velocityVectorsVisible(
+      velocityVectorsOn,
+      cameraWasInsideDenseBatchSphere,
+    );
+  }
+});
 infoToggleButton.addEventListener("click", () => infoDialog.show());
 
 /** Search / go-to-object (issue #106, spec §2.6): frames the camera closely
@@ -1045,6 +1146,15 @@ loadScene()
     // dense-batch member was present.
     denseBatchBoundaryMesh = createDenseBatchBoundaryLayer(denseBatchRadiusPc);
     if (denseBatchBoundaryMesh) scene.add(denseBatchBoundaryMesh);
+
+    // Issue #231: the velocity-vectors layer - built once here (like
+    // `denseBatchBoundaryMesh` above) now that both `sceneData.objects` and
+    // the real `denseBatchRadiusPc` are known. Starts hidden
+    // (`createVelocityVectorsLayer`'s own `visible = false` default);
+    // `applyVelocityVectorsButtonState`, called from `applyBackgroundDimming`
+    // in `animate()`, is what turns it on/off from here on.
+    velocityVectorsGroup = createVelocityVectorsLayer(sceneData.objects, denseBatchRadiusPc);
+    scene.add(velocityVectorsGroup);
 
     // Issue #215: `localBubbleStructure`/`bubbleOuterRadiusPc` are populated
     // here, before `createCatalogObjectGroup` below, rather than at their

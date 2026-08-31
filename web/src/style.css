@@ -759,6 +759,23 @@ body {
   background: rgba(10, 14, 24, 0.82);
 }
 
+/* Issue #231: the "Show velocity vectors" toggle is a persistent ON/OFF
+   control, unlike its momentary-action toolbar neighbors (zoom, fit,
+   show-all) - `main.ts` reflects that state via `aria-pressed` (mirroring
+   `fullscreenToggle.ts`'s own `aria-pressed` convention) plus this `.active`
+   class, styled with the same green used for its full-3D vector arrows
+   (`velocityVectors.ts`'s `FULL_VECTOR_COLOR`) so the button visibly reads
+   as "currently on". */
+#bottom-left-toolbar .toolbar-button.active {
+  background: rgba(57, 255, 106, 0.22);
+  border-color: rgba(57, 255, 106, 0.65);
+  color: #39ff6a;
+}
+
+#bottom-left-toolbar .toolbar-button.active:hover {
+  background: rgba(57, 255, 106, 0.3);
+}
+
 /* Issue #164: dimmed full-viewport scrim behind the centered Info dialog.
    `display: flex` (toggled from `none` by `InfoDialog.show`/`hide`) plus
    `align-items`/`justify-content: center` is what centers `.info-dialog` on
