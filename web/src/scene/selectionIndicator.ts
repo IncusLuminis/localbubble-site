@@ -71,6 +71,38 @@ const LINE_TO_SUN_OPACITY = 0.55;
 const RETICLE_SEGMENTS = 48;
 
 /**
+ * Issue #253: the selection indicator's own `THREE.Object3D.renderOrder`
+ * (the first use of this property anywhere in this codebase). Every
+ * translucent structure/boundary overlay this indicator can visually
+ * overlap - `structures.ts`'s Local Bubble ellipsoid and Gould Belt/
+ * Radcliffe Wave tubes, `denseBatchBoundary.ts`'s boundary shell - uses
+ * `depthWrite: false` (by design: none of them should occlude each other).
+ * None of them write to the depth buffer, so among themselves, in
+ * Three.js's transparent render pass, which one paints on top is decided
+ * by `renderOrder` (ascending), not true 3D depth - and every one of those
+ * overlays is left at the default `renderOrder` of `0`, same as this
+ * indicator's line-to-Sun/reticle. That tie meant paint order fell back to
+ * scene-graph traversal order, which happened to put the overlays on top,
+ * making the selection line/reticle vanish wherever an overlay's
+ * screen-space silhouette crossed them (issue #253's reported bug). A
+ * `renderOrder` higher than those overlays' `0` makes this indicator always
+ * paint AFTER (on top of) them in the transparent pass, with no effect on
+ * its correct occlusion behind genuinely OPAQUE objects (the Sun marker,
+ * star markers) - opaque depth-testing is a separate mechanism, untouched
+ * by transparent-pass `renderOrder`.
+ *
+ * Applied to `reticle` and `lineToSun` individually below, not just the
+ * outer `group` - verified against `WebGLRenderer.js`'s `projectObject`:
+ * a `THREE.Group`'s `renderOrder` is inherited by its non-Group
+ * descendants ONLY until the traversal hits another `Group`, which resets
+ * the inherited value to that nested Group's OWN `renderOrder` (default
+ * `0`). Since `reticle` is itself a `Group` nested inside `group`, setting
+ * `group.renderOrder` alone would fix `lineToSun` (a direct `Line` child of
+ * `group`) but silently leave the reticle's three circles back at `0`.
+ */
+const SELECTION_INDICATOR_RENDER_ORDER = 1;
+
+/**
  * Unit-radius (radius 1) circle, in one of the three coordinate planes, as
  * a `THREE.Line` - the real reticle size is applied entirely via the
  * returned line's own `Object3D.scale` at `updateForObject`-time, matching
@@ -140,6 +172,10 @@ export function createSelectionIndicator(): SelectionIndicator {
   const reticle = new Group();
   reticle.name = "selection-reticle";
   reticle.add(unitCircleLine("xy"), unitCircleLine("xz"), unitCircleLine("yz"));
+  // See `SELECTION_INDICATOR_RENDER_ORDER`'s docstring above - `reticle` is
+  // its own `Group`, so it needs this set directly rather than relying on
+  // inheriting it from the outer `group`.
+  reticle.renderOrder = SELECTION_INDICATOR_RENDER_ORDER;
   group.add(reticle);
 
   const lineGeometry = new BufferGeometry();
@@ -157,7 +193,14 @@ export function createSelectionIndicator(): SelectionIndicator {
     }),
   );
   lineToSun.name = "selection-line-to-sun";
+  // See `SELECTION_INDICATOR_RENDER_ORDER`'s docstring above.
+  lineToSun.renderOrder = SELECTION_INDICATOR_RENDER_ORDER;
   group.add(lineToSun);
+  // Set on the outer group too (belt-and-suspenders, and correct should
+  // any future child ever get added directly under `group` rather than
+  // under `reticle`) - see the docstring above for why this alone would
+  // not be sufficient for `reticle`'s own descendants.
+  group.renderOrder = SELECTION_INDICATOR_RENDER_ORDER;
 
   function updateForObject(
     positionPc: SceneObject["position_pc"],
