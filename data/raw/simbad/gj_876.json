@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 876",
-  "retrieved_utc": "2026-08-23T02:08:37+00:00",
+  "retrieved_utc": "2026-08-31T06:03:15+00:00",
   "record_id": "BD-15  6290",
   "raw": {
     "main_id": "BD-15  6290",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 10.192000389099121,
+    "pmra": 957.715,
+    "plx_err": 0.035599999129772186,
+    "pmdec": -673.601,
+    "otype": "**",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 214.038,
     "sp_type": "M3.5V",
-    "plx_err": 0.035599999129772186,
-    "otype": "**",
+    "rvz_radvel": -1.47,
     "ids": "TIC 188580272|GJ 876|GJ 876 A|Gaia DR3 2603090003484152064|CNS5 5644|Gaia DR2 2603090003484152064|WISEA J225317.42-141556.1|TYC 5819-1255-1|EPIC 206019387|EPIC 206019392|PM J22532-1415|UCAC4 379-165686|PLX 5546|8pc 212.69A|BD-15  6290|Ci 20 1387|G 156-57A|G 156-57|GCRV 14365|GEN# -0.01506290|GSC 05819-00957|HIC 113020|HIP 113020|JP11   295|LFT 1745|LHS   530|LPM 841|LTT  9244|NC 59|NLTT 55130|Ross  780|UBV   19209|UBV   19610|UBV M   5470|V* IL Aqr|Zkh 338|[RHG95]  3604|2MASS J22531672-1415489|PLX 5546.00|UCAC2  26801725|MCC 337|WEB 20121|Karmn J22532-142",
     "matched_id": "GJ 876"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 784",
-  "retrieved_utc": "2026-08-23T02:09:52+00:00",
+  "retrieved_utc": "2026-08-31T06:04:31+00:00",
   "record_id": "HD 191849",
   "raw": {
     "main_id": "HD 191849",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 7.966000080108643,
+    "pmra": 778.331,
+    "plx_err": 0.02250000089406967,
+    "pmdec": -159.939,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018A&A...616A...7S",
     "plx_value": 162.2171,
     "sp_type": "M0V",
-    "plx_err": 0.02250000089406967,
-    "otype": "PM*",
+    "rvz_radvel": -32.961,
     "ids": "TIC 129276723|GJ 784|HIP 99701|Gaia DR3 6673000841376349696|PLX 4794|CD-45 13677|CPC  0 18682|CPD-45  9899|Ci 20 1196|GC 28057|GCRV 70578|GEN# +1.00191849|HD 191849|HIC  99701|IRAS 20103-4518|JP11  3184|LFT 1532|LHS  3531|LPM 730|LTT  7999|NLTT 48880|NSV 25053|CNS5 5017|PM 20103-4519|PPM 325963|SAO 230110|SKY# 38116|TYC 8392-2673-1|UBV   17412|UBV M  24589|UGP 492|Zkh 303|[CS62] E8  61|[RHG95]  3174|uvby98 100191849|2MASS J20135335-4509506|PLX 4794.00|1RXS J201352.2-451005|Smethells 50|UCAC3 90-413875|USNO-B1.0 0448-00768195|UCAC4 225-185571|PM J20138-4509|WEB 17880|Gaia DR2 6673000841376349696",
     "matched_id": "GJ 784"
   }

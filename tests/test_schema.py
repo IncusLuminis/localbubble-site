@@ -4,6 +4,9 @@ fields (Story #170 acceptance criteria: "schema fields' optionality").
 
 from __future__ import annotations
 
+import pytest
+from pydantic import ValidationError
+
 from local_galactic_structures.schema import (
     AstronomicalObject,
     Cartesian,
@@ -12,6 +15,7 @@ from local_galactic_structures.schema import (
     ExoplanetSummary,
     PlanetSummary,
     Source,
+    Velocity,
     Visual,
 )
 
@@ -233,3 +237,113 @@ class TestExoplanetsOptionality:
             source=Source(reference="Unit test fixture"),
         )
         assert obj.exoplanets is None
+
+
+# ---------------------------------------------------------------------------
+# Velocity / AstronomicalObject.velocity (Story #230 acceptance criteria:
+# "schema fields' optionality")
+# ---------------------------------------------------------------------------
+
+
+def _make_object_with_velocity(velocity: Velocity | None) -> AstronomicalObject:
+    return AstronomicalObject(
+        id="x",
+        name="X",
+        object_type="star",
+        coordinates=Coordinates(
+            ra_deg=10.0, dec_deg=10.0, galactic_l_deg=0.0, galactic_b_deg=0.0
+        ),
+        distance=Distance(value_pc=10.0),
+        cartesian=Cartesian(x_pc=10.0, y_pc=0.0, z_pc=0.0),
+        source=Source(reference="Unit test fixture"),
+        velocity=velocity,
+    )
+
+
+class TestVelocityOptionality:
+    def test_astronomical_object_velocity_defaults_to_none(self):
+        # The common case for everything outside the ~127-star in-sphere
+        # set this Story scoped fetching to.
+        obj = _make_object_with_velocity(None)
+        assert obj.velocity is None
+
+    def test_velocity_is_not_nested_under_visual(self):
+        # Story #230 acceptance criteria: velocity is a top-level field,
+        # mirroring exoplanets' own precedent (physical/kinematic data, not
+        # a rendering style) - NOT a Visual attribute.
+        assert "velocity" not in Visual.model_fields
+        assert "velocity" in AstronomicalObject.model_fields
+
+    def test_full_3d_velocity_can_be_populated(self):
+        velocity = Velocity(
+            vx_kms=-140.95,
+            vy_kms=5.14,
+            vz_kms=18.56,
+            radial_velocity_known=True,
+            source=Source(reference="SIMBAD astronomical database (CDS)"),
+        )
+        obj = _make_object_with_velocity(velocity)
+        assert obj.velocity is not None
+        assert obj.velocity.vx_kms == -140.95
+        assert obj.velocity.vy_kms == 5.14
+        assert obj.velocity.vz_kms == 18.56
+        assert obj.velocity.radial_velocity_known is True
+
+    def test_tangential_only_velocity_sets_radial_velocity_known_false(self):
+        # Story #230: when SIMBAD had pmra/pmdec but no rvz_radvel, the
+        # vector is tangential-only (radial velocity defaulted to 0 by
+        # astropy) and must be flagged, never silently presented as a
+        # complete 3D space velocity.
+        velocity = Velocity(
+            vx_kms=1.0,
+            vy_kms=2.0,
+            vz_kms=3.0,
+            radial_velocity_known=False,
+            source=Source(reference="SIMBAD astronomical database (CDS)"),
+        )
+        obj = _make_object_with_velocity(velocity)
+        assert obj.velocity.radial_velocity_known is False
+
+    def test_velocity_requires_its_own_source_reference(self):
+        # spec §11: no scientific value may appear without a traceable
+        # origin - Velocity.source is its own provenance block (may differ
+        # from the object's own position/distance source.reference).
+        with pytest.raises(ValidationError):
+            Velocity(
+                vx_kms=1.0,
+                vy_kms=2.0,
+                vz_kms=3.0,
+                radial_velocity_known=True,
+                source=Source(),  # missing required `reference`
+            )
+
+    def test_round_trips_through_model_dump_and_validate(self):
+        velocity = Velocity(
+            vx_kms=-28.31,
+            vy_kms=0.67,
+            vz_kms=13.74,
+            radial_velocity_known=True,
+            source=Source(
+                reference="SIMBAD astronomical database (CDS), record GJ 551"
+            ),
+        )
+        obj = _make_object_with_velocity(velocity)
+        rebuilt = AstronomicalObject.model_validate(obj.model_dump())
+        assert rebuilt.velocity is not None
+        assert rebuilt.velocity.vx_kms == -28.31
+        assert rebuilt.velocity.radial_velocity_known is True
+        assert rebuilt.velocity.source.reference == velocity.source.reference
+
+    def test_default_astronomical_object_omits_velocity_key_free_construction(self):
+        obj = AstronomicalObject(
+            id="y",
+            name="Y",
+            object_type="molecular_cloud",
+            coordinates=Coordinates(
+                ra_deg=0.0, dec_deg=0.0, galactic_l_deg=0.0, galactic_b_deg=0.0
+            ),
+            distance=Distance(value_pc=50.0),
+            cartesian=Cartesian(x_pc=50.0, y_pc=0.0, z_pc=0.0),
+            source=Source(reference="Unit test fixture"),
+        )
+        assert obj.velocity is None

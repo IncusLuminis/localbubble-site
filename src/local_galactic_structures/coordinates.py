@@ -44,6 +44,50 @@ def radec_distance_to_galactic_xyz(
     )
 
 
+def galactic_velocity_kms(
+    ra_deg: float,
+    dec_deg: float,
+    distance_pc: float,
+    pmra_mas_yr: float,
+    pmdec_mas_yr: float,
+    radial_velocity_kms: float,
+) -> tuple[float, float, float]:
+    """Convert ICRS position + proper motion + radial velocity into a
+    heliocentric Galactic Cartesian space-velocity vector, km/s (Story
+    #230, schema.py's `Velocity`).
+
+    Reuses the identical ICRS -> Galactic transform
+    `radec_distance_to_galactic_xyz` above already applies to position, so
+    the resulting (vx, vy, vz) lands in the exact same axis convention as
+    `cartesian.{x,y,z}_pc` (module docstring: Sun = origin, +X -> Galactic
+    Center, +Y -> direction of Galactic rotation, +Z -> North Galactic
+    Pole).
+
+    `pmra_mas_yr` is proper motion in RA, already cos(dec)-corrected (this
+    is SIMBAD's own `pmra` convention - astropy's `pm_ra_cosdec` parameter
+    name matches it directly, no further correction needed here).
+    `radial_velocity_kms` is the caller's responsibility to default to 0.0
+    when unknown (astropy itself does this silently rather than erroring);
+    tracking whether that default was used is the caller's job
+    (`Velocity.radial_velocity_known`), not this pure transform's.
+    """
+    coord = SkyCoord(
+        ra=ra_deg * u.deg,
+        dec=dec_deg * u.deg,
+        distance=distance_pc * u.pc,
+        pm_ra_cosdec=pmra_mas_yr * u.mas / u.yr,
+        pm_dec=pmdec_mas_yr * u.mas / u.yr,
+        radial_velocity=radial_velocity_kms * u.km / u.s,
+        frame="icrs",
+    )
+    v_xyz = coord.galactic.velocity.d_xyz.to(u.km / u.s)
+    return (
+        float(v_xyz[0].value),
+        float(v_xyz[1].value),
+        float(v_xyz[2].value),
+    )
+
+
 def _radec_distance_to_galactic_xyz_batch(
     ra_deg: list[float], dec_deg: list[float], distance_pc: list[float]
 ):

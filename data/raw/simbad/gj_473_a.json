@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 473 A",
-  "retrieved_utc": "2026-08-23T02:08:25+00:00",
+  "retrieved_utc": "2026-08-31T06:03:03+00:00",
   "record_id": "Wolf  424 A",
   "raw": {
     "main_id": "Wolf  424 A",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": null,
+    "pmra": -1795.661,
+    "plx_err": 0.511900007724762,
+    "pmdec": 217.789,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "",
     "plx_value": 231.1185,
     "sp_type": "",
-    "plx_err": 0.511900007724762,
-    "otype": "PM*",
+    "rvz_radvel": null,
     "ids": "GJ 473 A|Wolf  424 A|** REU    1A|WDS J12335+0901A|Gaia DR3 3902874650602495232|CNS5 3092",
     "matched_id": "GJ 473 A"
   }

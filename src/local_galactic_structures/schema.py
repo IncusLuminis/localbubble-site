@@ -115,6 +115,43 @@ class PlanetSummary(BaseModel):
     discovery_facility: str | None = None
 
 
+class Velocity(BaseModel):
+    """A star's real 3D space velocity (Story #230), heliocentric Galactic
+    Cartesian km/s - the same axis convention `cartesian.{x,y,z}_pc` uses
+    for position (spec §6), so a renderer can draw a vector starting at the
+    star's own position using these same axes without any further
+    transform.
+
+    Derived from SIMBAD's `pmra`/`pmdec` (proper motion, mas/yr) and
+    `rvz_radvel` (radial velocity, km/s) via astropy's ICRS -> Galactic
+    velocity transform (`coordinates.galactic_velocity_kms`), reusing the
+    identical transform `coordinates.derive_galactic_coordinates` already
+    applies to position.
+
+    `radial_velocity_known` is `False` when SIMBAD had no `rvz_radvel` on
+    file and the derivation defaulted radial velocity to 0 km/s (astropy
+    does this silently rather than erroring) - in that case `vx_kms`/
+    `vy_kms`/`vz_kms` are a *tangential-only* vector (proper motion alone),
+    not a true 3D space velocity, and must never be presented as complete.
+    When `pmra`/`pmdec` themselves are absent (not just the radial
+    velocity), the whole velocity is unresolvable - the object's
+    `AstronomicalObject.velocity` is `None` in that case, never a
+    fabricated zero vector.
+
+    `source` is its own provenance block, separate from the object's own
+    `AstronomicalObject.source` - SIMBAD's `pmra`/`pmdec`/`rvz_radvel` may
+    be sourced from a different underlying catalog/bibcode than the
+    object's own distance/position (spec §11: no scientific value may
+    appear without a traceable origin).
+    """
+
+    vx_kms: float
+    vy_kms: float
+    vz_kms: float
+    radial_velocity_known: bool
+    source: Source
+
+
 class ExoplanetSummary(BaseModel):
     """A star's cross-matched exoplanet complement (Story #171), built by
     `data_sources.nasa_exoplanet_archive` from one bulk NASA Exoplanet
@@ -144,4 +181,12 @@ class AstronomicalObject(BaseModel):
     #: nested under `visual` - exoplanets are not a rendering/visual
     #: attribute of the star itself.
     exoplanets: ExoplanetSummary | None = None
+    #: Real 3D space velocity (Story #230) - a top-level field, NOT nested
+    #: under `visual`, mirroring `exoplanets`' own precedent: this is
+    #: physical/kinematic data about the object itself, not a rendering
+    #: style. `None` is the common case (every object outside the ~127-star
+    #: RECONS-dense-batch sphere this Story scoped fetching to, plus any
+    #: in-sphere star SIMBAD has no proper motion on file for at all) -
+    #: see `Velocity`'s own docstring for the full optionality story.
+    velocity: Velocity | None = None
     notes: str | None = None

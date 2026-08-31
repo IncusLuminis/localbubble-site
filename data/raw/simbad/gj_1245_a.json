@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 1245 A",
-  "retrieved_utc": "2026-08-23T02:08:32+00:00",
+  "retrieved_utc": "2026-08-31T06:03:10+00:00",
   "record_id": "G 208-44",
   "raw": {
     "main_id": "G 208-44",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2018yCat.1345....0G",
     "V": 13.12600040435791,
+    "pmra": 441.562,
+    "plx_err": 0.5737000107765198,
+    "pmdec": -434.241,
+    "otype": "PM*",
+    "pm_bibcode": "2018yCat.1345....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 213.1329,
     "sp_type": "M5.5Ve",
-    "plx_err": 0.5737000107765198,
-    "otype": "PM*",
+    "rvz_radvel": 5.79,
     "ids": "TIC 274127410|AP J19535443+4424541|GJ 1245 A|GJ 1245 C|Gaia DR3 2079074130463898624|2MASS J19535443+4424541|8pc 220.20A|G 208-44|GEN# +9.80208044|LHS  3494|NLTT 48414|USNO 353|USNO 892|V* V1581 Cyg|Zkh 298|[GKL99] 378|[GKL99] 379|[RHG95]  3120|LSPM J1953+4424W|WDS J19539+4425Aa,Ab|** MCY    3|** GIC  159A|WDS J19539+4425A|2E  4298|1RXS J195354.7+442454|2E 1952.2+4416|HAT 155-00965|PMSC 19506+4410AC|Gaia DR2 2079073928612819840|8pc 220.20C|PM J19539+4424W|UCAC4 673-080522|Karmn J19539+444WAB|Karmn J19539+444W|KIC 8451868",
     "matched_id": "GJ 1245 A"
   }

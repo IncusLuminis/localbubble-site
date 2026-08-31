@@ -379,6 +379,30 @@ _SIMBAD_SIRIUS_RAW = {
     "V": -1.46,
 }
 
+# Real-shaped response for Barnard's Star (captured live via astroquery
+# 0.4.11 during Story #230 development - see PR description), with the
+# new pmra/pmdec/rvz_radvel fields (plus bibcodes) all populated. Known
+# literature total space velocity for Barnard's Star is ~142 km/s - this
+# fixture's derived vector is this Story's own documented sanity gate
+# (see TestSimbadResolverVelocity below).
+_SIMBAD_BARNARDS_STAR_RAW = {
+    "main_id": "NAME Barnard's star",
+    "ra": 269.4520769586187,
+    "dec": 4.693364966576667,
+    "coo_bibcode": "2020yCat.1350....0G",
+    "plx_value": 546.9759,
+    "plx_err": 0.0401,
+    "ids": "NAME Barnard's star|GJ 699|HIP 87937",
+    "otype": "BY*",
+    "sp_type": "M4V",
+    "V": 9.51099967956543,
+    "pmra": -801.551,
+    "pmdec": 10362.394,
+    "rvz_radvel": -110.11,
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
+}
+
 
 class TestSimbadResolver:
     def _resolver(self, tmp_path: Path) -> SimbadResolver:
@@ -534,6 +558,103 @@ class TestSimbadResolver:
             resolver._query_upstream("Sirius")
         assert "sp_type" in recorded_fields
         assert "V" in recorded_fields
+
+    # -- Story #230: velocity -----------------------------------------
+
+    def test_query_upstream_requests_velocity_votable_fields(
+        self, tmp_path: Path, monkeypatch
+    ):
+        import local_galactic_structures.data_sources.simbad as simbad_module
+
+        recorded_fields = []
+
+        class FakeClient:
+            def add_votable_fields(self, *fields):
+                recorded_fields.extend(fields)
+
+            def query_object(self, name):
+                return None
+
+        monkeypatch.setattr(
+            simbad_module, "AstroquerySimbad", lambda: FakeClient()
+        )
+        resolver = self._resolver(tmp_path)
+        with pytest.raises(ValueError, match="no record"):
+            resolver._query_upstream("Barnard's Star")
+        assert "pmra" in recorded_fields
+        assert "pmdec" in recorded_fields
+        assert "rvz_radvel" in recorded_fields
+
+    def test_resolve_populates_full_3d_velocity_when_rv_present(
+        self, tmp_path: Path, monkeypatch
+    ):
+        resolver = self._resolver(tmp_path)
+        monkeypatch.setattr(
+            resolver, "_query_upstream", lambda name: dict(_SIMBAD_BARNARDS_STAR_RAW)
+        )
+        obj = resolver.resolve("Barnard's Star")
+        assert obj.velocity is not None
+        assert obj.velocity.radial_velocity_known is True
+        # Sanity gate (PR description / Story #230 acceptance criteria):
+        # known literature total space velocity for Barnard's Star ~142 km/s.
+        magnitude = (
+            obj.velocity.vx_kms**2 + obj.velocity.vy_kms**2 + obj.velocity.vz_kms**2
+        ) ** 0.5
+        assert magnitude == pytest.approx(142.3, abs=1.0)
+        assert obj.velocity.source.reference  # non-empty, traceable
+        assert "pm bibcode" in obj.velocity.source.reference
+
+    def test_resolve_populates_tangential_only_velocity_when_rv_absent(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # Story #230: pmra/pmdec present but rvz_radvel absent -> radial
+        # velocity defaults to 0, and radial_velocity_known must be False
+        # so the tangential-only vector is never presented as complete.
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_BARNARDS_STAR_RAW)
+        raw["rvz_radvel"] = None
+        monkeypatch.setattr(resolver, "_query_upstream", lambda name: raw)
+        obj = resolver.resolve("Barnard's Star")
+        assert obj.velocity is not None
+        assert obj.velocity.radial_velocity_known is False
+        assert "no rvz_radvel on file" in obj.velocity.source.reference
+
+    def test_resolve_velocity_is_none_when_pmra_absent(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # Story #230: pmra/pmdec themselves absent -> the whole velocity is
+        # unresolvable, `None` - never a fabricated zero vector. Real-shaped
+        # case: Sirius fixture predates this Story's fields entirely.
+        resolver = self._resolver(tmp_path)
+        monkeypatch.setattr(
+            resolver, "_query_upstream", lambda name: dict(_SIMBAD_SIRIUS_RAW)
+        )
+        obj = resolver.resolve("Sirius")
+        assert obj.velocity is None
+
+    def test_resolve_velocity_is_none_when_pmdec_absent(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # pmra present but pmdec absent must also fail independently - the
+        # whole pair is required, not just "at least one".
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_BARNARDS_STAR_RAW)
+        raw["pmdec"] = None
+        monkeypatch.setattr(resolver, "_query_upstream", lambda name: raw)
+        obj = resolver.resolve("Barnard's Star")
+        assert obj.velocity is None
+
+    def test_resolve_velocity_nulls_for_cluster_shaped_record(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # The Pleiades fixture is a non-stellar aggregate record with no
+        # pmra/pmdec on file at all - the common case for extended objects.
+        resolver = self._resolver(tmp_path)
+        monkeypatch.setattr(
+            resolver, "_query_upstream", lambda name: dict(_SIMBAD_PLEIADES_RAW)
+        )
+        obj = resolver.resolve("Pleiades")
+        assert obj.velocity is None
 
 
 # ---------------------------------------------------------------------------

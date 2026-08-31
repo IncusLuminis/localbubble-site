@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 570 D",
-  "retrieved_utc": "2026-08-23T02:09:28+00:00",
+  "retrieved_utc": "2026-08-31T06:04:07+00:00",
   "record_id": "GJ 570 D",
   "raw": {
     "main_id": "GJ 570 D",
@@ -13,10 +13,15 @@
     "coo_wavelength": "N",
     "coo_bibcode": "2003yCat.2246....0C",
     "V": null,
+    "pmra": 1038.08,
+    "plx_err": 1.7000000476837158,
+    "pmdec": -1677.69,
+    "otype": "BD*",
+    "pm_bibcode": "2016AJ....152...24W",
+    "rvz_bibcode": "2021ApJS..257...45H",
     "plx_value": 169.3,
     "sp_type": "T8",
-    "plx_err": 1.7000000476837158,
-    "otype": "BD*",
+    "rvz_radvel": 28.9,
     "ids": "TIC 287157669|GJ 570 D|CWISE J145716.20-212216.3|WISE J145715.84-212207.9|EQ J145716.21-212216.5|2MASS J14571496-2121477|2MASSW J1457150-212148|8pc 169.32D|CNS5 3699|WISEP J145715.85-212207.6|WISEP J145715.84-212207.5|WDS J14575-2125G|WISEA J145715.83-212208.0",
     "matched_id": "GJ 570 D"
   }

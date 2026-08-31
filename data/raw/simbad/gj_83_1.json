@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 83.1",
-  "retrieved_utc": "2026-08-23T02:08:28+00:00",
+  "retrieved_utc": "2026-08-31T06:03:06+00:00",
   "record_id": "G   3-33",
   "raw": {
     "main_id": "G   3-33",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 12.29800033569336,
+    "pmra": 1096.458,
+    "plx_err": 0.06989999860525131,
+    "pmdec": -1771.526,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 223.7321,
     "sp_type": "M4.5V",
-    "plx_err": 0.06989999860525131,
-    "otype": "PM*",
+    "rvz_radvel": -28.34,
     "ids": "TIC 404715018|AP J02001278+1303112|GJ 83.1|GJ 9066|Gaia DR3 76868614540049408|LSPM J0200+1303|UCAC2  36403434|2MASS J02001278+1303112|USNO-B1.0 1030-00025765|2E   510|8pc 224.80|CNS5 510|CSI+12-01575|G   3-33|G  73-12|GSC 00629-01255|TIC 471011166|JP11  5196|L 1159-16|LFT  171|LHS    11|LP  469-42|LTT 10681|NLTT  6690|PM 01575+1250|UBV M  43000|USNO 109|V* TZ Ari|Zkh  36|[GS83]  70|[R78b]  95|[RHG95]   358|PLX  412.02|1RXS J020012.5+130317|2E 0157.5+1249|RX J0200.2+1303|[ZEH2003] RX J0200.2+1303  1|[GKL99] 52|WISEA J020013.74+130248.6|UCAC4 516-003340|PM J02002+1303|Gaia DR2 76868614540049408|Karmn J02002+130",
     "matched_id": "GJ 83.1"
   }

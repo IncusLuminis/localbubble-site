@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 1221",
-  "retrieved_utc": "2026-08-23T02:09:44+00:00",
+  "retrieved_utc": "2026-08-31T06:04:23+00:00",
   "record_id": "EGGR 372",
   "raw": {
     "main_id": "EGGR 372",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": null,
+    "pmra": -1266.387,
+    "plx_err": 0.011900000274181366,
+    "pmdec": 1108.801,
+    "otype": "WD*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "",
     "plx_value": 160.9952,
     "sp_type": "DQ9P",
-    "plx_err": 0.011900000274181366,
-    "otype": "WD*",
+    "rvz_radvel": null,
     "ids": "TIC 233212451|WISE J174805.39+705247.3|GJ 1221|Gaia DR3 1638979384378696704|CNS5 4408|LSPM J1748+7052|USNO-B1.0 1608-00117171|2MASS J17480817+7052353|8pc 164.70|EGGR 372|G 240-72|GEN# +9.80240072|LHS   455|LP   44-113|NLTT 45565|USNO 346|WD 1748+708|Zkh 268|PLX 4085.11|Gaia DR2 1638979384378696704|WISEA J174805.31+705247.5|WD 1748+70|PM J17481+7052",
     "matched_id": "GJ 1221"
   }

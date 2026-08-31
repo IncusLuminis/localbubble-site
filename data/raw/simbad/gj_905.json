@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 905",
-  "retrieved_utc": "2026-08-23T02:07:49+00:00",
+  "retrieved_utc": "2026-08-31T06:02:27+00:00",
   "record_id": "Ross  248",
   "raw": {
     "main_id": "Ross  248",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": null,
+    "pmra": 112.527,
+    "plx_err": 0.04439999908208847,
+    "pmdec": -1591.65,
+    "otype": "BY*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 316.4812,
     "sp_type": "M5.0V",
-    "plx_err": 0.04439999908208847,
-    "otype": "BY*",
+    "rvz_radvel": -77.51,
     "ids": "TIC 176974026|GJ 905|Gaia DR3 1926461164913660160|[FS2003] 1203|1RXS J234155.0+441047|PLX 5736|LSPM J2341+4410|ASCC  451737|2MASS J23415498+4410407|8pc 316.00|CNS5 5844|CSI+43-23394|CSI+43-23394  1|CSV   5777|Ci 20 1445|G 171-10|G 190-42|GCRV 14848|GEN# +6.10010905|GEN# +9.80171010|IRAS 23394+4354|JP11  5182|LFT 1816|LHS   549|LTT 16985|NLTT 57692|RAFGL  905|Ross  248|UBV M  42997|USNO 275|USNO 908|V* HH And|Zkh 353|[GKL99] 454|[RHG95]  3743|USNO-B1.0 1341-00523884|PLX 5736.00|GAT 1360|Gaia DR2 1926461164913660160|PM 23394+4355|WISEA J234155.15+441022.1|PM J23419+4410|WEB 20625|Karmn J23419+441",
     "matched_id": "GJ 905"
   }

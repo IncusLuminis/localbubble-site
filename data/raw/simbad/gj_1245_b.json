@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 1245 B",
-  "retrieved_utc": "2026-08-23T02:08:33+00:00",
+  "retrieved_utc": "2026-08-31T06:03:11+00:00",
   "record_id": "G 208-45",
   "raw": {
     "main_id": "G 208-45",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 13.989999771118164,
+    "pmra": 349.363,
+    "plx_err": 0.047600001096725464,
+    "pmdec": -480.322,
+    "otype": "LM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 214.5745,
     "sp_type": "M6V",
-    "plx_err": 0.047600001096725464,
-    "otype": "LM*",
+    "rvz_radvel": 5.46,
     "ids": "TIC 274127413|GJ 1245 B|LAMOST J195355.01+442453.6|Gaia DR3 2079073928612821760|CNS5 4921|2MASS J19535508+4424550|8pc 220.20B|G 208-45|GEN# +9.80208045|LHS  3495|NLTT 48415|USNO 354|USNO 893|Zkh 299|[RHG95]  3121|LSPM J1953+4424E|WDS J19539+4425B|** GIC  159B|PMSC 19506+4410B|Gaia DR2 2079073928612821760|UCAC4 673-080524|PM J19539+4424E|Karmn J19539+444E|KIC 8451881",
     "matched_id": "GJ 1245 B"
   }

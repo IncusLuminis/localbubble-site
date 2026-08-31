@@ -31,6 +31,19 @@ Live network access to SIMBAD (https://simbad.cds.unistra.fr) was
 confirmed reachable from this environment during development (see PR
 description for what was tried).
 
+Story #230 additionally requests the `pmra`/`pmdec` (proper motion, mas/yr
+- `pmra` is already SIMBAD's own cos(dec)-corrected convention, matching
+astropy's `pm_ra_cosdec` parameter directly) and `rvz_radvel` (radial
+velocity, km/s) VOTable fields, deriving `schema.Velocity` via
+`coordinates.galactic_velocity_kms` - the same ICRS -> Galactic transform
+already applied to position, so the resulting XYZ velocity lands in the
+identical heliocentric Galactic Cartesian frame as `cartesian.{x,y,z}_pc`.
+See `_derive_velocity` below for the two "never fabricate" cases: `pmra`/
+`pmdec` absent -> `velocity: None` entirely; present but `rvz_radvel`
+absent -> a tangential-only vector with `radial_velocity_known: False`
+(astropy silently defaults radial velocity to 0 rather than erroring, so
+this must be tracked explicitly, not left implicit).
+
 Issue #221 (10 popular Messier nebulae) surfaced two further SIMBAD/
 astroquery quirks, both handled here rather than by any caller:
 
@@ -70,13 +83,14 @@ from typing import Any
 from astroquery.simbad import Simbad as AstroquerySimbad
 
 from . import CacheRecord, CachingObjectResolver, slugify, table_row_to_dict
-from ..coordinates import derive_galactic_coordinates
+from ..coordinates import derive_galactic_coordinates, galactic_velocity_kms
 from ..schema import (
     AstronomicalObject,
     Cartesian,
     Coordinates,
     Distance,
     Source,
+    Velocity,
     Visual,
 )
 
@@ -129,6 +143,59 @@ def absolute_magnitude_from_distance_modulus(
     return apparent_magnitude - 5.0 * math.log10(distance_pc) + 5.0
 
 
+def _derive_velocity(
+    raw: dict[str, Any],
+    *,
+    ra_deg: float,
+    dec_deg: float,
+    distance_pc: float,
+    record_id: str,
+) -> Velocity | None:
+    """Derive `schema.Velocity` from a SIMBAD raw record's `pmra`/`pmdec`/
+    `rvz_radvel` fields (Story #230). See `Velocity`'s own docstring for
+    the full optionality story - the two cases handled here:
+
+    * `pmra`/`pmdec` themselves absent -> the whole velocity is
+      unresolvable, returns `None` (never a fabricated zero vector).
+    * `pmra`/`pmdec` present but `rvz_radvel` absent -> radial velocity
+      defaults to 0 km/s (astropy does this silently), and
+      `radial_velocity_known` is set `False` so this tangential-only
+      vector is never presented as a complete 3D space velocity.
+    """
+    pmra = raw.get("pmra")
+    pmdec = raw.get("pmdec")
+    if pmra is None or pmdec is None:
+        return None
+
+    rv = raw.get("rvz_radvel")
+    radial_velocity_known = rv is not None
+    vx, vy, vz = galactic_velocity_kms(
+        ra_deg, dec_deg, distance_pc, pmra, pmdec, rv if rv is not None else 0.0
+    )
+
+    pm_bibcode = raw.get("pm_bibcode")
+    rvz_bibcode = raw.get("rvz_bibcode")
+    reference = f"SIMBAD astronomical database (CDS), record {record_id}"
+    if pm_bibcode:
+        reference += f", pm bibcode {pm_bibcode}"
+    if radial_velocity_known and rvz_bibcode:
+        reference += f", rv bibcode {rvz_bibcode}"
+    if not radial_velocity_known:
+        reference += " (no rvz_radvel on file - tangential-only vector)"
+
+    return Velocity(
+        vx_kms=vx,
+        vy_kms=vy,
+        vz_kms=vz,
+        radial_velocity_known=radial_velocity_known,
+        source=Source(
+            reference=reference,
+            url=f"https://simbad.cds.unistra.fr/simbad/sim-id?Ident={record_id}",
+            catalog="SIMBAD",
+        ),
+    )
+
+
 class SimbadResolver(CachingObjectResolver):
     """`ObjectResolver` backed by SIMBAD (spec §12)."""
 
@@ -151,7 +218,10 @@ class SimbadResolver(CachingObjectResolver):
         self.object_type = object_type
 
     def _dataset_label(self) -> str:
-        return "SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)"
+        return (
+            "SIMBAD basic identifier query "
+            "(ra, dec, parallax, sp_type, V, pmra, pmdec, rvz_radvel)"
+        )
 
     def _query_object_with_fields(
         self, name: str, *, include_v: bool
@@ -161,7 +231,23 @@ class SimbadResolver(CachingObjectResolver):
         raises) on zero rows, so `_query_upstream` can decide whether to
         retry or give up."""
         client = AstroquerySimbad()
-        fields = ["plx_value", "plx_err", "ids", "otype", "sp_type"]
+        fields = [
+            "plx_value",
+            "plx_err",
+            "ids",
+            "otype",
+            "sp_type",
+            # Story #230: proper motion (mas/yr, pmra already SIMBAD's own
+            # cos(dec)-corrected convention) + radial velocity (km/s), plus
+            # each field's own bibcode for Velocity.source provenance -
+            # verified live against astroquery 0.4.11 (see module
+            # docstring).
+            "pmra",
+            "pmdec",
+            "rvz_radvel",
+            "pm_bibcode",
+            "rvz_bibcode",
+        ]
         if include_v:
             fields.append("V")
         client.add_votable_fields(*fields)
@@ -279,6 +365,14 @@ class SimbadResolver(CachingObjectResolver):
             apparent_v_mag, distance_pc
         )
 
+        velocity = _derive_velocity(
+            raw,
+            ra_deg=float(raw["ra"]),
+            dec_deg=float(raw["dec"]),
+            distance_pc=distance_pc,
+            record_id=record.record_id,
+        )
+
         obj = AstronomicalObject(
             id=slugify(record.record_id),
             name=raw.get("main_id") or name,
@@ -297,6 +391,7 @@ class SimbadResolver(CachingObjectResolver):
                 absolute_magnitude=absolute_magnitude,
                 apparent_magnitude=apparent_v_mag,
             ),
+            velocity=velocity,
             source=Source(
                 reference=(
                     f"SIMBAD astronomical database (CDS), record "

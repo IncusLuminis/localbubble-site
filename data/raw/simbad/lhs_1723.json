@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LHS 1723",
-  "retrieved_utc": "2026-08-23T02:09:03+00:00",
+  "retrieved_utc": "2026-08-31T06:03:42+00:00",
   "record_id": "LP  656-38",
   "raw": {
     "main_id": "LP  656-38",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 12.196000099182129,
+    "pmra": -551.746,
+    "plx_err": 0.027699999511241913,
+    "pmdec": -533.648,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 186.0466,
     "sp_type": "M4.0Ve",
-    "plx_err": 0.027699999511241913,
-    "otype": "PM*",
+    "rvz_radvel": 42.49,
     "ids": "TIC 43605290|TIC 471012347|GJ 3323|Gaia DR3 3187115498866675456|2MASS J05015746-0656459|8pc 163.00|CNS5 1257|LHS  1723|LP  656-38|NLTT 14393|[RHG95]   855|1RXS J050157.6-065641|ASAS J050157-0656.6|RAVE J050157.5-065646|WISEA J050157.03-065651.8|Gaia DR2 3187115498866675456|UCAC3 167-17522|UCAC4 416-007809|PM J05019-0656|Karmn J05019-069",
     "matched_id": "LHS  1723"
   }

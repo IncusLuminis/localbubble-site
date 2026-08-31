@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LP 944-020",
-  "retrieved_utc": "2026-08-23T02:08:47+00:00",
+  "retrieved_utc": "2026-08-31T06:03:26+00:00",
   "record_id": "LP  944-20",
   "raw": {
     "main_id": "LP  944-20",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 18.690000534057617,
+    "pmra": 309.001,
+    "plx_err": 0.05220000073313713,
+    "pmdec": 269.058,
+    "otype": "LM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2016ApJS..225...10F",
     "plx_value": 155.5982,
     "sp_type": "M9.5Ve",
-    "plx_err": 0.05220000073313713,
-    "otype": "LM*",
+    "rvz_radvel": 7.43,
     "ids": "TIC 143029977|SMSS J033935.65-352539.5|Gaia DR3 4860376345833699840|SIPS J0339-3525|2MUCD 10201|2MASS J03393521-3525440|2MASSI J0339352-352544|2MASSW J0339352-352544|APMPM J0340-3526|CNS5 931|BRI B0337-3535|LEHPM 3451|LP  944-20|[B2006] J033935.2-352544|WISEP J033935.48-352541.0|WISE J033935.49-352540.8|WISEA J033935.51-352540.8|Gaia DR2 4860376345833699840|NLTT 11537",
     "matched_id": "LP  944-20"
   }

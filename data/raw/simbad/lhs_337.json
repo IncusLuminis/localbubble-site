@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LHS 337",
-  "retrieved_utc": "2026-08-23T02:09:59+00:00",
+  "retrieved_utc": "2026-08-31T06:04:39+00:00",
   "record_id": "L  471-42",
   "raw": {
     "main_id": "L  471-42",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 12.739999771118164,
+    "pmra": -665.164,
+    "plx_err": 0.03220000118017197,
+    "pmdec": -1312.638,
+    "otype": "PM*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2022ApJ...935..104M",
     "plx_value": 150.0781,
     "sp_type": "M4.5V",
-    "plx_err": 0.03220000118017197,
-    "otype": "PM*",
+    "rvz_radvel": 27.885,
     "ids": "TIC 144370079|GJ 3737|Gaia DR3 6153483658836320384|CNS5 3118|GEN# +9.86471042|L  471-42|LHS   337|LTT  4818|[RHG95]  1986|PM 12362-3805|2MASS J12384914-3822527|Gaia DR2 6153483658836320384|WISEA J123848.50-382307.4|UCAC4 259-059593|PM J12388-3822|NLTT 31382|LFT  932",
     "matched_id": "LHS   337"
   }

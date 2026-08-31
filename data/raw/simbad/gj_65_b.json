@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 65 B",
-  "retrieved_utc": "2026-08-23T02:07:46+00:00",
+  "retrieved_utc": "2026-08-31T06:02:24+00:00",
   "record_id": "G 272-61B",
   "raw": {
     "main_id": "G 272-61B",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": null,
+    "pmra": 3178.694,
+    "plx_err": 0.5008999705314636,
+    "pmdec": 584.061,
+    "otype": "Em*",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018MNRAS.475.1960F",
     "plx_value": 373.8443,
     "sp_type": "M6V",
-    "plx_err": 0.5008999705314636,
-    "otype": "Em*",
+    "rvz_radvel": 22.01,
     "ids": "Cl* Melotte   25    EGG       8|GJ 65 B|TIC 632499595|Gaia DR3 5140693571158946048|CNS5 425|8pc 373.70B|CSI-18-01364  2|CSI-18-01364  1|G 272-61B|IDS 01340-1828 B|L  726-8 B|LFT  145|LHS    10|LP  768-26|LTT   893|NLTT  5504|V* UV Cet|Zkh  28|[RHG95]   302|CCDM J01390-1756B|WDS J01388-1758B|** LDS  838B|Gaia DR2 5140693571158739712|[GKL99] 45|WEB  1642",
     "matched_id": "GJ 65 B"
   }

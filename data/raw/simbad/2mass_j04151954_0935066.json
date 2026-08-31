@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "2MASS J04151954-0935066",
-  "retrieved_utc": "2026-08-23T02:09:16+00:00",
+  "retrieved_utc": "2026-08-31T06:03:55+00:00",
   "record_id": "2MASSI J0415195-093506",
   "raw": {
     "main_id": "2MASSI J0415195-093506",
@@ -13,10 +13,15 @@
     "coo_wavelength": "N",
     "coo_bibcode": "2003yCat.2246....0C",
     "V": null,
+    "pmra": 2193.0,
+    "plx_err": 2.759999990463257,
+    "pmdec": 527.0,
+    "otype": "BD*",
+    "pm_bibcode": "2009AJ....137....1F",
+    "rvz_bibcode": "2021ApJS..257...45H",
     "plx_value": 174.34,
     "sp_type": "T8.0",
-    "plx_err": 2.759999990463257,
-    "otype": "BD*",
+    "rvz_radvel": 49.6,
     "ids": "TIC 67773411|2MASS J04151954-0935066|2MASSI J0415195-093506|2MASSW J0415195-093506|CNS5 1054|[B2006] J041519.5-093506|WISEP J041521.20-093500.6|WISE J041521.21-093500.6|WISEA J041521.26-093500.4|EQ J0415-0935",
     "matched_id": "2MASS J04151954-0935066"
   }

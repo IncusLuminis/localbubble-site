@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "GJ 234 A",
-  "retrieved_utc": "2026-08-23T02:08:20+00:00",
+  "retrieved_utc": "2026-08-31T06:02:58+00:00",
   "record_id": "Ross  614",
   "raw": {
     "main_id": "Ross  614",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2018yCat.1345....0G",
     "V": 11.10200023651123,
+    "pmra": 750.14,
+    "plx_err": 0.8833000063896179,
+    "pmdec": -802.947,
+    "otype": "**",
+    "pm_bibcode": "2018yCat.1345....0G",
+    "rvz_bibcode": "2006AstL...32..759G",
     "plx_value": 242.9659,
     "sp_type": "M4.5V",
-    "plx_err": 0.8833000063896179,
-    "otype": "**",
+    "rvz_radvel": 16.7,
     "ids": "TIC 711366839|TIC 43085522|GJ 234 A|HIP 30920|2MASS J06292339-0248499|PLX 1509|2E  1663|2RE J062923-024802|2RE J0629-024|CNS5 1610|CSI-02-06268  1|Ci 20  390|G 106-49|G 108-3|GAT 1306|GCRV  4143|GEN# +6.10010234D|HIC  30920|JP11  5119|JP11  5118|LFT  473|LPM 239|LTT  2564|NLTT 16580|RE J0629-024|RE J062922-024830|Ross  614|V* V577 Mon|[FS2003] 0369|[GKL99] 158|[GKL99] 159|[KW97] 29-9|0ES 0626-02.7|1RXS J062923.1-024845|2E 0626.8-0246|2EUVE J0629-02.8|EUVE J0629-02.8|EUVE J0629-02.7|GJ 234|WISEA J062923.89-024858.0|UCAC4 436-017625|WEB  6159|PM J06293-0248|CCDM J06294-0249A|IDS 06243-0244 A|LHS  1849|8pc 242.89A|Ross  614A|WDS J06293-0248A|Zkh  88|[RHG95]  1048|TYC 4789-3303-1|** B 2601A|Gaia DR2 3117120863523946368",
     "matched_id": "GJ 234 A"
   }

@@ -40,6 +40,7 @@ from local_galactic_structures.schema import (
     Group,
     PlanetSummary,
     Source,
+    Velocity,
     Visual,
 )
 
@@ -258,6 +259,44 @@ def test_scene_object_entry_includes_exoplanets(sample_models):
         "source_url": "https://exoplanetarchive.ipac.caltech.edu",
     }
     assert entries["without-exoplanets"]["exoplanets"] is None
+
+
+def test_scene_object_entry_includes_velocity(sample_models):
+    # Story #230: scene.py exports the new AstronomicalObject.velocity
+    # field, as its own top-level scene key (same flattening convention as
+    # spectral_type/absolute_magnitude/exoplanets), null when absent.
+    with_data = _make_object(
+        "with-velocity", "With Velocity", x_pc=10.0, y_pc=0.0, z_pc=0.0
+    )
+    with_data.velocity = Velocity(
+        vx_kms=-140.95,
+        vy_kms=5.14,
+        vz_kms=18.56,
+        radial_velocity_known=True,
+        source=Source(
+            reference="SIMBAD astronomical database (CDS), record GJ 699"
+        ),
+    )
+
+    without_data = _make_object(
+        "without-velocity", "Without Velocity", x_pc=20.0, y_pc=0.0, z_pc=0.0
+    )
+
+    scene = build_scene([with_data, without_data], sample_models)
+    entries = {e["id"]: e for e in scene["objects"]}
+
+    assert entries["with-velocity"]["velocity"] == {
+        "vx_kms": -140.95,
+        "vy_kms": 5.14,
+        "vz_kms": 18.56,
+        "radial_velocity_known": True,
+        "source": {
+            "reference": "SIMBAD astronomical database (CDS), record GJ 699",
+            "url": None,
+            "catalog": None,
+        },
+    }
+    assert entries["without-velocity"]["velocity"] is None
 
 
 def test_scene_works_with_no_objects_and_no_models():

@@ -46,7 +46,7 @@ from typing import Mapping, Sequence
 
 from pydantic import BaseModel
 
-from .schema import AstronomicalObject, ExoplanetSummary
+from .schema import AstronomicalObject, ExoplanetSummary, Velocity
 
 #: Fixed key set for the `structures` block (spec §21's example enumerates
 #: exactly these three). A model layer that is absent (not passed in
@@ -82,6 +82,30 @@ def _exoplanets_to_scene(exoplanets: ExoplanetSummary | None) -> dict | None:
     }
 
 
+def _velocity_to_scene(velocity: Velocity | None) -> dict | None:
+    """`AstronomicalObject.velocity` -> its scene representation (Story
+    #230). Same "flatten onto the scene object, don't bury it, `None` when
+    absent" convention `_exoplanets_to_scene` above established -
+    `velocity` is already a top-level `AstronomicalObject` field, not
+    nested under `visual`, and this Story's data pipeline only ever
+    populates it for the ~127 in-sphere stars (Epic #229), so `None` is
+    the overwhelmingly common case, never fabricated.
+    """
+    if velocity is None:
+        return None
+    return {
+        "vx_kms": velocity.vx_kms,
+        "vy_kms": velocity.vy_kms,
+        "vz_kms": velocity.vz_kms,
+        "radial_velocity_known": velocity.radial_velocity_known,
+        "source": {
+            "reference": velocity.source.reference,
+            "url": velocity.source.url,
+            "catalog": velocity.source.catalog,
+        },
+    }
+
+
 def _object_to_scene_entry(obj: AstronomicalObject) -> dict:
     """One catalog object -> its spec §21/§45 scene representation.
 
@@ -103,6 +127,7 @@ def _object_to_scene_entry(obj: AstronomicalObject) -> dict:
         "absolute_magnitude": obj.visual.absolute_magnitude,
         "apparent_magnitude": obj.visual.apparent_magnitude,
         "exoplanets": _exoplanets_to_scene(obj.exoplanets),
+        "velocity": _velocity_to_scene(obj.velocity),
         "group": {
             "primary": obj.group.primary,
             "secondary": list(obj.group.secondary),
