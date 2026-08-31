@@ -10,6 +10,7 @@ import {
   Vector3,
 } from "three";
 import { clampPlayerTimeYears, starPositionAtTime } from "./motionPlayer";
+import type { PlayerDirection } from "./motionPlayer";
 import type { SceneObject, SceneVelocity } from "./sceneTypes";
 
 /**
@@ -146,28 +147,57 @@ const TRAIL_COLOR = 0xffb833;
 
 /**
  * The trail's window start (years) given the player's current absolute
- * simulated time - the OLDEST end of the trail, chronologically before
- * `currentTimeYears` (the trail's NEWEST end, always exactly the star's
- * current animated position - see `starTrailPositionsPc` below). Always
- * `<= currentTimeYears` for any sign of `currentTimeYears` (subtracts a
- * non-negative distance), so a trail is never chronologically backwards.
+ * simulated time - the OLDEST end of the trail (in real-animation-time
+ * terms: the end the star passed through LONGER ago, chronologically before
+ * `currentTimeYears`, the trail's NEWEST end - always exactly the star's
+ * current animated position, see `starTrailPositionsPc` below).
+ *
+ * Story #247 (fixing a real bug from #243/#246's live-testing): this must be
+ * driven by the CURRENT PLAYBACK DIRECTION (`direction`, `main.ts`'s
+ * `playerDirection` - `1 | -1`), not by `sign(currentTimeYears)`. Those two
+ * only coincide in the single simplest case (started exactly at Today and
+ * has been playing in the direction that keeps them matching the whole
+ * time); in general - e.g. playing BACKWARD from Today, so `direction ===
+ * -1` while `currentTimeYears` is negative - they diverge, and the old
+ * formula (`currentTimeYears - distanceFromTodayYears`, no `direction` term)
+ * silently assumed `direction === sign(currentTimeYears)` and got the
+ * trail's orientation backwards: at `currentTimeYears = -5000, windowYears =
+ * 60000` it computed `-10000` (extending further negative - AHEAD of a
+ * backward-moving star, toward where it's HEADING) instead of the correct
+ * `0` (Today - BEHIND it, where it started and has been moving away from).
+ * The general, direction-driven formula:
+ * ```
+ * distanceFromTodayYears = min(|currentTimeYears|, windowYears)
+ * oldestEnd = currentTimeYears - direction * distanceFromTodayYears
+ * ```
+ * Consequently the OLD "always `<= currentTimeYears`" invariant only holds
+ * for `direction === 1`; for `direction === -1` the oldest end is instead
+ * always `>= currentTimeYears` (numerically "ahead" of the current position
+ * along the number line, since a backward-playing star's numerically-larger
+ * past values are chronologically OLDER in real-animation-time) - see this
+ * function's own test suite for both cases spelled out against concrete
+ * reference points, including the human owner's own worked backward-from-
+ * Today example above. The already-correct forward-from-Today case is
+ * unaffected: at `direction === 1`, `oldestEnd = currentTimeYears -
+ * distanceFromTodayYears`, identical to the pre-fix formula.
  *
  * Distance-from-Today-capped (`Math.min(Math.abs(currentTimeYears),
- * windowYears)`) rather than a flat `currentTimeYears - windowYears`: this
- * is what makes the trail visibly GROW from zero length right as playback
- * leaves Today in EITHER direction (AC: "play forward, trail grows to its
- * fixed max length then holds") rather than appearing at (near) full length
- * on the very first frame after Today - and, by the same formula run in
- * reverse, makes it visibly SHRINK back toward zero length as playback
- * approaches Today again (from either side), which combines with
+ * windowYears)`) rather than a flat `currentTimeYears - direction *
+ * windowYears`: this is what makes the trail visibly GROW from zero length
+ * right as playback leaves Today in EITHER direction (AC: "play forward,
+ * trail grows to its fixed max length then holds") rather than appearing at
+ * (near) full length on the very first frame after Today - and, by the same
+ * formula run in reverse, makes it visibly SHRINK back toward zero length as
+ * playback approaches Today again (from either side), which combines with
  * `isTrailVisible`'s hard cutoff at exactly `0` to make "return to Today
  * fully clears all trails" read as a smooth retraction rather than an
  * abrupt disappearance. Once `|currentTimeYears| >= windowYears` the cap is
- * inactive and the window is the plain fixed-length `[currentTimeYears -
- * windowYears, currentTimeYears]` (the "holds" half of that same AC).
+ * inactive and the window is the plain fixed-length window anchored at
+ * `currentTimeYears`, offset by `direction * windowYears` (the "holds" half
+ * of that same AC).
  *
  * Clamped through `clampPlayerTimeYears` (Epic #238's settled
- * `+/-1,000,000`-year range) defensively - `currentTimeYears -
+ * `+/-1,000,000`-year range) defensively - `currentTimeYears - direction *
  * distanceFromTodayYears` can land slightly outside that range for a
  * `currentTimeYears` near either boundary, since `distanceFromTodayYears`
  * is capped at `windowYears`, not at how close `currentTimeYears` already
@@ -175,10 +205,11 @@ const TRAIL_COLOR = 0xffb833;
  */
 export function trailWindowStartYears(
   currentTimeYears: number,
+  direction: PlayerDirection,
   windowYears: number = TRAIL_WINDOW_YEARS,
 ): number {
   const distanceFromTodayYears = Math.min(Math.abs(currentTimeYears), windowYears);
-  return clampPlayerTimeYears(currentTimeYears - distanceFromTodayYears);
+  return clampPlayerTimeYears(currentTimeYears - direction * distanceFromTodayYears);
 }
 
 /**
@@ -194,13 +225,14 @@ export function trailWindowStartYears(
  */
 export function trailSampleTimesYears(
   currentTimeYears: number,
+  direction: PlayerDirection,
   windowYears: number = TRAIL_WINDOW_YEARS,
   segmentCount: number = TRAIL_SEGMENT_COUNT,
 ): number[] {
   if (currentTimeYears === 0) {
     return [];
   }
-  const startYears = trailWindowStartYears(currentTimeYears, windowYears);
+  const startYears = trailWindowStartYears(currentTimeYears, direction, windowYears);
   const times: number[] = [];
   for (let i = 0; i <= segmentCount; i++) {
     const fraction = i / segmentCount;
@@ -224,10 +256,11 @@ export function starTrailPositionsPc(
   positionPc: readonly [number, number, number],
   velocityKms: Pick<SceneVelocity, "vx_kms" | "vy_kms" | "vz_kms">,
   currentTimeYears: number,
+  direction: PlayerDirection,
   windowYears: number = TRAIL_WINDOW_YEARS,
   segmentCount: number = TRAIL_SEGMENT_COUNT,
 ): Array<[number, number, number]> {
-  return trailSampleTimesYears(currentTimeYears, windowYears, segmentCount).map((tYears) =>
+  return trailSampleTimesYears(currentTimeYears, direction, windowYears, segmentCount).map((tYears) =>
     starPositionAtTime(positionPc, velocityKms, tYears),
   );
 }

@@ -85,6 +85,20 @@ const PLAY_BACKWARD_GLYPH = "◀"; // <
 const PLAY_FORWARD_GLYPH = "▶"; // >
 const STEP_FORWARD_GLYPH = "⏭"; // >|
 
+/** Story #247: the glyph either direction button swaps to while it is the
+ * one actively playing - reverts to its own `PLAY_BACKWARD_GLYPH`/
+ * `PLAY_FORWARD_GLYPH` the instant any other button in the panel is pressed
+ * (i.e. the same `forwardActive`/`backwardActive` condition that already
+ * drives `.active`/`aria-pressed` below also now drives this). A single
+ * shared glyph for both directions - unlike the toolbar's own single-static-
+ * glyph Play button (see `main.ts`'s `PLAYER_ICON_SVG` docstring for why
+ * THAT one deliberately doesn't swap), this panel's `<`/`>` buttons need a
+ * pause affordance because each one otherwise keeps showing its own
+ * direction arrow even while it's the thing currently animating - i.e. a
+ * player showing "▶" while playing doesn't read as "press me to pause",
+ * whereas "⏸" does. */
+const PAUSE_GLYPH = "⏸";
+
 export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandle {
   const panel = document.createElement("div");
   panel.id = "player-panel";
@@ -131,13 +145,17 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   todayButton.textContent = "Today";
   todayButton.addEventListener("click", () => options.onToday());
 
+  // Story #247: "Today" moved between `<` and `>` (new order `|< < Today >
+  // >|`, was `|< < > >| [readout] [Today]`) - the time readout now sits
+  // after the full transport row, which reads cleanest left-to-right
+  // (transport controls, then the number they're driving).
   topRow.append(
     stepBackButton,
     playBackwardButton,
+    todayButton,
     playForwardButton,
     stepForwardButton,
     timeReadout,
-    todayButton,
   );
   panel.appendChild(topRow);
 
@@ -201,6 +219,13 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
       playForwardButton.setAttribute("aria-pressed", String(forwardActive));
       playBackwardButton.classList.toggle("active", backwardActive);
       playBackwardButton.setAttribute("aria-pressed", String(backwardActive));
+      // Story #247: the currently-active direction button also swaps its
+      // glyph to a pause symbol while it's the one playing, reverting to its
+      // normal arrow glyph the instant any other button in the panel is
+      // pressed - exactly the same `forwardActive`/`backwardActive`
+      // condition above, just also driving `textContent` now.
+      playForwardButton.textContent = forwardActive ? PAUSE_GLYPH : PLAY_FORWARD_GLYPH;
+      playBackwardButton.textContent = backwardActive ? PAUSE_GLYPH : PLAY_BACKWARD_GLYPH;
     },
   };
 }
