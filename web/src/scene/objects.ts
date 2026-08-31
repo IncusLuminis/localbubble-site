@@ -9,7 +9,6 @@ import {
   Vector3,
 } from "three";
 import type { LocalBubbleStructure, SceneObject } from "./sceneTypes";
-import { positionToVector3 } from "./sceneData";
 import { isWithinRadius } from "./radiusFilter";
 import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
 import { sunCoreRadiusPc } from "./sun";
@@ -603,8 +602,20 @@ const scratchPosition = new Vector3();
 const scratchScale = new Vector3();
 const IDENTITY_QUATERNION = new Quaternion();
 
-function instanceMatrixFor(obj: SceneObject, radiusPc: number): Matrix4 {
-  scratchPosition.copy(positionToVector3(obj.position_pc));
+/** Story #239 (scope expansion): `positionPcOverride`, when given, replaces
+ * `obj`'s own static `position_pc` for this one matrix - the mechanism the
+ * motion player uses to display the ~127 in-sphere animated stars at their
+ * time-extrapolated position each frame while every other instance (no
+ * override passed) keeps rendering at its real, unchanged catalog position
+ * exactly as before. Defaults to `undefined` (i.e. "use `obj.position_pc`"),
+ * so every pre-#239 caller is completely unaffected. */
+function instanceMatrixFor(
+  obj: SceneObject,
+  radiusPc: number,
+  positionPcOverride?: readonly [number, number, number],
+): Matrix4 {
+  const [x, y, z] = positionPcOverride ?? obj.position_pc;
+  scratchPosition.set(x, y, z);
   scratchScale.setScalar(radiusPc);
   return scratchMatrix.compose(scratchPosition, IDENTITY_QUATERNION, scratchScale);
 }
@@ -697,7 +708,21 @@ export function isCatalogObjectVisible(
  * Issue #215: `bubbleOuterRadiusPc` (defaulting to `null`, i.e. "no
  * graduated sizing") feeds `starBaselineRadiusPc` to compute THIS star's own
  * per-distance ceiling, which is then passed as `starMarkerRadiusPc`'s
- * `maxRadiusPc` instead of the flat `STAR_MARKER_RADIUS_PC`. */
+ * `maxRadiusPc` instead of the flat `STAR_MARKER_RADIUS_PC`.
+ *
+ * Story #239 (scope expansion): `positionPcOverride`, forwarded straight
+ * through to `instanceMatrixFor` (see that function's own docstring), lets
+ * the motion player display an animated star at its time-extrapolated
+ * position while every radius/shrink/visibility computation above is
+ * completely unaffected - it still keys entirely off `obj.distance_pc` (the
+ * star's real, static catalog distance, never the animated one) exactly as
+ * before. This is deliberately an EXTENSION of this existing function
+ * (reusing its already-correct radius/visibility logic verbatim) rather than
+ * a second, parallel position-setting function that could drift from it -
+ * per this Story's own explicit instruction not to duplicate/diverge from
+ * this logic. Defaults to `undefined`, so every pre-#239 caller (every
+ * `updateCatalogVisibility`/`updateDenseBatchLod` call across the whole
+ * catalog) is completely unaffected. */
 export function setInstanceVisibility(
   bucket: CatalogBucket,
   index: number,
@@ -705,6 +730,7 @@ export function setInstanceVisibility(
   cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
   denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
   bubbleOuterRadiusPc: number | null = null,
+  positionPcOverride?: readonly [number, number, number],
 ): void {
   const obj = bucket.objects[index];
   let radiusPc = bucket.radiiPc[index];
@@ -713,8 +739,38 @@ export function setInstanceVisibility(
     radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc);
   }
   const effectiveRadiusPc = visible ? radiusPc : HIDDEN_INSTANCE_SCALE;
-  bucket.mesh.setMatrixAt(index, instanceMatrixFor(obj, effectiveRadiusPc));
+  bucket.mesh.setMatrixAt(index, instanceMatrixFor(obj, effectiveRadiusPc, positionPcOverride));
   bucket.mesh.instanceMatrix.needsUpdate = true;
+}
+
+/** Story #239: one animated star's resolved location within the
+ * `CatalogBucket[]` array - which bucket its `InstancedMesh` instance lives
+ * in, and its index within that bucket. `buildObjectIndexLookup` below
+ * builds this once per scene load (well before any player session starts),
+ * so `main.ts`'s per-frame animation loop never needs to scan
+ * `CatalogBucket.objects` per animated star per frame - a single `Map.get`
+ * instead. */
+export interface CatalogObjectRef {
+  bucket: CatalogBucket;
+  index: number;
+}
+
+/** Builds an `id -> (bucket, index)` lookup across every bucket/object in
+ * `buckets`, once. Generic over the whole catalog (not scoped to the ~127
+ * animated stars specifically) since building it is already O(number of
+ * catalog objects) regardless - about 700 `Map.set` calls, negligible and
+ * done exactly once at scene-load time, not per frame or per player
+ * session. `main.ts`'s motion player looks up only the animated stars' ids
+ * in the result; nothing stops a future caller from reusing the same
+ * lookup for an unrelated id -> instance resolution need. */
+export function buildObjectIndexLookup(buckets: CatalogBucket[]): Map<string, CatalogObjectRef> {
+  const lookup = new Map<string, CatalogObjectRef>();
+  for (const bucket of buckets) {
+    bucket.objects.forEach((obj, index) => {
+      lookup.set(obj.id, { bucket, index });
+    });
+  }
+  return lookup;
 }
 
 /** Builds one `InstancedMesh` per `object_type` present in `objects`
