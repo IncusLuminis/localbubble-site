@@ -68,6 +68,7 @@ import {
   starPositionAtTime,
   stepPlayerTimeYears,
   type PlayerDirection,
+  type PlayerState,
 } from "./scene/motionPlayer";
 import {
   createMotionTrailsLayer,
@@ -806,12 +807,21 @@ function handlePlayerStepButton(direction: PlayerDirection): void {
   playerTimeYears = stepPlayerTimeYears(playerTimeYears, direction);
 }
 
-/** Story #239: the toolbar Play/Pause button's own toggle - unlike the
- * panel's `<`/`>` buttons (Story #243's `handlePlayerDirectionButton`), this
- * one never changes `playerDirection`: pausing/resuming from the toolbar
- * always resumes in whichever direction was last active. */
-function togglePlayerPlaying(): void {
-  setPlayerPlaying(!playerPlaying);
+/** Story #249: applies a `PlayerState` (as produced by `nextPlayerStateForSphere`)
+ * to the live module/DOM state - the single application point shared by the
+ * sphere-exit force-reset (`applyPlayerSphereState` below) and the toolbar
+ * Play button's "close the already-open panel" action (its click handler
+ * further down), so the two reset call sites literally pass through the same
+ * code and can never drift apart. Uses `setPlayerPlaying` (not a direct
+ * assignment) so `playerButton`'s `aria-pressed`/`.active` stay correct
+ * either way, and re-syncs the UI lock since `playerTimeYears` may have just
+ * changed to/from exactly `0`. */
+function applyPlayerResetState(next: PlayerState): void {
+  playerTimeYears = next.timeYears;
+  setPlayerPlaying(next.playing);
+  playerPanelOpen = next.panelOpen;
+  playerPanelHandle.setVisible(playerPanelOpen);
+  syncUiLock();
 }
 
 /** Story #239 AC #7: forces "Show velocity vectors" off (arrows + speed
@@ -895,9 +905,7 @@ function applyPlayerSphereState(insideSphere: boolean): void {
     { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
     insideSphere,
   );
-  playerTimeYears = next.timeYears;
-  playerPlaying = next.playing;
-  playerPanelOpen = next.panelOpen;
+  applyPlayerResetState(next);
   // Story #243: `PlayerState` (the pure `nextPlayerStateForSphere` above)
   // doesn't carry direction, so reset it here alongside the other three
   // force-reset fields - a fresh session re-entering the sphere should
@@ -908,10 +916,6 @@ function applyPlayerSphereState(insideSphere: boolean): void {
   }
 
   playerButton.disabled = !insideSphere;
-  playerButton.setAttribute("aria-pressed", String(playerPlaying));
-  playerButton.classList.toggle("active", playerPlaying);
-  playerPanelHandle.setVisible(playerPanelOpen);
-  syncUiLock();
 }
 
 /**
@@ -1527,16 +1531,27 @@ velocityVectorsButton.addEventListener("click", () => {
 // purely inert reveal - it only opens the panel, never starts motion,
 // since #243 made direction an explicit choice via the panel's own `<`/`>`
 // buttons and auto-starting playback in whatever direction happened to be
-// last active no longer matches that design. A subsequent press (panel
-// already open) remains a plain play/pause toggle - the panel's own
-// play/pause button does the exact same thing via `togglePlayerPlaying`,
-// so the two controls can never disagree.
+// last active no longer matches that design. Story #249: a subsequent press
+// (panel already open) no longer toggles play/pause (that's now exclusively
+// the panel's own `<`/`>` transport buttons' job, via
+// `handlePlayerDirectionButton`) - instead it CLOSES the panel and resets to
+// Today, via the exact same `{ timeYears: 0, playing: false, panelOpen:
+// false }` target end-state the sphere-exit reset produces: passing
+// `insideSphereNow = false` to `nextPlayerStateForSphere` always returns that
+// fixed state regardless of the current `state` argument, and
+// `applyPlayerResetState` is the same application function
+// `applyPlayerSphereState` above uses, so this can't drift from that reset.
 playerButton.addEventListener("click", () => {
   if (!playerPanelOpen) {
     playerPanelOpen = true;
     playerPanelHandle.setVisible(true);
   } else {
-    togglePlayerPlaying();
+    applyPlayerResetState(
+      nextPlayerStateForSphere(
+        { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
+        false,
+      ),
+    );
   }
 });
 infoToggleButton.addEventListener("click", () => infoDialog.show());
