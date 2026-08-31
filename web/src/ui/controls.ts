@@ -48,7 +48,7 @@ function makeSection(titleText: string): { section: HTMLDivElement; body: HTMLDi
 function makeCheckbox(
   item: ToggleItem,
   onChange: (key: string, checked: boolean) => void,
-): HTMLLabelElement {
+): { row: HTMLLabelElement; input: HTMLInputElement } {
   const label = document.createElement("label");
   label.className = "toggle-row";
   const input = document.createElement("input");
@@ -58,10 +58,22 @@ function makeCheckbox(
   const text = document.createElement("span");
   text.textContent = item.label;
   label.append(input, text);
-  return label;
+  return { row: label, input };
 }
 
-export function createControlPanel(options: ControlPanelOptions): HTMLDivElement {
+/**
+ * Story #239's UI lock (Epic #238: category/structure checkboxes and the
+ * radius filter must disable whenever the motion player's time is away from
+ * Today). `element` is unchanged from this function's pre-#239 return type;
+ * `setLocked` is the new handle `main.ts` calls whenever
+ * `isUiLockedForPlayerTime`'s result changes.
+ */
+export interface ControlPanelHandle {
+  element: HTMLDivElement;
+  setLocked: (locked: boolean) => void;
+}
+
+export function createControlPanel(options: ControlPanelOptions): ControlPanelHandle {
   const panel = document.createElement("div");
   panel.id = "controls";
   panel.className = "panel";
@@ -71,12 +83,21 @@ export function createControlPanel(options: ControlPanelOptions): HTMLDivElement
   title.textContent = "Local Galactic Structures";
   panel.appendChild(title);
 
+  // Story #239: every category/structure checkbox plus the radius `<select>`
+  // (built below) is collected here so `setLocked` can disable/re-enable all
+  // of them together - deliberately NOT the "Labels" checkbox just below
+  // (display-only, not a scene-state filter Epic #238's UI-lock AC lists) or
+  // the "Object size"/camera-preset/export controls further down (also not
+  // listed - camera navigation and cosmetic-only controls stay live
+  // throughout per that AC).
+  const lockableInputs: (HTMLInputElement | HTMLSelectElement)[] = [];
+
   // --- Object categories (spec §23: stars/clusters/associations/etc) ---
   const categoriesSection = makeSection("Object categories");
   for (const item of options.categories) {
-    categoriesSection.body.appendChild(
-      makeCheckbox(item, options.onCategoryToggle),
-    );
+    const { row, input } = makeCheckbox(item, options.onCategoryToggle);
+    categoriesSection.body.appendChild(row);
+    lockableInputs.push(input);
   }
   panel.appendChild(categoriesSection.section);
 
@@ -84,11 +105,11 @@ export function createControlPanel(options: ControlPanelOptions): HTMLDivElement
   // Wave, Local Bubble - spec §23) ---
   const structuresSection = makeSection("Layers");
   for (const item of options.structureLayers) {
-    structuresSection.body.appendChild(
-      makeCheckbox(item, options.onStructureToggle),
-    );
+    const { row, input } = makeCheckbox(item, options.onStructureToggle);
+    structuresSection.body.appendChild(row);
+    lockableInputs.push(input);
   }
-  const labelsRow = makeCheckbox(
+  const { row: labelsRow } = makeCheckbox(
     { key: "labels", label: "Labels", defaultChecked: options.labelsDefaultChecked ?? true },
     (_key, checked) => options.onLabelsToggle(checked),
   );
@@ -113,6 +134,7 @@ export function createControlPanel(options: ControlPanelOptions): HTMLDivElement
   });
   radiusSection.body.appendChild(radiusSelect);
   panel.appendChild(radiusSection.section);
+  lockableInputs.push(radiusSelect);
 
   // --- Object size scale (spec §23: "opacity / size ... where relevant")
   const sizeSection = makeSection("Object size");
@@ -152,5 +174,12 @@ export function createControlPanel(options: ControlPanelOptions): HTMLDivElement
   exportSection.body.appendChild(exportButton);
   panel.appendChild(exportSection.section);
 
-  return panel;
+  return {
+    element: panel,
+    setLocked(locked: boolean) {
+      for (const input of lockableInputs) {
+        input.disabled = locked;
+      }
+    },
+  };
 }

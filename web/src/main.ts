@@ -21,12 +21,15 @@ import {
 } from "./scene/axes";
 import {
   bubbleOuterRadiusPcFrom,
+  buildObjectIndexLookup,
   catalogObjectTypes,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
+  isCatalogObjectVisible,
   isSelectedObjectVisible,
   markerRadiusPc,
   selectedMarkerRadiusPc,
+  setInstanceVisibility,
   SUN_OBJECT_ID,
   updateBackgroundDimming,
   updateCatalogSizeScale,
@@ -34,6 +37,7 @@ import {
   updateDenseBatchLod,
   visibleCatalogObjects,
   type CatalogBucket,
+  type CatalogObjectRef,
 } from "./scene/objects";
 import {
   denseBatchCollectionRadiusPc,
@@ -50,9 +54,18 @@ import {
   createVelocityVectorsLayer,
   nextVelocityVectorsToggleOn,
   selectVisibleVelocitySpeedLabelIds,
+  starsWithVelocityInSphere,
   VELOCITY_SPEED_LABEL_MAX_VISIBLE,
   velocityVectorsVisible,
 } from "./scene/velocityVectors";
+import {
+  advancePlayerTimeYears,
+  clampPlayerTimeYears,
+  isUiLockedForPlayerTime,
+  logSpeedSliderToYearsPerSecond,
+  nextPlayerStateForSphere,
+  starPositionAtTime,
+} from "./scene/motionPlayer";
 import {
   createGouldBeltLabel,
   createGouldBeltLayer,
@@ -75,6 +88,7 @@ import {
   selectNearestLabels,
   shouldShowLabel,
   shouldShowSunLabel,
+  type CatalogLabel,
   type DenseBatchLabelRankCandidate,
   type LabelRankCandidate,
 } from "./scene/labels";
@@ -93,11 +107,12 @@ import {
 } from "./scene/cameraPresets";
 import { pickSceneObject, toNdc } from "./scene/picking";
 import { exportSceneAsPng } from "./scene/pngExport";
-import { createControlPanel } from "./ui/controls";
+import { createControlPanel, type ControlPanelHandle } from "./ui/controls";
 import { Inspector } from "./ui/inspector";
 import { InfoDialog } from "./ui/infoDialog";
 import { SearchDialog } from "./ui/searchDialog";
 import { createSearchBox } from "./ui/search";
+import { createPlayerPanel } from "./ui/playerPanel";
 import { createFovReadout } from "./ui/fovReadout";
 import { createFullscreenToggle } from "./ui/fullscreenToggle";
 import { fovExtentPc } from "./scene/fov";
@@ -410,6 +425,33 @@ const velocityVectorsButton = createToolbarButton(
 );
 velocityVectorsButton.setAttribute("aria-pressed", "false");
 
+/** Story #239: the motion-player toggle glyph - a plain filled play
+ * triangle. `fill="currentColor"` (unlike the vectors icon's outline
+ * strokes) so it reads as a solid, familiar "play" symbol; `.active`
+ * styling (see `style.css`) is what actually distinguishes playing from
+ * paused, matching `velocityVectorsButton`'s own single-static-glyph +
+ * `.active`-class convention rather than swapping to a second "pause"
+ * glyph on this toolbar button specifically (the panel's own play/pause
+ * control, `ui/playerPanel.ts`, DOES swap its glyph - see that module). */
+const PLAYER_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" stroke="none" aria-hidden="true">
+    <path d="M7 4 L20 12 L7 20 Z" />
+  </svg>
+`;
+
+// Story #239: grouped immediately after "Show velocity vectors" per Epic
+// #238's explicit placement - both are gated on the same camera-inside-the-
+// RECONS-dense-batch-sphere check (`applyBackgroundDimming`'s crossing
+// detection drives both `applyVelocityVectorsButtonState` and this Story's
+// own `applyPlayerSphereState`, further below).
+const playerButton = createToolbarButton(
+  "player-toggle",
+  PLAYER_ICON_SVG,
+  "Play star motion through time",
+  true,
+);
+playerButton.setAttribute("aria-pressed", "false");
+
 // Issue #201: the Info ("i") button, relocated here (from the top-left row,
 // #164) as the toolbar's LAST button - same `createToolbarButton` sizing
 // (44x44px) as its neighbors, rather than the old top-left row's standalone
@@ -470,6 +512,79 @@ let velocitySpeedLabelsInfo: ReturnType<typeof createVelocitySpeedLabelsLayer> |
  * `nextVelocityVectorsToggleOn`'s docstring), so this can never be `true`
  * while the button is disabled. */
 let velocityVectorsOn = false;
+
+/** Story #239: the motion player's own state - `main.ts` is the single
+ * source of truth for all of it; `playerPanelHandle` (built just below) is
+ * a stateless view pushed into via `.update()`/`.setVisible()` each frame
+ * or on a relevant event, never read from directly (see `ui/playerPanel.ts`'s
+ * own docstring). `playerTimeYears` is always kept within Epic #238's
+ * settled `+/-1,000,000`-year range via `clampPlayerTimeYears`/
+ * `advancePlayerTimeYears`/`nextPlayerStateForSphere` - every one of this
+ * module's own write sites below routes through one of those three. */
+let playerTimeYears = 0;
+let playerPlaying = false;
+let playerPanelOpen = false;
+
+/** Story #239: default speed-slider position (`[-1, 1]`, positive = forward)
+ * - a moderate forward rate so the very first Play press already shows
+ * clearly visible motion within a couple of seconds without the user
+ * needing to touch the slider first. Live-tuned in the running viewer
+ * alongside `motionPlayer.ts`'s `MIN_YEARS_PER_REAL_SECOND`/
+ * `MAX_YEARS_PER_REAL_SECOND` anchors themselves - see the PR description. */
+const DEFAULT_PLAYER_SPEED_SLIDER_VALUE = 0.55;
+let playerSpeedSliderValue = DEFAULT_PLAYER_SPEED_SLIDER_VALUE;
+
+/** Story #239: the ~127 in-sphere stars with velocity data (Epic #229's
+ * `starsWithVelocityInSphere`, reused directly - never reimplemented),
+ * their `id -> (bucket, index)` lookup (`objects.ts`'s
+ * `buildObjectIndexLookup`, built ONCE per player session - here, once per
+ * scene load, well before any player session starts, see that function's
+ * own docstring), and a same-shape `id -> CatalogLabel` lookup so the
+ * per-frame animation loop (`applyPlayerAnimation`) never scans
+ * `labelsInfo.labels` linearly either. All three are populated once inside
+ * `loadScene().then(...)` below, once `catalogBuckets`/`labelsInfo` exist;
+ * empty here so `applyPlayerAnimation` is a correct no-op before the scene
+ * has loaded. */
+let animatedStars: SceneObject[] = [];
+let objectIndexLookup: Map<string, CatalogObjectRef> = new Map();
+let labelById: Map<string, CatalogLabel> = new Map();
+
+/** Story #239: the Structures control panel's lock/unlock handle
+ * (`ui/controls.ts`'s `createControlPanel` return value) - `null` until the
+ * scene loads and the panel is actually built (mirrors every other
+ * scene-load-gated `let ... | null` binding in this file, e.g.
+ * `labelsInfo`). `syncUiLock` below guards every use with a null check. */
+let panelHandle: ControlPanelHandle | null = null;
+
+/** Story #239: whether the app's other scene-state-changing controls are
+ * currently locked (Epic #238 AC: true whenever `playerTimeYears !== 0`,
+ * including while paused away from Today) - change-detected the same way
+ * `cameraWasInsideDenseBatchSphere` above is, so `syncUiLock` only touches
+ * the DOM on an actual transition rather than every single frame. The
+ * click-to-select handler (further below) reads this directly, since the
+ * canvas itself has no `disabled` DOM property to toggle. */
+let uiLocked = false;
+
+/** Story #239: the player's own control panel (`ui/playerPanel.ts`) - built
+ * once here at top-level startup (it needs no scene data, unlike the
+ * Structures panel), mirroring `inspector`/`searchDialog`/`infoDialog`'s own
+ * "always exists, shown/hidden via a method call" convention. */
+const playerPanelHandle = createPlayerPanel({
+  onTogglePlayPause: () => togglePlayerPlaying(),
+  onScrub: (tYears) => {
+    setPlayerPlaying(false);
+    playerTimeYears = clampPlayerTimeYears(tYears);
+  },
+  onSpeedChange: (sliderValue) => {
+    playerSpeedSliderValue = sliderValue;
+  },
+  onToday: () => {
+    setPlayerPlaying(false);
+    playerTimeYears = 0;
+  },
+  defaultSpeedSliderValue: DEFAULT_PLAYER_SPEED_SLIDER_VALUE,
+});
+app.appendChild(playerPanelHandle.element);
 
 /** Issue #104: the dense RECONS batch's own collection radius (pc),
  * derived once from the loaded scene data (`lod.ts`'s
@@ -611,6 +726,164 @@ function applyVelocityVectorsButtonState(insideSphere: boolean): void {
   }
 }
 
+/** Story #239: the single writer for the player's play/pause state - shared
+ * by the toolbar button's click handler and the panel's own play/pause
+ * control (`onTogglePlayPause` above) so the two can never disagree about
+ * whether the player is currently playing, mirroring how
+ * `applyVelocityVectorsButtonState` is the single writer for that toggle's
+ * `aria-pressed`/`.active` state. */
+function setPlayerPlaying(next: boolean): void {
+  playerPlaying = next;
+  playerButton.setAttribute("aria-pressed", String(playerPlaying));
+  playerButton.classList.toggle("active", playerPlaying);
+}
+
+function togglePlayerPlaying(): void {
+  setPlayerPlaying(!playerPlaying);
+}
+
+/** Story #239 AC #7: forces "Show velocity vectors" off (arrows + speed
+ * labels hidden, button un-pressed) for as long as the player's time is
+ * away from Today - the two are visually incompatible per Epic #238. Called
+ * every frame from `applyPlayerAnimation` (not just once when Play is first
+ * pressed) since the AC explicitly requires this to hold continuously while
+ * PAUSED away from Today too, not only while actively playing. Guarded on
+ * `velocityVectorsOn` already being `true` so this is a cheap no-op on every
+ * frame except the one where it actually needs to act - no auto-restore
+ * afterward, matching #231's own precedent (re-enabling the vectors toggle
+ * once back at Today works exactly like an ordinary click, nothing here
+ * remembers or restores the pre-Play state). */
+function forceVelocityVectorsOffIfAwayFromToday(): void {
+  if (playerTimeYears === 0 || !velocityVectorsOn) return;
+  velocityVectorsOn = false;
+  velocityVectorsButton.setAttribute("aria-pressed", "false");
+  velocityVectorsButton.classList.remove("active");
+  if (velocityVectorsGroup) {
+    velocityVectorsGroup.visible = false;
+  }
+}
+
+/** Story #239 AC #9: applies the UI lock - disabling category/structure
+ * checkboxes and the radius filter (`panelHandle.setLocked`) plus search
+ * (`searchToggle.disabled`, and closing an already-open search dialog so a
+ * newly-locked session can't leave it open) - whenever the player's time is
+ * not exactly Today, unlocking the instant it returns to exactly `0` via
+ * any path (play reaching it, a manual scrub, or the "Today" button all
+ * funnel through the shared `playerTimeYears` state this reads). Camera
+ * navigation (`OrbitControls`) is never touched here, per that same AC.
+ * Star-click selection is guarded directly in the click handler via the
+ * `uiLocked` flag this function maintains (the canvas itself has no
+ * `disabled` DOM property). Change-detected like
+ * `cameraWasInsideDenseBatchSphere` above, so this only touches the DOM on
+ * an actual lock/unlock transition, not every single frame. */
+function syncUiLock(): void {
+  const locked = isUiLockedForPlayerTime(playerTimeYears);
+  if (locked === uiLocked) return;
+  uiLocked = locked;
+  if (panelHandle) panelHandle.setLocked(uiLocked);
+  searchToggle.disabled = uiLocked;
+  if (uiLocked) searchDialog.hide();
+}
+
+/** Story #239 AC #8 (mirrors `applyVelocityVectorsButtonState` above
+ * exactly): syncs the player toolbar button's enabled/disabled state to
+ * `insideSphere`, and - via `motionPlayer.ts`'s pure `nextPlayerStateForSphere`
+ * - force-resets the whole player (time back to Today, paused, panel
+ * hidden) the instant the camera leaves the sphere, mirroring #231 AC #3's
+ * "no stale display the user can't currently turn off" reasoning: leaving
+ * the sphere mid-animation snaps back to Today FIRST (never leaves stars
+ * mid-flight while forcibly closing the player) rather than merely hiding
+ * the panel over whatever position happened to be showing. Called ONLY from
+ * `applyBackgroundDimming`'s own boundary-crossing detection, alongside
+ * `applyVelocityVectorsButtonState`, per this Story's explicit instruction
+ * to reuse that existing per-frame hook rather than adding a third
+ * independent RAF-driven check. */
+function applyPlayerSphereState(insideSphere: boolean): void {
+  const next = nextPlayerStateForSphere(
+    { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
+    insideSphere,
+  );
+  playerTimeYears = next.timeYears;
+  playerPlaying = next.playing;
+  playerPanelOpen = next.panelOpen;
+
+  playerButton.disabled = !insideSphere;
+  playerButton.setAttribute("aria-pressed", String(playerPlaying));
+  playerButton.classList.toggle("active", playerPlaying);
+  playerPanelHandle.setVisible(playerPanelOpen);
+  syncUiLock();
+}
+
+/**
+ * Story #239: per-frame motion-player tick, called every animation frame
+ * from `animate()` below UNCONDITIONALLY (mirrors `applyDenseBatchLod`'s own
+ * "walk the small animated subset every frame regardless of state" pattern)
+ * rather than only while actively playing - this is deliberate: it's what
+ * makes "restore to Today" the exact same code path as "animate away from
+ * Today", never a special case, since `starPositionAtTime` recomputes fresh
+ * from each star's real `position_pc` every call (see that function's own
+ * docstring on why this can't drift). At `playerTimeYears === 0` (the
+ * overwhelmingly common case - the app at rest) this loop is a correct,
+ * cheap (~127 objects) no-op that reproduces exactly what
+ * `updateCatalogVisibility`/`updateDenseBatchLod` already render.
+ *
+ * `deltaSeconds` is the real (wall-clock) time elapsed since the previous
+ * frame - `animate()` derives it from `performance.now()`, since no other
+ * per-frame effect in this file previously needed a delta (everything else
+ * here is a function of absolute camera/time state, not a rate).
+ */
+function applyPlayerAnimation(deltaSeconds: number): void {
+  if (playerPlaying) {
+    const yearsPerRealSecond = logSpeedSliderToYearsPerSecond(playerSpeedSliderValue);
+    const result = advancePlayerTimeYears(playerTimeYears, deltaSeconds, yearsPerRealSecond);
+    playerTimeYears = result.timeYears;
+    if (result.reachedToday) {
+      // Mirrors the "Today" button's own pause-on-arrival (see
+      // `advancePlayerTimeYears`'s docstring) - otherwise a still-`playing`
+      // player sitting exactly on Today would step away again next frame.
+      setPlayerPlaying(false);
+    }
+  }
+
+  forceVelocityVectorsOffIfAwayFromToday();
+
+  // Move the ~127 animated stars' markers (and, per this Story's chosen
+  // label-tracking approach - see the PR description - their name labels)
+  // to their time-extrapolated position. `isCatalogObjectVisible` is the
+  // SAME predicate `updateCatalogVisibility`/`updateDenseBatchLod` already
+  // use, so a star currently hidden by the category/radius filters stays
+  // hidden here too rather than being forced visible by the player.
+  const cameraDistancePc = camera.position.length();
+  for (const obj of animatedStars) {
+    const ref = objectIndexLookup.get(obj.id);
+    if (!ref || !obj.velocity) continue;
+    const positionPc = starPositionAtTime(obj.position_pc, obj.velocity, playerTimeYears);
+    const visible = isCatalogObjectVisible(
+      obj,
+      categoryVisibility,
+      radiusPc,
+      cameraDistancePc,
+      denseBatchRadiusPc,
+    );
+    setInstanceVisibility(
+      ref.bucket,
+      ref.index,
+      visible,
+      cameraDistancePc,
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+      positionPc,
+    );
+    const label = labelById.get(obj.id);
+    if (label) {
+      label.css2dObject.position.set(positionPc[0], positionPc[1], positionPc[2]);
+    }
+  }
+
+  playerPanelHandle.update({ tYears: playerTimeYears, playing: playerPlaying });
+  syncUiLock();
+}
+
 /**
  * Issue #137: dims the "background" - every non-star catalog bucket
  * (clusters, associations, extended structures - `objects.ts`'s
@@ -671,6 +944,10 @@ function applyBackgroundDimming(): void {
   // rather than a second independent per-frame check (see
   // `applyVelocityVectorsButtonState`'s docstring).
   applyVelocityVectorsButtonState(insideSphere);
+  // Story #239: the motion player's own enabled/disabled + force-reset
+  // state is gated on this exact same crossing, for the exact same reason
+  // (see `applyPlayerSphereState`'s docstring).
+  applyPlayerSphereState(insideSphere);
 }
 
 /** Issue #123: the selection reticle's scale should track the *same*
@@ -1084,6 +1361,8 @@ applyLocalBubbleButtonState();
 // explicitly rather than computed, mirroring `applyLocalBubbleButtonState`'s
 // own startup call just above).
 applyVelocityVectorsButtonState(false);
+// Story #239: same reasoning, same startup timing, for the player toggle.
+applyPlayerSphereState(false);
 
 zoomInButton.addEventListener("click", () => zoomBy(ZOOM_IN_STEP_FACTOR));
 zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
@@ -1104,6 +1383,22 @@ velocityVectorsButton.addEventListener("click", () => {
       velocityVectorsOn,
       cameraWasInsideDenseBatchSphere,
     );
+  }
+});
+// Story #239: only ever clickable while `applyPlayerSphereState`'s own
+// crossing-detection has left it enabled - same pattern as the vectors
+// toggle just above. First press (panel not yet open) reveals the panel
+// AND starts playing in one action, per Epic #238's brief; a subsequent
+// press (panel already open) is a plain play/pause toggle instead - the
+// panel's own play/pause button does the exact same thing via
+// `togglePlayerPlaying`, so the two controls can never disagree.
+playerButton.addEventListener("click", () => {
+  if (!playerPanelOpen) {
+    playerPanelOpen = true;
+    playerPanelHandle.setVisible(true);
+    setPlayerPlaying(true);
+  } else {
+    togglePlayerPlaying();
   }
 });
 infoToggleButton.addEventListener("click", () => infoDialog.show());
@@ -1232,8 +1527,22 @@ loadScene()
     catalogBuckets = catalogLayer.buckets;
     scene.add(catalogLayer.group);
 
+    // Story #239: the id -> (bucket, index) lookup the motion player's
+    // per-frame animation loop needs, built ONCE here (well before any
+    // player session starts) rather than scanned per animated star per
+    // frame - see `objects.ts`'s `buildObjectIndexLookup` docstring.
+    objectIndexLookup = buildObjectIndexLookup(catalogBuckets);
+    // The animated population itself - Epic #229's/#231's own
+    // `starsWithVelocityInSphere`, reused directly rather than
+    // reimplemented, per this Story's explicit instruction.
+    animatedStars = starsWithVelocityInSphere(sceneData.objects, denseBatchRadiusPc);
+
     labelsInfo = createLabelsLayer(catalogObjects);
     scene.add(labelsInfo.group);
+    // Story #239: same id -> label lookup, for the label-position-tracking
+    // half of the per-frame animation loop (see this Story's PR description
+    // for why label tracking, rather than hiding, was the chosen approach).
+    labelById = new Map(labelsInfo.labels.map((label) => [label.object.id, label]));
 
     gouldBeltGroup = createGouldBeltLayer(sceneData.structures.gould_belt);
     if (gouldBeltGroup) {
@@ -1287,7 +1596,7 @@ loadScene()
       { key: "local-bubble", label: "Local Bubble", defaultChecked: localBubbleGroup !== null },
     ];
 
-    const panel = createControlPanel({
+    panelHandle = createControlPanel({
       categories: categories.map((type) => ({ key: type, label: humanizeCategory(type) })),
       structureLayers: structureLayerItems,
       onCategoryToggle: (key, visible) => {
@@ -1323,6 +1632,11 @@ loadScene()
         applyCatalogVisibility();
       },
     });
+    // Story #239: the panel is built fresh here, well after startup - sync
+    // it to whatever the UI-lock state already is (normally `false`, since
+    // the scene loads before any player interaction is possible, but this
+    // keeps the invariant airtight rather than assumed).
+    panelHandle.setLocked(uiLocked);
 
     // Issue #203: `onSelect` now also closes the search modal after
     // `goToObject` moves the camera, so the user immediately sees the 3D
@@ -1343,7 +1657,7 @@ loadScene()
     // Issue #143 (Structures panel only, since #203 moved Search out into
     // its own modal above): lives inside the `menuPanels` toggle container
     // (top-left).
-    menuPanels.appendChild(panel);
+    menuPanels.appendChild(panelHandle.element);
 
     applyCatalogVisibility();
     applyStructureVisibility();
@@ -1382,6 +1696,14 @@ renderer.domElement.addEventListener("pointerdown", (event) => {
 
 renderer.domElement.addEventListener("click", (event) => {
   if (catalogBuckets.length === 0) return;
+  // Story #239 AC #9: star-click selection/Inspector-opening is one of the
+  // controls the UI lock disables whenever the player's time is away from
+  // Today - the canvas itself has no `disabled` DOM property to toggle, so
+  // this is guarded directly here via the same `uiLocked` flag
+  // `syncUiLock` maintains. Camera navigation (`OrbitControls`, which also
+  // listens on this same element) is a completely separate listener and is
+  // untouched by this check, per that AC.
+  if (uiLocked) return;
   if (pointerDownClientPos) {
     const dx = event.clientX - pointerDownClientPos.x;
     const dy = event.clientY - pointerDownClientPos.y;
@@ -1525,14 +1847,41 @@ function applyGalacticCenterLabelPosition(): void {
   galacticCenterEdgeIndicator.arrow.style.transform = `rotate(${angleDeg}deg)`;
 }
 
+/** Story #239: real (wall-clock) time of the previous `animate()` frame -
+ * `applyPlayerAnimation` needs a per-frame delta (nothing else in this file
+ * previously did; every other per-frame effect here is a function of
+ * absolute camera/time state, not a rate) to convert the speed slider's
+ * years-per-real-second rate into an actual time step. */
+let lastFrameTimeMs = performance.now();
+
 function animate(): void {
   requestAnimationFrame(animate);
+  const nowMs = performance.now();
+  const deltaSeconds = (nowMs - lastFrameTimeMs) / 1000;
+  lastFrameTimeMs = nowMs;
+
   controls.update();
-  updateLabelVisibility();
+  // Story #239: `applyDenseBatchLod` (which resets every dense-batch star's
+  // instance matrix to its real, static position every frame) must run
+  // BEFORE `applyPlayerAnimation` (which then overrides just the ~127
+  // animated stars' matrices with their time-extrapolated position) - the
+  // reverse order would have this per-frame LOD pass immediately stomp the
+  // player's own override right back to the static position every frame.
   applyDenseBatchLod();
   applySunCoreScale();
   applyDenseBatchBoundaryVisibility();
+  // May reset the player's time/playing/panel state to Today/paused/hidden
+  // on a sphere-exit crossing frame (`applyPlayerSphereState`, called from
+  // within this) - must run before `applyPlayerAnimation` so that reset is
+  // what the animation loop below actually acts on this same frame, rather
+  // than animating for one more frame off the pre-reset state.
   applyBackgroundDimming();
+  applyPlayerAnimation(deltaSeconds);
+  // Runs after `applyPlayerAnimation` so the density/rank cap's own
+  // camera-distance ranking (`updateLabelVisibility`) sees each animated
+  // star's label at its freshly-updated (this frame's) position, not last
+  // frame's.
+  updateLabelVisibility();
   applyFovReadout();
   applyGalacticCenterLabelPosition();
   renderer.render(scene, camera);

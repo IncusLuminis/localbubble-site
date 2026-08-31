@@ -3,6 +3,7 @@ import { Matrix4, Quaternion, Vector3 } from "three";
 import type { InstancedMesh, MeshBasicMaterial } from "three";
 import {
   backgroundBucketOpacity,
+  buildObjectIndexLookup,
   bubbleOuterRadiusPcFrom,
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
@@ -1250,6 +1251,114 @@ describe("setInstanceVisibility (zero-scale hide mechanism)", () => {
 
       expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(bucket.radiiPc[0], 6);
     });
+  });
+
+  /**
+   * Story #239: `positionPcOverride`, the mechanism the motion player uses
+   * to display an animated star at its time-extrapolated position each
+   * frame while still going through this exact same, unduplicated
+   * radius/shrink/visibility logic.
+   */
+  describe("Story #239 positionPcOverride (motion player)", () => {
+    it("uses the override position instead of the object's static position_pc when given", () => {
+      const star = makeObject({
+        id: "moving-star",
+        object_type: "star",
+        position_pc: [1, 2, 3],
+        distance_pc: 3.7,
+      });
+      const { buckets } = createCatalogObjectGroup([star]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, true, Infinity, Infinity, null, [10, 20, 30]);
+
+      const { position } = decomposeInstanceMatrix(bucket, 0);
+      expect(position.toArray()).toEqual([10, 20, 30]);
+    });
+
+    it("falls back to the object's real static position_pc when no override is given (backward compatible)", () => {
+      const star = makeObject({
+        id: "static-star",
+        object_type: "star",
+        position_pc: [4, 5, 6],
+        distance_pc: 3.7,
+      });
+      const { buckets } = createCatalogObjectGroup([star]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, true);
+
+      const { position } = decomposeInstanceMatrix(bucket, 0);
+      expect(position.toArray()).toEqual([4, 5, 6]);
+    });
+
+    it("still applies the exact same LOD-shrunk radius with an override position - the override only changes position, never the radius logic", () => {
+      const collectionRadiusPc = 11.26;
+      const nearbyStar = makeObject({
+        id: "proxima-moving",
+        object_type: "star",
+        position_pc: [0.9, -0.9, -0.04],
+        distance_pc: 1.3,
+        group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+      });
+      const { buckets } = createCatalogObjectGroup([nearbyStar]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, true, 0, collectionRadiusPc, null, [5, 5, 5]);
+
+      const { position, scale } = decomposeInstanceMatrix(bucket, 0);
+      expect(position.toArray()).toEqual([5, 5, 5]);
+      expect(scale.x).toBeCloseTo(STAR_MARKER_MIN_RADIUS_PC, 6);
+    });
+
+    it("ignores the override position for a hidden instance - stays at zero scale regardless", () => {
+      const star = makeObject({
+        id: "hidden-moving-star",
+        object_type: "star",
+        position_pc: [1, 1, 1],
+        distance_pc: 3.7,
+      });
+      const { buckets } = createCatalogObjectGroup([star]);
+      const bucket = buckets[0];
+
+      setInstanceVisibility(bucket, 0, false, Infinity, Infinity, null, [99, 99, 99]);
+
+      expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBe(0);
+    });
+  });
+});
+
+describe("buildObjectIndexLookup", () => {
+  it("maps every object's id to its own (bucket, index) across all buckets", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B]);
+    const lookup = buildObjectIndexLookup(buckets);
+
+    expect(lookup.size).toBe(2);
+    for (const bucket of buckets) {
+      bucket.objects.forEach((obj, index) => {
+        expect(lookup.get(obj.id)).toEqual({ bucket, index });
+      });
+    }
+  });
+
+  it("resolves an id to the exact instance setInstanceVisibility would need - a real end-to-end round trip", () => {
+    const star = makeObject({ id: "star-a", object_type: "star", position_pc: [1, 1, 1], distance_pc: 3 });
+    const cloud = makeObject({
+      id: "cloud-a",
+      object_type: "molecular_cloud",
+      position_pc: [2, 2, 2],
+      distance_pc: 3,
+    });
+    const { buckets } = createCatalogObjectGroup([star, cloud]);
+    const lookup = buildObjectIndexLookup(buckets);
+
+    const ref = lookup.get("star-a")!;
+    expect(ref.bucket.objectType).toBe("star");
+    expect(ref.bucket.objects[ref.index].id).toBe("star-a");
+  });
+
+  it("returns an empty map for an empty bucket list", () => {
+    expect(buildObjectIndexLookup([]).size).toBe(0);
   });
 });
 
