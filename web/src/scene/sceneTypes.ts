@@ -58,9 +58,41 @@ export interface SceneObject {
    * to a star-specific subtype, matching how `spectral_type`/
    * `absolute_magnitude` are already modeled above. */
   exoplanets: SceneExoplanetSummary | null;
+  /** 3D space-velocity vector, heliocentric Galactic Cartesian (same axes
+   * as `position_pc`), or `null` when unavailable. Story #230's addition -
+   * a top-level field (like `exoplanets`, NOT nested under a rendering-
+   * style concept) since it's physical kinematic data. Populated only for
+   * the ~127 stars within the RECONS-dense-batch sphere (`lod.ts`'s
+   * `denseBatchRadiusPc`) - `null` for every object outside that set (out
+   * of Epic #229's scope) or where SIMBAD had no proper motion on file at
+   * all (velocity entirely unresolvable, distinct from the narrower
+   * `radial_velocity_known: false` tangential-only case below). Story #231
+   * (`scene/velocityVectors.ts`) renders these as directional arrows. */
+  velocity: SceneVelocity | null;
   group: SceneObjectGroup;
   source: SceneObjectSource;
   notes: string | null;
+}
+
+/** `SceneObject.velocity` (Story #230/#231). */
+export interface SceneVelocity {
+  vx_kms: number;
+  vy_kms: number;
+  vz_kms: number;
+  /** `false` when SIMBAD had proper motion (`pmra`/`pmdec`) but no radial-
+   * velocity record on file - the Python pipeline's astropy derivation
+   * silently defaults radial velocity to 0 km/s in that case (see Story
+   * #230's `data_sources/simbad.py`), so the resulting vector is
+   * tangential-only (a 2D proper-motion-derived approximation), not a true
+   * 3D space-velocity measurement. Story #231 renders these visually
+   * distinguished (dashed, different color/opacity) from full 3D vectors
+   * so a viewer never mistakes an incomplete vector for an authoritative
+   * one. */
+  radial_velocity_known: boolean;
+  /** Own provenance block (Story #230): the underlying `pmra`/`pmdec`/
+   * `rvz_radvel` SIMBAD fields this vector was derived from may come from a
+   * different bibcode than the object's own `source` (position/distance). */
+  source: SceneObjectSource;
 }
 
 /** One entry of a star's `exoplanets.planets` array (Story #171 / #172).

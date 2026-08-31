@@ -31,6 +31,7 @@ function makeObject(overrides: Partial<SceneObject>): SceneObject {
     absolute_magnitude: null,
     apparent_magnitude: null,
     exoplanets: null,
+    velocity: null,
     group: { primary: null, secondary: [] },
     source: { reference: "test fixture", url: null, catalog: null },
     notes: null,
