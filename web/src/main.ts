@@ -750,7 +750,12 @@ let cameraWasInsideLocalBubble = false;
  * well after both are constructed at module-init time. */
 function applyVelocityVectorsButtonState(insideSphere: boolean): void {
   velocityVectorsOn = nextVelocityVectorsToggleOn(velocityVectorsOn, insideSphere);
-  velocityVectorsButton.disabled = !insideSphere;
+  // Story #247 AC #4: also disabled while the player's time is away from
+  // Today (`uiLocked`) - combined with the pre-existing sphere gate via OR,
+  // matching `syncUiLock`'s own combined formula for this same button, so
+  // whichever of the two triggers (a sphere crossing here, a player-time
+  // lock transition there) runs last always writes the same correct value.
+  velocityVectorsButton.disabled = !insideSphere || uiLocked;
   velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
   velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
   if (velocityVectorsGroup) {
@@ -830,14 +835,27 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
   }
 }
 
-/** Story #239 AC #9: applies the UI lock - disabling category/structure
- * checkboxes and the radius filter (`panelHandle.setLocked`) plus search
- * (`searchToggle.disabled`, and closing an already-open search dialog so a
- * newly-locked session can't leave it open) - whenever the player's time is
- * not exactly Today, unlocking the instant it returns to exactly `0` via
- * any path (play reaching it, a manual scrub, or the "Today" button all
- * funnel through the shared `playerTimeYears` state this reads). Camera
- * navigation (`OrbitControls`) is never touched here, per that same AC.
+/** Story #239 AC #9 (Story #247 AC #4 extends this to the left toolbar):
+ * applies the UI lock - disabling category/structure checkboxes and the
+ * radius filter (`panelHandle.setLocked`), search (`searchToggle.disabled`,
+ * and closing an already-open search dialog so a newly-locked session can't
+ * leave it open), and now every OTHER `#bottom-left-toolbar` button (Zoom
+ * In/Out, Show All, Fit to Local Bubble, Fit to nearest-stars sphere, Show
+ * velocity vectors, Info) - whenever the player's time is not exactly Today,
+ * unlocking the instant it returns to exactly `0` via any path (play
+ * reaching it, a manual scrub, or the "Today" button all funnel through the
+ * shared `playerTimeYears` state this reads). Deliberately reuses this SAME
+ * `isUiLockedForPlayerTime` condition (not a narrower "only while actively
+ * playing" one) for the toolbar buttons too, per Story #247's explicit
+ * "stay consistent with every other locked control" instruction - so Fit/
+ * Zoom read the same locked/unlocked whether paused mid-scrub or actively
+ * playing, matching every other control this function already locks the
+ * same way. `playerButton` itself is deliberately EXCLUDED (stays enabled
+ * throughout, gated only by its own existing sphere check in
+ * `applyPlayerSphereState` below) - locking it would trap the user with no
+ * way to reopen/interact with the player panel. Camera navigation
+ * (`OrbitControls`) is never touched here, per that same AC - this only
+ * disables discrete toolbar buttons, not mouse-driven camera control.
  * Star-click selection is guarded directly in the click handler via the
  * `uiLocked` flag this function maintains (the canvas itself has no
  * `disabled` DOM property). Change-detected like
@@ -850,6 +868,13 @@ function syncUiLock(): void {
   if (panelHandle) panelHandle.setLocked(uiLocked);
   searchToggle.disabled = uiLocked;
   if (uiLocked) searchDialog.hide();
+  zoomInButton.disabled = uiLocked;
+  zoomOutButton.disabled = uiLocked;
+  showAllButton.disabled = uiLocked;
+  fitLocalBubbleButton.disabled = uiLocked || localBubbleStructure === null;
+  fitNearestStarsButton.disabled = uiLocked;
+  velocityVectorsButton.disabled = uiLocked || !cameraWasInsideDenseBatchSphere;
+  infoToggleButton.disabled = uiLocked;
 }
 
 /** Story #239 AC #8 (mirrors `applyVelocityVectorsButtonState` above
@@ -980,7 +1005,7 @@ function applyPlayerAnimation(deltaSeconds: number): void {
       if (trailsVisible) {
         updateStarTrail(
           trail,
-          starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears),
+          starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears, playerDirection),
           camera.position,
         );
       }
@@ -1458,7 +1483,11 @@ function applyFitNearestStarsPose(): void {
  * absent/malformed - spec §38) rather than leaving it clickable into a
  * no-op or, worse, an error. */
 function applyLocalBubbleButtonState(): void {
-  fitLocalBubbleButton.disabled = localBubbleStructure === null;
+  // Story #247 AC #4: also disabled while the player's time is away from
+  // Today (`uiLocked`) - see `applyVelocityVectorsButtonState`'s matching
+  // comment for why combining via OR here is safe against `syncUiLock`'s own
+  // write to this same button.
+  fitLocalBubbleButton.disabled = localBubbleStructure === null || uiLocked;
 }
 
 applyLocalBubbleButtonState();
