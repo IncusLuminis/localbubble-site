@@ -73,6 +73,41 @@ astroquery quirks, both handled here rather than by any caller:
    initial_catalog_records.json`'s `taurus-molecular-cloud` etc.), for
    consistency - and otherwise the first row SIMBAD returns. See
    `_query_mes_distance`/`_normalize` below.
+
+Issue #234 (`V* EZ Aqr`/GJ 866, found by the Validator reviewing Story
+#231/PR #233) surfaced a third quirk: SIMBAD's default `rvz_radvel` for
+that identifier is `6824.7` km/s (bibcode `2021MNRAS.508.5148C`), which
+combined with its proper motion produces an implausible ~6825 km/s space
+velocity for a quiet, nearby (3.4 pc) RECONS M dwarf - live-verified as
+the genuine, unambiguous SIMBAD "basic" response for every alias of this
+star (`GJ 866`, `GJ 866 A/B/C`, `V* EZ Aqr`, `EZ Aqr` all resolve to the
+same `main_id` and the same bad value), so this is not a
+component-resolution mismatch (the "A"/"B"/"C" split cache files for this
+system, `data/raw/simbad/gj_866_{a,b,c}.json`, are a pre-existing
+RECONS-side artifact of one star having three separately-catalogued
+RECONS components, per issue #104's own dedup note already in this
+record's `notes` field - not the cause of this bug). SIMBAD's own
+`mesVelocities` table (all individual RV/redshift measurements on file,
+not just the one `rvz_radvel` surfaces as "the" default) shows two older,
+independent bibcodes (`1995A&AS..114..269D`, `1953GCRV..C......0W`, both
+4-measurement means) agreeing at `-60.0` km/s - matching the ~-59.9 km/s
+this issue itself cites from the literature - while only the newest
+bibcode disagrees by two orders of magnitude, strongly suggesting *that*
+bibcode's cross-match (not this pipeline's own unit handling, which was
+verified correct against this exact case) is where the bad value
+originates. `_query_upstream` now treats any `|rvz_radvel| >
+_IMPLAUSIBLE_RV_KMS_THRESHOLD` as suspect and queries `mesVelocities` for
+a plausible alternative bibcode/measurement, the same "corrected re-query
+over a real, traceable, differently-sourced SIMBAD value" shape as the
+`mesDistance` fallback above - never overwriting the original
+`rvz_radvel`/`rvz_bibcode` raw fields (spec §13: raw data is never
+modified in place), only adding new `rvz_radvel_corrected`/
+`rvz_bibcode_corrected`/`rvz_correction_note` keys alongside them. If no
+plausible alternative measurement exists either, the star instead falls
+back honestly to `radial_velocity_known: False` (tangential-only,
+proper-motion-derived vector) rather than propagating the bad value. See
+`_query_mes_velocities`/`_derive_velocity` below, and `data/raw/
+gap_fills/README.md` for this specific star's investigation writeup.
 """
 
 from __future__ import annotations
@@ -110,6 +145,18 @@ _PREFERRED_MESDISTANCE_BIBCODE = "2020A&A...633A..51Z"
 #: this table (values arrive with trailing whitespace, e.g. `"pc  "`,
 #: hence the `.strip()` at the call site).
 _MESDISTANCE_UNIT_TO_PC = {"pc": 1.0, "kpc": 1_000.0, "mpc": 1_000_000.0}
+
+#: A radial velocity beyond this magnitude (km/s) is treated as suspect
+#: (module docstring, quirk 3 / issue #234) and triggers a `mesVelocities`
+#: cross-check rather than being propagated as-is. Set well above any
+#: real velocity this catalog's own stars have ever shown (known "flying
+#: stars" like 61 Cygni A top out around 100-110 km/s per Story #230's own
+#: spot-checks; even genuine Galactic disk/halo stars are essentially
+#: never RV-only above a few hundred km/s) so a real, unusually fast but
+#: legitimate star would not be misflagged - while still catching a
+#: two-orders-of-magnitude cross-match artifact like V* EZ Aqr's `6824.7`
+#: km/s default.
+_IMPLAUSIBLE_RV_KMS_THRESHOLD = 500.0
 
 
 def _mes_distance_to_pc(value: float, unit: str | None) -> float | None:
@@ -161,20 +208,44 @@ def _derive_velocity(
       defaults to 0 km/s (astropy does this silently), and
       `radial_velocity_known` is set `False` so this tangential-only
       vector is never presented as a complete 3D space velocity.
+
+    A third case, added for issue #234 (module docstring, quirk 3): when
+    `_query_upstream` flagged the default `rvz_radvel` as implausible
+    (`|rvz_radvel| > _IMPLAUSIBLE_RV_KMS_THRESHOLD`), it never overwrites
+    `raw["rvz_radvel"]`/`raw["rvz_bibcode"]` themselves (raw data is never
+    modified in place) - instead it adds `rvz_radvel_corrected`/
+    `rvz_bibcode_corrected` (a plausible alternative from SIMBAD's own
+    `mesVelocities` table, if one exists) and/or `rvz_correction_note`
+    (always present when flagged, explaining what happened either way).
+    This method prefers the corrected value when present; otherwise, if
+    the star was flagged with no plausible alternative found, it treats
+    radial velocity as unknown (same as the "absent" case above) rather
+    than propagating the bad default.
     """
     pmra = raw.get("pmra")
     pmdec = raw.get("pmdec")
     if pmra is None or pmdec is None:
         return None
 
-    rv = raw.get("rvz_radvel")
+    correction_note = raw.get("rvz_correction_note")
+    if raw.get("rvz_radvel_corrected") is not None:
+        rv = raw["rvz_radvel_corrected"]
+        rvz_bibcode = raw.get("rvz_bibcode_corrected")
+    elif correction_note is not None:
+        # Flagged as implausible with no plausible mesVelocities
+        # alternative - honest fallback, never propagate the bad value.
+        rv = None
+        rvz_bibcode = None
+    else:
+        rv = raw.get("rvz_radvel")
+        rvz_bibcode = raw.get("rvz_bibcode")
+
     radial_velocity_known = rv is not None
     vx, vy, vz = galactic_velocity_kms(
         ra_deg, dec_deg, distance_pc, pmra, pmdec, rv if rv is not None else 0.0
     )
 
     pm_bibcode = raw.get("pm_bibcode")
-    rvz_bibcode = raw.get("rvz_bibcode")
     reference = f"SIMBAD astronomical database (CDS), record {record_id}"
     if pm_bibcode:
         reference += f", pm bibcode {pm_bibcode}"
@@ -182,6 +253,8 @@ def _derive_velocity(
         reference += f", rv bibcode {rvz_bibcode}"
     if not radial_velocity_known:
         reference += " (no rvz_radvel on file - tangential-only vector)"
+    if correction_note:
+        reference += f" [{correction_note}]"
 
     return Velocity(
         vx_kms=vx,
@@ -286,6 +359,39 @@ class SimbadResolver(CachingObjectResolver):
             "method": method,
         }
 
+    def _query_mes_velocities(self, name: str) -> dict[str, Any] | None:
+        """Fallback radial-velocity lookup via SIMBAD's `mesVelocities`
+        table (see module docstring, quirk 3 / issue #234) - only ever
+        called when the standard query's default `rvz_radvel` is already
+        flagged implausible. Returns the first row (in SIMBAD's own
+        `mespos` order) whose `|velvalue|` is plausible, or `None` (never
+        fabricates) if every measurement on file is equally implausible or
+        the table itself is empty."""
+        client = AstroquerySimbad()
+        client.add_votable_fields("mesVelocities")
+        table = client.query_object(name)
+        if table is None or len(table) == 0:
+            return None
+        rows = [table_row_to_dict(table, i) for i in range(len(table))]
+        for row in rows:
+            value = row.get("mesvelocities.velvalue")
+            veltype = (row.get("mesvelocities.veltype") or "").strip().lower()
+            # Only accept true velocity measurements (km/s), not redshifts
+            # ("z") or cz - `mesVelocities` mixes all of these into one
+            # `velvalue` column with `veltype` distinguishing units, and
+            # this fallback must not silently mix a dimensionless redshift
+            # into a km/s field.
+            if veltype not in ("", "v"):
+                continue
+            if value is None or abs(value) > _IMPLAUSIBLE_RV_KMS_THRESHOLD:
+                continue
+            return {
+                "kms": value,
+                "bibcode": row.get("mesvelocities.bibcode"),
+                "nbmes": row.get("mesvelocities.nbmes"),
+            }
+        return None
+
     def _query_upstream(self, name: str) -> dict[str, Any]:
         raw = self._query_object_with_fields(name, include_v=True)
         if raw is None:
@@ -307,6 +413,37 @@ class SimbadResolver(CachingObjectResolver):
                 raw["mesdistance_pc"] = mes["pc"]
                 raw["mesdistance_bibcode"] = mes["bibcode"]
                 raw["mesdistance_method"] = mes["method"]
+
+        rv = raw.get("rvz_radvel")
+        if rv is not None and abs(rv) > _IMPLAUSIBLE_RV_KMS_THRESHOLD:
+            # Quirk 3 (module docstring, issue #234): the default
+            # rvz_radvel looks like a bad cross-match. Never overwrite the
+            # original rvz_radvel/rvz_bibcode (raw data is never modified
+            # in place) - add separate corrected/note keys instead, which
+            # `_derive_velocity` consults.
+            alt = self._query_mes_velocities(name)
+            if alt is not None:
+                raw["rvz_radvel_corrected"] = alt["kms"]
+                raw["rvz_bibcode_corrected"] = alt["bibcode"]
+                raw["rvz_correction_note"] = (
+                    f"Default SIMBAD rvz_radvel ({rv} km/s, bibcode "
+                    f"{raw.get('rvz_bibcode')}) is implausible for a "
+                    f"resolved star (|rv| > {_IMPLAUSIBLE_RV_KMS_THRESHOLD} "
+                    "km/s) - likely a bad upstream cross-match. Corrected "
+                    "via SIMBAD's own mesVelocities table to a plausible "
+                    f"independent measurement ({alt['kms']} km/s, bibcode "
+                    f"{alt['bibcode']}); never fabricated."
+                )
+            else:
+                raw["rvz_correction_note"] = (
+                    f"Default SIMBAD rvz_radvel ({rv} km/s, bibcode "
+                    f"{raw.get('rvz_bibcode')}) is implausible for a "
+                    f"resolved star (|rv| > {_IMPLAUSIBLE_RV_KMS_THRESHOLD} "
+                    "km/s) and no plausible alternative measurement was "
+                    "found in SIMBAD's mesVelocities table - treated as "
+                    "unknown (radial_velocity_known=False) rather than "
+                    "propagating the bad value."
+                )
         return raw
 
     def _extract_record_id(self, name: str, raw: dict[str, Any]) -> str:

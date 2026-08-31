@@ -45769,12 +45769,12 @@
       "apparent_magnitude": 12.380000114440918,
       "exoplanets": null,
       "velocity": {
-        "vx_kms": 2486.922488261375,
-        "vy_kms": 2746.5942935098715,
-        "vz_kms": -5731.556222343015,
+        "vx_kms": -68.41510743168521,
+        "vy_kms": -0.35574996989774765,
+        "vz_kms": 41.10428392824766,
         "radial_velocity_known": true,
         "source": {
-          "reference": "SIMBAD astronomical database (CDS), record V* EZ Aqr, pm bibcode 2012yCat.1322....0Z, rv bibcode 2021MNRAS.508.5148C",
+          "reference": "SIMBAD astronomical database (CDS), record V* EZ Aqr, pm bibcode 2012yCat.1322....0Z, rv bibcode 1995A&AS..114..269D [Default SIMBAD rvz_radvel (6824.7 km/s, bibcode 2021MNRAS.508.5148C) is implausible for a resolved star (|rv| > 500.0 km/s) - likely a bad upstream cross-match. Corrected via SIMBAD's own mesVelocities table to a plausible independent measurement (-60.0 km/s, bibcode 1995A&AS..114..269D); never fabricated.]",
           "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V* EZ Aqr",
           "catalog": "SIMBAD"
         }

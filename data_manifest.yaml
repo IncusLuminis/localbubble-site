@@ -5927,9 +5927,9 @@ sources:
   query: GJ 866 A
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-08-31T06:02:32+00:00'
+  retrieved: '2026-08-31T07:16:42+00:00'
   record_id: V* EZ Aqr
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-230/local-galactic-structures/data/raw/simbad/gj_866_a.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-234/local-galactic-structures/data/raw/simbad/gj_866_a.json
 - id: simbad:GJ 866 B
   source: simbad
   query: GJ 866 B

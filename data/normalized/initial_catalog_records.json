@@ -51852,12 +51852,12 @@
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T16:41:14+00:00; upstream record id: V* EZ Aqr; otype: Er*. Candidate identified from RECONS (Research Consortium On Nearby Stars) 'The 100 Nearest Star Systems' table (astro.gsu.edu/RECONS/TOP100.posted.htm, recons.org; snapshot dated by RECONS as of 2012-01-01, retrieved 2026-08-18); see local-galactic-structures/data/raw/recons/README.md. This candidate-selection provenance is separate from the SIMBAD scientific-value provenance above (spec Idea-v1.2-individual-stars.md \u00a75 dual provenance) - it identifies why this star was looked up, not the source of its position/distance. This RECONS-listed multiple-star system has 3 separately-catalogued RECONS components (e.g. distinct A/B/C designations) that all resolve to this exact same SIMBAD record - SIMBAD does not carry independent identifier entries for those individual components, so they are represented here as one catalog object rather than duplicated at an identical position (issue #104 dedup).",
     "velocity": {
-      "vx_kms": 2486.922488261375,
-      "vy_kms": 2746.5942935098715,
-      "vz_kms": -5731.556222343015,
+      "vx_kms": -68.41510743168521,
+      "vy_kms": -0.35574996989774765,
+      "vz_kms": 41.10428392824766,
       "radial_velocity_known": true,
       "source": {
-        "reference": "SIMBAD astronomical database (CDS), record V* EZ Aqr, pm bibcode 2012yCat.1322....0Z, rv bibcode 2021MNRAS.508.5148C",
+        "reference": "SIMBAD astronomical database (CDS), record V* EZ Aqr, pm bibcode 2012yCat.1322....0Z, rv bibcode 1995A&AS..114..269D [Default SIMBAD rvz_radvel (6824.7 km/s, bibcode 2021MNRAS.508.5148C) is implausible for a resolved star (|rv| > 500.0 km/s) - likely a bad upstream cross-match. Corrected via SIMBAD's own mesVelocities table to a plausible independent measurement (-60.0 km/s, bibcode 1995A&AS..114..269D); never fabricated.]",
         "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=V* EZ Aqr",
         "catalog": "SIMBAD"
       }
