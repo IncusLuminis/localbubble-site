@@ -1,15 +1,28 @@
 import { describe, expect, it } from "vitest";
-import { Group, Line, LineBasicMaterial, LineDashedMaterial, Mesh } from "three";
+import { ConeGeometry, Group, Line, LineBasicMaterial, LineDashedMaterial, Mesh } from "three";
 import {
   createVelocityVectorsLayer,
+  formatSpeedKms,
   nextVelocityVectorsToggleOn,
+  selectVisibleVelocitySpeedLabelIds,
   starsWithVelocityInSphere,
+  VELOCITY_SPEED_LABEL_MAX_VISIBLE,
   velocityArrowLengthPc,
   velocityDirection,
   velocitySpeedKms,
   velocityVectorsVisible,
+  type VelocitySpeedLabelCandidate,
 } from "../src/scene/velocityVectors";
 import type { SceneObject, SceneVelocity } from "../src/scene/sceneTypes";
+
+// Note: `createVelocitySpeedLabelsLayer` (like `labels.ts`'s own
+// `createLabelsLayer`/`createSunLabel`) touches `document.createElement`/
+// `CSS2DObject` and so is not itself unit-tested here - this repo's
+// `vite.config.ts` runs Vitest with `environment: "node"` (no DOM), same
+// convention `labels.test.ts` already follows for its own DOM-touching
+// builders. The actual decision logic behind this Story's density control -
+// `formatSpeedKms` and `selectVisibleVelocitySpeedLabelIds` below - is pure
+// and fully covered instead.
 
 /**
  * Story #231: velocity-vector arrows for the RECONS-dense-batch sphere's
@@ -225,6 +238,43 @@ describe("createVelocityVectorsLayer", () => {
     const layer = createVelocityVectorsLayer(objects, 0);
     expect(layer.children).toHaveLength(0);
   });
+
+  // Issue #236: the arrowhead itself must read as a small, angular triangle
+  // rather than the previous smooth, chunky cone - a low radial segment
+  // count and a small size relative to the overall arrow length.
+  describe("arrowhead shape/size (issue #236)", () => {
+    it("builds the cone head with a low radial segment count - an angular pyramid/triangle, not a smooth rounded cone", () => {
+      const objects = [
+        makeObject({ id: "a", velocity: makeVelocity({ vx_kms: 100, vy_kms: 0, vz_kms: 0 }) }),
+      ];
+      const layer = createVelocityVectorsLayer(objects, 0);
+      const arrowGroup = layer.children[0] as Group;
+      const head = arrowGroup.children.find((c): c is Mesh => c instanceof Mesh)!;
+      const geometry = head.geometry as ConeGeometry;
+      // Low enough to read as an angular triangle/pyramid (issue #236 asks
+      // for "3-4"), and specifically not the original smooth 10-segment cone.
+      expect(geometry.parameters.radialSegments).toBeLessThanOrEqual(4);
+      expect(geometry.parameters.radialSegments).toBeGreaterThanOrEqual(3);
+    });
+
+    it("keeps the cone head small relative to the overall arrow length - subtle, not dominating the shaft", () => {
+      const objects = [
+        // A fast mover, so `velocityArrowLengthPc` sits well above the
+        // clamp floor - the case where a chunky head would be most visible.
+        makeObject({ id: "fast", velocity: makeVelocity({ vx_kms: 142.26, vy_kms: 0, vz_kms: 0 }) }),
+      ];
+      const layer = createVelocityVectorsLayer(objects, 0);
+      const arrowGroup = layer.children[0] as Group;
+      const head = arrowGroup.children.find((c): c is Mesh => c instanceof Mesh)!;
+      const geometry = head.geometry as ConeGeometry;
+      const totalLength = velocityArrowLengthPc(velocitySpeedKms(142.26, 0, 0));
+      // Substantially shrunk from the pre-#236 25% headLength/40% headWidth
+      // proportions - the head's own length should now be a small minority
+      // of the total arrow length, and its base radius smaller still.
+      expect(geometry.parameters.height).toBeLessThan(totalLength * 0.15);
+      expect(geometry.parameters.radius).toBeLessThan(geometry.parameters.height);
+    });
+  });
 });
 
 describe("nextVelocityVectorsToggleOn", () => {
@@ -245,5 +295,72 @@ describe("velocityVectorsVisible", () => {
     expect(velocityVectorsVisible(true, false)).toBe(false);
     expect(velocityVectorsVisible(false, true)).toBe(false);
     expect(velocityVectorsVisible(false, false)).toBe(false);
+  });
+});
+
+describe("formatSpeedKms", () => {
+  it('formats to one decimal place with a "km/s" suffix, matching this issue\'s own example text', () => {
+    expect(formatSpeedKms(31.5)).toBe("31.5 km/s");
+    expect(formatSpeedKms(142.26)).toBe("142.3 km/s");
+  });
+
+  it("handles zero and small values without a stray sign or extra precision", () => {
+    expect(formatSpeedKms(0)).toBe("0.0 km/s");
+    expect(formatSpeedKms(13)).toBe("13.0 km/s");
+  });
+});
+
+// Issue #236, part 2: the density-control decision behind the speed-label
+// cap - the actual logic `main.ts`'s `updateLabelVisibility` calls every
+// frame (see `velocityVectors.ts`'s docstring on why this is kept separate
+// from, and pure/DOM-free unlike, `createVelocitySpeedLabelsLayer`).
+describe("selectVisibleVelocitySpeedLabelIds", () => {
+  function candidate(objectId: string, cameraDistancePc: number): VelocitySpeedLabelCandidate {
+    return { objectId, cameraDistancePc };
+  }
+
+  it("returns every candidate when the pool is at or under the cap", () => {
+    const candidates = [candidate("a", 5), candidate("b", 1), candidate("c", 3)];
+    const visible = selectVisibleVelocitySpeedLabelIds(candidates, true, 5);
+    expect(visible).toEqual(new Set(["a", "b", "c"]));
+  });
+
+  it("caps the visible set and keeps only the nearest-to-camera candidates once the pool exceeds the cap", () => {
+    const candidates = [candidate("far", 100), candidate("near", 1), candidate("mid", 10)];
+    const visible = selectVisibleVelocitySpeedLabelIds(candidates, true, 2);
+    expect(visible).toEqual(new Set(["near", "mid"]));
+    expect(visible.has("far")).toBe(false);
+  });
+
+  it("never shows a single speed label when the arrows themselves are not visible, regardless of pool size or cap - no orphaned labels", () => {
+    const candidates = [candidate("a", 1), candidate("b", 2), candidate("c", 3)];
+    expect(selectVisibleVelocitySpeedLabelIds(candidates, false, 20)).toEqual(new Set());
+    // Even a generous cap that would show everything if arrows were visible
+    // still yields nothing while `arrowsVisible` is false.
+    expect(selectVisibleVelocitySpeedLabelIds(candidates, false, 1000)).toEqual(new Set());
+  });
+
+  it("shows all candidates once arrows become visible again, up to the cap", () => {
+    const candidates = [candidate("a", 1), candidate("b", 2)];
+    expect(selectVisibleVelocitySpeedLabelIds(candidates, true, 20)).toEqual(new Set(["a", "b"]));
+  });
+
+  it("defaults to this module's own VELOCITY_SPEED_LABEL_MAX_VISIBLE cap when none is passed - never labels.ts's uncapped DENSE_BATCH_MAX_VISIBLE_LABELS", () => {
+    const candidates = Array.from({ length: VELOCITY_SPEED_LABEL_MAX_VISIBLE + 50 }, (_, i) =>
+      candidate(`s${i}`, i + 1),
+    );
+    const visible = selectVisibleVelocitySpeedLabelIds(candidates, true);
+    expect(visible.size).toBe(VELOCITY_SPEED_LABEL_MAX_VISIBLE);
+  });
+
+  it("VELOCITY_SPEED_LABEL_MAX_VISIBLE is a real, finite bound, sized well under the ~127-arrow pool", () => {
+    expect(Number.isFinite(VELOCITY_SPEED_LABEL_MAX_VISIBLE)).toBe(true);
+    expect(VELOCITY_SPEED_LABEL_MAX_VISIBLE).toBeGreaterThan(0);
+    expect(VELOCITY_SPEED_LABEL_MAX_VISIBLE).toBeLessThan(127);
+  });
+
+  it("returns an empty set for an empty candidate pool regardless of visibility", () => {
+    expect(selectVisibleVelocitySpeedLabelIds([], true, 20)).toEqual(new Set());
+    expect(selectVisibleVelocitySpeedLabelIds([], false, 20)).toEqual(new Set());
   });
 });

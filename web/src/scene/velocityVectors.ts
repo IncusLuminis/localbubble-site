@@ -8,8 +8,11 @@ import {
   LineDashedMaterial,
   Mesh,
   MeshBasicMaterial,
+  Object3D,
   Vector3,
 } from "three";
+import { CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
+import { selectNearestLabels, type LabelRankCandidate } from "./labels";
 import type { SceneObject } from "./sceneTypes";
 
 /**
@@ -93,16 +96,36 @@ const MIN_ARROW_LENGTH_PC = 0.3;
  * (`denseBatchBoundary.ts`) itself. */
 const MAX_ARROW_LENGTH_PC = 2.2;
 
-/** Arrowhead (cone) length as a fraction of the total arrow length -
- * matches `THREE.ArrowHelper`'s own default proportion, kept here since
- * this module builds its head/shaft manually (to support the dashed-line
- * tangential-only style `ArrowHelper` itself can't produce). */
-const HEAD_LENGTH_FRACTION = 0.25;
-/** Arrowhead base radius as a fraction of its own length - same
- * `ArrowHelper`-matching proportion (its default `headWidth` is `0.2 *
- * headLength`, doubled here for a slightly more visible cone at this small
- * scale). */
-const HEAD_WIDTH_FRACTION = 0.4;
+/** Arrowhead (cone) length as a fraction of the total arrow length.
+ *
+ * Issue #236 (live-tuned at "Fit to nearest-stars sphere" zoom, per the
+ * human owner's follow-up on #231): the original `THREE.ArrowHelper`-
+ * matching `0.25` read as a big, chunky cone that competed visually with
+ * star markers and the dense-batch boundary shell. Shrunk to `0.08` -
+ * combined with the narrower `HEAD_WIDTH_FRACTION` and the low-poly
+ * `ConeGeometry` segment count below, this reads as a small, subtle
+ * triangular tip (closer to `axes.ts`'s flat "▲" Galactic Center indicator
+ * silhouette, referenced only as a visual-weight target) rather than a
+ * rounded cone, without changing the shaft length itself (out of this
+ * issue's scope - `ARROW_LENGTH_SCALE_PC_PER_KMS`/`MIN_ARROW_LENGTH_PC`/
+ * `MAX_ARROW_LENGTH_PC` above are untouched). */
+const HEAD_LENGTH_FRACTION = 0.08;
+/** Arrowhead base radius as a fraction of its own length.
+ *
+ * Issue #236: shrunk from `0.4` to `0.3` alongside `HEAD_LENGTH_FRACTION`
+ * above - a narrower base-to-length ratio reads as a more angular, pointed
+ * triangle rather than a squat blob once the head is already this small. */
+const HEAD_WIDTH_FRACTION = 0.3;
+
+/** `ConeGeometry`'s radial segment count for the arrowhead.
+ *
+ * Issue #236: shrunk from `10` (a smooth, rounded cone) to `4` - low enough
+ * that the head reads as a simple angular pyramid/triangle from most
+ * viewing angles (matching the "small triangular tip" look this issue asks
+ * for), while staying even (not `3`) so the silhouette is symmetric rather
+ * than showing a single flat face head-on from roughly half of all camera
+ * angles. */
+const HEAD_RADIAL_SEGMENTS = 4;
 
 const HALF_UP = new Vector3(0, 1, 0);
 
@@ -228,7 +251,7 @@ function buildArrow(
   group.add(shaft);
 
   if (headLength > 0) {
-    const headGeometry = new ConeGeometry(headRadius, headLength, 10);
+    const headGeometry = new ConeGeometry(headRadius, headLength, HEAD_RADIAL_SEGMENTS);
     const headMaterial = new MeshBasicMaterial({ color, transparent: true, opacity });
     const head = new Mesh(headGeometry, headMaterial);
     // ConeGeometry is centered at the origin along local +Y, apex up -
@@ -317,4 +340,177 @@ export function nextVelocityVectorsToggleOn(currentlyOn: boolean, insideSphereNo
  * that also forces the toggle itself back OFF in that same case). */
 export function velocityVectorsVisible(toggleOn: boolean, insideSphere: boolean): boolean {
   return toggleOn && insideSphere;
+}
+
+/**
+ * Issue #236, part 2: per-arrow speed labels ("31.5 km/s"), density-
+ * controlled the SAME way `scene/labels.ts`'s star NAME labels are - via
+ * that module's generic, already object-agnostic `selectNearestLabels`/
+ * `LabelRankCandidate` nearest-camera-distance-ranked cap - but through a
+ * NEW, independent, FINITE cap constant (`VELOCITY_SPEED_LABEL_MAX_VISIBLE`
+ * below), never `labels.ts`'s own `DENSE_BATCH_MAX_VISIBLE_LABELS` (issue
+ * #159 deliberately set that to `Number.POSITIVE_INFINITY` for star NAME
+ * labels specifically - reusing it here would show all ~127 speed labels
+ * simultaneously, exactly the "не захламлять вьюпорт" clutter the human
+ * owner explicitly asked this Story to avoid).
+ */
+
+/** Hard cap on how many arrow speed labels render simultaneously - the
+ * density control this whole section exists for. Deliberately its own
+ * constant, not `labels.ts`'s `MAX_VISIBLE_LABELS` (60, tuned for the ~605-
+ * object general catalog) or `DENSE_BATCH_MAX_VISIBLE_LABELS` (uncapped,
+ * issue #159 - see this section's docstring above for why that one in
+ * particular would be wrong here): this pool is a different, much smaller
+ * population (~127 in-sphere velocity arrows) with a different readability
+ * target (a handful of speed numbers near the camera, not "every arrow
+ * labeled"). Live-tuned at "Fit to nearest-stars sphere" zoom with vectors
+ * toggled on: `20` keeps the label set legible - readable at a glance,
+ * doesn't overlap into an unreadable wall of numbers - while still showing
+ * enough of the nearest arrows that the density control itself is obviously
+ * working (not so tight it reads as "almost no labels"). */
+export const VELOCITY_SPEED_LABEL_MAX_VISIBLE = 20;
+
+/** Formats a 3D speed (km/s) for on-screen display, e.g. `"31.5 km/s"` -
+ * one decimal place, matching this issue's own example text. Pure, no
+ * Three.js/DOM dependency - directly unit-testable. */
+export function formatSpeedKms(speedKms: number): string {
+  return `${speedKms.toFixed(1)} km/s`;
+}
+
+/** One speed-label's ranking input for `selectVisibleVelocitySpeedLabelIds`
+ * below - deliberately NOT `labels.ts`'s `LabelRankCandidate` itself (no
+ * `isSelected` field): there is no "selected arrow" concept for velocity
+ * vectors, so every candidate ranks purely by camera distance. */
+export interface VelocitySpeedLabelCandidate {
+  objectId: string;
+  cameraDistancePc: number;
+}
+
+/**
+ * The pure candidate/cap-selection decision behind this Story's density
+ * control: given every in-sphere arrow's speed-label candidate and whether
+ * the arrows themselves are currently visible (`velocityVectorsVisible`'s
+ * own result - the same toggle-ON-AND-inside-sphere gate the arrows use, so
+ * a speed label can never be visible while its arrow isn't), returns the
+ * ids that should actually render.
+ *
+ * `arrowsVisible: false` short-circuits to an empty set without even
+ * touching `selectNearestLabels` - the density cap below is irrelevant if
+ * nothing should be visible at all (arrows off, or camera outside the
+ * sphere), and this guarantees "no orphaned speed labels" structurally
+ * rather than by relying on every caller to remember the gate.
+ *
+ * `arrowsVisible: true` delegates to `scene/labels.ts`'s exported, generic
+ * `selectNearestLabels` - reused directly, per issue #236's brief, rather
+ * than reimplemented - through `maxVisible` (defaulting to this module's own
+ * `VELOCITY_SPEED_LABEL_MAX_VISIBLE`, NEVER `labels.ts`'s
+ * `DENSE_BATCH_MAX_VISIBLE_LABELS` - see that constant's docstring for why).
+ * Every candidate is passed through with `isSelected: false` - pure nearest-
+ * camera-distance ranking, no exemption.
+ *
+ * Pure and DOM-free (unlike `createVelocitySpeedLabelsLayer` below, which
+ * touches `document`/`CSS2DObject` and so - mirroring `labels.ts`'s own
+ * `createLabelsLayer`/`createSunLabel` convention - isn't itself unit-
+ * tested under this repo's `environment: "node"` vitest config): this is
+ * the actual "speed-label candidate/cap selection logic" `main.ts`'s
+ * `updateLabelVisibility` calls every frame, directly unit-testable without
+ * a DOM harness.
+ */
+export function selectVisibleVelocitySpeedLabelIds(
+  candidates: readonly VelocitySpeedLabelCandidate[],
+  arrowsVisible: boolean,
+  maxVisible: number = VELOCITY_SPEED_LABEL_MAX_VISIBLE,
+): Set<string> {
+  if (!arrowsVisible) {
+    return new Set();
+  }
+  const rankCandidates: LabelRankCandidate[] = candidates.map((c) => ({
+    id: c.objectId,
+    cameraDistancePc: c.cameraDistancePc,
+    isSelected: false,
+  }));
+  return selectNearestLabels(rankCandidates, maxVisible);
+}
+
+/** One arrow's speed label: mirrors `scene/labels.ts`'s `CatalogLabel`
+ * shape (the object it belongs to to identify it, the `CSS2DObject` added
+ * to the scene graph, and the underlying DOM element) so `main.ts` can
+ * drive this pool's visibility through the exact same
+ * `selectNearestLabels`-based pattern already used for star name labels. */
+export interface VelocitySpeedLabel {
+  /** The `SceneObject.id` this speed label belongs to - matches the
+   * corresponding arrow's `velocity-vector-${id}` group name, though the
+   * two are never cross-referenced directly (each is independently derived
+   * from the same `starsWithVelocityInSphere` pool). */
+  objectId: string;
+  css2dObject: CSS2DObject;
+  element: HTMLDivElement;
+}
+
+/**
+ * Builds one `CSS2DObject` speed label per in-sphere velocity arrow
+ * (`starsWithVelocityInSphere`, the SAME pool `createVelocityVectorsLayer`
+ * draws arrows for), anchored at that arrow's own tip (`origin +
+ * direction * length` - the same point `buildArrow` above positions its
+ * cone head at) so the label reads as "belonging to" that specific arrow
+ * rather than floating at the star's own marker position (already occupied
+ * by that star's name label, `labels.ts`'s `createLabelsLayer`).
+ *
+ * A separate function/layer from `createVelocityVectorsLayer` rather than
+ * building labels into that same pass: the two are independently toggled
+ * from different call sites in `main.ts` (arrows via
+ * `velocityVectorsGroup.visible`, labels via the density-capped
+ * `selectNearestLabels` pool driven from `updateLabelVisibility`), so
+ * keeping them as separate `Object3D` trees - like `labels.ts`'s
+ * `createLabelsLayer` is already separate from `objects.ts`'s catalog
+ * marker layer - keeps each concern simple to reason about and test in
+ * isolation, at the cost of one small, cheap second pass over the same
+ * (~127-object) pool.
+ *
+ * Always returns a real (possibly empty) group/labels pair, same
+ * "never null" convention as `createVelocityVectorsLayer` above - `main.ts`
+ * needs a stable reference regardless of whether the loaded scene has any
+ * in-sphere velocity data.
+ */
+export function createVelocitySpeedLabelsLayer(
+  objects: readonly SceneObject[],
+  denseBatchRadiusPc: number,
+): { group: Object3D; labels: VelocitySpeedLabel[] } {
+  const group = new Object3D();
+  group.name = "velocity-speed-labels";
+
+  const labels: VelocitySpeedLabel[] = [];
+
+  for (const obj of starsWithVelocityInSphere(objects, denseBatchRadiusPc)) {
+    const velocity = obj.velocity;
+    if (!velocity) {
+      continue;
+    }
+    const direction = velocityDirection(velocity.vx_kms, velocity.vy_kms, velocity.vz_kms);
+    if (!direction) {
+      // Same degenerate zero-vector skip as `createVelocityVectorsLayer` -
+      // no arrow is drawn for this star, so no speed label either.
+      continue;
+    }
+    const speedKms = velocitySpeedKms(velocity.vx_kms, velocity.vy_kms, velocity.vz_kms);
+    const length = velocityArrowLengthPc(speedKms);
+    const origin = new Vector3(...obj.position_pc);
+    const dir = new Vector3(...direction);
+    const tip = origin.clone().addScaledVector(dir, length);
+
+    const element = document.createElement("div");
+    // Issue #236 AC: a visually distinct class from star NAME labels
+    // (`.object-label`/`.selected` in `style.css`) so the two are never
+    // confused, even when both are visible near the same star.
+    element.className = "velocity-speed-label";
+    element.textContent = formatSpeedKms(speedKms);
+
+    const css2dObject = new CSS2DObject(element);
+    css2dObject.position.copy(tip);
+    group.add(css2dObject);
+
+    labels.push({ objectId: obj.id, css2dObject, element });
+  }
+
+  return { group, labels };
 }

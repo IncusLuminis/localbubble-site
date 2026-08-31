@@ -551,6 +551,38 @@ body {
   margin-top: -3px;
 }
 
+/* Issue #236: per-arrow velocity speed labels ("31.5 km/s") - a dedicated
+ * class, deliberately NOT `.object-label`/`.object-label.selected` above or
+ * `.structure-label` below, so a speed label is never visually confused
+ * with a star's own name label even when both are visible near the same
+ * star (this issue's explicit AC). Smaller and lower-contrast than either -
+ * a muted green tint (a dimmed version of `velocityVectors.ts`'s own
+ * `FULL_VECTOR_COLOR` #39ff6a, so a speed label reads as "belonging to" the
+ * green vector arrows rather than an arbitrary color) at reduced opacity,
+ * italic to further separate its silhouette from the upright catalog-object
+ * labels at a glance. Uses margin, not transform, positioned upward (a
+ * larger negative `margin-top` than `.object-label`'s -10px) since this is
+ * anchored at the arrow's own TIP (`velocityVectors.ts`'s
+ * `createVelocitySpeedLabelsLayer`), not a star marker's center - see the
+ * `.object-label` comment above for why `transform` itself is inert on
+ * CSS2DObject label elements (`CSS2DRenderer` overwrites it inline every
+ * frame). Density (how many are visible at once) is controlled entirely in
+ * `main.ts`'s `updateLabelVisibility` via `selectNearestLabels` +
+ * `VELOCITY_SPEED_LABEL_MAX_VISIBLE` - this class only controls look, never
+ * which/how many labels are shown. */
+.velocity-speed-label {
+  color: #9dffb8;
+  font-size: 9px;
+  font-style: italic;
+  font-family: system-ui, -apple-system, sans-serif;
+  text-shadow: 0 0 3px #05070d, 0 0 5px #05070d;
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0.85;
+  margin-left: 8px;
+  margin-top: -16px;
+}
+
 /* The "Galactic Center" axis label (issue #146) - a dedicated class (issue
  * #149), not `.structure-label` above, even though it started as a reuse of
  * it: the human owner asked specifically for *this* label to be made more
