@@ -1494,16 +1494,18 @@ velocityVectorsButton.addEventListener("click", () => {
 });
 // Story #239: only ever clickable while `applyPlayerSphereState`'s own
 // crossing-detection has left it enabled - same pattern as the vectors
-// toggle just above. First press (panel not yet open) reveals the panel
-// AND starts playing in one action, per Epic #238's brief; a subsequent
-// press (panel already open) is a plain play/pause toggle instead - the
-// panel's own play/pause button does the exact same thing via
-// `togglePlayerPlaying`, so the two controls can never disagree.
+// toggle just above. Story #245: first press (panel not yet open) is a
+// purely inert reveal - it only opens the panel, never starts motion,
+// since #243 made direction an explicit choice via the panel's own `<`/`>`
+// buttons and auto-starting playback in whatever direction happened to be
+// last active no longer matches that design. A subsequent press (panel
+// already open) remains a plain play/pause toggle - the panel's own
+// play/pause button does the exact same thing via `togglePlayerPlaying`,
+// so the two controls can never disagree.
 playerButton.addEventListener("click", () => {
   if (!playerPanelOpen) {
     playerPanelOpen = true;
     playerPanelHandle.setVisible(true);
-    setPlayerPlaying(true);
   } else {
     togglePlayerPlaying();
   }
