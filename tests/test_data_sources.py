@@ -656,6 +656,163 @@ class TestSimbadResolver:
         obj = resolver.resolve("Pleiades")
         assert obj.velocity is None
 
+    # -- Issue #234: implausible rvz_radvel (V* EZ Aqr / GJ 866) -------
+
+    def test_query_mes_velocities_skips_implausible_and_non_v_rows(
+        self, tmp_path: Path, monkeypatch
+    ):
+        # Real-shaped mesVelocities response for V* EZ Aqr (captured live
+        # 2026-08-31): the default row (mespos 1) is the implausible
+        # 6824.7 km/s value; a redshift-typed row is included to confirm
+        # it's skipped by unit, not just by magnitude; the two older,
+        # independent bibcodes both agree at -60.0 km/s.
+        from astropy.table import Table
+
+        import local_galactic_structures.data_sources.simbad as simbad_module
+
+        table = Table(
+            {
+                "mesvelocities.velvalue": [6824.7, 0.002, -60.0],
+                "mesvelocities.veltype": ["v", "z", "v"],
+                "mesvelocities.bibcode": [
+                    "2021MNRAS.508.5148C",
+                    "9999FAKE.....0Z",
+                    "1995A&AS..114..269D",
+                ],
+                "mesvelocities.nbmes": [1, 1, 4],
+            }
+        )
+
+        class FakeClient:
+            def add_votable_fields(self, *fields):
+                pass
+
+            def query_object(self, name):
+                return table
+
+        monkeypatch.setattr(
+            simbad_module, "AstroquerySimbad", lambda: FakeClient()
+        )
+        resolver = self._resolver(tmp_path)
+        result = resolver._query_mes_velocities("V* EZ Aqr")
+        assert result == {
+            "kms": -60.0,
+            "bibcode": "1995A&AS..114..269D",
+            "nbmes": 4,
+        }
+
+    def test_query_mes_velocities_returns_none_when_nothing_plausible(
+        self, tmp_path: Path, monkeypatch
+    ):
+        from astropy.table import Table
+
+        import local_galactic_structures.data_sources.simbad as simbad_module
+
+        table = Table(
+            {
+                "mesvelocities.velvalue": [6824.7],
+                "mesvelocities.veltype": ["v"],
+                "mesvelocities.bibcode": ["2021MNRAS.508.5148C"],
+                "mesvelocities.nbmes": [1],
+            }
+        )
+
+        class FakeClient:
+            def add_votable_fields(self, *fields):
+                pass
+
+            def query_object(self, name):
+                return table
+
+        monkeypatch.setattr(
+            simbad_module, "AstroquerySimbad", lambda: FakeClient()
+        )
+        resolver = self._resolver(tmp_path)
+        assert resolver._query_mes_velocities("V* EZ Aqr") is None
+
+    def test_query_upstream_corrects_implausible_rv_via_mesvelocities(
+        self, tmp_path: Path, monkeypatch
+    ):
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_BARNARDS_STAR_RAW)
+        raw["rvz_radvel"] = 6824.7
+        raw["rvz_bibcode"] = "2021MNRAS.508.5148C"
+        monkeypatch.setattr(
+            resolver, "_query_object_with_fields", lambda name, include_v: dict(raw)
+        )
+        monkeypatch.setattr(
+            resolver,
+            "_query_mes_velocities",
+            lambda name: {
+                "kms": -60.0,
+                "bibcode": "1995A&AS..114..269D",
+                "nbmes": 4,
+            },
+        )
+        result = resolver._query_upstream("V* EZ Aqr")
+        # Original raw fields are never modified in place (spec §13).
+        assert result["rvz_radvel"] == 6824.7
+        assert result["rvz_bibcode"] == "2021MNRAS.508.5148C"
+        # Corrected value lives in separate, additive keys.
+        assert result["rvz_radvel_corrected"] == -60.0
+        assert result["rvz_bibcode_corrected"] == "1995A&AS..114..269D"
+        assert "implausible" in result["rvz_correction_note"]
+
+    def test_query_upstream_flags_implausible_rv_with_no_alternative(
+        self, tmp_path: Path, monkeypatch
+    ):
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_BARNARDS_STAR_RAW)
+        raw["rvz_radvel"] = 6824.7
+        monkeypatch.setattr(
+            resolver, "_query_object_with_fields", lambda name, include_v: dict(raw)
+        )
+        monkeypatch.setattr(resolver, "_query_mes_velocities", lambda name: None)
+        result = resolver._query_upstream("V* EZ Aqr")
+        assert result["rvz_radvel"] == 6824.7
+        assert "rvz_radvel_corrected" not in result
+        assert "no plausible alternative" in result["rvz_correction_note"]
+
+    def test_resolve_uses_corrected_rv_when_default_flagged_implausible(
+        self, tmp_path: Path, monkeypatch
+    ):
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_BARNARDS_STAR_RAW)
+        raw["rvz_radvel"] = 6824.7
+        raw["rvz_bibcode"] = "2021MNRAS.508.5148C"
+        raw["rvz_radvel_corrected"] = -60.0
+        raw["rvz_bibcode_corrected"] = "1995A&AS..114..269D"
+        raw["rvz_correction_note"] = (
+            "Default SIMBAD rvz_radvel (6824.7 km/s) is implausible; "
+            "corrected via mesVelocities."
+        )
+        monkeypatch.setattr(resolver, "_query_upstream", lambda name: raw)
+        obj = resolver.resolve("V* EZ Aqr")
+        assert obj.velocity is not None
+        assert obj.velocity.radial_velocity_known is True
+        magnitude = (
+            obj.velocity.vx_kms**2 + obj.velocity.vy_kms**2 + obj.velocity.vz_kms**2
+        ) ** 0.5
+        assert magnitude < 500.0  # no longer an implausible hypervelocity
+        assert "1995A&AS..114..269D" in obj.velocity.source.reference
+        assert "implausible" in obj.velocity.source.reference
+
+    def test_resolve_falls_back_to_unknown_when_implausible_rv_uncorrectable(
+        self, tmp_path: Path, monkeypatch
+    ):
+        resolver = self._resolver(tmp_path)
+        raw = dict(_SIMBAD_BARNARDS_STAR_RAW)
+        raw["rvz_radvel"] = 6824.7
+        raw["rvz_correction_note"] = (
+            "Default SIMBAD rvz_radvel (6824.7 km/s) is implausible and no "
+            "plausible alternative measurement was found."
+        )
+        monkeypatch.setattr(resolver, "_query_upstream", lambda name: raw)
+        obj = resolver.resolve("V* EZ Aqr")
+        assert obj.velocity is not None
+        assert obj.velocity.radial_velocity_known is False
+        assert "no plausible alternative" in obj.velocity.source.reference
+
 
 # ---------------------------------------------------------------------------
 # absolute_magnitude_from_distance_modulus (Story #170, pure function)

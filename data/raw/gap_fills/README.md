@@ -210,3 +210,91 @@ Not part of this Story: the remaining ~100 Messier objects (this is a
 curated "greatest hits" batch, not a full import), or new billboard-sprite
 rendering for nebulae (a separate, later Story per issue #221's own scope
 note).
+
+## V* EZ Aqr's implausible ~6825 km/s velocity (issue #234)
+
+Not a new star addition like the entries above - this is a data-quality
+fix to an existing record, documented here per this issue's own request
+to follow the same "investigation findings, honestly documented"
+convention this file already established.
+
+Story #230/PR #232 added stellar space-velocity data for the 127
+in-sphere stars, including `V* EZ Aqr` (GJ 866, a 3.4 pc M5V triple
+RECONS dwarf, catalog id `v_ez_aqr`). Its merged velocity derived to
+`vx=2486.92, vy=2746.59, vz=-5731.56` km/s - a total space velocity of
+~6825 km/s, an essentially unheard-of hypervelocity for a quiet nearby M
+dwarf (published literature: RV ~ -59.9 km/s, proper motion ~(+2314,
++2295) mas/yr, a normal few-tens-of-km/s space velocity).
+
+**Investigation.** Live-queried SIMBAD (2026-08-31) for every alias of
+this star - `GJ 866`, `GJ 866 A`, `GJ 866 B`, `GJ 866 C`, `V* EZ Aqr`,
+`EZ Aqr` - all resolve to the identical `main_id` and the identical
+`rvz_radvel = 6824.7` km/s (bibcode `2021MNRAS.508.5148C`). This rules
+out a component-resolution mismatch (this system's separate
+`gj_866_{a,b,c}.json` cache files are a pre-existing RECONS artifact of
+one star having three separately-catalogued RECONS components - see this
+record's own `notes` field, issue #104's dedup note - not the cause of
+this bug) and rules out a unit-parsing bug in this pipeline's own
+`data_sources/simbad.py` (the raw upstream value itself is already
+`6824.7`, not something this pipeline mis-scaled). SIMBAD's own
+`mesVelocities` table (all individual RV/redshift measurements on file,
+not just the one it surfaces as the default `rvz_radvel`) shows three
+rows for this star:
+
+| mespos | bibcode | value | nbmes |
+| --- | --- | --- | --- |
+| 1 (default) | 2021MNRAS.508.5148C | 6824.7 km/s | - |
+| 2 | 1995A&AS..114..269D | -60.0 km/s | 4 |
+| 3 | 1953GCRV..C......0W | -60.0 km/s (err 2.0) | 4 |
+
+Two independent, older bibcodes agree at -60.0 km/s, matching the ~-59.9
+km/s this issue itself cites from the literature; only the newest
+bibcode (the one SIMBAD happens to surface as "the" default) disagrees by
+two orders of magnitude - almost certainly a bad cross-match in that
+specific upstream reference, not anything wrong with this star's actual
+measured history.
+
+**Fix.** `data_sources/simbad.py` now treats any `|rvz_radvel| > 500`
+km/s as suspect (module docstring quirk 3, `_IMPLAUSIBLE_RV_KMS_THRESHOLD`)
+and queries `mesVelocities` for a plausible alternative bibcode/
+measurement - the same "corrected re-query over a real, traceable,
+differently-sourced SIMBAD value" shape this module's existing
+`mesDistance` fallback already uses for quirk 2. The original
+`rvz_radvel`/`rvz_bibcode` raw fields are never overwritten (spec §13:
+raw data is never modified in place) - the correction lives in new,
+additive `rvz_radvel_corrected`/`rvz_bibcode_corrected`/
+`rvz_correction_note` keys instead, which `_derive_velocity` prefers over
+the flagged default. Re-running `scripts/backfill_velocity.py --only
+v_ez_aqr` against live SIMBAD picked up the fix automatically: `v_ez_aqr`
+now derives to `vx=-68.42, vy=-0.36, vz=41.10` km/s, a total space
+velocity of ~79.8 km/s - plausible for a fast-proper-motion nearby M
+dwarf (less than Barnard's Star's 142.3 km/s, well above the "quiet
+nearby star" floor) - with `radial_velocity_known: true` and a `source`
+citing both the corrected bibcode (`1995A&AS..114..269D`) and the full
+investigation note.
+
+If SIMBAD had genuinely had no plausible alternative measurement on file
+for a future star hitting this same quirk, the fallback is honest
+(`radial_velocity_known: false`, tangential-only from `pmra`/`pmdec`
+alone) rather than propagating a bad value - this star simply didn't need
+that path, since a plausible corrected value was available.
+
+**Scan for other implausible velocities (this issue's own acceptance
+criterion).** All 127 in-sphere star records were re-scanned for derived
+total space velocity above 500 km/s after this fix. Zero flagged. The two
+fastest after the fix are both genuine, well-documented high-velocity
+stars, not data-quality issues: Kapteyn's Star (HD 33793, catalog id
+`hd_33793`) at ~293.5 km/s - the textbook nearby halo/high-velocity star,
+consistent with its well-known extreme space velocity - and Wolf 28 / Van
+Maanen's Star (catalog id `wolf_28`) at ~270.0 km/s, an old white dwarf
+consistent with an old-population peculiar velocity. Neither required any
+change.
+
+`galactic-structures build-catalog` + `galactic-structures export-scene
+--no-radius-filter --output web/public/data/scene.json` regenerated the
+checked-in catalog/scene artifacts, run from this worktree's own clean
+`.venv` (pyarrow 25.0.1, matching the version the test suite runs against
+- see this repo's `Regenerate catalog.parquet with current pyarrow`
+commit for why that match matters). Full suite: 310 passed, 4 skipped (6
+new tests added for this quirk's `_query_mes_velocities`/`_query_upstream`
+wiring and the `_derive_velocity` corrected/fallback paths).
