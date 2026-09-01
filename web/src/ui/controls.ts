@@ -1,10 +1,16 @@
 import { RADIUS_PRESETS_PC, DEFAULT_RADIUS_PC } from "../scene/radiusFilter";
 
 /**
- * The main control panel (spec Idea.md §2's conceptual UI sketch: category
- * toggles, structure-layer checkboxes, a radius control, plus this Story's
- * additions - camera presets and PNG export). Plain DOM, no framework (spec
- * §31).
+ * Story #257 (Epic #255): the old single combined `#controls` panel
+ * (Object categories + Layers checkboxes + Radius + Object size + Camera
+ * presets + Save PNG, opened via the retired `#menu-toggle` hamburger) is
+ * split into three separate non-modal panels built by this module - Layers,
+ * Settings, Camera - each opened/closed independently via its own new
+ * `#left-toolbar` trigger icon (`main.ts`, toolbar positions #2/#3/#4).
+ * Plain DOM, no framework (spec §31), same convention as the single panel
+ * this replaces. All underlying category/structure/labels/radius/size/
+ * camera-preset/export callback wiring is unchanged from that panel - only
+ * presentation and entry points are reorganized here.
  */
 
 export interface ToggleItem {
@@ -16,20 +22,6 @@ export interface ToggleItem {
 export interface CameraPresetItem {
   key: string;
   label: string;
-}
-
-export interface ControlPanelOptions {
-  categories: ToggleItem[];
-  structureLayers: ToggleItem[];
-  onCategoryToggle: (key: string, visible: boolean) => void;
-  onStructureToggle: (key: string, visible: boolean) => void;
-  onLabelsToggle: (visible: boolean) => void;
-  labelsDefaultChecked?: boolean;
-  onRadiusChange: (radiusPc: number) => void;
-  cameraPresets: CameraPresetItem[];
-  onCameraPreset: (key: string) => void;
-  onExportPng: () => void;
-  onSizeScaleChange: (scale: number) => void;
 }
 
 function makeSection(titleText: string): { section: HTMLDivElement; body: HTMLDivElement } {
@@ -61,36 +53,53 @@ function makeCheckbox(
   return { row: label, input };
 }
 
-/**
- * Story #239's UI lock (Epic #238: category/structure checkboxes and the
- * radius filter must disable whenever the motion player's time is away from
- * Today). `element` is unchanged from this function's pre-#239 return type;
- * `setLocked` is the new handle `main.ts` calls whenever
- * `isUiLockedForPlayerTime`'s result changes.
- */
-export interface ControlPanelHandle {
+/** Shared open/close shape for all three of this Story's new side panels -
+ * `.open` class toggle, mirroring `ui/playerPanel.ts`'s `setVisible`/
+ * `#player-panel.open` convention (and the retired `#menu-panels.open`
+ * before it) rather than inventing a new show/hide mechanism. */
+export interface SidePanelHandle {
   element: HTMLDivElement;
+  setOpen: (open: boolean) => void;
+}
+
+function createSidePanel(id: string, titleText: string): { panel: HTMLDivElement } {
+  const panel = document.createElement("div");
+  panel.id = id;
+  panel.className = "panel side-panel";
+  const title = document.createElement("div");
+  title.className = "panel-title";
+  title.textContent = titleText;
+  panel.appendChild(title);
+  return { panel };
+}
+
+// --- Layers panel (toolbar position #2): merges the old panel's "Object
+// categories" and "Layers" (Galactic Plane/Gould Belt/Radcliffe Wave/Local
+// Bubble/Labels) sections under one trigger. ---
+
+export interface LayersPanelOptions {
+  categories: ToggleItem[];
+  structureLayers: ToggleItem[];
+  onCategoryToggle: (key: string, visible: boolean) => void;
+  onStructureToggle: (key: string, visible: boolean) => void;
+  onLabelsToggle: (visible: boolean) => void;
+  labelsDefaultChecked?: boolean;
+}
+
+/**
+ * Story #239's UI lock (Epic #238: category/structure checkboxes must
+ * disable whenever the motion player's time is away from Today) carries
+ * over unchanged onto this panel - deliberately NOT the "Labels" checkbox
+ * (display-only, not a scene-state filter Epic #238's UI-lock AC lists).
+ */
+export interface LayersPanelHandle extends SidePanelHandle {
   setLocked: (locked: boolean) => void;
 }
 
-export function createControlPanel(options: ControlPanelOptions): ControlPanelHandle {
-  const panel = document.createElement("div");
-  panel.id = "controls";
-  panel.className = "panel";
+export function createLayersPanel(options: LayersPanelOptions): LayersPanelHandle {
+  const { panel } = createSidePanel("layers-panel", "Layers");
 
-  const title = document.createElement("div");
-  title.className = "panel-title";
-  title.textContent = "Local Galactic Structures";
-  panel.appendChild(title);
-
-  // Story #239: every category/structure checkbox plus the radius `<select>`
-  // (built below) is collected here so `setLocked` can disable/re-enable all
-  // of them together - deliberately NOT the "Labels" checkbox just below
-  // (display-only, not a scene-state filter Epic #238's UI-lock AC lists) or
-  // the "Object size"/camera-preset/export controls further down (also not
-  // listed - camera navigation and cosmetic-only controls stay live
-  // throughout per that AC).
-  const lockableInputs: (HTMLInputElement | HTMLSelectElement)[] = [];
+  const lockableInputs: HTMLInputElement[] = [];
 
   // --- Object categories (spec §23: stars/clusters/associations/etc) ---
   const categoriesSection = makeSection("Object categories");
@@ -102,8 +111,10 @@ export function createControlPanel(options: ControlPanelOptions): ControlPanelHa
   panel.appendChild(categoriesSection.section);
 
   // --- Structure/model layers (Galactic Plane, Gould Belt, Radcliffe
-  // Wave, Local Bubble - spec §23) ---
-  const structuresSection = makeSection("Layers");
+  // Wave, Local Bubble - spec §23) plus Labels. Section retitled
+  // "Structures" (was "Layers" in the old combined panel) so it doesn't
+  // read as a duplicate of this panel's own "Layers" title above. ---
+  const structuresSection = makeSection("Structures");
   for (const item of options.structureLayers) {
     const { row, input } = makeCheckbox(item, options.onStructureToggle);
     structuresSection.body.appendChild(row);
@@ -115,6 +126,38 @@ export function createControlPanel(options: ControlPanelOptions): ControlPanelHa
   );
   structuresSection.body.appendChild(labelsRow);
   panel.appendChild(structuresSection.section);
+
+  return {
+    element: panel,
+    setOpen(open: boolean) {
+      panel.classList.toggle("open", open);
+    },
+    setLocked(locked: boolean) {
+      for (const input of lockableInputs) {
+        input.disabled = locked;
+      }
+    },
+  };
+}
+
+// --- Settings panel (toolbar position #3): Radius + Object size + Save
+// PNG export - confirmed placement with the human owner (Story #257 brief). ---
+
+export interface SettingsPanelOptions {
+  onRadiusChange: (radiusPc: number) => void;
+  onSizeScaleChange: (scale: number) => void;
+  onExportPng: () => void;
+}
+
+/** Same UI-lock carry-over as `LayersPanelHandle` - only the Radius
+ * `<select>` is lockable here (Epic #238's AC does not list "Object size"
+ * or "Save PNG": cosmetic-only/export controls stay live throughout). */
+export interface SettingsPanelHandle extends SidePanelHandle {
+  setLocked: (locked: boolean) => void;
+}
+
+export function createSettingsPanel(options: SettingsPanelOptions): SettingsPanelHandle {
+  const { panel } = createSidePanel("settings-panel", "Settings");
 
   // --- Radius filter (spec §28) ---
   const radiusSection = makeSection("Radius");
@@ -134,9 +177,8 @@ export function createControlPanel(options: ControlPanelOptions): ControlPanelHa
   });
   radiusSection.body.appendChild(radiusSelect);
   panel.appendChild(radiusSection.section);
-  lockableInputs.push(radiusSelect);
 
-  // --- Object size scale (spec §23: "opacity / size ... where relevant")
+  // --- Object size scale (spec §23: "opacity / size ... where relevant") ---
   const sizeSection = makeSection("Object size");
   const sizeSlider = document.createElement("input");
   sizeSlider.type = "range";
@@ -151,8 +193,42 @@ export function createControlPanel(options: ControlPanelOptions): ControlPanelHa
   sizeSection.body.appendChild(sizeSlider);
   panel.appendChild(sizeSection.section);
 
-  // --- Camera presets (spec §29) ---
-  const cameraSection = makeSection("Camera");
+  // --- Export (spec §39) ---
+  const exportSection = makeSection("Export");
+  const exportButton = document.createElement("button");
+  exportButton.type = "button";
+  exportButton.textContent = "Save PNG";
+  exportButton.addEventListener("click", () => options.onExportPng());
+  exportSection.body.appendChild(exportButton);
+  panel.appendChild(exportSection.section);
+
+  return {
+    element: panel,
+    setOpen(open: boolean) {
+      panel.classList.toggle("open", open);
+    },
+    setLocked(locked: boolean) {
+      radiusSelect.disabled = locked;
+    },
+  };
+}
+
+// --- Camera panel (toolbar position #4): the camera pose presets, MINUS
+// "Fit all" (already its own dedicated toolbar icon, position #8, via
+// `showAllButton`/`applyCameraPreset("fit-all")` - `main.ts` filters it out
+// of the `cameraPresets` list passed in here rather than this module
+// special-casing the key). Not lockable - camera navigation stays live
+// throughout the UI lock per Epic #238's AC, same as before this Story. ---
+
+export interface CameraPanelOptions {
+  cameraPresets: CameraPresetItem[];
+  onCameraPreset: (key: string) => void;
+}
+
+export function createCameraPanel(options: CameraPanelOptions): SidePanelHandle {
+  const { panel } = createSidePanel("camera-panel", "Camera");
+
+  const cameraSection = makeSection("Views");
   const cameraButtonRow = document.createElement("div");
   cameraButtonRow.className = "camera-preset-row";
   for (const preset of options.cameraPresets) {
@@ -165,21 +241,10 @@ export function createControlPanel(options: ControlPanelOptions): ControlPanelHa
   cameraSection.body.appendChild(cameraButtonRow);
   panel.appendChild(cameraSection.section);
 
-  // --- Export (spec §39) ---
-  const exportSection = makeSection("Export");
-  const exportButton = document.createElement("button");
-  exportButton.type = "button";
-  exportButton.textContent = "Save PNG";
-  exportButton.addEventListener("click", () => options.onExportPng());
-  exportSection.body.appendChild(exportButton);
-  panel.appendChild(exportSection.section);
-
   return {
     element: panel,
-    setLocked(locked: boolean) {
-      for (const input of lockableInputs) {
-        input.disabled = locked;
-      }
+    setOpen(open: boolean) {
+      panel.classList.toggle("open", open);
     },
   };
 }

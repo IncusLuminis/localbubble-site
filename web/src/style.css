@@ -73,13 +73,6 @@ body {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
-/* Issue #145: shares a common width with #search (below) so the two panels
-   stacked inside #menu-panels line up visually rather than each keeping
-   their own pre-#143 width (220px here vs 260px there). */
-#controls {
-  width: 240px;
-}
-
 #inspector {
   right: 12px;
   width: 240px;
@@ -98,14 +91,11 @@ body {
 }
 
 /* Issue #106: search / go-to-object panel content (input, results list,
-   status line) - issue #143 repositioned its container to sit atop the
-   Structures panel inside `#menu-panels`; issue #203 moved it again, into
-   its own modal (`.search-dialog` below) opened by `#search-toggle`. Issue
-   #145's 240px width (matching `#controls`, so the two aligned when
-   stacked) is superseded inside the modal by `.search-dialog`'s own width
-   below - `.search-dialog .panel` (below) neutralizes this element's box
-   chrome entirely there, so this rule now only matters if `#search` is ever
-   rendered outside a `.search-dialog` wrapper again. */
+   status line) - issue #203 moved its container into its own modal
+   (`.search-dialog` below) opened by `#search-toggle`. `.search-dialog
+   .panel` (below) neutralizes this element's own box chrome entirely
+   there, so this rule now only matters if `#search` is ever rendered
+   outside a `.search-dialog` wrapper again. */
 #search {
   width: 240px;
 }
@@ -115,42 +105,40 @@ body {
    #255's 13-item toolbar order has no slot for a hamburger trigger, and
    `#search-toggle` relocates into the new `#left-toolbar` (below) sharing
    its compact `.toolbar-button`/`.toolbar-button--icon` styling instead of
-   this dedicated 68x68px rule. */
+   this dedicated 68x68px rule. Story #257 additionally retired the old
+   combined `#controls` panel and its `#menu-panels` wrapper container
+   entirely (both replaced by `.side-panel` below) - see that rule's own
+   docstring. */
 
-/* Issue #143: shared container for Search + Structures. Story #256: its
-   `#menu-toggle` trigger is gone (see above) and nothing currently toggles
-   `.open` below, so this panel has no way to open until Story #257 splits
-   it into the new Layers/Settings/Camera panels and wires their own
-   trigger icons into `#left-toolbar` - an intentional transitional state
-   for this Story, not dead CSS (the rule itself, and the panel content
-   `main.ts` still mounts into it, both remain for that Story to build on). */
-#menu-panels {
+/* Story #257: the three new non-modal side panels (Layers/Settings/Camera,
+   `ui/controls.ts`'s `createLayersPanel`/`createSettingsPanel`/
+   `createCameraPanel`) that replace the retired combined `#controls` panel
+   and its `#menu-panels` wrapper - each opened by its own new
+   `#left-toolbar` trigger icon (`#layers-toggle`/`#settings-toggle`/
+   `#camera-toggle`, positions #2/#3/#4). All three share this one
+   positioning rule: docked immediately to the right of the toolbar and
+   vertically centered on the left edge the same way `#left-toolbar` itself
+   is (`left: 54px` clears the toolbar's `left: 12px` + 30px button width +
+   a small gap), so an open panel always reads as having grown out of the
+   toolbar regardless of which of the three trigger buttons opened it.
+   `main.ts`'s `openSidePanel`/`closeSidePanel` keep at most one of the
+   three open at a time (mutually exclusive, tab-like - see that function's
+   own docstring for why), so sharing one position never produces visible
+   overlap between them. Hidden by default (`display: none`); `.open`
+   reveals it - same on/off convention as `#player-panel.open` (and the
+   retired `#menu-panels.open` before it). `.panel`'s own inherited
+   `max-height`/`overflow-y` keep a tall panel from running off-screen top
+   or bottom despite being vertically centered rather than top-anchored. */
+.side-panel {
   display: none;
-  position: absolute;
-  top: 88px;
-  left: 12px;
-  z-index: 2;
-  flex-direction: column;
-  gap: 12px;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
+  left: 54px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 230px;
 }
 
-#menu-panels.open {
-  display: flex;
-}
-
-/* The panels keep their shared `.panel` box styling (background/border/
-   padding/etc) but no longer position or scroll themselves independently -
-   stacking order/placement/scrolling now come from the `#menu-panels` flex
-   container above (so the two panels don't each grow their own nested
-   scrollbar), so `position`/`top`/`left`/`transform`/`max-height`/
-   `overflow-y` are neutralized here. */
-#menu-panels .panel {
-  position: static;
-  transform: none;
-  max-height: none;
-  overflow-y: visible;
+.side-panel.open {
+  display: block;
 }
 
 .panel-title {
@@ -694,10 +682,12 @@ body {
    are 30x30px, ~30% smaller than the old 44x44px `#bottom-left-toolbar`
    baseline (tuned live for a compact, miniature look, not a hard pixel
    target). Order (top to bottom) is `main.ts`'s DOM order, matching Epic
-   #255's settled 13-item list (skipping #2-#4, Story #257's new panels):
-   Search, Expand/Collapse (`#fullscreen-toggle`, relocated per #163/#197),
-   Zoom In/Out, Show All, Fit to Local Bubble, Fit to Nearest-Stars Sphere,
-   Vectors, Information, Play. */
+   #255's settled 13-item list in full (Story #257 filled in #2-#4, the
+   Layers/Settings/Camera triggers, alongside every button Story #256
+   already placed here): Search, Layers, Settings, Camera, Expand/Collapse
+   (`#fullscreen-toggle`, relocated per #163/#197), Zoom In/Out, Show All,
+   Fit to Local Bubble, Fit to Nearest-Stars Sphere, Vectors, Information,
+   Play. */
 #left-toolbar {
   position: absolute;
   left: 12px;
@@ -805,7 +795,7 @@ body {
    (vs. e.g. `50`, which today's ~130 labels would already exceed), so this
    class of bug can't recur from ordinary label-count growth. This value is
    deliberately far above every other z-index in the app (#status/#fov-
-   readout: 1, .panel/#menu-panels: 2, #left-toolbar (Story #256, replacing
+   readout: 1, .panel/.side-panel: 2, #left-toolbar (Story #256, replacing
    #menu-toggle/#search-toggle (#203)/#bottom-left-toolbar (#197/#201)): 3,
    #154's edge-indicator: 20) - none of those need to change, since a modal is meant to be
    unconditionally topmost. Issue #203's search modal reuses this same
@@ -828,9 +818,9 @@ body {
    (background/border/radius/shadow/text color) but is positioned by the
    scrim's flex centering above rather than `.panel`'s own `position:
    absolute; top: 12px`, so those are neutralized here - mirrors how
-   `#menu-panels .panel` neutralizes the same properties for a different
-   reason (stacking inside a flex container instead of centering). Issue
-   #203's `.search-dialog` shares every property here except `width` (kept
+   `.side-panel` (above) neutralizes/overrides those same properties for a
+   different reason (docking next to the toolbar instead of centering).
+   Issue #203's `.search-dialog` shares every property here except `width` (kept
    narrower, below, since it only ever holds a search input/results list,
    not the Info dialog's prose). */
 .info-dialog,
@@ -853,10 +843,10 @@ body {
 
 /* Issue #203: `createSearchBox`'s own `#search` element (built by
    `ui/search.ts`, unchanged by this issue) keeps its `.panel` class from
-   its previous docked-in-`#menu-panels` life - mounted directly inside
+   its previous docked-in-a-shared-container life - mounted directly inside
    `.search-dialog` (itself already `.panel`-styled) here, so its own nested
    `.panel` box chrome (position/background/border/shadow/padding/z-index)
-   is neutralized, the same way `#menu-panels .panel` neutralizes it for
+   is neutralized, the same way `.side-panel` (above) overrides it for
    that other placement - otherwise the two `.panel` boxes would visibly
    double up (nested border/background/shadow) and the inner one's
    `position: absolute` would fight the outer dialog's `position: relative`. */
@@ -956,7 +946,7 @@ body {
    collide with `#left-toolbar`/`#status` (bottom-left) or
    `#inspector` (top-right). Hidden by default (`display: none`); `.open`
    (toggled by `ui/playerPanel.ts`'s `setVisible`, driven from `main.ts`)
-   reveals it - same on/off convention as `#menu-panels.open`.
+   reveals it - same on/off convention as `.side-panel.open` (above).
 
    Story #243 Part 1: shrunk noticeably from its original size (520px wide,
    `.panel`'s default 12px/14px padding, 0.82 background opacity) - at

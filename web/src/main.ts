@@ -118,7 +118,14 @@ import {
 } from "./scene/cameraPresets";
 import { pickSceneObject, toNdc } from "./scene/picking";
 import { exportSceneAsPng } from "./scene/pngExport";
-import { createControlPanel, type ControlPanelHandle } from "./ui/controls";
+import {
+  createLayersPanel,
+  createSettingsPanel,
+  createCameraPanel,
+  type LayersPanelHandle,
+  type SettingsPanelHandle,
+  type SidePanelHandle,
+} from "./ui/controls";
 import { Inspector } from "./ui/inspector";
 import { InfoDialog } from "./ui/infoDialog";
 import { SearchDialog } from "./ui/searchDialog";
@@ -219,21 +226,6 @@ app.appendChild(inspector.element);
 const fovReadout = createFovReadout();
 app.appendChild(fovReadout.element);
 
-// Story #256: the Structures control panel (`createControlPanel`) still
-// lives inside this shared container - unchanged by this Story. Its old
-// hamburger trigger (`#menu-toggle`) is retired below (Epic #255's 13-item
-// toolbar order has no slot for it - items #2/#3/#4, the new Layers/
-// Settings/Camera panels that will replace this combined panel, are Story
-// #257's job, "no new panels yet" per the Epic). `menuPanels` is left in
-// place, still populated by `panelHandle` further below, for Story #257 to
-// split apart and wire new triggers for; it simply has no way to open
-// (`.open` is never toggled) until then - an intentional, Epic-sanctioned
-// transitional state between the two sequential Stories, not a leftover
-// dead container from this Story's own relocations.
-const menuPanels = document.createElement("div");
-menuPanels.id = "menu-panels";
-app.appendChild(menuPanels);
-
 /** Issue #203's magnifying-glass inline SVG for the Search button
  * (`stroke="currentColor"`, so it inherits the button's own `color` for
  * free, same as the toolbar's other icons below). Story #256: shrunk from
@@ -247,8 +239,47 @@ const SEARCH_ICON_SVG = `
   </svg>
 `;
 
+/** Story #257: inline SVG glyphs for the three new `#left-toolbar` trigger
+ * icons (positions #2/#3/#4) that open the Layers/Settings/Camera panels
+ * below - same `stroke="currentColor"` convention as `SEARCH_ICON_SVG`
+ * above and the other toolbar icons further down, sized 20x20 to match
+ * `SHOW_ALL_ICON_SVG`/`FIT_LOCAL_BUBBLE_ICON_SVG`/etc.
+ *
+ * `LAYERS_ICON_SVG`: the classic stacked-layers glyph (a diamond plus two
+ * chevrons beneath it) - reads as "toggle what's shown", matching this
+ * panel's Object-categories/Structures checkbox content.
+ * `SETTINGS_ICON_SVG`: a plain gear - Radius/Object size/Save PNG.
+ * `CAMERA_ICON_SVG`: a camera body + lens - the camera pose presets. */
+const LAYERS_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+       stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 3 L21 8 L12 13 L3 8 Z" />
+    <path d="M3 12 L12 17 L21 12" />
+    <path d="M3 16 L12 21 L21 16" />
+  </svg>
+`;
+
+const SETTINGS_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+       stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="3.2" />
+    <path d="M12 2.5 V5.5 M12 18.5 V21.5 M2.5 12 H5.5 M18.5 12 H21.5
+              M5.1 5.1 L7.2 7.2 M16.8 16.8 L18.9 18.9 M5.1 18.9 L7.2 16.8 M16.8 7.2 L18.9 5.1" />
+  </svg>
+`;
+
+const CAMERA_ICON_SVG = `
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+       stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M3 8 H8 L9.5 6 H14.5 L16 8 H21 V18 H3 Z" />
+    <circle cx="12" cy="13" r="3.4" />
+  </svg>
+`;
+
 // Issue #203: dedicated Search button, opens `searchDialog` (built just
-// below) - entirely independent of `menuPanels`'s own open/closed state.
+// below) - entirely independent of the Story #257 side panels' own
+// open/closed state (`openSidePanel`/`closeSidePanel` further below only
+// ever touch the Layers/Settings/Camera panels, never this modal).
 // Story #256: relocated from its own standalone 68x68px top-left button
 // into the new `#left-toolbar` (below) as item #1, sharing the toolbar's
 // compact `.toolbar-button`/`.toolbar-button--icon` sizing/styling with
@@ -283,17 +314,28 @@ app.appendChild(infoDialog.element);
 // #255, styled after NASA "Eyes on the Solar System"'s own left toolbar)
 // replaces BOTH the old top-left row (`#menu-toggle`+`#search-toggle`) AND
 // the old horizontal `#bottom-left-toolbar` - every button below (Search,
-// Expand/Collapse, Zoom In/Out, Show All, Fit to Local Bubble, Fit to
-// Nearest-Stars Sphere, Vectors, Info, Play) is an existing button relocated
-// here, in the Epic's exact order, with unchanged click handlers/gating
-// logic - only container/position/size change. Items #2-#4 (the new Layers/
-// Settings/Camera panels) are Story #257's job and are omitted here per
-// this Story's explicit "purely structural, no new panels yet" scope.
+// Layers, Settings, Camera, Expand/Collapse, Zoom In/Out, Show All, Fit to
+// Local Bubble, Fit to Nearest-Stars Sphere, Vectors, Info, Play) sits here,
+// in the Epic's exact 13-item order. Story #257 fills in items #2-#4
+// (Layers/Settings/Camera, the `createToolbarButton` calls just below,
+// hoisted-function-declared further down in this file so it's already
+// callable here) - every other button here is an existing one relocated by
+// Story #256, unchanged click handlers/gating logic, only container/
+// position/size having changed there.
 const leftToolbar = document.createElement("div");
 leftToolbar.id = "left-toolbar";
 app.appendChild(leftToolbar);
 
 leftToolbar.appendChild(searchToggle);
+
+// Story #257: Layers/Settings/Camera trigger icons (positions #2/#3/#4) -
+// `openSidePanel`/`closeSidePanel`/`toggleSidePanel` (further below) wire
+// their click behavior and mutual-exclusivity once the panel content itself
+// exists (`layersPanelHandle`/`settingsPanelHandle`/`cameraPanelHandle`,
+// built once the scene loads).
+const layersToggle = createToolbarButton("layers-toggle", LAYERS_ICON_SVG, "Layers", true);
+const settingsToggle = createToolbarButton("settings-toggle", SETTINGS_ICON_SVG, "Settings", true);
+const cameraToggle = createToolbarButton("camera-toggle", CAMERA_ICON_SVG, "Camera", true);
 
 const fullscreenToggle = createFullscreenToggle(app);
 leftToolbar.appendChild(fullscreenToggle.element);
@@ -573,12 +615,90 @@ let labelById: Map<string, CatalogLabel> = new Map();
 let motionTrailsGroup: ReturnType<typeof createMotionTrailsLayer>["group"] | null = null;
 let trailByObjectId: Map<string, StarTrail> = new Map();
 
-/** Story #239: the Structures control panel's lock/unlock handle
- * (`ui/controls.ts`'s `createControlPanel` return value) - `null` until the
- * scene loads and the panel is actually built (mirrors every other
- * scene-load-gated `let ... | null` binding in this file, e.g.
- * `labelsInfo`). `syncUiLock` below guards every use with a null check. */
-let panelHandle: ControlPanelHandle | null = null;
+/** Story #257: the three new side panels' (Layers/Settings/Camera) own
+ * handles (`ui/controls.ts`'s `createLayersPanel`/`createSettingsPanel`/
+ * `createCameraPanel` return values) - `null` until the scene loads and
+ * each panel is actually built (mirrors every other scene-load-gated
+ * `let ... | null` binding in this file, e.g. `labelsInfo`, and the single
+ * pre-#257 `panelHandle` this replaces). `syncUiLock`/`getSidePanelHandle`
+ * below guard every use with a null check. */
+let layersPanelHandle: LayersPanelHandle | null = null;
+let settingsPanelHandle: SettingsPanelHandle | null = null;
+let cameraPanelHandle: SidePanelHandle | null = null;
+
+/** Story #257: which of the three new side panels (if any) is currently
+ * open. Design decision (documented in the PR): the three panels are
+ * mutually exclusive, tab-like - `openSidePanel` below always closes
+ * whichever of the other two was open before revealing the requested one,
+ * rather than allowing more than one open at once. All three panels share
+ * the exact same toolbar-adjacent screen position (`style.css`'s
+ * `.side-panel`), so stacking more than one open there would overlap
+ * rather than tile side by side - and the toolbar itself is deliberately
+ * compact (Story #256), leaving no clean place to lay three panels out
+ * next to each other instead. */
+type SidePanelName = "layers" | "settings" | "camera";
+let openSidePanelName: SidePanelName | null = null;
+
+function getSidePanelHandle(name: SidePanelName): SidePanelHandle | null {
+  switch (name) {
+    case "layers":
+      return layersPanelHandle;
+    case "settings":
+      return settingsPanelHandle;
+    case "camera":
+      return cameraPanelHandle;
+  }
+}
+
+function getSidePanelToggleButton(name: SidePanelName): HTMLButtonElement {
+  switch (name) {
+    case "layers":
+      return layersToggle;
+    case "settings":
+      return settingsToggle;
+    case "camera":
+      return cameraToggle;
+  }
+}
+
+/** Closes one side panel (a no-op if its content isn't built yet, or if
+ * it's already closed) and clears its toolbar button's pressed styling -
+ * the same `aria-pressed`/`.active` convention `velocityVectorsButton`/
+ * `playerButton` already use for their own toggle state. */
+function closeSidePanel(name: SidePanelName): void {
+  getSidePanelHandle(name)?.setOpen(false);
+  const button = getSidePanelToggleButton(name);
+  button.setAttribute("aria-pressed", "false");
+  button.classList.remove("active");
+  if (openSidePanelName === name) {
+    openSidePanelName = null;
+  }
+}
+
+/** Opens one side panel, first closing the other two (mutual exclusivity -
+ * see `openSidePanelName`'s docstring above). A no-op (beyond closing the
+ * others) if the requested panel's content isn't built yet - i.e. a click
+ * that lands in the brief window before the scene has finished loading. */
+function openSidePanel(name: SidePanelName): void {
+  for (const other of ["layers", "settings", "camera"] as const) {
+    if (other !== name) closeSidePanel(other);
+  }
+  const handle = getSidePanelHandle(name);
+  if (!handle) return;
+  handle.setOpen(true);
+  const button = getSidePanelToggleButton(name);
+  button.setAttribute("aria-pressed", "true");
+  button.classList.add("active");
+  openSidePanelName = name;
+}
+
+function toggleSidePanel(name: SidePanelName): void {
+  if (openSidePanelName === name) {
+    closeSidePanel(name);
+  } else {
+    openSidePanel(name);
+  }
+}
 
 /** Story #239: whether the app's other scene-state-changing controls are
  * currently locked (Epic #238 AC: true whenever `playerTimeYears !== 0`,
@@ -839,7 +959,9 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
 
 /** Story #239 AC #9 (Story #247 AC #4 extends this to the left toolbar):
  * applies the UI lock - disabling category/structure checkboxes and the
- * radius filter (`panelHandle.setLocked`), search (`searchToggle.disabled`,
+ * radius filter (Story #257: now `layersPanelHandle.setLocked`/
+ * `settingsPanelHandle.setLocked`, split from the single pre-#257
+ * `panelHandle.setLocked`), search (`searchToggle.disabled`,
  * and closing an already-open search dialog so a newly-locked session can't
  * leave it open), and now every OTHER `#left-toolbar` button (Zoom
  * In/Out, Show All, Fit to Local Bubble, Fit to nearest-stars sphere, Show
@@ -867,7 +989,8 @@ function syncUiLock(): void {
   const locked = isUiLockedForPlayerTime(playerTimeYears);
   if (locked === uiLocked) return;
   uiLocked = locked;
-  if (panelHandle) panelHandle.setLocked(uiLocked);
+  if (layersPanelHandle) layersPanelHandle.setLocked(uiLocked);
+  if (settingsPanelHandle) settingsPanelHandle.setLocked(uiLocked);
   searchToggle.disabled = uiLocked;
   if (uiLocked) searchDialog.hide();
   zoomInButton.disabled = uiLocked;
@@ -1496,6 +1619,12 @@ applyVelocityVectorsButtonState(false);
 // Story #239: same reasoning, same startup timing, for the player toggle.
 applyPlayerSphereState(false);
 
+// Story #257: the three new side-panel triggers - see `toggleSidePanel`'s
+// docstring above for the mutual-exclusivity behavior these share.
+layersToggle.addEventListener("click", () => toggleSidePanel("layers"));
+settingsToggle.addEventListener("click", () => toggleSidePanel("settings"));
+cameraToggle.addEventListener("click", () => toggleSidePanel("camera"));
+
 zoomInButton.addEventListener("click", () => zoomBy(ZOOM_IN_STEP_FACTOR));
 zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
 showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
@@ -1752,7 +1881,16 @@ loadScene()
       { key: "local-bubble", label: "Local Bubble", defaultChecked: localBubbleGroup !== null },
     ];
 
-    panelHandle = createControlPanel({
+    // Story #257: the old single combined panel is now three separate side
+    // panels - Layers needs the live catalog's category set (`categories`,
+    // just computed above) and so, like the old combined panel, can only be
+    // built here once the scene has loaded. Settings and Camera don't
+    // themselves depend on scene data, but are built here too rather than
+    // at top-level startup (unlike e.g. `playerPanelHandle`) so all three
+    // panels share one lifecycle and appear together - simpler to reason
+    // about than two different "when do these toolbar buttons start
+    // working" timings.
+    layersPanelHandle = createLayersPanel({
       categories: categories.map((type) => ({ key: type, label: humanizeCategory(type) })),
       structureLayers: structureLayerItems,
       onCategoryToggle: (key, visible) => {
@@ -1768,13 +1906,23 @@ loadScene()
         labelsEnabled = visible;
         updateLabelVisibility();
       },
+    });
+    // Story #239: the panel is built fresh here, well after startup - sync
+    // it to whatever the UI-lock state already is (normally `false`, since
+    // the scene loads before any player interaction is possible, but this
+    // keeps the invariant airtight rather than assumed).
+    layersPanelHandle.setLocked(uiLocked);
+
+    settingsPanelHandle = createSettingsPanel({
       onRadiusChange: (newRadiusPc) => {
         radiusPc = newRadiusPc;
         applyCatalogVisibility();
         updateLabelVisibility();
       },
-      cameraPresets: CAMERA_PRESETS,
-      onCameraPreset: applyCameraPreset,
+      onSizeScaleChange: (scale) => {
+        sizeScale = scale;
+        applyCatalogVisibility();
+      },
       onExportPng: () => {
         // Render both the WebGL canvas and re-sync the label layer just
         // before capture so the exported PNG reflects the current view
@@ -1783,16 +1931,21 @@ loadScene()
         // screenshot, which this provides).
         exportSceneAsPng(renderer, scene, camera);
       },
-      onSizeScaleChange: (scale) => {
-        sizeScale = scale;
-        applyCatalogVisibility();
-      },
     });
-    // Story #239: the panel is built fresh here, well after startup - sync
-    // it to whatever the UI-lock state already is (normally `false`, since
-    // the scene loads before any player interaction is possible, but this
-    // keeps the invariant airtight rather than assumed).
-    panelHandle.setLocked(uiLocked);
+    settingsPanelHandle.setLocked(uiLocked);
+
+    // Story #257 AC: the Camera panel omits "Fit all" - that preset is
+    // already its own dedicated toolbar icon (`showAllButton`, position #8)
+    // wired to the exact same `applyCameraPreset("fit-all")` action just
+    // above, so including it here too would duplicate it. Live-verified the
+    // remaining five presets (Perspective/Top view/Face-on/Edge-on/
+    // Sun-centered) still wrap cleanly in `.camera-preset-row`'s flex-wrap
+    // layout without it - omitting "Fit all" reads as strictly cleaner
+    // here, not a layout compromise.
+    cameraPanelHandle = createCameraPanel({
+      cameraPresets: CAMERA_PRESETS.filter((preset) => preset.key !== "fit-all"),
+      onCameraPreset: applyCameraPreset,
+    });
 
     // Issue #203: `onSelect` now also closes the search modal after
     // `goToObject` moves the camera, so the user immediately sees the 3D
@@ -1810,10 +1963,13 @@ loadScene()
     });
     searchDialog.appendContent(searchBox.element);
 
-    // Issue #143 (Structures panel only, since #203 moved Search out into
-    // its own modal above): lives inside the `menuPanels` toggle container
-    // (top-left).
-    menuPanels.appendChild(panelHandle.element);
+    // Story #257: mounted directly under `#app`, like `playerPanelHandle`'s
+    // own element - each panel's own `.side-panel` CSS positions/hides it
+    // (`style.css`), so no shared wrapper container (the retired
+    // `#menu-panels`) is needed any more.
+    app.appendChild(layersPanelHandle.element);
+    app.appendChild(settingsPanelHandle.element);
+    app.appendChild(cameraPanelHandle.element);
 
     applyCatalogVisibility();
     applyStructureVisibility();
