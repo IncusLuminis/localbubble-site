@@ -964,26 +964,26 @@ body {
   background: rgba(95, 201, 255, 0.3);
 }
 
-/* Story #239: the player's own control panel - transport buttons, time
-   readout, Today button, scrubber, speed slider. Docked bottom-center
-   (unlike `.panel`'s default top-anchored position) so it reads as a
-   persistent transport bar, not another stacked corner panel, and doesn't
-   collide with `#left-toolbar`/`#status` (bottom-left) or
-   `#inspector` (top-right). Hidden by default (`display: none`); `.open`
-   (toggled by `ui/playerPanel.ts`'s `setVisible`, driven from `main.ts`)
-   reveals it - same on/off convention as `.side-panel.open` (above).
+/* Story #239: the player's own control panel - now (Story #267) a slim
+   absolute-time scrubber row plus a NASA "Eyes on the Solar System"-style
+   bottom control bar (Today / time readout / arc+buttons cluster / rate
+   readout / collapse chevron). Docked bottom-center (unlike `.panel`'s
+   default top-anchored position) so it reads as a persistent transport bar,
+   not another stacked corner panel, and doesn't collide with
+   `#left-toolbar`/`#status` (bottom-left) or `#inspector` (top-right).
+   Hidden by default (`display: none`); `.open` (toggled by
+   `ui/playerPanel.ts`'s `setVisible`, driven from `main.ts`) reveals it -
+   same on/off convention as `.side-panel.open` (above).
 
-   Story #243 Part 1: shrunk noticeably from its original size (520px wide,
-   `.panel`'s default 12px/14px padding, 0.82 background opacity) - at
-   typical "zoomed into the sphere" framing the old size read as too large/
-   opaque, visibly blocking the Sun/nearby stars that often sit right at
-   bottom-center. Narrower max-width (360px), tighter padding (6px/10px) and
-   row spacing, smaller fonts, and a lower background opacity (0.6, vs.
-   `.panel`'s shared 0.82) all combine to make it read as a slim,
-   unobtrusive transport bar rather than another stacked panel - tuned live
-   in the running viewer per the issue's own "doesn't feel like it's
-   covering meaningful scene area" bar (not a specific pixel target). Stays
-   bottom-docked, unmoved - this is a size/opacity change only. */
+   Story #243 Part 1 shrunk this panel from its original 520px width down to
+   360px so it wouldn't visibly block the Sun/nearby stars at typical
+   "zoomed into the sphere" framing. Story #267's own 5-item bottom bar needs
+   a bit more breathing room than that interim single-row layout did to
+   avoid the buttons/readouts feeling cramped - widened to 420px (still well
+   under #243's original 520px), tuned live in the running viewer against
+   that same "doesn't feel like it's covering meaningful scene area" bar.
+   Padding/opacity/font-size stay at #243's compact values. Stays
+   bottom-docked, unmoved. */
 #player-panel {
   display: none;
   position: absolute;
@@ -998,7 +998,7 @@ body {
   top: auto;
   bottom: 10px;
   transform: translateX(-50%);
-  width: min(360px, calc(100vw - 24px));
+  width: min(420px, calc(100vw - 24px));
   padding: 6px 10px;
   background: rgba(10, 14, 24, 0.6);
   font-size: 11px;
@@ -1034,30 +1034,66 @@ body {
   gap: 6px;
 }
 
-.player-panel-top {
+.player-scrubber {
+  width: 100%;
+  display: block;
+  height: 12px;
   margin-bottom: 6px;
 }
 
-/* Story #243: the 4-button `|< < > >|` transport scheme, replacing the old
-   single `.player-play-pause` toggle - same small square shape, just four
-   of them in a row.
+/* Story #267: the new bottom control bar itself - Today, time readout, the
+   arc+buttons cluster, rate readout, collapse chevron, left to right. */
+.player-control-bar {
+  gap: 8px;
+}
 
-   Story #266: interim layout keeps this same small-square shape for the
-   reworked 3-button set (`.player-nudge-back`/`.player-play-pause`/
-   `.player-nudge-forward`) - the `|<`/`>|` step buttons are simply gone
-   (fewer buttons total), and `<`/`>` are repurposed into `<<`/`>>` nudges
-   rather than restyled. Story #267's own visual redesign is expected to
-   replace this shared class entirely. */
+.player-today {
+  flex: 0 0 auto;
+}
+
+.player-time-readout {
+  flex: 0 0 auto;
+  min-width: 74px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: #dfe6f3;
+}
+
+/* Story #267: the shallow rate-arc widget - the `<<`/Play-Pause/`>>`
+   buttons sit in their own row on top (reading as if perched on the arc's
+   own peaks), the SVG "bow" + drag surface sit beneath. `flex: 1 1 auto` so
+   it's the row's own flexible/growable element, matching where NASA Eyes'
+   own bar puts its widest, most central control. */
+.player-rate-arc {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+
+.player-rate-arc-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: -4px;
+  z-index: 1;
+}
+
+/* Story #243: the 3-button `<< Play/Pause >>` transport scheme - same small
+   square shape kept from #266's interim layout, now nested above the arc. */
 .player-transport {
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1;
+  border-radius: 50%;
 }
 
 /* Story #243: highlighted whichever of `<`/`>` was the actively playing
@@ -1076,36 +1112,64 @@ body {
   background: rgba(95, 201, 255, 0.3);
 }
 
-.player-time-readout {
-  flex: 1 1 auto;
+/* Story #267: the shallow arc's own drag surface - a fixed-height box the
+   SVG "bow" fills; `touch-action: none` stops the browser's own
+   scroll/zoom touch gestures from competing with a drag on mobile/touch
+   input (the whole point of using Pointer Events for this widget). */
+.player-rate-arc-track {
+  width: 100%;
+  height: 26px;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.player-rate-arc-track:focus-visible {
+  outline: 1px solid rgba(95, 201, 255, 0.65);
+  outline-offset: 2px;
+}
+
+.player-rate-arc-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.player-rate-arc-track-path {
+  stroke: rgba(143, 163, 200, 0.35);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.player-rate-arc-fill-path {
+  stroke: #5fc9ff;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.player-rate-arc-handle {
+  fill: #5fc9ff;
+  stroke: rgba(10, 14, 24, 0.9);
+  stroke-width: 1;
+}
+
+.player-rate-readout {
+  flex: 0 0 auto;
+  min-width: 64px;
   text-align: center;
   font-variant-numeric: tabular-nums;
   font-size: 11px;
-  color: #dfe6f3;
-}
-
-.player-today {
-  flex: 0 0 auto;
-}
-
-.player-scrubber {
-  width: 100%;
-  display: block;
-  height: 14px;
-}
-
-.player-speed-row {
-  margin-top: 6px;
-}
-
-.player-speed-label {
-  flex: 0 0 auto;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: #8fa3c8;
 }
 
-.player-speed-slider {
-  flex: 1 1 auto;
+.player-collapse-toggle {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1;
 }

@@ -719,6 +719,12 @@ const playerPanelHandle = createPlayerPanel({
     setPlayerPlaying(false);
     playerTimeYears = 0;
   },
+  // Story #267: the new collapse chevron - reuses the SAME close+reset-to-
+  // Today action as the toolbar Play button's own second-click behavior
+  // (`closePlayerPanelAndResetToToday` below), rather than inventing a
+  // separate minimized visual state (documented decision, see the PR
+  // description).
+  onCollapse: () => closePlayerPanelAndResetToToday(),
   defaultRateSliderValue: DEFAULT_PLAYER_RATE_SLIDER_VALUE,
 });
 app.appendChild(playerPanelHandle.element);
@@ -918,6 +924,27 @@ function applyPlayerResetState(next: PlayerState): void {
   playerPanelOpen = next.panelOpen;
   playerPanelHandle.setVisible(playerPanelOpen);
   syncUiLock();
+}
+
+/** Story #249's "close the already-open panel and reset to Today" action -
+ * originally inlined only at the toolbar Play button's own click handler
+ * (further down); Story #267 factors it out into this named function so its
+ * new collapse-chevron callback (`onCollapse` above) can call the exact same
+ * code rather than duplicating the `nextPlayerStateForSphere(..., false)` +
+ * `applyPlayerResetState` pairing at a second call site - the documented
+ * choice (per the issue's recommended default) to reuse this existing
+ * close+reset action for the chevron rather than invent a separate
+ * minimized-panel state. Passing `insideSphereNow = false` here always makes
+ * `nextPlayerStateForSphere` return the same fixed `{ timeYears: 0, playing:
+ * false, panelOpen: false }` end state regardless of the current player
+ * state passed in - see that function's own docstring. */
+function closePlayerPanelAndResetToToday(): void {
+  applyPlayerResetState(
+    nextPlayerStateForSphere(
+      { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
+      false,
+    ),
+  );
 }
 
 /** Story #239 AC #7: forces "Show velocity vectors" off (arrows + speed
@@ -1700,23 +1727,15 @@ velocityVectorsButton.addEventListener("click", () => {
 // no longer toggles play/pause (that's now exclusively the panel's own
 // center Play/Pause button's job, via Story #266's
 // `handlePlayerPlayPauseToggle`) - instead it CLOSES the panel and resets to
-// Today, via the exact same `{ timeYears: 0, playing: false, panelOpen:
-// false }` target end-state the sphere-exit reset produces: passing
-// `insideSphereNow = false` to `nextPlayerStateForSphere` always returns that
-// fixed state regardless of the current `state` argument, and
-// `applyPlayerResetState` is the same application function
-// `applyPlayerSphereState` above uses, so this can't drift from that reset.
+// Today, via `closePlayerPanelAndResetToToday` (Story #267 factored this out
+// of this handler so the new collapse chevron can share the exact same
+// code - see that function's own docstring).
 playerButton.addEventListener("click", () => {
   if (!playerPanelOpen) {
     playerPanelOpen = true;
     playerPanelHandle.setVisible(true);
   } else {
-    applyPlayerResetState(
-      nextPlayerStateForSphere(
-        { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
-        false,
-      ),
-    );
+    closePlayerPanelAndResetToToday();
   }
 });
 infoToggleButton.addEventListener("click", () => infoDialog.show());

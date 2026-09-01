@@ -39,6 +39,13 @@ import type { SceneVelocity } from "./sceneTypes";
  * SIGN of the rate value (still used by `motionTrail.ts`'s trail-window math
  * and by `nudgeRateSliderValue`'s `deltaSign` below), no longer a
  * separately-tracked piece of state.
+ *
+ * Story #267 (the matching visual redesign, purely additive to this file):
+ * `arcDragFractionToRateSliderValue` (the new arc widget's drag-to-value
+ * math) and `formatPlayerRateYearsPerSecond` (the new rate readout's
+ * formatting) - the only two bits of new pure logic the visual redesign
+ * needed, per this module's own DOM-free/independently-testable convention.
+ * Nothing above this addition changed.
  */
 
 /**
@@ -243,6 +250,62 @@ export function logSpeedSliderToYearsPerSecond(sliderValue: number): number {
  * take a `PlayerDirection`.
  */
 export type PlayerDirection = 1 | -1;
+
+/**
+ * Story #267 (the visual-redesign follow-up to #266's state-model work):
+ * maps a horizontal drag-position FRACTION across the new rate arc's own
+ * hit-area (`0` = its left/backward end, `1` = its right/forward end, `0.5`
+ * = dead center) to the signed `[-1, 1]` rate slider value the arc re-skins
+ * (unchanged from #266's `<input type="range" min="-1" max="1">`
+ * semantics). `ui/playerPanel.ts` computes `fraction` from a pointer event's
+ * `clientX` relative to the arc's own bounding box (mouse AND touch both
+ * resolve to a single `PointerEvent` stream, so one code path handles both)
+ * and calls this pure function for the actual value math, mirroring
+ * `nudgeRateSliderValue`'s own "pure math in here, DOM wiring in
+ * `main.ts`/`playerPanel.ts`" split so the mapping itself stays independently
+ * unit-tested.
+ *
+ * `fraction` is clamped to `[0, 1]` first (a drag gesture can end up outside
+ * the arc's own bounding box mid-drag) before a LINEAR `[0,1] -> [-1,1]`
+ * remap - deliberately linear across the drag surface's width, not curved to
+ * match the arc's visual bow, per the issue's own explicit priority: "a
+ * smooth drag interaction... over pixel-perfect curvature."
+ */
+export function arcDragFractionToRateSliderValue(fraction: number): number {
+  const clampedFraction = Math.max(0, Math.min(1, fraction));
+  return clampedFraction * 2 - 1;
+}
+
+/**
+ * Story #267: the abbreviation threshold `formatPlayerRateYearsPerSecond`
+ * (below) switches on - below this many years/real-second, the readout shows
+ * the exact whole-number value; at or above it, whole thousands abbreviated
+ * with a `K` suffix. `MIN_YEARS_PER_REAL_SECOND` (1,000) sits just under this
+ * threshold and stays unabbreviated; `MAX_YEARS_PER_REAL_SECOND` (150,000)
+ * sits comfortably inside the abbreviated range - live-tuned in the running
+ * viewer for readability, per the issue's own "your call on exact
+ * thresholds" guidance.
+ */
+export const RATE_READOUT_ABBREVIATION_THRESHOLD_YEARS_PER_SECOND = 10_000;
+
+/**
+ * Story #267's rate readout (target layout item 4) - e.g. `"1,000 yr/s"` at
+ * the slow end, `"50K yr/s"` near the fast end. Takes the SIGNED
+ * years-per-real-second rate (`logSpeedSliderToYearsPerSecond`'s own return
+ * shape) but renders UNSIGNED (`Math.abs` first): the arc's own handle
+ * position and the time readout's `+`/`-` sign already carry direction, so
+ * repeating it here would be redundant. Mirrors `formatPlayerTimeYears`'s own
+ * `toLocaleString("en-US")` comma-grouping convention for the unabbreviated
+ * case.
+ */
+export function formatPlayerRateYearsPerSecond(yearsPerRealSecond: number): string {
+  const magnitude = Math.abs(yearsPerRealSecond);
+  if (magnitude >= RATE_READOUT_ABBREVIATION_THRESHOLD_YEARS_PER_SECOND) {
+    const thousands = Math.round(magnitude / 1000);
+    return `${thousands.toLocaleString("en-US")}K yr/s`;
+  }
+  return `${Math.round(magnitude).toLocaleString("en-US")} yr/s`;
+}
 
 /**
  * Story #266: the increment `nudgeRateSliderValue` below moves the signed
