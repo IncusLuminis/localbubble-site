@@ -1040,7 +1040,14 @@ body {
 
 /* Story #243: the 4-button `|< < > >|` transport scheme, replacing the old
    single `.player-play-pause` toggle - same small square shape, just four
-   of them in a row. */
+   of them in a row.
+
+   Story #266: interim layout keeps this same small-square shape for the
+   reworked 3-button set (`.player-nudge-back`/`.player-play-pause`/
+   `.player-nudge-forward`) - the `|<`/`>|` step buttons are simply gone
+   (fewer buttons total), and `<`/`>` are repurposed into `<<`/`>>` nudges
+   rather than restyled. Story #267's own visual redesign is expected to
+   replace this shared class entirely. */
 .player-transport {
   flex: 0 0 auto;
   width: 24px;
@@ -1053,11 +1060,12 @@ body {
   line-height: 1;
 }
 
-/* Story #243: highlights whichever of `<`/`>` is the actively playing
-   direction (`ui/playerPanel.ts`'s `update()` toggles this) - reuses the
-   toolbar player-toggle's own blue-cyan accent (`#left-toolbar
-   #player-toggle.active` above) so "the player is running" reads
-   consistently in both places. */
+/* Story #243: highlighted whichever of `<`/`>` was the actively playing
+   direction. Story #266: now highlights the single center Play/Pause button
+   whenever `playing` is true (`ui/playerPanel.ts`'s `update()` toggles this,
+   independent of direction/rate) - still reuses the toolbar player-toggle's
+   own blue-cyan accent (`#left-toolbar #player-toggle.active` above) so "the
+   player is running" reads consistently in both places. */
 .player-transport.active {
   background: rgba(95, 201, 255, 0.22);
   border-color: rgba(95, 201, 255, 0.65);

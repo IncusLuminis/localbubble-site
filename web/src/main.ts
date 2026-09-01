@@ -63,10 +63,9 @@ import {
   clampPlayerTimeYears,
   isUiLockedForPlayerTime,
   logSpeedSliderToYearsPerSecond,
-  nextPlayerPlaybackStateForDirectionButton,
   nextPlayerStateForSphere,
+  nudgeRateSliderValue,
   starPositionAtTime,
-  stepPlayerTimeYears,
   type PlayerDirection,
   type PlayerState,
 } from "./scene/motionPlayer";
@@ -569,25 +568,19 @@ let playerTimeYears = 0;
 let playerPlaying = false;
 let playerPanelOpen = false;
 
-/** Story #243: which way the player is currently playing, or would resume
- * playing in if a direction button were pressed again while paused - the
- * ONE source of truth for playback direction now that the speed slider is
- * magnitude-only (see `logSpeedSliderToYearsPerSecond`'s updated docstring).
- * Defaults to forward, matching the toolbar Play button's own
- * first-press-plays-forward behavior below. Every write site routes through
- * `nextPlayerPlaybackStateForDirectionButton` (the `<`/`>` buttons) or is
- * left untouched (pause/step/scrub never change direction, only whether/
- * where the player is playing). */
-let playerDirection: PlayerDirection = 1;
-
-/** Story #239 (Story #243: now a MAGNITUDE, `[0, 1]`, direction removed) -
- * default speed-slider position: a moderate rate so the very first Play
- * press already shows clearly visible motion within a couple of seconds
- * without the user needing to touch the slider first. Live-tuned in the
- * running viewer alongside `motionPlayer.ts`'s `MIN_YEARS_PER_REAL_SECOND`/
- * `MAX_YEARS_PER_REAL_SECOND` anchors themselves - see the PR description. */
-const DEFAULT_PLAYER_SPEED_MAGNITUDE = 0.55;
-let playerSpeedMagnitude = DEFAULT_PLAYER_SPEED_MAGNITUDE;
+/** Story #266: the player's single signed `[-1, 1]` rate value - drives both
+ * direction (sign) and speed (magnitude) together via
+ * `logSpeedSliderToYearsPerSecond`, NASA "Eyes on the Solar System" style
+ * (the confirmed design reference). Replaces #243's separately-tracked
+ * `playerDirection` (`PlayerDirection`) + magnitude-only
+ * `playerSpeedMagnitude` pair - there is exactly ONE rate/direction value
+ * now, not two that could disagree. Persists across pause/resume exactly
+ * like the old `playerDirection` did: every write site is either a direct
+ * slider drag (`onRateChange` below) or `nudgeRateSliderValue` (the `<<`/`>>`
+ * buttons) - pause/scrub/Today/reaching-Today-while-playing never touch it,
+ * only whether/where the player is playing. */
+const DEFAULT_PLAYER_RATE_SLIDER_VALUE = 0.55;
+let playerRateSliderValue = DEFAULT_PLAYER_RATE_SLIDER_VALUE;
 
 /** Story #239: the ~127 in-sphere stars with velocity data (Epic #229's
  * `starsWithVelocityInSphere`, reused directly - never reimplemented),
@@ -713,20 +706,20 @@ let uiLocked = false;
  * Structures panel), mirroring `inspector`/`searchDialog`/`infoDialog`'s own
  * "always exists, shown/hidden via a method call" convention. */
 const playerPanelHandle = createPlayerPanel({
-  onPlayDirection: (direction) => handlePlayerDirectionButton(direction),
-  onStep: (direction) => handlePlayerStepButton(direction),
+  onNudge: (deltaSign) => handlePlayerRateNudge(deltaSign),
+  onPlayPauseToggle: () => handlePlayerPlayPauseToggle(),
   onScrub: (tYears) => {
     setPlayerPlaying(false);
     playerTimeYears = clampPlayerTimeYears(tYears);
   },
-  onSpeedChange: (sliderValue) => {
-    playerSpeedMagnitude = sliderValue;
+  onRateChange: (sliderValue) => {
+    playerRateSliderValue = sliderValue;
   },
   onToday: () => {
     setPlayerPlaying(false);
     playerTimeYears = 0;
   },
-  defaultSpeedMagnitude: DEFAULT_PLAYER_SPEED_MAGNITUDE,
+  defaultRateSliderValue: DEFAULT_PLAYER_RATE_SLIDER_VALUE,
 });
 app.appendChild(playerPanelHandle.element);
 
@@ -876,46 +869,38 @@ function applyVelocityVectorsButtonState(insideSphere: boolean): void {
 }
 
 /** Story #239: the single writer for the player's play/pause state - shared
- * by the toolbar button's click handler and (Story #243) the panel's own
- * transport-button handlers below, so all of them can never disagree about
- * whether the player is currently playing, mirroring how
+ * by the toolbar button's click handler and (Story #266) the panel's own
+ * center Play/Pause button, so all of them can never disagree about whether
+ * the player is currently playing, mirroring how
  * `applyVelocityVectorsButtonState` is the single writer for that toggle's
- * `aria-pressed`/`.active` state. Never writes `playerDirection` itself -
- * that's `handlePlayerDirectionButton`'s own job, since pausing/resuming via
- * this function alone (the toolbar button, a step, a scrub, Today) must
- * never silently change which direction the player would next resume in. */
+ * `aria-pressed`/`.active` state. Never writes `playerRateSliderValue` itself
+ * - Story #266's whole point is that the two are fully independent: pausing/
+ * resuming via this function alone (the toolbar button, a nudge, a scrub,
+ * Today, the panel's own Play/Pause button) must never silently change the
+ * configured rate/direction the player would next play at. */
 function setPlayerPlaying(next: boolean): void {
   playerPlaying = next;
   playerButton.setAttribute("aria-pressed", String(playerPlaying));
   playerButton.classList.toggle("active", playerPlaying);
 }
 
-/** Story #243: the panel's `<`/`>` continuous-play button handler - resolves
- * the full "toggle-off same direction / reverse-and-keep-playing opposite
- * direction / start playing from paused" rule via `motionPlayer.ts`'s pure
- * `nextPlayerPlaybackStateForDirectionButton`, then applies both resulting
- * fields (`playerDirection` directly, `playing` via `setPlayerPlaying` so
- * the toolbar button's own state never drifts out of sync). */
-function handlePlayerDirectionButton(direction: PlayerDirection): void {
-  const next = nextPlayerPlaybackStateForDirectionButton(
-    { playing: playerPlaying, direction: playerDirection },
-    direction,
-  );
-  playerDirection = next.direction;
-  setPlayerPlaying(next.playing);
+/** Story #266: the panel's center Play/Pause button handler - a PLAIN
+ * toggle, completely independent of `playerRateSliderValue`'s sign or
+ * magnitude (replaces #243's `handlePlayerDirectionButton`, which coupled
+ * play/pause to which direction button was pressed - that coupling is gone
+ * now that direction lives entirely in the signed rate value). */
+function handlePlayerPlayPauseToggle(): void {
+  setPlayerPlaying(!playerPlaying);
 }
 
-/** Story #243: the panel's `|<`/`>|` step-button handler - AC: "pressing a
- * step button while continuous play is active pauses first, then applies
- * the step; pressing while already paused just steps and stays paused" - so
- * this unconditionally pauses (a no-op if already paused) before applying
- * `stepPlayerTimeYears`'s single fixed nudge, never leaving playback running
- * afterward either way. Does not touch `playerDirection` - a step in either
- * direction has no bearing on which way a SUBSEQUENT `<`/`>` press should
- * resume playing. */
-function handlePlayerStepButton(direction: PlayerDirection): void {
-  setPlayerPlaying(false);
-  playerTimeYears = stepPlayerTimeYears(playerTimeYears, direction);
+/** Story #266: the panel's `<<`/`>>` nudge-button handler - moves
+ * `playerRateSliderValue` via the pure `nudgeRateSliderValue`, touching
+ * nothing else (AC: nudging must never change `playing`) - replaces #243's
+ * `handlePlayerStepButton`, which paused first then applied a fixed
+ * `stepPlayerTimeYears` time jump; nudging now changes the configured RATE,
+ * not the current time, and leaves `playing` exactly as it was. */
+function handlePlayerRateNudge(deltaSign: PlayerDirection): void {
+  playerRateSliderValue = nudgeRateSliderValue(playerRateSliderValue, deltaSign);
 }
 
 /** Story #249: applies a `PlayerState` (as produced by `nextPlayerStateForSphere`)
@@ -1020,13 +1005,14 @@ function applyPlayerSphereState(insideSphere: boolean): void {
     insideSphere,
   );
   applyPlayerResetState(next);
-  // Story #243: `PlayerState` (the pure `nextPlayerStateForSphere` above)
-  // doesn't carry direction, so reset it here alongside the other three
-  // force-reset fields - a fresh session re-entering the sphere should
-  // always default back to forward, not silently resume whichever direction
-  // happened to be active when a PREVIOUS session left the sphere.
+  // Story #266 (was #243's `playerDirection` reset): `PlayerState` (the pure
+  // `nextPlayerStateForSphere` above) doesn't carry the rate/direction
+  // value, so reset it here alongside the other three force-reset fields -
+  // a fresh session re-entering the sphere should always default back to
+  // the same starting rate, not silently resume whichever rate/direction
+  // happened to be configured when a PREVIOUS session left the sphere.
   if (!insideSphere) {
-    playerDirection = 1;
+    playerRateSliderValue = DEFAULT_PLAYER_RATE_SLIDER_VALUE;
   }
 
   playerButton.disabled = !insideSphere;
@@ -1051,17 +1037,26 @@ function applyPlayerSphereState(insideSphere: boolean): void {
  * here is a function of absolute camera/time state, not a rate).
  */
 function applyPlayerAnimation(deltaSeconds: number): void {
+  // Story #266: `playerRateSliderValue` is already SIGNED (sign = direction,
+  // magnitude = speed), so `logSpeedSliderToYearsPerSecond` maps it directly
+  // to the signed rate `advancePlayerTimeYears` wants - no separate
+  // direction multiply anymore (that was #243's shape, now removed).
+  const yearsPerRealSecond = logSpeedSliderToYearsPerSecond(playerRateSliderValue);
+  // `motionTrail.ts`'s `starTrailPositionsPc` (unchanged by this Story)
+  // still wants the current playback direction as its own `PlayerDirection`
+  // sign - derived here from the signed rate value rather than tracked as
+  // separate state.
+  const playerRateDirection: PlayerDirection = playerRateSliderValue < 0 ? -1 : 1;
+
   if (playerPlaying) {
-    // Story #243: the slider now yields an unsigned RATE MAGNITUDE only -
-    // `playerDirection` (the single source of truth for direction, owned by
-    // the `<`/`>` transport buttons) supplies the sign.
-    const yearsPerRealSecond = playerDirection * logSpeedSliderToYearsPerSecond(playerSpeedMagnitude);
     const result = advancePlayerTimeYears(playerTimeYears, deltaSeconds, yearsPerRealSecond);
     playerTimeYears = result.timeYears;
     if (result.reachedToday) {
       // Mirrors the "Today" button's own pause-on-arrival (see
       // `advancePlayerTimeYears`'s docstring) - otherwise a still-`playing`
       // player sitting exactly on Today would step away again next frame.
+      // Story #266 AC: does NOT reset `playerRateSliderValue` - the
+      // configured rate/direction persists across this auto-pause.
       setPlayerPlaying(false);
     }
   }
@@ -1123,14 +1118,18 @@ function applyPlayerAnimation(deltaSeconds: number): void {
       if (trailsVisible) {
         updateStarTrail(
           trail,
-          starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears, playerDirection),
+          starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears, playerRateDirection),
           camera.position,
         );
       }
     }
   }
 
-  playerPanelHandle.update({ tYears: playerTimeYears, playing: playerPlaying, direction: playerDirection });
+  playerPanelHandle.update({
+    tYears: playerTimeYears,
+    playing: playerPlaying,
+    rateSliderValue: playerRateSliderValue,
+  });
   syncUiLock();
 }
 
@@ -1693,13 +1692,14 @@ velocityVectorsButton.addEventListener("click", () => {
 // Story #239: only ever clickable while `applyPlayerSphereState`'s own
 // crossing-detection has left it enabled - same pattern as the vectors
 // toggle just above. Story #245: first press (panel not yet open) is a
-// purely inert reveal - it only opens the panel, never starts motion,
-// since #243 made direction an explicit choice via the panel's own `<`/`>`
-// buttons and auto-starting playback in whatever direction happened to be
-// last active no longer matches that design. Story #249: a subsequent press
-// (panel already open) no longer toggles play/pause (that's now exclusively
-// the panel's own `<`/`>` transport buttons' job, via
-// `handlePlayerDirectionButton`) - instead it CLOSES the panel and resets to
+// purely inert reveal - it only opens the panel, never starts motion, since
+// direction/rate is an explicit choice made via the panel's own controls
+// (Story #266: the rate slider and `<<`/`>>` nudges) and auto-starting
+// playback at whatever rate happened to be last configured no longer
+// matches that design. Story #249: a subsequent press (panel already open)
+// no longer toggles play/pause (that's now exclusively the panel's own
+// center Play/Pause button's job, via Story #266's
+// `handlePlayerPlayPauseToggle`) - instead it CLOSES the panel and resets to
 // Today, via the exact same `{ timeYears: 0, playing: false, panelOpen:
 // false }` target end-state the sphere-exit reset produces: passing
 // `insideSphereNow = false` to `nextPlayerStateForSphere` always returns that
