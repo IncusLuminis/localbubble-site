@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   advancePlayerTimeYears,
+  arcDragFractionToRateSliderValue,
   clampPlayerTimeYears,
+  formatPlayerRateYearsPerSecond,
   formatPlayerTimeYears,
   isUiLockedForPlayerTime,
   KM_PER_S_TO_PC_PER_YEAR,
@@ -12,6 +14,7 @@ import {
   nudgeRateSliderValue,
   PLAYER_TIME_RANGE_YEARS,
   RATE_NUDGE_STEP,
+  RATE_READOUT_ABBREVIATION_THRESHOLD_YEARS_PER_SECOND,
   starPositionAtTime,
   type PlayerState,
 } from "../src/scene/motionPlayer";
@@ -284,6 +287,55 @@ describe("Story #266: nudgeRateSliderValue", () => {
 
   it("can cross zero from one side to the other in a single nudge", () => {
     expect(nudgeRateSliderValue(0.05, -1, 0.1)).toBeCloseTo(-0.05, 10);
+  });
+});
+
+describe("Story #267: arcDragFractionToRateSliderValue", () => {
+  it("maps the left end of the drag surface (fraction 0) to fully backward (-1)", () => {
+    expect(arcDragFractionToRateSliderValue(0)).toBe(-1);
+  });
+
+  it("maps the right end of the drag surface (fraction 1) to fully forward (1)", () => {
+    expect(arcDragFractionToRateSliderValue(1)).toBe(1);
+  });
+
+  it("maps dead center (fraction 0.5) to 0", () => {
+    expect(arcDragFractionToRateSliderValue(0.5)).toBeCloseTo(0, 10);
+  });
+
+  it("is linear across the drag surface", () => {
+    expect(arcDragFractionToRateSliderValue(0.25)).toBeCloseTo(-0.5, 10);
+    expect(arcDragFractionToRateSliderValue(0.75)).toBeCloseTo(0.5, 10);
+  });
+
+  it("clamps a fraction outside [0, 1] (a drag gesture that overshoots the surface's own bounding box)", () => {
+    expect(arcDragFractionToRateSliderValue(-0.5)).toBe(-1);
+    expect(arcDragFractionToRateSliderValue(1.5)).toBe(1);
+  });
+});
+
+describe("Story #267: formatPlayerRateYearsPerSecond", () => {
+  it("renders a small magnitude with exact comma-grouped digits, unabbreviated", () => {
+    expect(formatPlayerRateYearsPerSecond(MIN_YEARS_PER_REAL_SECOND)).toBe("1,000 yr/s");
+    expect(formatPlayerRateYearsPerSecond(5_000)).toBe("5,000 yr/s");
+  });
+
+  it("is unsigned - a negative (backward) rate formats the same as its positive magnitude", () => {
+    expect(formatPlayerRateYearsPerSecond(-5_000)).toBe(formatPlayerRateYearsPerSecond(5_000));
+  });
+
+  it("abbreviates to whole thousands with a K suffix at/above the abbreviation threshold", () => {
+    expect(formatPlayerRateYearsPerSecond(RATE_READOUT_ABBREVIATION_THRESHOLD_YEARS_PER_SECOND)).toBe(
+      "10K yr/s",
+    );
+    expect(formatPlayerRateYearsPerSecond(50_000)).toBe("50K yr/s");
+    expect(formatPlayerRateYearsPerSecond(MAX_YEARS_PER_REAL_SECOND)).toBe("150K yr/s");
+  });
+
+  it("stays unabbreviated just under the threshold", () => {
+    expect(formatPlayerRateYearsPerSecond(RATE_READOUT_ABBREVIATION_THRESHOLD_YEARS_PER_SECOND - 1)).toBe(
+      "9,999 yr/s",
+    );
   });
 });
 
