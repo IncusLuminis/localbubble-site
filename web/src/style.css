@@ -696,7 +696,7 @@ body {
   z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
 }
 
 #left-toolbar #fullscreen-toggle,
@@ -705,12 +705,37 @@ body {
   height: 30px;
   background: rgba(10, 14, 24, 0.82);
   border: 1px solid rgba(143, 163, 200, 0.35);
-  border-radius: 6px;
+  border-radius: 0;
+  margin-top: -1px;
   color: #dfe6f3;
   font-size: 13px;
   line-height: 1;
   cursor: pointer;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* Issue #264: with `#left-toolbar`'s `gap` now `0`, every button's own
+   `border-radius: 6px` (above) plus its full 1px border on all four sides
+   left each button reading as a separate rounded square - doubled-up 2px
+   borders where two buttons touch, and a small diamond-shaped gap at every
+   touching corner where the two rounded corners met (verified live, looked
+   visually heavy/odd, not the single tightly-packed strip NASA "Eyes on the
+   Solar System" uses). Standard "shared border strip" fix: reset every
+   button's `border-radius` to 0 above, round only the outer corners of the
+   first and last button (immediate DOM children of `#left-toolbar` in
+   top-to-bottom visual order - see `main.ts`'s `leftToolbar.appendChild`
+   calls), and collapse the doubled borders via `margin-top: -1px` on every
+   button (offset back to 0 for the first, which has no button above it to
+   collapse into) so each pair of adjacent 1px borders overlaps into one. */
+#left-toolbar > *:first-child {
+  margin-top: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+#left-toolbar > *:last-child {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 /* `#fullscreen-toggle`'s glyphs (⤢/⤡) read a little small at the toolbar's
