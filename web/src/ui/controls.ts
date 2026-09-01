@@ -160,7 +160,7 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   const { panel } = createSidePanel("settings-panel", "Settings");
 
   // --- Radius filter (spec §28) ---
-  const radiusSection = makeSection("Radius");
+  const radiusSection = makeSection("Max Distance from Sun");
   const radiusSelect = document.createElement("select");
   radiusSelect.className = "radius-select";
   for (const radiusPc of RADIUS_PRESETS_PC) {
