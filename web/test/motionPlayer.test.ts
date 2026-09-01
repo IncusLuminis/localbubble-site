@@ -8,13 +8,11 @@ import {
   logSpeedSliderToYearsPerSecond,
   MAX_YEARS_PER_REAL_SECOND,
   MIN_YEARS_PER_REAL_SECOND,
-  nextPlayerPlaybackStateForDirectionButton,
   nextPlayerStateForSphere,
-  PLAYER_STEP_YEARS,
+  nudgeRateSliderValue,
   PLAYER_TIME_RANGE_YEARS,
+  RATE_NUDGE_STEP,
   starPositionAtTime,
-  stepPlayerTimeYears,
-  type PlayerPlaybackState,
   type PlayerState,
 } from "../src/scene/motionPlayer";
 import { starsWithVelocityInSphere } from "../src/scene/velocityVectors";
@@ -217,25 +215,29 @@ describe("advancePlayerTimeYears", () => {
 });
 
 describe("logSpeedSliderToYearsPerSecond", () => {
-  it("returns the slow anchor at the slider's floor (0)", () => {
-    expect(logSpeedSliderToYearsPerSecond(0)).toBeCloseTo(MIN_YEARS_PER_REAL_SECOND, 6);
-  });
-
-  it("returns the fast anchor at the slider's ceiling (1)", () => {
+  it("Story #266: returns the fast-forward anchor at the slider's ceiling (1)", () => {
     expect(logSpeedSliderToYearsPerSecond(1)).toBeCloseTo(MAX_YEARS_PER_REAL_SECOND, 6);
   });
 
-  it("Story #243: is magnitude-only - always non-negative, direction carries no meaning here anymore", () => {
+  it("Story #266: returns the fast-backward anchor (negated) at the slider's floor (-1)", () => {
+    expect(logSpeedSliderToYearsPerSecond(-1)).toBeCloseTo(-MAX_YEARS_PER_REAL_SECOND, 6);
+  });
+
+  it("Story #266: is SIGNED again (restores the pre-#243 shape) - a negative slider value yields a negative rate, a positive one a positive rate", () => {
     expect(logSpeedSliderToYearsPerSecond(0.5)).toBeGreaterThan(0);
-    expect(logSpeedSliderToYearsPerSecond(1)).toBeGreaterThan(0);
+    expect(logSpeedSliderToYearsPerSecond(-0.5)).toBeLessThan(0);
   });
 
-  it("Story #243: clamps a defensively negative slider value up to 0 (the magnitude floor), never returning a signed rate", () => {
-    expect(logSpeedSliderToYearsPerSecond(-1)).toBeCloseTo(MIN_YEARS_PER_REAL_SECOND, 6);
-    expect(logSpeedSliderToYearsPerSecond(-0.5)).toBeCloseTo(logSpeedSliderToYearsPerSecond(0), 6);
+  it("Story #266: magnitude 0 (either sign) maps to MIN_YEARS_PER_REAL_SECOND, not a true zero rate - 'stopped' is owned by the separate playing boolean", () => {
+    expect(Math.abs(logSpeedSliderToYearsPerSecond(0))).toBeCloseTo(MIN_YEARS_PER_REAL_SECOND, 6);
+    expect(logSpeedSliderToYearsPerSecond(0)).not.toBe(0);
   });
 
-  it("is logarithmic, not linear - equal slider steps produce a constant MULTIPLICATIVE change, not a constant additive one", () => {
+  it("mirrors around zero - equal-magnitude opposite-sign slider values yield exactly opposite rates", () => {
+    expect(logSpeedSliderToYearsPerSecond(-0.7)).toBeCloseTo(-logSpeedSliderToYearsPerSecond(0.7), 6);
+  });
+
+  it("is logarithmic (in magnitude), not linear - equal slider steps produce a constant MULTIPLICATIVE change, not a constant additive one", () => {
     const at0 = logSpeedSliderToYearsPerSecond(0);
     const at033 = logSpeedSliderToYearsPerSecond(1 / 3);
     const at066 = logSpeedSliderToYearsPerSecond(2 / 3);
@@ -256,72 +258,32 @@ describe("logSpeedSliderToYearsPerSecond", () => {
     expect(deltaNearFastEnd).toBeGreaterThan(deltaNearSlowEnd * 10);
   });
 
-  it("clamps a defensively out-of-range slider value to [0, 1]", () => {
+  it("clamps a defensively out-of-range slider value to [-1, 1]", () => {
     expect(logSpeedSliderToYearsPerSecond(5)).toBeCloseTo(MAX_YEARS_PER_REAL_SECOND, 6);
-    expect(logSpeedSliderToYearsPerSecond(-5)).toBeCloseTo(MIN_YEARS_PER_REAL_SECOND, 6);
+    expect(logSpeedSliderToYearsPerSecond(-5)).toBeCloseTo(-MAX_YEARS_PER_REAL_SECOND, 6);
   });
 });
 
-describe("Story #243: nextPlayerPlaybackStateForDirectionButton", () => {
-  it("pressing the button matching the currently playing direction pauses (toggle-off)", () => {
-    const playingForward: PlayerPlaybackState = { playing: true, direction: 1 };
-    expect(nextPlayerPlaybackStateForDirectionButton(playingForward, 1)).toEqual({
-      playing: false,
-      direction: 1,
-    });
-
-    const playingBackward: PlayerPlaybackState = { playing: true, direction: -1 };
-    expect(nextPlayerPlaybackStateForDirectionButton(playingBackward, -1)).toEqual({
-      playing: false,
-      direction: -1,
-    });
-  });
-
-  it("pressing the OPPOSITE direction while playing reverses direction and keeps playing - no separate pause click", () => {
-    const playingForward: PlayerPlaybackState = { playing: true, direction: 1 };
-    expect(nextPlayerPlaybackStateForDirectionButton(playingForward, -1)).toEqual({
-      playing: true,
-      direction: -1,
-    });
-
-    const playingBackward: PlayerPlaybackState = { playing: true, direction: -1 };
-    expect(nextPlayerPlaybackStateForDirectionButton(playingBackward, 1)).toEqual({
-      playing: true,
-      direction: 1,
-    });
-  });
-
-  it("pressing either button while paused starts playing in the pressed direction", () => {
-    const pausedForward: PlayerPlaybackState = { playing: false, direction: 1 };
-    expect(nextPlayerPlaybackStateForDirectionButton(pausedForward, -1)).toEqual({
-      playing: true,
-      direction: -1,
-    });
-    expect(nextPlayerPlaybackStateForDirectionButton(pausedForward, 1)).toEqual({
-      playing: true,
-      direction: 1,
-    });
-  });
-});
-
-describe("Story #243: stepPlayerTimeYears", () => {
-  it("advances by exactly PLAYER_STEP_YEARS in the given direction", () => {
-    expect(stepPlayerTimeYears(0, 1)).toBe(PLAYER_STEP_YEARS);
-    expect(stepPlayerTimeYears(0, -1)).toBe(-PLAYER_STEP_YEARS);
+describe("Story #266: nudgeRateSliderValue", () => {
+  it("moves the value by exactly RATE_NUDGE_STEP in the given direction", () => {
+    expect(nudgeRateSliderValue(0, 1)).toBeCloseTo(RATE_NUDGE_STEP, 10);
+    expect(nudgeRateSliderValue(0, -1)).toBeCloseTo(-RATE_NUDGE_STEP, 10);
   });
 
   it("accepts a custom step size", () => {
-    expect(stepPlayerTimeYears(100_000, 1, 5000)).toBe(105_000);
-    expect(stepPlayerTimeYears(100_000, -1, 5000)).toBe(95_000);
+    expect(nudgeRateSliderValue(0.2, 1, 0.05)).toBeCloseTo(0.25, 10);
+    expect(nudgeRateSliderValue(0.2, -1, 0.05)).toBeCloseTo(0.15, 10);
   });
 
-  it("clamps to the +/-1,000,000-year range when a step would overshoot it", () => {
-    expect(stepPlayerTimeYears(PLAYER_TIME_RANGE_YEARS - 100, 1)).toBe(PLAYER_TIME_RANGE_YEARS);
+  it("clamps to [-1, 1] rather than overshooting at either end", () => {
+    expect(nudgeRateSliderValue(0.95, 1)).toBe(1);
+    expect(nudgeRateSliderValue(-0.95, -1)).toBe(-1);
+    expect(nudgeRateSliderValue(1, 1)).toBe(1);
+    expect(nudgeRateSliderValue(-1, -1)).toBe(-1);
   });
 
-  it("snaps exactly to 0 when a step would cross or land on Today", () => {
-    expect(stepPlayerTimeYears(-10_000, 1, PLAYER_STEP_YEARS)).toBe(0);
-    expect(stepPlayerTimeYears(5_000, -1, PLAYER_STEP_YEARS)).toBe(0);
+  it("can cross zero from one side to the other in a single nudge", () => {
+    expect(nudgeRateSliderValue(0.05, -1, 0.1)).toBeCloseTo(-0.05, 10);
   });
 });
 
