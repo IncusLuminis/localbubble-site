@@ -964,10 +964,13 @@ body {
   background: rgba(95, 201, 255, 0.3);
 }
 
-/* Story #239: the player's own control panel - now (Story #267) a slim
-   absolute-time scrubber row plus a NASA "Eyes on the Solar System"-style
-   bottom control bar (Today / time readout / arc+buttons cluster / rate
-   readout / collapse chevron). Docked bottom-center (unlike `.panel`'s
+/* Story #239: the player's own control panel - now (Story #267, restyled
+   further by Story #271) a NASA "Eyes on the Solar System"-style bottom
+   control bar (Today / time readout / arc+buttons cluster / rate readout /
+   collapse chevron) with a second, wider time arc stacked directly beneath
+   it (Story #271 - see `.player-time-arc-row` below; replaces the old plain
+   `<input type="range">` scrubber row that used to sit ABOVE this bar).
+   Docked bottom-center (unlike `.panel`'s
    default top-anchored position) so it reads as a persistent transport bar,
    not another stacked corner panel, and doesn't collide with
    `#left-toolbar`/`#status` (bottom-left) or `#inspector` (top-right).
@@ -1032,13 +1035,6 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
-}
-
-.player-scrubber {
-  width: 100%;
-  display: block;
-  height: 12px;
-  margin-bottom: 6px;
 }
 
 /* Story #267: the new bottom control bar itself - Today, time readout, the
@@ -1151,6 +1147,84 @@ body {
   fill: #5fc9ff;
   stroke: rgba(10, 14, 24, 0.9);
   stroke-width: 1;
+}
+
+/* Story #271: the second, larger time arc stacked directly beneath the rate
+   arc/control bar above - the restyled absolute-time scrubber. Reuses the
+   EXACT SAME `ARC_START`/`ARC_CONTROL`/`ARC_END` geometry as the rate arc
+   (`ui/playerPanel.ts` shares `arcPointAtT`/the fill-path math between both
+   arcs) - it's rendered wider here (full panel width, vs the rate arc's own
+   narrower flexible column within `.player-control-bar`) purely via this
+   box's own on-screen size (`preserveAspectRatio="none"` on the SVG lets the
+   CSS box stretch the same proportional curve to whatever width it's
+   given), which alone gives it the "bigger, shallower, wrapping around the
+   first arc" look the issue asked for - no second curve shape needed.
+   Negative `margin-top` pulls it up snug against the control bar above so
+   the two read as one matching stacked pair rather than two separately
+   spaced widgets. */
+.player-time-arc-row {
+  margin-top: -4px;
+}
+
+.player-time-arc-track {
+  width: 100%;
+  height: 30px;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.player-time-arc-track:focus-visible {
+  outline: 1px solid rgba(242, 166, 90, 0.65);
+  outline-offset: 2px;
+}
+
+.player-time-arc-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.player-time-arc-track-path {
+  stroke: rgba(143, 163, 200, 0.3);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.player-time-arc-fill-path {
+  stroke: rgba(242, 166, 90, 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* Story #271: a small, dim, non-interactive reference dot fixed at year 0
+   ("Today") - echoes the reference screenshot's own smaller gray dot
+   alongside its larger draggable handle. */
+.player-time-arc-today-marker {
+  fill: rgba(143, 163, 200, 0.6);
+  stroke: rgba(10, 14, 24, 0.9);
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+/* Story #271: the time arc's own draggable handle - the reference
+   screenshot's own convention is a glowing orange-filled circle for exactly
+   this "primary, currently-being-scrubbed position" role, distinct from a
+   smaller flat reference dot. This app has no established literal orange
+   accent (the rate arc's own handle above is blue-cyan, `#5fc9ff`, matching
+   the toolbar's player-toggle accent), so rather than copying NASA's exact
+   hue, this reuses the same warm-highlight family already established for
+   emphasis elsewhere in this app (`.object-label.selected`'s `#fff3c4`),
+   just more saturated for visibility against the arc's own dark track - a
+   deliberately different color FROM the rate arc's handle so the two arcs'
+   handles stay visually distinguishable at a glance, per the issue's own
+   "adapt to this app's existing color scheme" guidance rather than a
+   literal copy. */
+.player-time-arc-handle {
+  fill: #f2a65a;
+  stroke: rgba(10, 14, 24, 0.9);
+  stroke-width: 1;
+  filter: drop-shadow(0 0 3px rgba(242, 166, 90, 0.65));
 }
 
 .player-rate-readout {
