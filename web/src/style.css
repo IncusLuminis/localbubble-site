@@ -1227,6 +1227,62 @@ body {
   filter: drop-shadow(0 0 3px rgba(242, 166, 90, 0.65));
 }
 
+/* Story #273: the time arc's new scale tick marks - small, dim, purely
+   decorative dots placed exactly on the curve (`ui/playerPanel.ts`'s
+   `arcPointAtT`, same geometry as the handle/today marker above).
+   `pointer-events: none` mirrors `.player-time-arc-today-marker`'s own
+   existing convention - keeps them from ever being able to intercept a drag,
+   on top of them already living entirely inside the drag surface's own
+   bounding box where events bubble up to `.player-time-arc-track` anyway. */
+.player-time-arc-tick {
+  fill: rgba(143, 163, 200, 0.5);
+  pointer-events: none;
+}
+
+/* Story #273: the tick LABEL row - plain HTML (not SVG `<text>`), directly
+   below `.player-time-arc-row` above, so the arc SVG's own
+   `preserveAspectRatio="none"` non-uniform horizontal stretch (deliberate -
+   see `.player-time-arc-row`'s own comment - it's what gives the curve its
+   wide, shallow look) never squashes/stretches label glyphs the way it
+   would if they were drawn as SVG text inside that same viewBox. `position:
+   relative` + each label's own `position: absolute; left: <tick's x
+   fraction>%` reproduces the tick's own horizontal position exactly, since
+   this row spans the identical on-screen panel width as the arc track
+   above it. `pointer-events: none` on the row (inherited by its label
+   children) keeps the whole row - which visually overlaps nothing
+   draggable anyway, but sits this close to the arc on purpose - from ever
+   being able to intercept a pointer event meant for the arc's own drag
+   surface. */
+.player-time-arc-tick-row {
+  position: relative;
+  height: 11px;
+  margin-top: 1px;
+  pointer-events: none;
+}
+
+.player-time-arc-tick-label {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 9px;
+  line-height: 1;
+  color: rgba(223, 230, 243, 0.55);
+  white-space: nowrap;
+}
+
+/* The two end ticks (-1M/+1M, at the arc's own x extremes) would otherwise
+   overflow past the panel's own left/right edges under the generic
+   `translateX(-50%)` centering above - anchoring each to its own inner edge
+   instead keeps both fully inside the panel. Relies on DOM order matching
+   `TIME_ARC_TICK_YEARS`' own ascending order (leftmost tick first). */
+.player-time-arc-tick-label:first-child {
+  transform: translateX(0);
+}
+
+.player-time-arc-tick-label:last-child {
+  transform: translateX(-100%);
+}
+
 .player-rate-readout {
   flex: 0 0 auto;
   min-width: 64px;

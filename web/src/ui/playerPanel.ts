@@ -2,6 +2,7 @@ import {
   arcDragFractionToPlayerTimeYears,
   arcDragFractionToRateSliderValue,
   formatPlayerRateYearsPerSecond,
+  formatPlayerTimeTickLabel,
   formatPlayerTimeYears,
   logSpeedSliderToYearsPerSecond,
   PLAYER_TIME_RANGE_YEARS,
@@ -68,6 +69,22 @@ import {
  * just over `[-PLAYER_TIME_RANGE_YEARS, +PLAYER_TIME_RANGE_YEARS]`) into the
  * SAME `onScrub` callback the old `<input>` called - this is a visual
  * restyle only, not a new control.
+ *
+ * Story #273 (tuning/polish follow-up to #271): adds >= 5 labeled, static
+ * tick marks to the time arc (`buildTimeArcTicks` below) - small dim dot
+ * markers ON the curve itself (SVG, positioned via the exact same
+ * `arcPointAtT` call the handle/fill path use, via `playerTimeYearsToArcT`
+ * for the same value-to-`t` mapping `renderTimeArc` uses) plus a compact
+ * (`formatPlayerTimeTickLabel`) text label per tick, in a dedicated row
+ * BELOW the arc rather than overlaid on the SVG itself - the SVG's own
+ * `preserveAspectRatio="none"` non-uniform stretch (deliberate, see the
+ * `.player-time-arc-row` CSS comment) would visibly squash/stretch SVG
+ * `<text>` glyphs, so the labels are plain HTML instead, horizontally
+ * aligned via the same tick point's `x` fraction of the arc's own viewBox
+ * width (which lines up correctly since both rows span the identical
+ * on-screen panel width). Every tick element is `pointer-events: none` and
+ * lives outside `.player-time-arc-track`'s own bounding box, so none of
+ * this can ever intercept a drag.
  *
  * This panel still makes no decisions of its own about what any of these
  * mean in terms of resulting time/playback state - that interaction logic
@@ -437,6 +454,79 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   }
   renderTimeArc(0);
 
+  // Story #273: >= 5 static, decorative tick marks + labels along the time
+  // arc, so it reads as an actual labeled scale rather than a bare curve.
+  // Evenly spaced across the arc's own `[0,1]` parametrization
+  // (`t = 0, 0.25, 0.5, 0.75, 1.0`), matching `PLAYER_TIME_RANGE_YEARS`'s
+  // settled `+/-1,000,000`-year range exactly - the issue's own suggested
+  // default. Built ONCE here (not from `update()`/`renderTimeArc` above):
+  // unlike the handle/fill path, these values never change with player
+  // state.
+  const TIME_ARC_TICK_YEARS: readonly number[] = [
+    -PLAYER_TIME_RANGE_YEARS,
+    -PLAYER_TIME_RANGE_YEARS / 2,
+    0,
+    PLAYER_TIME_RANGE_YEARS / 2,
+    PLAYER_TIME_RANGE_YEARS,
+  ];
+
+  // The tick marks themselves: small dim dots placed EXACTLY on the curve
+  // via the same `arcPointAtT`/`playerTimeYearsToArcT` geometry the
+  // handle/fill path and the existing `timeTodayMarker` already use - never
+  // approximated by separate straight-line math. `pointer-events: none`
+  // (mirroring `.player-time-arc-today-marker`'s own existing convention)
+  // keeps them purely decorative; they also render into the SVG, entirely
+  // inside `timeArcTrack`'s own hit area, so this alone would already be
+  // safe even without the CSS rule, since drag handling is wired on
+  // `timeArcTrack` itself and events bubble up regardless.
+  const tickMarkersGroup = document.createElementNS(svgNs, "g");
+  tickMarkersGroup.setAttribute("class", "player-time-arc-ticks");
+  tickMarkersGroup.setAttribute("aria-hidden", "true");
+
+  // The tick LABELS: plain HTML (not SVG `<text>`), in their own row BELOW
+  // the arc - see this module's top docstring (Story #273 paragraph) for
+  // why: the arc SVG's `preserveAspectRatio="none"` non-uniform stretch,
+  // which is what gives the curve itself its wide, shallow look, would also
+  // squash/stretch SVG text glyphs if labels were drawn inside that same
+  // SVG. Horizontal position still comes from the SAME `arcPointAtT` point
+  // as each tick's own dot (just read as an `x`-fraction of the arc's own
+  // viewBox width rather than a raw SVG coordinate), so labels line up with
+  // their dots exactly - this row spans the identical on-screen panel width
+  // as the arc track above it, so that fraction maps directly to the same
+  // horizontal position in both places.
+  const tickLabelsRow = document.createElement("div");
+  tickLabelsRow.className = "player-panel-row player-time-arc-tick-row";
+  tickLabelsRow.setAttribute("aria-hidden", "true");
+
+  for (const tickYears of TIME_ARC_TICK_YEARS) {
+    const [tickX, tickY] = arcPointAtT(playerTimeYearsToArcT(tickYears));
+
+    // Skips a redundant dot exactly at year 0 - `timeTodayMarker` above
+    // already marks that exact point; this just adds this tick's label
+    // alongside it rather than drawing a second, visually-identical dot on
+    // top.
+    if (tickYears !== 0) {
+      const tickDot = document.createElementNS(svgNs, "circle");
+      tickDot.setAttribute("class", "player-time-arc-tick");
+      tickDot.setAttribute("r", "1.5");
+      tickDot.setAttribute("cx", String(tickX));
+      tickDot.setAttribute("cy", String(tickY));
+      tickMarkersGroup.appendChild(tickDot);
+    }
+
+    const tickLabel = document.createElement("span");
+    tickLabel.className = "player-time-arc-tick-label";
+    tickLabel.textContent = formatPlayerTimeTickLabel(tickYears);
+    tickLabel.style.left = `${(tickX / ARC_VIEWBOX_WIDTH) * 100}%`;
+    tickLabelsRow.appendChild(tickLabel);
+  }
+
+  // Inserted BEFORE `timeTodayMarker`/`timeHandle` in paint order, so the
+  // draggable handle and the Today reference dot both still visually sit on
+  // top of these smaller, dimmer scale ticks wherever they happen to
+  // overlap.
+  timeArcSvg.insertBefore(tickMarkersGroup, timeTodayMarker);
+
   function handleTimeArcPointer(clientX: number): void {
     const rect = timeArcTrack.getBoundingClientRect();
     const fraction = rect.width === 0 ? 0.5 : (clientX - rect.left) / rect.width;
@@ -507,6 +597,10 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   // `timeArcRow` comment above for why it's a separate full-width row
   // rather than nested inside `arcCluster`.
   panel.appendChild(timeArcRow);
+  // Story #273: the tick-label row, directly below the time arc's own row -
+  // see the tick-building block above for why these are plain HTML in a
+  // separate row rather than SVG `<text>` inside `timeArcSvg` itself.
+  panel.appendChild(tickLabelsRow);
 
   return {
     element: panel,

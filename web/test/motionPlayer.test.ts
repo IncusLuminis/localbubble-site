@@ -5,6 +5,7 @@ import {
   arcDragFractionToRateSliderValue,
   clampPlayerTimeYears,
   formatPlayerRateYearsPerSecond,
+  formatPlayerTimeTickLabel,
   formatPlayerTimeYears,
   isUiLockedForPlayerTime,
   KM_PER_S_TO_PC_PER_YEAR,
@@ -152,6 +153,31 @@ describe("formatPlayerTimeYears", () => {
     expect(formatPlayerTimeYears(0.2)).toBe("Today");
     expect(formatPlayerTimeYears(-0.2)).toBe("Today");
     expect(formatPlayerTimeYears(1.6)).toBe("+2 years");
+  });
+});
+
+describe("Story #273: formatPlayerTimeTickLabel", () => {
+  it('formats t=0 as "Today"', () => {
+    expect(formatPlayerTimeTickLabel(0)).toBe("Today");
+  });
+
+  it("abbreviates whole millions with an M suffix", () => {
+    expect(formatPlayerTimeTickLabel(1_000_000)).toBe("+1M");
+    expect(formatPlayerTimeTickLabel(-1_000_000)).toBe("-1M");
+  });
+
+  it("abbreviates sub-million thousands with a K suffix", () => {
+    expect(formatPlayerTimeTickLabel(500_000)).toBe("+500K");
+    expect(formatPlayerTimeTickLabel(-500_000)).toBe("-500K");
+  });
+
+  it("falls through to a K-suffixed value for an in-between, non-round-million magnitude", () => {
+    expect(formatPlayerTimeTickLabel(750_000)).toBe("+750K");
+  });
+
+  it("shows a plain signed number below the K threshold", () => {
+    expect(formatPlayerTimeTickLabel(250)).toBe("+250");
+    expect(formatPlayerTimeTickLabel(-250)).toBe("-250");
   });
 });
 
@@ -354,7 +380,8 @@ describe("Story #267: formatPlayerRateYearsPerSecond", () => {
       "10K yr/s",
     );
     expect(formatPlayerRateYearsPerSecond(50_000)).toBe("50K yr/s");
-    expect(formatPlayerRateYearsPerSecond(MAX_YEARS_PER_REAL_SECOND)).toBe("150K yr/s");
+    // Story #273: MAX_YEARS_PER_REAL_SECOND is now 20,000 (was 150,000).
+    expect(formatPlayerRateYearsPerSecond(MAX_YEARS_PER_REAL_SECOND)).toBe("20K yr/s");
   });
 
   it("stays unabbreviated just under the threshold", () => {
@@ -370,10 +397,18 @@ describe("Epic #238's speed-slider anchors", () => {
     expect(MIN_YEARS_PER_REAL_SECOND).toBeLessThanOrEqual(2000);
   });
 
-  it("MAX_YEARS_PER_REAL_SECOND sweeps the full 2,000,000-year range in the Epic's suggested ~10-30 real-second window", () => {
+  // Story #273: the human owner's live-testing found the Epic's original
+  // ~10-30s full-sweep window (a MAX_YEARS_PER_REAL_SECOND of 150,000) too
+  // fast to actually watch stars move, and lowered the cap to 20,000 -
+  // deliberately superseding that original guidance rather than satisfying
+  // it. The sweep now takes 100s at the new cap.
+  it("MAX_YEARS_PER_REAL_SECOND is capped at 20,000 yr/s (Story #273, down from the Epic's original 150,000)", () => {
+    expect(MAX_YEARS_PER_REAL_SECOND).toBe(20_000);
+  });
+
+  it("MAX_YEARS_PER_REAL_SECOND sweeps the full 2,000,000-year range in 100 real seconds at the Story #273 cap", () => {
     const sweepSeconds = (2 * PLAYER_TIME_RANGE_YEARS) / MAX_YEARS_PER_REAL_SECOND;
-    expect(sweepSeconds).toBeGreaterThanOrEqual(10);
-    expect(sweepSeconds).toBeLessThanOrEqual(30);
+    expect(sweepSeconds).toBeCloseTo(100, 6);
   });
 });
 
