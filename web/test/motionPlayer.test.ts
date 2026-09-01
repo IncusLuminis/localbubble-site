@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   advancePlayerTimeYears,
+  arcDragFractionToPlayerTimeYears,
   arcDragFractionToRateSliderValue,
   clampPlayerTimeYears,
   formatPlayerRateYearsPerSecond,
@@ -311,6 +312,30 @@ describe("Story #267: arcDragFractionToRateSliderValue", () => {
   it("clamps a fraction outside [0, 1] (a drag gesture that overshoots the surface's own bounding box)", () => {
     expect(arcDragFractionToRateSliderValue(-0.5)).toBe(-1);
     expect(arcDragFractionToRateSliderValue(1.5)).toBe(1);
+  });
+});
+
+describe("Story #271: arcDragFractionToPlayerTimeYears", () => {
+  it("maps the left end of the drag surface (fraction 0) to the full backward range", () => {
+    expect(arcDragFractionToPlayerTimeYears(0)).toBe(-PLAYER_TIME_RANGE_YEARS);
+  });
+
+  it("maps the right end of the drag surface (fraction 1) to the full forward range", () => {
+    expect(arcDragFractionToPlayerTimeYears(1)).toBe(PLAYER_TIME_RANGE_YEARS);
+  });
+
+  it("maps dead center (fraction 0.5) to year 0 (Today)", () => {
+    expect(arcDragFractionToPlayerTimeYears(0.5)).toBeCloseTo(0, 6);
+  });
+
+  it("is linear across the drag surface", () => {
+    expect(arcDragFractionToPlayerTimeYears(0.25)).toBeCloseTo(-PLAYER_TIME_RANGE_YEARS / 2, 6);
+    expect(arcDragFractionToPlayerTimeYears(0.75)).toBeCloseTo(PLAYER_TIME_RANGE_YEARS / 2, 6);
+  });
+
+  it("clamps a fraction outside [0, 1] (a drag gesture that overshoots the surface's own bounding box)", () => {
+    expect(arcDragFractionToPlayerTimeYears(-0.5)).toBe(-PLAYER_TIME_RANGE_YEARS);
+    expect(arcDragFractionToPlayerTimeYears(1.5)).toBe(PLAYER_TIME_RANGE_YEARS);
   });
 });
 

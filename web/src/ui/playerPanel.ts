@@ -1,4 +1,5 @@
 import {
+  arcDragFractionToPlayerTimeYears,
   arcDragFractionToRateSliderValue,
   formatPlayerRateYearsPerSecond,
   formatPlayerTimeYears,
@@ -49,12 +50,24 @@ import {
  *    panel is open) rather than inventing a separate minimized visual
  *    state, per the issue's own recommended default.
  *
- * The full-range absolute-time scrubber (`onScrub`, unchanged since #239) is
- * kept as its own slim row ABOVE this new control bar - #267's target layout
- * only specifies the 5-item bottom bar itself, and dropping direct-scrub
- * entirely would be a behavior regression the issue never asked for, so it
- * stays, just visually subordinate to the new NASA-Eyes-style row beneath
- * it.
+ * Story #271 (follow-up to #267): the full-range absolute-time scrubber
+ * (`onScrub`, unchanged behavior/range since #239) was, until this Story, a
+ * plain `<input type="range">` kept as its own slim row ABOVE the #267
+ * control bar - the one piece of the panel that never got #267's visual
+ * treatment. Per the human owner's own NASA "Eyes on the Solar System"
+ * reference screenshot, it's now a SECOND shallow arc (`.player-time-arc*`),
+ * positioned directly BELOW the rate arc/control bar rather than above it,
+ * reusing the exact same `ARC_START`/`ARC_CONTROL`/`ARC_END` quadratic-bezier
+ * geometry as the rate arc (`arcPointAtT` is shared, unmodified) - only the
+ * on-screen CSS box is wider/full-panel-width, which alone is what gives it
+ * the "larger, wrapping-around-the-first-arc" look the issue asked for
+ * ("как бы огибая его") without needing a second curve shape. Its drag
+ * surface (`.player-time-arc-track`) reuses the same Pointer Events
+ * mouse+touch drag-to-value pattern as the rate arc, mapped through the new
+ * `arcDragFractionToPlayerTimeYears` (mirrors `arcDragFractionToRateSliderValue`,
+ * just over `[-PLAYER_TIME_RANGE_YEARS, +PLAYER_TIME_RANGE_YEARS]`) into the
+ * SAME `onScrub` callback the old `<input>` called - this is a visual
+ * restyle only, not a new control.
  *
  * This panel still makes no decisions of its own about what any of these
  * mean in terms of resulting time/playback state - that interaction logic
@@ -122,8 +135,9 @@ export interface PlayerPanelHandle {
    * #238 AC). */
   setVisible: (visible: boolean) => void;
   /** Pushes the current player state into the panel's own DOM (time
-   * readout text, scrubber position, rate arc handle position, rate
-   * readout text, Play/Pause glyph) - called every animation frame from
+   * readout text, time-arc handle position (Story #271), rate arc handle
+   * position, rate readout text, Play/Pause glyph) - called every animation
+   * frame from
    * `main.ts`'s `applyPlayerAnimation`, mirroring how `applyFovReadout`/
    * `applyGalacticCenterLabelPosition` already re-render their own small DOM
    * bits every frame. */
@@ -173,26 +187,26 @@ function rateSliderValueToArcT(value: number): number {
   return (Math.max(-1, Math.min(1, value)) + 1) / 2;
 }
 
+/** Story #271: `[-PLAYER_TIME_RANGE_YEARS, +PLAYER_TIME_RANGE_YEARS]`
+ * absolute-time value -> `[0, 1]` bezier parameter, mirroring
+ * `rateSliderValueToArcT` above for the new time arc (center `t = 0.5` is
+ * year 0 / "Today", same apex convention). */
+function playerTimeYearsToArcT(tYears: number): number {
+  const clamped = Math.max(-PLAYER_TIME_RANGE_YEARS, Math.min(PLAYER_TIME_RANGE_YEARS, tYears));
+  return (clamped / PLAYER_TIME_RANGE_YEARS + 1) / 2;
+}
+
 export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandle {
   const panel = document.createElement("div");
   panel.id = "player-panel";
   panel.className = "panel";
 
-  // Story #239's full-range absolute-time scrubber - unchanged behavior,
-  // kept as its own slim row above the new #267 control bar (see this
-  // module's own top docstring for why it's kept rather than dropped).
-  const scrubber = document.createElement("input");
-  scrubber.type = "range";
-  scrubber.className = "player-scrubber";
-  scrubber.min = String(-PLAYER_TIME_RANGE_YEARS);
-  scrubber.max = String(PLAYER_TIME_RANGE_YEARS);
-  scrubber.step = "1000";
-  scrubber.value = "0";
-  scrubber.setAttribute("aria-label", "Scrub time");
-  scrubber.addEventListener("input", () => {
-    options.onScrub(Number(scrubber.value));
-  });
-  panel.appendChild(scrubber);
+  // Story #271: the last `tYears` this stateless panel was told about via
+  // `update()` - only needed for the time arc's own keyboard-nudge handler
+  // below (mirrors why `main.ts`, not this panel, is the actual source of
+  // truth for player state - this is purely a read cache for that one
+  // interaction, not a second copy of state).
+  let latestTYears = 0;
 
   // Story #267: the new NASA-Eyes-style bottom control bar - Today, time
   // readout, the arc+buttons cluster, rate readout, collapse chevron, in
@@ -279,18 +293,19 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   arcSvg.append(trackPath, fillPath, handle);
   arcTrack.appendChild(arcSvg);
 
-  /** Redraws the fill sub-path and handle position for a given signed
-   * `[-1,1]` rate value - shared by the initial render, `update()`, and
-   * every drag/nudge-driven change (the drag path calls `onRateChange`,
-   * which `main.ts` reflects back into the next `update()` call, so this
-   * only needs to run from `update()` in practice, but is kept as its own
-   * function for the initial-render call below rather than duplicating the
-   * math). */
-  function renderArc(value: number): void {
-    const targetT = rateSliderValueToArcT(value);
+  /** Redraws a given arc's fill sub-path and handle position for bezier
+   * parameter `targetT` - shared by BOTH arcs (the rate arc and, since Story
+   * #271, the time arc beneath it), each just handing in their own
+   * `<circle>`/`<path>` elements. Used by the initial render, `update()`,
+   * and every drag/nudge-driven change (the drag path calls
+   * `onRateChange`/`onScrub`, which `main.ts` reflects back into the next
+   * `update()` call, so this only needs to run from `update()` in practice,
+   * but is kept as its own function for the initial-render calls below
+   * rather than duplicating the math). */
+  function paintArcAtT(targetT: number, arcHandle: SVGCircleElement, arcFillPath: SVGPathElement): void {
     const [hx, hy] = arcPointAtT(targetT);
-    handle.setAttribute("cx", String(hx));
-    handle.setAttribute("cy", String(hy));
+    arcHandle.setAttribute("cx", String(hx));
+    arcHandle.setAttribute("cy", String(hy));
 
     const startT = Math.min(0.5, targetT);
     const endT = Math.max(0.5, targetT);
@@ -300,9 +315,12 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
       const [x, y] = arcPointAtT(t);
       points.push(`${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`);
     }
-    fillPath.setAttribute("d", points.join(" "));
+    arcFillPath.setAttribute("d", points.join(" "));
   }
-  renderArc(options.defaultRateSliderValue);
+  function renderRateArc(value: number): void {
+    paintArcAtT(rateSliderValueToArcT(value), handle, fillPath);
+  }
+  renderRateArc(options.defaultRateSliderValue);
 
   function handleArcPointer(clientX: number): void {
     const rect = arcTrack.getBoundingClientRect();
@@ -359,6 +377,116 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
 
   arcCluster.append(buttonRow, arcTrack);
 
+  // Story #271: the second, larger arc beneath the rate arc/control bar -
+  // the restyled absolute-time scrubber. Own full-width row (not nested
+  // inside `arcCluster`, unlike the rate arc, which shares its row with
+  // Today/the readouts/the collapse button) so its on-screen CSS box spans
+  // the whole panel width rather than just the arc cluster's own flexible
+  // middle slice - stretching the SAME `ARC_START`/`ARC_CONTROL`/`ARC_END`
+  // geometry (via `preserveAspectRatio="none"`, exactly like the rate arc)
+  // across a wider box is what makes it read as a bigger, shallower,
+  // "wrapping around" echo of the rate arc above it, without inventing a
+  // second curve shape.
+  const timeArcRow = document.createElement("div");
+  timeArcRow.className = "player-panel-row player-time-arc-row";
+
+  const timeArcTrack = document.createElement("div");
+  timeArcTrack.className = "player-time-arc-track";
+  timeArcTrack.setAttribute("role", "slider");
+  timeArcTrack.setAttribute("aria-label", "Scrub time");
+  timeArcTrack.setAttribute("aria-valuemin", String(-PLAYER_TIME_RANGE_YEARS));
+  timeArcTrack.setAttribute("aria-valuemax", String(PLAYER_TIME_RANGE_YEARS));
+  timeArcTrack.tabIndex = 0;
+
+  const timeArcSvg = document.createElementNS(svgNs, "svg");
+  timeArcSvg.setAttribute("class", "player-time-arc-svg");
+  timeArcSvg.setAttribute("viewBox", `0 0 ${ARC_VIEWBOX_WIDTH} ${ARC_VIEWBOX_HEIGHT}`);
+  timeArcSvg.setAttribute("preserveAspectRatio", "none");
+  timeArcSvg.setAttribute("aria-hidden", "true");
+
+  const timeTrackPath = document.createElementNS(svgNs, "path");
+  timeTrackPath.setAttribute("class", "player-time-arc-track-path");
+  timeTrackPath.setAttribute("d", arcPathD);
+  timeTrackPath.setAttribute("fill", "none");
+
+  const timeFillPath = document.createElementNS(svgNs, "path");
+  timeFillPath.setAttribute("class", "player-time-arc-fill-path");
+  timeFillPath.setAttribute("fill", "none");
+
+  // Story #271: a small, dim, non-interactive reference dot fixed at year 0
+  // ("Today") - echoes the reference screenshot's own smaller gray dot
+  // alongside the larger draggable handle, and gives the arc a fixed visual
+  // anchor point (the `Today` button jumps here) independent of wherever the
+  // draggable handle currently sits.
+  const timeTodayMarker = document.createElementNS(svgNs, "circle");
+  timeTodayMarker.setAttribute("class", "player-time-arc-today-marker");
+  timeTodayMarker.setAttribute("r", "2.5");
+  const [todayMarkerX, todayMarkerY] = arcPointAtT(0.5);
+  timeTodayMarker.setAttribute("cx", String(todayMarkerX));
+  timeTodayMarker.setAttribute("cy", String(todayMarkerY));
+
+  const timeHandle = document.createElementNS(svgNs, "circle");
+  timeHandle.setAttribute("class", "player-time-arc-handle");
+  timeHandle.setAttribute("r", "4.5");
+
+  timeArcSvg.append(timeTrackPath, timeFillPath, timeTodayMarker, timeHandle);
+  timeArcTrack.appendChild(timeArcSvg);
+
+  function renderTimeArc(tYears: number): void {
+    paintArcAtT(playerTimeYearsToArcT(tYears), timeHandle, timeFillPath);
+  }
+  renderTimeArc(0);
+
+  function handleTimeArcPointer(clientX: number): void {
+    const rect = timeArcTrack.getBoundingClientRect();
+    const fraction = rect.width === 0 ? 0.5 : (clientX - rect.left) / rect.width;
+    options.onScrub(arcDragFractionToPlayerTimeYears(fraction));
+  }
+
+  let draggingTimeArc = false;
+  timeArcTrack.addEventListener("pointerdown", (event) => {
+    draggingTimeArc = true;
+    // See the rate arc's own `pointerdown` handler above for why
+    // `setPointerCapture` is wrapped defensively - same reasoning applies
+    // verbatim here.
+    try {
+      timeArcTrack.setPointerCapture(event.pointerId);
+    } catch {
+      // Best-effort only - see above.
+    }
+    handleTimeArcPointer(event.clientX);
+  });
+  timeArcTrack.addEventListener("pointermove", (event) => {
+    if (!draggingTimeArc) return;
+    handleTimeArcPointer(event.clientX);
+  });
+  const endTimeArcDrag = (event: PointerEvent): void => {
+    draggingTimeArc = false;
+    try {
+      if (timeArcTrack.hasPointerCapture(event.pointerId)) {
+        timeArcTrack.releasePointerCapture(event.pointerId);
+      }
+    } catch {
+      // Best-effort only - see above.
+    }
+  };
+  timeArcTrack.addEventListener("pointerup", endTimeArcDrag);
+  timeArcTrack.addEventListener("pointercancel", endTimeArcDrag);
+  // Basic keyboard access (the old `<input type="range">` had this for
+  // free) - nudges by a fixed step off the LAST value this panel was told
+  // about via `update()`, since this stateless panel doesn't otherwise know
+  // the current absolute time.
+  const TIME_ARC_KEYBOARD_STEP_YEARS = PLAYER_TIME_RANGE_YEARS / 100;
+  timeArcTrack.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      options.onScrub(latestTYears - TIME_ARC_KEYBOARD_STEP_YEARS);
+    } else if (event.key === "ArrowRight") {
+      options.onScrub(latestTYears + TIME_ARC_KEYBOARD_STEP_YEARS);
+    }
+  });
+
+  timeArcRow.appendChild(timeArcTrack);
+
   const rateReadout = document.createElement("div");
   rateReadout.className = "player-rate-readout";
   rateReadout.textContent = formatPlayerRateYearsPerSecond(
@@ -374,6 +502,11 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
 
   controlBar.append(todayButton, timeReadout, arcCluster, rateReadout, collapseButton);
   panel.appendChild(controlBar);
+  // Story #271: the time arc's own row, directly BELOW the control bar (and
+  // so below the rate arc it sits under) - see this function's own
+  // `timeArcRow` comment above for why it's a separate full-width row
+  // rather than nested inside `arcCluster`.
+  panel.appendChild(timeArcRow);
 
   return {
     element: panel,
@@ -382,12 +515,13 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
     },
     update(state: PlayerPanelState) {
       timeReadout.textContent = formatPlayerTimeYears(state.tYears);
-      // Avoid stomping the scrubber's own value while the DOM might be
-      // mid-drag: setting an equal string value is a harmless no-op, and
-      // this keeps it in sync with state changes driven from elsewhere
-      // (play advancing, the Today button, sphere-exit reset).
-      scrubber.value = String(Math.round(state.tYears));
-      renderArc(state.rateSliderValue);
+      latestTYears = state.tYears;
+      // Story #271: keeps the time arc's handle in sync with `tYears`
+      // regardless of what's driving it (play advancing, the Today button,
+      // the time arc's own drag, sphere-exit reset) - same "re-render from
+      // state every frame" approach the rate arc already used below.
+      renderTimeArc(state.tYears);
+      renderRateArc(state.rateSliderValue);
       rateReadout.textContent = formatPlayerRateYearsPerSecond(
         logSpeedSliderToYearsPerSecond(state.rateSliderValue),
       );

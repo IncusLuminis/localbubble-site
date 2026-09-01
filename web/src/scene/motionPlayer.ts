@@ -46,6 +46,13 @@ import type { SceneVelocity } from "./sceneTypes";
  * formatting) - the only two bits of new pure logic the visual redesign
  * needed, per this module's own DOM-free/independently-testable convention.
  * Nothing above this addition changed.
+ *
+ * Story #271 (follow-up to #267): `arcDragFractionToPlayerTimeYears` -
+ * `arcDragFractionToRateSliderValue`'s own drag-fraction-to-value math,
+ * mirrored for the absolute-time scrubber now that it's restyled as a
+ * second arc (`ui/playerPanel.ts`) instead of a plain `<input type="range">`.
+ * Same linear `[0,1]` remap shape, just over `[-PLAYER_TIME_RANGE_YEARS,
+ * +PLAYER_TIME_RANGE_YEARS]` instead of `[-1,1]`.
  */
 
 /**
@@ -274,6 +281,25 @@ export type PlayerDirection = 1 | -1;
 export function arcDragFractionToRateSliderValue(fraction: number): number {
   const clampedFraction = Math.max(0, Math.min(1, fraction));
   return clampedFraction * 2 - 1;
+}
+
+/**
+ * Story #271: the absolute-time scrubber's own drag-fraction-to-value math,
+ * now that it's a second arc (`ui/playerPanel.ts`) beneath the rate arc
+ * rather than a plain `<input type="range">`. Identical shape to
+ * `arcDragFractionToRateSliderValue` above - `fraction` clamped to `[0,1]`
+ * then a LINEAR remap - just scaled to
+ * `[-PLAYER_TIME_RANGE_YEARS, +PLAYER_TIME_RANGE_YEARS]` instead of `[-1,1]`,
+ * matching the un-clamped-value contract `onScrub` already had (`main.ts`
+ * clamps via `clampPlayerTimeYears`, same as the old scrubber's own values
+ * always were in range already since its native `min`/`max` enforced it -
+ * this function's own linear remap can never produce an out-of-range result
+ * either, but callers still route through `onScrub`/`clampPlayerTimeYears`
+ * for a single source of truth on the clamp).
+ */
+export function arcDragFractionToPlayerTimeYears(fraction: number): number {
+  const clampedFraction = Math.max(0, Math.min(1, fraction));
+  return (clampedFraction * 2 - 1) * PLAYER_TIME_RANGE_YEARS;
 }
 
 /**
