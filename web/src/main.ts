@@ -107,7 +107,6 @@ import { DEFAULT_RADIUS_PC, RADIUS_PRESETS_PC, isWithinRadius } from "./scene/ra
 import {
   denseBatchObjectFrameMaxDistancePc,
   edgeOnPose,
-  faceOnPose,
   fitAllPose,
   fitSpherePose,
   objectCenteredPose,
@@ -1625,6 +1624,51 @@ layersToggle.addEventListener("click", () => toggleSidePanel("layers"));
 settingsToggle.addEventListener("click", () => toggleSidePanel("settings"));
 cameraToggle.addEventListener("click", () => toggleSidePanel("camera"));
 
+/**
+ * Issue #262: close whichever of the three Story #257 side panels
+ * (Layers/Settings/Camera) is open on ANY click that lands outside both its
+ * own DOM subtree and its own toolbar trigger button - including a click on
+ * the 3D viewport itself (star selection, the start of an orbit/pan drag).
+ * Deliberately a single passive `document`-level listener rather than a
+ * modal scrim/overlay: it never calls `preventDefault`/`stopPropagation`, so
+ * every other click handler on the page (the trigger buttons' own toggle
+ * logic, the canvas's click-to-select handler, `OrbitControls`' own
+ * pointer listeners) keeps firing exactly as before - this only ever adds
+ * an "also close the panel" side effect on top, never swallows the click.
+ *
+ * Explicitly scoped to the three #257 panels ONLY, per the issue - the
+ * Player panel (Epic #238) keeps its own deliberately-different close/reset
+ * semantics (toolbar-button-only, no click-outside) and is untouched here.
+ *
+ * Ordering/double-handling: this listener only ever acts when
+ * `openSidePanelName` is still non-null by the time the click bubbles to
+ * `document`. A click on a trigger button already resolves synchronously in
+ * that button's own listener (target phase, before bubbling) via
+ * `toggleSidePanel`/`openSidePanel`/`closeSidePanel` above - by the time
+ * this listener runs, `openSidePanelName` (and `getSidePanelToggleButton`)
+ * already reflect the post-click state, so checking "is this click inside
+ * the NOW-open panel's own trigger button" correctly excludes both
+ * re-clicking a panel's own icon to close it (already closed, name is
+ * `null`, early return) and clicking a different panel's icon to switch to
+ * it (that panel is now the open one, and the click target is its own
+ * button) - neither case gets stuck open or immediately re-closed.
+ */
+document.addEventListener(
+  "click",
+  (event) => {
+    if (openSidePanelName === null) return;
+    const handle = getSidePanelHandle(openSidePanelName);
+    if (!handle) return;
+    const target = event.target as Node | null;
+    const button = getSidePanelToggleButton(openSidePanelName);
+    if (target && (handle.element.contains(target) || button.contains(target))) {
+      return;
+    }
+    closeSidePanel(openSidePanelName);
+  },
+  { passive: true },
+);
+
 zoomInButton.addEventListener("click", () => zoomBy(ZOOM_IN_STEP_FACTOR));
 zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
 showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
@@ -1708,10 +1752,13 @@ function goToObject(obj: SceneObject): void {
   selectObject(obj);
 }
 
+// Issue #262: the former "Face-on" preset was merged into "Top view" (they
+// computed an identical pose - see `scene/cameraPresets.ts`'s module
+// docstring for the original judgment call, and its `topViewPose`
+// docstring for the merge itself) - only one entry survives here.
 const CAMERA_PRESETS: { key: string; label: string }[] = [
   { key: "perspective", label: "Perspective" },
   { key: "top", label: "Top view" },
-  { key: "face-on", label: "Face-on" },
   { key: "edge-on", label: "Edge-on" },
   { key: "sun-centered", label: "Sun-centered" },
   { key: "fit-all", label: "Fit all" },
@@ -1724,9 +1771,6 @@ function applyCameraPreset(key: string): void {
       break;
     case "top":
       applyCameraPose(topViewPose(radiusPc));
-      break;
-    case "face-on":
-      applyCameraPose(faceOnPose(radiusPc));
       break;
     case "edge-on":
       applyCameraPose(edgeOnPose(radiusPc));
@@ -1938,10 +1982,11 @@ loadScene()
     // already its own dedicated toolbar icon (`showAllButton`, position #8)
     // wired to the exact same `applyCameraPreset("fit-all")` action just
     // above, so including it here too would duplicate it. Live-verified the
-    // remaining five presets (Perspective/Top view/Face-on/Edge-on/
-    // Sun-centered) still wrap cleanly in `.camera-preset-row`'s flex-wrap
-    // layout without it - omitting "Fit all" reads as strictly cleaner
-    // here, not a layout compromise.
+    // remaining four presets (Perspective/Top view/Edge-on/Sun-centered -
+    // issue #262 merged the former "Face-on" duplicate into "Top view")
+    // still wrap cleanly in `.camera-preset-row`'s flex-wrap layout without
+    // "Fit all" - omitting it reads as strictly cleaner here, not a layout
+    // compromise.
     cameraPanelHandle = createCameraPanel({
       cameraPresets: CAMERA_PRESETS.filter((preset) => preset.key !== "fit-all"),
       onCameraPreset: applyCameraPreset,

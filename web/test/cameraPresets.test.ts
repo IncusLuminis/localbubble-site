@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   denseBatchObjectFrameMaxDistancePc,
   edgeOnPose,
-  faceOnPose,
   fitAllPose,
   fitSpherePose,
   objectCenteredPose,
@@ -23,12 +22,10 @@ describe("perspectivePose", () => {
   });
 });
 
-describe("topViewPose / faceOnPose", () => {
-  it("both look straight down the +Z axis at the origin (documented judgment call)", () => {
+describe("topViewPose", () => {
+  it("looks straight down the +Z axis at the origin (issue #262: merged from the former duplicate faceOnPose)", () => {
     const top = topViewPose(800);
-    const faceOn = faceOnPose(800);
     expect(top.target).toEqual([0, 0, 0]);
-    expect(faceOn).toEqual(top);
     expect(top.position[0]).toBe(0);
     expect(top.position[1]).toBe(0);
     expect(top.position[2]).toBeGreaterThan(0);

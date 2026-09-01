@@ -318,7 +318,6 @@ describe("galacticCenterIndicatorPlacement (issue #154)", () => {
       { name: "Perspective", position: [700, -700, 450], target: [0, 0, 0] },
       { name: "Sun-centered", position: [60, -60, 40], target: [0, 0, 0] },
       { name: "Top view", position: [0, 0, 1280], target: [0, 0, 0] },
-      { name: "Face-on", position: [0, 0, 1280], target: [0, 0, 0] },
       { name: "Edge-on", position: [0, -1280, 0], target: [0, 0, 0] },
     ];
     for (const preset of presets) {

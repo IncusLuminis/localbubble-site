@@ -12,15 +12,18 @@
  * directly - so these poses are expressed in the same XYZ pc coordinates as
  * `scene.json`'s `position_pc`, with no axis remapping.
  *
- * Judgment call: spec §29 lists "Top view" and "Galactic Plane / face-on" as
- * two separate presets, but its own elaboration describes only one distinct
- * behavior ("View approximately along Galactic Z. Useful for XY
- * structure.") - it never says how a plain "Top view" should differ from
- * that. Rather than invent an unstated distinction, both presets here
- * compute the same top-down-along-Z pose (see `topViewPose`/`faceOnPose`
- * below, which intentionally share their implementation); they are exposed
- * as two separate UI buttons/entries for spec-completeness. Flagged in the
- * PR description as a judgment call.
+ * Judgment call (issue #262 update): spec §29 originally listed "Top view"
+ * and "Galactic Plane / face-on" as two separate presets, but its own
+ * elaboration described only one distinct behavior ("View approximately
+ * along Galactic Z. Useful for XY structure.") - it never said how a plain
+ * "Top view" should differ from that. Rather than invent an unstated
+ * distinction, both were originally kept as two UI buttons computing the
+ * same top-down-along-Z pose "for spec-completeness." Issue #262: the human
+ * owner found the duplication confusing in live testing and, given the
+ * choice, chose to merge them into a single "Top view" button rather than
+ * invent a distinct "Face-on" behavior or keep both with a clarifying
+ * tooltip - so the former `faceOnPose` function (identical to `topViewPose`
+ * below) has been removed; `topViewPose` is the sole survivor.
  */
 
 export interface CameraPose {
@@ -35,18 +38,13 @@ export function perspectivePose(): CameraPose {
   return { position: [700, -700, 450], target: [0, 0, 0] };
 }
 
-/** Looking straight down the +Z axis at the origin. See the module-level
- * judgment-call note: computed identically to `faceOnPose`. */
+/** "Top view" (spec §29, merging in the former "Galactic Plane / face-on"
+ * preset per issue #262 - see the module-level judgment-call note): looking
+ * straight down the +Z axis at the origin. "View approximately along
+ * Galactic Z. Useful for XY structure." */
 export function topViewPose(radiusPc: number): CameraPose {
   const height = Math.max(radiusPc * 1.6, 50);
   return { position: [0, 0, height], target: [0, 0, 0] };
-}
-
-/** "Galactic Plane / face-on" (spec §29): "View approximately along
- * Galactic Z. Useful for XY structure." See the module-level judgment-call
- * note: computed identically to `topViewPose`. */
-export function faceOnPose(radiusPc: number): CameraPose {
-  return topViewPose(radiusPc);
 }
 
 /** "Edge-on" (spec §29): "View approximately parallel to the Galactic
