@@ -53,6 +53,14 @@ import type { SceneVelocity } from "./sceneTypes";
  * second arc (`ui/playerPanel.ts`) instead of a plain `<input type="range">`.
  * Same linear `[0,1]` remap shape, just over `[-PLAYER_TIME_RANGE_YEARS,
  * +PLAYER_TIME_RANGE_YEARS]` instead of `[-1,1]`.
+ *
+ * Story #273 (tuning/polish follow-up to #271): lowered
+ * `MAX_YEARS_PER_REAL_SECOND` from `150_000` to `20_000` per the human
+ * owner's live-testing (the old max was too fast to watch anything move) -
+ * see that constant's own docstring below for the recomputed sweep-time
+ * figure. Also added labeled tick marks to the time arc
+ * (`ui/playerPanel.ts`'s `renderTimeArcTicks`), reusing the same
+ * `arcPointAtT` geometry already used for the arc's own handle/fill path.
  */
 
 /**
@@ -135,6 +143,34 @@ export function formatPlayerTimeYears(tYears: number): string {
 }
 
 /**
+ * Story #273: compact tick-label formatting for the time arc's new scale
+ * marks (`ui/playerPanel.ts`) - e.g. `"-1M"`, `"-500K"`, `"Today"`,
+ * `"+500K"`, `"+1M"`. Deliberately NOT `formatPlayerTimeYears`'s own
+ * `"-1,000,000 years"` shape - too long/dense for a handful of small labels
+ * stacked along a compact arc widget. Mirrors `formatPlayerRateYearsPerSecond`'s
+ * own `K`-suffix abbreviation convention, extended with an `M`-suffix for
+ * whole millions (the tick values `ui/playerPanel.ts` actually uses are
+ * always whole hundred-thousands or whole millions, so the `M` branch only
+ * ever fires on an exact multiple - an in-between value like 750,000 would
+ * fall through to the `K` branch as `"+750K"`, still reasonable).
+ */
+export function formatPlayerTimeTickLabel(tYears: number): string {
+  const rounded = Math.round(tYears);
+  if (rounded === 0) {
+    return "Today";
+  }
+  const sign = rounded > 0 ? "+" : "-";
+  const magnitude = Math.abs(rounded);
+  if (magnitude >= 1_000_000 && magnitude % 1_000_000 === 0) {
+    return `${sign}${magnitude / 1_000_000}M`;
+  }
+  if (magnitude >= 1_000) {
+    return `${sign}${Math.round(magnitude / 1000)}K`;
+  }
+  return `${sign}${magnitude}`;
+}
+
+/**
  * Story #239's UI-lock predicate (Epic #238: "locked/disabled whenever the
  * player's current time is NOT exactly Today (t=0) - this includes while
  * paused away from Today, not just while actively playing"). Deliberately
@@ -193,18 +229,27 @@ export function advancePlayerTimeYears(
 }
 
 /**
- * Epic #238's settled logarithmic speed-slider anchors, NASA "Eyes on the
+ * Epic #238's original logarithmic speed-slider anchors, NASA "Eyes on the
  * Solar System" style - live-tuned starting point per the Epic's own
  * suggested ranges (slow end ~500-2,000 simulated years/real-second, fast
  * end able to sweep the full 2,000,000-year range in ~10-30 real seconds).
- * `MAX_YEARS_PER_REAL_SECOND` sweeps the full `[-1_000_000, 1_000_000]`
- * range in `2 * PLAYER_TIME_RANGE_YEARS / MAX_YEARS_PER_REAL_SECOND` ~ 13.3s,
- * comfortably inside that window; `MIN_YEARS_PER_REAL_SECOND` sits at the
- * suggested slow-end anchor. Both were also verified live in the running
- * viewer (see the PR description) rather than accepted on paper alone.
+ * `MIN_YEARS_PER_REAL_SECOND` sits at that suggested slow-end anchor and is
+ * unchanged.
+ *
+ * Story #273 lowered `MAX_YEARS_PER_REAL_SECOND` from its original
+ * `150_000` down to `20_000`: the human owner's own live-testing found the
+ * original value too fast to be useful - at that rate stars fly out of
+ * visual range almost instantly, so higher speeds aren't actually meaningful
+ * for watching motion. At the new cap, `MAX_YEARS_PER_REAL_SECOND` sweeps
+ * the full `[-1_000_000, 1_000_000]` range in `2 * PLAYER_TIME_RANGE_YEARS /
+ * MAX_YEARS_PER_REAL_SECOND` = 100 real seconds - plainly slower than (and
+ * deliberately outside) the Epic's original ~10-30s guidance, since this
+ * Story's own live-tuned "motion stays watchable" priority supersedes that
+ * original figure. Verified live in the running viewer (see the PR
+ * description) rather than accepted on paper alone.
  */
 export const MIN_YEARS_PER_REAL_SECOND = 1_000;
-export const MAX_YEARS_PER_REAL_SECOND = 150_000;
+export const MAX_YEARS_PER_REAL_SECOND = 20_000;
 
 /**
  * Maps a rate-slider control value (`[-1, 1]`, SIGNED - Story #266, restoring
@@ -307,9 +352,10 @@ export function arcDragFractionToPlayerTimeYears(fraction: number): number {
  * (below) switches on - below this many years/real-second, the readout shows
  * the exact whole-number value; at or above it, whole thousands abbreviated
  * with a `K` suffix. `MIN_YEARS_PER_REAL_SECOND` (1,000) sits just under this
- * threshold and stays unabbreviated; `MAX_YEARS_PER_REAL_SECOND` (150,000)
- * sits comfortably inside the abbreviated range - live-tuned in the running
- * viewer for readability, per the issue's own "your call on exact
+ * threshold and stays unabbreviated; `MAX_YEARS_PER_REAL_SECOND` (20,000
+ * since Story #273, originally 150,000) still sits comfortably inside the
+ * abbreviated range, reading as "20K yr/s" at the new cap - live-tuned in the
+ * running viewer for readability, per the issue's own "your call on exact
  * thresholds" guidance.
  */
 export const RATE_READOUT_ABBREVIATION_THRESHOLD_YEARS_PER_SECOND = 10_000;
