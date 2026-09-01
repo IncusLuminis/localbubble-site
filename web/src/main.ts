@@ -217,7 +217,17 @@ app.appendChild(galacticCenterEdgeIndicator.element);
 const selectionIndicator = createSelectionIndicator();
 scene.add(selectionIndicator.group);
 
-const inspector = new Inspector();
+// Issue #98: the Inspector's own `×` button is wired to `selectObject(null)`
+// (rather than just closing the panel) so an explicit close is treated as a
+// full deselection - clearing `selectedObjectId` so a later filter change
+// doesn't resurrect the panel via `refreshSelectionVisibility`'s #95
+// re-show behavior, and (as a consequence of going through the same
+// `selectObject` chokepoint used elsewhere) also hiding the selection
+// reticle/line-to-Sun and clearing the selected label highlight. `hide()`
+// itself is still called directly by `refreshSelectionVisibility`'s
+// filter-hide case below, which must NOT clear the selection - see that
+// function's docstring.
+const inspector = new Inspector(() => selectObject(null));
 app.appendChild(inspector.element);
 
 // Issue #125: field-of-view extent readout, bottom-right.

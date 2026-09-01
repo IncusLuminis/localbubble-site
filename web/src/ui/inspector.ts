@@ -116,8 +116,24 @@ export function formatExoplanets(exoplanets: SceneExoplanetSummary | null): stri
 export class Inspector {
   readonly element: HTMLDivElement;
   private readonly content: HTMLDivElement;
+  private readonly onClose: (() => void) | undefined;
 
-  constructor() {
+  /**
+   * Issue #98: `onClose`, when supplied, fires only when the user
+   * explicitly dismisses the panel via its own `×` button - as opposed to
+   * `hide()` being called programmatically, e.g. from `main.ts`'s
+   * `refreshSelectionVisibility` (issue #95's filter-hide case), which must
+   * NOT be treated as an explicit deselection and so calls `hide()`
+   * directly rather than going through this callback. `main.ts` wires
+   * `onClose` to the equivalent of `selectObject(null)` so an explicit ×
+   * close clears `selectedObjectId` (and, as a consequence of reusing that
+   * same chokepoint, the selection reticle/line-to-Sun and the selected
+   * label highlight too - see `main.ts`'s `selectObject`), preventing a
+   * later filter change from resurrecting a panel the user just dismissed.
+   */
+  constructor(onClose?: () => void) {
+    this.onClose = onClose;
+
     this.element = document.createElement("div");
     this.element.id = "inspector";
     this.element.className = "panel";
@@ -137,7 +153,10 @@ export class Inspector {
     closeButton.className = "inspector-close";
     closeButton.textContent = "×";
     closeButton.setAttribute("aria-label", "Close inspector");
-    closeButton.addEventListener("click", () => this.hide());
+    closeButton.addEventListener("click", () => {
+      this.hide();
+      this.onClose?.();
+    });
     this.element.appendChild(closeButton);
   }
 
