@@ -219,60 +219,47 @@ app.appendChild(inspector.element);
 const fovReadout = createFovReadout();
 app.appendChild(fovReadout.element);
 
-// Issue #143: a single hamburger button, always present (created here at
-// top-level startup, not inside `loadScene().then(...)` below, so it's
-// visible even before scene data loads), toggling a shared container that
-// holds the Structures control panel (`createControlPanel`, previously
-// always-visible top-left). `menuPanels` itself starts empty and hidden, so
-// toggling before the scene has loaded is a harmless no-op (nothing inside
-// it yet).
-//
-// Issue #203: the Search box (#106) that used to also live inside this same
-// container (stacked above the Structures panel) has moved out into its own
-// dedicated button + modal (`searchToggle`/`searchDialog` below) - this
-// panel now holds only Structures, and its toggle button's aria-label below
-// no longer mentions Search.
+// Story #256: the Structures control panel (`createControlPanel`) still
+// lives inside this shared container - unchanged by this Story. Its old
+// hamburger trigger (`#menu-toggle`) is retired below (Epic #255's 13-item
+// toolbar order has no slot for it - items #2/#3/#4, the new Layers/
+// Settings/Camera panels that will replace this combined panel, are Story
+// #257's job, "no new panels yet" per the Epic). `menuPanels` is left in
+// place, still populated by `panelHandle` further below, for Story #257 to
+// split apart and wire new triggers for; it simply has no way to open
+// (`.open` is never toggled) until then - an intentional, Epic-sanctioned
+// transitional state between the two sequential Stories, not a leftover
+// dead container from this Story's own relocations.
 const menuPanels = document.createElement("div");
 menuPanels.id = "menu-panels";
 app.appendChild(menuPanels);
 
-const menuToggle = document.createElement("button");
-menuToggle.id = "menu-toggle";
-menuToggle.type = "button";
-menuToggle.textContent = "☰";
-menuToggle.setAttribute("aria-label", "Toggle Structures panel");
-menuToggle.setAttribute("aria-expanded", "false");
-menuToggle.addEventListener("click", () => {
-  const open = menuPanels.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(open));
-});
-app.appendChild(menuToggle);
-
-/** Issue #203: magnifying-glass inline SVG for the new Search button,
- * mirroring #199's inline-SVG icon pattern (`stroke="currentColor"`, so it
- * inherits `#search-toggle`'s own `color` for free) rather than a colored
- * Unicode/emoji glyph (e.g. "🔍") - keeps the button reading as a clean
- * monochrome icon consistent with `#menu-toggle`'s "☰" glyph, verified live
- * to render crisply at the shared 68x68px button size. */
+/** Issue #203's magnifying-glass inline SVG for the Search button
+ * (`stroke="currentColor"`, so it inherits the button's own `color` for
+ * free, same as the toolbar's other icons below). Story #256: shrunk from
+ * 30x30 (sized for the old 68x68px top-left button) to 18x18, matching the
+ * new compact `#left-toolbar` button size. */
 const SEARCH_ICON_SVG = `
-  <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <circle cx="10.5" cy="10.5" r="6.5" />
     <path d="M15.5 15.5 L21 21" />
   </svg>
 `;
 
-// Issue #203: dedicated Search button, top-left row next to the hamburger,
-// same 68x68px sizing (`#search-toggle` shares `#menu-toggle`'s box styling
-// in `style.css`). Opens `searchDialog` (built just below) - entirely
-// independent of `menuToggle`/`menuPanels`'s own open/closed state, per this
-// issue's explicit acceptance criterion that the two are unrelated.
+// Issue #203: dedicated Search button, opens `searchDialog` (built just
+// below) - entirely independent of `menuPanels`'s own open/closed state.
+// Story #256: relocated from its own standalone 68x68px top-left button
+// into the new `#left-toolbar` (below) as item #1, sharing the toolbar's
+// compact `.toolbar-button`/`.toolbar-button--icon` sizing/styling with
+// every other relocated button rather than its own dedicated CSS rule.
 const searchToggle = document.createElement("button");
 searchToggle.id = "search-toggle";
 searchToggle.type = "button";
+searchToggle.className = "toolbar-button toolbar-button--icon";
 searchToggle.innerHTML = SEARCH_ICON_SVG;
+searchToggle.title = "Search objects";
 searchToggle.setAttribute("aria-label", "Search objects");
-app.appendChild(searchToggle);
 
 // Issue #203: the modal shell (scrim + panel + close button) is built here,
 // at top-level startup like `infoDialog` below, so the button is clickable
@@ -283,39 +270,41 @@ const searchDialog = new SearchDialog();
 app.appendChild(searchDialog.element);
 searchToggle.addEventListener("click", () => searchDialog.show());
 
-// Issue #164 introduced the "i" (Info) button in this top-left row, next to
-// `#menu-toggle`. Issue #201 moved the button itself (and its click wiring)
-// down into `#bottom-left-toolbar` as that toolbar's last button (built
-// alongside the other `createToolbarButton` calls below) - only the dialog
+// Issue #164 introduced the "i" (Info) button in the old top-left row.
+// Issue #201 moved the button itself (and its click wiring) down into the
+// bottom-left toolbar (built alongside the other `createToolbarButton`
+// calls below, Story #256: now `#left-toolbar`) - only the dialog
 // instance/container stay created here, since nothing else in this row
 // depends on it.
 const infoDialog = new InfoDialog();
 app.appendChild(infoDialog.element);
 
-// Issue #197: new bottom-left toolbar - smaller/secondary utility row,
-// mirroring `#status`'s bottom-left corner (see `style.css`'s
-// `#bottom-left-toolbar` rule, which also pushes `#status`'s text up out of
-// the way so the two never collide). First button is the Expand/Collapse
-// fullscreen toggle relocated from the top-left row above (its own
-// `ui/fullscreenToggle.ts` Fullscreen API logic/state-sync is entirely
-// unchanged - only its container/position/size move here), followed by
-// Zoom In/Out, Show All, Fit to Local Bubble, and Fit to Nearest-Stars
-// Sphere (wired further below, once `applyCameraPose`/`denseBatchRadiusPc`
-// exist).
-const bottomLeftToolbar = document.createElement("div");
-bottomLeftToolbar.id = "bottom-left-toolbar";
-app.appendChild(bottomLeftToolbar);
+// Story #256: the new unified vertical, left-edge-docked toolbar (Epic
+// #255, styled after NASA "Eyes on the Solar System"'s own left toolbar)
+// replaces BOTH the old top-left row (`#menu-toggle`+`#search-toggle`) AND
+// the old horizontal `#bottom-left-toolbar` - every button below (Search,
+// Expand/Collapse, Zoom In/Out, Show All, Fit to Local Bubble, Fit to
+// Nearest-Stars Sphere, Vectors, Info, Play) is an existing button relocated
+// here, in the Epic's exact order, with unchanged click handlers/gating
+// logic - only container/position/size change. Items #2-#4 (the new Layers/
+// Settings/Camera panels) are Story #257's job and are omitted here per
+// this Story's explicit "purely structural, no new panels yet" scope.
+const leftToolbar = document.createElement("div");
+leftToolbar.id = "left-toolbar";
+app.appendChild(leftToolbar);
+
+leftToolbar.appendChild(searchToggle);
 
 const fullscreenToggle = createFullscreenToggle(app);
-bottomLeftToolbar.appendChild(fullscreenToggle.element);
+leftToolbar.appendChild(fullscreenToggle.element);
 
 /** Issue #199: inline SVG replacements for the "All"/"LB"/"NS" text-
  * abbreviation glyphs #197 originally shipped (no obvious single Unicode
  * character existed for any of the three). All three share the existing
  * toolbar glyph styling (`stroke="currentColor"`, so they pick up
- * `#bottom-left-toolbar .toolbar-button`'s `color: #dfe6f3` for free, same
+ * `#left-toolbar .toolbar-button`'s `color: #dfe6f3` for free, same
  * as the other glyphs) and a 24x24 viewBox at a smaller-than-button render
- * size so they sit comfortably inside the 44x44px buttons alongside the
+ * size so they sit comfortably inside the compact `#left-toolbar` buttons alongside the
  * existing `⤢`/`⤡`/`+`/`−` glyphs.
  *
  * `SHOW_ALL_ICON_SVG`: four separate cardinal-direction (up/down/left/right)
@@ -400,7 +389,7 @@ function createToolbarButton(
   }
   button.title = ariaLabel;
   button.setAttribute("aria-label", ariaLabel);
-  bottomLeftToolbar.appendChild(button);
+  leftToolbar.appendChild(button);
   return button;
 }
 
@@ -436,6 +425,17 @@ const velocityVectorsButton = createToolbarButton(
 );
 velocityVectorsButton.setAttribute("aria-pressed", "false");
 
+// Issue #201: the Info ("i") button, relocated here (from the old top-left
+// row, #164). Story #256: Epic #255's settled 13-item order places this
+// (#12) immediately after Vectors (#11) and immediately before Play (#13) -
+// note this is now BEFORE Play in DOM/creation order, unlike the old
+// bottom-left toolbar where Info was last - same `createToolbarButton`
+// sizing as its neighbors, rather than the old top-left row's standalone
+// 68x68px `#info-toggle` styling (removed from `style.css`). Glyph,
+// aria-label, and click behavior (`infoDialog.show()`) are unchanged from
+// #164 - only its container/position/size moved.
+const infoToggleButton = createToolbarButton("info-toggle", "i", "About Local Galactic Structures");
+
 /** Story #239: the motion-player toggle glyph - a plain filled play
  * triangle. `fill="currentColor"` (unlike the vectors icon's outline
  * strokes) so it reads as a solid, familiar "play" symbol; `.active`
@@ -450,11 +450,11 @@ const PLAYER_ICON_SVG = `
   </svg>
 `;
 
-// Story #239: grouped immediately after "Show velocity vectors" per Epic
-// #238's explicit placement - both are gated on the same camera-inside-the-
-// RECONS-dense-batch-sphere check (`applyBackgroundDimming`'s crossing
-// detection drives both `applyVelocityVectorsButtonState` and this Story's
-// own `applyPlayerSphereState`, further below).
+// Story #256: Epic #255's settled order places Play last (#13), after
+// Information (#12) - `applyPlayerSphereState`/`applyVelocityVectorsButtonState`
+// further below both key off the same camera-inside-the-RECONS-dense-batch-
+// sphere check regardless of DOM order, so reordering relative to Info here
+// doesn't affect that gating logic.
 const playerButton = createToolbarButton(
   "player-toggle",
   PLAYER_ICON_SVG,
@@ -462,14 +462,6 @@ const playerButton = createToolbarButton(
   true,
 );
 playerButton.setAttribute("aria-pressed", "false");
-
-// Issue #201: the Info ("i") button, relocated here (from the top-left row,
-// #164) as the toolbar's LAST button - same `createToolbarButton` sizing
-// (44x44px) as its neighbors, rather than the old top-left row's standalone
-// 68x68px `#info-toggle` styling (removed from `style.css`). Glyph,
-// aria-label, and click behavior (`infoDialog.show()`) are unchanged from
-// #164 - only its container/position/size moved.
-const infoToggleButton = createToolbarButton("info-toggle", "i", "About Local Galactic Structures");
 
 const raycaster = new Raycaster();
 
@@ -849,7 +841,7 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
  * applies the UI lock - disabling category/structure checkboxes and the
  * radius filter (`panelHandle.setLocked`), search (`searchToggle.disabled`,
  * and closing an already-open search dialog so a newly-locked session can't
- * leave it open), and now every OTHER `#bottom-left-toolbar` button (Zoom
+ * leave it open), and now every OTHER `#left-toolbar` button (Zoom
  * In/Out, Show All, Fit to Local Bubble, Fit to nearest-stars sphere, Show
  * velocity vectors, Info) - whenever the player's time is not exactly Today,
  * unlocking the instant it returns to exactly `0` via any path (play
