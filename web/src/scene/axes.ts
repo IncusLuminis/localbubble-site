@@ -49,7 +49,7 @@ export function createAxes(sizePc: number): AxesHelper {
  *   camera and the origin along the viewing ray (i.e. genuinely in front of
  *   the camera, not behind it) - exactly the failure mode #146 hit when it
  *   first tried placing the label at the axis's full 2000pc extent.
- * - Top view / Face-on / Edge-on: these poses sit on the Y or Z axis
+ * - Top view / Edge-on: these poses sit on the Y or Z axis
  *   (camera X-coordinate = 0), so the "behind the camera along +X" failure
  *   mode described above cannot occur regardless of factor - the label
  *   point is simply beside the viewing ray. At their default distance
