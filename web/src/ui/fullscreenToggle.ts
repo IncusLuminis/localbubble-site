@@ -3,10 +3,11 @@
  * immediately right of the hamburger menu button (`#menu-toggle`, `main.ts`,
  * issue #143/#145) in the top-left button row, sharing its 68x68px styling.
  * Issue #197 relocated it (container/position/size only - none of this
- * file's Fullscreen API logic changed) to be the first button in the new,
- * smaller bottom-left toolbar (`main.ts`'s `bottomLeftToolbar`, `style.css`'s
- * `#bottom-left-toolbar #fullscreen-toggle` rule), making room for the
- * top-left row to end up as just hamburger + Info.
+ * file's Fullscreen API logic changed) to be the first button in the
+ * bottom-left toolbar. Story #256 relocated it again into the new unified
+ * vertical `#left-toolbar` (`main.ts`'s `leftToolbar`, `style.css`'s
+ * `#left-toolbar #fullscreen-toggle` rule) as item #5 in Epic #255's
+ * settled order - still container/position/size only, no logic change.
  *
  * Uses the standard Fullscreen API (`element.requestFullscreen()` /
  * `document.exitFullscreen()`) on the app's root container - not a

@@ -22,11 +22,15 @@ body {
   display: block;
 }
 
-/* Issue #201: swapped back to the actual bottom-left corner (12px, same as
-   #197's original `#bottom-left-toolbar` value below) - the human owner
-   wanted the object-count text in the true corner and the toolbar sitting
-   above it, inverting #197's original stacking (see
-   `#bottom-left-toolbar`'s rule below for the other half of this swap). */
+/* Issue #201: swapped back to the actual bottom-left corner (12px). Story
+   #256: the toolbar (`#left-toolbar` below) is now vertically centered on
+   the left edge rather than bottom-anchored, so it and `#status` no longer
+   need to be deliberately stacked/offset from one another the way `#status`
+   and the old `#bottom-left-toolbar` were - verified live that the two
+   don't overlap at ordinary viewport heights (the toolbar's compact ~13
+   buttons at 30px + 6px gaps stay well clear of the bottom-left corner
+   unless the viewport is unusually short, in which case both are still
+   just `position: absolute` and would need revisiting together). */
 #status {
   position: absolute;
   left: 12px;
@@ -106,66 +110,20 @@ body {
   width: 240px;
 }
 
-/* Issue #143: hamburger toggle button, always visible in the top-left
-   corner (the position `#controls` used to occupy on its own). Clicking it
-   toggles `#menu-panels` (below) open/closed. Issue #145: roughly doubled
-   from the original 34x34px (too small/easy to lose track of) to 68x68px,
-   with `font-size` scaled by the same ~2x factor (16px -> 32px) so the ☰
-   glyph fills the bigger button rather than looking lost in empty space.
-   Issue #163 originally shared this rule with `#fullscreen-toggle`; issue
-   #197 moved that button down into `#bottom-left-toolbar` (below). Issue
-   #164's `#info-toggle` also shared this row/sizing at one point, but #201
-   relocated that button into `#bottom-left-toolbar` too (its own 44x44px
-   sizing now). Issue #203 added `#search-toggle` as this rule's other
-   sibling - same 68x68px box styling, positioned immediately to its right -
-   so this top-left row is now the hamburger plus the Search button. */
-#menu-toggle,
-#search-toggle {
-  position: absolute;
-  top: 12px;
-  z-index: 3;
-  width: 68px;
-  height: 68px;
-  background: rgba(10, 14, 24, 0.82);
-  border: 1px solid rgba(143, 163, 200, 0.35);
-  border-radius: 8px;
-  color: #dfe6f3;
-  cursor: pointer;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
-}
+/* Story #256: the old hamburger `#menu-toggle` (Issue #143, 68x68px) and its
+   shared top-left-row box styling with `#search-toggle` are retired - Epic
+   #255's 13-item toolbar order has no slot for a hamburger trigger, and
+   `#search-toggle` relocates into the new `#left-toolbar` (below) sharing
+   its compact `.toolbar-button`/`.toolbar-button--icon` styling instead of
+   this dedicated 68x68px rule. */
 
-#menu-toggle {
-  left: 12px;
-  font-size: 32px;
-  line-height: 1;
-}
-
-/* Issue #203: 12px (left edge) + 68px (`#menu-toggle` width) + 8px gap,
-   mirroring `#menu-panels`'s own "88px = button top + height + gap" math
-   just below for the same reason - keeps the two top-left buttons a
-   consistent 8px apart. The SVG icon (`main.ts`'s `SEARCH_ICON_SVG`) is
-   centered via flex rather than a `font-size`-driven glyph like
-   `#menu-toggle`'s "☰". */
-#search-toggle {
-  left: 88px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#menu-toggle:hover,
-#search-toggle:hover {
-  background: #24304a;
-}
-
-/* Issue #143: shared container for Search + Structures, stacked vertically
-   in the top-left (Search above Structures per the human owner's request).
-   Hidden by default; `.open` (toggled in `main.ts` by `#menu-toggle`)
-   reveals it. Positioned below `#menu-toggle` so the button stays clickable
-   (to close the menu again) even while both panels are open. Issue #145:
-   `top`/`max-height` shifted down to keep clearing `#menu-toggle` now that
-   it's grown to 68px tall (was 34px) - same 8px gap below the button as
-   before (12px button top + 68px height + 8px gap = 88px). */
+/* Issue #143: shared container for Search + Structures. Story #256: its
+   `#menu-toggle` trigger is gone (see above) and nothing currently toggles
+   `.open` below, so this panel has no way to open until Story #257 splits
+   it into the new Layers/Settings/Camera panels and wires their own
+   trigger icons into `#left-toolbar` - an intentional transitional state
+   for this Story, not dead CSS (the rule itself, and the panel content
+   `main.ts` still mounts into it, both remain for that Story to build on). */
 #menu-panels {
   display: none;
   position: absolute;
@@ -724,86 +682,84 @@ body {
   letter-spacing: 0.03em;
 }
 
-/* Issue #164's standalone `#info-toggle` top-left-row rule (68x68px,
-   Georgia-italic "i") lived here. Issue #201 moved that button into
-   `#bottom-left-toolbar` as its last button, sized identically to its
-   44x44px neighbors via the shared `.toolbar-button` rule below - so this
-   top-left-specific sizing is retired rather than kept as dead CSS. */
-
-/* Issue #197: bottom-left toolbar - a secondary/utility button row,
-   deliberately smaller (44x44px) than the top-left row's original 68x68px
-   Info-button sizing so it reads as a lesser-prominence toolbar rather than
-   competing with the primary hamburger row. Issue #201 swapped this row's
-   stacking with `#status` (see that rule above): `#status` now occupies the
-   actual bottom-left corner, so this toolbar sits directly above it instead
-   - `bottom: 36px` clears `#status`'s 12px own offset plus its text's
-   rendered line height (12px font, ~14-16px line box) plus an 8px gap
-   (mirroring #197's original 12px + 44px button + 8px gap = 64px reasoning,
-   just inverted and against text height instead of button height). Last
-   child is now `main.ts`'s relocated Info ("i") button (#201, formerly the
-   standalone top-left `#info-toggle`); first child is still the
-   `#fullscreen-toggle` relocated here per #163/#197; the rest are plain
-   `.toolbar-button`s built in `main.ts`. */
-#bottom-left-toolbar {
+/* Story #256 (Epic #255): the old top-left row's standalone `#info-toggle`
+   rule and the old horizontal `#bottom-left-toolbar` this section used to
+   describe are both retired - `#left-toolbar` below replaces both with one
+   unified, vertical, left-edge-docked toolbar, styled after NASA "Eyes on
+   the Solar System"'s own left toolbar (the human owner's explicit
+   reference). Vertically centered on the left edge (`top: 50%` +
+   `translateY(-50%)`) rather than anchored to top or bottom, so it doesn't
+   compete with `#status` (bottom-left) or need to clear any other
+   top-anchored chrome - verified live at typical viewport sizes. Buttons
+   are 30x30px, ~30% smaller than the old 44x44px `#bottom-left-toolbar`
+   baseline (tuned live for a compact, miniature look, not a hard pixel
+   target). Order (top to bottom) is `main.ts`'s DOM order, matching Epic
+   #255's settled 13-item list (skipping #2-#4, Story #257's new panels):
+   Search, Expand/Collapse (`#fullscreen-toggle`, relocated per #163/#197),
+   Zoom In/Out, Show All, Fit to Local Bubble, Fit to Nearest-Stars Sphere,
+   Vectors, Information, Play. */
+#left-toolbar {
   position: absolute;
   left: 12px;
-  bottom: 36px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 3;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 6px;
 }
 
-#bottom-left-toolbar #fullscreen-toggle,
-#bottom-left-toolbar .toolbar-button {
-  width: 44px;
-  height: 44px;
+#left-toolbar #fullscreen-toggle,
+#left-toolbar .toolbar-button {
+  width: 30px;
+  height: 30px;
   background: rgba(10, 14, 24, 0.82);
   border: 1px solid rgba(143, 163, 200, 0.35);
   border-radius: 6px;
   color: #dfe6f3;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 1;
   cursor: pointer;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
 /* `#fullscreen-toggle`'s glyphs (⤢/⤡) read a little small at the toolbar's
-   shared 18px - bumped up specifically for it, same way the top-left row
-   scaled its own glyph size to its button size. */
-#bottom-left-toolbar #fullscreen-toggle {
-  font-size: 22px;
+   shared 13px - bumped up specifically for it, same way the top-left row
+   used to scale its own glyph size to its button size. */
+#left-toolbar #fullscreen-toggle {
+  font-size: 16px;
 }
 
-#bottom-left-toolbar .toolbar-button {
-  font-size: 13px;
+#left-toolbar .toolbar-button {
+  font-size: 15px;
   font-family: system-ui, -apple-system, sans-serif;
 }
 
 /* Issue #199: the "All"/"LB"/"NS" text abbreviations above are now inline
    SVG icons (`main.ts`'s `SHOW_ALL_ICON_SVG`/`FIT_LOCAL_BUBBLE_ICON_SVG`/
-   `FIT_NEAREST_STARS_ICON_SVG`) - `display: flex` centers the `<svg>` inside
-   the 44x44px button both axes, same as the other toolbar buttons' text
+   `FIT_NEAREST_STARS_ICON_SVG`, plus `SEARCH_ICON_SVG`/`VELOCITY_VECTORS_
+   ICON_SVG`/`PLAYER_ICON_SVG`) - `display: flex` centers the `<svg>` inside
+   the 30x30px button both axes, same as the other toolbar buttons' text
    glyphs already read centered by default. The icons themselves already
-   `stroke="currentColor"`, so they inherit this button's `color: #dfe6f3`
-   above without any extra rule needed. */
-#bottom-left-toolbar .toolbar-button--icon {
+   `stroke`/`fill="currentColor"`, so they inherit this button's
+   `color: #dfe6f3` above without any extra rule needed. */
+#left-toolbar .toolbar-button--icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#bottom-left-toolbar #fullscreen-toggle:hover,
-#bottom-left-toolbar .toolbar-button:hover {
+#left-toolbar #fullscreen-toggle:hover,
+#left-toolbar .toolbar-button:hover {
   background: #24304a;
 }
 
-#bottom-left-toolbar .toolbar-button:disabled {
+#left-toolbar .toolbar-button:disabled {
   opacity: 0.35;
   cursor: default;
 }
 
-#bottom-left-toolbar .toolbar-button:disabled:hover {
+#left-toolbar .toolbar-button:disabled:hover {
   background: rgba(10, 14, 24, 0.82);
 }
 
@@ -814,13 +770,13 @@ body {
    class, styled with the same green used for its full-3D vector arrows
    (`velocityVectors.ts`'s `FULL_VECTOR_COLOR`) so the button visibly reads
    as "currently on". */
-#bottom-left-toolbar .toolbar-button.active {
+#left-toolbar .toolbar-button.active {
   background: rgba(57, 255, 106, 0.22);
   border-color: rgba(57, 255, 106, 0.65);
   color: #39ff6a;
 }
 
-#bottom-left-toolbar .toolbar-button.active:hover {
+#left-toolbar .toolbar-button.active:hover {
   background: rgba(57, 255, 106, 0.3);
 }
 
@@ -849,9 +805,9 @@ body {
    (vs. e.g. `50`, which today's ~130 labels would already exceed), so this
    class of bug can't recur from ordinary label-count growth. This value is
    deliberately far above every other z-index in the app (#status/#fov-
-   readout: 1, .panel/#menu-panels: 2, #menu-toggle/#search-toggle (#203)/
-   #bottom-left-toolbar (incl. #info-toggle, #201): 3, #154's edge-indicator:
-   20) - none of those need to change, since a modal is meant to be
+   readout: 1, .panel/#menu-panels: 2, #left-toolbar (Story #256, replacing
+   #menu-toggle/#search-toggle (#203)/#bottom-left-toolbar (#197/#201)): 3,
+   #154's edge-indicator: 20) - none of those need to change, since a modal is meant to be
    unconditionally topmost. Issue #203's search modal reuses this same
    `1000` (both modals are "primary action" modals per that issue's brief) -
    they aren't expected to be open simultaneously, but since DOM order alone
@@ -983,13 +939,13 @@ body {
    (blue-cyan, `#5fc9ff`) from the vectors toggle's green so the two
    sphere-gated toggles read as visually separate features even though they
    share the same enable/disable/active styling shape. */
-#bottom-left-toolbar #player-toggle.active {
+#left-toolbar #player-toggle.active {
   background: rgba(95, 201, 255, 0.22);
   border-color: rgba(95, 201, 255, 0.65);
   color: #5fc9ff;
 }
 
-#bottom-left-toolbar #player-toggle.active:hover {
+#left-toolbar #player-toggle.active:hover {
   background: rgba(95, 201, 255, 0.3);
 }
 
@@ -997,7 +953,7 @@ body {
    readout, Today button, scrubber, speed slider. Docked bottom-center
    (unlike `.panel`'s default top-anchored position) so it reads as a
    persistent transport bar, not another stacked corner panel, and doesn't
-   collide with `#bottom-left-toolbar`/`#status` (bottom-left) or
+   collide with `#left-toolbar`/`#status` (bottom-left) or
    `#inspector` (top-right). Hidden by default (`display: none`); `.open`
    (toggled by `ui/playerPanel.ts`'s `setVisible`, driven from `main.ts`)
    reveals it - same on/off convention as `#menu-panels.open`.
@@ -1084,7 +1040,7 @@ body {
 
 /* Story #243: highlights whichever of `<`/`>` is the actively playing
    direction (`ui/playerPanel.ts`'s `update()` toggles this) - reuses the
-   toolbar player-toggle's own blue-cyan accent (`#bottom-left-toolbar
+   toolbar player-toggle's own blue-cyan accent (`#left-toolbar
    #player-toggle.active` above) so "the player is running" reads
    consistently in both places. */
 .player-transport.active {
