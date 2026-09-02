@@ -5,7 +5,7 @@ import {
   formatSpeedKms,
   nextVelocityVectorsToggleOn,
   selectVisibleVelocitySpeedLabelIds,
-  starsWithVelocityInSphere,
+  starsWithVelocityInLocalBubble,
   VELOCITY_SPEED_LABEL_MAX_VISIBLE,
   velocityArrowLengthPc,
   velocityDirection,
@@ -25,12 +25,13 @@ import type { SceneObject, SceneVelocity } from "../src/scene/sceneTypes";
 // and fully covered instead.
 
 /**
- * Story #231: velocity-vector arrows for the RECONS-dense-batch sphere's
- * in-sphere stars, gated behind a toggle whose own enabled state depends on
- * the camera being inside that same sphere. Covers the pure geometry/
- * direction/length math, the in-sphere filtering, the toggle-state business
- * rule (issue #231 AC #3's "exiting the sphere forces the toggle off"), and
- * the layer construction itself (arrow count, tangential-only styling).
+ * Story #231: velocity-vector arrows for the Local Bubble's in-bubble stars
+ * (Story #287: widened from the original RECONS-dense-batch sphere), gated
+ * behind a toggle whose own enabled state depends on the camera being
+ * inside that same volume. Covers the pure geometry/direction/length math,
+ * the in-bubble filtering, the toggle-state business rule (issue #231 AC
+ * #3's "exiting the volume forces the toggle off"), and the layer
+ * construction itself (arrow count, tangential-only styling).
  */
 
 function makeVelocity(overrides: Partial<SceneVelocity> = {}): SceneVelocity {
@@ -127,51 +128,65 @@ describe("velocityArrowLengthPc", () => {
   });
 });
 
-describe("starsWithVelocityInSphere", () => {
-  const IN_SPHERE = makeObject({
-    id: "in-sphere",
+describe("starsWithVelocityInLocalBubble", () => {
+  const IN_BUBBLE = makeObject({
+    id: "in-bubble",
     distance_pc: 5,
+    velocity: makeVelocity(),
+  });
+  // Story #287: a star beyond the old RECONS sphere (~11.26pc) but still
+  // within the wider Local Bubble (~60pc) - exactly the population Story
+  // #286 backfilled `velocity` for, and this Story's own reason for
+  // widening the radius this function checks against.
+  const IN_BUBBLE_BEYOND_OLD_SPHERE = makeObject({
+    id: "in-bubble-beyond-old-sphere",
+    distance_pc: 30,
     velocity: makeVelocity(),
   });
   const NO_VELOCITY = makeObject({ id: "no-velocity", distance_pc: 3, velocity: null });
   // Defensive case: has a velocity block but its real distance exceeds the
-  // sphere radius (shouldn't happen given Story #230's own scoping, but
-  // Epic #229 explicitly asks for a real-distance check rather than trusting
-  // upstream scoping alone).
-  const OUT_OF_SPHERE_WITH_VELOCITY = makeObject({
-    id: "out-of-sphere",
-    distance_pc: 50,
+  // bubble radius (shouldn't happen given Story #230/#286's own scoping,
+  // but Epic #229 explicitly asks for a real-distance check rather than
+  // trusting upstream scoping alone).
+  const OUT_OF_BUBBLE_WITH_VELOCITY = makeObject({
+    id: "out-of-bubble",
+    distance_pc: 90,
     velocity: makeVelocity(),
   });
 
-  it("includes only objects with a non-null velocity within the real sphere radius", () => {
-    const result = starsWithVelocityInSphere(
-      [IN_SPHERE, NO_VELOCITY, OUT_OF_SPHERE_WITH_VELOCITY],
-      11.26,
+  it("includes only objects with a non-null velocity within the real Local Bubble radius, including stars beyond the old RECONS sphere", () => {
+    const result = starsWithVelocityInLocalBubble(
+      [IN_BUBBLE, IN_BUBBLE_BEYOND_OLD_SPHERE, NO_VELOCITY, OUT_OF_BUBBLE_WITH_VELOCITY],
+      60,
     );
-    expect(result.map((o) => o.id)).toEqual(["in-sphere"]);
+    expect(result.map((o) => o.id).sort()).toEqual(["in-bubble", "in-bubble-beyond-old-sphere"]);
   });
 
-  it("skips the distance check entirely when the sphere radius is not yet known (0)", () => {
-    const result = starsWithVelocityInSphere([IN_SPHERE, OUT_OF_SPHERE_WITH_VELOCITY], 0);
-    expect(result.map((o) => o.id).sort()).toEqual(["in-sphere", "out-of-sphere"]);
+  it("skips the distance check entirely when the bubble radius is not yet known (null)", () => {
+    const result = starsWithVelocityInLocalBubble([IN_BUBBLE, OUT_OF_BUBBLE_WITH_VELOCITY], null);
+    expect(result.map((o) => o.id).sort()).toEqual(["in-bubble", "out-of-bubble"]);
+  });
+
+  it("skips the distance check entirely when the bubble radius is non-positive (0)", () => {
+    const result = starsWithVelocityInLocalBubble([IN_BUBBLE, OUT_OF_BUBBLE_WITH_VELOCITY], 0);
+    expect(result.map((o) => o.id).sort()).toEqual(["in-bubble", "out-of-bubble"]);
   });
 });
 
 describe("createVelocityVectorsLayer", () => {
-  it("builds one arrow group per in-sphere star with velocity data", () => {
+  it("builds one arrow group per in-bubble star with velocity data", () => {
     const objects = [
       makeObject({ id: "a", distance_pc: 2, velocity: makeVelocity() }),
       makeObject({ id: "b", distance_pc: 4, velocity: makeVelocity() }),
       makeObject({ id: "c", distance_pc: 4, velocity: null }),
     ];
-    const layer = createVelocityVectorsLayer(objects, 11.26);
+    const layer = createVelocityVectorsLayer(objects, 60);
     expect(layer).toBeInstanceOf(Group);
     expect(layer.children).toHaveLength(2);
   });
 
-  it("starts hidden - main.ts's sphere-gated toggle turns it on", () => {
-    const layer = createVelocityVectorsLayer([], 11.26);
+  it("starts hidden - main.ts's Local-Bubble-gated toggle turns it on", () => {
+    const layer = createVelocityVectorsLayer([], 60);
     expect(layer.visible).toBe(false);
   });
 
@@ -353,10 +368,10 @@ describe("selectVisibleVelocitySpeedLabelIds", () => {
     expect(visible.size).toBe(VELOCITY_SPEED_LABEL_MAX_VISIBLE);
   });
 
-  it("VELOCITY_SPEED_LABEL_MAX_VISIBLE is a real, finite bound, sized well under the ~127-arrow pool", () => {
+  it("VELOCITY_SPEED_LABEL_MAX_VISIBLE is a real, finite bound, sized well under the ~156-arrow Local Bubble pool (Story #287, up from ~127)", () => {
     expect(Number.isFinite(VELOCITY_SPEED_LABEL_MAX_VISIBLE)).toBe(true);
     expect(VELOCITY_SPEED_LABEL_MAX_VISIBLE).toBeGreaterThan(0);
-    expect(VELOCITY_SPEED_LABEL_MAX_VISIBLE).toBeLessThan(127);
+    expect(VELOCITY_SPEED_LABEL_MAX_VISIBLE).toBeLessThan(156);
   });
 
   it("returns an empty set for an empty candidate pool regardless of visibility", () => {

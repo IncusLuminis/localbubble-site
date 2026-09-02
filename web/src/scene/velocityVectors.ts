@@ -16,17 +16,22 @@ import { selectNearestLabels, type LabelRankCandidate } from "./labels";
 import type { SceneObject } from "./sceneTypes";
 
 /**
- * Story #231: directional velocity-vector arrows for the ~127 stars within
- * the RECONS-dense-batch sphere that carry Story #230's `velocity` field
- * (`vx_kms`/`vy_kms`/`vz_kms`, heliocentric Galactic Cartesian - the SAME
- * axes as `SceneObject.position_pc`, so an arrow anchored at a star's own
- * position and pointing along its normalized velocity needs no extra
- * coordinate transform). Purely additive: a standalone `THREE.Group` added
- * directly to the scene, entirely independent of the InstancedMesh catalog
- * buckets (`objects.ts`) and picking (`picking.ts`), so selecting a star
- * (Inspector) is unaffected (issue #231 AC).
+ * Story #231: directional velocity-vector arrows for the stars that carry
+ * Story #230's/#286's `velocity` field (`vx_kms`/`vy_kms`/`vz_kms`,
+ * heliocentric Galactic Cartesian - the SAME axes as `SceneObject.
+ * position_pc`, so an arrow anchored at a star's own position and pointing
+ * along its normalized velocity needs no extra coordinate transform).
+ * Purely additive: a standalone `THREE.Group` added directly to the scene,
+ * entirely independent of the InstancedMesh catalog buckets (`objects.ts`)
+ * and picking (`picking.ts`), so selecting a star (Inspector) is unaffected
+ * (issue #231 AC).
  *
- * At most ~127 arrows - nowhere near the main catalog's draw-call budget
+ * Story #287: originally scoped to the ~127 stars within the RECONS-dense-
+ * batch sphere (~11.26pc), widened to the full Local Bubble (~60pc,
+ * `bubbleOuterRadiusPc`) - now ~156 stars (127 + Story #286's 29-star
+ * backfill). See `starsWithVelocityInLocalBubble` below.
+ *
+ * At most ~156 arrows - nowhere near the main catalog's draw-call budget
  * concern that justifies `objects.ts`'s InstancedMesh-per-type
  * architecture (issue #89). Each arrow here is a small, individually-
  * built `THREE.Line` (shaft) + `THREE.Mesh` (cone head) pair, matching
@@ -166,29 +171,43 @@ export function velocityArrowLengthPc(speedKms: number): number {
 }
 
 /**
- * The in-sphere stars a velocity arrow should be drawn for: a non-null
- * `velocity` block (Story #230 already scoped data acquisition to exactly
- * the 127 in-sphere stars, so this alone is normally sufficient) AND,
- * defensively, a real `distance_pc <= denseBatchRadiusPc` check - mirroring
- * Epic #229's own explicit "use the REAL-DISTANCE check, not a group tag"
- * principle (`lod.ts`'s `isStarMarkerShrinkEligible`/
+ * The in-Local-Bubble stars a velocity arrow should be drawn for: a
+ * non-null `velocity` block (Story #230/#286 already scoped data
+ * acquisition to exactly the in-bubble stars, so this alone is normally
+ * sufficient) AND, defensively, a real `distance_pc <= bubbleOuterRadiusPc`
+ * check - mirroring Epic #229's own explicit "use the REAL-DISTANCE check,
+ * not a group tag" principle (`lod.ts`'s `isStarMarkerShrinkEligible`/
  * `passesDenseBatchLod` precedent) rather than trusting the upstream
- * pipeline's scoping alone. `denseBatchRadiusPc <= 0` (scene not loaded
- * yet) skips the distance check entirely, matching `lod.ts`'s own "nothing
- * to be inside of yet" convention for that sentinel.
+ * pipeline's scoping alone.
+ *
+ * Story #287: widened from the RECONS dense-batch sphere
+ * (`denseBatchRadiusPc`, ~11.26pc) to the full Local Bubble
+ * (`bubbleOuterRadiusPc`, ~60pc, `objects.ts`'s `bubbleOuterRadiusPcFrom` -
+ * the SAME derivation `main.ts` already uses elsewhere), per Epic #285 -
+ * this is what carries `createVelocityVectorsLayer`/
+ * `createVelocitySpeedLabelsLayer`/`main.ts`'s motion-player population
+ * (`animatedStars`, `motionTrail.ts`'s trails) all along with it, since
+ * every one of those reuses this same function's result rather than
+ * re-selecting independently. `bubbleOuterRadiusPc === null` or `<= 0`
+ * (scene not loaded yet, or no Local Bubble layer in this scene) skips the
+ * distance check entirely, matching `lod.ts`'s `isCameraInsideLocalBubble`'s
+ * own "nothing to be inside of yet" convention for that sentinel - renamed
+ * from this function's original `starsWithVelocityInSphere`
+ * (denseBatchRadiusPc-keyed) name now that "sphere" no longer describes the
+ * gating volume.
  */
-export function starsWithVelocityInSphere(
+export function starsWithVelocityInLocalBubble(
   objects: readonly SceneObject[],
-  denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null,
 ): SceneObject[] {
   return objects.filter((obj) => {
     if (!obj.velocity) {
       return false;
     }
-    if (denseBatchRadiusPc <= 0) {
+    if (bubbleOuterRadiusPc === null || bubbleOuterRadiusPc <= 0) {
       return true;
     }
-    return obj.distance_pc <= denseBatchRadiusPc;
+    return obj.distance_pc <= bubbleOuterRadiusPc;
   });
 }
 
@@ -268,28 +287,29 @@ function buildArrow(
 
 /**
  * Builds the full velocity-vectors layer: one arrow per
- * `starsWithVelocityInSphere` result, anchored at the star's own
+ * `starsWithVelocityInLocalBubble` result, anchored at the star's own
  * `position_pc` and pointing along its normalized velocity. Stars with
- * `radial_velocity_known: false` (tangential-only, ~9 of the 127) render as
- * dashed, lower-opacity, distinctly-colored arrows (issue #231 AC #5); every
- * other in-sphere star with velocity data gets a solid full-3D arrow.
+ * `radial_velocity_known: false` (tangential-only) render as dashed,
+ * lower-opacity, distinctly-colored arrows (issue #231 AC #5); every other
+ * in-bubble star with velocity data gets a solid full-3D arrow.
  *
  * Always returns a `Group` (never `null`, unlike the optional `structures.*`
- * layers in `structures.ts`) - an empty scene/no in-sphere velocity data
+ * layers in `structures.ts`) - an empty scene/no in-bubble velocity data
  * still yields a valid, empty group, since `main.ts` needs a stable
  * reference to toggle `.visible` on regardless. Starts `visible = false`;
- * `main.ts`'s sphere-gated toggle (mirroring `isDenseBatchBoundaryVisible`'s
- * own camera-driven show/hide) is what turns it on.
+ * `main.ts`'s Local-Bubble-gated toggle (Story #287; mirrors
+ * `isDenseBatchBoundaryVisible`'s own camera-driven show/hide) is what turns
+ * it on.
  */
 export function createVelocityVectorsLayer(
   objects: readonly SceneObject[],
-  denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null,
 ): Group {
   const group = new Group();
   group.name = "velocity-vectors";
   group.visible = false;
 
-  for (const obj of starsWithVelocityInSphere(objects, denseBatchRadiusPc)) {
+  for (const obj of starsWithVelocityInLocalBubble(objects, bubbleOuterRadiusPc)) {
     const velocity = obj.velocity;
     if (!velocity) {
       continue;
@@ -318,28 +338,35 @@ export function createVelocityVectorsLayer(
 /**
  * Issue #231's exit-hides-vectors rule (AC #3), as a pure decision: the
  * toggle's next ON/OFF state given its current state and whether the camera
- * is inside the sphere RIGHT NOW - if the camera has just left the sphere,
+ * is inside the gating volume RIGHT NOW - if the camera has just left it,
  * the toggle is forced OFF regardless of its prior state (no stale display
  * the user can't currently turn off); otherwise the toggle's own state is
  * left untouched (a click, handled separately in `main.ts`, is the only
  * other thing that can change it). Pure so this specific business rule -
  * not just plain enable/disable - is directly unit-testable without a DOM/
  * `main.ts` harness.
+ *
+ * Story #287: the gating volume `main.ts` now passes is the Local Bubble
+ * (`lod.ts`'s `isCameraInsideLocalBubble`), widened from the original
+ * RECONS dense-batch sphere - this function's own logic is unchanged, only
+ * what its caller feeds it as `insideLocalBubbleNow`.
  */
-export function nextVelocityVectorsToggleOn(currentlyOn: boolean, insideSphereNow: boolean): boolean {
-  if (!insideSphereNow) {
+export function nextVelocityVectorsToggleOn(currentlyOn: boolean, insideLocalBubbleNow: boolean): boolean {
+  if (!insideLocalBubbleNow) {
     return false;
   }
   return currentlyOn;
 }
 
 /** Whether the vectors layer itself should be visible: the toggle must be
- * ON AND the camera must currently be inside the sphere (issue #231 AC:
- * exiting the sphere hides the vectors immediately, even before any further
+ * ON AND the camera must currently be inside the gating volume (issue #231
+ * AC: exiting it hides the vectors immediately, even before any further
  * click - see `nextVelocityVectorsToggleOn` above for the companion rule
- * that also forces the toggle itself back OFF in that same case). */
-export function velocityVectorsVisible(toggleOn: boolean, insideSphere: boolean): boolean {
-  return toggleOn && insideSphere;
+ * that also forces the toggle itself back OFF in that same case). Story
+ * #287: that volume is now the Local Bubble, not the RECONS sphere - see
+ * `nextVelocityVectorsToggleOn`'s docstring. */
+export function velocityVectorsVisible(toggleOn: boolean, insideLocalBubble: boolean): boolean {
+  return toggleOn && insideLocalBubble;
 }
 
 /**
@@ -361,7 +388,8 @@ export function velocityVectorsVisible(toggleOn: boolean, insideSphere: boolean)
  * object general catalog) or `DENSE_BATCH_MAX_VISIBLE_LABELS` (uncapped,
  * issue #159 - see this section's docstring above for why that one in
  * particular would be wrong here): this pool is a different, much smaller
- * population (~127 in-sphere velocity arrows) with a different readability
+ * population (Story #287: ~156 in-Local-Bubble velocity arrows, up from the
+ * original ~127-star RECONS-sphere-only pool) with a different readability
  * target (a handful of speed numbers near the camera, not "every arrow
  * labeled"). Live-tuned at "Fit to nearest-stars sphere" zoom with vectors
  * toggled on: `20` keeps the label set legible - readable at a glance,
@@ -388,17 +416,17 @@ export interface VelocitySpeedLabelCandidate {
 
 /**
  * The pure candidate/cap-selection decision behind this Story's density
- * control: given every in-sphere arrow's speed-label candidate and whether
+ * control: given every in-bubble arrow's speed-label candidate and whether
  * the arrows themselves are currently visible (`velocityVectorsVisible`'s
- * own result - the same toggle-ON-AND-inside-sphere gate the arrows use, so
- * a speed label can never be visible while its arrow isn't), returns the
- * ids that should actually render.
+ * own result - the same toggle-ON-AND-inside-Local-Bubble gate the arrows
+ * use, so a speed label can never be visible while its arrow isn't),
+ * returns the ids that should actually render.
  *
  * `arrowsVisible: false` short-circuits to an empty set without even
  * touching `selectNearestLabels` - the density cap below is irrelevant if
  * nothing should be visible at all (arrows off, or camera outside the
- * sphere), and this guarantees "no orphaned speed labels" structurally
- * rather than by relying on every caller to remember the gate.
+ * Local Bubble), and this guarantees "no orphaned speed labels"
+ * structurally rather than by relying on every caller to remember the gate.
  *
  * `arrowsVisible: true` delegates to `scene/labels.ts`'s exported, generic
  * `selectNearestLabels` - reused directly, per issue #236's brief, rather
@@ -441,15 +469,15 @@ export interface VelocitySpeedLabel {
   /** The `SceneObject.id` this speed label belongs to - matches the
    * corresponding arrow's `velocity-vector-${id}` group name, though the
    * two are never cross-referenced directly (each is independently derived
-   * from the same `starsWithVelocityInSphere` pool). */
+   * from the same `starsWithVelocityInLocalBubble` pool). */
   objectId: string;
   css2dObject: CSS2DObject;
   element: HTMLDivElement;
 }
 
 /**
- * Builds one `CSS2DObject` speed label per in-sphere velocity arrow
- * (`starsWithVelocityInSphere`, the SAME pool `createVelocityVectorsLayer`
+ * Builds one `CSS2DObject` speed label per in-bubble velocity arrow
+ * (`starsWithVelocityInLocalBubble`, the SAME pool `createVelocityVectorsLayer`
  * draws arrows for), anchored at that arrow's own tip (`origin +
  * direction * length` - the same point `buildArrow` above positions its
  * cone head at) so the label reads as "belonging to" that specific arrow
@@ -470,18 +498,18 @@ export interface VelocitySpeedLabel {
  * Always returns a real (possibly empty) group/labels pair, same
  * "never null" convention as `createVelocityVectorsLayer` above - `main.ts`
  * needs a stable reference regardless of whether the loaded scene has any
- * in-sphere velocity data.
+ * in-bubble velocity data.
  */
 export function createVelocitySpeedLabelsLayer(
   objects: readonly SceneObject[],
-  denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null,
 ): { group: Object3D; labels: VelocitySpeedLabel[] } {
   const group = new Object3D();
   group.name = "velocity-speed-labels";
 
   const labels: VelocitySpeedLabel[] = [];
 
-  for (const obj of starsWithVelocityInSphere(objects, denseBatchRadiusPc)) {
+  for (const obj of starsWithVelocityInLocalBubble(objects, bubbleOuterRadiusPc)) {
     const velocity = obj.velocity;
     if (!velocity) {
       continue;

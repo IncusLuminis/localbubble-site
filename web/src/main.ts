@@ -54,7 +54,7 @@ import {
   createVelocityVectorsLayer,
   nextVelocityVectorsToggleOn,
   selectVisibleVelocitySpeedLabelIds,
-  starsWithVelocityInSphere,
+  starsWithVelocityInLocalBubble,
   VELOCITY_SPEED_LABEL_MAX_VISIBLE,
   velocityVectorsVisible,
 } from "./scene/velocityVectors";
@@ -560,16 +560,21 @@ let playerTimeYears = 0;
 let playerPlaying = false;
 let playerPanelOpen = false;
 
-/** Story #275: whether the camera is currently inside the RECONS dense-batch
- * sphere, as of the last `applyPlayerSphereState` call (mirrors
- * `cameraWasInsideDenseBatchSphere`'s own crossing-detection value, but
- * scoped to this module's own player-indicator visibility need rather than
- * reused directly, since that flag lives above `applyBackgroundDimming` and
- * is updated on the same crossing frames `applyPlayerSphereState` already
- * runs on). Drives `playerCollapsedIndicator`'s visibility together with
+/** Story #275: whether the camera is currently inside the player's gating
+ * volume, as of the last `applyPlayerSphereState` call (mirrors
+ * `cameraWasInsideLocalBubble`'s own crossing-detection value, but scoped to
+ * this module's own player-indicator visibility need rather than reused
+ * directly, since that flag lives above `applyBackgroundDimming` and is
+ * updated on the same crossing frames `applyPlayerSphereState` already runs
+ * on). Story #287: that gating volume is now the Local Bubble
+ * (`isCameraInsideLocalBubble`), widened from the original RECONS
+ * dense-batch sphere - the name (`...InsideSphere`) is unchanged, mirroring
+ * `nextPlayerStateForSphere`'s own docstring note on keeping this Story's
+ * "sphere-exit-reset" shorthand even though the actual volume moved.
+ * Drives `playerCollapsedIndicator`'s visibility together with
  * `playerPanelOpen` via `syncPlayerCollapsedIndicatorVisibility` below - the
- * indicator shows exactly when inside the sphere AND the expanded panel is
- * NOT open, so the two are always mutually exclusive. */
+ * indicator shows exactly when inside the Local Bubble AND the expanded
+ * panel is NOT open, so the two are always mutually exclusive. */
 let playerInsideSphere = false;
 
 /** Story #266: the player's single signed `[-1, 1]` rate value - drives both
@@ -586,8 +591,10 @@ let playerInsideSphere = false;
 const DEFAULT_PLAYER_RATE_SLIDER_VALUE = 0.55;
 let playerRateSliderValue = DEFAULT_PLAYER_RATE_SLIDER_VALUE;
 
-/** Story #239: the ~127 in-sphere stars with velocity data (Epic #229's
- * `starsWithVelocityInSphere`, reused directly - never reimplemented),
+/** Story #239: the animated stars with velocity data (Epic #229's
+ * `starsWithVelocityInLocalBubble` - Story #287: renamed from
+ * `starsWithVelocityInSphere` and widened from the ~127-star RECONS sphere
+ * to the ~156-star Local Bubble - reused directly, never reimplemented),
  * their `id -> (bucket, index)` lookup (`objects.ts`'s
  * `buildObjectIndexLookup`, built ONCE per player session - here, once per
  * scene load, well before any player session starts, see that function's
@@ -898,28 +905,34 @@ let cameraWasInsideLocalBubble = false;
 
 /** Issue #231: syncs the velocity-vectors toggle button's enabled/disabled
  * state (and, per AC #3, forces the toggle itself - and so the layer's
- * visibility - back OFF if the camera has just left the sphere) to
- * `insideSphere`. Called ONLY from `applyBackgroundDimming` below, on the
- * same actual-boundary-crossing frames that function already isolates via
- * `cameraWasInsideDenseBatchSphere` change-detection - per this issue's own
+ * visibility - back OFF if the camera has just left the gating volume) to
+ * `insideLocalBubble`. Called ONLY from `applyBackgroundDimming` below, on
+ * the same actual-boundary-crossing frames that function already isolates
+ * via `cameraWasInsideLocalBubble` change-detection - per this issue's own
  * explicit instruction, this hooks into that existing per-frame call site
  * rather than duplicating a second independent RAF-driven check. Safe to
  * call before the scene has loaded (`velocityVectorsGroup` still `null`) or
  * before `velocityVectorsButton` exists in that ordering - in practice
  * `applyBackgroundDimming` itself is only ever invoked from `animate()`,
- * well after both are constructed at module-init time. */
-function applyVelocityVectorsButtonState(insideSphere: boolean): void {
-  velocityVectorsOn = nextVelocityVectorsToggleOn(velocityVectorsOn, insideSphere);
+ * well after both are constructed at module-init time.
+ *
+ * Story #287: widened from the RECONS dense-batch sphere
+ * (`cameraWasInsideDenseBatchSphere`) to the Local Bubble
+ * (`cameraWasInsideLocalBubble`) - this function's own logic is unchanged,
+ * only what `applyBackgroundDimming` feeds it. */
+function applyVelocityVectorsButtonState(insideLocalBubble: boolean): void {
+  velocityVectorsOn = nextVelocityVectorsToggleOn(velocityVectorsOn, insideLocalBubble);
   // Story #247 AC #4: also disabled while the player's time is away from
-  // Today (`uiLocked`) - combined with the pre-existing sphere gate via OR,
-  // matching `syncUiLock`'s own combined formula for this same button, so
-  // whichever of the two triggers (a sphere crossing here, a player-time
-  // lock transition there) runs last always writes the same correct value.
-  velocityVectorsButton.disabled = !insideSphere || uiLocked;
+  // Today (`uiLocked`) - combined with the pre-existing gating-volume gate
+  // via OR, matching `syncUiLock`'s own combined formula for this same
+  // button, so whichever of the two triggers (a boundary crossing here, a
+  // player-time lock transition there) runs last always writes the same
+  // correct value.
+  velocityVectorsButton.disabled = !insideLocalBubble || uiLocked;
   velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
   velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
   if (velocityVectorsGroup) {
-    velocityVectorsGroup.visible = velocityVectorsVisible(velocityVectorsOn, insideSphere);
+    velocityVectorsGroup.visible = velocityVectorsVisible(velocityVectorsOn, insideLocalBubble);
   }
 }
 
@@ -1069,17 +1082,21 @@ function syncUiLock(): void {
   showAllButton.disabled = uiLocked;
   fitLocalBubbleButton.disabled = uiLocked || localBubbleStructure === null;
   fitNearestStarsButton.disabled = uiLocked;
-  velocityVectorsButton.disabled = uiLocked || !cameraWasInsideDenseBatchSphere;
+  // Story #287: gated on the Local Bubble now, not the RECONS dense-batch
+  // sphere - `cameraWasInsideLocalBubble` is kept in sync by
+  // `applyBackgroundDimming`'s own crossing-detection, same as
+  // `cameraWasInsideDenseBatchSphere` was before.
+  velocityVectorsButton.disabled = uiLocked || !cameraWasInsideLocalBubble;
   infoToggleButton.disabled = uiLocked;
 }
 
 /** Story #239 AC #8 (mirrors `applyVelocityVectorsButtonState` above
- * exactly): syncs the player's sphere-gated visibility state to
- * `insideSphere`, and - via `motionPlayer.ts`'s pure `nextPlayerStateForSphere`
+ * exactly): syncs the player's gated visibility state to
+ * `insideLocalBubble`, and - via `motionPlayer.ts`'s pure `nextPlayerStateForSphere`
  * - force-resets the whole player (time back to Today, paused, panel
- * hidden) the instant the camera leaves the sphere, mirroring #231 AC #3's
- * "no stale display the user can't currently turn off" reasoning: leaving
- * the sphere mid-animation snaps back to Today FIRST (never leaves stars
+ * hidden) the instant the camera leaves the gating volume, mirroring #231
+ * AC #3's "no stale display the user can't currently turn off" reasoning:
+ * leaving it mid-animation snaps back to Today FIRST (never leaves stars
  * mid-flight while forcibly closing the player) rather than merely hiding
  * the panel over whatever position happened to be showing. Called ONLY from
  * `applyBackgroundDimming`'s own boundary-crossing detection, alongside
@@ -1087,31 +1104,37 @@ function syncUiLock(): void {
  * to reuse that existing per-frame hook rather than adding a third
  * independent RAF-driven check.
  *
+ * Story #287: widened from the RECONS dense-batch sphere
+ * (`cameraWasInsideDenseBatchSphere`) to the Local Bubble
+ * (`cameraWasInsideLocalBubble`) - `applyBackgroundDimming` now passes
+ * `insideBubble` here instead of `insideSphere`; this function's own logic
+ * is otherwise unchanged.
+ *
  * Story #275: `playerInsideSphere` is set FIRST, before `applyPlayerResetState`
  * runs - that call's own `syncPlayerCollapsedIndicatorVisibility` reads the
  * new value, so the collapsed indicator's visibility (extends this same
  * "outside" reset to also hide it, per the issue, rather than a second
- * independent hook) is always resolved from the up-to-date sphere state. On
+ * independent hook) is always resolved from the up-to-date gating state. On
  * exit this drives the indicator to hidden (via `panelOpen: false` AND
  * `playerInsideSphere = false`, both true at once - "hides BOTH the
  * collapsed indicator AND the expanded panel"); on entry it leaves
  * `panelOpen` at its existing `false` value (the reset from the PREVIOUS
  * exit), so re-entering always shows the collapsed indicator, never the
  * expanded panel, matching the human owner's own described flow. */
-function applyPlayerSphereState(insideSphere: boolean): void {
-  playerInsideSphere = insideSphere;
+function applyPlayerSphereState(insideLocalBubble: boolean): void {
+  playerInsideSphere = insideLocalBubble;
   const next = nextPlayerStateForSphere(
     { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
-    insideSphere,
+    insideLocalBubble,
   );
   applyPlayerResetState(next);
   // Story #266 (was #243's `playerDirection` reset): `PlayerState` (the pure
   // `nextPlayerStateForSphere` above) doesn't carry the rate/direction
   // value, so reset it here alongside the other three force-reset fields -
-  // a fresh session re-entering the sphere should always default back to
-  // the same starting rate, not silently resume whichever rate/direction
-  // happened to be configured when a PREVIOUS session left the sphere.
-  if (!insideSphere) {
+  // a fresh session re-entering the Local Bubble should always default back
+  // to the same starting rate, not silently resume whichever rate/direction
+  // happened to be configured when a PREVIOUS session left it.
+  if (!insideLocalBubble) {
     playerRateSliderValue = DEFAULT_PLAYER_RATE_SLIDER_VALUE;
   }
 }
@@ -1285,16 +1308,20 @@ function applyBackgroundDimming(): void {
   setGouldBeltDimmed(gouldBeltGroup, insideSphere, insideBubble);
   setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere, insideBubble);
   setLocalBubbleDimmed(localBubbleGroup, insideSphere);
-  // Issue #231: the velocity-vectors toggle's enabled/disabled (and
-  // forced-off-on-exit) state is also gated on this exact same sphere
-  // boundary crossing - reuses this function's own change-detection above
-  // rather than a second independent per-frame check (see
-  // `applyVelocityVectorsButtonState`'s docstring).
-  applyVelocityVectorsButtonState(insideSphere);
-  // Story #239: the motion player's own enabled/disabled + force-reset
-  // state is gated on this exact same crossing, for the exact same reason
-  // (see `applyPlayerSphereState`'s docstring).
-  applyPlayerSphereState(insideSphere);
+  // Story #287: the velocity-vectors toggle's enabled/disabled (and
+  // forced-off-on-exit) state, and the player's own enabled/disabled +
+  // force-reset state, are now gated on the Local Bubble boundary
+  // (`insideBubble`) rather than the RECONS dense-batch sphere boundary
+  // (`insideSphere`) - widened from issue #231's/Story #239's original
+  // sphere-only gating, per Epic #285. Both still reuse this function's own
+  // change-detection above rather than a second independent per-frame check
+  // (see `applyVelocityVectorsButtonState`'s/`applyPlayerSphereState`'s own
+  // docstrings). Every OTHER effect above this comment (background
+  // dimming's own dense-batch tier, the Gould Belt/Radcliffe Wave/Local
+  // Bubble overlay dimming, `insideSphere` itself) is unchanged and stays
+  // keyed to the RECONS sphere - out of this Story's scope.
+  applyVelocityVectorsButtonState(insideBubble);
+  applyPlayerSphereState(insideBubble);
 }
 
 /** Issue #123: the selection reticle's scale should track the *same*
@@ -1707,10 +1734,10 @@ function applyLocalBubbleButtonState(): void {
 
 applyLocalBubbleButtonState();
 // Issue #231: disabled until the scene loads and the camera is confirmed
-// inside the sphere (`denseBatchRadiusPc` is still 0 here, so
-// `isCameraInsideDenseBatchSphere` would report `false` regardless - passed
-// explicitly rather than computed, mirroring `applyLocalBubbleButtonState`'s
-// own startup call just above).
+// inside the Local Bubble (Story #287: widened from the RECONS sphere -
+// `bubbleOuterRadiusPc` is still `null` here, so `isCameraInsideLocalBubble`
+// would report `false` regardless - passed explicitly rather than computed,
+// mirroring `applyLocalBubbleButtonState`'s own startup call just above).
 applyVelocityVectorsButtonState(false);
 // Story #239: same reasoning, same startup timing, for the player toggle.
 applyPlayerSphereState(false);
@@ -1772,10 +1799,11 @@ showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
 fitLocalBubbleButton.addEventListener("click", applyFitLocalBubblePose);
 fitNearestStarsButton.addEventListener("click", applyFitNearestStarsPose);
 // Issue #231: the button is only ever clickable (native `disabled`) while
-// `cameraWasInsideDenseBatchSphere` is `true` - already kept in sync with
-// this exact click-time camera state by `applyBackgroundDimming`'s
-// crossing-detection, called every frame - so it's reused directly here
-// rather than recomputing `isCameraInsideDenseBatchSphere` again.
+// `cameraWasInsideLocalBubble` is `true` (Story #287: widened from
+// `cameraWasInsideDenseBatchSphere`) - already kept in sync with this exact
+// click-time camera state by `applyBackgroundDimming`'s crossing-detection,
+// called every frame - so it's reused directly here rather than
+// recomputing `isCameraInsideLocalBubble` again.
 velocityVectorsButton.addEventListener("click", () => {
   velocityVectorsOn = !velocityVectorsOn;
   velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
@@ -1783,7 +1811,7 @@ velocityVectorsButton.addEventListener("click", () => {
   if (velocityVectorsGroup) {
     velocityVectorsGroup.visible = velocityVectorsVisible(
       velocityVectorsOn,
-      cameraWasInsideDenseBatchSphere,
+      cameraWasInsideLocalBubble,
     );
   }
 });
@@ -1886,23 +1914,6 @@ loadScene()
     denseBatchBoundaryMesh = createDenseBatchBoundaryLayer(denseBatchRadiusPc);
     if (denseBatchBoundaryMesh) scene.add(denseBatchBoundaryMesh);
 
-    // Issue #231: the velocity-vectors layer - built once here (like
-    // `denseBatchBoundaryMesh` above) now that both `sceneData.objects` and
-    // the real `denseBatchRadiusPc` are known. Starts hidden
-    // (`createVelocityVectorsLayer`'s own `visible = false` default);
-    // `applyVelocityVectorsButtonState`, called from `applyBackgroundDimming`
-    // in `animate()`, is what turns it on/off from here on.
-    velocityVectorsGroup = createVelocityVectorsLayer(sceneData.objects, denseBatchRadiusPc);
-    scene.add(velocityVectorsGroup);
-
-    // Issue #236: the speed-label pool for those same arrows - built once
-    // here too. Every label starts life un-toggled either way (visibility
-    // is driven entirely by `updateLabelVisibility`'s new speed-label block,
-    // called right after this `.then()` finishes below, before the first
-    // real frame renders).
-    velocitySpeedLabelsInfo = createVelocitySpeedLabelsLayer(sceneData.objects, denseBatchRadiusPc);
-    scene.add(velocitySpeedLabelsInfo.group);
-
     // Issue #215: `localBubbleStructure`/`bubbleOuterRadiusPc` are populated
     // here, before `createCatalogObjectGroup` below, rather than at their
     // pre-#215 spot further down (right before the Local Bubble structure
@@ -1911,8 +1922,33 @@ loadScene()
     // at scene-load time, so it must be known by the time that call runs.
     // `?? null` since `SceneStructures.local_bubble` is `undefined` (not
     // `null`) when absent.
+    //
+    // Story #287: also moved ahead of the velocity-vectors/speed-labels
+    // construction just below - those now need `bubbleOuterRadiusPc`
+    // themselves (widened from `denseBatchRadiusPc`), so it must be known
+    // before they're built too, not just before `createCatalogObjectGroup`.
     localBubbleStructure = sceneData.structures.local_bubble ?? null;
     bubbleOuterRadiusPc = bubbleOuterRadiusPcFrom(localBubbleStructure);
+
+    // Issue #231: the velocity-vectors layer - built once here (like
+    // `denseBatchBoundaryMesh` above) now that both `sceneData.objects` and
+    // the real `bubbleOuterRadiusPc` are known. Starts hidden
+    // (`createVelocityVectorsLayer`'s own `visible = false` default);
+    // `applyVelocityVectorsButtonState`, called from `applyBackgroundDimming`
+    // in `animate()`, is what turns it on/off from here on. Story #287:
+    // widened from `denseBatchRadiusPc` (the RECONS sphere) to
+    // `bubbleOuterRadiusPc` (the Local Bubble), per Epic #285.
+    velocityVectorsGroup = createVelocityVectorsLayer(sceneData.objects, bubbleOuterRadiusPc);
+    scene.add(velocityVectorsGroup);
+
+    // Issue #236: the speed-label pool for those same arrows - built once
+    // here too. Every label starts life un-toggled either way (visibility
+    // is driven entirely by `updateLabelVisibility`'s new speed-label block,
+    // called right after this `.then()` finishes below, before the first
+    // real frame renders). Story #287: widened alongside the arrows layer
+    // above.
+    velocitySpeedLabelsInfo = createVelocitySpeedLabelsLayer(sceneData.objects, bubbleOuterRadiusPc);
+    scene.add(velocitySpeedLabelsInfo.group);
 
     const catalogLayer = createCatalogObjectGroup(
       sceneData.objects,
@@ -1928,9 +1964,11 @@ loadScene()
     // frame - see `objects.ts`'s `buildObjectIndexLookup` docstring.
     objectIndexLookup = buildObjectIndexLookup(catalogBuckets);
     // The animated population itself - Epic #229's/#231's own
-    // `starsWithVelocityInSphere`, reused directly rather than
-    // reimplemented, per this Story's explicit instruction.
-    animatedStars = starsWithVelocityInSphere(sceneData.objects, denseBatchRadiusPc);
+    // `starsWithVelocityInLocalBubble` (Story #287: renamed from
+    // `starsWithVelocityInSphere` and widened from `denseBatchRadiusPc` to
+    // `bubbleOuterRadiusPc`), reused directly rather than reimplemented, per
+    // this Story's explicit instruction.
+    animatedStars = starsWithVelocityInLocalBubble(sceneData.objects, bubbleOuterRadiusPc);
 
     // Story #240: one trail `Line` per animated star, built once now that
     // `animatedStars` (the SAME pool, never reimplemented) is known. Starts
