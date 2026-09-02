@@ -308,7 +308,11 @@ searchToggle.setAttribute("aria-label", "Search objects");
 // mounted into it later via `searchDialog.appendContent(...)`.
 const searchDialog = new SearchDialog();
 app.appendChild(searchDialog.element);
-searchToggle.addEventListener("click", () => searchDialog.show());
+// Issue #292: wrapped via `withLockedButtonEscapeHatch` (defined further
+// below, but hoisted - see that function's own docstring) like every other
+// button in `syncUiLock`'s 8-button locked set, so a click while locked
+// resets to Today instead of opening the dialog.
+searchToggle.addEventListener("click", withLockedButtonEscapeHatch(() => searchDialog.show()));
 
 // Issue #164 introduced the "i" (Info) button in the old top-left row.
 // Issue #201 moved the button itself (and its click wiring) down into the
@@ -727,10 +731,10 @@ const playerPanelHandle = createPlayerPanel({
   onRateChange: (sliderValue) => {
     playerRateSliderValue = sliderValue;
   },
-  onToday: () => {
-    setPlayerPlaying(false);
-    playerTimeYears = 0;
-  },
+  // Issue #292: extracted to the shared `resetPlayerToToday` (defined
+  // further below, but hoisted) so this panel button and the locked-toolbar-
+  // button escape hatch can never drift out of sync with each other.
+  onToday: () => resetPlayerToToday(),
   // Story #275: overrides #267's original choice (which reused the toolbar
   // Play button's own close+reset-to-Today action). The human owner's
   // described flow requires the collapse chevron to be a genuine MINIMIZE
@@ -1012,16 +1016,19 @@ function clearBubbleViewOverride(): void {
  * Story #287: widened from the RECONS dense-batch sphere
  * (`cameraWasInsideDenseBatchSphere`) to the Local Bubble
  * (`cameraWasInsideLocalBubble`) - this function's own logic is unchanged,
- * only what `applyBackgroundDimming` feeds it. */
+ * only what `applyBackgroundDimming` feeds it.
+ *
+ * Issue #292: the gating-volume condition (`!insideLocalBubble`) is the ONE
+ * out-of-scope reason this button stays genuinely `disabled` (native
+ * attribute - clicking it while outside the Local Bubble was never governed
+ * by this issue). The player-time lock (`uiLocked`) component of the old
+ * combined formula moved to `setToolbarButtonLocked`'s VISUAL-only class
+ * instead, matching `syncUiLock`'s own write to this same button so the two
+ * chokepoints can't disagree. */
 function applyVelocityVectorsButtonState(insideLocalBubble: boolean): void {
   velocityVectorsOn = nextVelocityVectorsToggleOn(velocityVectorsOn, insideLocalBubble);
-  // Story #247 AC #4: also disabled while the player's time is away from
-  // Today (`uiLocked`) - combined with the pre-existing gating-volume gate
-  // via OR, matching `syncUiLock`'s own combined formula for this same
-  // button, so whichever of the two triggers (a boundary crossing here, a
-  // player-time lock transition there) runs last always writes the same
-  // correct value.
-  velocityVectorsButton.disabled = !insideLocalBubble || uiLocked;
+  velocityVectorsButton.disabled = !insideLocalBubble;
+  setToolbarButtonLocked(velocityVectorsButton, uiLocked);
   velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
   velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
   if (velocityVectorsGroup) {
@@ -1043,6 +1050,41 @@ function applyVelocityVectorsButtonState(insideLocalBubble: boolean): void {
  * the player would next play at. */
 function setPlayerPlaying(next: boolean): void {
   playerPlaying = next;
+}
+
+/** Story #239 (panel's own Today button) + Issue #292 (locked-toolbar-button
+ * escape hatch): resets the player to Today - the exact previous inline body
+ * of the panel's `onToday` callback (`setPlayerPlaying(false); playerTimeYears
+ * = 0`), extracted here as the single shared implementation so the panel's
+ * Today button and `withLockedButtonEscapeHatch` below can never drift out
+ * of sync with each other, matching this codebase's established
+ * single-source-of-truth convention (e.g. `setPlayerPlaying` itself). */
+function resetPlayerToToday(): void {
+  setPlayerPlaying(false);
+  playerTimeYears = 0;
+}
+
+/** Issue #292: wraps one of `syncUiLock`'s 8 locked toolbar buttons' own
+ * click handler so that, at the moment of the click, if the toolbar is
+ * currently locked (the same `isUiLockedForPlayerTime(playerTimeYears)`
+ * condition `syncUiLock` itself uses), the button's normal `action` is
+ * skipped entirely and the click instead resets the player to Today via the
+ * shared `resetPlayerToToday` above - one click, one action (the issue's
+ * explicit "don't also perform the button's original action in the same
+ * click" requirement). `syncUiLock` naturally re-runs on the next
+ * `animate()` frame and unlocks the toolbar (existing mechanism, unchanged),
+ * so a SUBSEQUENT click on the same button performs `action` normally, now
+ * that it's genuinely unlocked. A plain function declaration (hoisted), so
+ * it's safe to call from `searchToggle`'s click wiring far above this point
+ * in the file. */
+function withLockedButtonEscapeHatch(action: () => void): () => void {
+  return () => {
+    if (isUiLockedForPlayerTime(playerTimeYears)) {
+      resetPlayerToToday();
+      return;
+    }
+    action();
+  };
 }
 
 /** Story #266: the panel's center Play/Pause button handler - a PLAIN
@@ -1132,11 +1174,51 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
   }
 }
 
+/** Issue #292: original title/aria-label text for each of `syncUiLock`'s 8
+ * locked toolbar buttons, captured once here (module init, before
+ * `syncUiLock` ever runs) so `setToolbarButtonLocked` below can restore each
+ * button's own label exactly on unlock, after swapping it for the escape
+ * hatch's discoverability cue while locked. */
+const TOOLBAR_BUTTON_DEFAULT_LABEL: ReadonlyMap<HTMLButtonElement, string> = new Map(
+  [
+    searchToggle,
+    zoomInButton,
+    zoomOutButton,
+    showAllButton,
+    fitLocalBubbleButton,
+    fitNearestStarsButton,
+    velocityVectorsButton,
+    infoToggleButton,
+  ].map((button) => [button, button.title] as const),
+);
+
+const LOCKED_BUTTON_ESCAPE_HATCH_LABEL = "Click to return to Today";
+
+/** Issue #292: applies (or clears) the visual-only locked look to one of
+ * `syncUiLock`'s 8 toolbar buttons - the exact same grayed-out appearance
+ * the native `:disabled` styling already gave (`style.css`'s
+ * `.toolbar-button--locked` rule, sharing its declaration block with
+ * `:disabled` so the two can never visually drift apart), but WITHOUT the
+ * native `disabled` attribute, so the button keeps receiving click events -
+ * `withLockedButtonEscapeHatch` above is what turns a click while locked
+ * into the "reset to Today" escape hatch instead of the button's normal
+ * action. Also swaps the button's title/aria-label for a discoverability cue
+ * while locked ("Click to return to Today"), restoring its normal label on
+ * unlock via `TOOLBAR_BUTTON_DEFAULT_LABEL` above. */
+function setToolbarButtonLocked(button: HTMLButtonElement, locked: boolean): void {
+  button.classList.toggle("toolbar-button--locked", locked);
+  const label = locked
+    ? LOCKED_BUTTON_ESCAPE_HATCH_LABEL
+    : (TOOLBAR_BUTTON_DEFAULT_LABEL.get(button) ?? button.title);
+  button.title = label;
+  button.setAttribute("aria-label", label);
+}
+
 /** Story #239 AC #9 (Story #247 AC #4 extends this to the left toolbar):
  * applies the UI lock - disabling category/structure checkboxes and the
  * radius filter (Story #257: now `layersPanelHandle.setLocked`/
  * `settingsPanelHandle.setLocked`, split from the single pre-#257
- * `panelHandle.setLocked`), search (`searchToggle.disabled`,
+ * `panelHandle.setLocked`), search (`searchToggle`,
  * and closing an already-open search dialog so a newly-locked session can't
  * leave it open), and now every OTHER `#left-toolbar` button (Zoom
  * In/Out, Show All, Fit to Local Bubble, Fit to nearest-stars sphere, Show
@@ -1161,26 +1243,38 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
  * `uiLocked` flag this function maintains (the canvas itself has no
  * `disabled` DOM property). Change-detected like
  * `cameraWasInsideDenseBatchSphere` above, so this only touches the DOM on
- * an actual lock/unlock transition, not every single frame. */
+ * an actual lock/unlock transition, not every single frame.
+ *
+ * Issue #292: the native `disabled` attribute this used to set directly on
+ * all 8 buttons is now `setToolbarButtonLocked`'s VISUAL-only class instead,
+ * for every button EXCEPT two structural/gating conditions that stay
+ * genuinely non-clickable (unrelated to the player-time lock, so out of this
+ * issue's scope, per its own "which buttons get locked" exclusion):
+ * `fitLocalBubbleButton` when there's no Local Bubble layer to fit to at all
+ * (`applyLocalBubbleButtonState`, the single writer for that button's native
+ * `disabled`), and `velocityVectorsButton` when the camera isn't inside the
+ * Local Bubble (also written here, mirroring `applyVelocityVectorsButtonState`'s
+ * own combined formula so the two chokepoints can't disagree). */
 function syncUiLock(): void {
   const locked = isUiLockedForPlayerTime(playerTimeYears);
   if (locked === uiLocked) return;
   uiLocked = locked;
   if (layersPanelHandle) layersPanelHandle.setLocked(uiLocked);
   if (settingsPanelHandle) settingsPanelHandle.setLocked(uiLocked);
-  searchToggle.disabled = uiLocked;
+  setToolbarButtonLocked(searchToggle, uiLocked);
   if (uiLocked) searchDialog.hide();
-  zoomInButton.disabled = uiLocked;
-  zoomOutButton.disabled = uiLocked;
-  showAllButton.disabled = uiLocked;
-  fitLocalBubbleButton.disabled = uiLocked || localBubbleStructure === null;
-  fitNearestStarsButton.disabled = uiLocked;
+  setToolbarButtonLocked(zoomInButton, uiLocked);
+  setToolbarButtonLocked(zoomOutButton, uiLocked);
+  setToolbarButtonLocked(showAllButton, uiLocked);
+  applyLocalBubbleButtonState();
+  setToolbarButtonLocked(fitNearestStarsButton, uiLocked);
   // Story #287: gated on the Local Bubble now, not the RECONS dense-batch
   // sphere - `cameraWasInsideLocalBubble` is kept in sync by
   // `applyBackgroundDimming`'s own crossing-detection, same as
   // `cameraWasInsideDenseBatchSphere` was before.
-  velocityVectorsButton.disabled = uiLocked || !cameraWasInsideLocalBubble;
-  infoToggleButton.disabled = uiLocked;
+  velocityVectorsButton.disabled = !cameraWasInsideLocalBubble;
+  setToolbarButtonLocked(velocityVectorsButton, uiLocked);
+  setToolbarButtonLocked(infoToggleButton, uiLocked);
 }
 
 /** Story #239 AC #8 (mirrors `applyVelocityVectorsButtonState` above
@@ -1853,13 +1947,18 @@ function applyFitNearestStarsPose(): void {
  * scene has no Local Bubble layer (`localBubbleStructure === null`, either
  * because the scene hasn't loaded yet or because that optional layer was
  * absent/malformed - spec §38) rather than leaving it clickable into a
- * no-op or, worse, an error. */
+ * no-op or, worse, an error.
+ *
+ * Issue #292: `localBubbleStructure === null` is the ONE out-of-scope reason
+ * this button stays genuinely `disabled` (native attribute - there's nothing
+ * sensible to fit to, unrelated to the player-time lock this issue covers).
+ * The player-time lock (`uiLocked`) component of the old combined formula
+ * moved to `setToolbarButtonLocked`'s VISUAL-only class instead, matching
+ * `syncUiLock`'s own write to this same button so the two chokepoints can't
+ * disagree. */
 function applyLocalBubbleButtonState(): void {
-  // Story #247 AC #4: also disabled while the player's time is away from
-  // Today (`uiLocked`) - see `applyVelocityVectorsButtonState`'s matching
-  // comment for why combining via OR here is safe against `syncUiLock`'s own
-  // write to this same button.
-  fitLocalBubbleButton.disabled = localBubbleStructure === null || uiLocked;
+  fitLocalBubbleButton.disabled = localBubbleStructure === null;
+  setToolbarButtonLocked(fitLocalBubbleButton, uiLocked);
 }
 
 applyLocalBubbleButtonState();
@@ -1923,9 +2022,13 @@ document.addEventListener(
   { passive: true },
 );
 
-zoomInButton.addEventListener("click", () => zoomBy(ZOOM_IN_STEP_FACTOR));
-zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
-showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
+// Issue #292: all 6 of the following, plus `velocityVectorsButton`'s own
+// handler further below, are wrapped via `withLockedButtonEscapeHatch` -
+// while `syncUiLock`'s lock is active, a click resets to Today instead of
+// performing the button's normal action below.
+zoomInButton.addEventListener("click", withLockedButtonEscapeHatch(() => zoomBy(ZOOM_IN_STEP_FACTOR)));
+zoomOutButton.addEventListener("click", withLockedButtonEscapeHatch(() => zoomBy(ZOOM_OUT_STEP_FACTOR)));
+showAllButton.addEventListener("click", withLockedButtonEscapeHatch(() => applyCameraPreset("fit-all")));
 // Issue #290: after the existing framing (unchanged - still shows the WHOLE
 // bubble from ~317pc, per this button's own confirmed-correct #219/#220
 // behavior), explicitly sets the persistent override and immediately
@@ -1937,29 +2040,35 @@ showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
 // just set to `true` again, and `applyLocalBubbleGateState(true)` is
 // idempotent (see `nextVelocityVectorsToggleOn`/`nextPlayerStateForSphere`'s
 // own "state unchanged when already inside" branches).
-fitLocalBubbleButton.addEventListener("click", () => {
-  applyFitLocalBubblePose();
-  bubbleViewOverrideActive = true;
-  applyLocalBubbleGateState(true);
-});
-fitNearestStarsButton.addEventListener("click", applyFitNearestStarsPose);
+fitLocalBubbleButton.addEventListener(
+  "click",
+  withLockedButtonEscapeHatch(() => {
+    applyFitLocalBubblePose();
+    bubbleViewOverrideActive = true;
+    applyLocalBubbleGateState(true);
+  }),
+);
+fitNearestStarsButton.addEventListener("click", withLockedButtonEscapeHatch(applyFitNearestStarsPose));
 // Issue #231: the button is only ever clickable (native `disabled`) while
 // `cameraWasInsideLocalBubble` is `true` (Story #287: widened from
 // `cameraWasInsideDenseBatchSphere`) - already kept in sync with this exact
 // click-time camera state by `applyBackgroundDimming`'s crossing-detection,
 // called every frame - so it's reused directly here rather than
 // recomputing `isCameraInsideLocalBubble` again.
-velocityVectorsButton.addEventListener("click", () => {
-  velocityVectorsOn = !velocityVectorsOn;
-  velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
-  velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
-  if (velocityVectorsGroup) {
-    velocityVectorsGroup.visible = velocityVectorsVisible(
-      velocityVectorsOn,
-      cameraWasInsideLocalBubble,
-    );
-  }
-});
+velocityVectorsButton.addEventListener(
+  "click",
+  withLockedButtonEscapeHatch(() => {
+    velocityVectorsOn = !velocityVectorsOn;
+    velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
+    velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
+    if (velocityVectorsGroup) {
+      velocityVectorsGroup.visible = velocityVectorsVisible(
+        velocityVectorsOn,
+        cameraWasInsideLocalBubble,
+      );
+    }
+  }),
+);
 // Story #275: the toolbar Play button's own click handler (Story #239's
 // original open/close toggle, Story #245's "first press only reveals,
 // never auto-starts" refinement, Story #249's "second press closes and
@@ -1969,7 +2078,7 @@ velocityVectorsButton.addEventListener("click", () => {
 // action, and `collapsePlayerPanel` (the panel's own collapse chevron, per
 // Part 2's behavior change) owns minimizing back to the indicator. Only
 // leaving the sphere (`applyPlayerSphereState`) still resets/closes fully.
-infoToggleButton.addEventListener("click", () => infoDialog.show());
+infoToggleButton.addEventListener("click", withLockedButtonEscapeHatch(() => infoDialog.show()));
 
 /** Search / go-to-object (issue #106, spec §2.6): frames the camera closely
  * on `obj` (via `objectCenteredPose`, distance proportional to the
