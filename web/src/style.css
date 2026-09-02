@@ -771,12 +771,22 @@ body {
   background: #24304a;
 }
 
-#left-toolbar .toolbar-button:disabled {
+/* Issue #292: `.toolbar-button--locked` is a VISUAL-only twin of the
+   `:disabled` rules below - added by `main.ts`'s `setToolbarButtonLocked`
+   to the 8 `syncUiLock`-gated toolbar buttons while the player's time is
+   away from Today, instead of the native `disabled` attribute, so the
+   button keeps receiving click events (its own click handler turns that
+   click into the "reset to Today" escape hatch). Shares the exact same
+   declaration blocks as `:disabled` via the combined selector below so the
+   two states can never visually drift apart. */
+#left-toolbar .toolbar-button:disabled,
+#left-toolbar .toolbar-button--locked {
   opacity: 0.35;
   cursor: default;
 }
 
-#left-toolbar .toolbar-button:disabled:hover {
+#left-toolbar .toolbar-button:disabled:hover,
+#left-toolbar .toolbar-button--locked:hover {
   background: rgba(10, 14, 24, 0.82);
 }
 
