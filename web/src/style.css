@@ -1024,7 +1024,19 @@ body {
    in the running viewer. Story #275 Part 3.1 grows the panel's overall
    height by ~30% (padding, arc track heights, readout/button font sizes,
    plus the new Today row all contribute - see each rule below) while
-   leaving the width and bottom-docked position unchanged. */
+   leaving the width and bottom-docked position unchanged.
+
+   Story #279 widens it again, 420px -> 600px: the same live-tested content
+   (bigger `.player-transport` buttons, `todayButton` now a fourth member of
+   `.player-button-row`, both readouts widened to fit their longest text on
+   one line) measured out to ~594px of required `.player-control-bar`
+   content width alone (readouts + gaps + button row + the row's own
+   left/right padding) plus this rule's own `padding` - 420px caused a real,
+   live-confirmed horizontal overflow (`.player-rate-readout` rendered
+   entirely outside the panel's own background, past its right edge). 600px
+   clears that with a little live-verified breathing room to spare; the
+   panel reads noticeably wider now, an accepted side effect of fitting
+   this Story's own bigger/regrouped content, not a separate design goal. */
 #player-panel {
   display: none;
   position: absolute;
@@ -1039,7 +1051,7 @@ body {
   top: auto;
   bottom: 10px;
   transform: translateX(-50%);
-  width: min(420px, calc(100vw - 24px));
+  width: min(600px, calc(100vw - 24px));
   padding: 10px 14px;
   background: rgba(10, 14, 24, 0.6);
   font-size: 12px;
@@ -1096,17 +1108,19 @@ body {
   padding: 0 30px;
 }
 
-/* Story #275 Part 3.3: Today's own dedicated row, centered, directly below
-   the control bar above (and so below the `<<`/Play-Pause/`>>` button row
-   nested inside it) - no longer inline with the time/rate readouts or the
-   collapse chevron. */
-.player-today-row {
-  justify-content: center;
-  margin-top: 4px;
-}
+/* Story #279: `.player-today-row` (Story #275 Part 3.3's own dedicated,
+   centered row below the control bar) is removed entirely - `todayButton`
+   is back inside `.player-button-row` below, as its last child. */
 
+/* Story #279: back inside `.player-button-row`, as the last item after
+   `>>` (Story #275 Part 3.3 had pulled it out into its own row - see the
+   removed `.player-today-row` comment above). A little extra left margin
+   (beyond `.player-button-row`'s own `gap`) visually separates it from the
+   `<<`/Play-Pause/`>>` transport trio as its own distinct action rather than
+   a fourth transport button. */
 .player-today {
   flex: 0 0 auto;
+  margin-left: 6px;
 }
 
 /* Story #275 Part 3.4: enlarged and repositioned immediately LEFT of the
@@ -1119,13 +1133,23 @@ body {
    below - the two previously differed (92px vs. 78px), which put unequal
    weight on `.player-control-bar`'s two flanks and threw off
    `.player-button-row`'s own centering between them. Width is unaffected in
-   practice (this readout's own text was already always >= 92px wide). */
+   practice (this readout's own text was already always >= 92px wide).
+
+   Story #279: 92px -> 140px, widened again alongside `.player-rate-readout`
+   below (still matched EXACTLY - see that rule's own comment for why the
+   two must stay equal). 92px was too narrow for the longest realistic
+   `formatPlayerTimeYears` output ("-1,000,000 years" at `PLAYER_TIME_RANGE_YEARS`'s
+   own extremes), which wrapped onto a second line; live-measured, that text
+   is ~128px wide at this font, so 140px fits it on one line with a few px
+   of breathing room on each side rather than sitting flush against the
+   box's own edge. */
 .player-time-readout {
-  flex: 0 0 92px;
+  flex: 0 0 140px;
   text-align: center;
   font-variant-numeric: tabular-nums;
   font-size: 16px;
   color: #dfe6f3;
+  white-space: nowrap;
 }
 
 /* Story #267: the `<<`/Play-Pause/`>>` transport buttons, centered in
@@ -1151,16 +1175,22 @@ body {
 /* Story #243: the 3-button `<< Play/Pause >>` transport scheme - same small
    round shape kept from #266's interim layout, now nested above the arc.
    Story #275 Part 3.1: enlarged slightly (was 22x22/11px) alongside the
-   panel's other elements. */
+   panel's other elements.
+   Story #279: enlarged again, roughly doubled (was 26x26/12px) per the human
+   owner's live-testing feedback that the buttons still read too small
+   against the rest of the (now considerably bigger) panel. A literal 2x
+   (52x52/24px) read slightly oversized/heavy next to the unchanged readouts
+   once live-rendered, so this settled a touch under that at 46x46/20px -
+   still clearly, deliberately bigger, tuned live rather than a hard 2x. */
 .player-transport {
   flex: 0 0 auto;
-  width: 26px;
-  height: 26px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  font-size: 12px;
+  font-size: 20px;
   line-height: 1;
   border-radius: 50%;
 }
@@ -1203,6 +1233,7 @@ body {
    whole panel width via its new full-width parent row (`.player-rate-arc-row`
    above) rather than `.player-rate-arc`'s own narrower flexible column. */
 .player-rate-arc-track {
+  position: relative;
   width: 100%;
   height: 34px;
   cursor: ew-resize;
@@ -1221,22 +1252,49 @@ body {
   overflow: visible;
 }
 
+/* Story #279: stroke-width 2 -> 3.5 on both this track path and its fill
+   path below, for a visually bolder/"chunkier" scale line - tuned live
+   alongside the bigger transport buttons and handles so the whole control
+   cluster reads as one deliberately scaled-up unit rather than a thin line
+   next to oversized buttons. */
 .player-rate-arc-track-path {
   stroke: rgba(143, 163, 200, 0.35);
-  stroke-width: 2;
+  stroke-width: 3.5;
   stroke-linecap: round;
 }
 
 .player-rate-arc-fill-path {
   stroke: #5fc9ff;
-  stroke-width: 2;
+  stroke-width: 3.5;
   stroke-linecap: round;
 }
 
+/* Story #279: no longer an SVG `<circle>` (see `ui/playerPanel.ts`'s own
+   Story #279 docstring paragraph for the full "why" - in short,
+   `preserveAspectRatio="none"` stretched a circle drawn in the shared
+   viewBox's coordinate space into a visible ellipse) - this is now a plain
+   `position: absolute` round div, sized in real CSS pixels so it stays a
+   true circle regardless of `.player-rate-arc-track`'s own on-screen aspect
+   ratio. `left`/`top` (a percentage of the SVG viewBox's own width/height)
+   are set from `ui/playerPanel.ts`'s `positionArcHandle`; `transform:
+   translate(-50%, -50%)` centers the div itself on that point rather than
+   anchoring its top-left corner there. Slightly bigger than the old `r:
+   3.5` (7px diameter) circle per the issue's own "increase slightly"
+   guidance. `pointer-events: none` keeps it purely decorative - dragging is
+   still handled entirely by `.player-rate-arc-track`'s own Pointer Events
+   listeners, which still fire correctly via event bubbling even when the
+   pointer lands visually on top of this div. */
 .player-rate-arc-handle {
-  fill: #5fc9ff;
-  stroke: rgba(10, 14, 24, 0.9);
-  stroke-width: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #5fc9ff;
+  border: 1px solid rgba(10, 14, 24, 0.9);
+  pointer-events: none;
 }
 
 /* Story #271: the second, larger time arc stacked directly beneath the rate
@@ -1261,6 +1319,7 @@ body {
    track, preserving the original "bigger, wrapping around the first arc"
    size relationship between the two. */
 .player-time-arc-track {
+  position: relative;
   width: 100%;
   height: 40px;
   cursor: ew-resize;
@@ -1279,15 +1338,17 @@ body {
   overflow: visible;
 }
 
+/* Story #279: stroke-width 2 -> 3.5, matching the rate arc's own increase
+   above - see that rule's comment for the reasoning. */
 .player-time-arc-track-path {
   stroke: rgba(143, 163, 200, 0.3);
-  stroke-width: 2;
+  stroke-width: 3.5;
   stroke-linecap: round;
 }
 
 .player-time-arc-fill-path {
   stroke: rgba(242, 166, 90, 0.55);
-  stroke-width: 2;
+  stroke-width: 3.5;
   stroke-linecap: round;
 }
 
@@ -1314,11 +1375,28 @@ body {
    handles stay visually distinguishable at a glance, per the issue's own
    "adapt to this app's existing color scheme" guidance rather than a
    literal copy. */
+/* Story #279: same "SVG `<circle>` -> plain absolutely-positioned div" fix
+   as `.player-rate-arc-handle` above - see that rule's own comment, and
+   `ui/playerPanel.ts`'s Story #279 docstring paragraph, for the full "why"
+   (this was the more visibly squished of the two handles, since
+   `.player-time-arc-track`'s on-screen box is proportionally wider than
+   `.player-rate-arc-track`'s own). Slightly bigger than the rate handle
+   (14px vs. 12px diameter), preserving the original "time arc reads as the
+   larger/primary of the pair" size relationship the old `r: 4.5` vs.
+   `r: 3.5` SVG circles had. `box-shadow` replaces the old SVG `filter:
+   drop-shadow(...)` for the same glow. */
 .player-time-arc-handle {
-  fill: #f2a65a;
-  stroke: rgba(10, 14, 24, 0.9);
-  stroke-width: 1;
-  filter: drop-shadow(0 0 3px rgba(242, 166, 90, 0.65));
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #f2a65a;
+  border: 1px solid rgba(10, 14, 24, 0.9);
+  box-shadow: 0 0 3px rgba(242, 166, 90, 0.65);
+  pointer-events: none;
 }
 
 /* Story #273: the time arc's new scale tick marks - small, dim, purely
@@ -1387,9 +1465,14 @@ body {
    than the time readout's 92px) - see that rule's own Story #277 comment
    for why the two must match. This readout's own text is comfortably
    narrower than 92px, so the extra width just adds a little symmetric
-   breathing room around it; nothing wraps or gets clipped. */
+   breathing room around it; nothing wraps or gets clipped.
+
+   Story #279: 92px -> 140px, matching `.player-time-readout`'s own
+   Story #279 widening EXACTLY (still equal, still required for #277's
+   centering fix) - this readout's text stays comfortably narrower than
+   140px too, so this is just more symmetric breathing room. */
 .player-rate-readout {
-  flex: 0 0 92px;
+  flex: 0 0 140px;
   text-align: center;
   font-variant-numeric: tabular-nums;
   font-size: 15px;

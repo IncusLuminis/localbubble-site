@@ -30,7 +30,8 @@ import {
  * #266's interim reused-straight-slider row with NASA "Eyes on the Solar
  * System"'s own bottom control-bar layout, left to right:
  * 1. "Today" (unchanged jump-to-zero behavior, moved far left) - Story #275
- *    Part 3.3 later moves this again, see below.
+ *    Part 3.3 later moves this again, see below (and Story #279 moves it
+ *    back into the button row, see further below still).
  * 2. The elapsed-time readout (unchanged `formatPlayerTimeYears`).
  * 3. The `<<`/Play-Pause/`>>` cluster, visually nested above a shallow
  *    curved rate-SCALE (`.player-rate-arc-track`, an SVG quadratic-bezier
@@ -60,7 +61,9 @@ import {
  *   RECONS sphere still resets those three fields.
  * - "Today" moves OUT of the bullet-3 control bar above into its own
  *   dedicated, centered `todayRow`, directly below the `<<`/Play-Pause/`>>`
- *   button row - see `todayRow` below.
+ *   button row (Story #279 later moves it back IN, as the last item of
+ *   `buttonRow` itself - `todayRow` no longer exists, see that Story's own
+ *   docstring paragraph further below).
  * - Both arcs' curvature is flipped (bow downward, not upward) and enlarged
  *   - see `ARC_START`/`ARC_CONTROL`/`ARC_END`'s own updated docstring.
  * - The elapsed-time readout and rate readout are enlarged (`style.css`),
@@ -140,6 +143,38 @@ import {
  *   previously `buttonRow` was vertically positioned by `arcCluster`'s own
  *   column layout plus a negative margin nestling it onto the arc, one more
  *   layer removed from `controlBar`'s own cross-axis centering.
+ *
+ * Story #279 (sizing/layout polish follow-up to #275/#277, no behavior
+ * changes): the human owner's live-testing of the expanded panel found four
+ * more issues, fixed here:
+ * - Transport buttons (`.player-transport`) roughly doubled (`style.css`),
+ *   proportionally larger font, tuned live against the panel's other
+ *   (unchanged) element sizes rather than a literal 2x.
+ * - `.player-time-readout`/`.player-rate-readout` widened TOGETHER (still
+ *   equal, per #277's own centering requirement above) so the longest
+ *   realistic `formatPlayerTimeYears` output ("-1,000,000 years") stays on
+ *   one line instead of wrapping.
+ * - Both arc handles (`.player-rate-arc-handle`/`.player-time-arc-handle`)
+ *   are now plain absolutely-positioned `<div>`s overlaid on their track,
+ *   not SVG `<circle>` elements living inside `arcSvg`/`timeArcSvg`'s own
+ *   `preserveAspectRatio="none"` non-uniformly-scaled coordinate space - see
+ *   `positionArcHandle` below for why that made the time arc's handle in
+ *   particular render as a visibly squished ellipse, and #273's own tick-
+ *   label fix this mirrors. Both arcs' `stroke-width` and both handles'
+ *   size are also increased (`style.css`) for a bolder scale line.
+ * - "Today" moves back INTO `buttonRow`, as the last item after `>>`
+ *   (`<< ▶ >> Today` in one row) - `todayRow`/`.player-today-row` (added by
+ *   #275 Part 3.3 above) are removed entirely. `buttonRow` still sits in
+ *   `controlBar`'s own flexible, centered middle slot between the two
+ *   equal-width readouts (#277's fix, untouched) - so the whole, now-wider
+ *   `<< ▶ >> Today` cluster is centered as a group, the same way the
+ *   narrower `<< ▶ >>` cluster was before. This reads as more centered on
+ *   the PANEL overall than leaving `timeReadout`/`rateReadout` as the
+ *   visual center reference would (they're no longer equidistant from the
+ *   button cluster's own midpoint once Today extends it to one side) -
+ *   #277's fix was about keeping the flexible slot itself centered
+ *   regardless of its content's width, which still holds unchanged here.
+ *   The panel is slightly shorter as a result (one fewer row).
  *
  * This panel still makes no decisions of its own about what any of these
  * mean in terms of resulting time/playback state - that interaction logic
@@ -299,10 +334,12 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   // Story #267: the NASA-Eyes-style bottom control bar - time readout, the
   // `<<`/Play-Pause/`>>` buttons, rate readout, in that left-to-right
   // reading order (Story #277: the collapse chevron is no longer part of
-  // this row at all - see `collapseButton` below). Story #275 Part 3.3 moves
-  // "Today" OUT of this row entirely (see `todayRow` below) - elapsed-time
-  // sits directly LEFT of the button row and rate directly RIGHT of it,
-  // matching the reference screenshot's date-left/time-right convention.
+  // this row at all - see `collapseButton` below). Story #275 Part 3.3 moved
+  // "Today" OUT of this row entirely into its own now-removed `todayRow`;
+  // Story #279 moves it back IN, as the last item of `buttonRow` itself (see
+  // `buttonRow.append(...)` below) - elapsed-time still sits directly LEFT
+  // of the button row and rate directly RIGHT of it, matching the reference
+  // screenshot's date-left/time-right convention.
   const controlBar = document.createElement("div");
   controlBar.className = "player-panel-row player-control-bar";
 
@@ -345,7 +382,12 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   nudgeForwardButton.setAttribute("aria-label", "Nudge playback rate forward");
   nudgeForwardButton.addEventListener("click", () => options.onNudge(1));
 
-  buttonRow.append(nudgeBackButton, playPauseButton, nudgeForwardButton);
+  // Story #279: "Today" moves back INTO this row, as the LAST item after
+  // `>>` (`#275` had pulled it out into its own separate `.player-today-row`
+  // below the control bar - see this module's Story #275 docstring
+  // paragraph above; that row is now removed entirely, see the panel
+  // assembly code near the bottom of this function).
+  buttonRow.append(nudgeBackButton, playPauseButton, nudgeForwardButton, todayButton);
 
   // The shallow arc itself: an SVG "bow" (decoration) overlaid by a
   // transparent, full-box drag surface (`arcTrack`) that captures Pointer
@@ -377,27 +419,38 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   fillPath.setAttribute("class", "player-rate-arc-fill-path");
   fillPath.setAttribute("fill", "none");
 
-  const handle = document.createElementNS(svgNs, "circle");
-  handle.setAttribute("class", "player-rate-arc-handle");
-  handle.setAttribute("r", "3.5");
-
-  arcSvg.append(trackPath, fillPath, handle);
+  arcSvg.append(trackPath, fillPath);
   arcTrack.appendChild(arcSvg);
 
-  /** Redraws a given arc's fill sub-path and handle position for bezier
-   * parameter `targetT` - shared by BOTH arcs (the rate arc and, since Story
-   * #271, the time arc beneath it), each just handing in their own
-   * `<circle>`/`<path>` elements. Used by the initial render, `update()`,
-   * and every drag/nudge-driven change (the drag path calls
-   * `onRateChange`/`onScrub`, which `main.ts` reflects back into the next
-   * `update()` call, so this only needs to run from `update()` in practice,
-   * but is kept as its own function for the initial-render calls below
-   * rather than duplicating the math). */
-  function paintArcAtT(targetT: number, arcHandle: SVGCircleElement, arcFillPath: SVGPathElement): void {
-    const [hx, hy] = arcPointAtT(targetT);
-    arcHandle.setAttribute("cx", String(hx));
-    arcHandle.setAttribute("cy", String(hy));
+  // Story #279: the drag handle is NO LONGER an SVG `<circle>` living inside
+  // `arcSvg`'s own `preserveAspectRatio="none"` non-uniformly-scaled
+  // coordinate space - a circle painted there stretches into an ELLIPSE
+  // whenever the track's on-screen box aspect ratio doesn't match the shared
+  // `ARC_VIEWBOX_WIDTH`x`ARC_VIEWBOX_HEIGHT` viewBox's own ratio (most
+  // visible on the wider time arc below). Instead, mirroring #273's own fix
+  // for the exact same distortion on the tick labels (plain HTML instead of
+  // SVG `<text>`), each handle is a separate absolutely-positioned `<div>`
+  // (`.player-rate-arc-handle`/`.player-time-arc-handle` in `style.css` now
+  // style a fixed-CSS-pixel round div, not an SVG circle) overlaid directly
+  // on the track, sibling to the SVG rather than a child of it - its
+  // `left`/`top` are still driven by the SAME `arcPointAtT` geometry the SVG
+  // fill path uses (see `positionArcHandle` below), just expressed as a
+  // percentage of the viewBox's own width/height rather than an SVG
+  // coordinate, so it lines up with the curve exactly while staying a true,
+  // undistorted circle regardless of the track's own aspect ratio.
+  const handle = document.createElement("div");
+  handle.className = "player-rate-arc-handle";
+  arcTrack.appendChild(handle);
 
+  /** Redraws a given arc's fill sub-path for bezier parameter `targetT` -
+   * shared by BOTH arcs (the rate arc and, since Story #271, the time arc
+   * beneath it), each just handing in their own `<path>` element. Used by
+   * the initial render, `update()`, and every drag/nudge-driven change (the
+   * drag path calls `onRateChange`/`onScrub`, which `main.ts` reflects back
+   * into the next `update()` call, so this only needs to run from
+   * `update()` in practice, but is kept as its own function for the
+   * initial-render calls below rather than duplicating the math). */
+  function paintArcFillAtT(targetT: number, arcFillPath: SVGPathElement): void {
     const startT = Math.min(0.5, targetT);
     const endT = Math.max(0.5, targetT);
     const points: string[] = [];
@@ -408,8 +461,26 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
     }
     arcFillPath.setAttribute("d", points.join(" "));
   }
+
+  /** Story #279: positions a handle `<div>` at bezier parameter `targetT`,
+   * as a `left`/`top` percentage of the shared viewBox's own width/height -
+   * see the `handle`/`timeHandle` `<div>` comment above for why this
+   * replaced an SVG `<circle>`. Percentage (not a raw pixel position)
+   * because each arc's track box is a different on-screen size but always
+   * stretches the SAME `[0, ARC_VIEWBOX_WIDTH]`x`[0, ARC_VIEWBOX_HEIGHT]`
+   * viewBox across its own full width/height (`preserveAspectRatio="none"`
+   * on the SVG achieves the same stretch for the curve itself), so a
+   * percentage of the viewBox maps directly onto the same percentage of the
+   * track's own box in both places. */
+  function positionArcHandle(targetT: number, handleEl: HTMLDivElement): void {
+    const [hx, hy] = arcPointAtT(targetT);
+    handleEl.style.left = `${(hx / ARC_VIEWBOX_WIDTH) * 100}%`;
+    handleEl.style.top = `${(hy / ARC_VIEWBOX_HEIGHT) * 100}%`;
+  }
   function renderRateArc(value: number): void {
-    paintArcAtT(rateSliderValueToArcT(value), handle, fillPath);
+    const t = rateSliderValueToArcT(value);
+    paintArcFillAtT(t, fillPath);
+    positionArcHandle(t, handle);
   }
   renderRateArc(options.defaultRateSliderValue);
 
@@ -522,15 +593,24 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   timeTodayMarker.setAttribute("cx", String(todayMarkerX));
   timeTodayMarker.setAttribute("cy", String(todayMarkerY));
 
-  const timeHandle = document.createElementNS(svgNs, "circle");
-  timeHandle.setAttribute("class", "player-time-arc-handle");
-  timeHandle.setAttribute("r", "4.5");
-
-  timeArcSvg.append(timeTrackPath, timeFillPath, timeTodayMarker, timeHandle);
+  timeArcSvg.append(timeTrackPath, timeFillPath, timeTodayMarker);
   timeArcTrack.appendChild(timeArcSvg);
 
+  // Story #279: same fix as the rate arc's own `handle` div above - a plain
+  // absolutely-positioned HTML div overlaid on `timeArcTrack`, sibling to
+  // `timeArcSvg` rather than an SVG `<circle>` inside it, so it renders as a
+  // true circle instead of the ellipse this specific handle was visibly
+  // "sploshed" into (the time arc's box is proportionally wider than the
+  // rate arc's, so its X/Y stretch mismatch - and thus the distortion - was
+  // the more visible of the two).
+  const timeHandle = document.createElement("div");
+  timeHandle.className = "player-time-arc-handle";
+  timeArcTrack.appendChild(timeHandle);
+
   function renderTimeArc(tYears: number): void {
-    paintArcAtT(playerTimeYearsToArcT(tYears), timeHandle, timeFillPath);
+    const t = playerTimeYearsToArcT(tYears);
+    paintArcFillAtT(t, timeFillPath);
+    positionArcHandle(t, timeHandle);
   }
   renderTimeArc(0);
 
@@ -678,17 +758,13 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   controlBar.append(timeReadout, buttonRow, rateReadout);
   panel.append(controlBar, collapseButton);
 
-  // Story #275 Part 3.3: "Today" moves into its own dedicated, centered row,
-  // directly below the `<<`/Play-Pause/`>>` button row - no longer inline
-  // with the time/rate readouts or the collapse chevron the way it was in
-  // `controlBar` above.
-  const todayRow = document.createElement("div");
-  todayRow.className = "player-panel-row player-today-row";
-  todayRow.appendChild(todayButton);
-  panel.appendChild(todayRow);
-
-  // Story #277: the rate arc's own row now sits here, directly below
-  // `todayRow` and above `timeArcRow` - see `rateArcRow`'s own comment
+  // Story #279: `.player-today-row` (its own dedicated row below the button
+  // row, added by #275 Part 3.3) is gone - `todayButton` is appended to
+  // `buttonRow` itself above instead, so there's no separate row to append
+  // here any more.
+  //
+  // Story #277: the rate arc's own row sits here, directly below
+  // `controlBar` and above `timeArcRow` - see `rateArcRow`'s own comment
   // above.
   panel.appendChild(rateArcRow);
   // Story #271: the time arc's own row, directly BELOW the rate arc row
