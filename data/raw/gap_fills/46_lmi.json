@@ -1,0 +1,86 @@
+{
+  "id": "46_lmi",
+  "name": "*  46 LMi",
+  "aliases": [
+    "TIC 85321185",
+    "Gaia DR3 738259665062428416",
+    "HIP 53229",
+    "PLX 2532",
+    "LSPM J1053+3412",
+    "ASCC  585315",
+    "USNO-B1.0 1242-00184835",
+    "AG+34 1112",
+    "BD+34  2172",
+    "FK5  412",
+    "GC 14961",
+    "GCRV  6745",
+    "GEN# +1.00094264",
+    "GSC 02521-02271",
+    "HD  94264",
+    "HIC  53229",
+    "HR  4247",
+    "IRAS 10505+3428",
+    "IRC +30226",
+    "JP11  2003",
+    "LTT 12905",
+    "N30 2564",
+    "NLTT 25614",
+    "NSV  4999",
+    "PMC 90-93   295",
+    "PPM  75534",
+    "RAFGL 1440",
+    "ROT  1624",
+    "SAO  62297",
+    "SKY# 20842",
+    "SRS  30412",
+    "TD1 15212",
+    "TYC 2521-2271-1",
+    "UBV    9986",
+    "UBV M  16582",
+    "[GS83] 118",
+    "[HFE83]  758",
+    "2MASS J10531870+3412538",
+    "PLX 2532.00",
+    "Pul -3  740423",
+    "NAME Praecipua",
+    "WEB  9661",
+    "Gaia DR2 738259665062173440"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 163.32787152823542,
+    "dec_deg": 34.214892133082785,
+    "galactic_l_deg": 190.01035936780463,
+    "galactic_b_deg": 63.733775844411554
+  },
+  "distance": {
+    "value_pc": 30.37574800279457,
+    "error_pc": 0.16377677189477313
+  },
+  "cartesian": {
+    "x_pc": -13.237918561808883,
+    "y_pc": -2.336670188720927,
+    "z_pc": 27.239375016863647
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record *  46 LMi, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=*  46 LMi",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K0+III-IV",
+    "absolute_magnitude": 1.417365017507736,
+    "apparent_magnitude": 3.8299999237060547
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:51+00:00; upstream record id: *  46 LMi; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

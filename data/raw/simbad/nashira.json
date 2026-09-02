@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Nashira",
+  "retrieved_utc": "2026-09-02T17:21:37+00:00",
+  "record_id": "* gam Cap",
+  "raw": {
+    "main_id": "* gam Cap",
+    "ra": 325.0226892543413,
+    "dec": -16.66237119824361,
+    "coo_err_maj": 0.795199990272522,
+    "coo_err_min": 0.48840001225471497,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.6700000762939453,
+    "plx_err": 0.6765000224113464,
+    "otype": "a2*",
+    "plx_value": 19.1037,
+    "pmra": 200.193,
+    "pmdec": -9.578,
+    "rvz_radvel": -31.2,
+    "sp_type": "kF0hF1VmF2",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 242072254|Gaia DR3 6838023243053666688|GJ 4209|PLX 5222|* gam Cap|*  40 Cap|BD-17  6340|FK5  812|GC 30320|GCRV 13603|GEN# +1.00206088|GSC 06362-01078|HD 206088|HIC 106985|HIP 106985|HR  8278|IRAS 21373-1653|IRC -20605|JP11  3373|N30 4776|PMC 90-93   569|PPM 239166|ROT  3147|SAO 164560|SKY# 41306|TD1 28336|UBV   18602|UBV M  25849|YZ 106  8145|[HFE83] 1452|[TVS94]  46|uvby98 100206088|2MASS J21400544-1639443|PLX 5222.00|V* gam Cap|TYC 6362-1078-1|Renson 57390|NAME Nashira|WEB 19332|Gaia DR2 6838023243053277312",
+    "matched_id": "NAME Nashira"
+  }
+}

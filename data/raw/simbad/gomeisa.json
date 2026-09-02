@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Gomeisa",
+  "retrieved_utc": "2026-09-02T17:20:42+00:00",
+  "record_id": "* bet CMi",
+  "raw": {
+    "main_id": "* bet CMi",
+    "ra": 111.78767390541668,
+    "dec": 8.2893157625,
+    "coo_err_maj": 0.18000000715255737,
+    "coo_err_min": 0.11999999731779099,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.890000104904175,
+    "plx_err": 0.20000000298023224,
+    "otype": "Be*",
+    "plx_value": 20.17,
+    "pmra": -51.76,
+    "pmdec": -38.29,
+    "rvz_radvel": 22.0,
+    "sp_type": "B8Ve",
+    "rvz_bibcode": "1993BICDS..43....5T",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 425224332|HIP 36188|Gaia DR3 3143264535611892096|PLX 1753|[JE82]  311|* bet CMi|*   3 CMi|AAVSO 0721+08|AG+08  981|BD+08  1774|CSI+08  1774  1|CSV   6586|EM* MWC  178|FAUST 1028|FK5  285|GC  9947|GCRV  4951|GEN# +1.00058715|GSC 00764-02774|HD  58715|HGAM    571|HIC  36188|HR  2845|IRAS 07244+0823|JP11  1553|N30 1666|PMC 90-93   206|PPM 152663|ROT  1202|SAO 115456|SKY# 13603|TD1 10116|TYC  764-2774-1|UBV    7201|UBV M  13277|V* bet CMi|[B10]  1944|2MASS J07270905+0817216|PLX 1753.00|** BUP  101A|CCDM J07272+0818A|IDS 07217+0829 A|WDS J07272+0817A|NAME Gomeisa|uvby98 100058715|WEB  7206|LAMOST J072709.01+081614.3",
+    "matched_id": "NAME Gomeisa"
+  }
+}

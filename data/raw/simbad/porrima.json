@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Porrima",
+  "retrieved_utc": "2026-09-02T17:20:21+00:00",
+  "record_id": "* gam Vir",
+  "raw": {
+    "main_id": "* gam Vir",
+    "ra": 190.41511762006294,
+    "dec": -1.4494039524575002,
+    "coo_err_maj": 0.396699994802475,
+    "coo_err_min": 0.1467999964952469,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.740000009536743,
+    "plx_err": 0.5073999762535095,
+    "otype": "PM*",
+    "plx_value": 83.1935,
+    "pmra": -605.176,
+    "pmdec": 85.701,
+    "rvz_radvel": -19.8,
+    "sp_type": "F1-F2V",
+    "rvz_bibcode": "1979IAUS...30...57E",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 51735845|BD-00  2601|CSI-00  2601  5|HD 110379J|UBV   11380|*  29 Vir|NAME Porrima|GSC 04949-01120|IRAS 12390-0110|IRC +00223|JP11  2269|RAFGL 1571|TD1 16433|1ES 1239-01.1|1RXS J124139.7-012706|RX J1241.6-0127|2RE J1241-012|2RE J124140-012632|2MASS J12413962-0126580|* gam Vir|uvby98 100110379|GEN# +1.00110379|GJ 482.0|GJ 482 A|HIP 61941|Gaia DR3 3683687763520080384|PLX 2924|WDS J12417-0127A|* gam Vir A|*  29 Vir A|ADS  8630 A|AG-01 1685|BD-00  2601A|CSI-00  2601  1|CSV 101317|Ci 20  732|GC 17270|GCRV  7623|CNS5 3135|HD 110379|HR  4825|LFT  937|LHS  2604|LPM 444|LTT  4843|N30 2927|NLTT 31564|NSV  5859|PM 12391-0110|PMC 90-93  6089|RBS  1143|ROT  1871|SAO 138917|SKY# 23673|UBV   11379|uvby98 100110379 A|IDS 12366-0054 A|CCDM J12417-0127A|TYC 4949-1120-1|2EUVE J1241-01.4|EUVE J1241-01.4|** STF 1670A|Gaia DR2 3683687763520080384|WEB 11013",
+    "matched_id": "NAME Porrima"
+  }
+}

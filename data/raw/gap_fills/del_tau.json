@@ -1,0 +1,102 @@
+{
+  "id": "del_tau",
+  "name": "* del Tau",
+  "aliases": [
+    "TIC 435926868",
+    "EPIC 200007766",
+    "HIP 20455",
+    "Gaia DR3 3314024566919613952",
+    "2MASS J04225609+1732331",
+    "Cl* Melotte   25    MMU      41",
+    "PLX  965",
+    "Cl* Melotte   25      S       2",
+    "Cl* Melotte   25     VA     256",
+    "SBC9 239",
+    "* del01 Tau",
+    "*  61 Tau",
+    "2E  1001",
+    "2E 0420.0+1726",
+    "AG+17  384",
+    "BD+17   712",
+    "CCDM J04229+1733A",
+    "CSI+17   712  1",
+    "CSV 102443",
+    "FK5  162",
+    "GC  5304",
+    "GCRV  2535",
+    "GEN# +5.20250041",
+    "GSC 01268-01267",
+    "HD  27697",
+    "HIC  20455",
+    "HR  1373",
+    "IDS 04172+1718 A",
+    "IRAS 04200+1725",
+    "IRC +20076",
+    "JP11  4819",
+    "N30  904",
+    "NSV  1582",
+    "PMC 90-93   116",
+    "PPM 119835",
+    "RAFGL 4340S",
+    "ROT  3851",
+    "SAO  93897",
+    "SBC7   176",
+    "SKY#  6743",
+    "SRS  30162",
+    "TD1  3094",
+    "TYC 1268-1267-1",
+    "UBV    4227",
+    "UBV M  41247",
+    "YZ  17  1151",
+    "uvby98 520250041",
+    "Cl Melotte   25    41",
+    "Cl Melotte   25   411",
+    "PLX  965.00",
+    "WDS J04230+1732Aa,Ab",
+    "1RXS J042255.4+173235",
+    "LP   17-712",
+    "UCAC4 538-008812",
+    "** CHR  262",
+    "NAME Secunda Hyadum",
+    "[RSP2011] 261",
+    "WEB  3912",
+    "Gaia DR2 3314024566918614528"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 65.73372983164,
+    "dec_deg": 17.54251383399,
+    "galactic_l_deg": 178.01540934635594,
+    "galactic_b_deg": -22.00858481171669
+  },
+  "distance": {
+    "value_pc": 49.23876863687393,
+    "error_pc": 0.5518062461456978
+  },
+  "cartesian": {
+    "x_pc": -45.62324478582745,
+    "y_pc": 1.5809138766596247,
+    "z_pc": -18.452007571065256
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Tau, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Tau",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G9.5IIICN0.5",
+    "absolute_magnitude": 0.29846407266987285,
+    "apparent_magnitude": 3.759999990463257
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:47+00:00; upstream record id: * del Tau; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

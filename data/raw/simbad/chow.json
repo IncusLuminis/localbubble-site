@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Chow",
+  "retrieved_utc": "2026-09-02T17:21:39+00:00",
+  "record_id": "* bet Ser",
+  "raw": {
+    "main_id": "* bet Ser",
+    "ra": 236.54689658602248,
+    "dec": 15.421819296846387,
+    "coo_err_maj": 0.21070000529289246,
+    "coo_err_min": 0.31360000371932983,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.6700000762939453,
+    "plx_err": 0.3070000112056732,
+    "otype": "PM*",
+    "plx_value": 21.5924,
+    "pmra": 65.958,
+    "pmdec": -47.791,
+    "rvz_radvel": 0.6,
+    "sp_type": "A2IV",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 119885027|Gaia DR3 1195823284391343104|HIP 77233|PLX 3569|* bet Ser|*  28 Ser|ADS  9778 A|AG+15 1580|BD+15  2911|CCDM J15461+1525A|CSI+15  2911  1|FK5  583|GC 21194|GCRV  9094|GEN# +1.00141003A|GSC 01495-01994|HD 141003|HGAM    641|HIC  77233|HR  5867|IDS 15416+1544 A|JP11  2645|N30 3542|PMC 90-93   414|PPM 131676|ROT  2222|SAO 101725|SKY# 28510|SRS  30583|TD1 18546|TYC 1495-1994-1|UBV   13431|YZ  15  5643|WDS J15462+1525A|2MASS J15461125+1525185|IRAS 15438+1534|AKARI-IRC-V1 J1546112+152518|** STF 1970A|NAME Chow|uvby98 100141003|WEB 13088|Gaia DR2 1195823284390905728",
+    "matched_id": "NAME Chow"
+  }
+}

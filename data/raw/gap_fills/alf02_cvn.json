@@ -1,0 +1,98 @@
+{
+  "id": "alf02_cvn",
+  "name": "* alf02 CVn",
+  "aliases": [
+    "HIP 63125",
+    "Gaia DR3 1517698716348324992",
+    "PLX 2969",
+    "LSPM J1256+3819",
+    "ASCC  494743",
+    "USNO-B1.0 1283-00241520",
+    "* alf CVn A",
+    "*  12 CVn A",
+    "2E  2902",
+    "ADS  8706 A",
+    "AG+38 1225",
+    "BD+39  2580",
+    "BD+39  2580A",
+    "CCDM J12560+3819A",
+    "CSI+39  2580  1",
+    "FK5  485",
+    "GC 17557",
+    "GCRV  7733",
+    "GEN# +1.00112413",
+    "HD 112413",
+    "HGAM    621",
+    "HIC  63125",
+    "HR  4915",
+    "IDS 12514+3851 A",
+    "IRAS 12536+3835",
+    "IRAS F12536+3835",
+    "IRC +40239",
+    "JP11  2336",
+    "LTT 13717",
+    "N30 2983",
+    "NLTT 32338",
+    "PMC 90-93   344",
+    "PPM  76815",
+    "ROT  1913",
+    "SAO  63257",
+    "SBS 74",
+    "SKY# 24037",
+    "SRS  30485",
+    "UBV   11678",
+    "UBV M  18844",
+    "V* alf02 CVn",
+    "[SS59]   I 358",
+    "[ZEH2003] RX J1256.0+3818  1",
+    "2MASS J12560168+3819059",
+    "2E 1253.6+3835",
+    "WDS J12560+3819A",
+    "TYC 3021-2645-1",
+    "Renson 32650",
+    "RX J1256.0+3818",
+    "1RXS J125600.6+381856",
+    "** STF 1692A",
+    "NAME Cor Caroli",
+    "TIC 17668155",
+    "uvby98 100112413",
+    "WEB 11192"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 194.00693995375286,
+    "dec_deg": 38.31837643625333,
+    "galactic_l_deg": 118.30501203870075,
+    "galactic_b_deg": 78.76861001723873
+  },
+  "distance": {
+    "value_pc": 30.55982544227707,
+    "error_pc": 0.5457728712206782
+  },
+  "cartesian": {
+    "x_pc": -2.8223218060322144,
+    "y_pc": 5.240522143041063,
+    "z_pc": 29.974561854244588
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf02 CVn, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf02 CVn",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A0VpSiEu",
+    "absolute_magnitude": 0.4542457683376355,
+    "apparent_magnitude": 2.880000114440918
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:40+00:00; upstream record id: * alf02 CVn; otype: a2*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

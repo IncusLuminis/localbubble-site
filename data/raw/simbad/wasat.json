@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Wasat",
+  "retrieved_utc": "2026-09-02T17:21:25+00:00",
+  "record_id": "* del Gem",
+  "raw": {
+    "main_id": "* del Gem",
+    "ra": 110.03072735754377,
+    "dec": 21.98230404962861,
+    "coo_err_maj": 0.1899999976158142,
+    "coo_err_min": 0.20600000023841858,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.5299999713897705,
+    "plx_err": 0.2402999997138977,
+    "otype": "SB*",
+    "plx_value": 53.7692,
+    "pmra": -27.722,
+    "pmdec": -14.702,
+    "rvz_radvel": 4.1,
+    "sp_type": "F2VkF0mF0",
+    "rvz_bibcode": "1979IAUS...30...57E",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 184842719|WISEA J072007.35+215855.8|UCAC4 560-040614|GJ 271|GJ 271 A|HIP 35550|Gaia DR3 866177431955478144|PLX 1718|SBC9 442|AG+22  862|BD+22  1645|CSI+22  1645  3|CSI+22  1645  1|FK5  279|CNS5 1821|GC  9755|GCRV  4854|HD  56986|HIC  35550|HR  2777|IRC +20177|JP11  1533|N30 1632|PMC 90-93   201|PPM  97380|ROT  1171|SAO  79294|SBC7   300|SKY# 13328|SRS  30279|TD1  9732|UBV    7099|UBV M  13165|[HFE83]  504|2EUVE J0720+21.9|EUVE J0719+21.9|EUVE J0720+21.9|Renson 15560|WISE J072007.29+215857.4|AKARI-IRC-V1 J0720073+215855|IRAS 07171+2204|1RXS J072007.4+215916|*  55 Gem|* del Gem|IRAS F07171+2204|NAME Wasat|uvby98 100056986|WEB  7084|Gaia DR2 866177431953646464|2MASS J07200736+2158561|* del Gem A|ADS  5983 A|PMSC 07142+2210A|*  55 Gem A|CCDM J07201+2159A|TYC 1359-2672-1|BD+22  1645A|PMSC 07142+2210Aab|WDS J07201+2159A|GEN# +1.00056986",
+    "matched_id": "NAME Wasat"
+  }
+}

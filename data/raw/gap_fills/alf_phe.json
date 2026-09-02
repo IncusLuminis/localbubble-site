@@ -1,0 +1,80 @@
+{
+  "id": "alf_phe",
+  "name": "* alf Phe",
+  "aliases": [
+    "TIC 80256524",
+    "GEN# +1.00002261",
+    "UCAC4 239-000445",
+    "GJ 9013",
+    "HIP 2081",
+    "Gaia DR3 4993479684438433792",
+    "2MASS J00261699-4218216",
+    "PLX   71",
+    "SBC9 21",
+    "CNS5 127",
+    "CD-42   116",
+    "CPC  0   173",
+    "CPD-42    34",
+    "Ci 20   32",
+    "FK5   12",
+    "GC   519",
+    "GCRV   237",
+    "GSC 07527-01031",
+    "HD   2261",
+    "HIC   2081",
+    "HR    99",
+    "IRAS 00238-4234",
+    "JP11   384",
+    "LTT   231",
+    "N30   77",
+    "NLTT  1388",
+    "PPM 304876",
+    "RAFGL   64",
+    "SAO 215093",
+    "SBC7    16",
+    "SKY#   732",
+    "TD1   223",
+    "TYC 7527-1031-1",
+    "UBV     321",
+    "NAME Ankaa",
+    "uvby98 100002261",
+    "WEB   393"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 6.5710475153919266,
+    "dec_deg": -42.305987194396046,
+    "galactic_l_deg": 319.9997777413224,
+    "galactic_b_deg": -73.97845492408743
+  },
+  "distance": {
+    "value_pc": 25.974025974025974,
+    "error_pc": 0.4924945313364725
+  },
+  "cartesian": {
+    "x_pc": 5.4916015678490755,
+    "y_pc": -4.608037151991071,
+    "z_pc": -24.96514232134964
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Phe, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Phe",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K0.5IIIb",
+    "absolute_magnitude": 0.30730376198342135,
+    "apparent_magnitude": 2.380000114440918
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:00+00:00; upstream record id: * alf Phe; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

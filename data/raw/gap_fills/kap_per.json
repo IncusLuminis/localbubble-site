@@ -1,0 +1,92 @@
+{
+  "id": "kap_per",
+  "name": "* kap Per",
+  "aliases": [
+    "TIC 192589330",
+    "HIP 14668",
+    "Gaia DR3 433103132037681536",
+    "2MASS J03092976+4451271",
+    "PLX  650",
+    "LSPM J0309+4451",
+    "ASCC  386305",
+    "USNO-B1.0 1348-00067589",
+    "*  27 Per",
+    "ADS  2368 A",
+    "AG+44  317",
+    "AN   74.1901",
+    "BD+44   631",
+    "CCDM J03095+4451A",
+    "CSI+44   631  1",
+    "CSV 100260",
+    "GC  3755",
+    "GCRV  1741",
+    "GEN# +1.00019476",
+    "GSC 02859-02274",
+    "HD  19476",
+    "HIC  14668",
+    "HR   941",
+    "IDS 03027+4429 A",
+    "IRAS 03061+4440",
+    "IRC +40057",
+    "JP11   754",
+    "LTT 11023",
+    "NLTT 10001",
+    "NSV  1055",
+    "PPM  45885",
+    "RAFGL  449",
+    "ROT   421",
+    "SAO  38609",
+    "SKY#  4714",
+    "SV* ZI   177",
+    "TD1  1918",
+    "TYC 2859-2274-1",
+    "UBV    3028",
+    "UBV M   9346",
+    "YPAC 309",
+    "uvby98 100019476",
+    "PLX  650.00",
+    "WDS J03095+4451A",
+    "1RXS J030928.6+445123",
+    "** ES 2596A",
+    "NAME Misam",
+    "WEB  2846",
+    "Gaia DR2 433103132036857856"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 47.37418183354417,
+    "dec_deg": 44.85745828572973,
+    "galactic_l_deg": 147.12324374864897,
+    "galactic_b_deg": -11.432136674915997
+  },
+  "distance": {
+    "value_pc": 34.805126098971854,
+    "error_pc": 0.1917641107873833
+  },
+  "cartesian": {
+    "x_pc": -28.650808977607802,
+    "y_pc": 18.5185563801558,
+    "z_pc": -6.898624304087677
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * kap Per, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* kap Per",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G9.5IIIb",
+    "absolute_magnitude": 1.1017838850367134,
+    "apparent_magnitude": 3.809999942779541
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:49+00:00; upstream record id: * kap Per; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

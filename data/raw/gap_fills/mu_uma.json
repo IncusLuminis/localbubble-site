@@ -1,0 +1,84 @@
+{
+  "id": "mu_uma",
+  "name": "* mu. UMa",
+  "aliases": [
+    "TIC 8172111",
+    "Gaia DR3 804753180515722624",
+    "HIP 50801",
+    "PLX 2430",
+    "SBC9 607",
+    "*  34 UMa",
+    "AAVSO 1016+42",
+    "AG+41  998",
+    "BD+42  2115",
+    "CSV 101121",
+    "FK5  386",
+    "GC 14232",
+    "GCRV  6517",
+    "GEN# +1.00089758",
+    "GSC 03004-01418",
+    "HD  89758",
+    "HIC  50801",
+    "HR  4069",
+    "IRAS 10193+4145",
+    "IRC +40218",
+    "JP11  1935",
+    "N30 2460",
+    "NSV  4829",
+    "PMC 90-93   278",
+    "PPM  51850",
+    "RAFGL 1411",
+    "SAO  43310",
+    "SBC7   397",
+    "SKY# 19925",
+    "SV* ZI   815",
+    "TD1 14776",
+    "TYC 3004-1418-1",
+    "UBV M  16152",
+    "UBV    9576",
+    "[DS98] 130",
+    "[HFE83]  721",
+    "2MASS J10221975+4129580",
+    "PLX 2430.00",
+    "NAME Tania Australis",
+    "WEB  9297",
+    "Gaia DR2 804753180515064576"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 155.5821986521946,
+    "dec_deg": 41.499538262575555,
+    "galactic_l_deg": 177.90319125767616,
+    "galactic_b_deg": 56.36026947967309
+  },
+  "distance": {
+    "value_pc": 56.18387859787512,
+    "error_pc": 1.2415018667501885
+  },
+  "cartesian": {
+    "x_pc": -31.103286652947983,
+    "y_pc": 1.1387710314890795,
+    "z_pc": 46.77517476421819
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * mu. UMa, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* mu. UMa",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "M0III",
+    "absolute_magnitude": -0.698058632612355,
+    "apparent_magnitude": 3.049999952316284
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:55+00:00; upstream record id: * mu. UMa; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

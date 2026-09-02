@@ -53,7 +53,16 @@ RECONS_BATCH_TAG = "recons-nearest-100"
 #: claim (Alnilam's notes happen to mention "Galaxy Map" as context for why
 #: it's a likely missed import from that batch, but it is not itself a
 #: resolved poster-candidate record either).
-GAP_FILL_TAGS = {"nearby-bright-star-gap-fill", "luminous-poster-gap-fill"}
+#: Story #295 added a third gap-fill batch (77 more named bright stars,
+#: V<4.0, 11-60pc, re-derived live from SIMBAD TAP) tagged
+#: "local-bubble-bright-named-gap-fill" - same reasoning, excluded here too
+#: rather than asserting Galaxy-Map-poster-specific provenance text against
+#: it. See `tests/test_local_bubble_bright_star_gap_fill.py`.
+GAP_FILL_TAGS = {
+    "nearby-bright-star-gap-fill",
+    "luminous-poster-gap-fill",
+    "local-bubble-bright-named-gap-fill",
+}
 
 
 @pytest.fixture(scope="module")

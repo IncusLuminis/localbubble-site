@@ -1,0 +1,89 @@
+{
+  "id": "tet_peg",
+  "name": "* tet Peg",
+  "aliases": [
+    "TIC 468285170",
+    "** VSP   57A",
+    "WDS J22102+0612A",
+    "Gaia DR3 2720428303852574336",
+    "GJ 9771",
+    "PLX 5362",
+    "LSPM J2210+0611",
+    "ASCC 1088144",
+    "USNO-B1.0 0961-00579177",
+    "*  26 Peg",
+    "AG+05 3241",
+    "BD+05  4961",
+    "CSV 102151",
+    "FK5  834",
+    "GC 31013",
+    "GCRV 13930",
+    "GEN# +1.00210418",
+    "GSC 00565-01999",
+    "HD 210418",
+    "HGAM   1052",
+    "HIC 109427",
+    "HIP 109427",
+    "HR  8450",
+    "IRAS 22076+0557",
+    "JP11  3458",
+    "LTT 16484",
+    "N30 4884",
+    "NLTT 53109",
+    "NSV 14057",
+    "PMC 90-93   584",
+    "PPM 172728",
+    "ROT  3226",
+    "SAO 127340",
+    "SKY# 42241",
+    "TD1 28827",
+    "TYC  565-1999-1",
+    "UBV   18949",
+    "UBV M  26173",
+    "YZ   5 11135",
+    "uvby98 100210418",
+    "2MASS J22101198+0611522",
+    "PLX 5362.00",
+    "NAME Biham",
+    "WISEA J221012.17+061152.5",
+    "WEB 19660",
+    "Gaia DR2 2720428303852169216"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 332.5499525505046,
+    "dec_deg": 6.1979215882049985,
+    "galactic_l_deg": 67.41705990162353,
+    "galactic_b_deg": -38.716955755951076
+  },
+  "distance": {
+    "value_pc": 27.19771104063882,
+    "error_pc": 0.8366182455361452
+  },
+  "cartesian": {
+    "x_pc": 8.149254048738191,
+    "y_pc": 19.593767359678377,
+    "z_pc": -17.011449819283822
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * tet Peg, coo_bibcode 2018yCat.1345....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tet Peg",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A1Va",
+    "absolute_magnitude": 1.3773381755735405,
+    "apparent_magnitude": 3.549999952316284
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:27+00:00; upstream record id: * tet Peg; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

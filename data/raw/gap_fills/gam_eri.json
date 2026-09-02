@@ -1,0 +1,86 @@
+{
+  "id": "gam_eri",
+  "name": "* gam Eri",
+  "aliases": [
+    "TIC 325685265",
+    "Gaia DR3 5111187420714898304",
+    "HIP 18543",
+    "2MASS J03580177-1330310",
+    "PLX  878",
+    "*  34 Eri",
+    "AAVSO 0353-13",
+    "ADS  2904 A",
+    "BD-13   781",
+    "CCDM J03580-1331A",
+    "CSI-13   781  1",
+    "CSV   6066",
+    "FK5  149",
+    "GC  4778",
+    "GCRV  2274",
+    "GEN# +1.00025025",
+    "GSC 05311-01285",
+    "HD  25025",
+    "HIC  18543",
+    "HR  1231",
+    "IDS 03534-1348 A",
+    "IRAS 03557-1339",
+    "IRC -10055",
+    "JP11   839",
+    "N30  816",
+    "NAME Zaurak",
+    "PMC 90-93   107",
+    "PPM 213659",
+    "RAFGL  537",
+    "SACS  86",
+    "SAO 149283",
+    "SKY#  6058",
+    "TD1  2709",
+    "TYC 5311-1285-1",
+    "UBV    3879",
+    "V* gam Eri",
+    "YZ   0  5238",
+    "YZC 11   929",
+    "[DS98]  48",
+    "PLX  878.00",
+    "WDS J03580-1331A",
+    "WEB  3576",
+    "Gaia DR2 5111187420712629632"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 59.50735758877376,
+    "dec_deg": -13.508514805984444,
+    "galactic_l_deg": 205.16211262517191,
+    "galactic_b_deg": -44.472772988897745
+  },
+  "distance": {
+    "value_pc": 58.8179936006023,
+    "error_pc": 0.7797840088729877
+  },
+  "cartesian": {
+    "x_pc": -37.98879932515036,
+    "y_pc": -17.845498696211155,
+    "z_pc": -41.206136355128834
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * gam Eri, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Eri",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "M0III-IIIb",
+    "absolute_magnitude": -0.9075509716313253,
+    "apparent_magnitude": 2.940000057220459
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:45+00:00; upstream record id: * gam Eri; otype: LP?. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

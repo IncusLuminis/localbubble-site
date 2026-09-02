@@ -1,0 +1,78 @@
+{
+  "id": "alf_sgr",
+  "name": "* alf Sgr",
+  "aliases": [
+    "TIC 98423184",
+    "Gaia DR3 6713727061309245952",
+    "HIP 95347",
+    "CD-40 13245",
+    "CPC  0 18143",
+    "CPD-40  8955",
+    "FK5  728",
+    "GC 26737",
+    "GCRV 11828",
+    "GEN# +1.00181869",
+    "GSC 07935-02139",
+    "HD 181869",
+    "HIC  95347",
+    "HR  7348",
+    "N30 4293",
+    "NAME Rukbat",
+    "PPM 325060",
+    "ROT  2780",
+    "SAO 229659",
+    "SKY# 36082",
+    "TD1 24515",
+    "TYC 7935-2139-1",
+    "UBV   16392",
+    "UBV M  23709",
+    "[B10]  4936",
+    "uvby98 100181869",
+    "ALS 16856",
+    "RX J1923.8-4036",
+    "IRAS 19204-4042",
+    "IRAS F19204-4042",
+    "AKARI-IRC-V1 J1923531-403658",
+    "1RXS J192354.0-403653",
+    "2MASS J19235315-4036571",
+    "WEB 16665",
+    "Gaia DR2 6713727061308648704"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 290.97156416063837,
+    "dec_deg": -40.615937202693054,
+    "galactic_l_deg": 357.71130355716537,
+    "galactic_b_deg": -23.089598210654593
+  },
+  "distance": {
+    "value_pc": 55.22177063085351,
+    "error_pc": 0.8812893158281438
+  },
+  "cartesian": {
+    "x_pc": 50.75758219072191,
+    "y_pc": -2.02860534446901,
+    "z_pc": -21.65632845417462
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Sgr, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Sgr",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B8V",
+    "absolute_magnitude": 0.23244843947746396,
+    "apparent_magnitude": 3.943000078201294
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:22:07+00:00; upstream record id: * alf Sgr; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

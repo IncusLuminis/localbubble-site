@@ -298,3 +298,122 @@ checked-in catalog/scene artifacts, run from this worktree's own clean
 commit for why that match matters). Full suite: 310 passed, 4 skipped (6
 new tests added for this quirk's `_query_mes_velocities`/`_query_upstream`
 wiring and the `_derive_velocity` corrected/fallback paths).
+
+## 77 new named bright stars in the Local Bubble (Epic #294, Story #295)
+
+By far the largest single gap-fill batch to date (previous largest: 34
+stars, issue #213 above). Unlike every batch before it, this one was not
+built from any hand-transcribed name list at all - the Epic's own
+33-name illustrative list was explicitly flagged as possibly stale/
+incomplete and deliberately *not* trusted. Instead, the full candidate
+list was re-derived live, from scratch, via a SIMBAD TAP/ADQL query:
+
+```sql
+SELECT b.oid, b.main_id, b.ra, b.dec, b.plx_value, f.V, i.ids
+FROM basic b JOIN allfluxes f ON f.oidref = b.oid JOIN ids i ON i.oidref = b.oid
+WHERE f.V < 4.0 AND b.plx_value > 16.6667 AND b.plx_value < 90.9091
+```
+
+(`V < 4.0` apparent magnitude; parallax 16.6667-90.9091 mas corresponds to
+exactly 11-60pc). This returned 240 raw rows. Filtering for a genuine
+`NAME `-prefixed common-name alias (this project's own `hasProperName`
+convention, `web/src/scene/labels.ts` - name or any alias literally
+starting with `"NAME "`) narrowed this to 106 named candidates. Cross-
+checking every one of those 106 against the full pre-Story catalog (every
+existing record's `name` *and* every alias, not just a display name)
+excluded 29 already present (including Arcturus, Capella, Achernar,
+Aldebaran, Regulus, Castor, Gacrux, Elnath, Miaplacidus, Alnair, Dubhe,
+Alkaid, Menkalinan, Peacock, Alphard, Diphda, Hamal, Rasalhague, Kochab,
+Algol, Mizar A, Eltanin, Alphecca, Merak, Sabik, Alderamin,
+Zubeneschamali, Unukalhai, and Zubenelgenubi - all from the issue #213
+batch above) - leaving **exactly 77 new candidates**, matching Epic #294's
+own research count exactly, and reproducing every one of its 33
+illustrative example names (Alioth, Kaus Australis, ... Alnasl) plus
+Mizar B, which the Epic separately flagged as a distinct find. See
+`tests/test_local_bubble_bright_star_gap_fill.py`'s module docstring for
+the full candidate-derivation methodology.
+
+**Known-tricky candidates, individually verified:**
+
+- **RECONS-boundary candidates** (Muphrid, Porrima, Deneb Algedi,
+  Zavijava - all flagged by the Epic as sitting at/near the ~11.26pc
+  RECONS sphere boundary): each resolved to its own unique SIMBAD record
+  with its own `NAME `-prefixed alias, absent from the pre-Story catalog
+  under any of its many cross-catalog identifiers (SIMBAD's `ids` field
+  was checked in full, not just the display name) - genuinely distinct
+  objects, not alias collisions. Zavijava resolves to 11.00pc, fractionally
+  *inside* the nominal 11.26pc RECONS boundary; per this project's own
+  established precedent (Fomalhaut, issue #207, at 7.7pc - also inside
+  RECONS's own distance range but still missing due to a transcription
+  gap, not a resolution failure), falling inside the sphere by distance
+  does not make a star a duplicate - RECONS's "100 nearest systems" census
+  is weighted toward faint dwarfs and has repeatedly been shown to miss
+  bright/evolved stars regardless of exact distance. Verified absent from
+  the catalog by every alias before acquiring; genuinely new.
+- **Multi-component systems** (Algol, Castor, Mizar - flagged by the Epic
+  as systems where one component is already cataloged): Algol and Castor
+  produced **no new NAME-prefixed candidate at all** - SIMBAD resolves
+  both plain names to the same already-cataloged component the issue #213
+  batch added (`bet_per`/`alf_gem`), so the pre-acquisition cross-check
+  correctly excluded them; neither is a distinct SIMBAD identifier the way
+  Mizar B is. **Mizar B** (SIMBAD identifier `* zet02 UMa`, alias `NAME
+  Mizar B`), by contrast, resolved to its own distinct `oid`/parallax/
+  photometry from the already-cataloged Mizar A (`* zet01 UMa`, issue
+  #213) - a genuinely separate real companion star, confirmed and
+  acquired as flagged.
+
+All 77 candidates were then acquired one at a time via the same
+`SimbadResolver`/`acquire` mechanism as every other entry in this
+directory (query = the plain common name, e.g. `"Alioth"`), each verified
+twice before being written: (1) the resolved object actually carries a
+`NAME <exact proper name>` alias (guards against an ambiguous/wrong
+cross-match, the same Mizar-alias quirk documented above); (2) the
+resolved distance is within 20% of the TAP-query-derived distance (guards
+against a gross cross-match/unit error). **Result: 77 of 77 attempted
+resolutions succeeded on the first attempt - 0 skipped, 0 fabricated.**
+All 77 carry a distinct `group.secondary: ["local-bubble-bright-named-gap-fill"]`
+tag - never claiming membership in the RECONS-nearest-100, Galaxy Map
+poster, or either prior gap-fill batch's own candidate list. No velocity
+was derived for any of these 77 (Story #296's job, which depends on this
+Story merging first).
+
+Spot-checked against public data (a representative spread, including all
+four RECONS-boundary candidates and Mizar B):
+
+| Star | Distance (resolved) | Public figure | Spectral type | Apparent V |
+| --- | --- | --- | --- | --- |
+| Alioth | 25.31 pc | ~81 ly = 24.8 pc | A1III-IVp (SIMBAD: A1III-IVp) | 1.77 (matches ~1.76) |
+| Kaus Australis | 43.94 pc | ~143 ly = 43.9 pc | B9.5III | 1.81 (matches ~1.85) |
+| Muphrid | 11.40 pc | ~37 ly = 11.3-11.4 pc | G0IV | 2.68 (matches) |
+| Porrima | 12.02 pc | ~38.6 ly = 11.8-12.0 pc (binary; orbital literature range) | F0V | 2.74 (matches) |
+| Deneb Algedi | 11.87 pc | ~39 ly = 11.9-12.0 pc | A7III(n) (kappa1 Cet-type) | 2.83 (matches) |
+| Zavijava | 11.00 pc | ~35.7 ly = 10.9-11.0 pc | F9V | 3.60 (matches) |
+| Mizar B | 24.83 pc | same system as Mizar A (~24.87 pc, this README's own #213 spot-check) | A1m (SIMBAD) | 3.88 (matches ~3.95 commonly cited) |
+
+All seven consistent with commonly cited public figures - no fabricated
+values, no cross-match errors. Mizar A and Mizar B resolving to
+essentially identical distances (24.87 pc vs. 24.83 pc) is exactly what a
+real gravitationally bound binary companion should show.
+
+Catalog grew from 1002 to 1079 objects; `galactic-structures build-catalog`
++ `galactic-structures export-scene --no-radius-filter --output
+web/public/data/scene.json` regenerated the checked-in catalog/scene
+artifacts, run from this worktree's own clean `.venv` (pyarrow 25.0.1,
+matching the version the test suite runs against - see this repo's
+`Regenerate catalog.parquet with current pyarrow` commit for why that
+match matters). New `tests/test_local_bubble_bright_star_gap_fill.py`
+covers presence, correct/disjoint tagging, distance sanity, dual
+provenance, the Mizar A/B disambiguation, the four RECONS-boundary
+candidates, and the Algol/Castor non-duplication - 11 new tests, full
+suite 321 passed, 4 skipped (a pre-existing `tests/
+test_bright_star_gap_fills.py::_find` helper needed a one-id exclusion for
+Mizar B, whose alias also contains the bare word "Mizar" that helper's
+own word-boundary matching would otherwise ambiguously match against
+issue #213's Mizar A).
+
+Not part of this Story: velocity derivation for these 77 stars (Story
+#296, which depends on this Story merging first), or any frontend change
+(none needed - Epic #285's Story #287 already widened the animated-
+population selection to `distance_pc <= bubbleOuterRadiusPc`, so these 77
+stars automatically join the animated Vectors/motion-player population
+once Story #296 adds their velocity).

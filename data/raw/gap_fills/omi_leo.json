@@ -1,0 +1,99 @@
+{
+  "id": "omi_leo",
+  "name": "* omi Leo",
+  "aliases": [
+    "TIC 469018187",
+    "HIP 47508",
+    "Gaia DR3 588551501854159744",
+    "PLX 2299",
+    "SBC9 580",
+    "*  14 Leo",
+    "* omi Leo A",
+    "ADS  7480 A",
+    "AG+10 1245",
+    "BD+10  2044",
+    "CCDM J09412+0954A",
+    "CSI+10  2044  1",
+    "FK5  365",
+    "GC 13366",
+    "GCRV  6240",
+    "GEN# +1.00083808",
+    "GSC 00821-02130",
+    "HD  83808",
+    "HD  83809",
+    "HIC  47508",
+    "HR  3852",
+    "IDS 09358+1021 A",
+    "IRAS 09384+1007",
+    "IRC +10210",
+    "JP11  1844",
+    "N30 2313",
+    "PMC 90-93   261",
+    "PPM 156093",
+    "ROT  1500",
+    "SAO  98709",
+    "SBC7   386",
+    "SKY# 18720",
+    "SRS  30365",
+    "TD1 14176",
+    "TYC  821-2130-1",
+    "UBV M  15636",
+    "UBV    9195",
+    "YZ  10  3836",
+    "[HFE83]  675",
+    "2MASS J09410902+0953321",
+    "[ZEH2003] RX J0941.1+0953  1",
+    "RX J0941.1+0953",
+    "1RXS J094110.2+095330",
+    "WDS J09412+0954Aa,Ab",
+    "Renson 23896",
+    "WDS J09412+0954A",
+    "WDS J09412+0954Aa,Ac",
+    "** HMM    1",
+    "** ARI    1",
+    "** H   76A",
+    "PMSC 09358+1020Aab",
+    "PMSC 09358+1020Aac",
+    "PMSC 09358+1020",
+    "NAME Subra",
+    "WEB  8912",
+    "Gaia DR2 588551497558573056"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 145.28763405888583,
+    "dec_deg": 9.89230789622861,
+    "galactic_l_deg": 224.6001868108176,
+    "galactic_b_deg": 42.055750697696844
+  },
+  "distance": {
+    "value_pc": 41.3264125367805,
+    "error_pc": 0.41125565597425284
+  },
+  "cartesian": {
+    "x_pc": -21.848155644399732,
+    "y_pc": -21.545348404590033,
+    "z_pc": 27.6826377034971
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * omi Leo, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* omi Leo",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "F8-G0III+A7m",
+    "absolute_magnitude": 0.4388614475136663,
+    "apparent_magnitude": 3.5199999809265137
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:22+00:00; upstream record id: * omi Leo; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

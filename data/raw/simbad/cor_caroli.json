@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Cor Caroli",
+  "retrieved_utc": "2026-09-02T17:20:40+00:00",
+  "record_id": "* alf02 CVn",
+  "raw": {
+    "main_id": "* alf02 CVn",
+    "ra": 194.00693995375286,
+    "dec": 38.31837643625333,
+    "coo_err_maj": 0.4302999973297119,
+    "coo_err_min": 0.2393999993801117,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.880000114440918,
+    "plx_err": 0.5843999981880188,
+    "otype": "a2*",
+    "plx_value": 32.7227,
+    "pmra": -233.776,
+    "pmdec": 55.035,
+    "rvz_radvel": -4.1,
+    "sp_type": "A0VpSiEu",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "HIP 63125|Gaia DR3 1517698716348324992|PLX 2969|LSPM J1256+3819|ASCC  494743|USNO-B1.0 1283-00241520|* alf CVn A|* alf02 CVn|*  12 CVn A|2E  2902|ADS  8706 A|AG+38 1225|BD+39  2580|BD+39  2580A|CCDM J12560+3819A|CSI+39  2580  1|FK5  485|GC 17557|GCRV  7733|GEN# +1.00112413|HD 112413|HGAM    621|HIC  63125|HR  4915|IDS 12514+3851 A|IRAS 12536+3835|IRAS F12536+3835|IRC +40239|JP11  2336|LTT 13717|N30 2983|NLTT 32338|PMC 90-93   344|PPM  76815|ROT  1913|SAO  63257|SBS 74|SKY# 24037|SRS  30485|UBV   11678|UBV M  18844|V* alf02 CVn|[SS59]   I 358|[ZEH2003] RX J1256.0+3818  1|2MASS J12560168+3819059|2E 1253.6+3835|WDS J12560+3819A|TYC 3021-2645-1|Renson 32650|RX J1256.0+3818|1RXS J125600.6+381856|** STF 1692A|NAME Cor Caroli|TIC 17668155|uvby98 100112413|WEB 11192",
+    "matched_id": "NAME Cor Caroli"
+  }
+}

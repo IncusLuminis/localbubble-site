@@ -1,0 +1,91 @@
+{
+  "id": "del_cas",
+  "name": "* del Cas",
+  "aliases": [
+    "TIC 54995745",
+    "GJ 58.1",
+    "HIP 6686",
+    "Gaia DR3 510204838759030144",
+    "PLX  287",
+    "ASCC  106973",
+    "LSPM J0125+6014",
+    "2MASS J01254889+6014070",
+    "USNO-B1.0 1502-00052721",
+    "*  37 Cas",
+    "AG+59  128",
+    "BD+59   248",
+    "CCDM J01259+6014A",
+    "CEL    139",
+    "CSI+59   248  1",
+    "FK5   48",
+    "GC  1715",
+    "GCRV   805",
+    "GEN# +1.00008538",
+    "HD   8538",
+    "HIC   6686",
+    "HR   403",
+    "IDS 01193+5943 A",
+    "IRAS 01225+5958",
+    "IRC +60050",
+    "IRCO  2978",
+    "JP11   494",
+    "LTT 10509",
+    "N30  290",
+    "NLTT  4718",
+    "PMC 90-93    34",
+    "PPM  12969",
+    "ROT   202",
+    "SAO  22268",
+    "SKY#  2155",
+    "TD1   800",
+    "UBV    1491",
+    "UBV M   8159",
+    "V* del Cas",
+    "[HFE83]   75",
+    "PLX  287.00",
+    "WDS J01258+6014A",
+    "** BUP   19A",
+    "NAME Ruchbah",
+    "TYC 4031-3289-1",
+    "uvby98 100008538",
+    "WEB  1460",
+    "Gaia DR2 510204838754613632"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 21.453964462083334,
+    "dec_deg": 60.23528402972222,
+    "galactic_l_deg": 127.19008780923234,
+    "galactic_b_deg": -2.351928788719868
+  },
+  "distance": {
+    "value_pc": 30.478512648582747,
+    "error_pc": 0.13005156321146583
+  },
+  "cartesian": {
+    "x_pc": -18.407562175906108,
+    "y_pc": 24.25978136998621,
+    "z_pc": -1.2507581262732437
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Cas, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Cas",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A5IV",
+    "absolute_magnitude": 0.26003121868744117,
+    "apparent_magnitude": 2.680000066757202
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:17+00:00; upstream record id: * del Cas; otype: EB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

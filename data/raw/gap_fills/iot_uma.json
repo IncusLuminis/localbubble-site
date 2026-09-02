@@ -1,0 +1,83 @@
+{
+  "id": "iot_uma",
+  "name": "* iot UMa",
+  "aliases": [
+    "TIC 456332840",
+    "HIP 44127",
+    "PLX 2143",
+    "ASCC  325676",
+    "2MASS J08591246+4802304",
+    "*   9 UMa",
+    "1RXS J085913.0+480227",
+    "2E  2082",
+    "AG+48  801",
+    "BD+48  1707",
+    "CSI+48  1707  1",
+    "Ci 20  499",
+    "FK5  335",
+    "GC 12407",
+    "GEN# +1.00076644",
+    "HD  76644",
+    "HIC  44127",
+    "HR  3569",
+    "IRAS 08557+4814",
+    "IRC +50194",
+    "JP11  1734",
+    "N30 2113",
+    "NSV  4329",
+    "PMC 90-93   243",
+    "PPM  50941",
+    "ROT  1411",
+    "SAO  42630",
+    "SKY# 17342",
+    "TD1 13330",
+    "UBV    8669",
+    "UBV M  14950",
+    "[HFE83]  626",
+    "uvby98 100076644",
+    "2E 0855.8+4814",
+    "RX J0859.2+4802",
+    "[ZEH2003] RX J0859.2+4802  1",
+    "WDS J08592+4803A,BC",
+    "PMSC 08524+4826",
+    "NAME Talitha",
+    "WEB  8476"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 134.8018900723819,
+    "dec_deg": 48.04182614451662,
+    "galactic_l_deg": 171.51239786133036,
+    "galactic_b_deg": 40.83614037817228
+  },
+  "distance": {
+    "value_pc": 14.509576320371444,
+    "error_pc": 0.0336844480465633
+  },
+  "cartesian": {
+    "x_pc": -10.857465471144096,
+    "y_pc": 1.6202573132891376,
+    "z_pc": 9.487782395182254
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * iot UMa, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* iot UMa",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A6",
+    "absolute_magnitude": 2.3317264487841296,
+    "apparent_magnitude": 3.140000104904175
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:01+00:00; upstream record id: * iot UMa; otype: **. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

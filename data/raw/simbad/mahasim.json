@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Mahasim",
+  "retrieved_utc": "2026-09-02T17:20:11+00:00",
+  "record_id": "* tet Aur",
+  "raw": {
+    "main_id": "* tet Aur",
+    "ra": 89.93029217610834,
+    "dec": 37.21258462923103,
+    "coo_err_maj": 1.8436121940612793,
+    "coo_err_min": 0.7045565843582153,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.619999885559082,
+    "plx_err": 0.1599999964237213,
+    "otype": "a2*",
+    "plx_value": 19.7,
+    "pmra": 43.63,
+    "pmdec": -73.79,
+    "rvz_radvel": 29.3,
+    "sp_type": "A0VpSi",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 174671483|ADS  4566 A|GEN# +1.00040312|WDS J05597+3713A|uvby98 100040312|CCDM J05597+3713A|** STT  545A|HIP 28380|PLX 1377|* tet Aur|*  37 Aur|AG+37  668|BD+37  1380|CSI+37  1380  1|CSI+37  1380  4|CSV 100704|GC  7557|GCRV  3735|HD  40312|HGAM    490|HIC  28380|HR  2095|IDS 05529+3712 A|IRC +40150|JP11  1295|PPM  71083|ROT   954|SAO  58636|SKY#  9958|SV* ZI   496|TD1  5708|UBV    6064|UBV M  11661|V* tet Aur|PLX 1377.00|TYC 2418-1573-1|Renson 10750|BD+37  1380A|1RXS J055943.0+371251|2MASS J05594324+3712452|CCDM J05597+3713AB|IRAS 05563+3712|AKARI-IRC-V1 J0559432+371245|NAME Mahasim|GCRV  3736|WEB  5547|WEB  5548",
+    "matched_id": "NAME Mahasim"
+  }
+}

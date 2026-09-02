@@ -1,0 +1,88 @@
+{
+  "id": "alf_equ",
+  "name": "* alf Equ",
+  "aliases": [
+    "TIC 387501663",
+    "Gaia DR3 1732693474833518720",
+    "*   8 Equ",
+    "PLX 5115",
+    "SBC9 1291",
+    "2E  4458",
+    "AG+05 3105",
+    "BD+04  4635",
+    "CCDM J21158+0515AB",
+    "FK5  800",
+    "GC 29735",
+    "GCRV 13363",
+    "GEN# +1.00202447",
+    "GSC 00536-02354",
+    "HD 202448",
+    "HD 202447",
+    "HIC 104987",
+    "HIP 104987",
+    "HR  8131",
+    "IDS 21108+0450 AB",
+    "IRAS 21133+0502",
+    "IRC +10489",
+    "JP11  3326",
+    "N30 4698",
+    "PMC 90-93   561",
+    "PPM 171503",
+    "ROT  3097",
+    "SAO 126662",
+    "SBC7   848",
+    "SKY# 40479",
+    "TD1 27865",
+    "TYC  536-2354-1",
+    "UBV   18375",
+    "UBV M  25570",
+    "YZ   5  7447",
+    "[HFE83] 1427",
+    "uvby98 100202447",
+    "2MASS J21154942+0514521",
+    "1RXS J211549.8+051458",
+    "2E 2113.3+0502",
+    "WDS J21158+0515AB",
+    "** WRH   35",
+    "NAME Kitalpha",
+    "WEB 19079",
+    "Gaia DR2 1732693474833048192"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 318.95598819687746,
+    "dec_deg": 5.247891952405833,
+    "galactic_l_deg": 56.37509070470032,
+    "galactic_b_deg": -28.71345867328246
+  },
+  "distance": {
+    "value_pc": 58.14460563421229,
+    "error_pc": 0.8208570568784427
+  },
+  "cartesian": {
+    "x_pc": 28.23853096376761,
+    "y_pc": 42.46234397347254,
+    "z_pc": -27.934385220457294
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf Equ, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Equ",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G6IV+B9.5V",
+    "absolute_magnitude": 0.11045294142392237,
+    "apparent_magnitude": 3.933000087738037
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:22:03+00:00; upstream record id: * alf Equ; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

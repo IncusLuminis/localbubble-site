@@ -1,0 +1,96 @@
+{
+  "id": "omi_uma",
+  "name": "* omi UMa",
+  "aliases": [
+    "TIC 73416947",
+    "HIP 41704",
+    "Gaia DR3 1041808368494264576",
+    "PLX 2010",
+    "LSPM J0830+6043",
+    "ASCC  125152",
+    "2MASS J08301592+6043056",
+    "USNO-B1.0 1507-00173995",
+    "*   1 UMa",
+    "AAVSO 0822+61",
+    "ADS  6830 A",
+    "AG+60  638",
+    "BD+61  1054",
+    "CCDM J08303+6043A",
+    "CSI+61  1054  1",
+    "CSV   6636",
+    "FK5  317",
+    "GC 11593",
+    "GCRV  5590",
+    "GSC 04127-02431",
+    "HD  71369",
+    "HIC  41704",
+    "HR  3323",
+    "IRAS 08261+6053",
+    "IRC +60187",
+    "JP11  1677",
+    "N30 1971",
+    "NSV  4093",
+    "PMC 90-93   232",
+    "PPM  16654",
+    "RAFGL 4085",
+    "ROT  1340",
+    "SAO  14573",
+    "SKY# 16191",
+    "TD1 12445",
+    "TYC 4127-2431-1",
+    "UBV    8062",
+    "UBV M  14329",
+    "[ATZ98] B209",
+    "[FS2003] 0475",
+    "[HFE83]  588",
+    "Gaia DR2 1041808368494264576",
+    "PLX 2010.00",
+    "1RXS J083014.7+604306",
+    "RX J0830.2+6043",
+    "[ZEH2003] RX J0830.2+6043  1",
+    "WDS J08303+6043A",
+    "NAME Muscida",
+    "IDS 08220+6103 A",
+    "uvby98 100071369",
+    "GEN# +1.00071369",
+    "** BU 1067A",
+    "WEB  8042"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 127.56612565266667,
+    "dec_deg": 60.718168223941106,
+    "galactic_l_deg": 155.97640725268602,
+    "galactic_b_deg": 35.42684126339492
+  },
+  "distance": {
+    "value_pc": 55.761563554242066,
+    "error_pc": 0.4527216654413206
+  },
+  "cartesian": {
+    "x_pc": -41.50175721083182,
+    "y_pc": 18.49825335478986,
+    "z_pc": 32.3229135637391
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * omi UMa, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* omi UMa",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G5III:",
+    "absolute_magnitude": -0.31167463809584994,
+    "apparent_magnitude": 3.4200000762939453
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:15+00:00; upstream record id: * omi UMa; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

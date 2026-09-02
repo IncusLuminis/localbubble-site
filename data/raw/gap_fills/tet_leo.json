@@ -1,0 +1,78 @@
+{
+  "id": "tet_leo",
+  "name": "* tet Leo",
+  "aliases": [
+    "TIC 77172923",
+    "Gaia DR3 3970052886914547712",
+    "HIP 54879",
+    "PLX 2615",
+    "*  70 Leo",
+    "AG+15 1219",
+    "BD+16  2234",
+    "FK5  423",
+    "GC 15441",
+    "GCRV  6894",
+    "GEN# +1.00097633",
+    "GSC 01437-02847",
+    "HD  97633",
+    "HIC  54879",
+    "HR  4359",
+    "JP11  2040",
+    "N30 2638",
+    "NSV  5144",
+    "PMC 90-93   305",
+    "PPM 128087",
+    "ROT  1672",
+    "SAO  99512",
+    "SKY# 21410",
+    "SRS  30423",
+    "TD1 15476",
+    "TYC 1437-2847-1",
+    "UBV   10244",
+    "UBV M  16907",
+    "uvby98 100097633",
+    "2MASS J11141442+1525466",
+    "PLX 2615.00",
+    "Renson 28150",
+    "Gaia DR2 3970052886914307200",
+    "NAME Chertan",
+    "WEB  9905"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 168.56002362722833,
+    "dec_deg": 15.429571086424442,
+    "galactic_l_deg": 235.3722262206124,
+    "galactic_b_deg": 64.58496554906003
+  },
+  "distance": {
+    "value_pc": 49.22228785193936,
+    "error_pc": 0.7903283476271166
+  },
+  "cartesian": {
+    "x_pc": -12.0040332212199,
+    "y_pc": -17.38280339423693,
+    "z_pc": 44.45868817183346
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * tet Leo, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tet Leo",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A2IV",
+    "absolute_magnitude": -0.11080907458463152,
+    "apparent_magnitude": 3.3499999046325684
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:10+00:00; upstream record id: * tet Leo; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

@@ -1,0 +1,102 @@
+{
+  "id": "del_cap",
+  "name": "* del Cap",
+  "aliases": [
+    "TYC 6363-1044-1",
+    "TIC 155842257",
+    "GJ 837",
+    "Gaia DR3 6838311796136238976",
+    "PLX 5258",
+    "SBC9 1331",
+    "CNS5 5370",
+    "*  49 Cap",
+    "2RE J214703-160639",
+    "2RE J2147-160",
+    "ADS 15314 A",
+    "BD-16  5943",
+    "CCDM J21470-1607A",
+    "CMC  164644",
+    "CSI-16  5943  1",
+    "FK5  819",
+    "GC 30491",
+    "GCRV 13686",
+    "GEN# +1.00207098",
+    "HD 207098",
+    "HIC 107556",
+    "HIP 107556",
+    "HR  8322",
+    "IDS 21415-1635 A",
+    "IRC -20608",
+    "JP11  3405",
+    "LTT  8693",
+    "N30 4800",
+    "NLTT 52065",
+    "PMC 90-93   575",
+    "PPM 239339",
+    "RAFGL 7180S",
+    "RBS  1783",
+    "RE J214703-160717",
+    "RE J2147-160",
+    "ROT  3167",
+    "RX J2147.0-1607",
+    "SACS 476",
+    "SAO 164644",
+    "SBC7   876",
+    "SKY# 41523",
+    "TD1 28443",
+    "UBV   21648",
+    "UBV M  25924",
+    "V* del Cap",
+    "[TVS94]  44",
+    "2MASS J21470244-1607382",
+    "PLX 5258.00",
+    "1RXS J214702.5-160736",
+    "2EUVE J2147-16.1",
+    "EUVE J2147-16.1",
+    "WDS J21470-1608A",
+    "Renson 57630",
+    "AKARI-IRC-V1 J2147025-160740",
+    "IRAS 21442-1621",
+    "WISEA J214702.64-160741.2",
+    "NAME Deneb Algedi",
+    "uvby98 100207098",
+    "WEB 19412"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 326.76018433125,
+    "dec_deg": -16.12728708527778,
+    "galactic_l_deg": 37.60061406020616,
+    "galactic_b_deg": -46.01330230191954
+  },
+  "distance": {
+    "value_pc": 11.866619200189866,
+    "error_pc": 0.02675516340030675
+  },
+  "cartesian": {
+    "x_pc": 6.529414469297222,
+    "y_pc": 5.02843754132134,
+    "z_pc": -8.538045082071
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Cap, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Cap",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "kA5hF0mF2III",
+    "absolute_magnitude": 2.4583648933122575,
+    "apparent_magnitude": 2.8299999237060547
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:36+00:00; upstream record id: * del Cap; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Rasalas",
+  "retrieved_utc": "2026-09-02T17:22:00+00:00",
+  "record_id": "* mu. Leo",
+  "raw": {
+    "main_id": "* mu. Leo",
+    "ra": 148.190904223595,
+    "dec": 26.00695118609,
+    "coo_err_maj": 0.11739999800920486,
+    "coo_err_min": 0.11060000211000443,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.880000114440918,
+    "plx_err": 0.19740000367164612,
+    "otype": "PM*",
+    "plx_value": 26.0971,
+    "pmra": -216.266,
+    "pmdec": -55.125,
+    "rvz_radvel": 13.647,
+    "sp_type": "K2IIIbCN1Ca1",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "GES J09524561+2600243|TIC 82204610|AP J09524585+2600248|RAVE J095245.8+260025|GALAH 150204002101256|HIP 48455|Gaia DR3 643819484617141504|PLX 2338|LSPM J0952+2600|TYC 1964-1473-1|ASCC  680731|USNO-B1.0 1160-00169660|* mu. Leo|*  24 Leo|AG+26 1058|BD+26  2019|FK5  371|GC 13590|GCRV  6325|GEN# +1.00085503|HD  85503|HIC  48455|HR  3905|IRAS 09499+2614|IRC +30218|JP11  1879|LTT 12624|N30 2364|NLTT 22823|PMC 90-93   266|PPM  99922|RAFGL 1386|ROT  1518|SAO  81064|SKY# 19073|SRS  30371|TD1 14358|UBV    9276|UBV M  15761|YZ  26  5130|[GS83] 135|[L91b] 162|uvby98 100085503|2MASS J09524585+2600248|PLX 2338.00|NAME Rasalas|WEB  9034|Gaia DR2 643819484616249984",
+    "matched_id": "NAME Rasalas"
+  }
+}

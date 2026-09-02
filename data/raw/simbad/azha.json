@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Azha",
+  "retrieved_utc": "2026-09-02T17:21:56+00:00",
+  "record_id": "* eta Eri",
+  "raw": {
+    "main_id": "* eta Eri",
+    "ra": 44.10687184660001,
+    "dec": -8.8981434724,
+    "coo_err_maj": 0.1851000040769577,
+    "coo_err_min": 0.1340000033378601,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.869999885559082,
+    "plx_err": 0.17489999532699585,
+    "otype": "PM*",
+    "plx_value": 24.2178,
+    "pmra": 78.2,
+    "pmdec": -219.121,
+    "rvz_radvel": -20.32,
+    "sp_type": "K1+IIIb",
+    "rvz_bibcode": "2015A&A...574A..50J",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 382393070|Gaia DR3 5173421634271199104|HIP 13701|2MASS J02562566-0853534|PLX  611|* eta Eri|*   3 Eri|BD-09   553|CSV 100247|FK5  104|GC  3539|GCRV  1638|GEN# +1.00018322|HD  18322|HIC  13701|HR   874|IRAS 02539-0905|IRC -10043|JP11   719|LTT  1404|N30  602|NLTT  9384|NSV   988|PMC 90-93    75|PPM 185202|RAFGL  403|ROT   393|SACS  62|SAO 130197|SKY#  4414|SV* ZI   164|TD1  1778|UBV    2852|UBV M   9237|YZ  99   661|[L91b]  32|PLX  611.00|TYC 5287-1076-1|NAME Azha|WEB  2718|Gaia DR2 5173421634270376320",
+    "matched_id": "NAME Azha"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "id": "bet_ser",
+  "name": "* bet Ser",
+  "aliases": [
+    "TIC 119885027",
+    "Gaia DR3 1195823284391343104",
+    "HIP 77233",
+    "PLX 3569",
+    "*  28 Ser",
+    "ADS  9778 A",
+    "AG+15 1580",
+    "BD+15  2911",
+    "CCDM J15461+1525A",
+    "CSI+15  2911  1",
+    "FK5  583",
+    "GC 21194",
+    "GCRV  9094",
+    "GEN# +1.00141003A",
+    "GSC 01495-01994",
+    "HD 141003",
+    "HGAM    641",
+    "HIC  77233",
+    "HR  5867",
+    "IDS 15416+1544 A",
+    "JP11  2645",
+    "N30 3542",
+    "PMC 90-93   414",
+    "PPM 131676",
+    "ROT  2222",
+    "SAO 101725",
+    "SKY# 28510",
+    "SRS  30583",
+    "TD1 18546",
+    "TYC 1495-1994-1",
+    "UBV   13431",
+    "YZ  15  5643",
+    "WDS J15462+1525A",
+    "2MASS J15461125+1525185",
+    "IRAS 15438+1534",
+    "AKARI-IRC-V1 J1546112+152518",
+    "** STF 1970A",
+    "NAME Chow",
+    "uvby98 100141003",
+    "WEB 13088",
+    "Gaia DR2 1195823284390905728"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 236.54689658602248,
+    "dec_deg": 15.421819296846387,
+    "galactic_l_deg": 25.979976289066304,
+    "galactic_b_deg": 47.87230448424444
+  },
+  "distance": {
+    "value_pc": 46.312591467368144,
+    "error_pc": 0.6584708554605225
+  },
+  "cartesian": {
+    "x_pc": 27.926514358427834,
+    "y_pc": 13.608591767473719,
+    "z_pc": 34.34781149240965
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Ser, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Ser",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A2IV",
+    "absolute_magnitude": 0.34150466101468524,
+    "apparent_magnitude": 3.6700000762939453
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:39+00:00; upstream record id: * bet Ser; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

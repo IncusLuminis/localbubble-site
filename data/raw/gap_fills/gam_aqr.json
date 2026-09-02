@@ -1,0 +1,87 @@
+{
+  "id": "gam_aqr",
+  "name": "* gam Aqr",
+  "aliases": [
+    "TIC 439852017",
+    "GJ 9779",
+    "Gaia DR3 2677558895241364864",
+    "PLX 5407",
+    "*  48 Aqr",
+    "ADS 15864 A",
+    "AG-01 2732",
+    "BD-02  5741",
+    "CCDM J22217-0123A",
+    "CSI-02  5741  1",
+    "FK5  842",
+    "GC 31257",
+    "GCRV 14062",
+    "GEN# +1.00212061",
+    "GSC 05226-01606",
+    "HD 212061",
+    "HGAM   1061",
+    "HIC 110395",
+    "HIP 110395",
+    "HR  8518",
+    "IDS 22165-0153 A",
+    "JP11  3475",
+    "N30 4927",
+    "PMC 90-93   590",
+    "PPM 181446",
+    "ROT  3254",
+    "SAO 146044",
+    "SKY# 42583",
+    "TD1 29003",
+    "TYC 5226-1606-1",
+    "UBV   19127",
+    "UBV M  26339",
+    "YZ  91  7780",
+    "uvby98 100212061",
+    "2MASS J22213936-0123145",
+    "ALS 16209",
+    "PLX 5407.00",
+    "WDS J22217-0123A",
+    "1RXS J222140.1-012310",
+    "NAME Sadachbia",
+    "IRAS 22190-0138",
+    "AKARI-IRC-V1 J2221394-012314",
+    "WEB 19798",
+    "Gaia DR2 2677558895240612992"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 335.41404820054,
+    "dec_deg": -1.38734919411,
+    "galactic_l_deg": 62.17954503697262,
+    "galactic_b_deg": -45.84217585386376
+  },
+  "distance": {
+    "value_pc": 38.677088852876224,
+    "error_pc": 0.867482424891742
+  },
+  "cartesian": {
+    "x_pc": 12.5747824226548,
+    "y_pc": 23.829572272925247,
+    "z_pc": -27.747856393703696
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * gam Aqr, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Aqr",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A0V",
+    "absolute_magnitude": 0.8967312198060382,
+    "apparent_magnitude": 3.8340001106262207
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:52+00:00; upstream record id: * gam Aqr; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

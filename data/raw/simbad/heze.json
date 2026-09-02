@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Heze",
+  "retrieved_utc": "2026-09-02T17:21:13+00:00",
+  "record_id": "* zet Vir",
+  "raw": {
+    "main_id": "* zet Vir",
+    "ra": 203.67329732802997,
+    "dec": -0.59581641612,
+    "coo_err_maj": 0.20999999344348907,
+    "coo_err_min": 0.15410000085830688,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.380000114440918,
+    "plx_err": 0.3330000042915344,
+    "otype": "PM*",
+    "plx_value": 43.7467,
+    "pmra": -276.903,
+    "pmdec": 44.621,
+    "rvz_radvel": -13.2,
+    "sp_type": "A2Van",
+    "rvz_bibcode": "1953GCRV..C......0W",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 130726180|GJ 3792|HIP 66249|Gaia DR3 3662636823132300032|PLX 3100|* zet Vir|*  79 Vir|AG-00 1843|BD+00  3076|FK5  501|GC 18351|GCRV  8040|GEN# +1.00118098|CNS5 3346|HD 118098|HIC  66249|HR  5107|IRAS 13321-0020|JP11  2406|LTT  5252|N30 3094|NLTT 34515|PMC 90-93   357|PPM 179083|ROT  1974|SAO 139420|SKY# 24984|TD1 16924|UBV   12182|UBV M  19520|uvby98 100118098|2MASS J13344160-0035450|PLX 3100.00|TYC 4966-1366-1|WISEA J133441.43-003544.5|NAME Heze|WEB 11707|Gaia DR2 3662636823132020480|** HNK    7A|WDS J13347-0036A",
+    "matched_id": "NAME Heze"
+  }
+}

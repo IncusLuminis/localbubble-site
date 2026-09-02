@@ -1,0 +1,84 @@
+{
+  "id": "iot_dra",
+  "name": "* iot Dra",
+  "aliases": [
+    "TIC 165722603",
+    "Gaia DR3 1614731957531452544",
+    "HIP 75458",
+    "PLX 3490",
+    "*  12 Dra",
+    "AG+59  999",
+    "BD+59  1654",
+    "CCDM J15250+5859A",
+    "DO 34945",
+    "FK5  571",
+    "GC 20747",
+    "GCRV  8925",
+    "GEN# +1.00137759",
+    "GSC 03875-01620",
+    "HD 137759",
+    "HIC  75458",
+    "HR  5744",
+    "IRAS 15238+5908",
+    "IRC +60233",
+    "JP11  2606",
+    "N30 3475",
+    "NSV  7077",
+    "PMC 90-93   405",
+    "PPM  34972",
+    "ROT  2187",
+    "SAO  29520",
+    "SKY# 27902",
+    "TD1 18258",
+    "TYC 3875-1620-1",
+    "UBV   13273",
+    "UBV M  20785",
+    "YZ   0  8366",
+    "[HFE83] 1103",
+    "uvby98 100137759",
+    "Gaia DR2 1614731957530945280",
+    "PLX 3490.00",
+    "WDS J15249+5858A",
+    "** BUP  162A",
+    "2MASS J15245578+5857577",
+    "NAME Edasich",
+    "WEB 12868"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 231.23239085120377,
+    "dec_deg": 58.966065864404726,
+    "galactic_l_deg": 93.97106855855029,
+    "galactic_b_deg": 48.62777923126215
+  },
+  "distance": {
+    "value_pc": 30.74662017777696,
+    "error_pc": 0.12384145686671276
+  },
+  "cartesian": {
+    "x_pc": -1.4073487863692724,
+    "y_pc": 20.273130372682736,
+    "z_pc": 23.073235721116244
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * iot Dra, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* iot Dra",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K2III",
+    "absolute_magnitude": 0.8510130472819277,
+    "apparent_magnitude": 3.2899999618530273
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:07+00:00; upstream record id: * iot Dra; otype: RG*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

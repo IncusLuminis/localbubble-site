@@ -1,0 +1,82 @@
+{
+  "id": "zet_sgr",
+  "name": "* zet Sgr",
+  "aliases": [
+    "TIC 30504485",
+    "GEN# +1.00176687",
+    "WISE J190236.60-295247.5",
+    "UCAC4 301-255103",
+    "HIP 93506",
+    "Gaia DR3 6760703042771435136",
+    "PLX 4415",
+    "*  38 Sgr",
+    "ADS 11950 AB",
+    "CCDM J19026-2953AB",
+    "CD-30 16575",
+    "CPC 17 10347",
+    "CPD-30  5798",
+    "GC 26161",
+    "GCRV 11482",
+    "GSC 06885-02837",
+    "HD 176687",
+    "HIC  93506",
+    "HR  7194",
+    "IDS 18562-3001 AB",
+    "IRAS 18594-2957",
+    "IRC -30399",
+    "JP11  3063",
+    "N30 4220",
+    "PPM 269230",
+    "ROT  2706",
+    "SAO 187600",
+    "SKY# 35179",
+    "SRS  44082",
+    "TD1 23703",
+    "TYC 6885-2837-1",
+    "UBV   16147",
+    "UBV M  23406",
+    "2MASS J19023670-2952484",
+    "WDS J19026-2953AB",
+    "** HDO  150",
+    "NAME Ascella",
+    "uvby98 100176687",
+    "WEB 16231"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 285.6530426563352,
+    "dec_deg": -29.88006330096877,
+    "galactic_l_deg": 6.840367286981201,
+    "galactic_b_deg": -15.353566128024504
+  },
+  "distance": {
+    "value_pc": 27.041644131963224,
+    "error_pc": 0.6361879535898489
+  },
+  "cartesian": {
+    "x_pc": 25.890919055974898,
+    "y_pc": 3.105807351028919,
+    "z_pc": -7.159943330431522
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * zet Sgr, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* zet Sgr",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A2.5Va",
+    "absolute_magnitude": 0.4298344482850833,
+    "apparent_magnitude": 2.5899999141693115
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:09+00:00; upstream record id: * zet Sgr; otype: **. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

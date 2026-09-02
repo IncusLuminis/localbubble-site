@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Phecda",
+  "retrieved_utc": "2026-09-02T17:20:02+00:00",
+  "record_id": "* gam UMa",
+  "raw": {
+    "main_id": "* gam UMa",
+    "ra": 178.45769715249997,
+    "dec": 53.69475972916666,
+    "coo_err_maj": 0.2199999988079071,
+    "coo_err_min": 0.25,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.440000057220459,
+    "plx_err": 0.4000000059604645,
+    "otype": "Em*",
+    "plx_value": 39.21,
+    "pmra": 107.68,
+    "pmdec": 11.01,
+    "rvz_radvel": -11.9,
+    "sp_type": "A0V",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 11895653|Gaia DR3 792588939773693568|HIP 58001|CNS5 2918|PLX 2749|* gam UMa|*  64 UMa|AC2000 1609350|AG+53  826|BD+54  1475|CEL   4005|CSV 101229|EM* MWC  583|FK5  447|GC 16268|GCRV  7177|GEN# +1.00103287|GSC 03833-01034|HD 103287|HGAM    607|HIC  58001|HR  4554|IRAS 11512+5358|IRC +50215|JP11  2124|N30 2769|NAME Phecda|NSV  5379|PMC 90-93   321|PPM  33292|RAFGL 4831S|ROT  1756|SAO  28179|SKY# 22423|SV* ZI   904|TD1 15932|TYC 3833-1034-1|UBV   10684|UBV M  17477|[HFE83]  832|uvby98 100103287|2MASS J11534983+5341408|PLX 2749.00|[ZEH2003] RX J1153.8+5341  1|RX J1153.8+5341|1RXS J115352.3+534153|** SHY  227A|WDS J11538+5342A|WEB 10387",
+    "matched_id": "NAME Phecda"
+  }
+}

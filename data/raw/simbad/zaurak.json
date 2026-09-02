@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Zaurak",
+  "retrieved_utc": "2026-09-02T17:20:45+00:00",
+  "record_id": "* gam Eri",
+  "raw": {
+    "main_id": "* gam Eri",
+    "ra": 59.50735758877376,
+    "dec": -13.508514805984444,
+    "coo_err_maj": 0.19249999523162842,
+    "coo_err_min": 0.1404999941587448,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.940000057220459,
+    "plx_err": 0.22540000081062317,
+    "otype": "LP?",
+    "plx_value": 17.0016,
+    "pmra": 62.227,
+    "pmdec": -112.006,
+    "rvz_radvel": 60.81,
+    "sp_type": "M0III-IIIb",
+    "rvz_bibcode": "2008AJ....135..209M",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 325685265|Gaia DR3 5111187420714898304|HIP 18543|2MASS J03580177-1330310|PLX  878|*  34 Eri|* gam Eri|AAVSO 0353-13|ADS  2904 A|BD-13   781|CCDM J03580-1331A|CSI-13   781  1|CSV   6066|FK5  149|GC  4778|GCRV  2274|GEN# +1.00025025|GSC 05311-01285|HD  25025|HIC  18543|HR  1231|IDS 03534-1348 A|IRAS 03557-1339|IRC -10055|JP11   839|N30  816|NAME Zaurak|PMC 90-93   107|PPM 213659|RAFGL  537|SACS  86|SAO 149283|SKY#  6058|TD1  2709|TYC 5311-1285-1|UBV    3879|V* gam Eri|YZ   0  5238|YZC 11   929|[DS98]  48|PLX  878.00|WDS J03580-1331A|WEB  3576|Gaia DR2 5111187420712629632",
+    "matched_id": "NAME Zaurak"
+  }
+}

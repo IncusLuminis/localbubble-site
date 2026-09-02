@@ -1,0 +1,101 @@
+{
+  "id": "gam_tau",
+  "name": "* gam Tau",
+  "aliases": [
+    "TIC 435911332",
+    "EPIC 200007765",
+    "Gaia DR3 3312052249215275904",
+    "HIP 20205",
+    "2MASS J04194757+1537395",
+    "Cl* Melotte   25    MMU      28",
+    "Cl* Melotte   25     VA     175",
+    "*  54 Tau",
+    "2E   975",
+    "2RE J041945+153637",
+    "2RE J0419+153",
+    "AG+15  356",
+    "BD+15   612",
+    "CSV 102439",
+    "FK5  159",
+    "GC  5226",
+    "GCRV  2486",
+    "GEN# +5.20250028",
+    "GSC 01264-01009",
+    "HD  27371",
+    "HIC  20205",
+    "HR  1346",
+    "IRAS 04169+1530",
+    "IRC +20074",
+    "JP11  4797",
+    "N30  889",
+    "NSV  1553",
+    "PMC 90-93   114",
+    "PPM 119792",
+    "RAFGL  566",
+    "RE J041944+153624",
+    "RE J0419+153",
+    "ROT  3838",
+    "SAO  93868",
+    "SKY#  6630",
+    "SRS  30159",
+    "TD1  3025",
+    "TYC 1264-1009-1",
+    "UBV    4176",
+    "UBV M  41234",
+    "YZ  15  1137",
+    "[B10]  1000",
+    "[HFE83]  290",
+    "uvby98 520250028",
+    "Cl Melotte   25    28",
+    "Cl* Melotte   25      S       1",
+    "PLX  954.02",
+    "1RXS J041947.6+153740",
+    "2E 0416.9+1530",
+    "EUVE J0419+15.6",
+    "** BLM    1",
+    "WDS J04198+1538AB",
+    "CCDM J04198+1538AB",
+    "UCAC4 529-008241",
+    "NAME Prima Hyadum",
+    "[RSP2011] 229",
+    "WEB  3852",
+    "Gaia DR2 3312052249216467328"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 64.94834968291876,
+    "dec_deg": 15.627642051424726,
+    "galactic_l_deg": 179.0838029586145,
+    "galactic_b_deg": -23.81548961463535
+  },
+  "distance": {
+    "value_pc": 46.15846200004616,
+    "error_pc": 0.3901135218125945
+  },
+  "cartesian": {
+    "x_pc": -42.22269502760666,
+    "y_pc": 0.6752261010444937,
+    "z_pc": -18.638447052474348
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * gam Tau, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Tau",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G9.5IIIabCN0.5",
+    "absolute_magnitude": 0.32874344688435997,
+    "apparent_magnitude": 3.6500000953674316
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:35+00:00; upstream record id: * gam Tau; otype: **. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

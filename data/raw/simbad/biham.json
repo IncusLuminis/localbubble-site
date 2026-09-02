@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Biham",
+  "retrieved_utc": "2026-09-02T17:21:27+00:00",
+  "record_id": "* tet Peg",
+  "raw": {
+    "main_id": "* tet Peg",
+    "ra": 332.5499525505046,
+    "dec": 6.1979215882049985,
+    "coo_err_maj": 0.8668000102043152,
+    "coo_err_min": 0.692799985408783,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2018yCat.1345....0G",
+    "V": 3.549999952316284,
+    "plx_err": 1.13100004196167,
+    "otype": "PM*",
+    "plx_value": 36.7678,
+    "pmra": 265.699,
+    "pmdec": 10.407,
+    "rvz_radvel": -9.22,
+    "sp_type": "A1Va",
+    "rvz_bibcode": "2022yCat.1355....0G",
+    "pm_bibcode": "2018yCat.1345....0G",
+    "ids": "TIC 468285170|** VSP   57A|WDS J22102+0612A|Gaia DR3 2720428303852574336|GJ 9771|PLX 5362|LSPM J2210+0611|ASCC 1088144|USNO-B1.0 0961-00579177|*  26 Peg|* tet Peg|AG+05 3241|BD+05  4961|CSV 102151|FK5  834|GC 31013|GCRV 13930|GEN# +1.00210418|GSC 00565-01999|HD 210418|HGAM   1052|HIC 109427|HIP 109427|HR  8450|IRAS 22076+0557|JP11  3458|LTT 16484|N30 4884|NLTT 53109|NSV 14057|PMC 90-93   584|PPM 172728|ROT  3226|SAO 127340|SKY# 42241|TD1 28827|TYC  565-1999-1|UBV   18949|UBV M  26173|YZ   5 11135|uvby98 100210418|2MASS J22101198+0611522|PLX 5362.00|NAME Biham|WISEA J221012.17+061152.5|WEB 19660|Gaia DR2 2720428303852169216",
+    "matched_id": "NAME Biham"
+  }
+}

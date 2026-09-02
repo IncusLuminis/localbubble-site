@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Ruchbah",
+  "retrieved_utc": "2026-09-02T17:20:17+00:00",
+  "record_id": "* del Cas",
+  "raw": {
+    "main_id": "* del Cas",
+    "ra": 21.453964462083334,
+    "dec": 60.23528402972222,
+    "coo_err_maj": 0.07999999821186066,
+    "coo_err_min": 0.07999999821186066,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.680000066757202,
+    "plx_err": 0.14000000059604645,
+    "otype": "EB*",
+    "plx_value": 32.81,
+    "pmra": 296.57,
+    "pmdec": -49.22,
+    "rvz_radvel": 6.7,
+    "sp_type": "A5IV",
+    "rvz_bibcode": "2007AN....328..889K",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 54995745|GJ 58.1|HIP 6686|Gaia DR3 510204838759030144|* del Cas|PLX  287|ASCC  106973|LSPM J0125+6014|2MASS J01254889+6014070|USNO-B1.0 1502-00052721|*  37 Cas|AG+59  128|BD+59   248|CCDM J01259+6014A|CEL    139|CSI+59   248  1|FK5   48|GC  1715|GCRV   805|GEN# +1.00008538|HD   8538|HIC   6686|HR   403|IDS 01193+5943 A|IRAS 01225+5958|IRC +60050|IRCO  2978|JP11   494|LTT 10509|N30  290|NLTT  4718|PMC 90-93    34|PPM  12969|ROT   202|SAO  22268|SKY#  2155|TD1   800|UBV    1491|UBV M   8159|V* del Cas|[HFE83]   75|PLX  287.00|WDS J01258+6014A|** BUP   19A|NAME Ruchbah|TYC 4031-3289-1|uvby98 100008538|WEB  1460|Gaia DR2 510204838754613632",
+    "matched_id": "NAME Ruchbah"
+  }
+}

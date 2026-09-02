@@ -1,0 +1,95 @@
+{
+  "id": "eps_vir",
+  "name": "* eps Vir",
+  "aliases": [
+    "GES J13021035+1057332",
+    "TIC 422290758",
+    "RAVE J130210.6+105733",
+    "GALAH 140209004701151",
+    "Gaia DR3 3736865265441207424",
+    "HIP 63608",
+    "PLX 2987",
+    "LSPM J1302+1057",
+    "TYC  886-1326-1",
+    "ASCC  954943",
+    "USNO-B1.0 1009-00211825",
+    "*  47 Vir",
+    "2E  2950",
+    "AG+11 1470",
+    "BD+11  2529",
+    "CCDM J13022+1057A",
+    "CSI+11  2529  1",
+    "FK5  488",
+    "GC 17687",
+    "GCRV  7772",
+    "GEN# +1.00113226",
+    "HD 113226",
+    "HIC  63608",
+    "HR  4932",
+    "IDS 12572+1130 A",
+    "IRAS 12596+1113",
+    "IRC +10261",
+    "JP11  2348",
+    "LTT 13759",
+    "N30 2999",
+    "NAME Vindemiatrix",
+    "NLTT 32663",
+    "NSV  6064",
+    "PMC 90-93   346",
+    "PPM 129529",
+    "RAFGL 1593",
+    "ROT  1924",
+    "SAO 100384",
+    "SKY# 24184",
+    "SRS  30488",
+    "TD1 16611",
+    "UBV M  18952",
+    "UBV   11767",
+    "2MASS J13021059+1057329",
+    "PLX 2987.00",
+    "1RXS J130210.9+105724",
+    "2E 1259.6+1114",
+    "RX J1302.1+1057",
+    "[ZEH2003] RX J1302.1+1057  1",
+    "WDS J13022+1058A",
+    "WEB 11257",
+    "Gaia DR2 3736865265439463424"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 195.5441542302233,
+    "dec_deg": 10.959148721740554,
+    "galactic_l_deg": 312.32500080768244,
+    "galactic_b_deg": 73.63473944336096
+  },
+  "distance": {
+    "value_pc": 33.100526298368145,
+    "error_pc": 0.20893946526649934
+  },
+  "cartesian": {
+    "x_pc": 6.279790717157348,
+    "y_pc": -6.895353135104081,
+    "z_pc": 31.7594580388248
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * eps Vir, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Vir",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G8III-IIIb",
+    "absolute_magnitude": 0.19082546628863462,
+    "apparent_magnitude": 2.7899999618530273
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:30+00:00; upstream record id: * eps Vir; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

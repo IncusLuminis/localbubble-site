@@ -1,0 +1,89 @@
+{
+  "id": "bet_crb",
+  "name": "* bet CrB",
+  "aliases": [
+    "TIC 383521659",
+    "Gaia DR3 1273423791421021568",
+    "uvby98 100137909",
+    "GEN# +1.00137909",
+    "HIP 75695",
+    "PLX 3495",
+    "SBC9 846",
+    "LSPM J1527+2906",
+    "TYC 2032-1605-1",
+    "ASCC  690250",
+    "USNO-B1.0 1191-00233167",
+    "*   3 CrB",
+    "AG+29 1493",
+    "BD+29  2670",
+    "CCDM J15278+2906AB",
+    "CSV 101506",
+    "FK5  572",
+    "GC 20795",
+    "GCRV  8940",
+    "HD 137909",
+    "HIC  75695",
+    "HR  5747",
+    "IDS 15237+2927 AB",
+    "IRAS 15257+2916",
+    "JP11  2607",
+    "N30 3483",
+    "PMC 90-93   406",
+    "PPM 104044",
+    "ROT  2189",
+    "SAO  83831",
+    "SBC7   543",
+    "SKY# 27986",
+    "SRS  30572",
+    "TD1 18274",
+    "UBV   13280",
+    "UBV M  20792",
+    "V* bet CrB",
+    "2MASS J15274972+2906202",
+    "WDS J15278+2906AB",
+    "** JEF    1",
+    "Renson 39200",
+    "BD+29  2670A",
+    "WISEA J152749.61+290622.1",
+    "NAME Nusakan",
+    "WEB 12887",
+    "Gaia DR2 1273423791418345344"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 231.95730858154164,
+    "dec_deg": 29.10569295567611,
+    "galactic_l_deg": 45.58687417025039,
+    "galactic_b_deg": 55.616471696148864
+  },
+  "distance": {
+    "value_pc": 35.80943650270719,
+    "error_pc": 1.2442309891763266
+  },
+  "cartesian": {
+    "x_pc": 14.152359919091365,
+    "y_pc": 14.445292675249572,
+    "z_pc": 29.55266436191996
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet CrB, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet CrB",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "F2VpSrCrEuSi",
+    "absolute_magnitude": 0.9100126317186739,
+    "apparent_magnitude": 3.680000066757202
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:41+00:00; upstream record id: * bet CrB; otype: a2*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}
