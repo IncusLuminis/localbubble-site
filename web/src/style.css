@@ -1121,6 +1121,10 @@ body {
 .player-today {
   flex: 0 0 auto;
   margin-left: 6px;
+  /* Story #281: explicit height matching `.player-transport`'s 46px below -
+     without this the button relied on default padding-based sizing and
+     didn't align with the transport trio's height in the same row. */
+  height: 46px;
 }
 
 /* Story #275 Part 3.4: enlarged and repositioned immediately LEFT of the
