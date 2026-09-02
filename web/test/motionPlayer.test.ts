@@ -20,7 +20,7 @@ import {
   starPositionAtTime,
   type PlayerState,
 } from "../src/scene/motionPlayer";
-import { starsWithVelocityInSphere } from "../src/scene/velocityVectors";
+import { starsWithVelocityInLocalBubble } from "../src/scene/velocityVectors";
 import type { SceneObject, SceneVelocity } from "../src/scene/sceneTypes";
 
 /**
@@ -442,26 +442,27 @@ describe("nextPlayerStateForSphere", () => {
   });
 });
 
-// Story #239 AC: the animated population is `velocityVectors.ts`'s own
-// `starsWithVelocityInSphere`, reused directly - never reimplemented. Full
-// coverage of that function's own behavior lives in
+// Story #239 AC (Story #287: widened to the Local Bubble): the animated
+// population is `velocityVectors.ts`'s own `starsWithVelocityInLocalBubble`
+// (renamed from `starsWithVelocityInSphere`), reused directly - never
+// reimplemented. Full coverage of that function's own behavior lives in
 // `test/velocityVectors.test.ts`; this is a small confirming test that the
 // motion player's population is exactly that same reused selection, not a
 // second, possibly-diverging one.
-describe("animated-star selection reuse (starsWithVelocityInSphere)", () => {
-  it("the player's animated population is exactly starsWithVelocityInSphere's result - no separate selection logic", () => {
-    const inSphereWithVelocity = makeObject({
-      id: "in-sphere",
+describe("animated-star selection reuse (starsWithVelocityInLocalBubble)", () => {
+  it("the player's animated population is exactly starsWithVelocityInLocalBubble's result - no separate selection logic", () => {
+    const inBubbleWithVelocity = makeObject({
+      id: "in-bubble",
       distance_pc: 5,
       velocity: makeVelocity(),
     });
     const noVelocity = makeObject({ id: "no-velocity", distance_pc: 3, velocity: null });
-    const outOfSphere = makeObject({ id: "out-of-sphere", distance_pc: 50, velocity: makeVelocity() });
+    const outOfBubble = makeObject({ id: "out-of-bubble", distance_pc: 90, velocity: makeVelocity() });
 
-    const objects = [inSphereWithVelocity, noVelocity, outOfSphere];
-    const animated = starsWithVelocityInSphere(objects, 11.26);
+    const objects = [inBubbleWithVelocity, noVelocity, outOfBubble];
+    const animated = starsWithVelocityInLocalBubble(objects, 60);
 
-    expect(animated.map((o) => o.id)).toEqual(["in-sphere"]);
+    expect(animated.map((o) => o.id)).toEqual(["in-bubble"]);
     // Every animated star necessarily carries a non-null `velocity`, which
     // `starPositionAtTime` requires - confirms the two functions compose
     // without any further null-checking gap.

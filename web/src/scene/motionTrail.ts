@@ -15,8 +15,10 @@ import type { SceneObject, SceneVelocity } from "./sceneTypes";
 
 /**
  * Story #240 (Epic #238's Story 2 of 2): a fixed-simulated-time-window
- * motion trail behind each of Story #239's ~127 animated stars, so
- * speed/direction reads at a glance during playback. Reuses
+ * motion trail behind each of Story #239's animated stars (Story #287:
+ * widened from ~127, the RECONS-sphere-only population, to ~156, the full
+ * Local Bubble population), so speed/direction reads at a glance during
+ * playback. Reuses
  * `motionPlayer.ts`'s `starPositionAtTime`/`clampPlayerTimeYears` directly
  * (never reimplemented) and is driven from `main.ts`'s existing
  * `applyPlayerAnimation` per-frame hook - no second RAF hook, per this
@@ -302,7 +304,8 @@ export interface StarTrail {
 
 /**
  * Builds the full motion-trails layer: one ribbon `Mesh` per Story #239's
- * `starsWithVelocityInSphere` result (passed in as `animatedStars`, reused
+ * (Story #287: now widened to the Local Bubble)
+ * `starsWithVelocityInLocalBubble` result (passed in as `animatedStars`, reused
  * directly - never reimplemented), each with `TRAIL_SEGMENT_COUNT + 1`
  * sampled cross-sections (`2` mesh vertices each, the ribbon's left/right
  * edges) and a baked-once RGBA vertex-color fade gradient (`MIN_TRAIL_OPACITY`
