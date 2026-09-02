@@ -59056,7 +59056,17 @@
       "absolute_magnitude": -0.2464648706662551,
       "apparent_magnitude": 1.7699999809265137,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 14.972011803283099,
+        "vy_kms": 1.4511297104416698,
+        "vz_kms": -10.78371119412094,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eps UMa, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps UMa",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59135,7 +59145,17 @@
       "absolute_magnitude": -1.404138768605291,
       "apparent_magnitude": 1.809999942779541,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -15.852060502596533,
+        "vy_kms": -26.611067219724244,
+        "vz_kms": -1.4670630851122823,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eps Sgr, pm bibcode 2007A&A...474..653V, rv bibcode 2007AN....328..889K",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Sgr",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59216,7 +59236,17 @@
       "absolute_magnitude": -0.706005948912189,
       "apparent_magnitude": 1.9199999570846558,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 14.439520417702154,
+        "vy_kms": -4.813506054735658,
+        "vz_kms": -2.9820695073777967,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Gem, pm bibcode 2007A&A...474..653V, rv bibcode 2004A&A...424..727P",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Gem",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59292,7 +59322,17 @@
       "absolute_magnitude": 0.7695077047421783,
       "apparent_magnitude": 2.049999952316284,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -26.912232399356565,
+        "vy_kms": -50.89170133336277,
+        "vz_kms": -25.086059417206588,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * tet Cen, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tet Cen",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59385,7 +59425,17 @@
       "absolute_magnitude": -0.3070115117031982,
       "apparent_magnitude": 2.059999942779541,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -4.965759413006917,
+        "vy_kms": -26.541588689466312,
+        "vz_kms": -16.722588735569484,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf And, pm bibcode 2007A&A...474..653V, rv bibcode 2004A&A...424..727P",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf And",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59473,7 +59523,17 @@
       "absolute_magnitude": 1.1455024753216385,
       "apparent_magnitude": 2.2699999809265137,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -35.797937325978765,
+        "vy_kms": -15.16529302008112,
+        "vz_kms": -21.130571029111213,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Cas, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Cas",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59543,7 +59603,17 @@
       "absolute_magnitude": 0.30730376198342135,
       "apparent_magnitude": 2.380000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 11.31318258253436,
+        "vy_kms": -64.76547988335007,
+        "vz_kms": -63.17180525892799,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf Phe, pm bibcode 2007A&A...474..653V, rv bibcode 1979IAUS...30...57E",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Phe",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59624,7 +59694,17 @@
       "absolute_magnitude": 0.4069842687214926,
       "apparent_magnitude": 2.440000057220459,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 15.390028002041179,
+        "vy_kms": 3.1481927985419604,
+        "vz_kms": -8.130072987396753,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam UMa, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam UMa",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59693,7 +59773,17 @@
       "absolute_magnitude": -0.5777177174251804,
       "apparent_magnitude": 2.4800000190734863,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -6.080898516171765,
+        "vy_kms": -10.271193385855305,
+        "vz_kms": -8.118368273848365,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf Peg, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Peg",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59773,7 +59863,17 @@
       "absolute_magnitude": 1.263949132152832,
       "apparent_magnitude": 2.5299999713897705,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 20.985914502406178,
+        "vy_kms": -0.08175428531350372,
+        "vz_kms": -16.321857472904604,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Leo, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Leo",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59845,7 +59945,17 @@
       "absolute_magnitude": -0.7852501054639518,
       "apparent_magnitude": 2.5799999237060547,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -33.881872126695775,
+        "vy_kms": -11.329311399378295,
+        "vz_kms": -4.408916723537354,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Crv, pm bibcode 2007A&A...474..653V, rv bibcode 1953GCRV..C......0W",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Crv",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59917,7 +60027,17 @@
       "absolute_magnitude": 0.4298344482850833,
       "apparent_magnitude": 2.5899999141693115,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 23.22849608071055,
+        "vy_kms": 5.838824829365455,
+        "vz_kms": -6.758046947063524,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * zet Sgr, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* zet Sgr",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -59996,7 +60116,17 @@
       "absolute_magnitude": -0.9076689836329539,
       "apparent_magnitude": 2.619999885559082,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -30.92944462855656,
+        "vy_kms": -17.656124310777518,
+        "vz_kms": 3.9537932837978746,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * tet Aur, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tet Aur",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60070,7 +60200,17 @@
       "absolute_magnitude": -0.6474028987098155,
       "apparent_magnitude": 2.640000104904175,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 2.0782476117871695,
+        "vy_kms": -1.183291909044345,
+        "vz_kms": -14.051179162493968,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Crv, pm bibcode 2020yCat.1350....0G, rv bibcode 2015A&A...574A..50J",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Crv",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60150,7 +60290,17 @@
       "absolute_magnitude": 1.375374053277719,
       "apparent_magnitude": 2.6500000953674316,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -1.648710270162342,
+        "vy_kms": -12.578538979858457,
+        "vz_kms": -2.856657822245927,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Ari, pm bibcode 2007A&A...474..653V, rv bibcode 2004A&A...424..727P",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Ari",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60231,7 +60381,17 @@
       "absolute_magnitude": 0.26003121868744117,
       "apparent_magnitude": 2.680000066757202,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -38.598598254763466,
+        "vy_kms": -20.953365278462613,
+        "vz_kms": -1.618217020999012,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Cas, pm bibcode 2007A&A...474..653V, rv bibcode 2007AN....328..889K",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Cas",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60332,7 +60492,17 @@
       "absolute_magnitude": 2.3962356924465116,
       "apparent_magnitude": 2.680000066757202,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 10.915480108120539,
+        "vy_kms": -16.890295285011643,
+        "vz_kms": 3.1921837289874295,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eta Boo, pm bibcode 2007A&A...474..653V, rv bibcode 2020AJ....160..120J",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eta Boo",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60428,7 +60598,17 @@
       "absolute_magnitude": 2.340446988081217,
       "apparent_magnitude": 2.740000009536743,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -36.052807644619655,
+        "vy_kms": -6.168876699410518,
+        "vz_kms": -16.344787790567953,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Vir, pm bibcode 2020yCat.1350....0G, rv bibcode 1979IAUS...30...57E",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Vir",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60498,7 +60678,17 @@
       "absolute_magnitude": -0.7006466704796939,
       "apparent_magnitude": 2.75,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -4.827910761233237,
+        "vy_kms": -34.57797190796366,
+        "vz_kms": -19.235192393916922,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Oph, pm bibcode 2020yCat.1350....0G, rv bibcode 2020AJ....160..120J",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Oph",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60574,7 +60764,17 @@
       "absolute_magnitude": 0.7180029750930492,
       "apparent_magnitude": 2.75,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -20.78175786156721,
+        "vy_kms": 5.4177164708475365,
+        "vz_kms": 9.074430810969906,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Oph, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Oph",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60652,7 +60852,17 @@
       "absolute_magnitude": -0.5176596092583701,
       "apparent_magnitude": 2.7699999809265137,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -18.981163555160894,
+        "vy_kms": -27.758913851650675,
+        "vz_kms": -2.0195690877491352,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Her, pm bibcode 2020yCat.1350....0G, rv bibcode 2004A&A...424..727P",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Her",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60729,7 +60939,17 @@
       "absolute_magnitude": 0.5862764285672117,
       "apparent_magnitude": 2.7899999618530273,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 11.71270353080938,
+        "vy_kms": 2.455929111721947,
+        "vz_kms": -10.569183866324485,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Eri, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Eri",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60814,7 +61034,17 @@
       "absolute_magnitude": 0.19082546628863462,
       "apparent_magnitude": 2.7899999618530273,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -39.87653444828332,
+        "vy_kms": -18.633605280188693,
+        "vz_kms": -11.05420369896769,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eps Vir, pm bibcode 2020yCat.1350....0G, rv bibcode 2015A&A...574A..50J",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Vir",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60895,7 +61125,17 @@
       "absolute_magnitude": 1.3648113130973174,
       "apparent_magnitude": 2.809999942779541,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -27.68721472905212,
+        "vy_kms": -37.52154858633297,
+        "vz_kms": -0.6009035639724681,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * rho Pup, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* rho Pup",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -60972,7 +61212,17 @@
       "absolute_magnitude": 0.9732883905283778,
       "apparent_magnitude": 2.809999942779541,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -40.33396981440576,
+        "vy_kms": -26.13752293636779,
+        "vz_kms": 0.20328472528596805,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * lam Sgr, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* lam Sgr",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61064,7 +61314,17 @@
       "absolute_magnitude": 2.4583648933122575,
       "apparent_magnitude": 2.8299999237060547,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -7.317345574117551,
+        "vy_kms": -17.95378224968194,
+        "vz_kms": -11.444182892174908,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Cap, pm bibcode 2007A&A...474..653V, rv bibcode 2004MNRAS.349.1069K",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Cap",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61143,7 +61403,17 @@
       "absolute_magnitude": -0.5624190549933576,
       "apparent_magnitude": 2.8399999141693115,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 23.711823661558096,
+        "vy_kms": -1.3417042390033587,
+        "vz_kms": -0.5684763648954774,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Lep, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Lep",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61231,7 +61501,17 @@
       "absolute_magnitude": 0.4542457683376355,
       "apparent_magnitude": 2.880000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -32.207179931795416,
+        "vy_kms": -12.859992656518243,
+        "vz_kms": -4.964250519936948,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf02 CVn, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf02 CVn",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61310,7 +61590,17 @@
       "absolute_magnitude": -0.5864704040319975,
       "apparent_magnitude": 2.890000104904175,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -20.028625911648444,
+        "vy_kms": -14.468473118876434,
+        "vz_kms": -10.12361463557124,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet CMi, pm bibcode 2007A&A...474..653V, rv bibcode 1993BICDS..43....5T",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet CMi",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61375,7 +61665,17 @@
       "absolute_magnitude": -0.7041020046440938,
       "apparent_magnitude": 2.930000066757202,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 13.330446136780902,
+        "vy_kms": -35.83639971958705,
+        "vz_kms": -9.922094129340348,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * tau Pup, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tau Pup",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61451,7 +61751,17 @@
       "absolute_magnitude": -0.9075509716313253,
       "apparent_magnitude": 2.940000057220459,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -25.758952099075294,
+        "vy_kms": -51.46926008598102,
+        "vz_kms": -40.762761655189706,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Eri, pm bibcode 2020yCat.1350....0G, rv bibcode 2008AJ....135..209M",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Eri",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61529,7 +61839,17 @@
       "absolute_magnitude": 0.8423439769754673,
       "apparent_magnitude": 2.940000057220459,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -11.024466739672741,
+        "vy_kms": -32.16608505949187,
+        "vz_kms": -4.119534590553563,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Crv, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Crv",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61602,7 +61922,17 @@
       "absolute_magnitude": 0.5339746492382957,
       "apparent_magnitude": 2.990000009536743,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 21.75086717505655,
+        "vy_kms": -29.46348879132445,
+        "vz_kms": -9.997049504846082,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam02 Sgr, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam02 Sgr",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61670,7 +62000,17 @@
       "absolute_magnitude": -0.7369242745835773,
       "apparent_magnitude": 3.009999990463257,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -20.299257477899125,
+        "vy_kms": -7.885096871138111,
+        "vz_kms": -20.484118686468538,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Gru, pm bibcode 2020yCat.1350....0G, rv bibcode 2022yCat.1355....0G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Gru",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61752,7 +62092,17 @@
       "absolute_magnitude": 0.9139120975201136,
       "apparent_magnitude": 3.0199999809265137,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -28.45705883422195,
+        "vy_kms": -8.952651655069932,
+        "vz_kms": -26.915139352230902,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Boo, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Boo",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61826,7 +62176,17 @@
       "absolute_magnitude": -0.698058632612355,
       "apparent_magnitude": 3.049999952316284,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -5.45149041592265,
+        "vy_kms": 2.99605318921401,
+        "vz_kms": -29.282364175268278,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * mu. UMa, pm bibcode 2020yCat.1350....0G, rv bibcode 2008AJ....135..209M",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* mu. UMa",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61898,7 +62258,17 @@
       "absolute_magnitude": 0.6854726133342277,
       "apparent_magnitude": 3.069999933242798,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -20.08380088011786,
+        "vy_kms": 23.763269541073395,
+        "vz_kms": 1.048484062446307,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Dra, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Dra",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -61968,7 +62338,17 @@
       "absolute_magnitude": 0.9553553253057778,
       "apparent_magnitude": 3.119999885559082,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -85.02185503825253,
+        "vy_kms": -54.848862620021706,
+        "vz_kms": -22.479870999517313,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Col, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Col",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62058,7 +62438,17 @@
       "absolute_magnitude": 1.3179490436344174,
       "apparent_magnitude": 3.130000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -9.895814616879836,
+        "vy_kms": -35.356827698275,
+        "vz_kms": -23.437488428565317,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Her, pm bibcode 2007A&A...474..653V, rv bibcode 1979IAUS...30...57E",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Her",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62131,7 +62521,17 @@
       "absolute_magnitude": 2.3317264487841296,
       "apparent_magnitude": 3.140000104904175,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -28.20664613493513,
+        "vy_kms": -12.574910122607509,
+        "vz_kms": -16.36756652136559,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * iot UMa, pm bibcode 2007A&A...474..653V, rv bibcode 1979IAUS...30...57E",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* iot UMa",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62207,7 +62607,17 @@
       "absolute_magnitude": 0.6524672631037074,
       "apparent_magnitude": 3.2300000190734863,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -6.325326757809845,
+        "vy_kms": 11.92506519989612,
+        "vz_kms": -10.729380989567813,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eps Oph, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Oph",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62284,7 +62694,17 @@
       "absolute_magnitude": -0.594768480431215,
       "apparent_magnitude": 3.25,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -74.71141249482903,
+        "vy_kms": -70.82989216646273,
+        "vz_kms": -10.271661006858057,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * sig Pup, pm bibcode 2020yCat.1350....0G, rv bibcode 2007AN....328..889K",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* sig Pup",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62351,7 +62771,17 @@
       "absolute_magnitude": 0.10229527900041546,
       "apparent_magnitude": 3.2799999713897705,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 11.681080428338117,
+        "vy_kms": 1.3389811623018653,
+        "vz_kms": -7.743080070589888,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Aqr, pm bibcode 2020yCat.1350....0G, rv bibcode 2022yCat.1355....0G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Aqr",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62425,7 +62855,17 @@
       "absolute_magnitude": 0.8510130472819277,
       "apparent_magnitude": 3.2899999618530273,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -2.2759112539631414,
+        "vy_kms": -7.096692873472177,
+        "vz_kms": -8.444326701172166,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * iot Dra, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* iot Dra",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62507,7 +62947,17 @@
       "absolute_magnitude": 1.3480279708586975,
       "apparent_magnitude": 3.319999933242798,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 14.524230915060016,
+        "vy_kms": 1.9470547975883474,
+        "vz_kms": -9.433033293575427,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del UMa, pm bibcode 2020yCat.1350....0G, rv bibcode 2022yCat.1355....0G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del UMa",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62575,7 +63025,17 @@
       "absolute_magnitude": -0.11080907458463152,
       "apparent_magnitude": 3.3499999046325684,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -6.105830984682802,
+        "vy_kms": -23.450662551541125,
+        "vz_kms": -2.474065201923623,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * tet Leo, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tet Leo",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62658,7 +63118,17 @@
       "absolute_magnitude": -0.41644261340033495,
       "apparent_magnitude": 3.380000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -103.89478075636679,
+        "vy_kms": -75.4656131185896,
+        "vz_kms": -21.089288120683776,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Vir, pm bibcode 2020yCat.1350....0G, rv bibcode 2005A&A...430..165F",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Vir",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62730,7 +63200,17 @@
       "absolute_magnitude": 1.584726603993258,
       "apparent_magnitude": 3.380000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -31.01951180973397,
+        "vy_kms": -10.861279535776063,
+        "vz_kms": -4.217105742658178,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * zet Vir, pm bibcode 2020yCat.1350....0G, rv bibcode 1953GCRV..C......0W",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* zet Vir",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62816,7 +63296,17 @@
       "absolute_magnitude": -0.31167463809584994,
       "apparent_magnitude": 3.4200000762939453,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -44.70570828943093,
+        "vy_kms": -15.804423881736117,
+        "vz_kms": -14.198356685773579,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * omi UMa, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* omi UMa",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62911,7 +63401,17 @@
       "absolute_magnitude": 1.9718987013432816,
       "apparent_magnitude": 3.4200000762939453,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 11.37252974411217,
+        "vy_kms": -19.415334952787262,
+        "vz_kms": -10.814041136554426,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf Tri, pm bibcode 2018yCat.1345....0G, rv bibcode 1953GCRV..C......0W",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Tri",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -62983,7 +63483,17 @@
       "absolute_magnitude": 1.5323298483759409,
       "apparent_magnitude": 3.4700000286102295,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 21.279476889163792,
+        "vy_kms": -1.9920121596754283,
+        "vz_kms": -11.78291550176883,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Cet, pm bibcode 2007A&A...474..653V, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Cet",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63056,7 +63566,17 @@
       "absolute_magnitude": 0.7870424047077016,
       "apparent_magnitude": 3.4800000190734863,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -16.691930478767368,
+        "vy_kms": 2.3469380200088055,
+        "vz_kms": -22.815517580160233,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * mu. Peg, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* mu. Peg",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63145,7 +63665,17 @@
       "absolute_magnitude": 0.4388614475136663,
       "apparent_magnitude": 3.5199999809265137,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -31.85636307483986,
+        "vy_kms": -22.21529622503822,
+        "vz_kms": -3.349160458745138,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * omi Leo, pm bibcode 2020yCat.1350....0G, rv bibcode 2004A&A...424..727P",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* omi Leo",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63232,7 +63762,17 @@
       "absolute_magnitude": 0.27788332056165466,
       "apparent_magnitude": 3.5299999713897705,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -41.241310568696186,
+        "vy_kms": -18.762031936778648,
+        "vz_kms": -1.2353216491432666,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eps Tau, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Tau",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63324,7 +63864,17 @@
       "absolute_magnitude": 2.182667845967095,
       "apparent_magnitude": 3.5299999713897705,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -4.455642088743842,
+        "vy_kms": -1.5064801704207793,
+        "vz_kms": -1.5301276306115887,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Gem, pm bibcode 2020yCat.1350....0G, rv bibcode 1979IAUS...30...57E",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Gem",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63403,7 +63953,17 @@
       "absolute_magnitude": 1.3773381755735405,
       "apparent_magnitude": 3.549999952316284,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -30.878068141469615,
+        "vy_kms": -11.45907867468784,
+        "vz_kms": -13.249714170568529,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * tet Peg, pm bibcode 2018yCat.1345....0G, rv bibcode 2022yCat.1355....0G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tet Peg",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63481,7 +64041,17 @@
       "absolute_magnitude": 0.959372370303238,
       "apparent_magnitude": 3.5799999237060547,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -4.818453593827774,
+        "vy_kms": 2.1650699251618377,
+        "vz_kms": -8.174728483351524,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf02 Cap, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf02 Cap",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63579,7 +64149,17 @@
       "absolute_magnitude": 3.3926879295478862,
       "apparent_magnitude": 3.5999999046325684,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 40.662923216448895,
+        "vy_kms": 3.4472569747014266,
+        "vz_kms": 6.8274355950705115,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Vir, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Vir",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63658,7 +64238,17 @@
       "absolute_magnitude": 1.1780286374986986,
       "apparent_magnitude": 3.630000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -22.103543495826877,
+        "vy_kms": -29.051256501691583,
+        "vz_kms": -8.817023076040515,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Del, pm bibcode 2007A&A...474..653V, rv bibcode 2018yCat.1345....0G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Del",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63749,7 +64339,17 @@
       "absolute_magnitude": 0.32874344688435997,
       "apparent_magnitude": 3.6500000953674316,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -42.06119196350884,
+        "vy_kms": -19.559679874859786,
+        "vz_kms": -0.6670328901059787,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Tau, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Tau",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63821,7 +64421,17 @@
       "absolute_magnitude": 0.07558752351740061,
       "apparent_magnitude": 3.6700000762939453,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -54.27437034012873,
+        "vy_kms": -19.22672915787828,
+        "vz_kms": -11.466915259971014,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Cap, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Cap",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63895,7 +64505,17 @@
       "absolute_magnitude": 0.34150466101468524,
       "apparent_magnitude": 3.6700000762939453,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 13.682424503989111,
+        "vy_kms": 2.4171252608019937,
+        "vz_kms": -11.273164827372067,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Ser, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Ser",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -63974,7 +64594,17 @@
       "absolute_magnitude": 0.9100126317186739,
       "apparent_magnitude": 3.680000066757202,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -39.750545762236825,
+        "vy_kms": -23.713805612738522,
+        "vz_kms": -1.9679088180722373,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet CrB, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet CrB",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64064,7 +64694,17 @@
       "absolute_magnitude": 3.042172250660819,
       "apparent_magnitude": 3.7100000381469727,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -11.173768653007173,
+        "vy_kms": -48.54149762710842,
+        "vz_kms": -9.723339549434854,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * bet Aql, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Aql",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64137,7 +64777,17 @@
       "absolute_magnitude": 1.0665004668217248,
       "apparent_magnitude": 3.75,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -15.193691771682504,
+        "vy_kms": -14.109045242354625,
+        "vz_kms": -25.497095596662888,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * ksi Dra, pm bibcode 2020yCat.1350....0G, rv bibcode 2020ApJS..248...19T",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* ksi Dra",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64229,7 +64879,17 @@
       "absolute_magnitude": 0.29846407266987285,
       "apparent_magnitude": 3.759999990463257,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -41.099817785632,
+        "vy_kms": -19.4909926658929,
+        "vz_kms": -0.35057157884697115,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Tau, pm bibcode 2020yCat.1350....0G, rv bibcode 2019MNRAS.483.5026L",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Tau",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64311,7 +64971,17 @@
       "absolute_magnitude": 1.1017838850367134,
       "apparent_magnitude": 3.809999942779541,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -42.38938527264743,
+        "vy_kms": -14.518889386341788,
+        "vz_kms": -11.25578020202291,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * kap Per, pm bibcode 2020yCat.1350....0G, rv bibcode 2005A&A...430..165F",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* kap Per",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64387,7 +65057,17 @@
       "absolute_magnitude": 1.417365017507736,
       "apparent_magnitude": 3.8299999237060547,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 15.873213846323011,
+        "vy_kms": -35.84163332992318,
+        "vz_kms": 22.136107083413343,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record *  46 LMi, pm bibcode 2020yCat.1350....0G, rv bibcode 2005A&A...430..165F",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=*  46 LMi",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64464,7 +65144,17 @@
       "absolute_magnitude": 0.8967312198060382,
       "apparent_magnitude": 3.8340001106262207,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -26.191679993504312,
+        "vy_kms": -13.000729131986741,
+        "vz_kms": -1.1505824525821324,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * gam Aqr, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Aqr",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64535,7 +65225,17 @@
       "absolute_magnitude": 1.1727527301239302,
       "apparent_magnitude": 3.869999885559082,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -9.661933716402553,
+        "vy_kms": -26.873811983190645,
+        "vz_kms": -43.197273963706635,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * l Eri, pm bibcode 2020yCat.1350....0G, rv bibcode 2008AJ....135..209M",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* l Eri",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64608,7 +65308,17 @@
       "absolute_magnitude": 0.7906733270640256,
       "apparent_magnitude": 3.869999885559082,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 27.256097342044793,
+        "vy_kms": -40.666091047333474,
+        "vz_kms": 9.500593521193121,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eta Eri, pm bibcode 2020yCat.1350....0G, rv bibcode 2015A&A...574A..50J",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eta Eri",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64675,7 +65385,17 @@
       "absolute_magnitude": 1.905463596621832,
       "apparent_magnitude": 3.880000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": 14.286282389139995,
+        "vy_kms": 1.7716759173694632,
+        "vz_kms": -8.42246846526741,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * zet02 UMa, pm bibcode 2020yCat.1350....0G, rv bibcode 1979IAUS...30...57E",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* zet02 UMa",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64755,7 +65475,17 @@
       "absolute_magnitude": 0.9629613630150118,
       "apparent_magnitude": 3.880000114440918,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -35.727414286804624,
+        "vy_kms": -17.770431564465543,
+        "vz_kms": -15.411544555537535,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * mu. Leo, pm bibcode 2020yCat.1350....0G, rv bibcode 2018A&A...616A...7S",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* mu. Leo",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64829,7 +65559,17 @@
       "absolute_magnitude": 0.5541295966909399,
       "apparent_magnitude": 3.9100000858306885,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -16.27326941841608,
+        "vy_kms": 4.093545132526875,
+        "vz_kms": -10.941141098527556,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * eps Dra, pm bibcode 2020yCat.1350....0G, rv bibcode 2020ApJS..248...19T",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Dra",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64907,7 +65647,17 @@
       "absolute_magnitude": 0.11045294142392237,
       "apparent_magnitude": 3.933000087738037,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -4.286591166442669,
+        "vy_kms": -28.941276675046737,
+        "vz_kms": -14.481442558518665,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf Equ, pm bibcode 2020yCat.1350....0G, rv bibcode 2004A&A...424..727P",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Equ",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -64989,7 +65739,17 @@
       "absolute_magnitude": 0.825355994794414,
       "apparent_magnitude": 3.940000057220459,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -2.9010297012559123,
+        "vy_kms": -47.96505249213279,
+        "vz_kms": -7.241502042266363,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * del Cnc, pm bibcode 2020yCat.1350....0G, rv bibcode 2005A&A...430..165F",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Cnc",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [
@@ -65057,7 +65817,17 @@
       "absolute_magnitude": 0.23244843947746396,
       "apparent_magnitude": 3.943000078201294,
       "exoplanets": null,
-      "velocity": null,
+      "velocity": {
+        "vx_kms": -8.414068571544725,
+        "vy_kms": -27.403886763684095,
+        "vz_kms": -15.36875778335191,
+        "radial_velocity_known": true,
+        "source": {
+          "reference": "SIMBAD astronomical database (CDS), record * alf Sgr, pm bibcode 2020yCat.1350....0G, rv bibcode 2006AstL...32..759G",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf Sgr",
+          "catalog": "SIMBAD"
+        }
+      },
       "group": {
         "primary": null,
         "secondary": [

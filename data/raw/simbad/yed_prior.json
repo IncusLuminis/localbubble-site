@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Yed Prior",
-  "retrieved_utc": "2026-09-02T17:20:22+00:00",
+  "retrieved_utc": "2026-09-02T18:04:54+00:00",
   "record_id": "* del Oph",
   "raw": {
     "main_id": "* del Oph",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.75,
-    "plx_err": 0.5400000214576721,
     "otype": "PM*",
-    "plx_value": 20.4113,
     "pmra": -45.34,
-    "pmdec": -144.433,
     "rvz_radvel": -18.7841,
+    "plx_value": 20.4113,
     "sp_type": "M0.5III",
-    "rvz_bibcode": "2020AJ....160..120J",
+    "plx_err": 0.5400000214576721,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2020AJ....160..120J",
+    "pmdec": -144.433,
     "ids": "TIC 74040747|AP J16142073-0341393|Gaia DR2 4357027756656094208|HIP 79593|Gaia DR3 4357027756659697664|PLX 3684|*   1 Oph|* del Oph|BD-03  3903|CSI-03  3903  1|FK5  603|GC 21838|GCRV  9340|GEN# +1.00146051|HD 146051|HIC  79593|HR  6056|IRAS 16117-0334|IRC +00280|JP11  2719|N30 3639|NSV  7556|PMC 90-93   430|PPM 199443|RAFGL 1837|SAO 141052|SKY# 29317|TD1 18991|UBV   13793|UBV M  21279|YZ  93  5613|[DS98] 229|2MASS J16142073-0341393|PLX 3684.00|TYC 5037-1068-1|NAME Yed Prior|WEB 13466|TIC 1203373581",
     "matched_id": "NAME Yed Prior"
   }

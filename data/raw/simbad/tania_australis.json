@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Tania Australis",
-  "retrieved_utc": "2026-09-02T17:20:55+00:00",
+  "retrieved_utc": "2026-09-02T18:05:26+00:00",
   "record_id": "* mu. UMa",
   "raw": {
     "main_id": "* mu. UMa",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.049999952316284,
-    "plx_err": 0.39329999685287476,
     "otype": "SB*",
-    "plx_value": 17.7987,
     "pmra": -73.749,
-    "pmdec": 28.259,
     "rvz_radvel": -21.3,
+    "plx_value": 17.7987,
     "sp_type": "M0III",
-    "rvz_bibcode": "2008AJ....135..209M",
+    "plx_err": 0.39329999685287476,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2008AJ....135..209M",
+    "pmdec": 28.259,
     "ids": "TIC 8172111|Gaia DR3 804753180515722624|HIP 50801|PLX 2430|SBC9 607|* mu. UMa|*  34 UMa|AAVSO 1016+42|AG+41  998|BD+42  2115|CSV 101121|FK5  386|GC 14232|GCRV  6517|GEN# +1.00089758|GSC 03004-01418|HD  89758|HIC  50801|HR  4069|IRAS 10193+4145|IRC +40218|JP11  1935|N30 2460|NSV  4829|PMC 90-93   278|PPM  51850|RAFGL 1411|SAO  43310|SBC7   397|SKY# 19925|SV* ZI   815|TD1 14776|TYC 3004-1418-1|UBV M  16152|UBV    9576|[DS98] 130|[HFE83]  721|2MASS J10221975+4129580|PLX 2430.00|NAME Tania Australis|WEB  9297|Gaia DR2 804753180515064576",
     "matched_id": "NAME Tania Australis"
   }

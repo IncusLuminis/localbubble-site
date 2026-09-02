@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Prima Hyadum",
-  "retrieved_utc": "2026-09-02T17:21:35+00:00",
+  "retrieved_utc": "2026-09-02T18:06:04+00:00",
   "record_id": "* gam Tau",
   "raw": {
     "main_id": "* gam Tau",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.6500000953674316,
-    "plx_err": 0.18310000002384186,
     "otype": "**",
-    "plx_value": 21.6645,
     "pmra": 116.247,
-    "pmdec": -23.368,
     "rvz_radvel": 38.458,
+    "plx_value": 21.6645,
     "sp_type": "G9.5IIIabCN0.5",
-    "rvz_bibcode": "2018A&A...616A...7S",
+    "plx_err": 0.18310000002384186,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pmdec": -23.368,
     "ids": "TIC 435911332|EPIC 200007765|Gaia DR3 3312052249215275904|HIP 20205|2MASS J04194757+1537395|Cl* Melotte   25    MMU      28|Cl* Melotte   25     VA     175|*  54 Tau|* gam Tau|2E   975|2RE J041945+153637|2RE J0419+153|AG+15  356|BD+15   612|CSV 102439|FK5  159|GC  5226|GCRV  2486|GEN# +5.20250028|GSC 01264-01009|HD  27371|HIC  20205|HR  1346|IRAS 04169+1530|IRC +20074|JP11  4797|N30  889|NSV  1553|PMC 90-93   114|PPM 119792|RAFGL  566|RE J041944+153624|RE J0419+153|ROT  3838|SAO  93868|SKY#  6630|SRS  30159|TD1  3025|TYC 1264-1009-1|UBV    4176|UBV M  41234|YZ  15  1137|[B10]  1000|[HFE83]  290|uvby98 520250028|Cl Melotte   25    28|Cl* Melotte   25      S       1|PLX  954.02|1RXS J041947.6+153740|2E 0416.9+1530|EUVE J0419+15.6|** BLM    1|WDS J04198+1538AB|CCDM J04198+1538AB|UCAC4 529-008241|NAME Prima Hyadum|[RSP2011] 229|WEB  3852|Gaia DR2 3312052249216467328",
     "matched_id": "NAME Prima Hyadum"
   }

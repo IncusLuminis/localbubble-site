@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Muscida",
-  "retrieved_utc": "2026-09-02T17:21:15+00:00",
+  "retrieved_utc": "2026-09-02T18:05:46+00:00",
   "record_id": "* omi UMa",
   "raw": {
     "main_id": "* omi UMa",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.4200000762939453,
-    "plx_err": 0.14560000598430634,
     "otype": "PM*",
-    "plx_value": 17.9335,
     "pmra": -133.644,
-    "pmdec": -107.664,
     "rvz_radvel": 19.8,
+    "plx_value": 17.9335,
     "sp_type": "G5III:",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.14560000598430634,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": -107.664,
     "ids": "TIC 73416947|HIP 41704|Gaia DR3 1041808368494264576|PLX 2010|LSPM J0830+6043|ASCC  125152|2MASS J08301592+6043056|USNO-B1.0 1507-00173995|*   1 UMa|* omi UMa|AAVSO 0822+61|ADS  6830 A|AG+60  638|BD+61  1054|CCDM J08303+6043A|CSI+61  1054  1|CSV   6636|FK5  317|GC 11593|GCRV  5590|GSC 04127-02431|HD  71369|HIC  41704|HR  3323|IRAS 08261+6053|IRC +60187|JP11  1677|N30 1971|NSV  4093|PMC 90-93   232|PPM  16654|RAFGL 4085|ROT  1340|SAO  14573|SKY# 16191|TD1 12445|TYC 4127-2431-1|UBV    8062|UBV M  14329|[ATZ98] B209|[FS2003] 0475|[HFE83]  588|Gaia DR2 1041808368494264576|PLX 2010.00|1RXS J083014.7+604306|RX J0830.2+6043|[ZEH2003] RX J0830.2+6043  1|WDS J08303+6043A|NAME Muscida|IDS 08220+6103 A|uvby98 100071369|GEN# +1.00071369|** BU 1067A|WEB  8042",
     "matched_id": "NAME Muscida"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Caph",
-  "retrieved_utc": "2026-09-02T17:19:59+00:00",
+  "retrieved_utc": "2026-09-02T18:04:20+00:00",
   "record_id": "* bet Cas",
   "raw": {
     "main_id": "* bet Cas",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.2699999809265137,
-    "plx_err": 0.3799999952316284,
     "otype": "dS*",
-    "plx_value": 59.58,
     "pmra": 523.5,
-    "pmdec": -179.77,
     "rvz_radvel": 4.3,
+    "plx_value": 59.58,
     "sp_type": "F2III",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.3799999952316284,
     "pm_bibcode": "2007A&A...474..653V",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": -179.77,
     "ids": "GJ 8|HIP 746|Gaia DR3 423018377034969216|CNS5 43|2MASS J00091071+5908591|LSPM J0009+5908|ASCC  155033|USNO-B1.0 1491-00004186|PLX   16|* bet Cas|*  11 Cas|2E    20|ADS   107 A|AG+58   16|BD+58     3|CCDM J00092+5909A|CEL     30|CSI+58     3  1|Ci 20   10|FK5    2|GC   147|GCRV    69|GEN# +1.00000432|HD    432|HIC    746|HR    21|IDS 00038+5836 A|IRAS 00065+5852|IRC +60004|JP11   346|LFT   15|LHS  1027|LTT 10046|N30   17|NAME Caph|TIC 396298498|NLTT   389|PMC 90-93     2|PPM  25054|RAFGL   21|ROT    60|SAO  21133|SKY#   277|TD1    38|UBV      63|UBV M   7167|USNO-A2.0 1425-00225287|V* bet Cas|[HFE83]    5|PLX   16.00|1RXS J000910.1+590903|2E 0006.5+5851|WDS J00092+5909A|TYC 3664-1985-1|uvby98 100000432|WEB   125",
     "matched_id": "NAME Caph"
   }

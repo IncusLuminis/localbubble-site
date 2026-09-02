@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Tyl",
-  "retrieved_utc": "2026-09-02T17:22:01+00:00",
+  "retrieved_utc": "2026-09-02T18:06:31+00:00",
   "record_id": "* eps Dra",
   "raw": {
     "main_id": "* eps Dra",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.9100000858306885,
-    "plx_err": 0.12559999525547028,
     "otype": "PM*",
-    "plx_value": 21.3219,
     "pmra": 79.486,
-    "pmdec": 40.041,
     "rvz_radvel": 3.12,
+    "plx_value": 21.3219,
     "sp_type": "G7IIIbFe-1",
-    "rvz_bibcode": "2020ApJS..248...19T",
+    "plx_err": 0.12559999525547028,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2020ApJS..248...19T",
+    "pmdec": 40.041,
     "ids": "TIC 279979429|HIP 97433|Gaia DR3 2251191616254289152|* eps Dra A|CCDM J19482+7016A|*  63 Dra A|** STF 2603A|BD+69  1070A|HD 188119A|WDS J19482+7016A|TYC 4449-2652-1|UCAC4 802-027680|Gaia DR2 2251191616253487360|GC 27471|PLX 4689|*  63 Dra|* eps Dra|AG+70  689|BD+69  1070|GCRV 12194|HD 188119|HIC  97433|HR  7582|IRAS 19483+7008|IRC +70160|JP11  3149|NSV 12465|PPM  10315|RAFGL 2464|ROT  2867|SAO   9540|SKY# 37019|TD1 25620|UBV   16930|UBV M  24245|[B10]  5079|2MASS J19481035+7016045|NAME Tyl|WEB 17123|ADS 13007 A|GEN# +1.00188119|IDS 19485+7001 A",
     "matched_id": "NAME Tyl"
   }

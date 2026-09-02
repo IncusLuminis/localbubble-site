@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Cebalrai",
-  "retrieved_utc": "2026-09-02T17:20:25+00:00",
+  "retrieved_utc": "2026-09-02T18:04:57+00:00",
   "record_id": "* bet Oph",
   "raw": {
     "main_id": "* bet Oph",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.75,
-    "plx_err": 0.20270000398159027,
     "otype": "PM*",
-    "plx_value": 39.2284,
     "pmra": -41.793,
-    "pmdec": 159.43,
     "rvz_radvel": -12.12,
+    "plx_value": 39.2284,
     "sp_type": "K2IIICN0.5",
-    "rvz_bibcode": "2018A&A...616A...7S",
+    "plx_err": 0.20270000398159027,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pmdec": 159.43,
     "ids": "TIC 361269297|Gaia DR3 4473334474604992384|HIP 86742|PLX 4042|LSPM J1743+0434|ASCC 1152081|USNO-B1.0 0945-00301598|* bet Oph|*  60 Oph|AG+04 2178|BD+04  3489|EIC   585|FK5  665|GC 24048|GCRV 10239|GEN# +1.00161096|GSC 00423-01724|HD 161096|HIC  86742|HR  6603|CNS5 4386|IRAS 17409+0435|IRC +00317|JP11  2883|N30 3943|NAME Cebalrai|NSV 23613|PMC 90-93   472|PPM 164476|RAFGL 2000|ROT  2482|SAO 122671|SKY# 32036|TD1 20888|TYC  423-1724-1|UBV   15049|UBV M  22360|USNO 871|YZ   4  5892|uvby98 100161096|2MASS J17432835+0434022|PLX 4042.00|WEB 14628|Gaia DR2 4473334474601314560",
     "matched_id": "NAME Cebalrai"
   }

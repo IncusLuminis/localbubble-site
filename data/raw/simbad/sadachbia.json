@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Sadachbia",
-  "retrieved_utc": "2026-09-02T17:21:52+00:00",
+  "retrieved_utc": "2026-09-02T18:06:21+00:00",
   "record_id": "* gam Aqr",
   "raw": {
     "main_id": "* gam Aqr",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.8340001106262207,
-    "plx_err": 0.5799000263214111,
     "otype": "PM*",
-    "plx_value": 25.8551,
     "pmra": 134.223,
-    "pmdec": 11.219,
     "rvz_radvel": -15.7,
+    "plx_value": 25.8551,
     "sp_type": "A0V",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.5799000263214111,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": 11.219,
     "ids": "TIC 439852017|GJ 9779|Gaia DR3 2677558895241364864|PLX 5407|* gam Aqr|*  48 Aqr|ADS 15864 A|AG-01 2732|BD-02  5741|CCDM J22217-0123A|CSI-02  5741  1|FK5  842|GC 31257|GCRV 14062|GEN# +1.00212061|GSC 05226-01606|HD 212061|HGAM   1061|HIC 110395|HIP 110395|HR  8518|IDS 22165-0153 A|JP11  3475|N30 4927|PMC 90-93   590|PPM 181446|ROT  3254|SAO 146044|SKY# 42583|TD1 29003|TYC 5226-1606-1|UBV   19127|UBV M  26339|YZ  91  7780|uvby98 100212061|2MASS J22213936-0123145|ALS 16209|PLX 5407.00|WDS J22217-0123A|1RXS J222140.1-012310|NAME Sadachbia|IRAS 22190-0138|AKARI-IRC-V1 J2221394-012314|WEB 19798|Gaia DR2 2677558895240612992",
     "matched_id": "NAME Sadachbia"
   }

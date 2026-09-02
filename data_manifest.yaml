@@ -7253,7 +7253,7 @@ sources:
   query: Alioth
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:19:49+00:00'
+  retrieved: '2026-09-02T18:04:12+00:00'
   record_id: '* eps UMa'
   cache_path: data/raw/simbad/alioth.json
 - id: simbad:Kaus Australis
@@ -7261,7 +7261,7 @@ sources:
   query: Kaus Australis
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:19:51+00:00'
+  retrieved: '2026-09-02T18:04:14+00:00'
   record_id: '* eps Sgr'
   cache_path: data/raw/simbad/kaus_australis.json
 - id: simbad:Alhena
@@ -7269,7 +7269,7 @@ sources:
   query: Alhena
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:19:53+00:00'
+  retrieved: '2026-09-02T18:04:15+00:00'
   record_id: '* gam Gem'
   cache_path: data/raw/simbad/alhena.json
 - id: simbad:Menkent
@@ -7277,7 +7277,7 @@ sources:
   query: Menkent
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:19:55+00:00'
+  retrieved: '2026-09-02T18:04:16+00:00'
   record_id: '* tet Cen'
   cache_path: data/raw/simbad/menkent.json
 - id: simbad:Alpheratz
@@ -7285,7 +7285,7 @@ sources:
   query: Alpheratz
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:19:57+00:00'
+  retrieved: '2026-09-02T18:04:18+00:00'
   record_id: '* alf And'
   cache_path: data/raw/simbad/alpheratz.json
 - id: simbad:Caph
@@ -7293,7 +7293,7 @@ sources:
   query: Caph
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:19:59+00:00'
+  retrieved: '2026-09-02T18:04:20+00:00'
   record_id: '* bet Cas'
   cache_path: data/raw/simbad/caph.json
 - id: simbad:Ankaa
@@ -7301,7 +7301,7 @@ sources:
   query: Ankaa
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:00+00:00'
+  retrieved: '2026-09-02T18:04:22+00:00'
   record_id: '* alf Phe'
   cache_path: data/raw/simbad/ankaa.json
 - id: simbad:Phecda
@@ -7309,7 +7309,7 @@ sources:
   query: Phecda
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:02+00:00'
+  retrieved: '2026-09-02T18:04:24+00:00'
   record_id: '* gam UMa'
   cache_path: data/raw/simbad/phecda.json
 - id: simbad:Markab
@@ -7317,7 +7317,7 @@ sources:
   query: Markab
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:04+00:00'
+  retrieved: '2026-09-02T18:04:26+00:00'
   record_id: '* alf Peg'
   cache_path: data/raw/simbad/markab.json
 - id: simbad:Zosma
@@ -7325,7 +7325,7 @@ sources:
   query: Zosma
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:05+00:00'
+  retrieved: '2026-09-02T18:04:27+00:00'
   record_id: '* del Leo'
   cache_path: data/raw/simbad/zosma.json
 - id: simbad:Gienah
@@ -7333,7 +7333,7 @@ sources:
   query: Gienah
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:07+00:00'
+  retrieved: '2026-09-02T18:04:29+00:00'
   record_id: '* gam Crv'
   cache_path: data/raw/simbad/gienah.json
 - id: simbad:Ascella
@@ -7341,7 +7341,7 @@ sources:
   query: Ascella
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:09+00:00'
+  retrieved: '2026-09-02T18:04:31+00:00'
   record_id: '* zet Sgr'
   cache_path: data/raw/simbad/ascella.json
 - id: simbad:Mahasim
@@ -7349,7 +7349,7 @@ sources:
   query: Mahasim
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:11+00:00'
+  retrieved: '2026-09-02T18:04:33+00:00'
   record_id: '* tet Aur'
   cache_path: data/raw/simbad/mahasim.json
 - id: simbad:Kraz
@@ -7357,7 +7357,7 @@ sources:
   query: Kraz
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:13+00:00'
+  retrieved: '2026-09-02T18:04:36+00:00'
   record_id: '* bet Crv'
   cache_path: data/raw/simbad/kraz.json
 - id: simbad:Sheratan
@@ -7365,7 +7365,7 @@ sources:
   query: Sheratan
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:15+00:00'
+  retrieved: '2026-09-02T18:04:39+00:00'
   record_id: '* bet Ari'
   cache_path: data/raw/simbad/sheratan.json
 - id: simbad:Ruchbah
@@ -7373,7 +7373,7 @@ sources:
   query: Ruchbah
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:17+00:00'
+  retrieved: '2026-09-02T18:04:42+00:00'
   record_id: '* del Cas'
   cache_path: data/raw/simbad/ruchbah.json
 - id: simbad:Muphrid
@@ -7381,7 +7381,7 @@ sources:
   query: Muphrid
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:19+00:00'
+  retrieved: '2026-09-02T18:04:46+00:00'
   record_id: '* eta Boo'
   cache_path: data/raw/simbad/muphrid.json
 - id: simbad:Porrima
@@ -7389,7 +7389,7 @@ sources:
   query: Porrima
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:21+00:00'
+  retrieved: '2026-09-02T18:04:49+00:00'
   record_id: '* gam Vir'
   cache_path: data/raw/simbad/porrima.json
 - id: simbad:Yed Prior
@@ -7397,7 +7397,7 @@ sources:
   query: Yed Prior
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:22+00:00'
+  retrieved: '2026-09-02T18:04:54+00:00'
   record_id: '* del Oph'
   cache_path: data/raw/simbad/yed_prior.json
 - id: simbad:Cebalrai
@@ -7405,7 +7405,7 @@ sources:
   query: Cebalrai
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:25+00:00'
+  retrieved: '2026-09-02T18:04:57+00:00'
   record_id: '* bet Oph'
   cache_path: data/raw/simbad/cebalrai.json
 - id: simbad:Kornephoros
@@ -7413,7 +7413,7 @@ sources:
   query: Kornephoros
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:27+00:00'
+  retrieved: '2026-09-02T18:05:02+00:00'
   record_id: '* bet Her'
   cache_path: data/raw/simbad/kornephoros.json
 - id: simbad:Cursa
@@ -7421,7 +7421,7 @@ sources:
   query: Cursa
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:29+00:00'
+  retrieved: '2026-09-02T18:05:04+00:00'
   record_id: '* bet Eri'
   cache_path: data/raw/simbad/cursa.json
 - id: simbad:Vindemiatrix
@@ -7429,7 +7429,7 @@ sources:
   query: Vindemiatrix
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:30+00:00'
+  retrieved: '2026-09-02T18:05:06+00:00'
   record_id: '* eps Vir'
   cache_path: data/raw/simbad/vindemiatrix.json
 - id: simbad:Tureis
@@ -7437,7 +7437,7 @@ sources:
   query: Tureis
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:32+00:00'
+  retrieved: '2026-09-02T18:05:08+00:00'
   record_id: '* rho Pup'
   cache_path: data/raw/simbad/tureis.json
 - id: simbad:Kaus Borealis
@@ -7445,7 +7445,7 @@ sources:
   query: Kaus Borealis
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:34+00:00'
+  retrieved: '2026-09-02T18:05:09+00:00'
   record_id: '* lam Sgr'
   cache_path: data/raw/simbad/kaus_borealis.json
 - id: simbad:Deneb Algedi
@@ -7453,7 +7453,7 @@ sources:
   query: Deneb Algedi
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:36+00:00'
+  retrieved: '2026-09-02T18:05:11+00:00'
   record_id: '* del Cap'
   cache_path: data/raw/simbad/deneb_algedi.json
 - id: simbad:Nihal
@@ -7461,7 +7461,7 @@ sources:
   query: Nihal
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:38+00:00'
+  retrieved: '2026-09-02T18:05:12+00:00'
   record_id: '* bet Lep'
   cache_path: data/raw/simbad/nihal.json
 - id: simbad:Cor Caroli
@@ -7469,7 +7469,7 @@ sources:
   query: Cor Caroli
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:40+00:00'
+  retrieved: '2026-09-02T18:05:14+00:00'
   record_id: '* alf02 CVn'
   cache_path: data/raw/simbad/cor_caroli.json
 - id: simbad:Gomeisa
@@ -7477,7 +7477,7 @@ sources:
   query: Gomeisa
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:42+00:00'
+  retrieved: '2026-09-02T18:05:16+00:00'
   record_id: '* bet CMi'
   cache_path: data/raw/simbad/gomeisa.json
 - id: simbad:Altaleban
@@ -7485,7 +7485,7 @@ sources:
   query: Altaleban
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:43+00:00'
+  retrieved: '2026-09-02T18:05:17+00:00'
   record_id: '* tau Pup'
   cache_path: data/raw/simbad/altaleban.json
 - id: simbad:Zaurak
@@ -7493,7 +7493,7 @@ sources:
   query: Zaurak
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:45+00:00'
+  retrieved: '2026-09-02T18:05:19+00:00'
   record_id: '* gam Eri'
   cache_path: data/raw/simbad/zaurak.json
 - id: simbad:Algorab
@@ -7501,7 +7501,7 @@ sources:
   query: Algorab
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:47+00:00'
+  retrieved: '2026-09-02T18:05:20+00:00'
   record_id: '* del Crv'
   cache_path: data/raw/simbad/algorab.json
 - id: simbad:Alnasl
@@ -7509,7 +7509,7 @@ sources:
   query: Alnasl
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:49+00:00'
+  retrieved: '2026-09-02T18:05:22+00:00'
   record_id: '* gam02 Sgr'
   cache_path: data/raw/simbad/alnasl.json
 - id: simbad:Aldhanab
@@ -7517,7 +7517,7 @@ sources:
   query: Aldhanab
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:51+00:00'
+  retrieved: '2026-09-02T18:05:23+00:00'
   record_id: '* gam Gru'
   cache_path: data/raw/simbad/aldhanab.json
 - id: simbad:Seginus
@@ -7525,7 +7525,7 @@ sources:
   query: Seginus
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:53+00:00'
+  retrieved: '2026-09-02T18:05:25+00:00'
   record_id: '* gam Boo'
   cache_path: data/raw/simbad/seginus.json
 - id: simbad:Tania Australis
@@ -7533,7 +7533,7 @@ sources:
   query: Tania Australis
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:55+00:00'
+  retrieved: '2026-09-02T18:05:26+00:00'
   record_id: '* mu. UMa'
   cache_path: data/raw/simbad/tania_australis.json
 - id: simbad:Altais
@@ -7541,7 +7541,7 @@ sources:
   query: Altais
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:57+00:00'
+  retrieved: '2026-09-02T18:05:28+00:00'
   record_id: '* del Dra'
   cache_path: data/raw/simbad/altais.json
 - id: simbad:Wazn
@@ -7549,7 +7549,7 @@ sources:
   query: Wazn
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:20:58+00:00'
+  retrieved: '2026-09-02T18:05:29+00:00'
   record_id: '* bet Col'
   cache_path: data/raw/simbad/wazn.json
 - id: simbad:Sarin
@@ -7557,7 +7557,7 @@ sources:
   query: Sarin
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:00+00:00'
+  retrieved: '2026-09-02T18:05:31+00:00'
   record_id: '* del Her'
   cache_path: data/raw/simbad/sarin.json
 - id: simbad:Talitha
@@ -7565,7 +7565,7 @@ sources:
   query: Talitha
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:01+00:00'
+  retrieved: '2026-09-02T18:05:32+00:00'
   record_id: '* iot UMa'
   cache_path: data/raw/simbad/talitha.json
 - id: simbad:Yed Posterior
@@ -7573,7 +7573,7 @@ sources:
   query: Yed Posterior
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:03+00:00'
+  retrieved: '2026-09-02T18:05:34+00:00'
   record_id: '* eps Oph'
   cache_path: data/raw/simbad/yed_posterior.json
 - id: simbad:Hadir
@@ -7581,7 +7581,7 @@ sources:
   query: Hadir
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:04+00:00'
+  retrieved: '2026-09-02T18:05:36+00:00'
   record_id: '* sig Pup'
   cache_path: data/raw/simbad/hadir.json
 - id: simbad:Skat
@@ -7589,7 +7589,7 @@ sources:
   query: Skat
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:06+00:00'
+  retrieved: '2026-09-02T18:05:37+00:00'
   record_id: '* del Aqr'
   cache_path: data/raw/simbad/skat.json
 - id: simbad:Edasich
@@ -7597,7 +7597,7 @@ sources:
   query: Edasich
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:07+00:00'
+  retrieved: '2026-09-02T18:05:39+00:00'
   record_id: '* iot Dra'
   cache_path: data/raw/simbad/edasich.json
 - id: simbad:Megrez
@@ -7605,7 +7605,7 @@ sources:
   query: Megrez
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:09+00:00'
+  retrieved: '2026-09-02T18:05:40+00:00'
   record_id: '* del UMa'
   cache_path: data/raw/simbad/megrez.json
 - id: simbad:Chertan
@@ -7613,7 +7613,7 @@ sources:
   query: Chertan
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:10+00:00'
+  retrieved: '2026-09-02T18:05:42+00:00'
   record_id: '* tet Leo'
   cache_path: data/raw/simbad/chertan.json
 - id: simbad:Minelauva
@@ -7621,7 +7621,7 @@ sources:
   query: Minelauva
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:12+00:00'
+  retrieved: '2026-09-02T18:05:43+00:00'
   record_id: '* del Vir'
   cache_path: data/raw/simbad/minelauva.json
 - id: simbad:Heze
@@ -7629,7 +7629,7 @@ sources:
   query: Heze
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:13+00:00'
+  retrieved: '2026-09-02T18:05:45+00:00'
   record_id: '* zet Vir'
   cache_path: data/raw/simbad/heze.json
 - id: simbad:Muscida
@@ -7637,7 +7637,7 @@ sources:
   query: Muscida
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:15+00:00'
+  retrieved: '2026-09-02T18:05:46+00:00'
   record_id: '* omi UMa'
   cache_path: data/raw/simbad/muscida.json
 - id: simbad:Mothallah
@@ -7645,7 +7645,7 @@ sources:
   query: Mothallah
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:16+00:00'
+  retrieved: '2026-09-02T18:05:48+00:00'
   record_id: '* alf Tri'
   cache_path: data/raw/simbad/mothallah.json
 - id: simbad:Kaffaljidhma
@@ -7653,7 +7653,7 @@ sources:
   query: Kaffaljidhma
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:18+00:00'
+  retrieved: '2026-09-02T18:05:49+00:00'
   record_id: '* gam Cet'
   cache_path: data/raw/simbad/kaffaljidhma.json
 - id: simbad:Sadalbari
@@ -7661,7 +7661,7 @@ sources:
   query: Sadalbari
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:20+00:00'
+  retrieved: '2026-09-02T18:05:51+00:00'
   record_id: '* mu. Peg'
   cache_path: data/raw/simbad/sadalbari.json
 - id: simbad:Subra
@@ -7669,7 +7669,7 @@ sources:
   query: Subra
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:22+00:00'
+  retrieved: '2026-09-02T18:05:52+00:00'
   record_id: '* omi Leo'
   cache_path: data/raw/simbad/subra.json
 - id: simbad:Ain
@@ -7677,7 +7677,7 @@ sources:
   query: Ain
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:23+00:00'
+  retrieved: '2026-09-02T18:05:54+00:00'
   record_id: '* eps Tau'
   cache_path: data/raw/simbad/ain.json
 - id: simbad:Wasat
@@ -7685,7 +7685,7 @@ sources:
   query: Wasat
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:25+00:00'
+  retrieved: '2026-09-02T18:05:56+00:00'
   record_id: '* del Gem'
   cache_path: data/raw/simbad/wasat.json
 - id: simbad:Biham
@@ -7693,7 +7693,7 @@ sources:
   query: Biham
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:27+00:00'
+  retrieved: '2026-09-02T18:05:57+00:00'
   record_id: '* tet Peg'
   cache_path: data/raw/simbad/biham.json
 - id: simbad:Algedi
@@ -7701,7 +7701,7 @@ sources:
   query: Algedi
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:28+00:00'
+  retrieved: '2026-09-02T18:05:59+00:00'
   record_id: '* alf02 Cap'
   cache_path: data/raw/simbad/algedi.json
 - id: simbad:Zavijava
@@ -7709,7 +7709,7 @@ sources:
   query: Zavijava
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:30+00:00'
+  retrieved: '2026-09-02T18:06:01+00:00'
   record_id: '* bet Vir'
   cache_path: data/raw/simbad/zavijava.json
 - id: simbad:Rotanev
@@ -7717,7 +7717,7 @@ sources:
   query: Rotanev
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:32+00:00'
+  retrieved: '2026-09-02T18:06:03+00:00'
   record_id: '* bet Del'
   cache_path: data/raw/simbad/rotanev.json
 - id: simbad:Prima Hyadum
@@ -7725,7 +7725,7 @@ sources:
   query: Prima Hyadum
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:35+00:00'
+  retrieved: '2026-09-02T18:06:04+00:00'
   record_id: '* gam Tau'
   cache_path: data/raw/simbad/prima_hyadum.json
 - id: simbad:Nashira
@@ -7733,7 +7733,7 @@ sources:
   query: Nashira
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:37+00:00'
+  retrieved: '2026-09-02T18:06:06+00:00'
   record_id: '* gam Cap'
   cache_path: data/raw/simbad/nashira.json
 - id: simbad:Chow
@@ -7741,7 +7741,7 @@ sources:
   query: Chow
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:39+00:00'
+  retrieved: '2026-09-02T18:06:08+00:00'
   record_id: '* bet Ser'
   cache_path: data/raw/simbad/chow.json
 - id: simbad:Nusakan
@@ -7749,7 +7749,7 @@ sources:
   query: Nusakan
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:41+00:00'
+  retrieved: '2026-09-02T18:06:10+00:00'
   record_id: '* bet CrB'
   cache_path: data/raw/simbad/nusakan.json
 - id: simbad:Alshain
@@ -7757,7 +7757,7 @@ sources:
   query: Alshain
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:43+00:00'
+  retrieved: '2026-09-02T18:06:12+00:00'
   record_id: '* bet Aql'
   cache_path: data/raw/simbad/alshain.json
 - id: simbad:Grumium
@@ -7765,7 +7765,7 @@ sources:
   query: Grumium
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:45+00:00'
+  retrieved: '2026-09-02T18:06:14+00:00'
   record_id: '* ksi Dra'
   cache_path: data/raw/simbad/grumium.json
 - id: simbad:Secunda Hyadum
@@ -7773,7 +7773,7 @@ sources:
   query: Secunda Hyadum
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:47+00:00'
+  retrieved: '2026-09-02T18:06:15+00:00'
   record_id: '* del Tau'
   cache_path: data/raw/simbad/secunda_hyadum.json
 - id: simbad:Misam
@@ -7781,7 +7781,7 @@ sources:
   query: Misam
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:49+00:00'
+  retrieved: '2026-09-02T18:06:17+00:00'
   record_id: '* kap Per'
   cache_path: data/raw/simbad/misam.json
 - id: simbad:Praecipua
@@ -7789,7 +7789,7 @@ sources:
   query: Praecipua
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:51+00:00'
+  retrieved: '2026-09-02T18:06:19+00:00'
   record_id: '*  46 LMi'
   cache_path: data/raw/simbad/praecipua.json
 - id: simbad:Sadachbia
@@ -7797,7 +7797,7 @@ sources:
   query: Sadachbia
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:52+00:00'
+  retrieved: '2026-09-02T18:06:21+00:00'
   record_id: '* gam Aqr'
   cache_path: data/raw/simbad/sadachbia.json
 - id: simbad:Sceptrum
@@ -7805,7 +7805,7 @@ sources:
   query: Sceptrum
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:54+00:00'
+  retrieved: '2026-09-02T18:06:23+00:00'
   record_id: '* l Eri'
   cache_path: data/raw/simbad/sceptrum.json
 - id: simbad:Azha
@@ -7813,7 +7813,7 @@ sources:
   query: Azha
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:56+00:00'
+  retrieved: '2026-09-02T18:06:24+00:00'
   record_id: '* eta Eri'
   cache_path: data/raw/simbad/azha.json
 - id: simbad:Mizar B
@@ -7821,7 +7821,7 @@ sources:
   query: Mizar B
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:21:58+00:00'
+  retrieved: '2026-09-02T18:06:26+00:00'
   record_id: '* zet02 UMa'
   cache_path: data/raw/simbad/mizar_b.json
 - id: simbad:Rasalas
@@ -7829,7 +7829,7 @@ sources:
   query: Rasalas
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:22:00+00:00'
+  retrieved: '2026-09-02T18:06:29+00:00'
   record_id: '* mu. Leo'
   cache_path: data/raw/simbad/rasalas.json
 - id: simbad:Tyl
@@ -7837,7 +7837,7 @@ sources:
   query: Tyl
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:22:01+00:00'
+  retrieved: '2026-09-02T18:06:31+00:00'
   record_id: '* eps Dra'
   cache_path: data/raw/simbad/tyl.json
 - id: simbad:Kitalpha
@@ -7845,7 +7845,7 @@ sources:
   query: Kitalpha
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:22:03+00:00'
+  retrieved: '2026-09-02T18:06:32+00:00'
   record_id: '* alf Equ'
   cache_path: data/raw/simbad/kitalpha.json
 - id: simbad:Asellus Australis
@@ -7853,7 +7853,7 @@ sources:
   query: Asellus Australis
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:22:05+00:00'
+  retrieved: '2026-09-02T18:06:34+00:00'
   record_id: '* del Cnc'
   cache_path: data/raw/simbad/asellus_australis.json
 - id: simbad:Rukbat
@@ -7861,6 +7861,14 @@ sources:
   query: Rukbat
   dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
     rvz_radvel)
-  retrieved: '2026-09-02T17:22:07+00:00'
+  retrieved: '2026-09-02T18:06:36+00:00'
   record_id: '* alf Sgr'
   cache_path: data/raw/simbad/rukbat.json
+- id: simbad:* eps UMa
+  source: simbad
+  query: '* eps UMa'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T18:02:46+00:00'
+  record_id: '* eps UMa'
+  cache_path: eps_uma.json

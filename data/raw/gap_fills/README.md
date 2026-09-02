@@ -417,3 +417,11 @@ Not part of this Story: velocity derivation for these 77 stars (Story
 population selection to `distance_pc <= bubbleOuterRadiusPc`, so these 77
 stars automatically join the animated Vectors/motion-player population
 once Story #296 adds their velocity).
+
+**Update (Story #296):** velocity has since been derived for all 77 of
+these stars (77/77 resolved, 100% full 3D vectors, no implausible
+speeds) - see the main [`README.md`](../../../README.md)'s "Velocity for
+the 77 newly-acquired Local Bubble stars (Story #296)" section for the
+full writeup, spot-checks, and live-verification result. Confirmed live
+in the web viewer with zero frontend code changes, exactly as this
+Story's own note above anticipated.

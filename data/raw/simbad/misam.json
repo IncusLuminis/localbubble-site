@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Misam",
-  "retrieved_utc": "2026-09-02T17:21:49+00:00",
+  "retrieved_utc": "2026-09-02T18:06:17+00:00",
   "record_id": "* kap Per",
   "raw": {
     "main_id": "* kap Per",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.809999942779541,
-    "plx_err": 0.1582999974489212,
     "otype": "PM*",
-    "plx_value": 28.7314,
     "pmra": 165.691,
-    "pmdec": -138.559,
     "rvz_radvel": 29.4,
+    "plx_value": 28.7314,
     "sp_type": "G9.5IIIb",
-    "rvz_bibcode": "2005A&A...430..165F",
+    "plx_err": 0.1582999974489212,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2005A&A...430..165F",
+    "pmdec": -138.559,
     "ids": "TIC 192589330|HIP 14668|Gaia DR3 433103132037681536|2MASS J03092976+4451271|PLX  650|LSPM J0309+4451|ASCC  386305|USNO-B1.0 1348-00067589|* kap Per|*  27 Per|ADS  2368 A|AG+44  317|AN   74.1901|BD+44   631|CCDM J03095+4451A|CSI+44   631  1|CSV 100260|GC  3755|GCRV  1741|GEN# +1.00019476|GSC 02859-02274|HD  19476|HIC  14668|HR   941|IDS 03027+4429 A|IRAS 03061+4440|IRC +40057|JP11   754|LTT 11023|NLTT 10001|NSV  1055|PPM  45885|RAFGL  449|ROT   421|SAO  38609|SKY#  4714|SV* ZI   177|TD1  1918|TYC 2859-2274-1|UBV    3028|UBV M   9346|YPAC 309|uvby98 100019476|PLX  650.00|WDS J03095+4451A|1RXS J030928.6+445123|** ES 2596A|NAME Misam|WEB  2846|Gaia DR2 433103132036857856",
     "matched_id": "NAME Misam"
   }

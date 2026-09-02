@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Asellus Australis",
-  "retrieved_utc": "2026-09-02T17:22:05+00:00",
+  "retrieved_utc": "2026-09-02T18:06:34+00:00",
   "record_id": "* del Cnc",
   "raw": {
     "main_id": "* del Cnc",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.940000057220459,
-    "plx_err": 0.18529999256134033,
     "otype": "**",
-    "plx_value": 23.8271,
     "pmra": -18.435,
-    "pmdec": -227.813,
     "rvz_radvel": 17.14,
+    "plx_value": 23.8271,
     "sp_type": "K0+IIIb",
-    "rvz_bibcode": "2005A&A...430..165F",
+    "plx_err": 0.18529999256134033,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2005A&A...430..165F",
+    "pmdec": -227.813,
     "ids": "TIC 184899026|Gaia DR3 660136821288588416|HIP 42911|PLX 2086|NAME Asellus Australis|ASCC  860185|LSPM J0844+1809|TYC 1396-2758-1|USNO-B1.0 1081-00199805|* del Cnc|*  47 Cnc|ADS  6967 A|AG+18  894|BD+18  2027|CCDM J08447+1809A|CSI+18  2027  1|FK5  326|GC 12022|GCRV  5768|GEN# +1.00074442|HD  74442|HIC  42911|HR  3461|IDS 08390+1831 A|IRAS 08418+1820|IRC +20205|JP11  1709|LTT 12274|N30 2038|NLTT 20152|PMC 90-93   238|PPM 125682|RAFGL 1285|ROT  1374|SAO  98087|SKY# 16778|SRS  30326|TD1 12978|UBV    8443|UBV M  14644|YPAC  37|YZ  18  3502|2MASS J08444109+1809158|PLX 2086.00|WDS J08447+1809A|WDS J08447+1809Aa,Ab|** TOK    3|** HJ  457A|WEB  8290|Gaia DR2 660136821288967296",
     "matched_id": "NAME Asellus Australis"
   }

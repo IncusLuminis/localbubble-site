@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Kornephoros",
-  "retrieved_utc": "2026-09-02T17:20:27+00:00",
+  "retrieved_utc": "2026-09-02T18:05:02+00:00",
   "record_id": "* bet Her",
   "raw": {
     "main_id": "* bet Her",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.7699999809265137,
-    "plx_err": 0.9866999983787537,
     "otype": "SB*",
-    "plx_value": 22.0023,
     "pmra": -98.822,
-    "pmdec": -14.869,
     "rvz_radvel": -25.91,
+    "plx_value": 22.0023,
     "sp_type": "G7IIIaFe-0.5",
-    "rvz_bibcode": "2004A&A...424..727P",
+    "plx_err": 0.9866999983787537,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2004A&A...424..727P",
+    "pmdec": -14.869,
     "ids": "TIC 284853659|Gaia DR3 1297565458994346240|HIP 80816|PLX 3754|SBC9 907|*  27 Her|* bet Her|2E 1628.0+2135|2E  3708|AG+21 1607|BD+21  2934|CSI+21  2934  1|CSV 101593|FK5  618|GC 22193|GCRV  9493|GEN# +1.00148856|GSC 01518-01442|HD 148856|HIC  80816|HR  6148|IRAS 16280+2135|IRC +20300|JP11  2768|N30 3696|NSV  7778|PMC 90-93   440|PPM 104935|ROT  2353|SAO  84411|SBC7   577|SKY# 29735|SRS  30618|SV* ZI  1252|TD1 19249|TYC 1518-1442-1|UBV M  21486|UBV   13963|YZ  21  5622|2MASS J16301319+2129225|1RXS J163013.4+212922|RX J1630.2+2129|[ZEH2003] RX J1630.2+2129  1|WDS J16302+2129Aa,Ab|NAME Kornephoros|WEB 13667",
     "matched_id": "NAME Kornephoros"
   }

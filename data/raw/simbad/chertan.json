@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Chertan",
-  "retrieved_utc": "2026-09-02T17:21:10+00:00",
+  "retrieved_utc": "2026-09-02T18:05:42+00:00",
   "record_id": "* tet Leo",
   "raw": {
     "main_id": "* tet Leo",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.3499999046325684,
-    "plx_err": 0.326200008392334,
     "otype": "PM*",
-    "plx_value": 20.316,
     "pmra": -60.538,
-    "pmdec": -78.675,
     "rvz_radvel": 7.536,
+    "plx_value": 20.316,
     "sp_type": "A2IV",
-    "rvz_bibcode": "2018A&A...616A...7S",
+    "plx_err": 0.326200008392334,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pmdec": -78.675,
     "ids": "TIC 77172923|Gaia DR3 3970052886914547712|HIP 54879|PLX 2615|*  70 Leo|* tet Leo|AG+15 1219|BD+16  2234|FK5  423|GC 15441|GCRV  6894|GEN# +1.00097633|GSC 01437-02847|HD  97633|HIC  54879|HR  4359|JP11  2040|N30 2638|NSV  5144|PMC 90-93   305|PPM 128087|ROT  1672|SAO  99512|SKY# 21410|SRS  30423|TD1 15476|TYC 1437-2847-1|UBV   10244|UBV M  16907|uvby98 100097633|2MASS J11141442+1525466|PLX 2615.00|Renson 28150|Gaia DR2 3970052886914307200|NAME Chertan|WEB  9905",
     "matched_id": "NAME Chertan"
   }

@@ -319,18 +319,17 @@ def test_gap_fill_batch_adds_exactly_77_new_records(catalog_objects):
     assert len(tagged) == len(GAP_FILL_STARS) == 77
 
 
-def test_gap_fill_stars_carry_no_velocity(catalog_objects):
-    # Regression guard for the Validator's PR #297 finding: issue #295's
-    # own Definition of Done explicitly excludes velocity derivation for
-    # this batch ("Do NOT derive velocity for these stars in this Story -
-    # that's Story 2's job"). The shared `SimbadResolver._normalize`
-    # pipeline (data_sources/simbad.py) derives velocity for free whenever
-    # a resolved object has usable pmra/pmdec, regardless of which Story
-    # is acquiring it - so this batch's own acquisition step must strip it
-    # back out afterward, and this test must fail loudly if that ever
-    # regresses (e.g. Story #296 accidentally re-acquiring instead of
-    # backfilling in place, or a future re-acquisition of this batch
-    # forgetting the strip step again).
+def test_gap_fill_stars_carry_velocity(catalog_objects):
+    # Story #296 supersedes this test's prior form (the Validator's PR
+    # #297 regression guard, which asserted the *opposite*: that this
+    # batch must NOT carry velocity yet, since Story #295's own Definition
+    # of Done explicitly deferred derivation - "that's Story 2's job").
+    # Story #296 is that Story 2: every one of the 77 gap-fill stars must
+    # now carry a real, derived `velocity` (never fabricated - see
+    # `data_sources/simbad.py`'s own "never fabricate" docstring), and
+    # this test flips to guard *that* invariant instead so a future
+    # re-acquisition of this batch cannot silently regress it back to
+    # velocity-less.
     #
     # Checked two ways: every catalog record carrying this batch's tag
     # (not just the name-matched subset), and every individually
@@ -339,17 +338,32 @@ def test_gap_fill_stars_carry_no_velocity(catalog_objects):
     # check.
     tagged = [obj for obj in catalog_objects if TAG in obj.group.secondary]
     assert len(tagged) == 77
-    tagged_with_velocity = [obj.id for obj in tagged if obj.velocity is not None]
-    assert not tagged_with_velocity, (
-        "gap-fill batch records must not carry velocity in this Story "
-        f"(Story #296's job): {tagged_with_velocity}"
+    tagged_without_velocity = [obj.id for obj in tagged if obj.velocity is None]
+    assert not tagged_without_velocity, (
+        "gap-fill batch records must carry a derived velocity as of Story "
+        f"#296: {tagged_without_velocity}"
     )
 
-    named_with_velocity = []
+    named_without_velocity = []
     for proper_name, _bounds in GAP_FILL_STARS:
         obj = _find_by_exact_name(catalog_objects, proper_name)[0]
-        if obj.velocity is not None:
-            named_with_velocity.append(proper_name)
-    assert not named_with_velocity, (
-        f"gap-fill stars must not carry velocity in this Story: {named_with_velocity}"
+        if obj.velocity is None:
+            named_without_velocity.append(proper_name)
+    assert not named_without_velocity, (
+        f"gap-fill stars must carry a derived velocity as of Story #296: "
+        f"{named_without_velocity}"
     )
+
+    # Story #296's own implausible-speed scan (issue #234/#286's
+    # established pitfall: a bad SIMBAD rvz_radvel cross-match producing a
+    # nonsensical total space velocity) - re-asserted here as a permanent
+    # regression guard, not just a one-time PR-documented scan, since a
+    # future re-derivation of this exact batch could reintroduce a bad
+    # value the `mesVelocities` fallback (`data_sources/simbad.py`) is
+    # meant to catch.
+    implausible = [
+        (obj.id, (obj.velocity.vx_kms**2 + obj.velocity.vy_kms**2 + obj.velocity.vz_kms**2) ** 0.5)
+        for obj in tagged
+        if (obj.velocity.vx_kms**2 + obj.velocity.vy_kms**2 + obj.velocity.vz_kms**2) ** 0.5 > 500.0
+    ]
+    assert not implausible, f"implausible (>500 km/s) derived speed: {implausible}"

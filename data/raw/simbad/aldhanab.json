@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Aldhanab",
-  "retrieved_utc": "2026-09-02T17:20:51+00:00",
+  "retrieved_utc": "2026-09-02T18:05:23+00:00",
   "record_id": "* gam Gru",
   "raw": {
     "main_id": "* gam Gru",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.009999990463257,
-    "plx_err": 0.5145000219345093,
     "otype": "PM*",
-    "plx_value": 17.808,
     "pmra": 110.445,
-    "pmdec": -17.161,
     "rvz_radvel": 2.93,
+    "plx_value": 17.808,
     "sp_type": "B8IV-Vs",
-    "rvz_bibcode": "2022yCat.1355....0G",
+    "plx_err": 0.5145000219345093,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2022yCat.1355....0G",
+    "pmdec": -17.161,
     "ids": "TIC 197641601|Gaia DR3 6586825380598949632|PLX 5287|* gam Gru|CD-37 14536|CPC 18 11240|CPD-37  9119|FK5  822|GC 30640|GCRV 13749|GEN# +1.00207971|GSC 07494-01748|HD 207971|HIC 108085|HIP 108085|HR  8353|IRAS 21508-3736|JP11  3414|N30 4823|PMC 90-93   577|PPM 301949|ROT  3182|SAO 213374|SKY# 41726|SRS  30822|NAME Aldhanab|TD1 28542|TYC 7494-1748-1|UBV   18734|UBV M  25977|uvby98 100207971|2MASS J21535573-3721535|ALS 15811|PLX 5287.00|WEB 19485|Gaia DR2 6586825380598277248",
     "matched_id": "NAME Aldhanab"
   }

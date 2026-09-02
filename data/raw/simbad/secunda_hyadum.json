@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Secunda Hyadum",
-  "retrieved_utc": "2026-09-02T17:21:47+00:00",
+  "retrieved_utc": "2026-09-02T18:06:15+00:00",
   "record_id": "* del Tau",
   "raw": {
     "main_id": "* del Tau",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.759999990463257,
-    "plx_err": 0.22759999334812164,
     "otype": "SB*",
-    "plx_value": 20.3092,
     "pmra": 106.212,
-    "pmdec": -27.692,
     "rvz_radvel": 37.5875,
+    "plx_value": 20.3092,
     "sp_type": "G9.5IIICN0.5",
-    "rvz_bibcode": "2019MNRAS.483.5026L",
+    "plx_err": 0.22759999334812164,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2019MNRAS.483.5026L",
+    "pmdec": -27.692,
     "ids": "TIC 435926868|EPIC 200007766|HIP 20455|Gaia DR3 3314024566919613952|2MASS J04225609+1732331|Cl* Melotte   25    MMU      41|PLX  965|Cl* Melotte   25      S       2|Cl* Melotte   25     VA     256|SBC9 239|* del Tau|* del01 Tau|*  61 Tau|2E  1001|2E 0420.0+1726|AG+17  384|BD+17   712|CCDM J04229+1733A|CSI+17   712  1|CSV 102443|FK5  162|GC  5304|GCRV  2535|GEN# +5.20250041|GSC 01268-01267|HD  27697|HIC  20455|HR  1373|IDS 04172+1718 A|IRAS 04200+1725|IRC +20076|JP11  4819|N30  904|NSV  1582|PMC 90-93   116|PPM 119835|RAFGL 4340S|ROT  3851|SAO  93897|SBC7   176|SKY#  6743|SRS  30162|TD1  3094|TYC 1268-1267-1|UBV    4227|UBV M  41247|YZ  17  1151|uvby98 520250041|Cl Melotte   25    41|Cl Melotte   25   411|PLX  965.00|WDS J04230+1732Aa,Ab|1RXS J042255.4+173235|LP   17-712|UCAC4 538-008812|** CHR  262|NAME Secunda Hyadum|[RSP2011] 261|WEB  3912|Gaia DR2 3314024566918614528",
     "matched_id": "NAME Secunda Hyadum"
   }
