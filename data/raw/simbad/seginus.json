@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Seginus",
-  "retrieved_utc": "2026-09-02T17:20:53+00:00",
+  "retrieved_utc": "2026-09-02T18:05:25+00:00",
   "record_id": "* gam Boo",
   "raw": {
     "main_id": "* gam Boo",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.0199999809265137,
-    "plx_err": 0.2549999952316284,
     "otype": "dS*",
-    "plx_value": 37.9125,
     "pmra": -114.344,
-    "pmdec": 151.788,
     "rvz_radvel": -32.4,
+    "plx_value": 37.9125,
     "sp_type": "A7IV+(n)",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.2549999952316284,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": 151.788,
     "ids": "WISE J143204.89+381831.4|Gaia DR3 1487434040320076800|HIP 71075|* gam Boo|*  27 Boo|PLX 3294|LSPM J1432+3818|ASCC  497125|USNO-B1.0 1283-00265219|ADS  9300 A|AG+38 1345|BD+38  2565|CCDM J14321+3818A|CSI+38  2565  1|FK5  535|GC 19607|GCRV  8477|GEN# +1.00127762|HD 127762|HIC  71075|HR  5435|IDS 14280+3845 A|IRAS F14300+3831|IRAS 14300+3831|IRC +40258|JP11  2515|N30 3291|NLTT 37667|PMC 90-93   383|PPM  77976|RAFGL 4948S|ROT  2086|SAO  64203|SKY# 26467|TD1 17553|UBV M  20232|UBV   12720|V* gam Boo|[HFE83] 1034|2MASS J14320470+3818294|WDS J14321+3818A|TYC 3036-1151-1|Renson 36300|WDS J14321+3818Aa,Ab|** BLM    3|** BU  616A|NAME Seginus|TIC 67991192|WEB 12291|Gaia DR2 1487434040318624256",
     "matched_id": "NAME Seginus"
   }

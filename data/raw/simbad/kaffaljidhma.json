@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Kaffaljidhma",
-  "retrieved_utc": "2026-09-02T17:21:18+00:00",
+  "retrieved_utc": "2026-09-02T18:05:49+00:00",
   "record_id": "* gam Cet",
   "raw": {
     "main_id": "* gam Cet",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 3.4700000286102295,
-    "plx_err": 0.6299999952316284,
     "otype": "**",
-    "plx_value": 40.97,
     "pmra": -146.1,
-    "pmdec": -146.12,
     "rvz_radvel": -4.9,
+    "plx_value": 40.97,
     "sp_type": "A2Vn+F4V",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.6299999952316284,
     "pm_bibcode": "2007A&A...474..653V",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": -146.12,
     "ids": "TIC 318805118|IDS 02381+0249 AB|HIP 12706|PLX  554|2MASS J02431801+0314089|USNO-B1.0 0932-00043112|* gam Cet|*  86 Cet|1RXS J024319.0+031408|CNS5 683|BD+02   422|GC  3276|GCRV  1535|HD  16970|HGAM    169|HIC  12706|HR   804|JP11   690|N30  552|PPM 400042|RBS   349|ROT   369|SAO 110707|SKY#  4075|TD1  1618|UBV    2707|YPAC 302|YZ   3   759|RX J0243.3+0314|[ZEH2003] RX J0243.3+0314  1|WDS J02433+0314AB|** STF  299|AKARI-IRC-V1 J0243179+031408|IRAS 02407+0301|PMSC 02381+0248|CCDM J02433+0314AB|NAME Kaffaljidhma|uvby98 100016970|WEB  2583|GEN# +1.00016970",
     "matched_id": "NAME Kaffaljidhma"
   }

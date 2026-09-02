@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Minelauva",
-  "retrieved_utc": "2026-09-02T17:21:12+00:00",
+  "retrieved_utc": "2026-09-02T18:05:43+00:00",
   "record_id": "* del Vir",
   "raw": {
     "main_id": "* del Vir",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.380000114440918,
-    "plx_err": 0.25130000710487366,
     "otype": "RG*",
-    "plx_value": 17.4065,
     "pmra": -469.714,
-    "pmdec": -53.71,
     "rvz_radvel": -18.87,
+    "plx_value": 17.4065,
     "sp_type": "M3+III",
-    "rvz_bibcode": "2005A&A...430..165F",
+    "plx_err": 0.25130000710487366,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2005A&A...430..165F",
+    "pmdec": -53.71,
     "ids": "TIC 411188061|HIP 63090|Gaia DR3 3704342295607157120|PLX 2968|LSPM J1255+0323|TYC  294-1032-1|ASCC 1137980|USNO-B1.0 0933-00243269|*  43 Vir|* del Vir|AG+03 1660|BD+04  2669|BDS  6308 A|CCDM J12557+0323A|CSI+04  2669  1|Ci 20  749|DO  3300|FK5  484|GC 17543|GCRV  7728|GEN# +1.00112300|HD 112300|HIC  63090|HR  4910|IDS 12506+0357 A|IRAS 12530+0340|IRC +00226|JP11  2332|LTT 13714|N30 2979|NLTT 32308|NSV  6026|PMC 90-93   343|PPM 159316|RAFGL 1586|SAO 119674|SKY# 24027|TD1 16548|UBV   11663|UBV M  18831|Wolf  448|YZ   3  4608|[DS98] 183|2MASS J12553619+0323507|PLX 2968.00|Pul -3 1030240|WDS J12556+0324A|** BUP  146A|NAME Minelauva|WEB 11187|Gaia DR2 3704342295605242112",
     "matched_id": "NAME Minelauva"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Nihal",
-  "retrieved_utc": "2026-09-02T17:20:38+00:00",
+  "retrieved_utc": "2026-09-02T18:05:12+00:00",
   "record_id": "* bet Lep",
   "raw": {
     "main_id": "* bet Lep",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.8399999141693115,
-    "plx_err": 0.20469999313354492,
     "otype": "PM*",
-    "plx_value": 20.8697,
     "pmra": -5.748,
-    "pmdec": -83.65,
     "rvz_radvel": -14.2,
+    "plx_value": 20.8697,
     "sp_type": "G5II-IIIa:",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.20469999313354492,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": -83.65,
     "ids": "TIC 420963448|GEN# +1.00036079|CCDM J05283-2046A|** BU  320A|ADS  4066 A|IDS 05240-2050 A|WDS J05282-2046A|Gaia DR3 2968097043228517120|HIP 25606|2MASS J05281473-2045338|PLX 1246|* bet Lep|*   9 Lep|1E 0526.0-2048|2E 0526.0-2047|2E  1280|AAVSO 0524-20|BD-20  1096|CSI-20  1096  1|FK5  204|GC  6762|GCRV  3303|GSC 05928-01657|HD  36079|HIC  25606|HR  1829|IRAS 05261-2047|IRC -20071|JP11  1102|N30 1175|NSV  2008|PMC 90-93   147|PPM 248938|RAFGL  756|ROT   821|SAO 170457|SKY#  8740|SRS  30204|TD1  4701|TYC 5928-1657-1|UBV    5252|YZ 110  1774|1RXS J052814.7-204546|NAME Nihal|uvby98 100036079|WEB  4967|Gaia DR2 2968097043227107968",
     "matched_id": "NAME Nihal"
   }

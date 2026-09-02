@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Markab",
-  "retrieved_utc": "2026-09-02T17:20:04+00:00",
+  "retrieved_utc": "2026-09-02T18:04:26+00:00",
   "record_id": "* alf Peg",
   "raw": {
     "main_id": "* alf Peg",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.4800000190734863,
-    "plx_err": 0.1899999976158142,
     "otype": "PM*",
-    "plx_value": 24.46,
     "pmra": 60.4,
-    "pmdec": -41.3,
     "rvz_radvel": -2.7,
+    "plx_value": 24.46,
     "sp_type": "A0IV",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.1899999976158142,
     "pm_bibcode": "2007A&A...474..653V",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": -41.3,
     "ids": "TIC 217777441|Gaia DR3 2816504901198512768|PLX 5587|* alf Peg|*  54 Peg|AAVSO 2259+14B|AG+14 2576|BD+14  4926|FK5  871|GC 32149|GCRV 14477|GEN# +1.00218045|HD 218045|HGAM   1114|HIC 113963|HIP 113963|HR  8781|IRAS 23022+1456|IRC +10526|JP11  3581|N30 5074|NAME Markab|PMC 90-93   614|PPM 142158|ROT  3360|SAO 108378|SKY# 43805|SRS  30871|TD1 29586|UBV   19775|UBV M  26811|uvby98 100218045|2MASS J23044565+1512191|ALS 16176|PLX 5587.00|TYC 1711-2475-1|WEB 20238",
     "matched_id": "NAME Markab"
   }

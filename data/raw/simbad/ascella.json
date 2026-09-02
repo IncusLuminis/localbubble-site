@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Ascella",
-  "retrieved_utc": "2026-09-02T17:20:09+00:00",
+  "retrieved_utc": "2026-09-02T18:04:31+00:00",
   "record_id": "* zet Sgr",
   "raw": {
     "main_id": "* zet Sgr",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.5899999141693115,
-    "plx_err": 0.8700000047683716,
     "otype": "**",
-    "plx_value": 36.98,
     "pmra": 10.79,
-    "pmdec": 21.11,
     "rvz_radvel": 24.7,
+    "plx_value": 36.98,
     "sp_type": "A2.5Va",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.8700000047683716,
     "pm_bibcode": "2007A&A...474..653V",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": 21.11,
     "ids": "TIC 30504485|GEN# +1.00176687|WISE J190236.60-295247.5|UCAC4 301-255103|HIP 93506|Gaia DR3 6760703042771435136|PLX 4415|*  38 Sgr|* zet Sgr|ADS 11950 AB|CCDM J19026-2953AB|CD-30 16575|CPC 17 10347|CPD-30  5798|GC 26161|GCRV 11482|GSC 06885-02837|HD 176687|HIC  93506|HR  7194|IDS 18562-3001 AB|IRAS 18594-2957|IRC -30399|JP11  3063|N30 4220|PPM 269230|ROT  2706|SAO 187600|SKY# 35179|SRS  44082|TD1 23703|TYC 6885-2837-1|UBV   16147|UBV M  23406|2MASS J19023670-2952484|WDS J19026-2953AB|** HDO  150|NAME Ascella|uvby98 100176687|WEB 16231",
     "matched_id": "NAME Ascella"
   }

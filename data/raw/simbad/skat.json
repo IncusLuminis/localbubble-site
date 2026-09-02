@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Skat",
-  "retrieved_utc": "2026-09-02T17:21:06+00:00",
+  "retrieved_utc": "2026-09-02T18:05:37+00:00",
   "record_id": "* del Aqr",
   "raw": {
     "main_id": "* del Aqr",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.2799999713897705,
-    "plx_err": 1.1613999605178833,
     "otype": "PM*",
-    "plx_value": 23.1451,
     "pmra": -34.152,
-    "pmdec": -26.359,
     "rvz_radvel": 10.96,
+    "plx_value": 23.1451,
     "sp_type": "A3Vp",
-    "rvz_bibcode": "2022yCat.1355....0G",
+    "plx_err": 1.1613999605178833,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2022yCat.1355....0G",
+    "pmdec": -26.359,
     "ids": "TIC 111750833|Gaia DR3 2404579570000684544|PLX 5552|* del Aqr|*  76 Aqr|BD-16  6173|FK5  866|GC 31943|GCRV 14380|GEN# +1.00216627|GSC 06387-01382|HD 216627|HGAM   1092|HIC 113136|HIP 113136|HR  8709|JP11  3546|N30 5040|PMC 90-93   610|PPM 240921|ROT  3333|SAO 165375|SKY# 43516|TD1 29440|TYC 6387-1382-1|UBV   19625|UBV M  26696|YZ 106  8500|uvby98 100216627|2MASS J22543901-1549144|PLX 5552.00|RAVE J225439.0-154914|NAME Skat|WEB 20136|Gaia DR2 2404579569999907200",
     "matched_id": "NAME Skat"
   }

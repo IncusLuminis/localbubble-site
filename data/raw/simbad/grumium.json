@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Grumium",
-  "retrieved_utc": "2026-09-02T17:21:45+00:00",
+  "retrieved_utc": "2026-09-02T18:06:14+00:00",
   "record_id": "* ksi Dra",
   "raw": {
     "main_id": "* ksi Dra",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.75,
-    "plx_err": 0.11550000309944153,
     "otype": "PM*",
-    "plx_value": 29.0603,
     "pmra": 93.698,
-    "pmdec": 78.914,
     "rvz_radvel": -26.09,
+    "plx_value": 29.0603,
     "sp_type": "K2III",
-    "rvz_bibcode": "2020ApJS..248...19T",
+    "plx_err": 0.11550000309944153,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2020ApJS..248...19T",
+    "pmdec": 78.914,
     "ids": "** LDS 1457A|Gaia DR3 1421593566062037120|HIP 87585|PLX 4093|* ksi Dra|*  32 Dra|AG+56 1133|BD+56  2033|CCDM J17535+5653A|FK5  671|GC 24364|GCRV 10361|GEN# +1.00163588|GSC 03910-01710|HD 163588|HIC  87585|HR  6688|IDS 17519+5654 A|IRAS 17526+5652|IRC +60253|JP11  2902|N30 3981|PMC 90-93   477|PPM  36240|RAFGL 2026|ROT  2507|SAO  30631|SKY# 32410|TD1 21275|TYC 3910-1710-1|UBV M  22485|UBV   15249|USNO 874|YZ  56  9517|2MASS J17533173+5652216|PLX 4093.00|WDS J17535+5652A|NAME Grumium|TIC 232621005|WEB 14775|Gaia DR2 1421593566061407872",
     "matched_id": "NAME Grumium"
   }

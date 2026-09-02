@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Vindemiatrix",
-  "retrieved_utc": "2026-09-02T17:20:30+00:00",
+  "retrieved_utc": "2026-09-02T18:05:06+00:00",
   "record_id": "* eps Vir",
   "raw": {
     "main_id": "* eps Vir",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.7899999618530273,
-    "plx_err": 0.1906999945640564,
     "otype": "PM*",
-    "plx_value": 30.211,
     "pmra": -273.793,
-    "pmdec": 19.804,
     "rvz_radvel": -14.29,
+    "plx_value": 30.211,
     "sp_type": "G8III-IIIb",
-    "rvz_bibcode": "2015A&A...574A..50J",
+    "plx_err": 0.1906999945640564,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2015A&A...574A..50J",
+    "pmdec": 19.804,
     "ids": "GES J13021035+1057332|TIC 422290758|RAVE J130210.6+105733|GALAH 140209004701151|Gaia DR3 3736865265441207424|HIP 63608|PLX 2987|LSPM J1302+1057|TYC  886-1326-1|ASCC  954943|USNO-B1.0 1009-00211825|* eps Vir|*  47 Vir|2E  2950|AG+11 1470|BD+11  2529|CCDM J13022+1057A|CSI+11  2529  1|FK5  488|GC 17687|GCRV  7772|GEN# +1.00113226|HD 113226|HIC  63608|HR  4932|IDS 12572+1130 A|IRAS 12596+1113|IRC +10261|JP11  2348|LTT 13759|N30 2999|NAME Vindemiatrix|NLTT 32663|NSV  6064|PMC 90-93   346|PPM 129529|RAFGL 1593|ROT  1924|SAO 100384|SKY# 24184|SRS  30488|TD1 16611|UBV M  18952|UBV   11767|2MASS J13021059+1057329|PLX 2987.00|1RXS J130210.9+105724|2E 1259.6+1114|RX J1302.1+1057|[ZEH2003] RX J1302.1+1057  1|WDS J13022+1058A|WEB 11257|Gaia DR2 3736865265439463424",
     "matched_id": "NAME Vindemiatrix"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Algedi",
-  "retrieved_utc": "2026-09-02T17:21:28+00:00",
+  "retrieved_utc": "2026-09-02T18:05:59+00:00",
   "record_id": "* alf02 Cap",
   "raw": {
     "main_id": "* alf02 Cap",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.5799999237060547,
-    "plx_err": 0.16509999334812164,
     "otype": "PM*",
-    "plx_value": 29.914,
     "pmra": 61.212,
-    "pmdec": 2.412,
     "rvz_radvel": 0.7,
+    "plx_value": 29.914,
     "sp_type": "G9III",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.16509999334812164,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": 2.412,
     "ids": "TIC 114532819|Gaia DR3 6880093650314169984|PLX 4829|*   6 Cap|* alf02 Cap|BD-12  5685|CSI-12  5685  1|FK5  761|GC 28200|GCRV 12666|GSC 05749-02530|HD 192947|HIC 100064|HIP 100064|HR  7754|IRAS 20152-1242|IRC -10535|JP11  3210|N30 4485|PMC 90-93   538|PPM 237217|ROT  2952|SACS 444|SAO 163427|SKY# 38302|NAME Algedi|CCDM J20181-1233A|GEN# +1.00192947|IDS 20125-1251 A|WDS J20181-1233A|ADS 13645 A|uvby98 100192947|TD1 26419|TYC 5749-2530-1|UBV   17558|UBV M  24690|YZC 11  7152|PLX 4829.00|1RXS J201803.2-123241|2MASS J20180324-1232418|CSI-12  5685  2|WEB 18016|Gaia DR2 6880093650312745984|* alf Cap|** STF 4051A|** HJ  608A",
     "matched_id": "NAME Algedi"
   }

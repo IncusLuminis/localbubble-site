@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Alpheratz",
-  "retrieved_utc": "2026-09-02T17:19:57+00:00",
+  "retrieved_utc": "2026-09-02T18:04:18+00:00",
   "record_id": "* alf And",
   "raw": {
     "main_id": "* alf And",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.059999942779541,
-    "plx_err": 0.3499999940395355,
     "otype": "a2*",
-    "plx_value": 33.62,
     "pmra": 137.46,
-    "pmdec": -163.44,
     "rvz_radvel": -10.1,
+    "plx_value": 33.62,
     "sp_type": "B8IV-VHgMn",
-    "rvz_bibcode": "2004A&A...424..727P",
+    "plx_err": 0.3499999940395355,
     "pm_bibcode": "2007A&A...474..653V",
+    "rvz_bibcode": "2004A&A...424..727P",
+    "pmdec": -163.44,
     "ids": "TIC 427733653|HIP 677|2MASS J00082326+2905253|LSPM J0008+2905|ASCC  647497|USNO-B1.0 1190-00002295|PLX   12|SBC9 4|* alf And|* del Peg|*  21 And|ADS    94 A|AG+28   11|BD+28     4|CCDM J00083+2905A|CSI+28     4  1|EUVE J0008+29.0|FK5    1|GC   127|GCRV    62|GEN# +1.00000358|HD    358|HGAM      2|HIC    677|HR    15|IDS 00032+2832 A|TIC 471011200|IRC +30004|JP11   345|LTT 10039|N30   16|NAME Alpheratz|NAME Sirrah|NLTT   346|PMC 90-93     1|PPM  89441|ROT    58|SAO  73765|SBC7     4|SKY#   244|SRS  30001|TD1    31|UBV M   7157|UBV      52|V* alf And|YPAC   1|[HFE83]    4|ALS 16723|WDS J00084+2905Aa,Ab|TYC 1735-3180-1|GSC 01735-03180|UCAC3 239-808|Renson 50|AKARI-IRC-V1 J0008233+290524|IRAS 00057+2848|** MKT   11|WDS J00084+2905A|** H  532A|** JNN    1A|uvby98 100000358|WEB   113",
     "matched_id": "NAME Alpheratz"
   }

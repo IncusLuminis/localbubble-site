@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Hadir",
-  "retrieved_utc": "2026-09-02T17:21:04+00:00",
+  "retrieved_utc": "2026-09-02T18:05:36+00:00",
   "record_id": "* sig Pup",
   "raw": {
     "main_id": "* sig Pup",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.25,
-    "plx_err": 0.5613999962806702,
     "otype": "SB*",
-    "plx_value": 17.0234,
     "pmra": -61.628,
-    "pmdec": 189.627,
     "rvz_radvel": 87.3,
+    "plx_value": 17.0234,
     "sp_type": "K5III",
-    "rvz_bibcode": "2007AN....328..889K",
+    "plx_err": 0.5613999962806702,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2007AN....328..889K",
+    "pmdec": 189.627,
     "ids": "TIC 60376707|Gaia DR3 5512070906394195968|HIP 36377|PLX 1778|SBC9 458|* sig Pup|CCDM J07292-4318A|CD-43  3260|CPC  0  4565|CPD-43  1499|CSI-43  3260 21|FK5 1194|GC 10040|GCRV  5001|GEN# +1.00059717A|GSC 07655-02687|HD  59717|HIC  36377|HR  2878|IDS 07261-4306 A|IRAS 07276-4311|JP11  1561|LTT  2861|N30 1682|NLTT 17967|PPM 311853|SACS 164|SAO 218755|SBC7   310|SKY# 13683|SRS  31194|TD1 10317|UBV    7258|UBV M  13346|V* sig Pup|uvby98 100059717 A|WDS J07292-4318A|TYC 7655-2687-1|PMSC 07261-4306A|PMSC 07261-4306Aab|NAME Hadir|** DUN   51A|2MASS J07291384-4318054|WEB  7241|Gaia DR2 5512070906388269568",
     "matched_id": "NAME Hadir"
   }

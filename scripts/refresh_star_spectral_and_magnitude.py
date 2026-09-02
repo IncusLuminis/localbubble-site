@@ -74,10 +74,20 @@ DEFAULT_FAILURES_OUTPUT = CACHE_DIR / "refresh_failures.json"
 
 def build_id_to_query(cache_dir: Path) -> dict[str, str]:
     """Recover {catalog id -> original SIMBAD query string} from every
-    cached response under `cache_dir` (see module docstring)."""
+    cached response under `cache_dir` (see module docstring).
+
+    `cache_dir` also holds non-cache-record `.json` artifacts written by
+    prior scripts (e.g. `backfill_bubble_velocity_failures.json`, Story
+    #286's own `--failures-output` default, checked in as an empty `[]`) -
+    those are lists, not `{query, raw, ...}` cache-record dicts, and are
+    skipped here rather than crashing this glob (discovered by Story #296
+    while re-running this exact helper).
+    """
     id_to_query: dict[str, str] = {}
     for path in sorted(cache_dir.glob("*.json")):
         data = json.loads(path.read_text())
+        if not isinstance(data, dict):
+            continue
         raw = data.get("raw", {})
         record_id = raw.get("main_id") or data.get("query")
         expected_id = slugify(str(record_id))

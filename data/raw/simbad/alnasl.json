@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Alnasl",
-  "retrieved_utc": "2026-09-02T17:20:49+00:00",
+  "retrieved_utc": "2026-09-02T18:05:22+00:00",
   "record_id": "* gam02 Sgr",
   "raw": {
     "main_id": "* gam02 Sgr",
@@ -13,15 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.990000009536743,
-    "plx_err": 0.7753999829292297,
     "otype": "PM*",
-    "plx_value": 32.2697,
     "pmra": -48.839,
-    "pmdec": -204.86,
     "rvz_radvel": 22.0,
+    "plx_value": 32.2697,
     "sp_type": "K0+III",
-    "rvz_bibcode": "2006AstL...32..759G",
+    "plx_err": 0.7753999829292297,
     "pm_bibcode": "2020yCat.1350....0G",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pmdec": -204.86,
     "ids": "TIC 194920626|Gaia DR3 4049975081571729920|HIP 88635|PLX 4131|* gam02 Sgr|*  10 Sgr|* gam Sgr|CD-30 15215|CPC 17  9681|CPD-30  5241|FK5  679|GC 24632|GCRV 10526|GEN# +1.00165135|GSC 07391-02710|HD 165135|HIC  88635|HR  6746|IRAS 18025-3025|IRC -30353|JP11  2922|LTT  7181|N30 4013|NLTT 45887|NSV 10173|PMC 90-93   483|PPM 297231|RAFGL 6934S|SACS 395|SAO 209696|SKY# 32860|SRS  30679|TD1 21552|TYC 7391-2710-1|UBV   15364|UBV M  22594|2MASS J18054848-3025265|PLX 4131.00|NAME Alnasl|WEB 15012|Gaia DR2 4049975081502371328",
     "matched_id": "NAME Alnasl"
   }

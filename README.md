@@ -648,3 +648,97 @@ Story #230.
 Frontend widening (animated-population selection + sphere-gating from the
 RECONS sphere to the full Local Bubble) is explicitly out of scope for
 this Story - Story #287's job.
+
+## Velocity for the 77 newly-acquired Local Bubble stars (Story #296)
+
+Epic #294's Story 2 (of 2). Story #295 (merged) acquired 77 new named
+bright stars (V<4.0, 11-60pc, genuinely `NAME `-prefixed) into the catalog
+but deliberately stripped `velocity` from every one of them - a
+scope-separation fix from that Story's own review (PR #297). This Story
+derives and populates `velocity` for that exact batch.
+
+Target list re-derived from the CURRENT catalog by the `group.secondary`
+provenance tag Story #295 wrote (`local-bubble-bright-named-gap-fill`),
+per this Story's own acceptance criteria - not trusted as "77" without
+checking. Confirmed: **exactly 77** records carry the tag, none had
+`velocity` yet. (As a cross-check, the radius+missing-velocity filter
+`backfill_bubble_velocity.py` already uses independently agrees: 77
+records in the full ~60pc Local Bubble currently lack `velocity`, the
+same 77.)
+
+New script `scripts/derive_bubble_gap_fill_velocity.py` reuses Story
+#230/#286's exact pipeline (`SimbadResolver`, `coordinates.
+galactic_velocity_kms`, `schema.Velocity`) unchanged, scoped by the
+provenance tag rather than radius - see the script's own docstring for
+why the tag is the correct, future-proof selector here. Every one of the
+77 already had a cache file under `data/raw/simbad/` from Story #295's
+own acquisition (position/spectral-type resolution goes through the same
+`SimbadResolver`), so no manual id list was needed.
+
+**Bug found and fixed along the way**: `refresh_star_spectral_and_
+magnitude.build_id_to_query` (reused unchanged by every velocity script
+since Story #286) crashed on `data/raw/simbad/
+backfill_bubble_velocity_failures.json`, a non-cache-record `[]` artifact
+checked in by Story #286's own `--failures-output` default - the helper's
+`cache_dir.glob("*.json")` loop assumed every file was a `{query, raw,
+...}` cache-record dict. Fixed with a one-line `isinstance(data, dict)`
+guard before the crash could block this Story (or any future one reusing
+the same helper).
+
+Result against live SIMBAD: **77/77 resolved, 0 failures, 77/77 (100%)
+got a full 3D vector** (`radial_velocity_known: true`) - matching the
+Epic's own bulk pre-acquisition SIMBAD check (100% pmra/pmdec/rvz_radvel
+coverage, no drop-off across magnitude bands). Zero tangential-only,
+zero unresolvable.
+
+Implausible-velocity scan (issue #234/#286's `|speed| > 500 km/s`
+pitfall): the fastest of the 77 is Delta Virginis (`del_vir`) at
+**130.1 km/s** - a real, unremarkable disk-star speed, nowhere near the
+threshold. No star triggered `_query_mes_velocities`'s `mesVelocities`
+fallback. This scan is now also a permanent `pytest` regression guard
+(`test_gap_fill_stars_carry_velocity`, `tests/
+test_local_bubble_bright_star_gap_fill.py`), not just a one-time
+PR-documented check.
+
+Sanity gate (spot-checked against literature, same practice #230/#286
+used):
+
+- **Alpheratz** (`alf_and`) derives `rvz_radvel=-10.1` km/s (SIMBAD) ->
+  total space velocity **31.8 km/s**. Independent literature figure: an
+  RV of **-10.6 ± 0.3 km/s** - matches to within 0.5 km/s, well inside
+  typical measurement precision.
+- **Menkent** (`tet_cen`) derives to **62.8 km/s** total
+  (`vt≈62.8` km/s tangential, `rv=1.3` km/s radial - almost entirely
+  transverse motion). Independent literature: described as moving "across
+  our line of sight at **65 km/s**, twice the normal value" with radial
+  velocity "+1.3 km/s" - both the magnitude (62.8 vs ~65 km/s) and the
+  radial velocity (exact match) agree, and the "twice normal, high proper
+  motion" characterization independently confirms this star's real speed
+  is genuinely unusual (not a data-quality artifact).
+- **Alioth** (`eps_uma`) derives `rvz_radvel=-12.7` km/s (SIMBAD) -> total
+  space velocity **18.5 km/s**. One independent literature source cites
+  RV **-9.3 km/s** - same sign, same order of magnitude, but a ~3 km/s
+  disagreement; consistent with #286's own established precedent
+  (Achernar) that RV measurements from different epochs/methods commonly
+  disagree by a few km/s for bright, well-studied stars without that
+  disagreement being a data-quality issue - well short of the >500 km/s
+  implausibility threshold either way.
+
+`catalog.parquet`/`catalog.csv` rebuilt and `scene.json` re-exported the
+same way as Story #230/#286 (`galactic-structures build-catalog` +
+`galactic-structures export-scene --no-radius-filter --output
+web/public/data/scene.json`), from a clean venv matching the test-runtime
+pyarrow version (25.0.1, standing lesson from PR #183). `pytest` (322
+passed, 4 skipped) and the frontend's own suite (622/622 passing, `tsc
+--noEmit` clean) both green.
+
+**Live browser verification** (no frontend code change): started a fresh
+dev server on a dedicated port/tab, clicked "Fit to Local Bubble" (auto-
+activates Vectors + Time Controls via Story #290's persistent override),
+searched for and selected Menkent - one of the 77 newly-velocity'd stars
+- and confirmed its `62.8 km/s` vector label rendering exactly as
+derived. Pressing play on the motion player visibly moved Menkent away
+from the Sun with a motion trail after +57,054 simulated years. Worked
+automatically via Epic #285's existing `starsWithVelocityInLocalBubble`
+population selection, exactly as expected - zero frontend code changes
+were needed.
