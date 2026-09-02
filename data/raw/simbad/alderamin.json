@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Alderamin",
-  "retrieved_utc": "2026-08-24T04:19:42+00:00",
+  "retrieved_utc": "2026-09-02T07:05:50+00:00",
   "record_id": "* alf Cep",
   "raw": {
     "main_id": "* alf Cep",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.4600000381469727,
-    "sp_type": "A8Vn",
     "otype": "PM*",
+    "pmdec": 49.09,
+    "pmra": 150.55,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 66.5,
+    "sp_type": "A8Vn",
+    "rvz_radvel": -15.8,
+    "rvz_bibcode": "2006AstL...32..759G",
     "plx_err": 0.10999999940395355,
     "ids": "TIC 417604820|GJ 826|Gaia DR3 2193192137376175488|CNS5 5253|*   5 Cep|PLX 5139|LSPM J2118+6235|ASCC  144910|2MASS J21183475+6235081|* alf Cep|AAVSO 2116+62|ADS 14858 A|AG+62 1226|BD+61  2111|CCDM J21186+6236A|CEL   5294|CSI+61  2111  1|FK5  803|GC 29848|GCRV 13408|HD 203280|HIC 105199|HIP 105199|HR  8162|IDS 21162+6210 A|IRC +60310|JP11  3335|N30 4712|NAME Alderamin|NSV 13660|PMC 90-93   563|PPM  22755|ROT  3108|SAO  19302|SKY# 40575|TD1 27973|UBV   18421|UBV M  25623|[HFE83] 1431|USNO-B1.0 1525-00356034|PLX 5139.00|WDS J21186+6235A|AKARI-IRC-V1 J2118349+623508|IRAS 21174+6222|uvby98 100203280|TYC 4252-1870-1|WEB 19106|1RXS J211837.1+623513|GEN# +1.00203280|** BU 1502A",
     "matched_id": "NAME Alderamin"

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Castor",
-  "retrieved_utc": "2026-08-24T04:19:32+00:00",
+  "retrieved_utc": "2026-09-02T07:05:42+00:00",
   "record_id": "* alf Gem",
   "raw": {
     "main_id": "* alf Gem",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.5800000429153442,
-    "sp_type": "A1V+A2Vm",
     "otype": "**",
+    "pmdec": -145.19,
+    "pmra": -191.45,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 64.12,
+    "sp_type": "A1V+A2Vm",
+    "rvz_radvel": -11.23,
+    "rvz_bibcode": "2023ApJS..266...11B",
     "plx_err": 3.75,
     "ids": "TIC 239187687|GJ 278.0|HIP 36850|WDS J07346+3153AB|NLTT 18087|* alf Gem|*  66 Gem|ADS  6175 AB|AG+31  789|BD+32  1581|CCDM J07346+3153AB|CSI+32  1581  1|FK5  287|CNS5 1879|GC 10120|HIC  36850|IRAS 07314+3159|IRC +30188|LTT 12038|NAME Castor|NAME Castor AB|PMC 90-93   208|PPM  72938|RAFGL 1144|SAO  60198|SRS  30287|TD1 10405|UBV    7277|[HFE83]  521|2MASS J07343598+3153184|** STF 1110AB|2XMM J073435.6+315318|PLX 1785|PLX 1785.00|GEN# +1.00060179",
     "matched_id": "NAME Castor"

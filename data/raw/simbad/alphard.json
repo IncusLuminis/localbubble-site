@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Alphard",
-  "retrieved_utc": "2026-08-24T04:20:04+00:00",
+  "retrieved_utc": "2026-09-02T07:06:12+00:00",
   "record_id": "* alf Hya",
   "raw": {
     "main_id": "* alf Hya",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.9700000286102295,
-    "sp_type": "K3IIIa",
     "otype": "*",
+    "pmdec": 34.37,
+    "pmra": -15.23,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 18.09,
+    "sp_type": "K3IIIa",
+    "rvz_radvel": -4.561,
+    "rvz_bibcode": "2018A&A...616A...7S",
     "plx_err": 0.18000000715255737,
     "ids": "TIC 46799297|HIP 46390|Gaia DR2 5741512800984781824|PLX 2247|* alf Hya|*  30 Hya|BD-08  2680|CCDM J09277-0841A|CSI-08  2680  1|CSV 101049|FK5  354|GC 13044|GCRV  6136|GEN# +1.00081797|GSC 05460-01592|HD  81797|HIC  46390|HR  3748|IDS 09227-0814 A|IRAS 09251-0826|IRC -10217|JP11  1813|N30 2249|NAME Alphard|NSV  4496|PMC 90-93   253|PPM 192393|RAFGL 1353|ROT  1471|SACS 209|SAO 136871|SKY# 18272|SV* SVS    75|SV* P   621|TD1 13937|TYC 5460-1592-1|UBV    9023|UBV M  15411|YZ  98  3683|[HFE83]  657|[L91b] 151|2MASS J09273524-0839308|PLX 2247.00|WDS J09276-0840A|WEB  8768",
     "matched_id": "NAME Alphard"

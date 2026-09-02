@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Peacock",
-  "retrieved_utc": "2026-08-24T04:20:05+00:00",
+  "retrieved_utc": "2026-09-02T07:06:14+00:00",
   "record_id": "* alf Pav",
   "raw": {
     "main_id": "* alf Pav",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.9179999828338623,
-    "sp_type": "B2IV",
     "otype": "SB*",
+    "pmdec": -86.02,
+    "pmra": 6.9,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 18.24,
+    "sp_type": "B2IV",
+    "rvz_radvel": 2.0,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "plx_err": 0.5199999809265137,
     "ids": "TIC 219974785|SBC9 1234|* alf Pav|CCDM J20257-5644A|CPC 20  6489|CPD-57  9674|CSI-57  9674 41|FK5  764|GC 28374|GCRV 12742|GEN# +1.00193924A|GSC 08785-01898|HD 193924|HIC 100751|HIP 100751|HR  7790|IDS 20178-5703 A|JP11  3235|N30 4510|NAME Peacock|PPM 348537|ROT  2969|SACS 447|SAO 246574|SBC7   810|SKY# 38611|TD1 26602|TYC 8785-1898-1|UBV   17659|UBV M  24775|uvby98 100193924 A|2MASS J20253886-5644062|ALS 16177|WDS J20256-5644A|AKARI-IRC-V1 J2025388-564406|IRAS 20217-5653|WEB 18206",
     "matched_id": "NAME Peacock"

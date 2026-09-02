@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Alcor",
-  "retrieved_utc": "2026-08-24T04:19:39+00:00",
+  "retrieved_utc": "2026-09-02T07:05:48+00:00",
   "record_id": "* g UMa",
   "raw": {
     "main_id": "* g UMa",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 4.010000228881836,
-    "sp_type": "A5V+M3-4V",
     "otype": "**",
+    "pmdec": -16.04,
+    "pmra": 120.21,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 39.91,
+    "sp_type": "A5V+M3-4V",
+    "rvz_radvel": -8.9,
+    "rvz_bibcode": "1979IAUS...30...57E",
     "plx_err": 0.12999999523162842,
     "ids": "Gaia DR3 1565090003967879424|GJ 3785|HIP 65477|CNS5 3306|PLX 3066|*  80 UMa|* g UMa|AG+55  887|BD+55  1603|CCDM J13240+5456D|CEL   4258|CSV 101383|GC 18155|GCRV  7966|GEN# +1.00116842|GSC 03850-01384|HD 116842|HGAM    624|HIC  65477|HR  5062|IRAS 13232+5514|IRAS F13232+5514|JP11  2393|NSV  6238|PPM  34021|ROT  1965|SAO  28751|SKY# 24753|SV* ZI  1001|TD1 16842|TYC 3850-1384-1|UBV   12110|UBV M  19376|uvby98 100116842|PLX 3066.00|WDS J13239+5456Ca,Cb|2MASS J13251353+5459165|NAME Alcor|** PSF    1|** SHY  248C|2RXP J132513.9+545914|1RXS J132513.8+545920|WEB 11557|Gaia DR2 1565090003969283968|TIC 159191044",
     "matched_id": "NAME Alcor"

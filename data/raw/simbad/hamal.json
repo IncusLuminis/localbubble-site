@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Hamal",
-  "retrieved_utc": "2026-08-24T04:19:48+00:00",
+  "retrieved_utc": "2026-09-02T07:05:57+00:00",
   "record_id": "* alf Ari",
   "raw": {
     "main_id": "* alf Ari",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.009999990463257,
-    "sp_type": "K2-IIIbCa-1",
     "otype": "PM*",
+    "pmdec": -148.08,
+    "pmra": 188.55,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 49.56,
+    "sp_type": "K2-IIIbCa-1",
+    "rvz_radvel": -14.412,
+    "rvz_bibcode": "2018A&A...616A...7S",
     "plx_err": 0.25,
     "ids": "TIC 306349516|GJ 84.3|GJ 9072|HIP 9884|2MASS J02071038+2327447|PLX  436|LSPM J0207+2327|ASCC  744576|USNO-B1.0 1134-00030670|*  13 Ari|* alf Ari|AG+23  175|CNS5 534|BD+22   306|CSV 100163|FK5   74|GC  2538|GCRV  1160|GEN# +1.00012929|HD  12929|HIC   9884|HR   617|IRAS 02043+2313|IRC +20038|JP11   587|LTT 10711|N30  431|NAME Hamal|NLTT  7032|NSV   725|PMC 90-93    52|PPM  91373|RAFGL 5063|ROT   295|SAO  75151|SKY#  3115|SRS  30074|SV* ZI   111|TD1  1227|UBV    2137|UBV M   8692|USNO 800|[B10]   447|uvby98 100012929|PLX  436.00|TYC 1758-2416-1|GSC 01758-02416|WEB  2075",
     "matched_id": "NAME Hamal"

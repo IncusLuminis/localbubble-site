@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Rasalhague",
-  "retrieved_utc": "2026-08-24T04:19:44+00:00",
+  "retrieved_utc": "2026-09-02T07:05:53+00:00",
   "record_id": "* alf Oph",
   "raw": {
     "main_id": "* alf Oph",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.069999933242798,
-    "sp_type": "A5IVnn",
     "otype": "**",
+    "pmdec": -221.57,
+    "pmra": 108.07,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 67.13,
+    "sp_type": "A5IVnn",
+    "rvz_radvel": 11.7,
+    "rvz_bibcode": "2006AstL...32..759G",
     "plx_err": 1.059999942779541,
     "ids": "TIC 289643770|WISE J173456.17+123330.2|GJ 681|HIP 86032|Gaia DR3 4493746564376875520|PLX 4000|LSPM J1734+1233|ASCC  965558|USNO-B1.0 1025-00347133|* alf Oph|*  55 Oph|2E  3921|AG+12 1827|BD+12  3252|CSV 101982|CSV 101662|FK5  656|GAT 1321|GC 23837|GCRV 10159|GEN# +1.00159561|HD 159561|HIC  86032|HR  6556|CNS5 4331|TIC 471011992|IRAS 17326+1235|IRC +10331|JP11  2871|LTT 15218|N30 3915|NAME Rasalhague|NLTT 45084|NSV  9189|PMC 90-93   465|PPM 133563|ROT  2468|SAO 102932|SKY# 31749|SRS  30656|TD1 20664|UBV   14978|UBV M  22280|[GS83]  83|uvby98 100159561|2MASS J17345606+1233361|PLX 4000.00|1E 1732.6+1200|1RXS J173456.3+123344|2E 1732.6+1235|TYC 1000-2508-1|* alf Oph A|WEB 14516|* alf Oph B|** MCY    4|WDS J17349+1234AB",
     "matched_id": "NAME Rasalhague"

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Zubenelgenubi",
-  "retrieved_utc": "2026-08-24T04:19:55+00:00",
+  "retrieved_utc": "2026-09-02T07:06:04+00:00",
   "record_id": "* alf02 Lib",
   "raw": {
     "main_id": "* alf02 Lib",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.75,
-    "sp_type": "kA2hA5mA4IV-V",
     "otype": "SB*",
+    "pmdec": -68.4,
+    "pmra": -105.68,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 43.03,
+    "sp_type": "kA2hA5mA4IV-V",
+    "rvz_radvel": -10.0,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "plx_err": 0.1899999976158142,
     "ids": "TIC 386886963|GJ 564.1|GJ 9499|HIP 72622|Gaia DR3 6309703507861332736|PLX 3351|*   9 Lib|* alf02 Lib|BD-15  3966|BDS  7018 A|CCDM J14508-1602A|FK5  548|GC 19975|GCRV  8623|GEN# +1.00130841|CNS5 3671|GSC 06155-01210|HD 130841|HIC  72622|HR  5531|IDS 14453-1537 A|IRAS 14481-1550|IRC -20271|JP11  2543|N30 3351|NSV  6827|PMC 90-93   389|PPM 229372|ROT  2118|SACS 320|SAO 158840|SKY# 26964|TYC 6155-1210-1|UBV   12928|UBV M  20396|uvby98 100130841|2MASS J14505274-1602302|PLX 3351.00|WDS J14509-1603A|Renson 37210|* alf Lib A|NAME Zubenelgenubi|WEB 12484|* alf Lib|** AOT   53A|** DSG   17|WDS J14509-1603Aa,Ab|** SHJ  186A|** CAB    1A|** ALP   30A",
     "matched_id": "NAME Zubenelgenubi"

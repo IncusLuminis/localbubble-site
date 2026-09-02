@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Alnair",
-  "retrieved_utc": "2026-08-24T04:19:57+00:00",
+  "retrieved_utc": "2026-09-02T07:06:05+00:00",
   "record_id": "* alf Gru",
   "raw": {
     "main_id": "* alf Gru",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.7100000381469727,
-    "sp_type": "B6V",
     "otype": "PM*",
+    "pmdec": -147.47,
+    "pmra": 126.69,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 32.29,
+    "sp_type": "B6V",
+    "rvz_radvel": 10.9,
+    "rvz_bibcode": "2006AstL...32..759G",
     "plx_err": 0.20999999344348907,
     "ids": "TIC 279316667|Gaia DR2 6560604777053880704|GJ 848.2|GJ 9767|Gaia DR3 6560604777055249536|PLX 5339|* alf Gru|CCDM J22082-4658A|CD-47 14063|CEL   5438|CPC  0 19748|CPD-47  9830|CSI-47 14063 21|CSV 103076|FK5  829|GC 30942|GCRV 13901|GEN# +1.00209952|HD 209952|HIC 109268|HIP 109268|HR  8425|IDS 22019-4727 A|IRAS 22051-4712|JP11  3451|LTT  8869|N30 4875|NAME Alnair|NLTT 52990|NSV 14040|PPM 327928|ROT  3215|SACS 483|SAO 230992|SKY# 42171|TD1 28783|UBV   18893|UBV M  26132|[CS62] E9  70|uvby98 100209952|2MASS J22081397-4657393|ALS 15069|PLX 5339.00|EXO 2205.1-4712|WDS J22082-4658A|TYC 8438-1959-1|WEB 19636",
     "matched_id": "NAME Alnair"

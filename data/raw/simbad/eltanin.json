@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Eltanin",
-  "retrieved_utc": "2026-08-24T04:19:43+00:00",
+  "retrieved_utc": "2026-09-02T07:05:52+00:00",
   "record_id": "* gam Dra",
   "raw": {
     "main_id": "* gam Dra",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.2300000190734863,
-    "sp_type": "K5III",
     "otype": "*",
+    "pmdec": -22.79,
+    "pmra": -8.48,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 21.14,
+    "sp_type": "K5III",
+    "rvz_radvel": -27.91,
+    "rvz_bibcode": "2005A&A...430..165F",
     "plx_err": 0.10000000149011612,
     "ids": "TIC 329269366|HIP 87833|PLX 4107|* gam Dra|*  33 Dra|ADS 10923 A|AG+51 1174|BD+51  2282|CCDM J17566+5129A|CSI+51  2282  1|FK5  676|GC 24432|GCRV 10394|GEN# +1.00164058|HD 164058|HIC  87833|HR  6705|IRAS 17554+5129|IRC +50274|JP11  2911|N30 3992|PMC 90-93   482|PPM  36267|RAFGL 2039|ROT  2516|SAO  30653|SKY# 32519|NAME Eltanin|TD1 21351|UBV   15288|UBV M  22521|USNO 875|uvby98 100164058|2MASS J17563637+5129197|PLX 4107.00|WDS J17566+5129A|TYC 3523-1684-1|WEB 14827",
     "matched_id": "NAME Eltanin"

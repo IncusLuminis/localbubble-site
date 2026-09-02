@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Elnath",
-  "retrieved_utc": "2026-08-24T04:20:00+00:00",
+  "retrieved_utc": "2026-09-02T07:06:08+00:00",
   "record_id": "* bet Tau",
   "raw": {
     "main_id": "* bet Tau",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.649999976158142,
-    "sp_type": "B7III",
     "otype": "PM*",
+    "pmdec": -173.58,
+    "pmra": 22.76,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 24.36,
+    "sp_type": "B7III",
+    "rvz_radvel": 9.2,
+    "rvz_bibcode": "1979IAUS...30...57E",
     "plx_err": 0.3400000035762787,
     "ids": "TIC 285473140|1RXS J052619.9+283621|2MASS J05261751+2836271|PLX 1231|LSPM J0526+2836|ASCC  661203|USNO-B1.0 1186-00083031|* bet Tau|* gam Aur|* 112 Tau|AG+28  516|BD+28   795|CCDM J05263+2836A|CEL    688|CSI+28   795  1|FK5  202|GC  6681|GCRV  3257|GEN# +1.00035497|GSC 01859-01470|HD  35497|HGAM    398|HIC  25428|HIP 25428|HR  1791|IDS 05200+2831 A|TIC 471011468|IRC +30112|JP11  1072|N30 1163|NAME Elnath|PMC 90-93   145|PPM  94361|ROT   794|SAO  77168|SKY#  8655|SRS  30202|TD1  4565|TYC 1859-1470-1|UBV    3965|UBV    5151|UBV M  10935|uvby98 100035497|ALS 15829|PLX 1231.00|WDS J05263+2836A|Renson 9110|AKARI-IRC-V1 J0526175+283625|IRAS 05231+2833|WEB  4928|*  23 Aur",
     "matched_id": "NAME Elnath"
