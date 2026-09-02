@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Sceptrum",
+  "retrieved_utc": "2026-09-02T17:21:54+00:00",
+  "record_id": "* l Eri",
+  "raw": {
+    "main_id": "* l Eri",
+    "ra": 69.54509840443708,
+    "dec": -14.30402789671278,
+    "coo_err_maj": 0.1168999969959259,
+    "coo_err_min": 0.09220000356435776,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.869999885559082,
+    "plx_err": 0.1680999994277954,
+    "otype": "**",
+    "plx_value": 28.8769,
+    "pmra": -79.531,
+    "pmdec": -153.335,
+    "rvz_radvel": 43.33,
+    "sp_type": "K2-IIIb",
+    "rvz_bibcode": "2008AJ....135..209M",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 117763145|Gaia DR3 3174163561130003840|GEN# +1.00029503|GJ 9160|HIP 21594|2MASS J04381081-1418142|PLX 1028|* l Eri|*  53 Eri|BD-14   933|CCDM J04382-1418AB|FK5  172|GC  5657|GCRV  2721|HD  29503|HIC  21594|HR  1481|IDS 04336-1430 AB|IRAS 04358-1424|IRC -10073|JP11   909|N30  979|PMC 90-93   122|PPM 214604|RAFGL  610|ROT   665|SACS 101|SAO 149781|SKY#  7200|TD1  3421|UBV    4477|YZ 104  1271|PLX 1028.00|WDS J04382-1418AB|** KUI   18|** KUI   18AB|NAME Sceptrum|WEB  4147|Gaia DR2 3174163561127715328",
+    "matched_id": "NAME Sceptrum"
+  }
+}

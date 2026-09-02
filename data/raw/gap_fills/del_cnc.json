@@ -1,0 +1,92 @@
+{
+  "id": "del_cnc",
+  "name": "* del Cnc",
+  "aliases": [
+    "TIC 184899026",
+    "Gaia DR3 660136821288588416",
+    "HIP 42911",
+    "PLX 2086",
+    "NAME Asellus Australis",
+    "ASCC  860185",
+    "LSPM J0844+1809",
+    "TYC 1396-2758-1",
+    "USNO-B1.0 1081-00199805",
+    "*  47 Cnc",
+    "ADS  6967 A",
+    "AG+18  894",
+    "BD+18  2027",
+    "CCDM J08447+1809A",
+    "CSI+18  2027  1",
+    "FK5  326",
+    "GC 12022",
+    "GCRV  5768",
+    "GEN# +1.00074442",
+    "HD  74442",
+    "HIC  42911",
+    "HR  3461",
+    "IDS 08390+1831 A",
+    "IRAS 08418+1820",
+    "IRC +20205",
+    "JP11  1709",
+    "LTT 12274",
+    "N30 2038",
+    "NLTT 20152",
+    "PMC 90-93   238",
+    "PPM 125682",
+    "RAFGL 1285",
+    "ROT  1374",
+    "SAO  98087",
+    "SKY# 16778",
+    "SRS  30326",
+    "TD1 12978",
+    "UBV    8443",
+    "UBV M  14644",
+    "YPAC  37",
+    "YZ  18  3502",
+    "2MASS J08444109+1809158",
+    "PLX 2086.00",
+    "WDS J08447+1809A",
+    "WDS J08447+1809Aa,Ab",
+    "** TOK    3",
+    "** HJ  457A",
+    "WEB  8290",
+    "Gaia DR2 660136821288967296"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 131.17124658768913,
+    "dec_deg": 18.154308069054167,
+    "galactic_l_deg": 208.02593426945455,
+    "galactic_b_deg": 32.898774811302275
+  },
+  "distance": {
+    "value_pc": 41.969018470565025,
+    "error_pc": 0.326387131056757
+  },
+  "cartesian": {
+    "x_pc": -31.106265355045537,
+    "y_pc": -16.557559506824024,
+    "z_pc": 22.795745002567916
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Cnc, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Cnc",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K0+IIIb",
+    "absolute_magnitude": 0.825355994794414,
+    "apparent_magnitude": 3.940000057220459
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:22:05+00:00; upstream record id: * del Cnc; otype: **. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

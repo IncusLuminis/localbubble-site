@@ -1,0 +1,89 @@
+{
+  "id": "tet_aur",
+  "name": "* tet Aur",
+  "aliases": [
+    "TIC 174671483",
+    "ADS  4566 A",
+    "GEN# +1.00040312",
+    "WDS J05597+3713A",
+    "uvby98 100040312",
+    "CCDM J05597+3713A",
+    "** STT  545A",
+    "HIP 28380",
+    "PLX 1377",
+    "*  37 Aur",
+    "AG+37  668",
+    "BD+37  1380",
+    "CSI+37  1380  1",
+    "CSI+37  1380  4",
+    "CSV 100704",
+    "GC  7557",
+    "GCRV  3735",
+    "HD  40312",
+    "HGAM    490",
+    "HIC  28380",
+    "HR  2095",
+    "IDS 05529+3712 A",
+    "IRC +40150",
+    "JP11  1295",
+    "PPM  71083",
+    "ROT   954",
+    "SAO  58636",
+    "SKY#  9958",
+    "SV* ZI   496",
+    "TD1  5708",
+    "UBV    6064",
+    "UBV M  11661",
+    "V* tet Aur",
+    "PLX 1377.00",
+    "TYC 2418-1573-1",
+    "Renson 10750",
+    "BD+37  1380A",
+    "1RXS J055943.0+371251",
+    "2MASS J05594324+3712452",
+    "CCDM J05597+3713AB",
+    "IRAS 05563+3712",
+    "AKARI-IRC-V1 J0559432+371245",
+    "NAME Mahasim",
+    "GCRV  3736",
+    "WEB  5547",
+    "WEB  5548"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 89.93029217610834,
+    "dec_deg": 37.21258462923103,
+    "galactic_l_deg": 174.33839060494273,
+    "galactic_b_deg": 6.729332514747639
+  },
+  "distance": {
+    "value_pc": 50.76142131979696,
+    "error_pc": 0.4122754938898744
+  },
+  "cartesian": {
+    "x_pc": -50.165801586521006,
+    "y_pc": 4.973266842169671,
+    "z_pc": 5.948181445140779
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * tet Aur, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* tet Aur",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A0VpSi",
+    "absolute_magnitude": -0.9076689836329539,
+    "apparent_magnitude": 2.619999885559082
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:11+00:00; upstream record id: * tet Aur; otype: a2*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

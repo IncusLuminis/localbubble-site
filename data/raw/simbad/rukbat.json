@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Rukbat",
+  "retrieved_utc": "2026-09-02T17:22:07+00:00",
+  "record_id": "* alf Sgr",
+  "raw": {
+    "main_id": "* alf Sgr",
+    "ra": 290.97156416063837,
+    "dec": -40.615937202693054,
+    "coo_err_maj": 0.2777000069618225,
+    "coo_err_min": 0.25270000100135803,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.943000078201294,
+    "plx_err": 0.289000004529953,
+    "otype": "PM*",
+    "plx_value": 18.1088,
+    "pmra": 31.79,
+    "pmdec": -120.087,
+    "rvz_radvel": -0.7,
+    "sp_type": "B8V",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 98423184|Gaia DR3 6713727061309245952|HIP 95347|* alf Sgr|CD-40 13245|CPC  0 18143|CPD-40  8955|FK5  728|GC 26737|GCRV 11828|GEN# +1.00181869|GSC 07935-02139|HD 181869|HIC  95347|HR  7348|N30 4293|NAME Rukbat|PPM 325060|ROT  2780|SAO 229659|SKY# 36082|TD1 24515|TYC 7935-2139-1|UBV   16392|UBV M  23709|[B10]  4936|uvby98 100181869|ALS 16856|RX J1923.8-4036|IRAS 19204-4042|IRAS F19204-4042|AKARI-IRC-V1 J1923531-403658|1RXS J192354.0-403653|2MASS J19235315-4036571|WEB 16665|Gaia DR2 6713727061308648704",
+    "matched_id": "NAME Rukbat"
+  }
+}

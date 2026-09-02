@@ -1,0 +1,91 @@
+{
+  "id": "rho_pup",
+  "name": "* rho Pup",
+  "aliases": [
+    "TIC 154360594",
+    "HIP 39757",
+    "Gaia DR3 5698015743046182272",
+    "PLX 1930",
+    "*  15 Pup",
+    "2E  1920",
+    "CNS5 2008",
+    "CCDM J08075-2418A",
+    "CD-23  6828",
+    "CPD-23  3368",
+    "CSI-23  6828 21",
+    "CSV 100920",
+    "FK5  308",
+    "GC 11034",
+    "GCRV  5394",
+    "GEN# +1.00067523",
+    "HD  67523",
+    "HIC  39757",
+    "HR  3185",
+    "IDS 08033-2401 A",
+    "IRAS 08054-2409",
+    "IRC -20157",
+    "JP11  1629",
+    "N30 1871",
+    "PMC 90-93   225",
+    "PPM 253887",
+    "ROT  1301",
+    "SACS 176",
+    "SAO 175217",
+    "SKY# 15322",
+    "SRS  30308",
+    "TD1 11823",
+    "UBV    7771",
+    "UBV M  14003",
+    "V* rho Pup",
+    "YZ 114  5971",
+    "2MASS J08073264-2418154",
+    "PLX 1930.00",
+    "2E 0805.4-2409",
+    "1RXS J080732.2-241749",
+    "WDS J08075-2418A",
+    "TYC 6555-3245-1",
+    "Renson 18660",
+    "NAME Tureis",
+    "** RST 5284A",
+    "uvby98 100067523",
+    "WEB  7758",
+    "Gaia DR2 5698015743040715264"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 121.88603676458334,
+    "dec_deg": -24.304324429444446,
+    "galactic_l_deg": 243.14833235367954,
+    "galactic_b_deg": 4.401890819996593
+  },
+  "distance": {
+    "value_pc": 19.455290769048187,
+    "error_pc": 0.09254528746428473
+  },
+  "cartesian": {
+    "x_pc": -8.76168828127799,
+    "y_pc": -17.306398183865547,
+    "z_pc": 1.4932311513702194
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * rho Pup, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* rho Pup",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "F5IIkF2IImF5II",
+    "absolute_magnitude": 1.3648113130973174,
+    "apparent_magnitude": 2.809999942779541
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:32+00:00; upstream record id: * rho Pup; otype: dS*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Kaus Australis",
+  "retrieved_utc": "2026-09-02T17:19:51+00:00",
+  "record_id": "* eps Sgr",
+  "raw": {
+    "main_id": "* eps Sgr",
+    "ra": 276.0429933505963,
+    "dec": -34.38461648586744,
+    "coo_err_maj": 1.9375306367874146,
+    "coo_err_min": 1.2329740524291992,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 1.809999942779541,
+    "plx_err": 0.23999999463558197,
+    "otype": "PM*",
+    "plx_value": 22.76,
+    "pmra": -39.42,
+    "pmdec": -124.2,
+    "rvz_radvel": -15.0,
+    "sp_type": "B9IVp_lB?",
+    "rvz_bibcode": "2007AN....328..889K",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 66389641|** GOL    2A|WDS J18242-3423A|WISE J182410.41-342310.0|UCAC4 279-185534|HIP 90185|PLX 4222|* eps Sgr|*  20 Sgr|2E  4062|CCDM J18242-3423A|CD-34 12784|CPC 17  9906|CSI-34 12784 21|FK5  689|GC 25100|GCRV 10865|GEN# +1.00169022|GSC 07401-03471|HD 169022|HIC  90185|HR  6879|IDS 18175-3427 A|JP11  2965|N30 4084|NAME Kaus Australis|PMC 90-93   491|PPM 297655|SAO 210091|SKY# 33590|SRS  30689|TYC 7401-3471-1|UBV M  22887|UBV   15626|[SC95] M 591|[SC96] GC 585|[SC96] Mis 1335|uvby98 100169022|ALS 15808|PLX 4222.00|2E 1820.8-3424|EUVE J1824-34.3|IRAS 18208-3424|** SEE  351A|1RXS J182410.8-342259|2MASS J18241032-3423046|WEB 15421",
+    "matched_id": "NAME Kaus Australis"
+  }
+}

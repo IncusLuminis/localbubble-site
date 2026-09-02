@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Sheratan",
+  "retrieved_utc": "2026-09-02T17:20:15+00:00",
+  "record_id": "* bet Ari",
+  "raw": {
+    "main_id": "* bet Ari",
+    "ra": 28.66004578884514,
+    "dec": 20.808031471916408,
+    "coo_err_maj": 6.237688064575195,
+    "coo_err_min": 4.132887363433838,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.6500000953674316,
+    "plx_err": 0.5799999833106995,
+    "otype": "SB*",
+    "plx_value": 55.6,
+    "pmra": 98.74,
+    "pmdec": -110.41,
+    "rvz_radvel": -3.1,
+    "sp_type": "kA4hA5mA5Va",
+    "rvz_bibcode": "2004A&A...424..727P",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 91356756|GJ 80|HIP 8903|2MASS J01543840+2048291|PLX  394|SBC9 98|* bet Ari|*   6 Ari|AG+20  171|CNS5 495|BD+20   306|CEL    180|CSV 100146|FK5   66|GC  2309|GCRV  1058|GEN# +1.00011636|HD  11636|HIC   8903|HR   553|IRAS 01518+2033|IRC +20031|JP11   551|N30  395|NSV   658|PMC 90-93    48|PPM  91184|ROT   269|SAO  75012|SBC7    67|SKY#  2798|SRS  30066|SV* ZI   101|TD1  1090|UBV    1907|UBV M   8501|YZ  20   543|uvby98 100011636|PLX  394.00|TYC 1212-1935-1|Renson 2970|NAME Sheratan|** MKT    3|WDS J01546+2049AB|CCDM J01546+2048AB|WEB  1872|Gaia DR2 97054342356001024|TIC 620249312",
+    "matched_id": "NAME Sheratan"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "id": "eps_oph",
+  "name": "* eps Oph",
+  "aliases": [
+    "TIC 362392898",
+    "WISEA J161819.34-044132.5",
+    "Gaia DR3 4356298849169862784",
+    "GJ 3949",
+    "HIP 79882",
+    "PLX 3696",
+    "*   2 Oph",
+    "BD-04  4086",
+    "CCDM J16183-0442A",
+    "CSI-04  4086  1",
+    "FK5  605",
+    "GC 21920",
+    "GCRV  9383",
+    "GEN# +1.00146791",
+    "GSC 05042-00999",
+    "HD 146791",
+    "HIC  79882",
+    "HR  6075",
+    "IDS 16130-0427 A",
+    "IRC +00282",
+    "JP11  2725",
+    "N30 3652",
+    "PMC 90-93   431",
+    "PPM 199508",
+    "ROT  2311",
+    "SAO 141086",
+    "SKY# 29417",
+    "TD1 19047",
+    "TYC 5042-999-1",
+    "UBV   13839",
+    "UBV M  21325",
+    "YZ  94  5629",
+    "[B10]  4147",
+    "PLX 3696.00",
+    "WDS J16183-0442A",
+    "2MASS J16181928-0441327",
+    "IRAS 16156-0434",
+    "AKARI-IRC-V1 J1618193-044132",
+    "WISE J161819.40-044131.7",
+    "IRAS F16156-0434",
+    "NAME Yed Posterior",
+    "WEB 13523",
+    "Gaia DR2 4356298849169523968"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 244.58037593556583,
+    "dec_deg": -4.692513152746668,
+    "galactic_l_deg": 8.565889604271137,
+    "galactic_b_deg": 30.809805512039542
+  },
+  "distance": {
+    "value_pc": 32.77227203607572,
+    "error_pc": 0.20170130219977206
+  },
+  "cartesian": {
+    "x_pc": 27.8332196681229,
+    "y_pc": 4.19243104538315,
+    "z_pc": 16.785625375370227
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * eps Oph, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Oph",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G9.5IIIbFe-0.5",
+    "absolute_magnitude": 0.6524672631037074,
+    "apparent_magnitude": 3.2300000190734863
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:03+00:00; upstream record id: * eps Oph; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

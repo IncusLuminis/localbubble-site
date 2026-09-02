@@ -1,0 +1,77 @@
+{
+  "id": "zet02_uma",
+  "name": "* zet02 UMa",
+  "aliases": [
+    "GJ 3784",
+    "Gaia DR3 1563590510627624064",
+    "HIP 65378B",
+    "CNS5 3301",
+    "* zet UMa B",
+    "*  79 UMa B",
+    "ADS  8891 B",
+    "BD+55  1598B",
+    "CCDM J13240+5456C",
+    "CSI+55  1598  2",
+    "CSV 101382",
+    "GC 18134",
+    "GCRV  7959",
+    "HD 116657",
+    "HR  5055",
+    "ROT  3563",
+    "SAO  28738",
+    "SBC7   486",
+    "SKY# 24723",
+    "UBV   12101",
+    "2MASS J13235629+5455183",
+    "WDS J13239+5456B",
+    "Renson 33660",
+    "TYC 3850-1386-1",
+    "WISE J132356.60+545515.1",
+    "SBC9 765",
+    "PMSC 13199+5527B",
+    "PMSC 13199+5527Bab",
+    "NAME Mizar B",
+    "uvby98 100116657",
+    "GEN# +1.00116657",
+    "WEB 11539",
+    "Gaia DR2 1563590510625852544",
+    "TIC 159190005"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 200.9846746374,
+    "dec_deg": 54.92180938212,
+    "galactic_l_deg": 113.10474460388396,
+    "galactic_b_deg": 61.581995265934296
+  },
+  "distance": {
+    "value_pc": 24.826031583677384,
+    "error_pc": 0.17565457339104346
+  },
+  "cartesian": {
+    "x_pc": -4.636254466580634,
+    "y_pc": 10.867052797256465,
+    "z_pc": 21.834471649584238
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * zet02 UMa, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* zet02 UMa",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "kA1h(eA)mA7IV-V",
+    "absolute_magnitude": 1.905463596621832,
+    "apparent_magnitude": 3.880000114440918
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:58+00:00; upstream record id: * zet02 UMa; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Deneb Algedi",
+  "retrieved_utc": "2026-09-02T17:20:36+00:00",
+  "record_id": "* del Cap",
+  "raw": {
+    "main_id": "* del Cap",
+    "ra": 326.76018433125,
+    "dec": -16.12728708527778,
+    "coo_err_maj": 0.17000000178813934,
+    "coo_err_min": 0.14000000059604645,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.8299999237060547,
+    "plx_err": 0.1899999976158142,
+    "otype": "SB*",
+    "plx_value": 84.27,
+    "pmra": 261.7,
+    "pmdec": -296.7,
+    "rvz_radvel": -3.4,
+    "sp_type": "kA5hF0mF2III",
+    "rvz_bibcode": "2004MNRAS.349.1069K",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TYC 6363-1044-1|TIC 155842257|GJ 837|Gaia DR3 6838311796136238976|PLX 5258|SBC9 1331|CNS5 5370|* del Cap|*  49 Cap|2RE J214703-160639|2RE J2147-160|ADS 15314 A|BD-16  5943|CCDM J21470-1607A|CMC  164644|CSI-16  5943  1|FK5  819|GC 30491|GCRV 13686|GEN# +1.00207098|HD 207098|HIC 107556|HIP 107556|HR  8322|IDS 21415-1635 A|IRC -20608|JP11  3405|LTT  8693|N30 4800|NLTT 52065|PMC 90-93   575|PPM 239339|RAFGL 7180S|RBS  1783|RE J214703-160717|RE J2147-160|ROT  3167|RX J2147.0-1607|SACS 476|SAO 164644|SBC7   876|SKY# 41523|TD1 28443|UBV   21648|UBV M  25924|V* del Cap|[TVS94]  44|2MASS J21470244-1607382|PLX 5258.00|1RXS J214702.5-160736|2EUVE J2147-16.1|EUVE J2147-16.1|WDS J21470-1608A|Renson 57630|AKARI-IRC-V1 J2147025-160740|IRAS 21442-1621|WISEA J214702.64-160741.2|NAME Deneb Algedi|uvby98 100207098|WEB 19412",
+    "matched_id": "NAME Deneb Algedi"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "bet_lep",
+  "name": "* bet Lep",
+  "aliases": [
+    "TIC 420963448",
+    "GEN# +1.00036079",
+    "CCDM J05283-2046A",
+    "** BU  320A",
+    "ADS  4066 A",
+    "IDS 05240-2050 A",
+    "WDS J05282-2046A",
+    "Gaia DR3 2968097043228517120",
+    "HIP 25606",
+    "2MASS J05281473-2045338",
+    "PLX 1246",
+    "*   9 Lep",
+    "1E 0526.0-2048",
+    "2E 0526.0-2047",
+    "2E  1280",
+    "AAVSO 0524-20",
+    "BD-20  1096",
+    "CSI-20  1096  1",
+    "FK5  204",
+    "GC  6762",
+    "GCRV  3303",
+    "GSC 05928-01657",
+    "HD  36079",
+    "HIC  25606",
+    "HR  1829",
+    "IRAS 05261-2047",
+    "IRC -20071",
+    "JP11  1102",
+    "N30 1175",
+    "NSV  2008",
+    "PMC 90-93   147",
+    "PPM 248938",
+    "RAFGL  756",
+    "ROT   821",
+    "SAO 170457",
+    "SKY#  8740",
+    "SRS  30204",
+    "TD1  4701",
+    "TYC 5928-1657-1",
+    "UBV    5252",
+    "YZ 110  1774",
+    "1RXS J052814.7-204546",
+    "NAME Nihal",
+    "uvby98 100036079",
+    "WEB  4967",
+    "Gaia DR2 2968097043227107968"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 82.06134536679916,
+    "dec_deg": -20.759443885748333,
+    "galactic_l_deg": 223.5612287252645,
+    "galactic_b_deg": -27.201323502978934
+  },
+  "distance": {
+    "value_pc": 47.9163572068597,
+    "error_pc": 0.4699865350833345
+  },
+  "cartesian": {
+    "x_pc": -30.881975464251035,
+    "y_pc": -29.368685199045924,
+    "z_pc": -21.90345199004284
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Lep, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Lep",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G5II-IIIa:",
+    "absolute_magnitude": -0.5624190549933576,
+    "apparent_magnitude": 2.8399999141693115
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:38+00:00; upstream record id: * bet Lep; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

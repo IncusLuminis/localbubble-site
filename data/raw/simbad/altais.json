@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Altais",
+  "retrieved_utc": "2026-09-02T17:20:57+00:00",
+  "record_id": "* del Dra",
+  "raw": {
+    "main_id": "* del Dra",
+    "ra": 288.1387557204383,
+    "dec": 67.66153865705445,
+    "coo_err_maj": 0.17090000212192535,
+    "coo_err_min": 0.148499995470047,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.069999933242798,
+    "plx_err": 0.156700000166893,
+    "otype": "PM*",
+    "plx_value": 33.3499,
+    "pmra": 94.599,
+    "pmdec": 92.374,
+    "rvz_radvel": 24.818,
+    "sp_type": "G9III",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 258873063|Gaia DR3 2255173119658513408|HIP 94376|PLX 4495|* del Dra|*  57 Dra|AG+67  836|BD+67  1129|CCDM J19126+6740A|CSI+67  1129  1|FK5  723|GC 26520|GCRV 11694|GEN# +1.00180711|GSC 04444-02239|HD 180711|HIC  94376|HR  7310|IDS 19125+6729 A|IRAS 19125+6734|IRC +70150|JP11  3086|N30 4261|PMC 90-93   513|PPM  21358|RAFGL 2348|ROT  2757|SAO  18222|SKY# 35612|TD1 24318|TYC 4444-2239-1|UBV   16319|UBV M  23638|[HFE83] 1269|2MASS J19123328+6739415|PLX 4495.00|WDS J19126+6740A|NAME Altais|WEB 16446|Gaia DR2 2255173119656110336",
+    "matched_id": "NAME Altais"
+  }
+}

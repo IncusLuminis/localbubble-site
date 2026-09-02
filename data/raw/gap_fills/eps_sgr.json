@@ -1,0 +1,89 @@
+{
+  "id": "eps_sgr",
+  "name": "* eps Sgr",
+  "aliases": [
+    "TIC 66389641",
+    "** GOL    2A",
+    "WDS J18242-3423A",
+    "WISE J182410.41-342310.0",
+    "UCAC4 279-185534",
+    "HIP 90185",
+    "PLX 4222",
+    "*  20 Sgr",
+    "2E  4062",
+    "CCDM J18242-3423A",
+    "CD-34 12784",
+    "CPC 17  9906",
+    "CSI-34 12784 21",
+    "FK5  689",
+    "GC 25100",
+    "GCRV 10865",
+    "GEN# +1.00169022",
+    "GSC 07401-03471",
+    "HD 169022",
+    "HIC  90185",
+    "HR  6879",
+    "IDS 18175-3427 A",
+    "JP11  2965",
+    "N30 4084",
+    "NAME Kaus Australis",
+    "PMC 90-93   491",
+    "PPM 297655",
+    "SAO 210091",
+    "SKY# 33590",
+    "SRS  30689",
+    "TYC 7401-3471-1",
+    "UBV M  22887",
+    "UBV   15626",
+    "[SC95] M 591",
+    "[SC96] GC 585",
+    "[SC96] Mis 1335",
+    "uvby98 100169022",
+    "ALS 15808",
+    "PLX 4222.00",
+    "2E 1820.8-3424",
+    "EUVE J1824-34.3",
+    "IRAS 18208-3424",
+    "** SEE  351A",
+    "1RXS J182410.8-342259",
+    "2MASS J18241032-3423046",
+    "WEB 15421"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 276.0429933505963,
+    "dec_deg": -34.38461648586744,
+    "galactic_l_deg": 359.19382957290344,
+    "galactic_b_deg": -9.807591817213567
+  },
+  "distance": {
+    "value_pc": 43.936731107205624,
+    "error_pc": 0.46330471133718615
+  },
+  "cartesian": {
+    "x_pc": 43.290325039625166,
+    "y_pc": -0.6091492840058407,
+    "z_pc": -7.484185693867182
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * eps Sgr, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* eps Sgr",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B9IVp_lB?",
+    "absolute_magnitude": -1.404138768605291,
+    "apparent_magnitude": 1.809999942779541
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:19:51+00:00; upstream record id: * eps Sgr; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

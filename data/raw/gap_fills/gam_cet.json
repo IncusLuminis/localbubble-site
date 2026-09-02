@@ -1,0 +1,82 @@
+{
+  "id": "gam_cet",
+  "name": "* gam Cet",
+  "aliases": [
+    "TIC 318805118",
+    "IDS 02381+0249 AB",
+    "HIP 12706",
+    "PLX  554",
+    "2MASS J02431801+0314089",
+    "USNO-B1.0 0932-00043112",
+    "*  86 Cet",
+    "1RXS J024319.0+031408",
+    "CNS5 683",
+    "BD+02   422",
+    "GC  3276",
+    "GCRV  1535",
+    "HD  16970",
+    "HGAM    169",
+    "HIC  12706",
+    "HR   804",
+    "JP11   690",
+    "N30  552",
+    "PPM 400042",
+    "RBS   349",
+    "ROT   369",
+    "SAO 110707",
+    "SKY#  4075",
+    "TD1  1618",
+    "UBV    2707",
+    "YPAC 302",
+    "YZ   3   759",
+    "RX J0243.3+0314",
+    "[ZEH2003] RX J0243.3+0314  1",
+    "WDS J02433+0314AB",
+    "** STF  299",
+    "AKARI-IRC-V1 J0243179+031408",
+    "IRAS 02407+0301",
+    "PMSC 02381+0248",
+    "CCDM J02433+0314AB",
+    "NAME Kaffaljidhma",
+    "uvby98 100016970",
+    "WEB  2583",
+    "GEN# +1.00016970"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 40.825162898112545,
+    "dec_deg": 3.2358163764959436,
+    "galactic_l_deg": 168.9191929047084,
+    "galactic_b_deg": -49.38240150853126
+  },
+  "distance": {
+    "value_pc": 24.4081034903588,
+    "error_pc": 0.3753259722367376
+  },
+  "cartesian": {
+    "x_pc": -15.593622944639963,
+    "y_pc": 3.0539229432106616,
+    "z_pc": -18.527492925741296
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * gam Cet, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* gam Cet",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A2Vn+F4V",
+    "absolute_magnitude": 1.5323298483759409,
+    "apparent_magnitude": 3.4700000286102295
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:18+00:00; upstream record id: * gam Cet; otype: **. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

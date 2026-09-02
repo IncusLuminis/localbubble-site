@@ -71,6 +71,15 @@ GAP_FILL_STARS = [
 ]
 
 
+#: Story #295 (a later, separate batch) added Mizar B (zet02 UMa, tag
+#: "local-bubble-bright-named-gap-fill") - a genuinely distinct star whose
+#: alias also contains the bare word "Mizar". `_find` below excludes this
+#: one specific id so `\bmizar\b` still resolves unambiguously to this
+#: module's own Mizar A (zet01 UMa, issue #213); every other word in this
+#: module's GAP_FILL_STARS list is unaffected.
+_MIZAR_B_ID = "zet02_uma"
+
+
 def _find(catalog_objects, word):
     # Word-boundary match (not a bare substring) - "hamal" is a bare
     # substring of "Zubeneschamali" (bet_lib's alias "NAME Zubeneschamali"),
@@ -79,7 +88,8 @@ def _find(catalog_objects, word):
     return [
         obj
         for obj in catalog_objects
-        if pattern.search(obj.name) or any(pattern.search(alias) for alias in obj.aliases)
+        if obj.id != _MIZAR_B_ID
+        and (pattern.search(obj.name) or any(pattern.search(alias) for alias in obj.aliases))
     ]
 
 

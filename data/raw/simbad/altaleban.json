@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Altaleban",
+  "retrieved_utc": "2026-09-02T17:20:43+00:00",
+  "record_id": "* tau Pup",
+  "raw": {
+    "main_id": "* tau Pup",
+    "ra": 102.48403810537876,
+    "dec": -50.61453869751139,
+    "coo_err_maj": 0.30649998784065247,
+    "coo_err_min": 0.34470000863075256,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.930000066757202,
+    "plx_err": 0.3474999964237213,
+    "otype": "SB*",
+    "plx_value": 18.7577,
+    "pmra": 32.618,
+    "pmdec": -69.566,
+    "rvz_radvel": 34.4,
+    "sp_type": "K1III",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 238001475|RAVE J064956.2-503652|Gaia DR3 5502164890740285696|HIP 32768|2MASS J06495616-5036523|SBC9 423|* tau Pup|CD-50  2415|CPC  0  3937|CPD-50  1070|FK5  263|GC  8969|GCRV  4462|GEN# +1.00050310|HD  50310|HIC  32768|HR  2553|IRAS 06486-5033|JP11  1446|N30 1491|PPM 335509|SACS 148|SAO 234735|SBC7   291|SKY# 12062|TD1  8385|UBV    6807|UBV M  12534|TYC 8125-2314-1|NAME Altaleban|NAME Taleban|WEB  6598|Gaia DR2 5502164890737840000",
+    "matched_id": "NAME Altaleban"
+  }
+}

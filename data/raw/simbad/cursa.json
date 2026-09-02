@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Cursa",
+  "retrieved_utc": "2026-09-02T17:20:29+00:00",
+  "record_id": "* bet Eri",
+  "raw": {
+    "main_id": "* bet Eri",
+    "ra": 76.96239535462041,
+    "dec": -5.086496983969999,
+    "coo_err_maj": 0.22609999775886536,
+    "coo_err_min": 0.17870000004768372,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.7899999618530273,
+    "plx_err": 0.35749998688697815,
+    "otype": "PM*",
+    "plx_value": 36.2456,
+    "pmra": -88.481,
+    "pmdec": -70.497,
+    "rvz_radvel": -6.0,
+    "sp_type": "A3IV",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 248409489|Gaia DR3 3211922645854328832|GJ 9175|HIP 23875|2MASS J05075100-0505109|*  67 Eri|PLX 1158|* bet Eri|2E  1221|BD-05  1162|CCDM J05079-0506A|CEL    541|CSI-05  1162  1|CSV 100450|FK5  188|GC  6274|GCRV  3046|GEN# +1.00033111|HD  33111|HIC  23875|HR  1666|IDS 05030-0513 A|IRAS 05053-0509|IRC -10081|JP11   990|N30 1097|NSV  1841|PMC 90-93   135|PPM 187729|ROT   728|SAO 131794|SKY#  8057|SV* ZI   351|TD1  4059|UBV    4929|UBV M  10648|uvby98 100033111|PLX 1158.00|1RXS J050750.5-050455|2E 0505.4-0508|WDS J05078-0505A|TYC 4759-1671-1|** BUP   74A|NAME Cursa|WEB  4660",
+    "matched_id": "NAME Cursa"
+  }
+}

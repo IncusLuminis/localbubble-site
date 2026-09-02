@@ -1,0 +1,89 @@
+{
+  "id": "bet_cmi",
+  "name": "* bet CMi",
+  "aliases": [
+    "TIC 425224332",
+    "HIP 36188",
+    "Gaia DR3 3143264535611892096",
+    "PLX 1753",
+    "[JE82]  311",
+    "*   3 CMi",
+    "AAVSO 0721+08",
+    "AG+08  981",
+    "BD+08  1774",
+    "CSI+08  1774  1",
+    "CSV   6586",
+    "EM* MWC  178",
+    "FAUST 1028",
+    "FK5  285",
+    "GC  9947",
+    "GCRV  4951",
+    "GEN# +1.00058715",
+    "GSC 00764-02774",
+    "HD  58715",
+    "HGAM    571",
+    "HIC  36188",
+    "HR  2845",
+    "IRAS 07244+0823",
+    "JP11  1553",
+    "N30 1666",
+    "PMC 90-93   206",
+    "PPM 152663",
+    "ROT  1202",
+    "SAO 115456",
+    "SKY# 13603",
+    "TD1 10116",
+    "TYC  764-2774-1",
+    "UBV    7201",
+    "UBV M  13277",
+    "V* bet CMi",
+    "[B10]  1944",
+    "2MASS J07270905+0817216",
+    "PLX 1753.00",
+    "** BUP  101A",
+    "CCDM J07272+0818A",
+    "IDS 07217+0829 A",
+    "WDS J07272+0817A",
+    "NAME Gomeisa",
+    "uvby98 100058715",
+    "WEB  7206",
+    "LAMOST J072709.01+081614.3"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 111.78767390541668,
+    "dec_deg": 8.2893157625,
+    "galactic_l_deg": 209.51993236924096,
+    "galactic_b_deg": 11.678510955585546
+  },
+  "distance": {
+    "value_pc": 49.578582052553294,
+    "error_pc": 0.49160716699386947
+  },
+  "cartesian": {
+    "x_pc": -42.24940379756093,
+    "y_pc": -23.922969135417404,
+    "z_pc": 10.035697526244322
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet CMi, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet CMi",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B8Ve",
+    "absolute_magnitude": -0.5864704040319975,
+    "apparent_magnitude": 2.890000104904175
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:42+00:00; upstream record id: * bet CMi; otype: Be*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

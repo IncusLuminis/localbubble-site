@@ -1,0 +1,87 @@
+{
+  "id": "sig_pup",
+  "name": "* sig Pup",
+  "aliases": [
+    "TIC 60376707",
+    "Gaia DR3 5512070906394195968",
+    "HIP 36377",
+    "PLX 1778",
+    "SBC9 458",
+    "CCDM J07292-4318A",
+    "CD-43  3260",
+    "CPC  0  4565",
+    "CPD-43  1499",
+    "CSI-43  3260 21",
+    "FK5 1194",
+    "GC 10040",
+    "GCRV  5001",
+    "GEN# +1.00059717A",
+    "GSC 07655-02687",
+    "HD  59717",
+    "HIC  36377",
+    "HR  2878",
+    "IDS 07261-4306 A",
+    "IRAS 07276-4311",
+    "JP11  1561",
+    "LTT  2861",
+    "N30 1682",
+    "NLTT 17967",
+    "PPM 311853",
+    "SACS 164",
+    "SAO 218755",
+    "SBC7   310",
+    "SKY# 13683",
+    "SRS  31194",
+    "TD1 10317",
+    "UBV    7258",
+    "UBV M  13346",
+    "V* sig Pup",
+    "uvby98 100059717 A",
+    "WDS J07292-4318A",
+    "TYC 7655-2687-1",
+    "PMSC 07261-4306A",
+    "PMSC 07261-4306Aab",
+    "NAME Hadir",
+    "** DUN   51A",
+    "2MASS J07291384-4318054",
+    "WEB  7241",
+    "Gaia DR2 5512070906388269568"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 112.30763598742709,
+    "dec_deg": -43.30143539413861,
+    "galactic_l_deg": 255.73593115932476,
+    "galactic_b_deg": -11.911941577906441
+  },
+  "distance": {
+    "value_pc": 58.74267185168651,
+    "error_pc": 1.9372238071744443
+  },
+  "cartesian": {
+    "x_pc": -14.162005527175348,
+    "y_pc": -55.70569387639079,
+    "z_pc": -12.12496455553633
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * sig Pup, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* sig Pup",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K5III",
+    "absolute_magnitude": -0.594768480431215,
+    "apparent_magnitude": 3.25
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:04+00:00; upstream record id: * sig Pup; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

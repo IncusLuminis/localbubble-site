@@ -1,0 +1,100 @@
+{
+  "id": "del_her",
+  "name": "* del Her",
+  "aliases": [
+    "TIC 257582738",
+    "WISEA J171501.84+245019.6",
+    "GJ 3995",
+    "HIP 84379",
+    "PLX 3916",
+    "LSPM J1715+2450",
+    "ASCC  788714",
+    "USNO-B1.0 1148-00254291",
+    "*  65 Her",
+    "AG+24 1725",
+    "BD+25  3221",
+    "CSI+25  3221  1",
+    "FK5  641",
+    "GC 23294",
+    "GCRV  9948",
+    "GEN# +1.00156164",
+    "GSC 02065-01930",
+    "HD 156164",
+    "HGAM    664",
+    "HIC  84379",
+    "HR  6410",
+    "CNS5 4230",
+    "IRC +20316",
+    "JP11  2835",
+    "N30 3845",
+    "NSV  8419",
+    "PMC 90-93   456",
+    "PPM 105702",
+    "ROT  2425",
+    "SAO  84951",
+    "SKY# 31083",
+    "SRS  30641",
+    "SV* SVS     9",
+    "TD1 20162",
+    "UBV   14633",
+    "UBV M  22045",
+    "2MASS J17150190+2450212",
+    "PLX 3916.00",
+    "AKARI-IRC-V1 J1715018+245020",
+    "IRAS 17129+2453",
+    "WISE J171501.88+245019.2",
+    "IRAS F17129+2453",
+    "NAME Sarin",
+    "WEB 14243",
+    "IDS 17109+2457 A",
+    "ADS 10424 A",
+    "TYC 2065-1930-1",
+    "CCDM J17151+2451A",
+    "** STF 3127A",
+    "WDS J17150+2450A",
+    "HD 156164A",
+    "BD+25  3221A",
+    "** BNU    5",
+    "WDS J17150+2450Aa,Ab",
+    "Gaia DR2 4573412435276520320",
+    "Gaia DR3 4573412435280434560",
+    "UCAC4 575-056725"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 258.7579607430354,
+    "dec_deg": 24.839206966655976,
+    "galactic_l_deg": 46.82408496351891,
+    "galactic_b_deg": 31.423281716413825
+  },
+  "distance": {
+    "value_pc": 23.036166781847502,
+    "error_pc": 0.07959975016317392
+  },
+  "cartesian": {
+    "x_pc": 13.450569329474016,
+    "y_pc": 14.335472765077894,
+    "z_pc": 12.010053510114629
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Her, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Her",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A1IVn",
+    "absolute_magnitude": 1.3179490436344174,
+    "apparent_magnitude": 3.130000114440918
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:00+00:00; upstream record id: * del Her; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

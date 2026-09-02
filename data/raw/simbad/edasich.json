@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Edasich",
+  "retrieved_utc": "2026-09-02T17:21:07+00:00",
+  "record_id": "* iot Dra",
+  "raw": {
+    "main_id": "* iot Dra",
+    "ra": 231.23239085120377,
+    "dec": 58.966065864404726,
+    "coo_err_maj": 0.1428000032901764,
+    "coo_err_min": 0.13359999656677246,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.2899999618530273,
+    "plx_err": 0.13099999725818634,
+    "otype": "RG*",
+    "plx_value": 32.5239,
+    "pmra": -8.183,
+    "pmdec": 17.296,
+    "rvz_radvel": -10.912,
+    "sp_type": "K2III",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 165722603|Gaia DR3 1614731957531452544|HIP 75458|PLX 3490|*  12 Dra|* iot Dra|AG+59  999|BD+59  1654|CCDM J15250+5859A|DO 34945|FK5  571|GC 20747|GCRV  8925|GEN# +1.00137759|GSC 03875-01620|HD 137759|HIC  75458|HR  5744|IRAS 15238+5908|IRC +60233|JP11  2606|N30 3475|NSV  7077|PMC 90-93   405|PPM  34972|ROT  2187|SAO  29520|SKY# 27902|TD1 18258|TYC 3875-1620-1|UBV   13273|UBV M  20785|YZ   0  8366|[HFE83] 1103|uvby98 100137759|Gaia DR2 1614731957530945280|PLX 3490.00|WDS J15249+5858A|** BUP  162A|2MASS J15245578+5857577|NAME Edasich|WEB 12868",
+    "matched_id": "NAME Edasich"
+  }
+}

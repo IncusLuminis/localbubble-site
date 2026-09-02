@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Megrez",
+  "retrieved_utc": "2026-09-02T17:21:09+00:00",
+  "record_id": "* del UMa",
+  "raw": {
+    "main_id": "* del UMa",
+    "ra": 183.85649936126705,
+    "dec": 57.03261697773611,
+    "coo_err_maj": 0.13249999284744263,
+    "coo_err_min": 0.14169999957084656,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.319999933242798,
+    "plx_err": 0.19449999928474426,
+    "otype": "PM*",
+    "plx_value": 40.3279,
+    "pmra": 103.947,
+    "pmdec": 8.141,
+    "rvz_radvel": -12.39,
+    "sp_type": "A2Vn",
+    "rvz_bibcode": "2022yCat.1355....0G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 224292240|GJ 459|HIP 59774|WISE J121525.72+570157.0|Gaia DR3 1575287046603605888|CNS5 3013|PLX 2824|* del UMa|*  69 UMa|AAVSO 1210+57|AG+57  844|BD+57  1363|CCDM J12155+5702A|CEL   4078|CSI+57  1363  1|CSV 101249|FK5  456|GC 16736|GCRV  7337|GEN# +1.00106591|GSC 03837-01070|HD 106591|HGAM    610|HIC  59774|HR  4660|IDS 12105+5735 A|JP11  2194|N30 2835|NAME Megrez|NSV  5513|PMC 90-93   325|PPM  33469|ROT  1795|SAO  28315|SKY# 22985|SV* ZI   919|TD1 16157|TYC 3837-1070-1|UBV   11008|UBV M  17960|uvby98 100106591|PLX 2824.00|WDS J12154+5702A|AKARI-IRC-V1 J1215257+570157|IRAS 12129+5718|** BLL   29A|** BUP  140A|2MASS J12152554+5701575|WEB 10621|Gaia DR2 1575287046603149056",
+    "matched_id": "NAME Megrez"
+  }
+}

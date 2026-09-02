@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Algorab",
+  "retrieved_utc": "2026-09-02T17:20:47+00:00",
+  "record_id": "* del Crv",
+  "raw": {
+    "main_id": "* del Crv",
+    "ra": 187.46606318416664,
+    "dec": -16.515431261666667,
+    "coo_err_maj": 0.14000000059604645,
+    "coo_err_min": 0.10000000149011612,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.940000057220459,
+    "plx_err": 0.39959999918937683,
+    "otype": "PM*",
+    "plx_value": 38.06,
+    "pmra": -209.276,
+    "pmdec": -139.184,
+    "rvz_radvel": 13.9,
+    "sp_type": "A0IV(n)kB9",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 297075865|1RXS J122952.5-163055|HIP 60965|Gaia DR3 3520586071217872896|PLX 2880|* del Crv|*   7 Crv|ADS  8572 A|BD-15  3482|CCDM J12299-1631A|CEL   4116|CSV 101281|FK5  465|GC 17029|GCRV  7515|GEN# +1.00108767A|HD 108767|HIC  60965|HR  4757|IDS 12247-1558 A|IRAS 12272-1614|IRAS F12272-1614|IRC -20238|JP11  2224|LTT  4742|N30 2888|NLTT 30918|NSV  5656|PMC 90-93   331|PPM 225920|ROT  1830|SACS 270|SAO 157323|SKY# 23365|SV* ZI   940|TD1 16305|UBV   11226|uvby98 100108767 A|2MASS J12295187-1630552|PLX 2880.00|WDS J12299-1631A|TYC 6103-2395-1|** SHJ  145A|NAME Algorab|WEB 10850|Gaia DR2 3520586071216143488",
+    "matched_id": "NAME Algorab"
+  }
+}

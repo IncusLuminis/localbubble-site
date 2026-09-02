@@ -1,0 +1,102 @@
+{
+  "id": "del_gem",
+  "name": "* del Gem",
+  "aliases": [
+    "TIC 184842719",
+    "WISEA J072007.35+215855.8",
+    "UCAC4 560-040614",
+    "GJ 271",
+    "GJ 271 A",
+    "HIP 35550",
+    "Gaia DR3 866177431955478144",
+    "PLX 1718",
+    "SBC9 442",
+    "AG+22  862",
+    "BD+22  1645",
+    "CSI+22  1645  3",
+    "CSI+22  1645  1",
+    "FK5  279",
+    "CNS5 1821",
+    "GC  9755",
+    "GCRV  4854",
+    "HD  56986",
+    "HIC  35550",
+    "HR  2777",
+    "IRC +20177",
+    "JP11  1533",
+    "N30 1632",
+    "PMC 90-93   201",
+    "PPM  97380",
+    "ROT  1171",
+    "SAO  79294",
+    "SBC7   300",
+    "SKY# 13328",
+    "SRS  30279",
+    "TD1  9732",
+    "UBV    7099",
+    "UBV M  13165",
+    "[HFE83]  504",
+    "2EUVE J0720+21.9",
+    "EUVE J0719+21.9",
+    "EUVE J0720+21.9",
+    "Renson 15560",
+    "WISE J072007.29+215857.4",
+    "AKARI-IRC-V1 J0720073+215855",
+    "IRAS 07171+2204",
+    "1RXS J072007.4+215916",
+    "*  55 Gem",
+    "IRAS F07171+2204",
+    "NAME Wasat",
+    "uvby98 100056986",
+    "WEB  7084",
+    "Gaia DR2 866177431953646464",
+    "2MASS J07200736+2158561",
+    "* del Gem A",
+    "ADS  5983 A",
+    "PMSC 07142+2210A",
+    "*  55 Gem A",
+    "CCDM J07201+2159A",
+    "TYC 1359-2672-1",
+    "BD+22  1645A",
+    "PMSC 07142+2210Aab",
+    "WDS J07201+2159A",
+    "GEN# +1.00056986"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 110.03072735754377,
+    "dec_deg": 21.98230404962861,
+    "galactic_l_deg": 195.98491998749782,
+    "galactic_b_deg": 15.885081211469327
+  },
+  "distance": {
+    "value_pc": 18.598007781406455,
+    "error_pc": 0.08311638009401365
+  },
+  "cartesian": {
+    "x_pc": -17.196152552744582,
+    "y_pc": -4.926019673174051,
+    "z_pc": 5.090438193269107
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Gem, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Gem",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "F2VkF0mF0",
+    "absolute_magnitude": 2.182667845967095,
+    "apparent_magnitude": 3.5299999713897705
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:25+00:00; upstream record id: * del Gem; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

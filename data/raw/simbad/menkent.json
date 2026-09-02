@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Menkent",
+  "retrieved_utc": "2026-09-02T17:19:55+00:00",
+  "record_id": "* tet Cen",
+  "raw": {
+    "main_id": "* tet Cen",
+    "ra": 211.670614682339,
+    "dec": -36.369954742511496,
+    "coo_err_maj": 1.8444527387619019,
+    "coo_err_min": 1.3171014785766602,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.049999952316284,
+    "plx_err": 0.20000000298023224,
+    "otype": "PM*",
+    "plx_value": 55.45,
+    "pmra": -520.53,
+    "pmdec": -518.06,
+    "rvz_radvel": 1.3,
+    "sp_type": "K0-IIIb",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 179323446|GJ 539|HIP 68933|PLX 3206|* tet Cen|*   5 Cen|CCDM J14067-3622A|CD-35  9260|CPC 18  6806|CPD-35  6109|CSI-35  9260 21|Ci 20  831|CNS5 3486|FK5  520|GC 19033|GCRV  8272|GEN# +1.00123139|HD 123139|HIC  68933|HR  5288|IDS 14008-3553 A|IRAS 14037-3607|JP11  2468|LFT 1068|LHS  2858|LTT  5502|N30 3206|NLTT 36243|PM 14037-3607|PMC 90-93   370|PPM 292214|SACS 304|SAO 205188|SKY# 25816|SRS  30520|TD1 17252|TYC 7293-2215-1|UBV   12457|UBV M  19965|2MASS J14064097-3622113|PLX 3206.00|WDS J14067-3622A|NAME Menkent|WEB 12044",
+    "matched_id": "NAME Menkent"
+  }
+}

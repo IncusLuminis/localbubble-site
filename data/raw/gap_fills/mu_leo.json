@@ -1,0 +1,90 @@
+{
+  "id": "mu_leo",
+  "name": "* mu. Leo",
+  "aliases": [
+    "GES J09524561+2600243",
+    "TIC 82204610",
+    "AP J09524585+2600248",
+    "RAVE J095245.8+260025",
+    "GALAH 150204002101256",
+    "HIP 48455",
+    "Gaia DR3 643819484617141504",
+    "PLX 2338",
+    "LSPM J0952+2600",
+    "TYC 1964-1473-1",
+    "ASCC  680731",
+    "USNO-B1.0 1160-00169660",
+    "*  24 Leo",
+    "AG+26 1058",
+    "BD+26  2019",
+    "FK5  371",
+    "GC 13590",
+    "GCRV  6325",
+    "GEN# +1.00085503",
+    "HD  85503",
+    "HIC  48455",
+    "HR  3905",
+    "IRAS 09499+2614",
+    "IRC +30218",
+    "JP11  1879",
+    "LTT 12624",
+    "N30 2364",
+    "NLTT 22823",
+    "PMC 90-93   266",
+    "PPM  99922",
+    "RAFGL 1386",
+    "ROT  1518",
+    "SAO  81064",
+    "SKY# 19073",
+    "SRS  30371",
+    "TD1 14358",
+    "UBV    9276",
+    "UBV M  15761",
+    "YZ  26  5130",
+    "[GS83] 135",
+    "[L91b] 162",
+    "uvby98 100085503",
+    "2MASS J09524585+2600248",
+    "PLX 2338.00",
+    "NAME Rasalas",
+    "WEB  9034",
+    "Gaia DR2 643819484616249984"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 148.190904223595,
+    "dec_deg": 26.00695118609,
+    "galactic_l_deg": 204.04518510966332,
+    "galactic_b_deg": 50.2457666291735
+  },
+  "distance": {
+    "value_pc": 38.31843384897172,
+    "error_pc": 0.28984289374983224
+  },
+  "cartesian": {
+    "x_pc": -22.37808724634177,
+    "y_pc": -9.984520142894912,
+    "z_pc": 29.459004418840436
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * mu. Leo, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* mu. Leo",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "K2IIIbCN1Ca1",
+    "absolute_magnitude": 0.9629613630150118,
+    "apparent_magnitude": 3.880000114440918
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:22:00+00:00; upstream record id: * mu. Leo; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

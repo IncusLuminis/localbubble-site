@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Kraz",
+  "retrieved_utc": "2026-09-02T17:20:13+00:00",
+  "record_id": "* bet Crv",
+  "raw": {
+    "main_id": "* bet Crv",
+    "ra": 188.59681217680622,
+    "dec": -23.39676021620222,
+    "coo_err_maj": 0.18790000677108765,
+    "coo_err_min": 0.12449999898672104,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 2.640000104904175,
+    "plx_err": 0.23330000042915344,
+    "otype": "PM*",
+    "plx_value": 22.0049,
+    "pmra": 1.116,
+    "pmdec": -56.704,
+    "rvz_radvel": -7.34,
+    "sp_type": "G5IIBa0.3",
+    "rvz_bibcode": "2015A&A...574A..50J",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 83151778|Gaia DR3 3501215734352781440|HIP 61359|PLX 2896|* bet Crv|*   9 Crv|BD-22  3401|CD-22  3401|CD-22  9505|CPD-22  5388|CSV 101293|FK5  471|GC 17133|GCRV  7566|GEN# +1.00109379|HD 109379|HIC  61359|HR  4786|IRAS 12317-2307|IRC -20240|JP11  2237|N30 2906|NSV  5729|PMC 90-93   335|PPM 260512|RAFGL 1558|ROT  1843|SACS 272|SAO 180915|SKY# 23509|SRS  30471|SV* ZI   946|TD1 16365|UBV   11287|UBV M  18363|[L91b] 210|2MASS J12342324-2323483|PLX 2896.00|TYC 6683-1116-1|NAME Kraz|WEB 10920|Gaia DR2 3501215730056271104",
+    "matched_id": "NAME Kraz"
+  }
+}

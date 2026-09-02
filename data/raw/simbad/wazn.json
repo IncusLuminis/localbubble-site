@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Wazn",
+  "retrieved_utc": "2026-09-02T17:20:58+00:00",
+  "record_id": "* bet Col",
+  "raw": {
+    "main_id": "* bet Col",
+    "ra": 87.73996785288541,
+    "dec": -35.76830962121,
+    "coo_err_maj": 0.10540000349283218,
+    "coo_err_min": 0.11209999769926071,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.119999885559082,
+    "plx_err": 0.13449999690055847,
+    "otype": "PM*",
+    "plx_value": 36.9038,
+    "pmra": 54.452,
+    "pmdec": 404.6,
+    "rvz_radvel": 89.4,
+    "sp_type": "K1III_CN+1",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 100725142|HIP 27628|Gaia DR3 2887731882922767744|2MASS J05505760-3546062|PLX 1350|* bet Col|CD-35  2546|CPC 18  2147|CPD-35   752|Ci 20  355|FK5  223|GC  7364|GCRV  3644|GEN# +1.00039425|HD  39425|HIC  27628|HR  2040|IRAS 05491-3546|JP11  1276|LTT  2392|N30 1254|NLTT 15724|PMC 90-93   161|PPM 281952|RAFGL  829|SACS 128|SAO 196240|SKY#  9650|SRS  30223|TD1  5520|UBV    5986|UBV M  11574|uvby98 100039425|PLX 1350.00|TYC 7069-1482-1|NAME Wazn|WEB  5427|Gaia DR2 2887731882922142848",
+    "matched_id": "NAME Wazn"
+  }
+}

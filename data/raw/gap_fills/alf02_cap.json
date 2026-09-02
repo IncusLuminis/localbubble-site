@@ -1,0 +1,88 @@
+{
+  "id": "alf02_cap",
+  "name": "* alf02 Cap",
+  "aliases": [
+    "TIC 114532819",
+    "Gaia DR3 6880093650314169984",
+    "PLX 4829",
+    "*   6 Cap",
+    "BD-12  5685",
+    "CSI-12  5685  1",
+    "FK5  761",
+    "GC 28200",
+    "GCRV 12666",
+    "GSC 05749-02530",
+    "HD 192947",
+    "HIC 100064",
+    "HIP 100064",
+    "HR  7754",
+    "IRAS 20152-1242",
+    "IRC -10535",
+    "JP11  3210",
+    "N30 4485",
+    "PMC 90-93   538",
+    "PPM 237217",
+    "ROT  2952",
+    "SACS 444",
+    "SAO 163427",
+    "SKY# 38302",
+    "NAME Algedi",
+    "CCDM J20181-1233A",
+    "GEN# +1.00192947",
+    "IDS 20125-1251 A",
+    "WDS J20181-1233A",
+    "ADS 13645 A",
+    "uvby98 100192947",
+    "TD1 26419",
+    "TYC 5749-2530-1",
+    "UBV   17558",
+    "UBV M  24690",
+    "YZC 11  7152",
+    "PLX 4829.00",
+    "1RXS J201803.2-123241",
+    "2MASS J20180324-1232418",
+    "CSI-12  5685  2",
+    "WEB 18016",
+    "Gaia DR2 6880093650312745984",
+    "* alf Cap",
+    "** STF 4051A",
+    "** HJ  608A"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 304.5135649821425,
+    "dec_deg": -12.544852120195275,
+    "galactic_l_deg": 31.096870331769882,
+    "galactic_b_deg": -24.80987759270838
+  },
+  "distance": {
+    "value_pc": 33.42916360232667,
+    "error_pc": 0.18450072502431647
+  },
+  "cartesian": {
+    "x_pc": 25.983273864828853,
+    "y_pc": 15.672177191486936,
+    "z_pc": -14.027163665369374
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf02 Cap, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf02 Cap",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G9III",
+    "absolute_magnitude": 0.959372370303238,
+    "apparent_magnitude": 3.5799999237060547
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:28+00:00; upstream record id: * alf02 Cap; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

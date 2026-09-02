@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Kitalpha",
+  "retrieved_utc": "2026-09-02T17:22:03+00:00",
+  "record_id": "* alf Equ",
+  "raw": {
+    "main_id": "* alf Equ",
+    "ra": 318.95598819687746,
+    "dec": 5.247891952405833,
+    "coo_err_maj": 0.16449999809265137,
+    "coo_err_min": 0.164000004529953,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.933000087738037,
+    "plx_err": 0.24279999732971191,
+    "otype": "SB*",
+    "plx_value": 17.1985,
+    "pmra": 49.747,
+    "pmdec": -89.846,
+    "rvz_radvel": -16.26,
+    "sp_type": "G6IV+B9.5V",
+    "rvz_bibcode": "2004A&A...424..727P",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 387501663|Gaia DR3 1732693474833518720|*   8 Equ|PLX 5115|SBC9 1291|* alf Equ|2E  4458|AG+05 3105|BD+04  4635|CCDM J21158+0515AB|FK5  800|GC 29735|GCRV 13363|GEN# +1.00202447|GSC 00536-02354|HD 202448|HD 202447|HIC 104987|HIP 104987|HR  8131|IDS 21108+0450 AB|IRAS 21133+0502|IRC +10489|JP11  3326|N30 4698|PMC 90-93   561|PPM 171503|ROT  3097|SAO 126662|SBC7   848|SKY# 40479|TD1 27865|TYC  536-2354-1|UBV   18375|UBV M  25570|YZ   5  7447|[HFE83] 1427|uvby98 100202447|2MASS J21154942+0514521|1RXS J211549.8+051458|2E 2113.3+0502|WDS J21158+0515AB|** WRH   35|NAME Kitalpha|WEB 19079|Gaia DR2 1732693474833048192",
+    "matched_id": "NAME Kitalpha"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Ain",
+  "retrieved_utc": "2026-09-02T17:21:23+00:00",
+  "record_id": "* eps Tau",
+  "raw": {
+    "main_id": "* eps Tau",
+    "ra": 67.15416772966458,
+    "dec": 19.18043420581389,
+    "coo_err_maj": 0.13850000500679016,
+    "coo_err_min": 0.07620000094175339,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.5299999713897705,
+    "plx_err": 0.1720999926328659,
+    "otype": "**",
+    "plx_value": 22.3654,
+    "pmra": 107.526,
+    "pmdec": -36.2,
+    "rvz_radvel": 38.42,
+    "sp_type": "G9.5IIICN0.5",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 17554529|HIP 20889|Gaia DR3 48026706558487040|2MASS J04283697+1910494|PLX  987|Cl* Melotte   25      S       3|* eps Tau|*  74 Tau|AG+19  352|BD+18   640|CCDM J04286+1911A|CSI+18   640  1|FK5  164|GC  5430|GCRV  2605|GEN# +5.20250070|GSC 01273-01104|HD  28305|HIC  20889|HR  1409|IDS 04228+1858 A|IRAS 04256+1904|IRC +20080|JP11  4862|LP   18-640|N30  931|PMC 90-93   117|PPM 119934|RAFGL 4345S|ROT  3871|SAO  93954|SKY#  6922|SRS  30164|TD1  3201|TYC 1273-1104-1|UBV    4302|UBV M  10146|UBV M  41276|YZ  19  1188|[B10]  1044|uvby98 520250070|Gaia DR2 48026706557926528|Cl Melotte   25    70|Cl Melotte   25   701|Cl* Melotte   25    MMU      70|PLX  987.00|WDS J04286+1911Aa,Ab|WDS J04286+1911A|** BUP   61A|** WSI   53|NAME Ain|[RSP2011] 357|WEB  4009|EPIC 210754593|1RXS J042836.7+191037",
+    "matched_id": "NAME Ain"
+  }
+}

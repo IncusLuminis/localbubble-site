@@ -1,0 +1,93 @@
+{
+  "id": "del_vir",
+  "name": "* del Vir",
+  "aliases": [
+    "TIC 411188061",
+    "HIP 63090",
+    "Gaia DR3 3704342295607157120",
+    "PLX 2968",
+    "LSPM J1255+0323",
+    "TYC  294-1032-1",
+    "ASCC 1137980",
+    "USNO-B1.0 0933-00243269",
+    "*  43 Vir",
+    "AG+03 1660",
+    "BD+04  2669",
+    "BDS  6308 A",
+    "CCDM J12557+0323A",
+    "CSI+04  2669  1",
+    "Ci 20  749",
+    "DO  3300",
+    "FK5  484",
+    "GC 17543",
+    "GCRV  7728",
+    "GEN# +1.00112300",
+    "HD 112300",
+    "HIC  63090",
+    "HR  4910",
+    "IDS 12506+0357 A",
+    "IRAS 12530+0340",
+    "IRC +00226",
+    "JP11  2332",
+    "LTT 13714",
+    "N30 2979",
+    "NLTT 32308",
+    "NSV  6026",
+    "PMC 90-93   343",
+    "PPM 159316",
+    "RAFGL 1586",
+    "SAO 119674",
+    "SKY# 24027",
+    "TD1 16548",
+    "UBV   11663",
+    "UBV M  18831",
+    "Wolf  448",
+    "YZ   3  4608",
+    "[DS98] 183",
+    "2MASS J12553619+0323507",
+    "PLX 2968.00",
+    "Pul -3 1030240",
+    "WDS J12556+0324A",
+    "** BUP  146A",
+    "NAME Minelauva",
+    "WEB 11187",
+    "Gaia DR2 3704342295605242112"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 193.9008692670183,
+    "dec_deg": 3.3974689038383334,
+    "galactic_l_deg": 305.5136644934115,
+    "galactic_b_deg": 66.24833301243946
+  },
+  "distance": {
+    "value_pc": 57.44980323442392,
+    "error_pc": 0.829410620227175
+  },
+  "cartesian": {
+    "x_pc": 13.441522005968643,
+    "y_pc": -18.834815733846202,
+    "z_pc": 52.58379117284276
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Vir, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Vir",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "M3+III",
+    "absolute_magnitude": -0.41644261340033495,
+    "apparent_magnitude": 3.380000114440918
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:21:12+00:00; upstream record id: * del Vir; otype: RG*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

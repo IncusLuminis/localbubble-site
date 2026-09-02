@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Alhena",
+  "retrieved_utc": "2026-09-02T17:19:53+00:00",
+  "record_id": "* gam Gem",
+  "raw": {
+    "main_id": "* gam Gem",
+    "ra": 99.42796042942895,
+    "dec": 16.399280426663772,
+    "coo_err_maj": 20.75853729248047,
+    "coo_err_min": 15.56289005279541,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 1.9199999570846558,
+    "plx_err": 2.2300000190734863,
+    "otype": "SB*",
+    "plx_value": 29.84,
+    "pmra": 13.81,
+    "pmdec": -54.96,
+    "rvz_radvel": -12.63,
+    "sp_type": "A1.5IV+",
+    "rvz_bibcode": "2004A&A...424..727P",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 308056612|HIP 31681|2MASS J06374273+1623574|PLX 1539|SBC9 410|* gam Gem|*  24 Gem|2E  1712|AG+16  651|BD+16  1223|CCDM J06377+1624A|CEL   1322|CSI+16  1223  1|FK5  251|GC  8633|GCRV  4280|GEN# +1.00047105|HD  47105|HGAM    543|HIC  31681|HR  2421|IDS 06319+1629 A|IRC +20154|JP11  1408|N30 1440|NAME Alhena|PMC 90-93   182|PPM 122774|RAFGL  975|ROT  1062|SAO  95912|SKY# 11555|SRS  30251|TD1  7585|UBV    6564|UBV M  12269|[HFE83]  452|[SC93] 321|uvby98 100047105|PLX 1539.00|1E 0634.8+1627|1RXS J063742.7+162356|2E 0634.8+1626|TYC 1329-1746-1|WDS J06377+1624Aa,Ab|IRAS 06348+1626|Renson 12640|AKARI-IRC-V1 J0637427+162356|WEB  6349",
+    "matched_id": "NAME Alhena"
+  }
+}

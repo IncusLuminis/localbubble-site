@@ -1,0 +1,90 @@
+{
+  "id": "bet_ari",
+  "name": "* bet Ari",
+  "aliases": [
+    "TIC 91356756",
+    "GJ 80",
+    "HIP 8903",
+    "2MASS J01543840+2048291",
+    "PLX  394",
+    "SBC9 98",
+    "*   6 Ari",
+    "AG+20  171",
+    "CNS5 495",
+    "BD+20   306",
+    "CEL    180",
+    "CSV 100146",
+    "FK5   66",
+    "GC  2309",
+    "GCRV  1058",
+    "GEN# +1.00011636",
+    "HD  11636",
+    "HIC   8903",
+    "HR   553",
+    "IRAS 01518+2033",
+    "IRC +20031",
+    "JP11   551",
+    "N30  395",
+    "NSV   658",
+    "PMC 90-93    48",
+    "PPM  91184",
+    "ROT   269",
+    "SAO  75012",
+    "SBC7    67",
+    "SKY#  2798",
+    "SRS  30066",
+    "SV* ZI   101",
+    "TD1  1090",
+    "UBV    1907",
+    "UBV M   8501",
+    "YZ  20   543",
+    "uvby98 100011636",
+    "PLX  394.00",
+    "TYC 1212-1935-1",
+    "Renson 2970",
+    "NAME Sheratan",
+    "** MKT    3",
+    "WDS J01546+2049AB",
+    "CCDM J01546+2048AB",
+    "WEB  1872",
+    "Gaia DR2 97054342356001024",
+    "TIC 620249312"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 28.66004578884514,
+    "dec_deg": 20.808031471916408,
+    "galactic_l_deg": 142.24493142866504,
+    "galactic_b_deg": -39.681698817515056
+  },
+  "distance": {
+    "value_pc": 17.985611510791365,
+    "error_pc": 0.18761968302323231
+  },
+  "cartesian": {
+    "x_pc": -10.943809685053,
+    "y_pc": 8.475151451343464,
+    "z_pc": -11.484209109522567
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Ari, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Ari",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "kA4hA5mA5Va",
+    "absolute_magnitude": 1.375374053277719,
+    "apparent_magnitude": 2.6500000953674316
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:15+00:00; upstream record id: * bet Ari; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

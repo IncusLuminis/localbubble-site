@@ -1,0 +1,103 @@
+{
+  "id": "alf_and",
+  "name": "* alf And",
+  "aliases": [
+    "TIC 427733653",
+    "HIP 677",
+    "2MASS J00082326+2905253",
+    "LSPM J0008+2905",
+    "ASCC  647497",
+    "USNO-B1.0 1190-00002295",
+    "PLX   12",
+    "SBC9 4",
+    "* del Peg",
+    "*  21 And",
+    "ADS    94 A",
+    "AG+28   11",
+    "BD+28     4",
+    "CCDM J00083+2905A",
+    "CSI+28     4  1",
+    "EUVE J0008+29.0",
+    "FK5    1",
+    "GC   127",
+    "GCRV    62",
+    "GEN# +1.00000358",
+    "HD    358",
+    "HGAM      2",
+    "HIC    677",
+    "HR    15",
+    "IDS 00032+2832 A",
+    "TIC 471011200",
+    "IRC +30004",
+    "JP11   345",
+    "LTT 10039",
+    "N30   16",
+    "NAME Alpheratz",
+    "NAME Sirrah",
+    "NLTT   346",
+    "PMC 90-93     1",
+    "PPM  89441",
+    "ROT    58",
+    "SAO  73765",
+    "SBC7     4",
+    "SKY#   244",
+    "SRS  30001",
+    "TD1    31",
+    "UBV M   7157",
+    "UBV      52",
+    "V* alf And",
+    "YPAC   1",
+    "[HFE83]    4",
+    "ALS 16723",
+    "WDS J00084+2905Aa,Ab",
+    "TYC 1735-3180-1",
+    "GSC 01735-03180",
+    "UCAC3 239-808",
+    "Renson 50",
+    "AKARI-IRC-V1 J0008233+290524",
+    "IRAS 00057+2848",
+    "** MKT   11",
+    "WDS J00084+2905A",
+    "** H  532A",
+    "** JNN    1A",
+    "uvby98 100000358",
+    "WEB   113"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 2.0969161856756404,
+    "dec_deg": 29.090431118059698,
+    "galactic_l_deg": 111.73222781647081,
+    "galactic_b_deg": -32.843356747293875
+  },
+  "distance": {
+    "value_pc": 29.744199881023203,
+    "error_pc": 0.30965109402346447
+  },
+  "cartesian": {
+    "x_pc": -9.252949242348299,
+    "y_pc": 23.213618688771994,
+    "z_pc": -16.13159211773842
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * alf And, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* alf And",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "B8IV-VHgMn",
+    "absolute_magnitude": -0.3070115117031982,
+    "apparent_magnitude": 2.059999942779541
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:19:57+00:00; upstream record id: * alf And; otype: a2*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

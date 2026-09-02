@@ -1,0 +1,88 @@
+{
+  "id": "bet_her",
+  "name": "* bet Her",
+  "aliases": [
+    "TIC 284853659",
+    "Gaia DR3 1297565458994346240",
+    "HIP 80816",
+    "PLX 3754",
+    "SBC9 907",
+    "*  27 Her",
+    "2E 1628.0+2135",
+    "2E  3708",
+    "AG+21 1607",
+    "BD+21  2934",
+    "CSI+21  2934  1",
+    "CSV 101593",
+    "FK5  618",
+    "GC 22193",
+    "GCRV  9493",
+    "GEN# +1.00148856",
+    "GSC 01518-01442",
+    "HD 148856",
+    "HIC  80816",
+    "HR  6148",
+    "IRAS 16280+2135",
+    "IRC +20300",
+    "JP11  2768",
+    "N30 3696",
+    "NSV  7778",
+    "PMC 90-93   440",
+    "PPM 104935",
+    "ROT  2353",
+    "SAO  84411",
+    "SBC7   577",
+    "SKY# 29735",
+    "SRS  30618",
+    "SV* ZI  1252",
+    "TD1 19249",
+    "TYC 1518-1442-1",
+    "UBV M  21486",
+    "UBV   13963",
+    "YZ  21  5622",
+    "2MASS J16301319+2129225",
+    "1RXS J163013.4+212922",
+    "RX J1630.2+2129",
+    "[ZEH2003] RX J1630.2+2129  1",
+    "WDS J16302+2129Aa,Ab",
+    "NAME Kornephoros",
+    "WEB 13667"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 247.5550013403688,
+    "dec_deg": 21.489610745563056,
+    "galactic_l_deg": 39.00771906036571,
+    "galactic_b_deg": 40.21290930971142
+  },
+  "distance": {
+    "value_pc": 45.449793885184725,
+    "error_pc": 2.038210166792856
+  },
+  "cartesian": {
+    "x_pc": 26.97005378775252,
+    "y_pc": 21.845935735030775,
+    "z_pc": 29.343739617717677
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * bet Her, coo_bibcode 2020yCat.1350....0G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* bet Her",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "G7IIIaFe-0.5",
+    "absolute_magnitude": -0.5176596092583701,
+    "apparent_magnitude": 2.7699999809265137
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:27+00:00; upstream record id: * bet Her; otype: SB*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}

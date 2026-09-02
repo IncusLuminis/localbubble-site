@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Sadalbari",
+  "retrieved_utc": "2026-09-02T17:21:20+00:00",
+  "record_id": "* mu. Peg",
+  "raw": {
+    "main_id": "* mu. Peg",
+    "ra": 342.50080447836956,
+    "dec": 24.601581283481668,
+    "coo_err_maj": 0.13609999418258667,
+    "coo_err_min": 0.14030000567436218,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "V": 3.4800000190734863,
+    "plx_err": 0.18870000541210175,
+    "otype": "PM*",
+    "plx_value": 28.934,
+    "pmra": 145.24,
+    "pmdec": -42.396,
+    "rvz_radvel": 13.791,
+    "sp_type": "G8+III",
+    "rvz_bibcode": "2018A&A...616A...7S",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 44155570|Gaia DR3 1876510592179455744|GJ 4298|PLX 5528|LSPM J2250+2436|ASCC  825572|USNO-B1.0 1146-00562556|*  48 Peg|* mu. Peg|AG+24 2464|BD+23  4615|FK5  862|GC 31851|GCRV 14339|GEN# +1.00216131|GSC 02225-01821|HD 216131|HIC 112748|HIP 112748|HR  8684|IRAS 22475+2420|IRC +20537|JP11  3540|N30 5024|PMC 90-93   607|PPM 114859|RAFGL 2966|ROT  3323|SAO  90816|SKY# 43386|SRS  30862|TD1 29395|TYC 2225-1821-1|UBV   19566|UBV M  26652|YZ  24  8764|2MASS J22500017+2436056|PLX 5528.00|NAME Sadalbari|WEB 20089|Gaia DR2 1876510592179102464",
+    "matched_id": "NAME Sadalbari"
+  }
+}

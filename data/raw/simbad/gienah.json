@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Gienah",
+  "retrieved_utc": "2026-09-02T17:20:07+00:00",
+  "record_id": "* gam Crv",
+  "raw": {
+    "main_id": "* gam Crv",
+    "ra": 183.9515450373768,
+    "dec": -17.541930457603193,
+    "coo_err_maj": 1.322216510772705,
+    "coo_err_min": 0.8806957602500916,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.5799999237060547,
+    "plx_err": 0.20000000298023224,
+    "otype": "PM*",
+    "plx_value": 21.23,
+    "pmra": -158.61,
+    "pmdec": 21.86,
+    "rvz_radvel": -4.2,
+    "sp_type": "B8III",
+    "rvz_bibcode": "1953GCRV..C......0W",
+    "pm_bibcode": "2007A&A...474..653V",
+    "ids": "TIC 348987372|HIP 59803|* gam Crv|*   4 Crv|BD-16  3424|CSV 101250|FAUST 3054|FK5  457|GC 16740|GCRV  7338|GEN# +1.00106625|HD 106625|HIC  59803|HR  4662|IRC -20235|JP11  2195|N30 2837|NSV  5515|PMC 90-93   326|PPM 225593|ROT  1796|SACS 267|SAO 157176|SKY# 22994|NAME Gienah|SV* ZI   921|TD1 16159|TYC 6098-1754-1|UBV   11010|[DBA2001] FA32|[HFE83]  862|uvby98 100106625|ALS 15805|Renson 30850|AKARI-IRC-V1 J1215483-173230|IRAS 12132-1715|2MASS J12154839-1732310|WEB 10626|Gaia DR2 3520774534381588224|TIC 952261043",
+    "matched_id": "NAME Gienah"
+  }
+}

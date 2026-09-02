@@ -1,0 +1,28 @@
+{
+  "source": "simbad",
+  "query": "Tureis",
+  "retrieved_utc": "2026-09-02T17:20:32+00:00",
+  "record_id": "* rho Pup",
+  "raw": {
+    "main_id": "* rho Pup",
+    "ra": 121.88603676458334,
+    "dec": -24.304324429444446,
+    "coo_err_maj": 0.05999999865889549,
+    "coo_err_min": 0.07000000029802322,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2007A&A...474..653V",
+    "V": 2.809999942779541,
+    "plx_err": 0.24449999630451202,
+    "otype": "dS*",
+    "plx_value": 51.3999,
+    "pmra": -82.886,
+    "pmdec": 46.93,
+    "rvz_radvel": 45.8,
+    "sp_type": "F5IIkF2IImF5II",
+    "rvz_bibcode": "2006AstL...32..759G",
+    "pm_bibcode": "2020yCat.1350....0G",
+    "ids": "TIC 154360594|HIP 39757|Gaia DR3 5698015743046182272|* rho Pup|PLX 1930|*  15 Pup|2E  1920|CNS5 2008|CCDM J08075-2418A|CD-23  6828|CPD-23  3368|CSI-23  6828 21|CSV 100920|FK5  308|GC 11034|GCRV  5394|GEN# +1.00067523|HD  67523|HIC  39757|HR  3185|IDS 08033-2401 A|IRAS 08054-2409|IRC -20157|JP11  1629|N30 1871|PMC 90-93   225|PPM 253887|ROT  1301|SACS 176|SAO 175217|SKY# 15322|SRS  30308|TD1 11823|UBV    7771|UBV M  14003|V* rho Pup|YZ 114  5971|2MASS J08073264-2418154|PLX 1930.00|2E 0805.4-2409|1RXS J080732.2-241749|WDS J08075-2418A|TYC 6555-3245-1|Renson 18660|NAME Tureis|** RST 5284A|uvby98 100067523|WEB  7758|Gaia DR2 5698015743040715264",
+    "matched_id": "NAME Tureis"
+  }
+}

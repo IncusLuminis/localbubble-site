@@ -1,0 +1,90 @@
+{
+  "id": "del_leo",
+  "name": "* del Leo",
+  "aliases": [
+    "TIC 159523958",
+    "GJ 419",
+    "HIP 54872",
+    "Gaia DR3 3990320597065899776",
+    "PLX 2614",
+    "LSPM J1114+2031",
+    "ASCC  776748",
+    "USNO-B1.0 1105-00197091",
+    "*  68 Leo",
+    "AG+20 1243",
+    "BD+21  2298",
+    "CSI+21  2298  1",
+    "CSV 101190",
+    "FK5  422",
+    "GC 15438",
+    "GCRV  6892",
+    "GEN# +1.00097603",
+    "CNS5 2742",
+    "HD  97603",
+    "HGAM    602",
+    "HIC  54872",
+    "HR  4357",
+    "IRC +20226",
+    "JP11  2038",
+    "LTT 13027",
+    "N30 2637",
+    "NLTT 26691",
+    "NSV  5143",
+    "PMC 90-93   304",
+    "PPM 100996",
+    "ROT  1671",
+    "SAO  81727",
+    "SKY# 21407",
+    "SRS  30422",
+    "SV* ZI   877",
+    "TD1 15474",
+    "UBV   10242",
+    "UBV M  16901",
+    "YPAC  46",
+    "uvby98 100097603",
+    "2MASS J11140651+2031258",
+    "PLX 2614.00",
+    "TYC 1439-2479-1",
+    "NAME Zosma",
+    "WEB  9902",
+    "Gaia DR2 3990320597065664384",
+    "TIC 903621263"
+  ],
+  "object_type": "star",
+  "coordinates": {
+    "ra_deg": 168.52708926588556,
+    "dec_deg": 20.523718139047475,
+    "galactic_l_deg": 224.2285148018778,
+    "galactic_b_deg": 66.82752209206271
+  },
+  "distance": {
+    "value_pc": 17.914725904693658,
+    "error_pc": 0.08023435106007551
+  },
+  "cartesian": {
+    "x_pc": -5.051379695573547,
+    "y_pc": -4.917145817282794,
+    "z_pc": 16.469445783724083
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "local-bubble-bright-named-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "SIMBAD astronomical database (CDS), record * del Leo, coo_bibcode 2007A&A...474..653V",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=* del Leo",
+    "catalog": "SIMBAD"
+  },
+  "visual": {
+    "size_pc": null,
+    "color_class": null,
+    "spectral_type": "A5IV(n)",
+    "absolute_magnitude": 1.263949132152832,
+    "apparent_magnitude": 2.5299999713897705
+  },
+  "exoplanets": null,
+  "velocity": null,
+  "notes": "Retrieved from SIMBAD on 2026-09-02T17:20:05+00:00; upstream record id: * del Leo; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+}
