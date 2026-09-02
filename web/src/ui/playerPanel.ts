@@ -104,6 +104,43 @@ import {
  * lives outside `.player-time-arc-track`'s own bounding box, so none of
  * this can ever intercept a drag.
  *
+ * Story #277 (layout-only follow-up to #275, no behavior changes): the human
+ * owner's live-testing of #275's redesign found four positioning issues,
+ * fixed here:
+ * - Row order: since the rate arc lived INSIDE `arcCluster` directly beneath
+ *   `buttonRow`, it visually sat BETWEEN the buttons and `todayRow`, even
+ *   though `todayRow` was meant to read as "directly below the buttons".
+ *   Fixed by pulling the rate arc's track out of `arcCluster` (now removed
+ *   entirely - it added no styling of its own once it held only one child)
+ *   into its own full-width `rateArcRow`, positioned in panel child order
+ *   AFTER `todayRow` and BEFORE `timeArcRow` - mirroring how #271 already
+ *   extracted the time arc into its own row for the exact same reason.
+ *   `buttonRow` is now a direct flex child of `controlBar` instead of being
+ *   nested two levels deep inside `arcCluster`.
+ * - Horizontal centering: `buttonRow` (and, via `todayRow`'s own centering,
+ *   the Today button) read off-center because `controlBar`'s two flanking
+ *   elements - `timeReadout` and `rateReadout` - had different widths
+ *   (92px vs 78px `min-width`), so the flexible middle slot `buttonRow` sits
+ *   in wasn't itself centered on the panel. Fixed by giving both readouts
+ *   the SAME fixed width (`flex: 0 0 92px` on both, `style.css`) so the
+ *   flexible middle slot is always exactly centered between two equal
+ *   flanks, regardless of either readout's actual text length.
+ * - Collapse button: moved from an inline `controlBar` flex child to an
+ *   `position: absolute`-positioned direct child of the panel itself
+ *   (`#player-panel` is already `position: absolute` via `.panel`, so it's
+ *   already a valid positioning context - no extra wrapper needed), pinned
+ *   to the panel's own top-right corner rather than "the right side of a
+ *   row". `controlBar` gets symmetric left/right padding equal to the
+ *   collapse button's footprint so it can't visually collide with
+ *   `rateReadout` while keeping `buttonRow`'s centering symmetric (equal
+ *   padding on both sides shifts nothing).
+ * - Vertical alignment: `timeReadout`/`rateReadout` now line up with
+ *   `buttonRow` "for free", since all three are direct flex children of the
+ *   same `controlBar` (`align-items: center` on `.player-panel-row`) -
+ *   previously `buttonRow` was vertically positioned by `arcCluster`'s own
+ *   column layout plus a negative margin nestling it onto the arc, one more
+ *   layer removed from `controlBar`'s own cross-axis centering.
+ *
  * This panel still makes no decisions of its own about what any of these
  * mean in terms of resulting time/playback state - that interaction logic
  * lives entirely in `motionPlayer.ts`'s pure functions, driven by `main.ts`;
@@ -260,10 +297,11 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   let latestTYears = 0;
 
   // Story #267: the NASA-Eyes-style bottom control bar - time readout, the
-  // arc+buttons cluster, rate readout, collapse chevron, in that
-  // left-to-right reading order. Story #275 Part 3.3 moves "Today" OUT of
-  // this row entirely (see `todayRow` below) - elapsed-time now sits
-  // directly LEFT of the button/arc cluster and rate directly RIGHT of it,
+  // `<<`/Play-Pause/`>>` buttons, rate readout, in that left-to-right
+  // reading order (Story #277: the collapse chevron is no longer part of
+  // this row at all - see `collapseButton` below). Story #275 Part 3.3 moves
+  // "Today" OUT of this row entirely (see `todayRow` below) - elapsed-time
+  // sits directly LEFT of the button row and rate directly RIGHT of it,
   // matching the reference screenshot's date-left/time-right convention.
   const controlBar = document.createElement("div");
   controlBar.className = "player-panel-row player-control-bar";
@@ -278,14 +316,13 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   timeReadout.className = "player-time-readout";
   timeReadout.textContent = formatPlayerTimeYears(0);
 
-  // The arc cluster: a small column with the three transport buttons on top
-  // (raised, reading as if perched on the arc's own peaks) and the SVG arc
-  // track/handle beneath.
-  const arcCluster = document.createElement("div");
-  arcCluster.className = "player-rate-arc";
-
+  // Story #277: previously nested inside a now-removed `arcCluster` wrapper
+  // (a small column with these buttons on top, "perched" on the rate arc's
+  // SVG track beneath) - `buttonRow` is now a direct flex child of
+  // `controlBar` itself, matching `timeReadout`/`rateReadout` (see this
+  // module's own Story #277 docstring paragraph above for why).
   const buttonRow = document.createElement("div");
-  buttonRow.className = "player-rate-arc-buttons";
+  buttonRow.className = "player-button-row";
 
   const nudgeBackButton = document.createElement("button");
   nudgeBackButton.type = "button";
@@ -429,14 +466,20 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
     }
   });
 
-  arcCluster.append(buttonRow, arcTrack);
+  // Story #277: the rate arc's own full-width row, positioned in panel child
+  // order AFTER `todayRow` and BEFORE `timeArcRow` (see this module's own
+  // Story #277 docstring paragraph above) - `arcTrack` used to live inside
+  // the now-removed `arcCluster`, nested directly under `buttonRow` in
+  // `controlBar`.
+  const rateArcRow = document.createElement("div");
+  rateArcRow.className = "player-panel-row player-rate-arc-row";
+  rateArcRow.appendChild(arcTrack);
 
-  // Story #271: the second, larger arc beneath the rate arc/control bar -
-  // the restyled absolute-time scrubber. Own full-width row (not nested
-  // inside `arcCluster`, unlike the rate arc, which shares its row with
-  // Today/the readouts/the collapse button) so its on-screen CSS box spans
-  // the whole panel width rather than just the arc cluster's own flexible
-  // middle slice - stretching the SAME `ARC_START`/`ARC_CONTROL`/`ARC_END`
+  // Story #271: the second, larger arc beneath the rate arc row above -
+  // the restyled absolute-time scrubber. Its own full-width row (Story #277:
+  // now matching `rateArcRow` above, which used to be narrower/nested inside
+  // the now-removed `arcCluster`) so its on-screen CSS box spans the whole
+  // panel width - stretching the SAME `ARC_START`/`ARC_CONTROL`/`ARC_END`
   // geometry (via `preserveAspectRatio="none"`, exactly like the rate arc)
   // across a wider box is what makes it read as a bigger, shallower,
   // "wrapping around" echo of the rate arc above it, without inventing a
@@ -620,6 +663,11 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
     logSpeedSliderToYearsPerSecond(options.defaultRateSliderValue),
   );
 
+  // Story #277: moved OUT of `controlBar`'s flex flow entirely - now a
+  // `position: absolute` direct child of `panel`, pinned to the panel's own
+  // top-right corner (`style.css`), rather than an inline flex item "on the
+  // right side of" `controlBar`'s row (see this module's own Story #277
+  // docstring paragraph above for why).
   const collapseButton = document.createElement("button");
   collapseButton.type = "button";
   collapseButton.className = "player-collapse-toggle";
@@ -627,22 +675,25 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   collapseButton.setAttribute("aria-label", "Collapse player panel");
   collapseButton.addEventListener("click", () => options.onCollapse());
 
-  controlBar.append(timeReadout, arcCluster, rateReadout, collapseButton);
-  panel.appendChild(controlBar);
+  controlBar.append(timeReadout, buttonRow, rateReadout);
+  panel.append(controlBar, collapseButton);
 
   // Story #275 Part 3.3: "Today" moves into its own dedicated, centered row,
-  // directly below the `<<`/Play-Pause/`>>` button row (and the rate arc
-  // beneath it) - no longer inline with the time/rate readouts or the
-  // collapse chevron the way it was in `controlBar` above.
+  // directly below the `<<`/Play-Pause/`>>` button row - no longer inline
+  // with the time/rate readouts or the collapse chevron the way it was in
+  // `controlBar` above.
   const todayRow = document.createElement("div");
   todayRow.className = "player-panel-row player-today-row";
   todayRow.appendChild(todayButton);
   panel.appendChild(todayRow);
 
-  // Story #271: the time arc's own row, directly BELOW the control bar (and
-  // so below the rate arc it sits under) - see this function's own
-  // `timeArcRow` comment above for why it's a separate full-width row
-  // rather than nested inside `arcCluster`.
+  // Story #277: the rate arc's own row now sits here, directly below
+  // `todayRow` and above `timeArcRow` - see `rateArcRow`'s own comment
+  // above.
+  panel.appendChild(rateArcRow);
+  // Story #271: the time arc's own row, directly BELOW the rate arc row
+  // above it - see this function's own `timeArcRow` comment above for why
+  // it's a separate full-width row.
   panel.appendChild(timeArcRow);
   // Story #273: the tick-label row, directly below the time arc's own row -
   // see the tick-building block above for why these are plain HTML in a
