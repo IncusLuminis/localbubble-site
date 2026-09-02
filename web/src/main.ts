@@ -486,32 +486,14 @@ velocityVectorsButton.setAttribute("aria-pressed", "false");
 // #164 - only its container/position/size moved.
 const infoToggleButton = createToolbarButton("info-toggle", "i", "About Local Galactic Structures");
 
-/** Story #239: the motion-player toggle glyph - a plain filled play
- * triangle. `fill="currentColor"` (unlike the vectors icon's outline
- * strokes) so it reads as a solid, familiar "play" symbol; `.active`
- * styling (see `style.css`) is what actually distinguishes playing from
- * paused, matching `velocityVectorsButton`'s own single-static-glyph +
- * `.active`-class convention rather than swapping to a second "pause"
- * glyph on this toolbar button specifically (the panel's own play/pause
- * control, `ui/playerPanel.ts`, DOES swap its glyph - see that module). */
-const PLAYER_ICON_SVG = `
-  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" stroke="none" aria-hidden="true">
-    <path d="M7 4 L20 12 L7 20 Z" />
-  </svg>
-`;
-
-// Story #256: Epic #255's settled order places Play last (#13), after
-// Information (#12) - `applyPlayerSphereState`/`applyVelocityVectorsButtonState`
-// further below both key off the same camera-inside-the-RECONS-dense-batch-
-// sphere check regardless of DOM order, so reordering relative to Info here
-// doesn't affect that gating logic.
-const playerButton = createToolbarButton(
-  "player-toggle",
-  PLAYER_ICON_SVG,
-  "Play star motion through time",
-  true,
-);
-playerButton.setAttribute("aria-pressed", "false");
+// Story #275: the toolbar Play button (Story #239's `player-toggle`,
+// Epic #255's item #13) is removed entirely - the motion player is now
+// opened via the new sphere-gated "TIME CONTROLS" collapsed indicator
+// (`playerCollapsedIndicator`, built alongside `playerPanelHandle` below)
+// instead of a `#left-toolbar` icon. `applyPlayerSphereState`/
+// `applyVelocityVectorsButtonState` further below still key off the same
+// camera-inside-the-RECONS-dense-batch-sphere check for the indicator's own
+// visibility, unchanged from how they gated this button before.
 
 const raycaster = new Raycaster();
 
@@ -577,6 +559,18 @@ let velocityVectorsOn = false;
 let playerTimeYears = 0;
 let playerPlaying = false;
 let playerPanelOpen = false;
+
+/** Story #275: whether the camera is currently inside the RECONS dense-batch
+ * sphere, as of the last `applyPlayerSphereState` call (mirrors
+ * `cameraWasInsideDenseBatchSphere`'s own crossing-detection value, but
+ * scoped to this module's own player-indicator visibility need rather than
+ * reused directly, since that flag lives above `applyBackgroundDimming` and
+ * is updated on the same crossing frames `applyPlayerSphereState` already
+ * runs on). Drives `playerCollapsedIndicator`'s visibility together with
+ * `playerPanelOpen` via `syncPlayerCollapsedIndicatorVisibility` below - the
+ * indicator shows exactly when inside the sphere AND the expanded panel is
+ * NOT open, so the two are always mutually exclusive. */
+let playerInsideSphere = false;
 
 /** Story #266: the player's single signed `[-1, 1]` rate value - drives both
  * direction (sign) and speed (magnitude) together via
@@ -665,8 +659,8 @@ function getSidePanelToggleButton(name: SidePanelName): HTMLButtonElement {
 
 /** Closes one side panel (a no-op if its content isn't built yet, or if
  * it's already closed) and clears its toolbar button's pressed styling -
- * the same `aria-pressed`/`.active` convention `velocityVectorsButton`/
- * `playerButton` already use for their own toggle state. */
+ * the same `aria-pressed`/`.active` convention `velocityVectorsButton`
+ * already uses for its own toggle state. */
 function closeSidePanel(name: SidePanelName): void {
   getSidePanelHandle(name)?.setOpen(false);
   const button = getSidePanelToggleButton(name);
@@ -729,15 +723,60 @@ const playerPanelHandle = createPlayerPanel({
     setPlayerPlaying(false);
     playerTimeYears = 0;
   },
-  // Story #267: the new collapse chevron - reuses the SAME close+reset-to-
-  // Today action as the toolbar Play button's own second-click behavior
-  // (`closePlayerPanelAndResetToToday` below), rather than inventing a
-  // separate minimized visual state (documented decision, see the PR
-  // description).
-  onCollapse: () => closePlayerPanelAndResetToToday(),
+  // Story #275: overrides #267's original choice (which reused the toolbar
+  // Play button's own close+reset-to-Today action). The human owner's
+  // described flow requires the collapse chevron to be a genuine MINIMIZE
+  // now - it hides the expanded panel and reveals the "TIME CONTROLS"
+  // collapsed indicator again, but leaves `playerTimeYears`/`playerPlaying`/
+  // `playerRateSliderValue` completely untouched. Only leaving the sphere
+  // (`applyPlayerSphereState` below) still resets those.
+  onCollapse: () => collapsePlayerPanel(),
   defaultRateSliderValue: DEFAULT_PLAYER_RATE_SLIDER_VALUE,
 });
 app.appendChild(playerPanelHandle.element);
+
+/** Story #275: the small up-chevron SVG glyph shown above the "TIME
+ * CONTROLS" text label in `playerCollapsedIndicator` below - a plain thin
+ * stroke chevron (matching the human owner's reference screenshot), sized
+ * small since the text label itself carries most of the indicator's visual
+ * weight, unlike the toolbar's own bigger 20x20 icons. */
+const TIME_CONTROLS_CHEVRON_SVG = `
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M5 15 L12 8 L19 15" />
+  </svg>
+`;
+
+/** Story #275: the new persistent bottom-center "TIME CONTROLS" collapsed
+ * indicator (reference screenshot: a small up-chevron above the text
+ * "TIME CONTROLS") that replaces the old toolbar Play button as the way to
+ * open the player panel. Built once here, alongside `playerPanelHandle`
+ * itself, mirroring every other "always exists, shown/hidden via a method
+ * call" element in this file (`inspector`/`searchDialog`/`playerPanelHandle`
+ * above). Visibility is driven entirely by `syncPlayerCollapsedIndicatorVisibility`
+ * below (sphere-gated via `playerInsideSphere`, and mutually exclusive with
+ * the expanded panel via `playerPanelOpen`) - never toggled directly at any
+ * other call site. */
+const playerCollapsedIndicator = document.createElement("button");
+playerCollapsedIndicator.id = "player-collapsed-indicator";
+playerCollapsedIndicator.type = "button";
+playerCollapsedIndicator.className = "player-collapsed-indicator";
+playerCollapsedIndicator.innerHTML = `${TIME_CONTROLS_CHEVRON_SVG}<span>TIME CONTROLS</span>`;
+playerCollapsedIndicator.setAttribute("aria-label", "Open time controls");
+app.appendChild(playerCollapsedIndicator);
+
+/** Story #275: clicking the collapsed indicator reveals the expanded panel -
+ * same "just reveal, never auto-start playback" behavior as the old toolbar
+ * Play button's first-click (#245); nothing about `playerTimeYears`/
+ * `playerPlaying`/`playerRateSliderValue` changes here. Only reachable while
+ * the indicator is actually visible (`display: none` otherwise - see
+ * `style.css`), which itself only happens while inside the sphere, so no
+ * extra sphere check is needed here. */
+playerCollapsedIndicator.addEventListener("click", () => {
+  playerPanelOpen = true;
+  playerPanelHandle.setVisible(true);
+  syncPlayerCollapsedIndicatorVisibility();
+});
 
 /** Issue #104: the dense RECONS batch's own collection radius (pc),
  * derived once from the loaded scene data (`lod.ts`'s
@@ -884,20 +923,20 @@ function applyVelocityVectorsButtonState(insideSphere: boolean): void {
   }
 }
 
-/** Story #239: the single writer for the player's play/pause state - shared
- * by the toolbar button's click handler and (Story #266) the panel's own
- * center Play/Pause button, so all of them can never disagree about whether
- * the player is currently playing, mirroring how
- * `applyVelocityVectorsButtonState` is the single writer for that toggle's
- * `aria-pressed`/`.active` state. Never writes `playerRateSliderValue` itself
- * - Story #266's whole point is that the two are fully independent: pausing/
- * resuming via this function alone (the toolbar button, a nudge, a scrub,
- * Today, the panel's own Play/Pause button) must never silently change the
- * configured rate/direction the player would next play at. */
+/** Story #239: the single writer for the player's play/pause state -
+ * (Story #266) shared by the panel's own center Play/Pause button and every
+ * other call site that pauses/resumes (a nudge, a scrub, Today, reaching
+ * Today while playing), so all of them can never disagree about whether the
+ * player is currently playing. Story #275: the toolbar Play button this used
+ * to also update (`aria-pressed`/`.active`) is gone - `playerPlaying` itself
+ * is still pushed into `ui/playerPanel.ts`'s own Play/Pause glyph every
+ * frame via `applyPlayerAnimation`'s `playerPanelHandle.update()` call,
+ * unchanged. Never writes `playerRateSliderValue` itself - Story #266's whole
+ * point is that the two are fully independent: pausing/resuming via this
+ * function alone must never silently change the configured rate/direction
+ * the player would next play at. */
 function setPlayerPlaying(next: boolean): void {
   playerPlaying = next;
-  playerButton.setAttribute("aria-pressed", String(playerPlaying));
-  playerButton.classList.toggle("active", playerPlaying);
 }
 
 /** Story #266: the panel's center Play/Pause button handler - a PLAIN
@@ -919,42 +958,51 @@ function handlePlayerRateNudge(deltaSign: PlayerDirection): void {
   playerRateSliderValue = nudgeRateSliderValue(playerRateSliderValue, deltaSign);
 }
 
+/** Story #275: shows/hides `playerCollapsedIndicator` so it's visible
+ * exactly when the camera is inside the RECONS sphere AND the expanded panel
+ * is NOT open - the "only one of {collapsed indicator, expanded panel} is
+ * ever visible at a time" requirement. Called from every site that changes
+ * either `playerInsideSphere` or `playerPanelOpen` (the indicator's own click
+ * handler above, `collapsePlayerPanel` below, and `applyPlayerResetState`
+ * below on every sphere-crossing reset) rather than being folded into any one
+ * of them, since more than one of those sites needs to trigger this same
+ * recomputation. */
+function syncPlayerCollapsedIndicatorVisibility(): void {
+  playerCollapsedIndicator.classList.toggle("visible", playerInsideSphere && !playerPanelOpen);
+}
+
 /** Story #249: applies a `PlayerState` (as produced by `nextPlayerStateForSphere`)
- * to the live module/DOM state - the single application point shared by the
- * sphere-exit force-reset (`applyPlayerSphereState` below) and the toolbar
- * Play button's "close the already-open panel" action (its click handler
- * further down), so the two reset call sites literally pass through the same
- * code and can never drift apart. Uses `setPlayerPlaying` (not a direct
- * assignment) so `playerButton`'s `aria-pressed`/`.active` stay correct
- * either way, and re-syncs the UI lock since `playerTimeYears` may have just
+ * to the live module/DOM state - the single application point for the
+ * sphere-exit force-reset (`applyPlayerSphereState` below), so that reset
+ * logic lives in exactly one place. Story #275: also re-syncs the collapsed
+ * indicator's own visibility here (rather than duplicating that sync at
+ * `applyPlayerSphereState` itself) since every caller of this function is
+ * exactly a point where `playerPanelOpen` (and possibly `playerInsideSphere`,
+ * set by the caller first) may have just changed. Uses `setPlayerPlaying`
+ * (not a direct assignment) for consistency with every other play/pause
+ * write site, and re-syncs the UI lock since `playerTimeYears` may have just
  * changed to/from exactly `0`. */
 function applyPlayerResetState(next: PlayerState): void {
   playerTimeYears = next.timeYears;
   setPlayerPlaying(next.playing);
   playerPanelOpen = next.panelOpen;
   playerPanelHandle.setVisible(playerPanelOpen);
+  syncPlayerCollapsedIndicatorVisibility();
   syncUiLock();
 }
 
-/** Story #249's "close the already-open panel and reset to Today" action -
- * originally inlined only at the toolbar Play button's own click handler
- * (further down); Story #267 factors it out into this named function so its
- * new collapse-chevron callback (`onCollapse` above) can call the exact same
- * code rather than duplicating the `nextPlayerStateForSphere(..., false)` +
- * `applyPlayerResetState` pairing at a second call site - the documented
- * choice (per the issue's recommended default) to reuse this existing
- * close+reset action for the chevron rather than invent a separate
- * minimized-panel state. Passing `insideSphereNow = false` here always makes
- * `nextPlayerStateForSphere` return the same fixed `{ timeYears: 0, playing:
- * false, panelOpen: false }` end state regardless of the current player
- * state passed in - see that function's own docstring. */
-function closePlayerPanelAndResetToToday(): void {
-  applyPlayerResetState(
-    nextPlayerStateForSphere(
-      { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
-      false,
-    ),
-  );
+/** Story #275: the player panel's own collapse chevron handler - a genuine
+ * MINIMIZE, overriding #267's original "reuse the toolbar button's own
+ * close+reset-to-Today action" choice (that action, `closePlayerPanelAndResetToToday`,
+ * is removed - nothing else called it once the toolbar button itself was
+ * removed). Hides the expanded panel and reveals the collapsed indicator
+ * again, WITHOUT touching `playerTimeYears`/`playerPlaying`/
+ * `playerRateSliderValue` at all - only leaving the sphere
+ * (`applyPlayerSphereState` below) still resets those. */
+function collapsePlayerPanel(): void {
+  playerPanelOpen = false;
+  playerPanelHandle.setVisible(false);
+  syncPlayerCollapsedIndicatorVisibility();
 }
 
 /** Story #239 AC #7: forces "Show velocity vectors" off (arrows + speed
@@ -995,10 +1043,12 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
  * "stay consistent with every other locked control" instruction - so Fit/
  * Zoom read the same locked/unlocked whether paused mid-scrub or actively
  * playing, matching every other control this function already locks the
- * same way. `playerButton` itself is deliberately EXCLUDED (stays enabled
- * throughout, gated only by its own existing sphere check in
- * `applyPlayerSphereState` below) - locking it would trap the user with no
- * way to reopen/interact with the player panel. Camera navigation
+ * same way. The player's own controls (the collapsed indicator, the
+ * expanded panel - Story #275, previously the toolbar `playerButton`) are
+ * deliberately EXCLUDED (stay enabled throughout, gated only by their own
+ * existing sphere check in `applyPlayerSphereState` below) - locking them
+ * would trap the user with no way to reopen/interact with the player.
+ * Camera navigation
  * (`OrbitControls`) is never touched here, per that same AC - this only
  * disables discrete toolbar buttons, not mouse-driven camera control.
  * Star-click selection is guarded directly in the click handler via the
@@ -1024,7 +1074,7 @@ function syncUiLock(): void {
 }
 
 /** Story #239 AC #8 (mirrors `applyVelocityVectorsButtonState` above
- * exactly): syncs the player toolbar button's enabled/disabled state to
+ * exactly): syncs the player's sphere-gated visibility state to
  * `insideSphere`, and - via `motionPlayer.ts`'s pure `nextPlayerStateForSphere`
  * - force-resets the whole player (time back to Today, paused, panel
  * hidden) the instant the camera leaves the sphere, mirroring #231 AC #3's
@@ -1035,8 +1085,21 @@ function syncUiLock(): void {
  * `applyBackgroundDimming`'s own boundary-crossing detection, alongside
  * `applyVelocityVectorsButtonState`, per this Story's explicit instruction
  * to reuse that existing per-frame hook rather than adding a third
- * independent RAF-driven check. */
+ * independent RAF-driven check.
+ *
+ * Story #275: `playerInsideSphere` is set FIRST, before `applyPlayerResetState`
+ * runs - that call's own `syncPlayerCollapsedIndicatorVisibility` reads the
+ * new value, so the collapsed indicator's visibility (extends this same
+ * "outside" reset to also hide it, per the issue, rather than a second
+ * independent hook) is always resolved from the up-to-date sphere state. On
+ * exit this drives the indicator to hidden (via `panelOpen: false` AND
+ * `playerInsideSphere = false`, both true at once - "hides BOTH the
+ * collapsed indicator AND the expanded panel"); on entry it leaves
+ * `panelOpen` at its existing `false` value (the reset from the PREVIOUS
+ * exit), so re-entering always shows the collapsed indicator, never the
+ * expanded panel, matching the human owner's own described flow. */
 function applyPlayerSphereState(insideSphere: boolean): void {
+  playerInsideSphere = insideSphere;
   const next = nextPlayerStateForSphere(
     { timeYears: playerTimeYears, playing: playerPlaying, panelOpen: playerPanelOpen },
     insideSphere,
@@ -1051,8 +1114,6 @@ function applyPlayerSphereState(insideSphere: boolean): void {
   if (!insideSphere) {
     playerRateSliderValue = DEFAULT_PLAYER_RATE_SLIDER_VALUE;
   }
-
-  playerButton.disabled = !insideSphere;
 }
 
 /**
@@ -1726,28 +1787,15 @@ velocityVectorsButton.addEventListener("click", () => {
     );
   }
 });
-// Story #239: only ever clickable while `applyPlayerSphereState`'s own
-// crossing-detection has left it enabled - same pattern as the vectors
-// toggle just above. Story #245: first press (panel not yet open) is a
-// purely inert reveal - it only opens the panel, never starts motion, since
-// direction/rate is an explicit choice made via the panel's own controls
-// (Story #266: the rate slider and `<<`/`>>` nudges) and auto-starting
-// playback at whatever rate happened to be last configured no longer
-// matches that design. Story #249: a subsequent press (panel already open)
-// no longer toggles play/pause (that's now exclusively the panel's own
-// center Play/Pause button's job, via Story #266's
-// `handlePlayerPlayPauseToggle`) - instead it CLOSES the panel and resets to
-// Today, via `closePlayerPanelAndResetToToday` (Story #267 factored this out
-// of this handler so the new collapse chevron can share the exact same
-// code - see that function's own docstring).
-playerButton.addEventListener("click", () => {
-  if (!playerPanelOpen) {
-    playerPanelOpen = true;
-    playerPanelHandle.setVisible(true);
-  } else {
-    closePlayerPanelAndResetToToday();
-  }
-});
+// Story #275: the toolbar Play button's own click handler (Story #239's
+// original open/close toggle, Story #245's "first press only reveals,
+// never auto-starts" refinement, Story #249's "second press closes and
+// resets" behavior) is removed along with the button itself -
+// `playerCollapsedIndicator`'s own click handler (built alongside
+// `playerPanelHandle` above) now owns the "reveal, never auto-start" first
+// action, and `collapsePlayerPanel` (the panel's own collapse chevron, per
+// Part 2's behavior change) owns minimizing back to the indicator. Only
+// leaving the sphere (`applyPlayerSphereState`) still resets/closes fully.
 infoToggleButton.addEventListener("click", () => infoDialog.show());
 
 /** Search / go-to-object (issue #106, spec §2.6): frames the camera closely
