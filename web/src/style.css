@@ -1114,13 +1114,15 @@ body {
 
 /* Story #279: back inside `.player-button-row`, as the last item after
    `>>` (Story #275 Part 3.3 had pulled it out into its own row - see the
-   removed `.player-today-row` comment above). A little extra left margin
-   (beyond `.player-button-row`'s own `gap`) visually separates it from the
-   `<<`/Play-Pause/`>>` transport trio as its own distinct action rather than
-   a fourth transport button. */
+   removed `.player-today-row` comment above).
+
+   Story #283: the extra `margin-left: 6px` Story #279 added here (on top of
+   `.player-button-row`'s own `gap: 4px`) made the gap before Today 10px
+   while every other gap in the row was 4px. Removed so all three gaps in
+   the row (`<<`-to-Play-Pause, Play-Pause-to-`>>`, `>>`-to-Today) are equal,
+   live-verified via `getBoundingClientRect()`. */
 .player-today {
   flex: 0 0 auto;
-  margin-left: 6px;
   /* Story #281: explicit height matching `.player-transport`'s 46px below -
      without this the button relied on default padding-based sizing and
      didn't align with the transport trio's height in the same row. */
