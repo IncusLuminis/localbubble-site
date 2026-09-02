@@ -140,3 +140,29 @@ export function isCameraInsideLocalBubble(
   }
   return cameraDistanceFromOriginPc <= bubbleOuterRadiusPc;
 }
+
+/**
+ * Issue #290: the EFFECTIVE "is the Local Bubble gate open" value that
+ * `main.ts` feeds into `applyVelocityVectorsButtonState`/
+ * `applyPlayerSphereState` (and everything else keyed off
+ * `cameraWasInsideLocalBubble`) each frame - `insideBubbleNow`
+ * (`isCameraInsideLocalBubble` above, the real camera-distance check)
+ * widened with an OR against `bubbleViewOverrideActive`, the persistent
+ * override "Fit to Local Bubble" sets so Vectors/TIME CONTROLS activate
+ * even though that button's own framing (`applyFitLocalBubblePose`,
+ * unchanged) deliberately frames the WHOLE bubble from ~317pc - farther out
+ * than the bubble's own ~60pc radius, so `insideBubbleNow` alone would
+ * never trip from that pose.
+ *
+ * Deliberately NOT used for the RECONS-sphere-specific gating/dimming or
+ * the Local-Bubble/Gould-Belt/Radcliffe-Wave dimming tiers - those all stay
+ * keyed to the real, un-widened `isCameraInsideLocalBubble`/
+ * `isCameraInsideDenseBatchSphere` values (per #290's explicit scope: only
+ * the Local-Bubble-specific Vectors/player gate widens).
+ */
+export function effectiveInsideLocalBubble(
+  insideBubbleNow: boolean,
+  bubbleViewOverrideActive: boolean,
+): boolean {
+  return insideBubbleNow || bubbleViewOverrideActive;
+}

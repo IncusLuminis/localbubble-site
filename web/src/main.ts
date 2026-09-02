@@ -41,6 +41,7 @@ import {
 } from "./scene/objects";
 import {
   denseBatchCollectionRadiusPc,
+  effectiveInsideLocalBubble,
   isCameraInsideDenseBatchSphere,
   isCameraInsideLocalBubble,
   isDenseBatchMember,
@@ -901,7 +902,99 @@ function applyDenseBatchBoundaryVisibility(): void {
  * crossing of EITHER boundary (not just the sphere's) triggers a re-apply
  * below. */
 let cameraWasInsideDenseBatchSphere = false;
+/** Issue #290: this tracks the EFFECTIVE "inside the Local Bubble" value
+ * (`scene/lod.ts`'s `effectiveInsideLocalBubble` - the real camera-distance
+ * check widened by `bubbleViewOverrideActive` below), not the raw
+ * camera-distance check - every OTHER call site in this file that reads this
+ * flag (`syncUiLock`, `velocityVectorsButton`'s own click handler) should see
+ * the widened value too, so they never disagree with
+ * `applyVelocityVectorsButtonState`/`applyPlayerSphereState` about whether
+ * the Local-Bubble-gated controls are currently active. Written ONLY by
+ * `applyLocalBubbleGateState` (see that function's docstring), which is also
+ * what `applyBackgroundDimming` below uses to change-detect whether the
+ * Vectors/player gate itself needs a re-apply this frame.
+ *
+ * Bug fix (Validator review on PR #291, post-#290): this used to ALSO be the
+ * sole change-detection value guarding whether `applyBackgroundDimming`'s
+ * dimming-tier calls (`updateBackgroundDimming`/`setGouldBeltDimmed`/
+ * `setRadcliffeWaveDimmed`/`setLocalBubbleDimmed`) ran at all. Once the
+ * override pins the EFFECTIVE value at `true`, that guard matched on every
+ * subsequent frame regardless of the REAL camera distance, so the raw-valued
+ * dimming calls silently stopped re-running the moment the override
+ * activated - e.g. framing "Fit to Local Bubble" (317pc, correctly
+ * undimmed) then manually zooming to a real ~34.6pc (inside the 60pc
+ * bubble) left Gould Belt/Radcliffe Wave stuck fully bright instead of
+ * dimming to the #227 tier, directly violating #290's "dimming tiers stay
+ * completely unaffected by the override" scope. Fixed by giving the
+ * dimming-tier branch its own, separately-tracked RAW change-detection
+ * value - `cameraWasInsideLocalBubbleRaw` just below - so the two branches
+ * (dimming-tier calls vs. the Vectors/player gate) can no longer share a
+ * single boolean that only one of them is allowed to see the override-widened
+ * version of. */
 let cameraWasInsideLocalBubble = false;
+/** Bug fix (Validator review on PR #291, post-#290): the RAW (un-widened by
+ * `bubbleViewOverrideActive`), real-camera-distance "inside the Local
+ * Bubble" value as of the last frame `applyBackgroundDimming` actually ran
+ * its dimming-tier calls - tracked separately from `cameraWasInsideLocalBubble`
+ * above (which tracks the EFFECTIVE/override-widened value for the
+ * Vectors/player gate) so the dimming-tier calls' own change-detection keeps
+ * firing on every REAL boundary crossing regardless of whether the override
+ * is active. See `cameraWasInsideLocalBubble`'s own docstring above for the
+ * full bug writeup this fixes. Written ONLY inside `applyBackgroundDimming`
+ * below, immediately before the dimming-tier calls it guards. */
+let cameraWasInsideLocalBubbleRaw = false;
+
+/** Issue #290: persistent override set by `fitLocalBubbleButton`'s click
+ * handler - `false` by default. While `true`, Vectors/TIME CONTROLS stay
+ * active regardless of the real camera distance (the button's own framing,
+ * `applyFitLocalBubblePose`, deliberately shows the WHOLE bubble from
+ * ~317pc, farther out than the bubble's own ~60pc radius, so the normal
+ * distance check alone would never activate them from that pose). Cleared
+ * only by `clearBubbleViewOverride` below - manual camera navigation
+ * (orbit/pan/zoom) never touches this, only the explicit
+ * camera-repositioning actions that call that function. */
+let bubbleViewOverrideActive = false;
+
+/** Issue #290: the single place that applies "the camera is now
+ * (effectively) inside the Local Bubble" to the Vectors toggle and the
+ * motion player - shared by `applyBackgroundDimming`'s own per-frame
+ * boundary-crossing detection below AND `fitLocalBubbleButton`'s click
+ * handler (which needs to apply this SAME activation immediately, not wait
+ * for the next animation frame - this dev environment has a known issue
+ * where the rAF loop can stall while the tab isn't focused, so an explicit
+ * synchronous call here is load-bearing, not just a minor optimization).
+ * Also updates `cameraWasInsideLocalBubble` itself (see that binding's own
+ * docstring above for why it now stores the EFFECTIVE value) so the
+ * per-frame guard in `applyBackgroundDimming` and every other reader of
+ * that flag stay in sync with whatever this function was just called
+ * with. */
+function applyLocalBubbleGateState(effectiveInsideBubble: boolean): void {
+  cameraWasInsideLocalBubble = effectiveInsideBubble;
+  applyVelocityVectorsButtonState(effectiveInsideBubble);
+  applyPlayerSphereState(effectiveInsideBubble);
+}
+
+/** Issue #290: clears `bubbleViewOverrideActive` (a no-op if it's already
+ * `false`) and immediately re-applies the gate state from the REAL current
+ * camera distance, via the exact same `applyLocalBubbleGateState` chokepoint
+ * above - so Vectors/TIME CONTROLS correctly reflect wherever the camera
+ * actually ended up right after the repositioning action that called this,
+ * rather than staying stuck on (or off) until the next frame's
+ * `applyBackgroundDimming` call happens to run. Called from every OTHER
+ * camera-repositioning control's own click handler (the four Camera-panel
+ * presets, "Fit all", "Fit to nearest-stars sphere", and Search's "go to
+ * object") AFTER that handler has already moved the camera, so
+ * `camera.position` here is always the POST-move position. Deliberately
+ * NOT called from `fitLocalBubbleButton`'s own handler (that's the button
+ * that SETS the override, not one of the ones that clears it) or from any
+ * mouse-driven `OrbitControls` navigation (manual orbit/pan/zoom must never
+ * clear this, per #290's explicit acceptance criteria). */
+function clearBubbleViewOverride(): void {
+  if (!bubbleViewOverrideActive) return;
+  bubbleViewOverrideActive = false;
+  const insideBubbleNow = isCameraInsideLocalBubble(camera.position.length(), bubbleOuterRadiusPc);
+  applyLocalBubbleGateState(insideBubbleNow);
+}
 
 /** Issue #231: syncs the velocity-vectors toggle button's enabled/disabled
  * state (and, per AC #3, forces the toggle itself - and so the layer's
@@ -1295,33 +1388,62 @@ function applyBackgroundDimming(): void {
   const cameraDistancePc = camera.position.length();
   const insideSphere = isCameraInsideDenseBatchSphere(cameraDistancePc, denseBatchRadiusPc);
   const insideBubble = isCameraInsideLocalBubble(cameraDistancePc, bubbleOuterRadiusPc);
-  if (
-    insideSphere === cameraWasInsideDenseBatchSphere &&
-    insideBubble === cameraWasInsideLocalBubble
-  ) {
-    return;
-  }
-  cameraWasInsideDenseBatchSphere = insideSphere;
-  cameraWasInsideLocalBubble = insideBubble;
+  // Issue #290: the EFFECTIVE value fed into `applyLocalBubbleGateState`
+  // below (and so into that call's own change-detection, via
+  // `cameraWasInsideLocalBubble`) - widened by `bubbleViewOverrideActive`
+  // so a crossing-detection frame also fires on the frame that flag flips,
+  // not only on a real camera-distance crossing. `insideBubble` itself
+  // (the RAW, un-widened value) is still what's passed to the dimming-tier
+  // calls below, completely unaffected by the override.
+  const effectiveInsideBubble = effectiveInsideLocalBubble(insideBubble, bubbleViewOverrideActive);
 
-  updateBackgroundDimming(catalogBuckets, insideSphere, insideBubble);
-  setGouldBeltDimmed(gouldBeltGroup, insideSphere, insideBubble);
-  setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere, insideBubble);
-  setLocalBubbleDimmed(localBubbleGroup, insideSphere);
+  // Bug fix (Validator review on PR #291, post-#290): the dimming-tier
+  // calls below get their OWN change-detection, gated on the RAW
+  // `insideSphere`/`insideBubble` values (`cameraWasInsideDenseBatchSphere`/
+  // `cameraWasInsideLocalBubbleRaw`) - deliberately NOT the same guard as
+  // the Vectors/player gate just below, which uses the EFFECTIVE,
+  // override-widened value instead. Reusing a single guard for both used to
+  // mean that once `bubbleViewOverrideActive` pinned `effectiveInsideBubble`
+  // at `true`, the shared guard matched on every subsequent frame regardless
+  // of the real camera distance, so the raw-valued dimming calls silently
+  // stopped re-running - see `cameraWasInsideLocalBubble`'s own docstring
+  // above for the full writeup. Splitting the two guards means each branch
+  // fires exactly on the frames it actually cares about, independent of the
+  // other.
+  if (insideSphere !== cameraWasInsideDenseBatchSphere || insideBubble !== cameraWasInsideLocalBubbleRaw) {
+    cameraWasInsideDenseBatchSphere = insideSphere;
+    cameraWasInsideLocalBubbleRaw = insideBubble;
+
+    updateBackgroundDimming(catalogBuckets, insideSphere, insideBubble);
+    setGouldBeltDimmed(gouldBeltGroup, insideSphere, insideBubble);
+    setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere, insideBubble);
+    setLocalBubbleDimmed(localBubbleGroup, insideSphere);
+  }
+
   // Story #287: the velocity-vectors toggle's enabled/disabled (and
   // forced-off-on-exit) state, and the player's own enabled/disabled +
   // force-reset state, are now gated on the Local Bubble boundary
   // (`insideBubble`) rather than the RECONS dense-batch sphere boundary
   // (`insideSphere`) - widened from issue #231's/Story #239's original
-  // sphere-only gating, per Epic #285. Both still reuse this function's own
-  // change-detection above rather than a second independent per-frame check
-  // (see `applyVelocityVectorsButtonState`'s/`applyPlayerSphereState`'s own
-  // docstrings). Every OTHER effect above this comment (background
-  // dimming's own dense-batch tier, the Gould Belt/Radcliffe Wave/Local
-  // Bubble overlay dimming, `insideSphere` itself) is unchanged and stays
-  // keyed to the RECONS sphere - out of this Story's scope.
-  applyVelocityVectorsButtonState(insideBubble);
-  applyPlayerSphereState(insideBubble);
+  // sphere-only gating, per Epic #285. Every OTHER effect above this
+  // comment (background dimming's own dense-batch tier, the Gould
+  // Belt/Radcliffe Wave/Local Bubble overlay dimming, `insideSphere`
+  // itself) is unchanged and stays keyed to the RECONS sphere - out of this
+  // Story's scope.
+  //
+  // Issue #290: routed through `applyLocalBubbleGateState` (which also
+  // writes `cameraWasInsideLocalBubble`, the EFFECTIVE-valued change-
+  // detection for this branch specifically) rather than calling
+  // `applyVelocityVectorsButtonState`/`applyPlayerSphereState` directly, so
+  // this is the exact same chokepoint `fitLocalBubbleButton`'s click
+  // handler and `clearBubbleViewOverride` reuse - never duplicated. Guarded
+  // by its own change-detection here (rather than unconditionally
+  // re-applying every frame) so it only touches the DOM/group visibility on
+  // an actual transition, matching the dimming-tier branch's own guard
+  // above in spirit even though the two now track different values.
+  if (effectiveInsideBubble !== cameraWasInsideLocalBubble) {
+    applyLocalBubbleGateState(effectiveInsideBubble);
+  }
 }
 
 /** Issue #123: the selection reticle's scale should track the *same*
@@ -1717,6 +1839,14 @@ function applyFitNearestStarsPose(): void {
     fitSpherePose([0, 0, 0], denseBatchRadiusPc),
     FIT_NEAREST_STARS_EXTRA_ZOOM_IN_STEPS,
   );
+  // Issue #290: one of the explicit camera-repositioning actions that
+  // clears `bubbleViewOverrideActive` - called AFTER the pose above so
+  // `clearBubbleViewOverride` recomputes the gate from the camera's real
+  // POST-move distance (which, for this particular button, is normally
+  // still inside the Local Bubble anyway, so Vectors/TIME CONTROLS should
+  // stay active here too - just now via the ordinary real-distance path,
+  // not the override).
+  clearBubbleViewOverride();
 }
 
 /** Issue #197: keeps `fitLocalBubbleButton` disabled whenever the loaded
@@ -1796,7 +1926,22 @@ document.addEventListener(
 zoomInButton.addEventListener("click", () => zoomBy(ZOOM_IN_STEP_FACTOR));
 zoomOutButton.addEventListener("click", () => zoomBy(ZOOM_OUT_STEP_FACTOR));
 showAllButton.addEventListener("click", () => applyCameraPreset("fit-all"));
-fitLocalBubbleButton.addEventListener("click", applyFitLocalBubblePose);
+// Issue #290: after the existing framing (unchanged - still shows the WHOLE
+// bubble from ~317pc, per this button's own confirmed-correct #219/#220
+// behavior), explicitly sets the persistent override and immediately
+// applies the same activation `applyBackgroundDimming`'s crossing-detection
+// calls, via the shared `applyLocalBubbleGateState` chokepoint - so Vectors/
+// TIME CONTROLS activate right away rather than waiting on the real
+// (never-true-from-this-pose) per-frame distance check. Re-clicking while
+// already active is a harmless no-op re-set: `bubbleViewOverrideActive` is
+// just set to `true` again, and `applyLocalBubbleGateState(true)` is
+// idempotent (see `nextVelocityVectorsToggleOn`/`nextPlayerStateForSphere`'s
+// own "state unchanged when already inside" branches).
+fitLocalBubbleButton.addEventListener("click", () => {
+  applyFitLocalBubblePose();
+  bubbleViewOverrideActive = true;
+  applyLocalBubbleGateState(true);
+});
 fitNearestStarsButton.addEventListener("click", applyFitNearestStarsPose);
 // Issue #231: the button is only ever clickable (native `disabled`) while
 // `cameraWasInsideLocalBubble` is `true` (Story #287: widened from
@@ -1855,6 +2000,13 @@ function goToObject(obj: SceneObject): void {
     ),
   );
   selectObject(obj);
+  // Issue #290: Search's "go to object" is a deliberate extension of the
+  // literal acceptance criteria (scoped there to "Fit/Camera buttons") -
+  // included here too so `bubbleViewOverrideActive` doesn't linger active
+  // after jumping to an unrelated, possibly-distant object via search; see
+  // the PR description for the full rationale. Called AFTER the pose above,
+  // same ordering as every other clearing call site.
+  clearBubbleViewOverride();
 }
 
 // Issue #262: the former "Face-on" preset was merged into "Top view" (they
@@ -1893,7 +2045,17 @@ function applyCameraPreset(key: string): void {
       break;
     default:
       console.warn(`Unknown camera preset '${key}'`);
+      return;
   }
+  // Issue #290: every real preset above (the four Camera-panel presets AND
+  // "Fit all"/`showAllButton`, which also routes through this same
+  // function with key `"fit-all"`) is one of the explicit
+  // camera-repositioning actions that clears `bubbleViewOverrideActive` -
+  // called AFTER the pose above so it recomputes the gate from the
+  // camera's real POST-move distance. The unknown-key `default` case
+  // returns early instead of falling through here, since it never actually
+  // moved the camera.
+  clearBubbleViewOverride();
 }
 
 loadScene()

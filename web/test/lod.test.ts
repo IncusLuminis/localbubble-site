@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   DENSE_BATCH_GROUP_TAG,
   denseBatchCollectionRadiusPc,
+  effectiveInsideLocalBubble,
   isCameraInsideDenseBatchSphere,
   isCameraInsideLocalBubble,
   isDenseBatchMember,
@@ -195,5 +196,31 @@ describe("isCameraInsideLocalBubble", () => {
   it("is false at a 0 or negative bubble radius, regardless of camera distance", () => {
     expect(isCameraInsideLocalBubble(0, 0)).toBe(false);
     expect(isCameraInsideLocalBubble(1087, 0)).toBe(false);
+  });
+});
+
+/**
+ * Issue #290: the pure OR that folds `bubbleViewOverrideActive`
+ * ("Fit to Local Bubble" was just clicked, or clicked more recently than any
+ * other camera-repositioning control) into the same effective value
+ * `main.ts` feeds `applyVelocityVectorsButtonState`/`applyPlayerSphereState`
+ * - a real camera-distance crossing (`insideBubbleNow`) and the override are
+ * each independently sufficient to activate Vectors/TIME CONTROLS.
+ */
+describe("effectiveInsideLocalBubble", () => {
+  it("is true when actually inside the bubble and the override is off", () => {
+    expect(effectiveInsideLocalBubble(true, false)).toBe(true);
+  });
+
+  it("is true when outside the bubble but the override is active (the #290 case)", () => {
+    expect(effectiveInsideLocalBubble(false, true)).toBe(true);
+  });
+
+  it("is true when both inside the bubble and the override is active", () => {
+    expect(effectiveInsideLocalBubble(true, true)).toBe(true);
+  });
+
+  it("is false when outside the bubble and the override is off", () => {
+    expect(effectiveInsideLocalBubble(false, false)).toBe(false);
   });
 });
