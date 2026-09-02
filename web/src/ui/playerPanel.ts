@@ -29,7 +29,8 @@ import {
  * Story #267 (the visual redesign this docstring now describes): replaces
  * #266's interim reused-straight-slider row with NASA "Eyes on the Solar
  * System"'s own bottom control-bar layout, left to right:
- * 1. "Today" (unchanged jump-to-zero behavior, moved far left).
+ * 1. "Today" (unchanged jump-to-zero behavior, moved far left) - Story #275
+ *    Part 3.3 later moves this again, see below.
  * 2. The elapsed-time readout (unchanged `formatPlayerTimeYears`).
  * 3. The `<<`/Play-Pause/`>>` cluster, visually nested above a shallow
  *    curved rate-SCALE (`.player-rate-arc-track`, an SVG quadratic-bezier
@@ -45,11 +46,28 @@ import {
  *    #266 (`onNudge`/`onPlayPauseToggle`, same glyphs) - only their
  *    position/styling moved.
  * 4. The rate readout (`formatPlayerRateYearsPerSecond`, new in #267).
- * 5. A collapse chevron (`onCollapse`, new in #267) - Story #267's PR
- *    documents the decision to reuse #249's existing close+reset-to-Today
- *    action (the same thing the toolbar Play button already does when the
- *    panel is open) rather than inventing a separate minimized visual
- *    state, per the issue's own recommended default.
+ * 5. A collapse chevron (`onCollapse`, new in #267) - originally reused
+ *    #249's existing close+reset-to-Today action (the same thing the
+ *    toolbar Play button did when the panel was open); Story #275
+ *    overrides this, see below.
+ *
+ * Story #275 (behavior + visual follow-up, layered on #267/#271's look):
+ * - `onCollapse` no longer resets time/playing/rate - it's a genuine
+ *   minimize now (`main.ts`'s `collapsePlayerPanel` just flips
+ *   `playerPanelOpen` back to `false`, revealing the new sphere-gated
+ *   "TIME CONTROLS" collapsed indicator built in `main.ts`, a sibling
+ *   element of this panel - NOT built by this module). Only leaving the
+ *   RECONS sphere still resets those three fields.
+ * - "Today" moves OUT of the bullet-3 control bar above into its own
+ *   dedicated, centered `todayRow`, directly below the `<<`/Play-Pause/`>>`
+ *   button row - see `todayRow` below.
+ * - Both arcs' curvature is flipped (bow downward, not upward) and enlarged
+ *   - see `ARC_START`/`ARC_CONTROL`/`ARC_END`'s own updated docstring.
+ * - The elapsed-time readout and rate readout are enlarged (`style.css`),
+ *   and the collapse chevron is enlarged (`style.css`).
+ * - The panel's overall height grows ~30% as a consequence of the above
+ *   (taller arcs, the new `todayRow`, bigger fonts/buttons) plus a direct
+ *   padding/gap increase in `style.css`.
  *
  * Story #271 (follow-up to #267): the full-range absolute-time scrubber
  * (`onScrub`, unchanged behavior/range since #239) was, until this Story, a
@@ -123,11 +141,13 @@ export interface PlayerPanelOptions {
   onRateChange: (sliderValue: number) => void;
   /** The "Today" button was pressed. */
   onToday: () => void;
-  /** Story #267: the collapse chevron was pressed - `main.ts` wires this to
-   * the SAME close+reset-to-Today action the toolbar Play button already
-   * performs when the panel is open (`applyPlayerResetState`/
-   * `nextPlayerStateForSphere("outside")`-shaped reset), per this Story's
-   * documented (a)-over-(b) decision - see the PR description. */
+  /** The collapse chevron was pressed. Story #267 originally wired this to
+   * the same close+reset-to-Today action the toolbar Play button performed
+   * when the panel was open. Story #275 overrides that: `main.ts` now wires
+   * this to `collapsePlayerPanel`, a genuine MINIMIZE - it hides this panel
+   * and reveals the sphere-gated "TIME CONTROLS" collapsed indicator again,
+   * WITHOUT touching time/playing/rate at all. Only leaving the RECONS
+   * sphere still resets those. */
   onCollapse: () => void;
   /** Initial rate-slider value (`[-1, 1]`, signed) - see `main.ts`'s
    * `DEFAULT_PLAYER_RATE_SLIDER_VALUE` for the chosen live-tuned default. */
@@ -147,9 +167,10 @@ export interface PlayerPanelState {
 
 export interface PlayerPanelHandle {
   element: HTMLDivElement;
-  /** Shows/hides the whole panel (`main.ts` calls this when the toolbar
-   * button first opens it, and when a sphere exit force-hides it - Epic
-   * #238 AC). */
+  /** Shows/hides the whole panel (`main.ts` calls this when the "TIME
+   * CONTROLS" collapsed indicator opens it, when the collapse chevron
+   * minimizes it back, and when a sphere exit force-hides it - Epic #238
+   * AC, Story #275). */
   setVisible: (visible: boolean) => void;
   /** Pushes the current player state into the panel's own DOM (time
    * readout text, time-arc handle position (Story #271), rate arc handle
@@ -172,17 +193,30 @@ const COLLAPSE_GLYPH = "▾";
 
 // Story #267: the shallow rate-arc's own SVG geometry constants - a
 // quadratic-bezier "bow" from the left/backward end to the right/forward
-// end, apex (the control point) raised above the two ends so the curve
-// reads as a shallow slice of a large circle's rim (per the issue's own
-// "sector 10-15 degrees... not a speedometer gauge" guidance) rather than a
-// deep dial sweep. Values are in the SVG's own `viewBox` units, not pixels -
-// `preserveAspectRatio="none"` lets the CSS box stretch this to whatever
-// on-screen size the panel's layout gives it.
+// end, reading as a shallow slice of a large circle's rim (per the issue's
+// own "sector 10-15 degrees... not a speedometer gauge" guidance) rather
+// than a deep dial sweep. Values are in the SVG's own `viewBox` units, not
+// pixels - `preserveAspectRatio="none"` lets the CSS box stretch this to
+// whatever on-screen size the panel's layout gives it.
+//
+// Story #275 Part 3.2: flips the curvature - #267/#271 originally raised the
+// control point ABOVE the two endpoints (apex Y=2 < endpoints Y=24 in SVG
+// coordinates, where smaller Y is higher on screen), so both arcs bowed
+// UPWARD. The human owner's reference screenshot bows DOWNWARD instead (the
+// arc sags toward the bottom in the middle), so the control point now sits
+// BELOW the two endpoints (apex Y=34 > endpoints Y=6). Both arcs still share
+// this exact same geometry (`arcPointAtT` below), so they stay a "matching
+// stacked pair" per #271's own requirement - only the curvature direction
+// changed, not the shape family. The sag (apex-to-endpoint Y distance) is
+// also larger than before (28 vs. the original 22 units) and the CSS boxes
+// that stretch this viewBox are taller too (`.player-rate-arc-track`/
+// `.player-time-arc-track` in `style.css`) - together, "larger arcs" per
+// Part 3.2.
 const ARC_VIEWBOX_WIDTH = 200;
-const ARC_VIEWBOX_HEIGHT = 30;
-const ARC_START: readonly [number, number] = [6, 24];
-const ARC_CONTROL: readonly [number, number] = [ARC_VIEWBOX_WIDTH / 2, 2];
-const ARC_END: readonly [number, number] = [ARC_VIEWBOX_WIDTH - 6, 24];
+const ARC_VIEWBOX_HEIGHT = 40;
+const ARC_START: readonly [number, number] = [6, 6];
+const ARC_CONTROL: readonly [number, number] = [ARC_VIEWBOX_WIDTH / 2, 34];
+const ARC_END: readonly [number, number] = [ARC_VIEWBOX_WIDTH - 6, 6];
 const ARC_FILL_SAMPLE_STEPS = 16;
 
 /** Point at bezier parameter `t` (`[0,1]`) along the quadratic curve defined
@@ -225,9 +259,12 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   // interaction, not a second copy of state).
   let latestTYears = 0;
 
-  // Story #267: the new NASA-Eyes-style bottom control bar - Today, time
-  // readout, the arc+buttons cluster, rate readout, collapse chevron, in
-  // that left-to-right reading order (the issue's own target layout).
+  // Story #267: the NASA-Eyes-style bottom control bar - time readout, the
+  // arc+buttons cluster, rate readout, collapse chevron, in that
+  // left-to-right reading order. Story #275 Part 3.3 moves "Today" OUT of
+  // this row entirely (see `todayRow` below) - elapsed-time now sits
+  // directly LEFT of the button/arc cluster and rate directly RIGHT of it,
+  // matching the reference screenshot's date-left/time-right convention.
   const controlBar = document.createElement("div");
   controlBar.className = "player-panel-row player-control-bar";
 
@@ -590,8 +627,18 @@ export function createPlayerPanel(options: PlayerPanelOptions): PlayerPanelHandl
   collapseButton.setAttribute("aria-label", "Collapse player panel");
   collapseButton.addEventListener("click", () => options.onCollapse());
 
-  controlBar.append(todayButton, timeReadout, arcCluster, rateReadout, collapseButton);
+  controlBar.append(timeReadout, arcCluster, rateReadout, collapseButton);
   panel.appendChild(controlBar);
+
+  // Story #275 Part 3.3: "Today" moves into its own dedicated, centered row,
+  // directly below the `<<`/Play-Pause/`>>` button row (and the rate arc
+  // beneath it) - no longer inline with the time/rate readouts or the
+  // collapse chevron the way it was in `controlBar` above.
+  const todayRow = document.createElement("div");
+  todayRow.className = "player-panel-row player-today-row";
+  todayRow.appendChild(todayButton);
+  panel.appendChild(todayRow);
+
   // Story #271: the time arc's own row, directly BELOW the control bar (and
   // so below the rate arc it sits under) - see this function's own
   // `timeArcRow` comment above for why it's a separate full-width row
