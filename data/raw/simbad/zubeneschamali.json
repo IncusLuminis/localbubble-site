@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Zubeneschamali",
-  "retrieved_utc": "2026-08-24T04:20:01+00:00",
+  "retrieved_utc": "2026-09-02T07:06:09+00:00",
   "record_id": "* bet Lib",
   "raw": {
     "main_id": "* bet Lib",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.619999885559082,
-    "sp_type": "B8Vn",
     "otype": "PM*",
+    "pmdec": -19.65,
+    "pmra": -98.1,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 17.62,
+    "sp_type": "B8Vn",
+    "rvz_radvel": -35.6,
+    "rvz_bibcode": "2006AstL...32..759G",
     "plx_err": 0.1599999964237213,
     "ids": "TIC 79391147|WISEA J151700.34-092258.6|HIP 74785|Gaia DR3 6319542659461082752|PLX 3450|*  27 Lib|* bet Lib|BD-08  3935|FK5  564|GC 20539|GCRV  8838|GEN# +1.00135742|GSC 05585-01014|HD 135742|HIC  74785|HR  5685|IRAS 15142-0911|IRC -10315|JP11  2586|N30 3439|NSV  7009|PMC 90-93   399|PPM 198424|ROT  2165|SAO 140430|SKY# 27682|TD1 18099|TYC 5585-1014-1|UBV   13171|UBV M  20667|[HFE83] 1088|uvby98 100135742|2MASS J15170043-0922584|PLX 3450.00|NAME Zubeneschamali|IRAS F15143-0912|WISE J151700.43-092258.9|AKARI-IRC-V1 J1517003-092258|WEB 12758|IRAS F15143-0912A|Gaia DR2 6319542659459349120|TIC 1179719919",
     "matched_id": "NAME Zubeneschamali"

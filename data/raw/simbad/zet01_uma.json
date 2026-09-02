@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "zet01 UMa",
-  "retrieved_utc": "2026-08-24T04:23:02+00:00",
+  "retrieved_utc": "2026-09-02T07:06:16+00:00",
   "record_id": "* zet01 UMa",
   "raw": {
     "main_id": "* zet01 UMa",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.2200000286102295,
-    "plx_err": 0.46230000257492065,
+    "otype": "SB*",
+    "pmdec": -22.682,
+    "pmra": 122.467,
+    "pm_bibcode": "2020yCat.1350....0G",
     "plx_value": 40.2133,
     "sp_type": "A1.5Vas",
-    "otype": "SB*",
+    "rvz_radvel": -5.6,
+    "rvz_bibcode": "1979IAUS...30...57E",
+    "plx_err": 0.46230000257492065,
     "ids": "UCAC4 725-051078|2MASS J13235563+5455292|GJ 3783|Gaia DR3 1563590579347125632|HIP 65378A|CNS5 3300|PLX 3062|SBC9 764|* zet UMa A|*  79 UMa A|* zet01 UMa|ADS  8891 A|AG+55  884|CCDM J13240+5456AB|CEL   4252|CSI+55  1598  1|CSV 101381|FK5  497|GC 18133|GCRV  7958|HD 116656|HGAM    622|HR  5054|N30 3065|NSV  6224|PMC 90-93   353|PPM  34007|ROT  3516|SAO  28737|SBC7   485|SKY# 24722|SV* ZI  1000|TYC 3850-1385-1|UBV   12100|[HFE83]  949|WDS J13239+5456Aa,Ab|** STF 1744A|Renson 33650|BD+55  1598A|** PEA    1|WDS J13239+5456A|WISE J132355.98+545527.5|PMSC 13199+5527A|PMSC 13199+5527Aab|NAME Mizar A|WEB 11538|GEN# +1.00116656|TIC 1001230963|Gaia DR2 1563590579345330944",
     "matched_id": "* zet01 UMa"
   }

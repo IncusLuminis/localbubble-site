@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Regulus",
-  "retrieved_utc": "2026-08-24T04:19:29+00:00",
+  "retrieved_utc": "2026-09-02T07:05:41+00:00",
   "record_id": "* alf Leo",
   "raw": {
     "main_id": "* alf Leo",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.399999976158142,
-    "sp_type": "B8IVn",
     "otype": "PM*",
+    "pmdec": 5.59,
+    "pmra": -248.73,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 41.13,
+    "sp_type": "B8IVn",
+    "rvz_radvel": 0.719522,
+    "rvz_bibcode": "2020AJ....160..120J",
     "plx_err": 0.3499999940395355,
     "ids": "TIC 357348164|AP J10082229+1158018|GJ 9316 A|HIP 49669|PLX 2384|LSPM J1008+1158|ASCC  949713|USNO-B1.0 1019-00203254|* alf Leo|*  32 Leo|2E  2231|ADS  7654 A|AG+12 1199|BD+12  2149|CCDM J10083+1159A|CSI+12  2149  1|CSV 101099|FK5  380|GC 13926|GCRV  6417|GEN# +1.00087901A|CNS5 2491|HD  87901|HGAM    596|HIC  49669|HR  3982|IRAS 10056+1212|TIC 471011645|IRC +10226|JP11  1896|LTT 12716|N30 2414|NAME Regulus|NLTT 23490|NSV  4750|PMC 90-93   274|PPM 127140|RAFGL 4771S|ROT  1536|SAO  98967|SKY# 19511|SRS  30380|SV* ZI   793|TD1 14585|UBV    9452|UBV M  15960|YPAC  43|[HFE83]  708|uvby98 100087901 A|2MASS J10082229+1158018|WDS J10084+1158A|2E 1005.5+1213|TYC  833-1381-1|PMSC 10030+1227A|** STF 5006A|WEB  9160",
     "matched_id": "NAME Regulus"

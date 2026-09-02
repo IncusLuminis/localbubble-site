@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Gacrux",
-  "retrieved_utc": "2026-08-24T04:19:59+00:00",
+  "retrieved_utc": "2026-09-02T07:06:07+00:00",
   "record_id": "* gam Cru",
   "raw": {
     "main_id": "* gam Cru",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.6399999856948853,
-    "sp_type": "M3.5III",
     "otype": "PM*",
+    "pmdec": -265.08,
+    "pmra": 28.23,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 36.83,
+    "sp_type": "M3.5III",
+    "rvz_radvel": 21.0,
+    "rvz_bibcode": "2006AstL...32..759G",
     "plx_err": 0.18000000715255737,
     "ids": "TIC 272314138|GJ 470|HIP 61084|* gam Cru|CCDM J12312-5706A|CD-56  4504|CPC 20  3840|CPD-56  5272|CSV 101285|FK5  468|GC 17052|GCRV  7528|GEN# +1.00108903|HD 108903|HIC  61084|HR  4763|IDS 12256-5633 A|IRAS 12283-5650|JP11  2226|LTT  4752|N30 2892|NLTT 30973|NSV  5672|PPM 341058|RAFGL 4150|SAO 240019|SKY# 23406|SV* BV   839|SV* ZI   944|UBV   11239|UBV M  18297|[DS98] 174|[L91b] 208|2MASS J12310993-5706474|WDS J12312-5707A|NAME Gacrux|TYC 8654-3422-1|WEB 10875",
     "matched_id": "NAME Gacrux"

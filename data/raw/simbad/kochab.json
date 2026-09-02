@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Kochab",
-  "retrieved_utc": "2026-08-24T04:19:46+00:00",
+  "retrieved_utc": "2026-09-02T07:05:54+00:00",
   "record_id": "* bet UMi",
   "raw": {
     "main_id": "* bet UMi",
@@ -13,9 +13,14 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.0799999237060547,
-    "sp_type": "K4-III",
     "otype": "*",
+    "pmdec": 11.42,
+    "pmra": -32.61,
+    "pm_bibcode": "2007A&A...474..653V",
     "plx_value": 24.91,
+    "sp_type": "K4-III",
+    "rvz_radvel": 16.96,
+    "rvz_bibcode": "2005A&A...430..165F",
     "plx_err": 0.11999999731779099,
     "ids": "TIC 229540730|HIP 72607|PLX 3373|*   7 UMi|* bet UMi|AG+74  412|BD+74   595|CCDM J14506+7410A|CSI+74   595  1|CSV 101477|FK5  550|GC 20029|GCRV  8646|GSC 04416-01799|HD 131873|HIC  72607|HR  5563|IDS 14510+7434 A|IRAS 14508+7421|IRC +70125|JP11  2549|N30 3361|NAME Kochab|NSV  6846|PMC 90-93   390|PPM   8758|RAFGL 1740|ROT  2127|SAO   8102|SKY# 26960|SV* ZI  1097|TD1 17825|TYC 4416-1799-1|UBV   12983|UBV M  20451|USNO 853|[HFE83] 1055|[L91b] 244|2MASS J14504235+7409199|PLX 3373.00|WDS J14507+7409A|uvby98 100131873|WEB 12482|** BUP  159A|GEN# +1.00131873",
     "matched_id": "NAME Kochab"

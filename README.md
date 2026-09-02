@@ -566,3 +566,85 @@ of scope for this Story - Story #231's job. `web/src/scene/sceneTypes.ts`
 is intentionally untouched; the extra `velocity` key in `scene.json` is
 additive and does not affect the existing (untyped-at-runtime) frontend
 pipeline or its own test suite (495/495 passing, `tsc --noEmit` clean).
+
+## Local Bubble velocity backfill (Story #286)
+
+Epic #285's Story 1 (of 2). Widens Story #230's velocity backfill from the
+RECONS-dense-batch sphere (~11.26pc) to the full Local Bubble (~60pc,
+`bubbleOuterRadiusPc`): 29 already-cataloged, named (`"NAME "`-alias)
+stars within the bubble had no `velocity` yet - every one of them added by
+earlier gap-fill Stories, none part of Story #230's original 127.
+
+Target list re-derived live (not trusted from the Epic's own research
+summary): every `object_type: "star"` record with `distance.value_pc <=`
+the Local Bubble's outer radius and no `velocity` key/value. The radius
+itself is re-derived from `models/local_bubble.yaml` -
+`(semi_axes_pc.a_pc + semi_axes_pc.b_pc) / 2` - the exact same mean-of-
+the-two-shorter-axes formula the frontend's `objects.ts`'s
+`bubbleOuterRadiusPcFrom` applies to the same YAML's `scene.json`-exported
+form, never hard-coded to 60. It currently evaluates to 60.0pc (matching
+both the frontend's own derivation and the `local-bubble-centroid` catalog
+record's independently-set `visual.size_pc: 60.0`), yielding exactly 29
+target stars - confirming the Epic's own estimate, not just trusting it.
+
+New script `scripts/backfill_bubble_velocity.py` reuses Story #230's exact
+pipeline (`SimbadResolver`, `coordinates.galactic_velocity_kms`,
+`schema.Velocity`) unchanged - it only narrows scope to this specific
+29-star list (`in_bubble_velocity_missing_star_records`), rather than
+re-running the same unconditional refresh `backfill_velocity.py` already
+did for the 127 RECONS-sphere stars (which already have `velocity` from
+that Story and are correctly left untouched here).
+
+Result against live SIMBAD: **29/29 resolved, 0 failures, 29/29 (100%)
+got a full 3D vector** (`radial_velocity_known: true`) - every target star
+had both `pmra`/`pmdec` and `rvz_radvel` on file, so there were no
+tangential-only or entirely-unresolvable cases this round.
+
+Implausible-velocity scan (issue #234's `|speed| > 500` km/s pitfall):
+the highest derived total space velocity among the 29 is Aldebaran's
+**57.7 km/s** - nowhere near the threshold, so `_query_mes_velocities`'s
+`mesVelocities` fallback (already generically wired into
+`data_sources/simbad.py`, not per-star) was correctly never triggered for
+any of these 29 (verified: none of their 29 refreshed cache files under
+`data/raw/simbad/` gained an `rvz_radvel_corrected` key; the one file that
+has one, `gj_866_a.json`, predates this Story and is issue #234's own
+unrelated RECONS-sphere fix).
+
+Sanity gate (spot-checked against literature, same practice #230/#234
+used):
+
+- **Capella** derives to a total space velocity of **39.7 km/s**;
+  independent published figure (constellation-guide.com, citing its own
+  kinematic sourcing): "travelling through the Milky Way at a speed of
+  39.7 km/s relative to the Sun" - matches to three significant figures.
+- **Aldebaran** derives to **57.7 km/s**. Its SIMBAD-sourced astrometry
+  used here (`pmra=63.45`, `pmdec=-188.94` mas/yr, `plx=48.94` mas) agrees
+  with Wikipedia's independently-cited values for the same star; combining
+  its tangential velocity (`4.74057 * mu_arcsec/yr * d_pc`, ~19.3 km/s)
+  with its radial velocity (~54.4 km/s) via `sqrt(vt^2 + vr^2)` - a
+  simple, independent cross-check of the total speed's magnitude, not a
+  re-run of the pipeline itself - reproduces **57.7 km/s**.
+- **Achernar** derives to **21.0 km/s**, cross-checked the same
+  independent tangential+radial way as Aldebaran above (`pmra=87.0`,
+  `pmdec=-38.24` mas/yr, `plx=23.39` mas, `rv=8.47` km/s -> ~21.0 km/s).
+  Its SIMBAD `rvz_radvel` (8.47 km/s) differs from one commonly-quoted
+  literature figure (+16 km/s); both are physically unremarkable (nowhere
+  near the >500 km/s implausibility threshold) and Achernar is a known
+  rapidly-rotating Be star with a circumstellar disk, where radial-velocity
+  measurements from different epochs/methods commonly disagree by this
+  much due to variable emission-line contamination - not the kind of
+  two-orders-of-magnitude cross-match artifact issue #234 found, so no
+  correction was warranted or applied.
+
+`catalog.parquet`/`catalog.csv` rebuilt and `scene.json` re-exported the
+same way as Story #230 (`galactic-structures build-catalog` +
+`galactic-structures export-scene --no-radius-filter --output
+web/public/data/scene.json`), from a clean venv matching the test-runtime
+pyarrow version (standing lesson from PR #183). `pytest` (310 passed, 4
+skipped) and the frontend's own suite (617/617 passing, `tsc --noEmit`
+clean) both green - `web/src/scene/sceneTypes.ts` is untouched, same as
+Story #230.
+
+Frontend widening (animated-population selection + sphere-gating from the
+RECONS sphere to the full Local Bubble) is explicitly out of scope for
+this Story - Story #287's job.

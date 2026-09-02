@@ -6919,24 +6919,27 @@ sources:
 - id: simbad:Capella
   source: simbad
   query: Capella
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:27+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:38+00:00'
   record_id: '* alf Aur'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/capella.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/capella.json
 - id: simbad:Aldebaran
   source: simbad
   query: Aldebaran
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:28+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:40+00:00'
   record_id: '* alf Tau'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/aldebaran.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/aldebaran.json
 - id: simbad:Regulus
   source: simbad
   query: Regulus
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:29+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:41+00:00'
   record_id: '* alf Leo'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/regulus.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/regulus.json
 - id: simbad:Pollux
   source: simbad
   query: Pollux
@@ -6948,10 +6951,11 @@ sources:
 - id: simbad:Castor
   source: simbad
   query: Castor
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:32+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:42+00:00'
   record_id: '* alf Gem'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/castor.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/castor.json
 - id: simbad:Denebola
   source: simbad
   query: Denebola
@@ -6963,115 +6967,131 @@ sources:
 - id: simbad:Dubhe
   source: simbad
   query: Dubhe
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:35+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:44+00:00'
   record_id: '* alf UMa'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/dubhe.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/dubhe.json
 - id: simbad:Merak
   source: simbad
   query: Merak
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:36+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:45+00:00'
   record_id: '* bet UMa'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/merak.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/merak.json
 - id: simbad:Alkaid
   source: simbad
   query: Alkaid
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:37+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:46+00:00'
   record_id: '* eta UMa'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/alkaid.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/alkaid.json
 - id: simbad:Alcor
   source: simbad
   query: Alcor
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:39+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:48+00:00'
   record_id: '* g UMa'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/alcor.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/alcor.json
 - id: simbad:Menkalinan
   source: simbad
   query: Menkalinan
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:41+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:49+00:00'
   record_id: '* bet Aur'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/menkalinan.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/menkalinan.json
 - id: simbad:Alderamin
   source: simbad
   query: Alderamin
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:42+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:50+00:00'
   record_id: '* alf Cep'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/alderamin.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/alderamin.json
 - id: simbad:Eltanin
   source: simbad
   query: Eltanin
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:43+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:52+00:00'
   record_id: '* gam Dra'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/eltanin.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/eltanin.json
 - id: simbad:Rasalhague
   source: simbad
   query: Rasalhague
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:44+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:53+00:00'
   record_id: '* alf Oph'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/rasalhague.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/rasalhague.json
 - id: simbad:Kochab
   source: simbad
   query: Kochab
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:46+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:54+00:00'
   record_id: '* bet UMi'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/kochab.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/kochab.json
 - id: simbad:Diphda
   source: simbad
   query: Diphda
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:47+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:56+00:00'
   record_id: '* bet Cet'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/diphda.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/diphda.json
 - id: simbad:Hamal
   source: simbad
   query: Hamal
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:48+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:57+00:00'
   record_id: '* alf Ari'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/hamal.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/hamal.json
 - id: simbad:Algol
   source: simbad
   query: Algol
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:50+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:05:58+00:00'
   record_id: '* bet Per'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/algol.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/algol.json
 - id: simbad:Alphecca
   source: simbad
   query: Alphecca
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:51+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:00+00:00'
   record_id: '* alf CrB'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/alphecca.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/alphecca.json
 - id: simbad:Unukalhai
   source: simbad
   query: Unukalhai
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:52+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:01+00:00'
   record_id: '* alf Ser'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/unukalhai.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/unukalhai.json
 - id: simbad:Sabik
   source: simbad
   query: Sabik
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:53+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:02+00:00'
   record_id: '* eta Oph'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/sabik.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/sabik.json
 - id: simbad:Zubenelgenubi
   source: simbad
   query: Zubenelgenubi
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:55+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:04+00:00'
   record_id: '* alf02 Lib'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/zubenelgenubi.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/zubenelgenubi.json
 - id: simbad:Nunki
   source: simbad
   query: Nunki
@@ -7082,59 +7102,67 @@ sources:
 - id: simbad:Alnair
   source: simbad
   query: Alnair
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:57+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:05+00:00'
   record_id: '* alf Gru'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/alnair.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/alnair.json
 - id: simbad:Gacrux
   source: simbad
   query: Gacrux
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:19:59+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:07+00:00'
   record_id: '* gam Cru'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/gacrux.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/gacrux.json
 - id: simbad:Elnath
   source: simbad
   query: Elnath
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:20:00+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:08+00:00'
   record_id: '* bet Tau'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/elnath.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/elnath.json
 - id: simbad:Zubeneschamali
   source: simbad
   query: Zubeneschamali
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:20:01+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:09+00:00'
   record_id: '* bet Lib'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/zubeneschamali.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/zubeneschamali.json
 - id: simbad:Achernar
   source: simbad
   query: Achernar
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:20:02+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:11+00:00'
   record_id: '* alf Eri'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/achernar.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/achernar.json
 - id: simbad:Alphard
   source: simbad
   query: Alphard
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:20:04+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:12+00:00'
   record_id: '* alf Hya'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/alphard.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/alphard.json
 - id: simbad:Peacock
   source: simbad
   query: Peacock
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:20:05+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:14+00:00'
   record_id: '* alf Pav'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/peacock.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/peacock.json
 - id: simbad:Miaplacidus
   source: simbad
   query: Miaplacidus
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:20:06+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:15+00:00'
   record_id: '* bet Car'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/miaplacidus.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/miaplacidus.json
 - id: simbad:Alnilam
   source: simbad
   query: Alnilam
@@ -7145,10 +7173,11 @@ sources:
 - id: simbad:zet01 UMa
   source: simbad
   query: zet01 UMa
-  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V)
-  retrieved: '2026-08-24T04:23:02+00:00'
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-02T07:06:16+00:00'
   record_id: '* zet01 UMa'
-  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-213/local-galactic-structures/data/raw/simbad/zet01_uma.json
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-286/local-galactic-structures/data/raw/simbad/zet01_uma.json
 - id: simbad:M 27
   source: simbad
   query: M 27
