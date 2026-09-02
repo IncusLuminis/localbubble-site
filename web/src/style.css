@@ -1000,11 +1000,14 @@ body {
 }
 
 /* Story #239: the player's own control panel - now (Story #267, restyled
-   further by Story #271, #275) a NASA "Eyes on the Solar System"-style
-   bottom control bar (time readout / arc+buttons cluster / rate readout /
-   collapse chevron, plus Story #275's own centered Today row beneath it)
-   with a second, wider time arc stacked directly beneath that (Story #271 -
-   see `.player-time-arc-row` below; replaces the old plain
+   further by Story #271, #275, #277) a NASA "Eyes on the Solar System"-style
+   stack, top to bottom: a bottom control bar (time readout / `<<`/Play-
+   Pause/`>>` buttons / rate readout - Story #277: the collapse chevron is no
+   longer part of this row, see `.player-collapse-toggle` below), Story
+   #275's own centered Today row, the rate arc's own row (Story #277 -
+   previously nested directly under the buttons above; see
+   `.player-rate-arc-row` above), and the wider time arc (Story #271 - see
+   `.player-time-arc-row` below; replaces the old plain
    `<input type="range">` scrubber row that used to sit ABOVE this bar).
    Docked bottom-center (unlike `.panel`'s
    default top-anchored position) so it reads as a persistent transport bar,
@@ -1075,11 +1078,22 @@ body {
 }
 
 /* Story #267: the bottom control bar itself - time readout, the
-   arc+buttons cluster, rate readout, collapse chevron, left to right (Story
-   #275 Part 3.3: Today is no longer part of this row - see
-   `.player-today-row` below). */
+   `<<`/Play-Pause/`>>` buttons, rate readout, left to right (Story #275
+   Part 3.3: Today is no longer part of this row - see `.player-today-row`
+   below; Story #277: neither is the collapse chevron anymore - see
+   `.player-collapse-toggle` below).
+
+   Story #277: the extra `padding` here (on top of `.panel`'s own
+   panel-level padding) reserves room clear of the absolutely-positioned
+   `.player-collapse-toggle` in the panel's top-right corner, so its icon
+   never visually overlaps `.player-rate-readout`'s text - matched on BOTH
+   sides (not just the right, where the collapse button actually sits) so
+   the reserved space doesn't skew `.player-button-row`'s own centering:
+   equal padding on both sides of a flex row shifts its content region's
+   midpoint by zero, keeping it exactly on the panel's true center-x. */
 .player-control-bar {
   gap: 10px;
+  padding: 0 30px;
 }
 
 /* Story #275 Part 3.3: Today's own dedicated row, centered, directly below
@@ -1098,35 +1112,40 @@ body {
 /* Story #275 Part 3.4: enlarged and repositioned immediately LEFT of the
    `<<`/Play-Pause/`>>` cluster (unchanged position - see `.player-control-bar`'s
    own child order in `ui/playerPanel.ts`), matching the reference
-   screenshot's date-left convention, just bigger (was 11px/74px). */
+   screenshot's date-left convention, just bigger (was 11px/74px).
+
+   Story #277: `min-width` -> fixed `flex: 0 0 92px` (a fixed flex-basis, not
+   just a floor) and matched EXACTLY by `.player-rate-readout`'s own basis
+   below - the two previously differed (92px vs. 78px), which put unequal
+   weight on `.player-control-bar`'s two flanks and threw off
+   `.player-button-row`'s own centering between them. Width is unaffected in
+   practice (this readout's own text was already always >= 92px wide). */
 .player-time-readout {
-  flex: 0 0 auto;
-  min-width: 92px;
+  flex: 0 0 92px;
   text-align: center;
   font-variant-numeric: tabular-nums;
   font-size: 16px;
   color: #dfe6f3;
 }
 
-/* Story #267: the shallow rate-arc widget - the `<<`/Play-Pause/`>>`
-   buttons sit in their own row on top (reading as if perched on the arc's
-   own peaks), the SVG "bow" + drag surface sit beneath. `flex: 1 1 auto` so
+/* Story #267: the `<<`/Play-Pause/`>>` transport buttons, centered in
+   `.player-control-bar`'s own flexible middle slot. `flex: 1 1 auto` so
    it's the row's own flexible/growable element, matching where NASA Eyes'
-   own bar puts its widest, most central control. */
-.player-rate-arc {
+   own bar puts its widest, most central control - `justify-content: center`
+   then centers the (fixed-width) button trio within that slot.
+
+   Story #277: this used to be two nested elements (`.player-rate-arc`, a
+   column wrapping this row above the rate arc's own SVG track beneath it,
+   both inside `.player-control-bar`) - now that the rate arc has its own
+   row entirely (`.player-rate-arc-row` below), this single row IS the
+   flexible middle flex child directly, with no wrapper and no more
+   `margin-bottom` nestling it against the (no longer adjacent) arc. */
+.player-button-row {
   flex: 1 1 auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 120px;
-}
-
-.player-rate-arc-buttons {
-  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 4px;
-  margin-bottom: -4px;
-  z-index: 1;
 }
 
 /* Story #243: the 3-button `<< Play/Pause >>` transport scheme - same small
@@ -1162,13 +1181,27 @@ body {
   background: rgba(95, 201, 255, 0.3);
 }
 
+/* Story #277: `.player-rate-arc-row` (the rate arc's own row, directly
+   below `.player-today-row` and above `.player-time-arc-row` in
+   `ui/playerPanel.ts`'s panel child order) needs no rule of its own here -
+   `.player-panel-row`'s shared flex/gap styling is already enough, and
+   default spacing between it and its neighboring rows already reads fine
+   (unlike `.player-time-arc-row` below, which pulls itself up snug against
+   this row via a small negative `margin-top`). Previously the arc lived
+   inside a narrower flexible column nested in `.player-control-bar` (the
+   now-removed `.player-rate-arc`); pulling it out to its own full-width row
+   mirrors `.player-time-arc-row` exactly - `.player-time-arc-track`'s own
+   `width: 100%` already made it span whatever row it's given, same as here. */
+
 /* Story #267: the shallow arc's own drag surface - a fixed-height box the
    SVG "bow" fills; `touch-action: none` stops the browser's own
    scroll/zoom touch gestures from competing with a drag on mobile/touch
    input (the whole point of using Pointer Events for this widget). Story
    #275 Part 3.2: taller (was 26px) - together with `ARC_VIEWBOX_HEIGHT`'s
    own increase in `ui/playerPanel.ts`, this is what makes the arc read as
-   visually LARGER, not just differently curved. */
+   visually LARGER, not just differently curved. Story #277: now spans the
+   whole panel width via its new full-width parent row (`.player-rate-arc-row`
+   above) rather than `.player-rate-arc`'s own narrower flexible column. */
 .player-rate-arc-track {
   width: 100%;
   height: 34px;
@@ -1347,19 +1380,42 @@ body {
 /* Story #275 Part 3.4: enlarged and repositioned immediately RIGHT of the
    `<<`/Play-Pause/`>>` cluster (unchanged position), matching the reference
    screenshot's time-right convention, just bigger (was 11px/64px) - mirrors
-   `.player-time-readout`'s own enlargement on the opposite side. */
+   `.player-time-readout`'s own enlargement on the opposite side.
+
+   Story #277: `min-width` -> fixed `flex: 0 0 92px`, matching
+   `.player-time-readout`'s own basis EXACTLY (was 78px, a narrower basis
+   than the time readout's 92px) - see that rule's own Story #277 comment
+   for why the two must match. This readout's own text is comfortably
+   narrower than 92px, so the extra width just adds a little symmetric
+   breathing room around it; nothing wraps or gets clipped. */
 .player-rate-readout {
-  flex: 0 0 auto;
-  min-width: 78px;
+  flex: 0 0 92px;
   text-align: center;
   font-variant-numeric: tabular-nums;
   font-size: 15px;
   color: #8fa3c8;
 }
 
-/* Story #275 Part 3.5: bigger collapse button (was 22x22/12px). */
+/* Story #275 Part 3.5: bigger collapse button (was 22x22/12px).
+
+   Story #277: moved from an inline `.player-control-bar` flex child to a
+   `position: absolute` direct child of `#player-panel` itself, pinned to
+   the panel's own top-right corner per the human owner's live-testing
+   feedback (previously just "the right side of a row", not the panel's
+   actual corner). `#player-panel` is already `position: absolute` (see
+   `.panel`), so it's already a valid containing block for this - no extra
+   wrapper needed. `top`/`right` here are deliberately smaller than
+   `#player-panel`'s own `padding: 10px 14px` so the button sits IN the
+   corner rather than merely near it, echoing `.player-control-bar`'s own
+   reserved `padding: 0 30px` (above), which keeps this from overlapping
+   `.player-rate-readout`'s text. `z-index: 1` keeps it above
+   `.player-control-bar`'s content in the (small, deliberate) region where
+   their boxes overlap. */
 .player-collapse-toggle {
-  flex: 0 0 auto;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 1;
   width: 30px;
   height: 30px;
   display: flex;
