@@ -844,3 +844,112 @@ Story only adds more data of the identical shape, and the UI gate that
 would let a user actually reach these open-space stars with Vectors/Time
 Controls enabled is Story #308's job (not yet done) - there is nothing new
 to browser-verify here yet.
+
+## `size_pc` backfill for clusters, associations & diffuse structures (Story #314)
+
+Epic #313's first Story ("give star clusters and diffuse structures real
+visual size"): backfill `visual.size_pc` for the ~254 EXISTING
+`star_cluster`/`stellar_association`/`molecular_cloud`/`hii_region`/
+`planetary_nebula`/`supernova_remnant` records that had `size_pc: null`
+since they were originally acquired - same non-destructive backfill shape
+as Story #307's own velocity backfill: only `visual.size_pc` is merged
+into each in-scope record, every other field (position/distance/notes/
+group/aliases) stays byte-identical.
+
+Scope re-derived live from the catalog (not trusted blindly): every record
+of the six target `object_type`s with `visual.size_pc` null/absent -
+**exactly 254** matched (228 `star_cluster` + 10 `stellar_association` +
+8 `molecular_cloud` + 5 `hii_region` + 4 `planetary_nebula` + 2
+`supernova_remnant` = 257 total, minus the 4 already populated at Epic
+research time - Pleiades, Cepheus Flare, the Local Bubble centroid
+(out of this Story's scope - `bubble` type), and the Vela SNR).
+
+**Radius-vs-diameter convention** (this Story's own required judgment
+call, made by reading `markerRadiusPc` in `web/src/scene/objects.ts` -
+convention-agnostic, just a shared divisor/clamp - together with the
+`notes` already on the 4 pre-existing populated records, which explicitly
+say which convention each one used): `star_cluster`/`stellar_association`
+records use **RADIUS** (the Pleiades record's own notes: "the tidal
+radius..., not a diameter"); `molecular_cloud`/`hii_region`/
+`planetary_nebula`/`supernova_remnant` records use **DIAMETER** (Vela
+SNR's own notes: "an approximate physical diameter"; Cepheus Flare's own
+notes: "spans ~90x60 pc..., uses the larger axis" - a full span, not a
+half-span). Each record-type family was backfilled in its own existing
+precedent's convention rather than unifying to one convention catalog-
+wide, since a unified convention now would have required silently
+reinterpreting the 4 already-populated records, out of this Story's scope.
+
+**Sources** (see `scripts/backfill_structure_size.py`'s own module
+docstring, and the new `data_sources/cluster_radius.py`/`data_sources/
+simbad_size.py` adapters, for the full paper-lineage rationale):
+
+- `star_cluster`/`stellar_association`: this catalog's own cluster/
+  association records already trace to the Cantat-Gaudin/Tarricq
+  Gaia-membership open-cluster lineage via their own `source.reference`
+  `coo_bibcode`s (e.g. `2021A&A...647A..19T`). Cascade: **(1)** Tarricq et
+  al. 2022 ("Structural parameters of 389 local open clusters", VizieR
+  `J/A+A/659/A59`) tidal radius `Rt` (pc, already in parsecs), **(2)** the
+  same table's core radius `Rc` when `Rt` is unavailable, **(3)**
+  Cantat-Gaudin et al. 2020 ("Gaia DR2 open clusters in the Milky Way II",
+  VizieR `J/A+A/633/A99`, the larger 1481-cluster parent catalog) `r50`
+  (degrees, converted to pc via the record's own `distance_pc`), **(4)**
+  SIMBAD `galdim_majaxis` (arcmin) -> diameter via `distance_pc`, halved
+  to a radius - reserved for large OB associations/loose "Theia" moving
+  groups not compact enough for a membership-catalog radius.
+- `molecular_cloud`/`hii_region`/`planetary_nebula`/`supernova_remnant`:
+  SIMBAD `galdim_majaxis` (arcmin) -> physical diameter via `distance_pc`
+  directly (no halving) - the new `data_sources/simbad_size.py` adapter,
+  a narrowly-scoped sibling to `simbad.py` (which was built for
+  kinematics, not angular size).
+
+**Result: 239/254 (94.1%) resolved, 15/254 (5.9%) honest failures.**
+Breakdown by method: `tarricq2022_Rt` 79, `cantat_gaudin_2020_r50` 116,
+`simbad_galdim_halved` 27 (clusters/associations, 222 total); plus
+`simbad_galdim_diameter` 17 (diffuse structures). The 15 honest failures
+are concentrated in large-scale OB associations/moving groups with no
+well-defined structural radius in either source - Cepheus OB2/3/4, Orion
+OB1, Perseus OB2, Vela OB2, Scorpius-Centaurus, the Hyades, the two
+Kounkel & Covey 2019 "Theia" groups (`[KC2019] Theia 75`/`80`) - plus 3
+individual clusters absent from both bulk catalogs and with no SIMBAD
+`galdim_majaxis` (`ubc_159`, `ngc_1980`, `ngc_1981`), and M8 the Lagoon
+Nebula (resolves on SIMBAD under every alias tried - `NGC 6523`, `Lagoon
+Nebula`, `Sh 2-25`, `NAME Lagoon Nebula`, `GRS G006.00 -01.20`, `LBN 25` -
+but none carries `galdim_majaxis`). Per-record source/method/failure-
+reason is checked in at `data/raw/cluster_radius/
+backfill_structure_size_results.json` (mirrors Story #307's own
+`--unresolved-output` convention: this provenance cannot live in `notes`,
+since this Story's acceptance criteria forbid touching it).
+
+**Byte-identical regression guard, full record set** (an explicit
+escalation over Story #307's own 18-record sample, since this Story's
+acceptance criteria call for full-set verification):
+`tests/test_structure_size_backfill.py`'s
+`test_full_record_set_is_byte_identical_except_visual_size_pc` diffs
+every field except `visual.size_pc` across **all 1079** catalog records
+against a full pre-backfill snapshot (`tests/fixtures/
+pre_size_pc_backfill_full_snapshot.json`) - zero non-`size_pc` field
+changes found.
+
+Spot checks (re-asserted as permanent regression guards):
+
+- **M42/the Orion Nebula** (`m42_orion`): SIMBAD `galdim_majaxis=66`
+  arcmin at `distance_pc=433` -> **8.31 pc** diameter - well within the
+  nebula's commonly cited several-pc visible extent; position/notes/
+  aliases confirmed untouched.
+- **Pleiades**/**Vela SNR**/**Cepheus Flare** (already-populated
+  precedent records): confirmed unchanged (`11.6`/`40.0`/`90.0` pc
+  respectively) - this Story never touches an already-populated record.
+
+`catalog.parquet`/`catalog.csv` rebuilt and `scene.json` re-exported the
+same way as every prior Story (`galactic-structures build-catalog` +
+`galactic-structures export-scene --no-radius-filter --output
+web/public/data/scene.json`), from a clean venv matching the test-runtime
+pyarrow version (25.0.1, standing lesson from PR #183). `pytest` (361
+passed, 4 skipped) green.
+
+Frontend (`web/`) was not touched for this Story - `size_pc` is already
+wired into `markerRadiusPc`, so clusters/associations with a newly
+backfilled value will nudge their existing point-marker radius on the
+next page load, but no rendering-code change was made; the diffuse-
+structure extended-volume rendering this data enables is Story #315's job
+(not yet started, depends on this Story merging first).

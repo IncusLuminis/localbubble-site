@@ -1,0 +1,2034 @@
+[
+  {
+    "id": "cepheus-ob2-association",
+    "object_type": "stellar_association",
+    "name": "Cepheus OB2",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "cepheus-ob3-association",
+    "object_type": "stellar_association",
+    "name": "Cepheus OB3",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "cepheus-ob4-association",
+    "object_type": "stellar_association",
+    "name": "Cepheus OB4",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "chamaeleon-molecular-cloud",
+    "object_type": "molecular_cloud",
+    "name": "Chamaeleon Molecular Cloud",
+    "size_pc": 29.321531433504738,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=480.0 arcmin (queried as 'Cha cloud' -> resolved identifier 'NAME Chamaeleon Region', bibcode 2018MNRAS.474.4672L) -> diameter 29.3215 pc via this record's own distance_pc=210.0."
+  },
+  {
+    "id": "hyades-open-cluster",
+    "object_type": "star_cluster",
+    "name": "Hyades",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "lupus-molecular-cloud",
+    "object_type": "molecular_cloud",
+    "name": "Lupus Molecular Cloud",
+    "size_pc": 28.98991887562581,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=660.0 arcmin (queried as 'Lupus cloud' -> resolved identifier 'NAME Lupus Complex', bibcode 2018MNRAS.474.4672L) -> diameter 28.9899 pc via this record's own distance_pc=151.0."
+  },
+  {
+    "id": "ophiuchus-rho-ophiuchi-molecular-cloud",
+    "object_type": "molecular_cloud",
+    "name": "Ophiuchus / Rho Ophiuchi Molecular Cloud",
+    "size_pc": 24.26007660272118,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=600.0 arcmin (queried as 'Rho Ophiuchi cloud' -> resolved identifier 'NAME Ophiuchus Molecular Cloud', bibcode 2018MNRAS.474.4672L) -> diameter 24.2601 pc via this record's own distance_pc=139.0."
+  },
+  {
+    "id": "orion-molecular-cloud-complex",
+    "object_type": "molecular_cloud",
+    "name": "Orion Molecular Cloud Complex",
+    "size_pc": 52.90092962794813,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=420.0 arcmin (queried as 'Orion A' -> resolved identifier 'NAME Ori A', bibcode 2018MNRAS.474.4672L) -> diameter 52.9009 pc via this record's own distance_pc=433.0."
+  },
+  {
+    "id": "orion-ob1-association",
+    "object_type": "stellar_association",
+    "name": "Orion OB1",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "perseus-molecular-cloud",
+    "object_type": "molecular_cloud",
+    "name": "Perseus Molecular Cloud",
+    "size_pc": 24.08554367752175,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=300.0 arcmin (queried as 'Perseus Molecular Cloud' -> resolved identifier 'NAME Perseus Cloud', bibcode 2018MNRAS.474.4672L) -> diameter 24.0855 pc via this record's own distance_pc=276.0."
+  },
+  {
+    "id": "perseus-ob2-association",
+    "object_type": "stellar_association",
+    "name": "Perseus OB2",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "pipe-nebula",
+    "object_type": "molecular_cloud",
+    "name": "Pipe Nebula",
+    "size_pc": 11.37954672300303,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=240.0 arcmin (queried as 'Pipe Nebula' -> resolved identifier 'NAME the Pipe Nebula', bibcode 2018MNRAS.474.4672L) -> diameter 11.3795 pc via this record's own distance_pc=163.0."
+  },
+  {
+    "id": "scorpius-centaurus-association",
+    "object_type": "stellar_association",
+    "name": "Scorpius-Centaurus Association",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "taurus-molecular-cloud",
+    "object_type": "molecular_cloud",
+    "name": "Taurus Molecular Cloud",
+    "size_pc": 19.24225500323748,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=450.0 arcmin (queried as 'Taurus Molecular Cloud' -> resolved identifier 'NAME Taurus Complex', bibcode 2018MNRAS.474.4672L) -> diameter 19.2423 pc via this record's own distance_pc=147.0."
+  },
+  {
+    "id": "vela-ob2-stellar-association",
+    "object_type": "stellar_association",
+    "name": "Vela OB2",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "cl_alessi_1",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi    1",
+    "size_pc": 3.1265250374789733,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.24899999797344208 deg -> 3.1265 pc via this record's own distance_pc=719.4244604316548, matched cluster 'Alessi_1' (SimbadName 'Cl Alessi1')."
+  },
+  {
+    "id": "cl_alessi_10",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   10",
+    "size_pc": 30.99899202064852,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=30.99899202064852 pc, matched cluster 'Alessi_10' (SimbadName 'Cl Alessi 10')."
+  },
+  {
+    "id": "cl_alessi_12",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   12",
+    "size_pc": 35.40718596003717,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=35.40718596003717 pc, matched cluster 'Alessi_12' (SimbadName 'Cl Alessi 12')."
+  },
+  {
+    "id": "cl_alessi_13",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   13",
+    "size_pc": 2.4784985501160954,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.3609999418258667 deg -> 2.4785 pc via this record's own distance_pc=104.34056761268782, matched cluster 'Alessi_13' (SimbadName 'Cl Alessi13')."
+  },
+  {
+    "id": "cl_alessi_19",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   19",
+    "size_pc": 6.072929560648517,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5950000286102295 deg -> 6.0729 pc via this record's own distance_pc=584.7953216374269, matched cluster 'Alessi_19' (SimbadName 'Cl Alessi19')."
+  },
+  {
+    "id": "cl_alessi_2",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi    2",
+    "size_pc": 6.085037385518237,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5540000200271606 deg -> 6.0850 pc via this record's own distance_pc=629.3266205160478, matched cluster 'Alessi_2' (SimbadName 'Cl Alessi2')."
+  },
+  {
+    "id": "cl_alessi_20",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   20",
+    "size_pc": 1.7747830946705763,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.23499999940395355 deg -> 1.7748 pc via this record's own distance_pc=432.7131112072696, matched cluster 'Alessi_20' (SimbadName 'Cl Alessi20')."
+  },
+  {
+    "id": "cl_alessi_21",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   21",
+    "size_pc": 98.53758267650426,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=98.53758267650426 pc, matched cluster 'Alessi_21' (SimbadName 'Cl Alessi 21')."
+  },
+  {
+    "id": "cl_alessi_24",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   24",
+    "size_pc": 8.11550347289629,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=8.11550347289629 pc, matched cluster 'Alessi_24' (SimbadName 'Cl Alessi 24')."
+  },
+  {
+    "id": "cl_alessi_3",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi    3",
+    "size_pc": 7.690663254751029,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=7.690663254751029 pc, matched cluster 'Alessi_3' (SimbadName 'Cl Alessi 3')."
+  },
+  {
+    "id": "cl_alessi_31",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   31",
+    "size_pc": 34.01325319893836,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=34.01325319893836 pc, matched cluster 'Alessi_31' (SimbadName 'Cl Alessi 31')."
+  },
+  {
+    "id": "cl_alessi_37",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   37",
+    "size_pc": 98.40425711785772,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=98.40425711785772 pc, matched cluster 'Alessi_37' (SimbadName 'Cl Alessi 37')."
+  },
+  {
+    "id": "cl_alessi_44",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   44",
+    "size_pc": 15.119964687450228,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.2960000038146973 deg -> 15.1200 pc via this record's own distance_pc=668.4491978609626, matched cluster 'Alessi_44' (SimbadName 'Cl Alessi44')."
+  },
+  {
+    "id": "cl_alessi_5",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi    5",
+    "size_pc": 3.7823608440255345,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5419999957084656 deg -> 3.7824 pc via this record's own distance_pc=399.84006397441027, matched cluster 'Alessi_5' (SimbadName 'Cl Alessi5')."
+  },
+  {
+    "id": "cl_alessi_62",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   62",
+    "size_pc": 26.20819302084278,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=26.20819302084278 pc, matched cluster 'Alessi_62' (SimbadName 'Cl Alessi 62')."
+  },
+  {
+    "id": "cl_alessi_8",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi    8",
+    "size_pc": 2.643365547763208,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.2240000069141388 deg -> 2.6434 pc via this record's own distance_pc=676.1325219743069, matched cluster 'Alessi_8' (SimbadName 'Cl Alessi8')."
+  },
+  {
+    "id": "cl_alessi_9",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi    9",
+    "size_pc": 40.96736698515806,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=40.96736698515806 pc, matched cluster 'Alessi_9' (SimbadName 'Cl Alessi 9')."
+  },
+  {
+    "id": "kpr2005_112",
+    "object_type": "star_cluster",
+    "name": "[KPR2005] 112",
+    "size_pc": 2.947156777952018,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=30.799999237060547 arcmin (identifier '[KPR2005] 112', bibcode 2020A&A...633A..99C) -> diameter 5.8943 pc via distance_pc=657.8947368421052, halved to radius 2.9472 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "kpr2005_86",
+    "object_type": "star_cluster",
+    "name": "[KPR2005]  86",
+    "size_pc": 5.231353575553906,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=58.70000076293945 arcmin (identifier '[KPR2005]  86', bibcode 2020A&A...633A..99C) -> diameter 10.4627 pc via distance_pc=612.7450980392157, halved to radius 5.2314 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "kpr2005_42",
+    "object_type": "star_cluster",
+    "name": "[KPR2005]  42",
+    "size_pc": 6.045630181464779,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=58.900001525878906 arcmin (identifier '[KPR2005]  42', bibcode 2020A&A...633A..99C) -> diameter 12.0913 pc via distance_pc=705.7163020465773, halved to radius 6.0456 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "kc2019_theia_75",
+    "object_type": "stellar_association",
+    "name": "[KC2019] Theia   75",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "kc2019_theia_80",
+    "object_type": "stellar_association",
+    "name": "[KC2019] Theia   80",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "ngc_2632",
+    "object_type": "star_cluster",
+    "name": "NGC  2632",
+    "size_pc": 15.67669486636924,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=15.67669486636924 pc, matched cluster 'NGC_2632' (SimbadName 'NGC 2632')."
+  },
+  {
+    "id": "cl_blanco_1",
+    "object_type": "star_cluster",
+    "name": "Cl Blanco    1",
+    "size_pc": 13.172956352676753,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=13.172956352676753 pc, matched cluster 'Blanco_1' (SimbadName 'Cl Blanco 1')."
+  },
+  {
+    "id": "ngc_6405",
+    "object_type": "star_cluster",
+    "name": "NGC  6405",
+    "size_pc": 2.2193912637631263,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.2750000059604645 deg -> 2.2194 pc via this record's own distance_pc=462.40636271155097, matched cluster 'NGC_6405' (SimbadName 'NGC 6405')."
+  },
+  {
+    "id": "name_coin_gaia_30",
+    "object_type": "star_cluster",
+    "name": "NAME COIN-Gaia 30",
+    "size_pc": 3.295724503827826,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=30.5 arcmin (identifier 'NAME COIN-Gaia 30', bibcode 2020A&A...633A..99C) -> diameter 6.5914 pc via distance_pc=742.9420505200594, halved to radius 3.2957 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "cl_collinder_132",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder  132",
+    "size_pc": 15.499825425508675,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.3329999446868896 deg -> 15.4998 pc via this record's own distance_pc=666.2225183211193, matched cluster 'Collinder_132' (SimbadName 'Cl Collinder 132')."
+  },
+  {
+    "id": "cl_collinder_135",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder  135",
+    "size_pc": 6.059135780180767,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.1380000114440918 deg -> 6.0591 pc via this record's own distance_pc=305.0640634533252, matched cluster 'Collinder_135' (SimbadName 'Cl Collinder 135')."
+  },
+  {
+    "id": "cl_collinder_140",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder  140",
+    "size_pc": 3.8596342129260472,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5680000185966492 deg -> 3.8596 pc via this record's own distance_pc=389.33229511387975, matched cluster 'Collinder_140' (SimbadName 'Cl Collinder 140')."
+  },
+  {
+    "id": "cl_collinder_338",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder  338",
+    "size_pc": 7.953385220115526,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=7.953385220115526 pc, matched cluster 'Collinder_338' (SimbadName 'Cl Collinder 338')."
+  },
+  {
+    "id": "cl_collinder_350",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder  350",
+    "size_pc": 32.663098069359634,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=32.663098069359634 pc, matched cluster 'Collinder_350' (SimbadName 'Cl Collinder 350')."
+  },
+  {
+    "id": "cl_melotte_186",
+    "object_type": "star_cluster",
+    "name": "Cl Melotte  186",
+    "size_pc": 15.261043820972985,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=187.39999389648438 arcmin (identifier 'Cl Melotte  186', bibcode 2020A&A...633A..99C) -> diameter 30.5221 pc via distance_pc=559.9104143337066, halved to radius 15.2610 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "cl_collinder_394",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder  394",
+    "size_pc": 38.64059532226931,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=38.64059532226931 pc, matched cluster 'Collinder_394' (SimbadName 'Cl Collinder 394')."
+  },
+  {
+    "id": "cl_collinder_69",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder   69",
+    "size_pc": 7.011091264571773,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.9890000224113464 deg -> 7.0111 pc via this record's own distance_pc=406.17384240454913, matched cluster 'Collinder_69' (SimbadName 'Cl Collinder 69')."
+  },
+  {
+    "id": "cl_collinder_95",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder   95",
+    "size_pc": 2.0469911436826687,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.17100000381469727 deg -> 2.0470 pc via this record's own distance_pc=685.8710562414267, matched cluster 'Collinder_95' (SimbadName 'Cl Collinder 95')."
+  },
+  {
+    "id": "eso_130_6",
+    "object_type": "star_cluster",
+    "name": "ESO 130-6",
+    "size_pc": 1.5502992857957683,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=13.100000381469727 arcmin (identifier 'ESO 130-6', bibcode 2020A&A...633A..99C) -> diameter 3.1006 pc via distance_pc=813.6696501220504, halved to radius 1.5503 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "cl_ferrero_11",
+    "object_type": "star_cluster",
+    "name": "Cl Ferrero   11",
+    "size_pc": 3.2513795808853394,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.23100000619888306 deg -> 3.2514 pc via this record's own distance_pc=806.4516129032259, matched cluster 'Ferrero_11' (SimbadName 'Cl Ferrero 11')."
+  },
+  {
+    "id": "cl_gulliver_10",
+    "object_type": "star_cluster",
+    "name": "Cl Gulliver   10",
+    "size_pc": 1.933385291780447,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.18299999833106995 deg -> 1.9334 pc via this record's own distance_pc=605.3268765133172, matched cluster 'Gulliver_10' (SimbadName 'Cl Gulliver 10')."
+  },
+  {
+    "id": "cl_gulliver_20",
+    "object_type": "star_cluster",
+    "name": "Cl Gulliver   20",
+    "size_pc": 5.235244084985536,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.7039999961853027 deg -> 5.2352 pc via this record's own distance_pc=426.075841499787, matched cluster 'Gulliver_20' (SimbadName 'Cl Gulliver 20')."
+  },
+  {
+    "id": "cl_gulliver_21",
+    "object_type": "star_cluster",
+    "name": "Cl Gulliver   21",
+    "size_pc": 98.37842754697078,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=98.37842754697078 pc, matched cluster 'Gulliver_21' (SimbadName 'Cl Gulliver 21')."
+  },
+  {
+    "id": "cl_gulliver_28",
+    "object_type": "star_cluster",
+    "name": "Cl Gulliver   28",
+    "size_pc": 6.126867472108922,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5550000071525574 deg -> 6.1269 pc via this record's own distance_pc=632.5110689437065, matched cluster 'Gulliver_28' (SimbadName 'Cl Gulliver 28')."
+  },
+  {
+    "id": "cl_gulliver_6",
+    "object_type": "star_cluster",
+    "name": "Cl Gulliver    6",
+    "size_pc": 3.8121472640592304,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5170000195503235 deg -> 3.8121 pc via this record's own distance_pc=422.4757076468103, matched cluster 'Gulliver_6' (SimbadName 'Cl Gulliver 6')."
+  },
+  {
+    "id": "cl_gulliver_9",
+    "object_type": "star_cluster",
+    "name": "Cl Gulliver    9",
+    "size_pc": 8.520020219433086,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.968999981880188 deg -> 8.5200 pc via this record's own distance_pc=503.7783375314861, matched cluster 'Gulliver_9' (SimbadName 'Cl Gulliver 9')."
+  },
+  {
+    "id": "cl_haffner_13",
+    "object_type": "star_cluster",
+    "name": "Cl Haffner   13",
+    "size_pc": 3.27624943553514,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.3269999921321869 deg -> 3.2762 pc via this record's own distance_pc=574.052812858783, matched cluster 'Haffner_13' (SimbadName 'Cl Haffner 13')."
+  },
+  {
+    "id": "cl_collinder_299",
+    "object_type": "star_cluster",
+    "name": "Cl Collinder  299",
+    "size_pc": 4.359220334376999,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=42.5 arcmin (identifier 'Cl Collinder  299', bibcode 2020A&A...633A..99C) -> diameter 8.7184 pc via distance_pc=705.2186177715092, halved to radius 4.3592 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "ic_2391",
+    "object_type": "star_cluster",
+    "name": "IC 2391",
+    "size_pc": 2.1535516589853216,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8140000104904175 deg -> 2.1536 pc via this record's own distance_pc=151.58405335758678, matched cluster 'IC_2391' (SimbadName 'IC 2391')."
+  },
+  {
+    "id": "ic_2395",
+    "object_type": "star_cluster",
+    "name": "IC 2395",
+    "size_pc": 2.645205400246311,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.20900000631809235 deg -> 2.6452 pc via this record's own distance_pc=725.1631617113851, matched cluster 'IC_2395' (SimbadName 'IC 2395')."
+  },
+  {
+    "id": "ic_2602",
+    "object_type": "star_cluster",
+    "name": "IC 2602",
+    "size_pc": 3.8487020054850998,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.4490000009536743 deg -> 3.8487 pc via this record's own distance_pc=152.18383807639628, matched cluster 'IC_2602' (SimbadName 'IC 2602')."
+  },
+  {
+    "id": "ic_348",
+    "object_type": "star_cluster",
+    "name": "IC  348",
+    "size_pc": 0.544175412951841,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.09600000083446503 deg -> 0.5442 pc via this record's own distance_pc=324.78077297823967, matched cluster 'IC_348' (SimbadName 'IC 348')."
+  },
+  {
+    "id": "ic_4665",
+    "object_type": "star_cluster",
+    "name": "IC 4665",
+    "size_pc": 3.0539337807467,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5059999823570251 deg -> 3.0539 pc via this record's own distance_pc=345.8053807317242, matched cluster 'IC_4665' (SimbadName 'IC 4665')."
+  },
+  {
+    "id": "ic_4756",
+    "object_type": "star_cluster",
+    "name": "IC 4756",
+    "size_pc": 30.821703279512164,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=30.821703279512164 pc, matched cluster 'IC_4756' (SimbadName 'IC 4756')."
+  },
+  {
+    "id": "cl_king_6",
+    "object_type": "star_cluster",
+    "name": "Cl King    6",
+    "size_pc": 2.0617187317110233,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.1589999943971634 deg -> 2.0617 pc via this record's own distance_pc=742.9420505200594, matched cluster 'King_6' (SimbadName 'Cl King 6')."
+  },
+  {
+    "id": "cl_loden_1194",
+    "object_type": "star_cluster",
+    "name": "Cl Loden 1194",
+    "size_pc": 4.412570509885893,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.335999995470047 deg -> 4.4126 pc via this record's own distance_pc=752.4454477050414, matched cluster 'Loden_1194' (SimbadName 'Cl Loden 1194')."
+  },
+  {
+    "id": "mamajek_4",
+    "object_type": "star_cluster",
+    "name": "Mamajek 4",
+    "size_pc": 16.82245941994264,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=16.82245941994264 pc, matched cluster 'Mamajek_4' (SimbadName 'Cl Mamajek 4')."
+  },
+  {
+    "id": "m_23",
+    "object_type": "star_cluster",
+    "name": "M  23",
+    "size_pc": 3.7596334207164905,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=35.0 arcmin (identifier 'M  23', bibcode 2020A&A...633A..99C) -> diameter 7.5193 pc via distance_pc=738.5524372230428, halved to radius 3.7596 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "ic_4725",
+    "object_type": "star_cluster",
+    "name": "IC 4725",
+    "size_pc": 24.650566901819488,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=24.650566901819488 pc, matched cluster 'IC_4725' (SimbadName 'IC 4725')."
+  },
+  {
+    "id": "ngc_1039",
+    "object_type": "star_cluster",
+    "name": "NGC  1039",
+    "size_pc": 20.32026382429301,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=20.32026382429301 pc, matched cluster 'NGC_1039' (SimbadName 'NGC 1039')."
+  },
+  {
+    "id": "ngc_7092",
+    "object_type": "star_cluster",
+    "name": "NGC  7092",
+    "size_pc": 59.41182235187218,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=59.41182235187218 pc, matched cluster 'NGC_7092' (SimbadName 'NGC 7092')."
+  },
+  {
+    "id": "m_41",
+    "object_type": "star_cluster",
+    "name": "M  41",
+    "size_pc": 4.256378854031481,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=39.79999923706055 arcmin (identifier 'M  41', bibcode 2020A&A...633A..99C) -> diameter 8.5128 pc via distance_pc=735.2941176470588, halved to radius 4.2564 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "ngc_2422",
+    "object_type": "star_cluster",
+    "name": "NGC  2422",
+    "size_pc": 9.664537599693148,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=9.664537599693148 pc, matched cluster 'NGC_2422' (SimbadName 'NGC 2422')."
+  },
+  {
+    "id": "ngc_2548",
+    "object_type": "star_cluster",
+    "name": "NGC  2548",
+    "size_pc": 38.74652488211272,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=38.74652488211272 pc, matched cluster 'NGC_2548' (SimbadName 'NGC 2548')."
+  },
+  {
+    "id": "ngc_2682",
+    "object_type": "star_cluster",
+    "name": "NGC  2682",
+    "size_pc": 27.44922846374387,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=27.44922846374387 pc, matched cluster 'NGC_2682' (SimbadName 'NGC 2682')."
+  },
+  {
+    "id": "ngc_1333",
+    "object_type": "star_cluster",
+    "name": "NGC  1333",
+    "size_pc": 0.49583216764015164,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.0949999988079071 deg -> 0.4958 pc via this record's own distance_pc=299.04306220095697, matched cluster 'NGC_1333' (SimbadName 'NGC 1333')."
+  },
+  {
+    "id": "ngc_1342",
+    "object_type": "star_cluster",
+    "name": "NGC  1342",
+    "size_pc": 26.32879435862692,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=26.32879435862692 pc, matched cluster 'NGC_1342' (SimbadName 'NGC 1342')."
+  },
+  {
+    "id": "ngc_1545",
+    "object_type": "star_cluster",
+    "name": "NGC  1545",
+    "size_pc": 25.352460075779867,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=25.352460075779867 pc, matched cluster 'NGC_1545' (SimbadName 'NGC 1545')."
+  },
+  {
+    "id": "ngc_1647",
+    "object_type": "star_cluster",
+    "name": "NGC  1647",
+    "size_pc": 26.686007853466467,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=26.686007853466467 pc, matched cluster 'NGC_1647' (SimbadName 'NGC 1647')."
+  },
+  {
+    "id": "ngc_1662",
+    "object_type": "star_cluster",
+    "name": "NGC  1662",
+    "size_pc": 38.32428035795712,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=38.32428035795712 pc, matched cluster 'NGC_1662' (SimbadName 'NGC 1662')."
+  },
+  {
+    "id": "ngc_1750",
+    "object_type": "star_cluster",
+    "name": "NGC  1750",
+    "size_pc": 27.515818282727405,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=27.515818282727405 pc, matched cluster 'NGC_1750' (SimbadName 'NGC 1750')."
+  },
+  {
+    "id": "ngc_1901",
+    "object_type": "star_cluster",
+    "name": "NGC  1901",
+    "size_pc": 4.2729971685679775,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=4.2729971685679775 pc, matched cluster 'NGC_1901' (SimbadName 'NGC 1901')."
+  },
+  {
+    "id": "ngc_1977",
+    "object_type": "star_cluster",
+    "name": "NGC  1977",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "ngc_1980",
+    "object_type": "star_cluster",
+    "name": "NGC  1980",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "ngc_2184",
+    "object_type": "star_cluster",
+    "name": "NGC  2184",
+    "size_pc": 26.384982429723507,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=26.384982429723507 pc, matched cluster 'NGC_2184' (SimbadName 'NGC 2184')."
+  },
+  {
+    "id": "ngc_2232",
+    "object_type": "star_cluster",
+    "name": "NGC  2232",
+    "size_pc": 2.9325621836259104,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.515999972820282 deg -> 2.9326 pc via this record's own distance_pc=325.626831650928, matched cluster 'NGC_2232' (SimbadName 'NGC 2232')."
+  },
+  {
+    "id": "ngc_225",
+    "object_type": "star_cluster",
+    "name": "NGC   225",
+    "size_pc": 82.52681864536842,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=82.52681864536842 pc, matched cluster 'NGC_225' (SimbadName 'NGC 225')."
+  },
+  {
+    "id": "ngc_2264",
+    "object_type": "star_cluster",
+    "name": "NGC  2264",
+    "size_pc": 0.9280923244759657,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.07199999690055847 deg -> 0.9281 pc via this record's own distance_pc=738.5524372230428, matched cluster 'NGC_2264' (SimbadName 'NGC 2264')."
+  },
+  {
+    "id": "ngc_2281",
+    "object_type": "star_cluster",
+    "name": "NGC  2281",
+    "size_pc": 31.284367490249288,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=31.284367490249288 pc, matched cluster 'NGC_2281' (SimbadName 'NGC 2281')."
+  },
+  {
+    "id": "ngc_2451a",
+    "object_type": "star_cluster",
+    "name": "NGC  2451A",
+    "size_pc": 3.8725021704846005,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.1460000276565552 deg -> 3.8725 pc via this record's own distance_pc=193.61084220716359, matched cluster 'NGC_2451A' (SimbadName 'NGC 2451A')."
+  },
+  {
+    "id": "ngc_2451b",
+    "object_type": "star_cluster",
+    "name": "NGC  2451B",
+    "size_pc": 4.011882245297742,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.625 deg -> 4.0119 pc via this record's own distance_pc=367.7822728944465, matched cluster 'NGC_2451B' (SimbadName 'NGC 2451B')."
+  },
+  {
+    "id": "ngc_2516",
+    "object_type": "star_cluster",
+    "name": "NGC  2516",
+    "size_pc": 13.70362354293042,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=13.70362354293042 pc, matched cluster 'NGC_2516' (SimbadName 'NGC 2516')."
+  },
+  {
+    "id": "ngc_2527",
+    "object_type": "star_cluster",
+    "name": "NGC  2527",
+    "size_pc": 38.31687350316773,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=38.31687350316773 pc, matched cluster 'NGC_2527' (SimbadName 'NGC 2527')."
+  },
+  {
+    "id": "ngc_2547",
+    "object_type": "star_cluster",
+    "name": "NGC  2547",
+    "size_pc": 1.9416941779958714,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.28299999237060547 deg -> 1.9417 pc via this record's own distance_pc=393.1126660901014, matched cluster 'NGC_2547' (SimbadName 'NGC 2547')."
+  },
+  {
+    "id": "ngc_2925",
+    "object_type": "star_cluster",
+    "name": "NGC  2925",
+    "size_pc": 31.711167870003912,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=31.711167870003912 pc, matched cluster 'NGC_2925' (SimbadName 'NGC 2925')."
+  },
+  {
+    "id": "ngc_3228",
+    "object_type": "star_cluster",
+    "name": "NGC  3228",
+    "size_pc": 4.397031045934294,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5120000243186951 deg -> 4.3970 pc via this record's own distance_pc=492.0533385819022, matched cluster 'NGC_3228' (SimbadName 'NGC 3228')."
+  },
+  {
+    "id": "ngc_3532",
+    "object_type": "star_cluster",
+    "name": "NGC  3532",
+    "size_pc": 23.51585031941115,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=23.51585031941115 pc, matched cluster 'NGC_3532' (SimbadName 'NGC 3532')."
+  },
+  {
+    "id": "ngc_5460",
+    "object_type": "star_cluster",
+    "name": "NGC  5460",
+    "size_pc": 28.23079015316204,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=28.23079015316204 pc, matched cluster 'NGC_5460' (SimbadName 'NGC 5460')."
+  },
+  {
+    "id": "ngc_5662",
+    "object_type": "star_cluster",
+    "name": "NGC  5662",
+    "size_pc": 28.651988917939548,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=28.651988917939548 pc, matched cluster 'NGC_5662' (SimbadName 'NGC 5662')."
+  },
+  {
+    "id": "ngc_6025",
+    "object_type": "star_cluster",
+    "name": "NGC  6025",
+    "size_pc": 53.104306869586985,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=53.104306869586985 pc, matched cluster 'NGC_6025' (SimbadName 'NGC 6025')."
+  },
+  {
+    "id": "ngc_6124",
+    "object_type": "star_cluster",
+    "name": "NGC  6124",
+    "size_pc": 30.58291824161974,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=30.58291824161974 pc, matched cluster 'NGC_6124' (SimbadName 'NGC 6124')."
+  },
+  {
+    "id": "ngc_6281",
+    "object_type": "star_cluster",
+    "name": "NGC  6281",
+    "size_pc": 26.262435137117464,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=26.262435137117464 pc, matched cluster 'NGC_6281' (SimbadName 'NGC 6281')."
+  },
+  {
+    "id": "ngc_6633",
+    "object_type": "star_cluster",
+    "name": "NGC  6633",
+    "size_pc": 14.509961790587358,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=14.509961790587358 pc, matched cluster 'NGC_6633' (SimbadName 'NGC 6633')."
+  },
+  {
+    "id": "ngc_6716",
+    "object_type": "star_cluster",
+    "name": "NGC  6716",
+    "size_pc": 98.52103556475028,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=98.52103556475028 pc, matched cluster 'NGC_6716' (SimbadName 'NGC 6716')."
+  },
+  {
+    "id": "ngc_6793",
+    "object_type": "star_cluster",
+    "name": "NGC  6793",
+    "size_pc": 9.589557375302489,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=9.589557375302489 pc, matched cluster 'NGC_6793' (SimbadName 'NGC 6793')."
+  },
+  {
+    "id": "ngc_6991",
+    "object_type": "star_cluster",
+    "name": "NGC  6991",
+    "size_pc": 11.231527430054197,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=11.231527430054197 pc, matched cluster 'NGC_6991' (SimbadName 'NGC 6991')."
+  },
+  {
+    "id": "ngc_7039",
+    "object_type": "star_cluster",
+    "name": "NGC  7039",
+    "size_pc": 1.9437540716789754,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.14399999380111694 deg -> 1.9438 pc via this record's own distance_pc=773.3952049497293, matched cluster 'NGC_7039' (SimbadName 'NGC 7039')."
+  },
+  {
+    "id": "ngc_7058",
+    "object_type": "star_cluster",
+    "name": "NGC  7058",
+    "size_pc": 0.6968530545423949,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.10899999737739563 deg -> 0.6969 pc via this record's own distance_pc=366.3003663003663, matched cluster 'NGC_7058' (SimbadName 'NGC 7058')."
+  },
+  {
+    "id": "ngc_7063",
+    "object_type": "star_cluster",
+    "name": "NGC  7063",
+    "size_pc": 11.664488810570342,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=11.664488810570342 pc, matched cluster 'NGC_7063' (SimbadName 'NGC 7063')."
+  },
+  {
+    "id": "ngc_752",
+    "object_type": "star_cluster",
+    "name": "NGC   752",
+    "size_pc": 28.168167134429435,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=28.168167134429435 pc, matched cluster 'NGC_752' (SimbadName 'NGC 752')."
+  },
+  {
+    "id": "cl_pismis_4",
+    "object_type": "star_cluster",
+    "name": "Cl Pismis    4",
+    "size_pc": 47.88702804239641,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=47.88702804239641 pc, matched cluster 'Pismis_4' (SimbadName 'Cl Pismis 4')."
+  },
+  {
+    "id": "cl_platais_10",
+    "object_type": "star_cluster",
+    "name": "Cl Platais   10",
+    "size_pc": 2.0357977686012143,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.48500001430511475 deg -> 2.0358 pc via this record's own distance_pc=240.50024050024047, matched cluster 'Platais_10' (SimbadName 'Cl Platais 10')."
+  },
+  {
+    "id": "name_hip_21974_cluster",
+    "object_type": "star_cluster",
+    "name": "NAME HIP 21974 Cluster",
+    "size_pc": 5.351929042686084,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=206.8000030517578 arcmin (identifier 'NAME HIP 21974 Cluster', bibcode 2020A&A...633A..99C) -> diameter 10.7039 pc via distance_pc=177.9359430604982, halved to radius 5.3519 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "cl_platais_8",
+    "object_type": "star_cluster",
+    "name": "Cl Platais    8",
+    "size_pc": 6.3928717305900955,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=2.7160000801086426 deg -> 6.3929 pc via this record's own distance_pc=134.86176668914362, matched cluster 'Platais_8' (SimbadName 'Cl Platais 8')."
+  },
+  {
+    "id": "cl_platais_9",
+    "object_type": "star_cluster",
+    "name": "Cl Platais    9",
+    "size_pc": 17.574727808300807,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=17.574727808300807 pc, matched cluster 'Platais_9' (SimbadName 'Cl Platais 9')."
+  },
+  {
+    "id": "name_pozzo_1",
+    "object_type": "star_cluster",
+    "name": "NAME Pozzo 1",
+    "size_pc": 3.8234517437660562,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.625 deg -> 3.8235 pc via this record's own distance_pc=350.50823694356814, matched cluster 'Pozzo_1' (SimbadName 'NAME Pozzo 1')."
+  },
+  {
+    "id": "ngc_6475",
+    "object_type": "star_cluster",
+    "name": "NGC  6475",
+    "size_pc": 22.367088512742125,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=22.367088512742125 pc, matched cluster 'NGC_6475' (SimbadName 'NGC 6475')."
+  },
+  {
+    "id": "cl_alessi_96",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   96",
+    "size_pc": 3.610658371475551,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=74.5 arcmin (identifier 'Cl Alessi   96', bibcode 2020A&A...633A..99C) -> diameter 7.2213 pc via distance_pc=333.2222592469177, halved to radius 3.6107 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "rsg_5",
+    "object_type": "star_cluster",
+    "name": "RSG 5",
+    "size_pc": 5.138201810468582,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8669999837875366 deg -> 5.1382 pc via this record's own distance_pc=339.55857385398986, matched cluster 'RSG_5' (SimbadName 'RSG 5')."
+  },
+  {
+    "id": "rsg_7",
+    "object_type": "star_cluster",
+    "name": "RSG 7",
+    "size_pc": 6.1687715826741485,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8259999752044678 deg -> 6.1688 pc via this record's own distance_pc=427.89901583226356, matched cluster 'RSG_7' (SimbadName 'RSG 7')."
+  },
+  {
+    "id": "rsg_8",
+    "object_type": "star_cluster",
+    "name": "RSG 8",
+    "size_pc": 8.015878578312712,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.0149999856948853 deg -> 8.0159 pc via this record's own distance_pc=452.4886877828054, matched cluster 'RSG_8' (SimbadName 'RSG 8')."
+  },
+  {
+    "id": "cl_roslund_5",
+    "object_type": "star_cluster",
+    "name": "Cl Roslund    5",
+    "size_pc": 10.884780112534042,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=10.884780112534042 pc, matched cluster 'Roslund_5' (SimbadName 'Cl Roslund 5')."
+  },
+  {
+    "id": "cl_roslund_6",
+    "object_type": "star_cluster",
+    "name": "Cl Roslund    6",
+    "size_pc": 32.11012462531632,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=32.11012462531632 pc, matched cluster 'Roslund_6' (SimbadName 'Cl Roslund 6')."
+  },
+  {
+    "id": "cl_ruprecht_145",
+    "object_type": "star_cluster",
+    "name": "Cl Ruprecht  145",
+    "size_pc": 25.476467547519785,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=25.476467547519785 pc, matched cluster 'Ruprecht_145' (SimbadName 'Cl Ruprecht 145')."
+  },
+  {
+    "id": "ngc_6774",
+    "object_type": "star_cluster",
+    "name": "NGC  6774",
+    "size_pc": 3.4978867372891904,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=78.19999694824219 arcmin (identifier 'NGC  6774', bibcode 2020A&A...633A..99C) -> diameter 6.9958 pc via distance_pc=307.54090294009103, halved to radius 3.4979 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "cl_ruprecht_98",
+    "object_type": "star_cluster",
+    "name": "Cl Ruprecht   98",
+    "size_pc": 22.542710683115928,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=22.542710683115928 pc, matched cluster 'Ruprecht_98' (SimbadName 'Cl Ruprecht 98')."
+  },
+  {
+    "id": "name_del_lyr_cluster",
+    "object_type": "star_cluster",
+    "name": "NAME del Lyr Cluster",
+    "size_pc": 1.5648717754839923,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=29.899999618530273 arcmin (identifier 'NAME del Lyr Cluster', bibcode 2020A&A...633A..99C) -> diameter 3.1297 pc via distance_pc=359.84166966534724, halved to radius 1.5649 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "cl_stock_1",
+    "object_type": "star_cluster",
+    "name": "Cl Stock    1",
+    "size_pc": 9.943700297896957,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=9.943700297896957 pc, matched cluster 'Stock_1' (SimbadName 'Cl Stock 1')."
+  },
+  {
+    "id": "cl_stock_10",
+    "object_type": "star_cluster",
+    "name": "Cl Stock   10",
+    "size_pc": 18.212917123885404,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=18.212917123885404 pc, matched cluster 'Stock_10' (SimbadName 'Cl Stock 10')."
+  },
+  {
+    "id": "cl_stock_12",
+    "object_type": "star_cluster",
+    "name": "Cl Stock   12",
+    "size_pc": 34.98745610853753,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=34.98745610853753 pc, matched cluster 'Stock_12' (SimbadName 'Cl Stock 12')."
+  },
+  {
+    "id": "cl_stock_2",
+    "object_type": "star_cluster",
+    "name": "Cl Stock    2",
+    "size_pc": 73.79826602067541,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=73.79826602067541 pc, matched cluster 'Stock_2' (SimbadName 'Cl Stock 2')."
+  },
+  {
+    "id": "cl_stock_23",
+    "object_type": "star_cluster",
+    "name": "Cl Stock   23",
+    "size_pc": 8.158575760395337,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.7540000081062317 deg -> 8.1586 pc via this record's own distance_pc=619.9628022318661, matched cluster 'Stock_23' (SimbadName 'Cl Stock 23')."
+  },
+  {
+    "id": "cl_mrk_6",
+    "object_type": "star_cluster",
+    "name": "Cl Mrk    6",
+    "size_pc": 3.38124739427539,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=33.5 arcmin (identifier 'Cl Mrk    6', bibcode 2020A&A...633A..99C) -> diameter 6.7625 pc via distance_pc=693.9625260235947, halved to radius 3.3812 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "teutsch_35",
+    "object_type": "star_cluster",
+    "name": "Teutsch  35",
+    "size_pc": 49.81328813606523,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=49.81328813606523 pc, matched cluster 'Teutsch_35' (SimbadName 'Teutsch 35')."
+  },
+  {
+    "id": "teutsch_38",
+    "object_type": "star_cluster",
+    "name": "Teutsch  38",
+    "size_pc": 7.146321615321368,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.6150000095367432 deg -> 7.1463 pc via this record's own distance_pc=665.7789613848203, matched cluster 'Teutsch_38' (SimbadName 'Teutsch 38')."
+  },
+  {
+    "id": "cl_trumpler_10",
+    "object_type": "star_cluster",
+    "name": "Cl Trumpler   10",
+    "size_pc": 6.861964965798552,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8899999856948853 deg -> 6.8620 pc via this record's own distance_pc=441.7546494676856, matched cluster 'Trumpler_10' (SimbadName 'Cl Trumpler 10')."
+  },
+  {
+    "id": "cl_trumpler_2",
+    "object_type": "star_cluster",
+    "name": "Cl Trumpler    2",
+    "size_pc": 40.89403804601957,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=40.89403804601957 pc, matched cluster 'Trumpler_2' (SimbadName 'Cl Trumpler 2')."
+  },
+  {
+    "id": "cl_trumpler_3",
+    "object_type": "star_cluster",
+    "name": "Cl Trumpler    3",
+    "size_pc": 3.2971311532031913,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.2759999930858612 deg -> 3.2971 pc via this record's own distance_pc=684.4626967830253, matched cluster 'Trumpler_3' (SimbadName 'Cl Trumpler 3')."
+  },
+  {
+    "id": "cl_turner_5",
+    "object_type": "star_cluster",
+    "name": "Cl Turner    5",
+    "size_pc": 5.74421482272486,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.781000018119812 deg -> 5.7442 pc via this record's own distance_pc=421.40750105351873, matched cluster 'Turner_5' (SimbadName 'Cl Turner 5')."
+  },
+  {
+    "id": "ubc_1",
+    "object_type": "star_cluster",
+    "name": "UBC 1",
+    "size_pc": 17.77238773400624,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=17.77238773400624 pc, matched cluster 'UBC_1' (SimbadName 'UBC_1')."
+  },
+  {
+    "id": "ubc_11",
+    "object_type": "star_cluster",
+    "name": "UBC 11",
+    "size_pc": 8.405545015396552,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.034000039100647 deg -> 8.4055 pc via this record's own distance_pc=465.7661853749418, matched cluster 'UBC_11' (SimbadName 'UBC 11')."
+  },
+  {
+    "id": "ubc_12",
+    "object_type": "star_cluster",
+    "name": "UBC 12",
+    "size_pc": 3.6416739199690706,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.46299999952316284 deg -> 3.6417 pc via this record's own distance_pc=450.6534474988734, matched cluster 'UBC_12' (SimbadName 'UBC 12')."
+  },
+  {
+    "id": "ubc_13",
+    "object_type": "star_cluster",
+    "name": "UBC 13",
+    "size_pc": 11.932021248015255,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.100000023841858 deg -> 11.9320 pc via this record's own distance_pc=621.5040397762585, matched cluster 'UBC_13' (SimbadName 'UBC 13')."
+  },
+  {
+    "id": "ubc_14",
+    "object_type": "star_cluster",
+    "name": "UBC 14",
+    "size_pc": 14.272676642859796,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.0679999589920044 deg -> 14.2727 pc via this record's own distance_pc=765.6967840735068, matched cluster 'UBC_14' (SimbadName 'UBC 14')."
+  },
+  {
+    "id": "ubc_159",
+    "object_type": "star_cluster",
+    "name": "UBC 159",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "ubc_17a",
+    "object_type": "star_cluster",
+    "name": "UBC 17a",
+    "size_pc": 8.59668133851679,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.3559999465942383 deg -> 8.5967 pc via this record's own distance_pc=363.24010170722846, matched cluster 'UBC_17a' (SimbadName 'UBC 17a')."
+  },
+  {
+    "id": "ubc_17b",
+    "object_type": "star_cluster",
+    "name": "UBC 17b",
+    "size_pc": 3.9225832692708114,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5339999794960022 deg -> 3.9226 pc via this record's own distance_pc=420.8754208754209, matched cluster 'UBC_17b' (SimbadName 'UBC 17b')."
+  },
+  {
+    "id": "ubc_19",
+    "object_type": "star_cluster",
+    "name": "UBC 19",
+    "size_pc": 1.8587574178390063,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.2540000081062317 deg -> 1.8588 pc via this record's own distance_pc=419.287211740042, matched cluster 'UBC_19' (SimbadName 'UBC 19')."
+  },
+  {
+    "id": "cl_alessi_94",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   94",
+    "size_pc": 5.439642544073876,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=65.5999984741211 arcmin (identifier 'Cl Alessi   94', bibcode 2020A&A...633A..99C) -> diameter 10.8793 pc via distance_pc=570.1254275940707, halved to radius 5.4396 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "ngc_1981",
+    "object_type": "star_cluster",
+    "name": "NGC  1981",
+    "size_pc": null,
+    "method": null,
+    "detail": "No Tarricq et al. 2022 or Cantat-Gaudin et al. 2020 row matched this cluster/association's name, and SIMBAD has no galdim_majaxis on file for it either - no resolvable size; never fabricated."
+  },
+  {
+    "id": "ubc_26",
+    "object_type": "star_cluster",
+    "name": "UBC 26",
+    "size_pc": 7.534022197445754,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.7170000076293945 deg -> 7.5340 pc via this record's own distance_pc=602.0469596628537, matched cluster 'UBC_26' (SimbadName 'UBC 26')."
+  },
+  {
+    "id": "ubc_260",
+    "object_type": "star_cluster",
+    "name": "UBC 260",
+    "size_pc": 17.02351267488194,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=17.02351267488194 pc, matched cluster 'UBC_260' (SimbadName 'UBC_260')."
+  },
+  {
+    "id": "ubc_31",
+    "object_type": "star_cluster",
+    "name": "UBC 31",
+    "size_pc": 10.33224654513827,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.6119999885559082 deg -> 10.3322 pc via this record's own distance_pc=367.2420124862284, matched cluster 'UBC_31' (SimbadName 'UBC 31')."
+  },
+  {
+    "id": "ubc_32",
+    "object_type": "star_cluster",
+    "name": "UBC 32",
+    "size_pc": 19.65797637136048,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=19.65797637136048 pc, matched cluster 'UBC_32' (SimbadName 'UBC_32')."
+  },
+  {
+    "id": "ubc_4",
+    "object_type": "star_cluster",
+    "name": "UBC 4",
+    "size_pc": 10.795850841386917,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.0199999809265137 deg -> 10.7959 pc via this record's own distance_pc=606.4281382656155, matched cluster 'UBC_4' (SimbadName 'UBC 4')."
+  },
+  {
+    "id": "ubc_480",
+    "object_type": "star_cluster",
+    "name": "UBC 480",
+    "size_pc": 92.32851890686725,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=92.32851890686725 pc, matched cluster 'UBC_480' (SimbadName 'UBC_480')."
+  },
+  {
+    "id": "cl_alessi_190",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi  190",
+    "size_pc": 3.731843063013994,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=45.79999923706055 arcmin (identifier 'Cl Alessi  190', bibcode 2020A&A...633A..99C) -> diameter 7.4637 pc via distance_pc=560.2240896358544, halved to radius 3.7318 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "cl_alessi_36",
+    "object_type": "star_cluster",
+    "name": "Cl Alessi   36",
+    "size_pc": 2.910517083934656,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=71.19999694824219 arcmin (identifier 'Cl Alessi   36', bibcode 2020A&A...633A..99C) -> diameter 5.8210 pc via distance_pc=281.0567734682406, halved to radius 2.9105 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "ubc_8",
+    "object_type": "star_cluster",
+    "name": "UBC 8",
+    "size_pc": 6.343414088644007,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=6.343414088644007 pc, matched cluster 'UBC_8' (SimbadName 'UBC_8')."
+  },
+  {
+    "id": "teutsch_179",
+    "object_type": "star_cluster",
+    "name": "Teutsch 179",
+    "size_pc": 2.6564208048002773,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=52.400001525878906 arcmin (identifier 'Teutsch 179', bibcode 2020A&A...633A..99C) -> diameter 5.3128 pc via distance_pc=348.5535029627047, halved to radius 2.6564 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_113",
+    "object_type": "star_cluster",
+    "name": "UPK 113",
+    "size_pc": 3.343683432444936,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.27300000190734863 deg -> 3.3437 pc via this record's own distance_pc=701.7543859649122, matched cluster 'UPK_113' (SimbadName 'UPK 113')."
+  },
+  {
+    "id": "upk_119",
+    "object_type": "star_cluster",
+    "name": "UPK 119",
+    "size_pc": 3.0276119791771037,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.22100000083446503 deg -> 3.0276 pc via this record's own distance_pc=784.9293563579278, matched cluster 'UPK_119' (SimbadName 'UPK 119')."
+  },
+  {
+    "id": "ubc_98",
+    "object_type": "star_cluster",
+    "name": "UBC 98",
+    "size_pc": 2.5863092407500328,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=27.100000381469727 arcmin (identifier 'UBC 98', bibcode 2020A&A...633A..99C) -> diameter 5.1726 pc via distance_pc=656.1679790026246, halved to radius 2.5863 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_136",
+    "object_type": "star_cluster",
+    "name": "UPK 136",
+    "size_pc": 7.612850476539845,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.6629999876022339 deg -> 7.6129 pc via this record's own distance_pc=657.8947368421052, matched cluster 'UPK_136' (SimbadName 'UPK 136')."
+  },
+  {
+    "id": "upk_166",
+    "object_type": "star_cluster",
+    "name": "UPK 166",
+    "size_pc": 9.95184429446246,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8610000014305115 deg -> 9.9518 pc via this record's own distance_pc=662.2516556291391, matched cluster 'UPK_166' (SimbadName 'UPK 166')."
+  },
+  {
+    "id": "upk_167",
+    "object_type": "star_cluster",
+    "name": "UPK 167",
+    "size_pc": 37.78275666825037,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=37.78275666825037 pc, matched cluster 'UPK_167' (SimbadName 'UPK_167')."
+  },
+  {
+    "id": "upk_168",
+    "object_type": "star_cluster",
+    "name": "UPK 168",
+    "size_pc": 9.270753466137874,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8859999775886536 deg -> 9.2708 pc via this record's own distance_pc=599.5203836930456, matched cluster 'UPK_168' (SimbadName 'UPK 168')."
+  },
+  {
+    "id": "upk_17",
+    "object_type": "star_cluster",
+    "name": "UPK 17",
+    "size_pc": 29.085609098352425,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=29.085609098352425 pc, matched cluster 'UPK_17' (SimbadName 'UPK_17')."
+  },
+  {
+    "id": "upk_18",
+    "object_type": "star_cluster",
+    "name": "UPK 18",
+    "size_pc": 2.35893250508381,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.1679999977350235 deg -> 2.3589 pc via this record's own distance_pc=804.5052292839903, matched cluster 'UPK_18' (SimbadName 'UPK 18')."
+  },
+  {
+    "id": "ubc_171",
+    "object_type": "star_cluster",
+    "name": "UBC 171",
+    "size_pc": 2.201228036427826,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=27.0 arcmin (identifier 'UBC 171', bibcode 2020A&A...633A..99C) -> diameter 4.4025 pc via distance_pc=560.5381165919282, halved to radius 2.2012 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_20",
+    "object_type": "star_cluster",
+    "name": "UPK 20",
+    "size_pc": 3.570179865318946,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.4309999942779541 deg -> 3.5702 pc via this record's own distance_pc=474.6084480303749, matched cluster 'UPK_20' (SimbadName 'UPK 20')."
+  },
+  {
+    "id": "upk_21",
+    "object_type": "star_cluster",
+    "name": "UPK 21",
+    "size_pc": 2.4948063102311306,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.2409999966621399 deg -> 2.4948 pc via this record's own distance_pc=593.1198102016608, matched cluster 'UPK_21' (SimbadName 'UPK 21')."
+  },
+  {
+    "id": "upk_230",
+    "object_type": "star_cluster",
+    "name": "UPK 230",
+    "size_pc": 5.814597072655533,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.6119999885559082 deg -> 5.8146 pc via this record's own distance_pc=544.3658138268917, matched cluster 'UPK_230' (SimbadName 'UPK 230')."
+  },
+  {
+    "id": "ubc_408",
+    "object_type": "star_cluster",
+    "name": "UBC 408",
+    "size_pc": 3.32944331041901,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=30.399999618530273 arcmin (identifier 'UBC 408', bibcode 2020A&A...633A..99C) -> diameter 6.6589 pc via distance_pc=753.0120481927711, halved to radius 3.3294 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_24",
+    "object_type": "star_cluster",
+    "name": "UPK 24",
+    "size_pc": 2.5014690062468325,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=2.5014690062468325 pc, matched cluster 'UPK_24' (SimbadName 'UPK_24')."
+  },
+  {
+    "id": "upk_25",
+    "object_type": "star_cluster",
+    "name": "UPK 25",
+    "size_pc": 5.880758897077397,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5289999842643738 deg -> 5.8808 pc via this record's own distance_pc=636.9426751592356, matched cluster 'UPK_25' (SimbadName 'UPK 25')."
+  },
+  {
+    "id": "upk_29",
+    "object_type": "star_cluster",
+    "name": "UPK 29",
+    "size_pc": 2.2183404231925237,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.1889999955892563 deg -> 2.2183 pc via this record's own distance_pc=672.4949562878278, matched cluster 'UPK_29' (SimbadName 'UPK 29')."
+  },
+  {
+    "id": "upk_294",
+    "object_type": "star_cluster",
+    "name": "UPK 294",
+    "size_pc": 11.213307385129552,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8410000205039978 deg -> 11.2133 pc via this record's own distance_pc=763.9419404125287, matched cluster 'UPK_294' (SimbadName 'UPK 294')."
+  },
+  {
+    "id": "upk_296",
+    "object_type": "star_cluster",
+    "name": "UPK 296",
+    "size_pc": 9.034757158952281,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.953000009059906 deg -> 9.0348 pc via this record's own distance_pc=543.1830526887561, matched cluster 'UPK_296' (SimbadName 'UPK 296')."
+  },
+  {
+    "id": "upk_303",
+    "object_type": "star_cluster",
+    "name": "UPK 303",
+    "size_pc": 74.60259871567492,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=74.60259871567492 pc, matched cluster 'UPK_303' (SimbadName 'UPK_303')."
+  },
+  {
+    "id": "upk_305",
+    "object_type": "star_cluster",
+    "name": "UPK 305",
+    "size_pc": 12.219494818548204,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.6740000247955322 deg -> 12.2195 pc via this record's own distance_pc=418.23504809703053, matched cluster 'UPK_305' (SimbadName 'UPK 305')."
+  },
+  {
+    "id": "upk_31",
+    "object_type": "star_cluster",
+    "name": "UPK 31",
+    "size_pc": 10.795009805566997,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=10.795009805566997 pc, matched cluster 'UPK_31' (SimbadName 'UPK_31')."
+  },
+  {
+    "id": "upk_312",
+    "object_type": "star_cluster",
+    "name": "UPK 312",
+    "size_pc": 4.655038901122857,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.375 deg -> 4.6550 pc via this record's own distance_pc=711.2375533428166, matched cluster 'UPK_312' (SimbadName 'UPK 312')."
+  },
+  {
+    "id": "upk_33",
+    "object_type": "star_cluster",
+    "name": "UPK 33",
+    "size_pc": 1.6088483286615052,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.17800000309944153 deg -> 1.6088 pc via this record's own distance_pc=517.8663904712585, matched cluster 'UPK_33' (SimbadName 'UPK 33')."
+  },
+  {
+    "id": "upk_333",
+    "object_type": "star_cluster",
+    "name": "UPK 333",
+    "size_pc": 5.15519747816837,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.4020000100135803 deg -> 5.1552 pc via this record's own distance_pc=734.7538574577517, matched cluster 'UPK_333' (SimbadName 'UPK 333')."
+  },
+  {
+    "id": "upk_350",
+    "object_type": "star_cluster",
+    "name": "UPK 350",
+    "size_pc": 7.389436285685708,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.9559999704360962 deg -> 7.3894 pc via this record's own distance_pc=442.8697962798937, matched cluster 'UPK_350' (SimbadName 'UPK 350')."
+  },
+  {
+    "id": "upk_379",
+    "object_type": "star_cluster",
+    "name": "UPK 379",
+    "size_pc": 8.446902562762236,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.6190000176429749 deg -> 8.4469 pc via this record's own distance_pc=781.8608287724785, matched cluster 'UPK_379' (SimbadName 'UPK 379')."
+  },
+  {
+    "id": "upk_38",
+    "object_type": "star_cluster",
+    "name": "UPK 38",
+    "size_pc": 0.8539200633452553,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.0820000022649765 deg -> 0.8539 pc via this record's own distance_pc=596.6587112171838, matched cluster 'UPK_38' (SimbadName 'UPK 38')."
+  },
+  {
+    "id": "upk_381",
+    "object_type": "star_cluster",
+    "name": "UPK 381",
+    "size_pc": 7.07257641042025,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5580000281333923 deg -> 7.0726 pc via this record's own distance_pc=726.2164124909223, matched cluster 'UPK_381' (SimbadName 'UPK 381')."
+  },
+  {
+    "id": "upk_385",
+    "object_type": "star_cluster",
+    "name": "UPK 385",
+    "size_pc": 1.9832021210631128,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.35600000619888306 deg -> 1.9832 pc via this record's own distance_pc=319.1828917969997, matched cluster 'UPK_385' (SimbadName 'UPK 385')."
+  },
+  {
+    "id": "ubc_202",
+    "object_type": "star_cluster",
+    "name": "UBC 202",
+    "size_pc": 2.529974306760928,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=21.5 arcmin (identifier 'UBC 202', bibcode 2020A&A...633A..99C) -> diameter 5.0599 pc via distance_pc=809.0614886731391, halved to radius 2.5300 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "name_lambda_orion_south_group",
+    "object_type": "star_cluster",
+    "name": "NAME lambda Orion South Group",
+    "size_pc": 2.2121280995663213,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=33.400001525878906 arcmin (identifier 'NAME lambda Orion South Group', bibcode 2020A&A...633A..99C) -> diameter 4.4243 pc via distance_pc=455.37340619307827, halved to radius 2.2121 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_4",
+    "object_type": "star_cluster",
+    "name": "UPK 4",
+    "size_pc": 12.816200570758372,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=12.816200570758372 pc, matched cluster 'UPK_4' (SimbadName 'UPK_4')."
+  },
+  {
+    "id": "upk_40",
+    "object_type": "star_cluster",
+    "name": "UPK 40",
+    "size_pc": 9.854344064746305,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8519999980926514 deg -> 9.8543 pc via this record's own distance_pc=662.6905235255136, matched cluster 'UPK_40' (SimbadName 'UPK 40')."
+  },
+  {
+    "id": "upk_402",
+    "object_type": "star_cluster",
+    "name": "UPK 402",
+    "size_pc": 1.364779565282285,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.1889999955892563 deg -> 1.3648 pc via this record's own distance_pc=413.7360364087712, matched cluster 'UPK_402' (SimbadName 'UPK 402')."
+  },
+  {
+    "id": "ubc_115",
+    "object_type": "star_cluster",
+    "name": "UBC 115",
+    "size_pc": 2.4706290766235983,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=28.299999237060547 arcmin (identifier 'UBC 115', bibcode 2020A&A...633A..99C) -> diameter 4.9413 pc via distance_pc=600.2400960384153, halved to radius 2.4706 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_422",
+    "object_type": "star_cluster",
+    "name": "UPK 422",
+    "size_pc": 3.891968486237139,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.7390000224113464 deg -> 3.8920 pc via this record's own distance_pc=301.7501508750754, matched cluster 'UPK_422' (SimbadName 'UPK 422')."
+  },
+  {
+    "id": "upk_431",
+    "object_type": "star_cluster",
+    "name": "UPK 431",
+    "size_pc": 8.077556824965006,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.6159999966621399 deg -> 8.0776 pc via this record's own distance_pc=751.3148009015778, matched cluster 'UPK_431' (SimbadName 'UPK 431')."
+  },
+  {
+    "id": "teutsch_201",
+    "object_type": "star_cluster",
+    "name": "Teutsch 201",
+    "size_pc": 4.78204352658163,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=41.0 arcmin (identifier 'Teutsch 201', bibcode 2020A&A...633A..99C) -> diameter 9.5641 pc via distance_pc=801.9246190858058, halved to radius 4.7820 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_442",
+    "object_type": "star_cluster",
+    "name": "UPK 442",
+    "size_pc": 13.82678356443814,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.2009999752044678 deg -> 13.8268 pc via this record's own distance_pc=659.6306068601583, matched cluster 'UPK_442' (SimbadName 'UPK 442')."
+  },
+  {
+    "id": "upk_445",
+    "object_type": "star_cluster",
+    "name": "UPK 445",
+    "size_pc": 3.561654936853,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.3009999990463257 deg -> 3.5617 pc via this record's own distance_pc=677.9661016949152, matched cluster 'UPK_445' (SimbadName 'UPK 445')."
+  },
+  {
+    "id": "upk_452",
+    "object_type": "star_cluster",
+    "name": "UPK 452",
+    "size_pc": 60.45740387658181,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=60.45740387658181 pc, matched cluster 'UPK_452' (SimbadName 'UPK_452')."
+  },
+  {
+    "id": "upk_46",
+    "object_type": "star_cluster",
+    "name": "UPK 46",
+    "size_pc": 4.30111695889122,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.3630000054836273 deg -> 4.3011 pc via this record's own distance_pc=678.8866259334691, matched cluster 'UPK_46' (SimbadName 'UPK 46')."
+  },
+  {
+    "id": "upk_467",
+    "object_type": "star_cluster",
+    "name": "UPK 467",
+    "size_pc": 6.319648592631542,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.6169999837875366 deg -> 6.3196 pc via this record's own distance_pc=586.8544600938967, matched cluster 'UPK_467' (SimbadName 'UPK 467')."
+  },
+  {
+    "id": "upk_495",
+    "object_type": "star_cluster",
+    "name": "UPK 495",
+    "size_pc": 12.758463857340791,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.0679999589920044 deg -> 12.7585 pc via this record's own distance_pc=684.4626967830253, matched cluster 'UPK_495' (SimbadName 'UPK 495')."
+  },
+  {
+    "id": "upk_5",
+    "object_type": "star_cluster",
+    "name": "UPK 5",
+    "size_pc": 93.8420969142124,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=93.8420969142124 pc, matched cluster 'UPK_5' (SimbadName 'UPK_5')."
+  },
+  {
+    "id": "upk_502",
+    "object_type": "star_cluster",
+    "name": "UPK 502",
+    "size_pc": 1.863340912470622,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.15000000596046448 deg -> 1.8633 pc via this record's own distance_pc=711.7437722419928, matched cluster 'UPK_502' (SimbadName 'UPK 502')."
+  },
+  {
+    "id": "upk_524",
+    "object_type": "star_cluster",
+    "name": "UPK 524",
+    "size_pc": 10.546120010101308,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.0809999704360962 deg -> 10.5461 pc via this record's own distance_pc=558.9714924538848, matched cluster 'UPK_524' (SimbadName 'UPK 524')."
+  },
+  {
+    "id": "upk_526",
+    "object_type": "star_cluster",
+    "name": "UPK 526",
+    "size_pc": 9.570508675413716,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.9470000267028809 deg -> 9.5705 pc via this record's own distance_pc=579.0387955993051, matched cluster 'UPK_526' (SimbadName 'UPK 526')."
+  },
+  {
+    "id": "upk_53",
+    "object_type": "star_cluster",
+    "name": "UPK 53",
+    "size_pc": 22.09705495121085,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=22.09705495121085 pc, matched cluster 'UPK_53' (SimbadName 'UPK_53')."
+  },
+  {
+    "id": "upk_533",
+    "object_type": "star_cluster",
+    "name": "UPK 533",
+    "size_pc": 7.184502741786158,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.180999994277954 deg -> 7.1845 pc via this record's own distance_pc=348.5535029627047, matched cluster 'UPK_533' (SimbadName 'UPK 533')."
+  },
+  {
+    "id": "upk_535",
+    "object_type": "star_cluster",
+    "name": "UPK 535",
+    "size_pc": 6.941842378010924,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.2309999465942383 deg -> 6.9418 pc via this record's own distance_pc=323.1017770597738, matched cluster 'UPK_535' (SimbadName 'UPK 535')."
+  },
+  {
+    "id": "upk_537",
+    "object_type": "star_cluster",
+    "name": "UPK 537",
+    "size_pc": 8.954206031843855,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8460000157356262 deg -> 8.9542 pc via this record's own distance_pc=606.4281382656155, matched cluster 'UPK_537' (SimbadName 'UPK 537')."
+  },
+  {
+    "id": "upk_540",
+    "object_type": "star_cluster",
+    "name": "UPK 540",
+    "size_pc": 5.327369817098619,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8220000267028809 deg -> 5.3274 pc via this record's own distance_pc=371.3330857779428, matched cluster 'UPK_540' (SimbadName 'UPK 540')."
+  },
+  {
+    "id": "upk_545",
+    "object_type": "star_cluster",
+    "name": "UPK 545",
+    "size_pc": 98.67010122292048,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=98.67010122292048 pc, matched cluster 'UPK_545' (SimbadName 'UPK_545')."
+  },
+  {
+    "id": "upk_55",
+    "object_type": "star_cluster",
+    "name": "UPK 55",
+    "size_pc": 3.5715772160880364,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.25600001215934753 deg -> 3.5716 pc via this record's own distance_pc=799.3605115907275, matched cluster 'UPK_55' (SimbadName 'UPK 55')."
+  },
+  {
+    "id": "pkv98_hip_51688",
+    "object_type": "star_cluster",
+    "name": "[PKV98] HIP  51688",
+    "size_pc": 3.870919338431621,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=81.5999984741211 arcmin (identifier '[PKV98] HIP  51688', bibcode 2020A&A...633A..99C) -> diameter 7.7418 pc via distance_pc=326.1578604044358, halved to radius 3.8709 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_560",
+    "object_type": "star_cluster",
+    "name": "UPK 560",
+    "size_pc": 13.372752748671664,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.2649999856948853 deg -> 13.3728 pc via this record's own distance_pc=605.6935190793458, matched cluster 'UPK_560' (SimbadName 'UPK 560')."
+  },
+  {
+    "id": "upk_567",
+    "object_type": "star_cluster",
+    "name": "UPK 567",
+    "size_pc": 9.726574547696861,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.8560000061988831 deg -> 9.7266 pc via this record's own distance_pc=651.0416666666666, matched cluster 'UPK_567' (SimbadName 'UPK 567')."
+  },
+  {
+    "id": "upk_579",
+    "object_type": "star_cluster",
+    "name": "UPK 579",
+    "size_pc": 26.43358451848508,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=26.43358451848508 pc, matched cluster 'UPK_579' (SimbadName 'UPK_579')."
+  },
+  {
+    "id": "upk_585",
+    "object_type": "star_cluster",
+    "name": "UPK 585",
+    "size_pc": 3.9338378674284042,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.3160000145435333 deg -> 3.9338 pc via this record's own distance_pc=713.2667617689016, matched cluster 'UPK_585' (SimbadName 'UPK 585')."
+  },
+  {
+    "id": "upk_599",
+    "object_type": "star_cluster",
+    "name": "UPK 599",
+    "size_pc": 9.365475457711248,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.7770000100135803 deg -> 9.3655 pc via this record's own distance_pc=690.6077348066299, matched cluster 'UPK_599' (SimbadName 'UPK 599')."
+  },
+  {
+    "id": "upk_604",
+    "object_type": "star_cluster",
+    "name": "UPK 604",
+    "size_pc": 4.692316832860817,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.3529999852180481 deg -> 4.6923 pc via this record's own distance_pc=761.6146230007616, matched cluster 'UPK_604' (SimbadName 'UPK 604')."
+  },
+  {
+    "id": "ubc_304",
+    "object_type": "star_cluster",
+    "name": "UBC 304",
+    "size_pc": 2.379994476569936,
+    "method": "simbad_galdim_halved",
+    "detail": "No Tarricq et al. 2022/Cantat-Gaudin et al. 2020 row matched this cluster/association's name; fell back to SIMBAD galdim_majaxis=21.600000381469727 arcmin (identifier 'UBC 304', bibcode 2020A&A...633A..99C) -> diameter 4.7600 pc via distance_pc=757.5757575757575, halved to radius 2.3800 pc to match this record type's RADIUS convention."
+  },
+  {
+    "id": "upk_612",
+    "object_type": "star_cluster",
+    "name": "UPK 612",
+    "size_pc": 10.377962396349444,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=2.561000108718872 deg -> 10.3780 pc via this record's own distance_pc=232.18017181332712, matched cluster 'UPK_612' (SimbadName 'UPK 612')."
+  },
+  {
+    "id": "upk_617",
+    "object_type": "star_cluster",
+    "name": "UPK 617",
+    "size_pc": 2.741557004738601,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.21299999952316284 deg -> 2.7416 pc via this record's own distance_pc=737.4631268436577, matched cluster 'UPK_617' (SimbadName 'UPK 617')."
+  },
+  {
+    "id": "upk_624",
+    "object_type": "star_cluster",
+    "name": "UPK 624",
+    "size_pc": 3.346225029403753,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.6069999933242798 deg -> 3.3462 pc via this record's own distance_pc=315.8559696778269, matched cluster 'UPK_624' (SimbadName 'UPK 624')."
+  },
+  {
+    "id": "upk_626",
+    "object_type": "star_cluster",
+    "name": "UPK 626",
+    "size_pc": 2.8173334140944544,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.3179999887943268 deg -> 2.8173 pc via this record's own distance_pc=507.61421319796955, matched cluster 'UPK_626' (SimbadName 'UPK 626')."
+  },
+  {
+    "id": "upk_627",
+    "object_type": "star_cluster",
+    "name": "UPK 627",
+    "size_pc": 5.174453778527887,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5550000071525574 deg -> 5.1745 pc via this record's own distance_pc=534.1880341880342, matched cluster 'UPK_627' (SimbadName 'UPK 627')."
+  },
+  {
+    "id": "upk_640",
+    "object_type": "star_cluster",
+    "name": "UPK 640",
+    "size_pc": 4.1790869289783,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.3609999418258667 deg -> 4.1791 pc via this record's own distance_pc=175.93244194229416, matched cluster 'UPK_640' (SimbadName 'UPK 640')."
+  },
+  {
+    "id": "upk_644",
+    "object_type": "star_cluster",
+    "name": "UPK 644",
+    "size_pc": 5.791015809967144,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.43299999833106995 deg -> 5.7910 pc via this record's own distance_pc=766.2835249042146, matched cluster 'UPK_644' (SimbadName 'UPK 644')."
+  },
+  {
+    "id": "upk_645",
+    "object_type": "star_cluster",
+    "name": "UPK 645",
+    "size_pc": 2.9619191914023406,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.24199999868869781 deg -> 2.9619 pc via this record's own distance_pc=701.2622720897616, matched cluster 'UPK_645' (SimbadName 'UPK 645')."
+  },
+  {
+    "id": "upk_65",
+    "object_type": "star_cluster",
+    "name": "UPK 65",
+    "size_pc": 3.539479002876508,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.26100000739097595 deg -> 3.5395 pc via this record's own distance_pc=777.000777000777, matched cluster 'UPK_65' (SimbadName 'UPK 65')."
+  },
+  {
+    "id": "upk_654",
+    "object_type": "star_cluster",
+    "name": "UPK 654",
+    "size_pc": 14.523164762747973,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=14.523164762747973 pc, matched cluster 'UPK_654' (SimbadName 'UPK_654')."
+  },
+  {
+    "id": "upk_66",
+    "object_type": "star_cluster",
+    "name": "UPK 66",
+    "size_pc": 3.543510711987519,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.29499998688697815 deg -> 3.5435 pc via this record's own distance_pc=688.2312456985546, matched cluster 'UPK_66' (SimbadName 'UPK 66')."
+  },
+  {
+    "id": "upk_7",
+    "object_type": "star_cluster",
+    "name": "UPK 7",
+    "size_pc": 2.4415077050161567,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.17499999701976776 deg -> 2.4415 pc via this record's own distance_pc=799.3605115907275, matched cluster 'UPK_7' (SimbadName 'UPK 7')."
+  },
+  {
+    "id": "upk_82",
+    "object_type": "star_cluster",
+    "name": "UPK 82",
+    "size_pc": 4.946047205974012,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.5220000147819519 deg -> 4.9460 pc via this record's own distance_pc=542.8881650380022, matched cluster 'UPK_82' (SimbadName 'UPK 82')."
+  },
+  {
+    "id": "upk_88",
+    "object_type": "star_cluster",
+    "name": "UPK 88",
+    "size_pc": 5.520206442885158,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=1.0759999752044678 deg -> 5.5202 pc via this record's own distance_pc=293.9447383891828, matched cluster 'UPK_88' (SimbadName 'UPK 88')."
+  },
+  {
+    "id": "upk_93",
+    "object_type": "star_cluster",
+    "name": "UPK 93",
+    "size_pc": 5.248454441053682,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.42100000381469727 deg -> 5.2485 pc via this record's own distance_pc=714.2857142857143, matched cluster 'UPK_93' (SimbadName 'UPK 93')."
+  },
+  {
+    "id": "upk_99",
+    "object_type": "star_cluster",
+    "name": "UPK 99",
+    "size_pc": 6.050102795385662,
+    "method": "cantat_gaudin_2020_r50",
+    "detail": "Cantat-Gaudin et al. 2020 (VizieR J/A+A/633/A99) r50=0.4339999854564667 deg -> 6.0501 pc via this record's own distance_pc=798.7220447284345, matched cluster 'UPK_99' (SimbadName 'UPK 99')."
+  },
+  {
+    "id": "cl_melotte_111",
+    "object_type": "star_cluster",
+    "name": "Cl Melotte  111",
+    "size_pc": 19.01621032808461,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=19.01621032808461 pc, matched cluster 'Melotte_111' (SimbadName 'Cl Melotte 111')."
+  },
+  {
+    "id": "cl_melotte_20",
+    "object_type": "stellar_association",
+    "name": "Cl Melotte   20",
+    "size_pc": 22.101983634499035,
+    "method": "tarricq2022_Rt",
+    "detail": "Tarricq et al. 2022 (VizieR J/A+A/659/A59) tidal radius Rt=22.101983634499035 pc, matched cluster 'Melotte_20' (SimbadName 'Cl Melotte 20')."
+  },
+  {
+    "id": "m27_dumbbell",
+    "object_type": "planetary_nebula",
+    "name": "M  27",
+    "size_pc": 0.7583466702637401,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=6.699999809265137 arcmin (queried as 'M  27' -> resolved identifier 'M  27', bibcode 1992ESOPN...1....1A) -> diameter 0.7583 pc via this record's own distance_pc=389.1050583657588."
+  },
+  {
+    "id": "m57_ring",
+    "object_type": "planetary_nebula",
+    "name": "M  57",
+    "size_pc": 0.2641730495899017,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=1.152999997138977 arcmin (queried as 'M  57' -> resolved identifier 'M  57', bibcode 2008ApJ...689..194S) -> diameter 0.2642 pc via this record's own distance_pc=787.6496534341525."
+  },
+  {
+    "id": "m76_little_dumbbell",
+    "object_type": "planetary_nebula",
+    "name": "M  76",
+    "size_pc": 2.2787065352936686,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=2.306999921798706 arcmin (queried as 'M  76' -> resolved identifier 'M  76', bibcode 2008ApJ...689..194S) -> diameter 2.2787 pc via this record's own distance_pc=3395.585738539898."
+  },
+  {
+    "id": "m97_owl",
+    "object_type": "planetary_nebula",
+    "name": "M  97",
+    "size_pc": 0.7852355903400977,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=3.3329999446868896 arcmin (queried as 'M  97' -> resolved identifier 'M  97', bibcode 2008ApJ...689..194S) -> diameter 0.7852 pc via this record's own distance_pc=809.9133392726978."
+  },
+  {
+    "id": "m1_crab",
+    "object_type": "supernova_remnant",
+    "name": "M   1",
+    "size_pc": 4.072434921320102,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=7.0 arcmin (queried as 'M   1' -> resolved identifier 'M   1', bibcode 2014BASI...42...47G) -> diameter 4.0724 pc via this record's own distance_pc=2000.0."
+  },
+  {
+    "id": "m42_orion",
+    "object_type": "hii_region",
+    "name": "M  42",
+    "size_pc": 8.313003227248993,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=66.0 arcmin (queried as 'M  42' -> resolved identifier 'M  42', bibcode 1989Sci...246.1066D) -> diameter 8.3130 pc via this record's own distance_pc=433.0."
+  },
+  {
+    "id": "m8_lagoon",
+    "object_type": "hii_region",
+    "name": "M   8",
+    "size_pc": null,
+    "method": null,
+    "detail": "SIMBAD has no galdim_majaxis on file for 'M   8' or any tried alias (['M   8']) - no resolvable size; never fabricated."
+  },
+  {
+    "id": "m16_eagle",
+    "object_type": "hii_region",
+    "name": "M  16",
+    "size_pc": 41.1149411541656,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=80.0 arcmin (queried as 'M  16' -> resolved identifier 'M  16', bibcode 2022A&A...664A..66M) -> diameter 41.1149 pc via this record's own distance_pc=1766.78445229682."
+  },
+  {
+    "id": "m17_omega",
+    "object_type": "hii_region",
+    "name": "NGC  6618",
+    "size_pc": 0.7918623419592892,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=1.6333333253860474 arcmin (queried as 'NGC  6618' -> resolved identifier 'NGC  6618', bibcode 2013A&A...560A..76M) -> diameter 0.7919 pc via this record's own distance_pc=1666.6666666666667."
+  },
+  {
+    "id": "m20_trifid",
+    "object_type": "hii_region",
+    "name": "M  20",
+    "size_pc": 10.309961826126841,
+    "method": "simbad_galdim_diameter",
+    "detail": "SIMBAD galdim_majaxis=28.0 arcmin (queried as 'M  20' -> resolved identifier 'M  20', bibcode 2013A&A...560A..76M) -> diameter 10.3100 pc via this record's own distance_pc=1265.8227848101264."
+  }
+]

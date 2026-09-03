@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "M  16",
+  "retrieved_utc": "2026-09-03T14:18:19+00:00",
+  "record_id": "M  16",
+  "raw": {
+    "main_id": "M  16",
+    "ra": 274.688,
+    "dec": -13.792,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_minaxis": 80.0,
+    "galdim_majaxis": 80.0,
+    "galdim_qual": "C",
+    "galdim_angle": 0,
+    "galdim_bibcode": "2022A&A...664A..66M",
+    "matched_id": "M  16"
+  }
+}

@@ -8459,3 +8459,347 @@ sources:
   retrieved: '2026-09-02T18:02:46+00:00'
   record_id: '* eps UMa'
   cache_path: /tmp/simbad_test_cache/eps_uma.json
+- id: simbad_size:M  42
+  source: simbad_size
+  query: M  42
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:16:45+00:00'
+  record_id: M  42
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_42.json
+- id: simbad_size:Cha cloud
+  source: simbad_size
+  query: Cha cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:22+00:00'
+  record_id: NAME Chamaeleon Region
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cha_cloud.json
+- id: simbad_size:Lupus cloud
+  source: simbad_size
+  query: Lupus cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:25+00:00'
+  record_id: NAME Lupus Complex
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/lupus_cloud.json
+- id: simbad_size:Rho Ophiuchi cloud
+  source: simbad_size
+  query: Rho Ophiuchi cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:27+00:00'
+  record_id: NAME Ophiuchus Molecular Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/rho_ophiuchi_cloud.json
+- id: simbad_size:Orion A
+  source: simbad_size
+  query: Orion A
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:29+00:00'
+  record_id: NAME Ori A
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/orion_a.json
+- id: simbad_size:Perseus Molecular Cloud
+  source: simbad_size
+  query: Perseus Molecular Cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:31+00:00'
+  record_id: NAME Perseus Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/perseus_molecular_cloud.json
+- id: simbad_size:Pipe Nebula
+  source: simbad_size
+  query: Pipe Nebula
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:33+00:00'
+  record_id: NAME the Pipe Nebula
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/pipe_nebula.json
+- id: simbad_size:Taurus Molecular Cloud
+  source: simbad_size
+  query: Taurus Molecular Cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:35+00:00'
+  record_id: NAME Taurus Complex
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/taurus_molecular_cloud.json
+- id: simbad_size:[KPR2005] 112
+  source: simbad_size
+  query: '[KPR2005] 112'
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:36+00:00'
+  record_id: '[KPR2005] 112'
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/kpr2005_112.json
+- id: simbad_size:[KPR2005]  86
+  source: simbad_size
+  query: '[KPR2005]  86'
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:37+00:00'
+  record_id: '[KPR2005]  86'
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/kpr2005_86.json
+- id: simbad_size:[KPR2005]  42
+  source: simbad_size
+  query: '[KPR2005]  42'
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:39+00:00'
+  record_id: '[KPR2005]  42'
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/kpr2005_42.json
+- id: simbad_size:NAME COIN-Gaia 30
+  source: simbad_size
+  query: NAME COIN-Gaia 30
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:41+00:00'
+  record_id: NAME COIN-Gaia 30
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/name_coin_gaia_30.json
+- id: simbad_size:Cl Melotte  186
+  source: simbad_size
+  query: Cl Melotte  186
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:43+00:00'
+  record_id: Cl Melotte  186
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cl_melotte_186.json
+- id: simbad_size:ESO 130-6
+  source: simbad_size
+  query: ESO 130-6
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:44+00:00'
+  record_id: ESO 130-6
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/eso_130_6.json
+- id: simbad_size:Cl Collinder  299
+  source: simbad_size
+  query: Cl Collinder  299
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:45+00:00'
+  record_id: Cl Collinder  299
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cl_collinder_299.json
+- id: simbad_size:M  23
+  source: simbad_size
+  query: M  23
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:46+00:00'
+  record_id: M  23
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_23.json
+- id: simbad_size:M  41
+  source: simbad_size
+  query: M  41
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:47+00:00'
+  record_id: M  41
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_41.json
+- id: simbad_size:NAME HIP 21974 Cluster
+  source: simbad_size
+  query: NAME HIP 21974 Cluster
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:50+00:00'
+  record_id: NAME HIP 21974 Cluster
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/name_hip_21974_cluster.json
+- id: simbad_size:Cl Alessi   96
+  source: simbad_size
+  query: Cl Alessi   96
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:51+00:00'
+  record_id: Cl Alessi   96
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cl_alessi_96.json
+- id: simbad_size:NGC  6774
+  source: simbad_size
+  query: NGC  6774
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:52+00:00'
+  record_id: NGC  6774
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ngc_6774.json
+- id: simbad_size:NAME del Lyr Cluster
+  source: simbad_size
+  query: NAME del Lyr Cluster
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:53+00:00'
+  record_id: NAME del Lyr Cluster
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/name_del_lyr_cluster.json
+- id: simbad_size:Cl Mrk    6
+  source: simbad_size
+  query: Cl Mrk    6
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:54+00:00'
+  record_id: Cl Mrk    6
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cl_mrk_6.json
+- id: simbad_size:Cl Alessi   94
+  source: simbad_size
+  query: Cl Alessi   94
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:56+00:00'
+  record_id: Cl Alessi   94
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cl_alessi_94.json
+- id: simbad_size:Cl Alessi  190
+  source: simbad_size
+  query: Cl Alessi  190
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:58+00:00'
+  record_id: Cl Alessi  190
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cl_alessi_190.json
+- id: simbad_size:Cl Alessi   36
+  source: simbad_size
+  query: Cl Alessi   36
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:17:59+00:00'
+  record_id: Cl Alessi   36
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/cl_alessi_36.json
+- id: simbad_size:Teutsch 179
+  source: simbad_size
+  query: Teutsch 179
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:00+00:00'
+  record_id: Teutsch 179
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/teutsch_179.json
+- id: simbad_size:UBC 98
+  source: simbad_size
+  query: UBC 98
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:02+00:00'
+  record_id: UBC 98
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ubc_98.json
+- id: simbad_size:UBC 171
+  source: simbad_size
+  query: UBC 171
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:03+00:00'
+  record_id: UBC 171
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ubc_171.json
+- id: simbad_size:UBC 408
+  source: simbad_size
+  query: UBC 408
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:04+00:00'
+  record_id: UBC 408
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ubc_408.json
+- id: simbad_size:UBC 202
+  source: simbad_size
+  query: UBC 202
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:05+00:00'
+  record_id: UBC 202
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ubc_202.json
+- id: simbad_size:NAME lambda Orion South Group
+  source: simbad_size
+  query: NAME lambda Orion South Group
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:06+00:00'
+  record_id: NAME lambda Orion South Group
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/name_lambda_orion_south_group.json
+- id: simbad_size:UBC 115
+  source: simbad_size
+  query: UBC 115
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:08+00:00'
+  record_id: UBC 115
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ubc_115.json
+- id: simbad_size:Teutsch 201
+  source: simbad_size
+  query: Teutsch 201
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:09+00:00'
+  record_id: Teutsch 201
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/teutsch_201.json
+- id: simbad_size:[PKV98] HIP  51688
+  source: simbad_size
+  query: '[PKV98] HIP  51688'
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:10+00:00'
+  record_id: '[PKV98] HIP  51688'
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/pkv98_hip_51688.json
+- id: simbad_size:UBC 304
+  source: simbad_size
+  query: UBC 304
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:11+00:00'
+  record_id: UBC 304
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ubc_304.json
+- id: simbad_size:M  27
+  source: simbad_size
+  query: M  27
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:12+00:00'
+  record_id: M  27
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_27.json
+- id: simbad_size:M  57
+  source: simbad_size
+  query: M  57
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:13+00:00'
+  record_id: M  57
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_57.json
+- id: simbad_size:M  76
+  source: simbad_size
+  query: M  76
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:15+00:00'
+  record_id: M  76
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_76.json
+- id: simbad_size:M  97
+  source: simbad_size
+  query: M  97
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:16+00:00'
+  record_id: M  97
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_97.json
+- id: simbad_size:M   1
+  source: simbad_size
+  query: M   1
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:17+00:00'
+  record_id: M   1
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_1.json
+- id: simbad_size:M  16
+  source: simbad_size
+  query: M  16
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:19+00:00'
+  record_id: M  16
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_16.json
+- id: simbad_size:NGC  6618
+  source: simbad_size
+  query: NGC  6618
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:20+00:00'
+  record_id: NGC  6618
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/ngc_6618.json
+- id: simbad_size:M  20
+  source: simbad_size
+  query: M  20
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-03T14:18:21+00:00'
+  record_id: M  20
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_20.json

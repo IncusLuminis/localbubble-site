@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "Lupus cloud",
+  "retrieved_utc": "2026-09-03T14:17:25+00:00",
+  "record_id": "NAME Lupus Complex",
+  "raw": {
+    "main_id": "NAME Lupus Complex",
+    "ra": 240.75,
+    "dec": -38.1,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "galdim_minaxis": 480.0,
+    "galdim_majaxis": 660.0,
+    "galdim_qual": "D",
+    "galdim_angle": null,
+    "galdim_bibcode": "2018MNRAS.474.4672L",
+    "matched_id": "NAME Lupus Cloud"
+  }
+}

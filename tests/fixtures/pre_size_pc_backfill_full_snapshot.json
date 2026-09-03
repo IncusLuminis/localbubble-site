@@ -7828,7 +7828,7 @@
       "catalog": "Zucker et al. 2020 (SF Handbook compendium, Table A.1)"
     },
     "visual": {
-      "size_pc": 29.321531433504738,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "SIMBAD centroid for Chamaeleon I specifically (ra=166.7, dec=-77.3, coo_bibcode 2000PASA...17...92O) used only to identify the named region; final position is the Zucker+2020 sightline closest to that centroid (l,b offset ~0.5 deg), RA/Dec=168.6420, -77.1386. Table A.1 statistical uncertainty +15/-11 pc, systematic ~7% for this NSC-footprint cloud (14 pc); combined in quadrature -> 19.1 pc. Broadly consistent with other Cha I distance determinations (~191 pc, e.g. Voirin et al. 2018, A&A, 610, A54; Zucker's own sightline set used here samples a slightly different part of the Chamaeleon complex, hence the modest offset)."
@@ -33889,7 +33889,7 @@
       "catalog": "Zucker et al. 2020 (SF Handbook compendium, Table A.1)"
     },
     "visual": {
-      "size_pc": 28.98991887562581,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "SIMBAD centroid for the Lupus 1 sub-cloud (ra=235.76, dec=-34.15) used only to identify the named region; final position is the Zucker+2020 sightline closest to that centroid (l,b offset ~0.2 deg), RA/Dec=235.9739, -34.2287. Table A.1 statistical uncertainty +13/-11 pc, systematic ~7% for this NSC-footprint cloud (10 pc, per the paper's Table A.1 footnote 4); combined in quadrature -> 15.6 pc. The Lupus region as a whole (Lupus I-IV) spans several sub-clouds at somewhat different distances (~150-200 pc); this record represents the Lupus 1 sightline as a single representative centroid for the MVP (spec \u00a715)."
@@ -35409,7 +35409,7 @@
       "catalog": "Zucker et al. 2020 (SF Handbook compendium, Table A.1)"
     },
     "visual": {
-      "size_pc": 24.26007660272118,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "object_type=molecular_cloud chosen over star_forming_region for consistency with the other diffuse clouds in this batch; the region is simultaneously a very well known active low-mass star-forming region (L1688 core around the rho Ophiuchi association), so star_forming_region would be an equally defensible choice. SIMBAD centroid (ra=247.02, dec=-24.54) used only to identify the named region; final position is the Zucker+2020 L1688 sightline, essentially coincident with that centroid (l,b offset ~0.1 deg). Table A.1 statistical uncertainty +3/-4 pc, systematic ~5% for NSC clouds (Chamaeleon/Lupus/Corona Australis get ~7% per the paper's footnote, but L1688 is a standard ~5% sightline) -> combined 6.9 pc. Note the star rho Ophiuchi itself (SIMBAD 'rho Oph', d~111 pc) is a distinct object (the illuminating star, not the cloud) and was NOT used here."
@@ -35447,7 +35447,7 @@
       "catalog": "Zucker et al. 2020 (SF Handbook compendium, Table A.1)"
     },
     "visual": {
-      "size_pc": 52.90092962794813,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Broad Orion A+B molecular cloud complex, distinct from any single embedded cluster (e.g. Trapezium/ONC) or OB association (Orion OB1, handled separately). SIMBAD centroid (ra=89.0, dec=-1.8) used only to identify the named region; final position is the Zucker+2020 sightline closest to that centroid (l,b offset ~2.9 deg), converted RA/Dec=86.2152, -1.3456. Table A.1 statistical uncertainty +27/-22 pc, systematic ~5% (21 pc); combined in quadrature -> 32.3 pc."
@@ -35611,7 +35611,7 @@
       "catalog": "Zucker et al. 2020 (SF Handbook compendium, Table A.1)"
     },
     "visual": {
-      "size_pc": 24.08554367752175,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "SIMBAD centroid (ra=53.75, dec=31.22) used only to identify the named region; final position is the Zucker+2020 sightline closest to that centroid (l,b offset ~0.8 deg), RA/Dec=53.0591, 30.6894. Table A.1 statistical uncertainty +12/-8 pc, systematic ~5% (13 pc); combined in quadrature -> 16.4 pc. Consistent with the widely cited ~293 pc Gaia-DR2 Perseus distance (Zucker et al. 2018, ApJ, 869, 83)."
@@ -36678,7 +36678,7 @@
       "catalog": "Dzib et al. 2018 (Gaia DR2 YSO parallaxes, Gould Belt survey)"
     },
     "visual": {
-      "size_pc": 11.37954672300303,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "A dark/molecular cloud, not an emission nebula, despite the name. Position (ra/dec) taken from the SIMBAD entry 'NAME the Pipe Nebula' (otype DNe); SIMBAD carries no parallax for this extended entry. Distance is the Gaia DR2 parallax distance to B59, the embedded young cluster within the Pipe Nebula, used as representative for the whole cloud; consistent with the independent dust-map range of ~147-163 pc reported by Zucker et al. 2020 for the Pipe stem-to-bowl gradient."
@@ -37545,7 +37545,7 @@
       "catalog": "Zucker et al. 2020 (SF Handbook compendium, Table A.1)"
     },
     "visual": {
-      "size_pc": 19.24225500323748,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "SIMBAD centroid (ra=70.25, dec=25.87) used only to identify the named region; final position is the Zucker+2020 sightline closest to that centroid (l,b offset ~1.0 deg), RA/Dec=69.1743, 25.8590. Table A.1 statistical uncertainty +10/-15 pc, systematic ~5% (7 pc); combined in quadrature -> 14.3 pc."
@@ -47750,7 +47750,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.1265250374789733,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:38+00:00; upstream record id: Cl Alessi    1; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -47790,7 +47790,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 30.99899202064852,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:40+00:00; upstream record id: Cl Alessi   10; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -47829,7 +47829,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 35.40718596003717,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:42+00:00; upstream record id: Cl Alessi   12; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -47870,7 +47870,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.4784985501160954,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:44+00:00; upstream record id: Cl Alessi   13; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -47908,7 +47908,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.072929560648517,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:46+00:00; upstream record id: Cl Alessi   19; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -47947,7 +47947,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.085037385518237,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:48+00:00; upstream record id: Cl Alessi    2; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -47986,7 +47986,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.7747830946705763,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:51+00:00; upstream record id: Cl Alessi   20; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48024,7 +48024,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 98.53758267650426,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:53+00:00; upstream record id: Cl Alessi   21; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48061,7 +48061,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.11550347289629,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:55+00:00; upstream record id: Cl Alessi   24; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48100,7 +48100,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.690663254751029,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:57+00:00; upstream record id: Cl Alessi    3; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48137,7 +48137,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 34.01325319893836,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:12:59+00:00; upstream record id: Cl Alessi   31; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48176,7 +48176,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 98.40425711785772,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:01+00:00; upstream record id: Cl Alessi   37; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48215,7 +48215,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 15.119964687450228,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:03+00:00; upstream record id: Cl Alessi   44; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48253,7 +48253,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.7823608440255345,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:06+00:00; upstream record id: Cl Alessi    5; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48291,7 +48291,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 26.20819302084278,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:07+00:00; upstream record id: Cl Alessi   62; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48330,7 +48330,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.643365547763208,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:09+00:00; upstream record id: Cl Alessi    8; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48369,7 +48369,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 40.96736698515806,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:11+00:00; upstream record id: Cl Alessi    9; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48410,7 +48410,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.947156777952018,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:12+00:00; upstream record id: [KPR2005] 112; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48450,7 +48450,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.231353575553906,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:16+00:00; upstream record id: [KPR2005]  86; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48490,7 +48490,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.045630181464779,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:17+00:00; upstream record id: [KPR2005]  42; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48610,7 +48610,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 15.67669486636924,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:26+00:00; upstream record id: NGC  2632; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48651,7 +48651,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 13.172956352676753,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:28+00:00; upstream record id: Cl Blanco    1; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48703,7 +48703,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.2193912637631263,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:33+00:00; upstream record id: NGC  6405; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48741,7 +48741,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.295724503827826,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:41+00:00; upstream record id: NAME COIN-Gaia 30; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48781,7 +48781,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 15.499825425508675,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:44+00:00; upstream record id: Cl Collinder  132; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48820,7 +48820,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.059135780180767,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:45+00:00; upstream record id: Cl Collinder  135; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48860,7 +48860,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.8596342129260472,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:46+00:00; upstream record id: Cl Collinder  140; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48902,7 +48902,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.953385220115526,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:47+00:00; upstream record id: Cl Collinder  338; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48942,7 +48942,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 32.663098069359634,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:48+00:00; upstream record id: Cl Collinder  350; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -48983,7 +48983,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 15.261043820972985,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:50+00:00; upstream record id: Cl Melotte  186; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49024,7 +49024,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 38.64059532226931,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:51+00:00; upstream record id: Cl Collinder  394; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49068,7 +49068,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.011091264571773,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:52+00:00; upstream record id: Cl Collinder   69; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49108,7 +49108,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.0469911436826687,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:53+00:00; upstream record id: Cl Collinder   95; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49148,7 +49148,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.5502992857957683,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:13:59+00:00; upstream record id: ESO 130-6; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49185,7 +49185,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.2513795808853394,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:01+00:00; upstream record id: Cl Ferrero   11; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49220,7 +49220,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.933385291780447,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:03+00:00; upstream record id: Cl Gulliver   10; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49257,7 +49257,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.235244084985536,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:06+00:00; upstream record id: Cl Gulliver   20; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49294,7 +49294,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 98.37842754697078,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:08+00:00; upstream record id: Cl Gulliver   21; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49331,7 +49331,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.126867472108922,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:10+00:00; upstream record id: Cl Gulliver   28; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49366,7 +49366,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.8121472640592304,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:13+00:00; upstream record id: Cl Gulliver    6; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49404,7 +49404,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.520020219433086,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:15+00:00; upstream record id: Cl Gulliver    9; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49445,7 +49445,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.27624943553514,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:16+00:00; upstream record id: Cl Haffner   13; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49487,7 +49487,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.359220334376999,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:17+00:00; upstream record id: Cl Collinder  299; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49531,7 +49531,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.1535516589853216,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:18+00:00; upstream record id: IC 2391; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49575,7 +49575,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.645205400246311,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:20+00:00; upstream record id: IC 2395; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49621,7 +49621,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.8487020054850998,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:21+00:00; upstream record id: IC 2602; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49677,7 +49677,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.544175412951841,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:22+00:00; upstream record id: IC  348; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49720,7 +49720,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.0539337807467,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:23+00:00; upstream record id: IC 4665; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49762,7 +49762,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 30.821703279512164,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:25+00:00; upstream record id: IC 4756; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49802,7 +49802,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.0617187317110233,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:26+00:00; upstream record id: Cl King    6; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49841,7 +49841,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.412570509885893,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:30+00:00; upstream record id: Cl Loden 1194; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49878,7 +49878,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 16.82245941994264,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:31+00:00; upstream record id: Mamajek 4; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49919,7 +49919,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.7596334207164905,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:36+00:00; upstream record id: M  23; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -49963,7 +49963,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 24.650566901819488,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:39+00:00; upstream record id: IC 4725; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50005,7 +50005,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 20.32026382429301,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:42+00:00; upstream record id: NGC  1039; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50047,7 +50047,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 59.41182235187218,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:46+00:00; upstream record id: NGC  7092; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50089,7 +50089,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.256378854031481,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:47+00:00; upstream record id: M  41; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50131,7 +50131,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.664537599693148,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:52+00:00; upstream record id: NGC  2422; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50172,7 +50172,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 38.74652488211272,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:55+00:00; upstream record id: NGC  2548; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50214,7 +50214,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 27.44922846374387,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:58+00:00; upstream record id: NGC  2682; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50262,7 +50262,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.49583216764015164,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:00+00:00; upstream record id: NGC  1333; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50302,7 +50302,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 26.32879435862692,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:01+00:00; upstream record id: NGC  1342; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50343,7 +50343,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 25.352460075779867,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:02+00:00; upstream record id: NGC  1545; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50384,7 +50384,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 26.686007853466467,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:04+00:00; upstream record id: NGC  1647; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50424,7 +50424,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 38.32428035795712,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:05+00:00; upstream record id: NGC  1662; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50463,7 +50463,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 27.515818282727405,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:06+00:00; upstream record id: NGC  1750; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50503,7 +50503,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.2729971685679775,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:08+00:00; upstream record id: NGC  1901; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50627,7 +50627,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 26.384982429723507,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:13+00:00; upstream record id: NGC  2184; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50667,7 +50667,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.9325621836259104,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:14+00:00; upstream record id: NGC  2232; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50707,7 +50707,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 82.52681864536842,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:16+00:00; upstream record id: NGC   225; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50761,7 +50761,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.9280923244759657,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:17+00:00; upstream record id: NGC  2264; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50805,7 +50805,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 31.284367490249288,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:18+00:00; upstream record id: NGC  2281; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50845,7 +50845,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.8725021704846005,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:20+00:00; upstream record id: NGC  2451A; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50885,7 +50885,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.011882245297742,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:21+00:00; upstream record id: NGC  2451B; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50926,7 +50926,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 13.70362354293042,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:22+00:00; upstream record id: NGC  2516; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -50968,7 +50968,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 38.31687350316773,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:23+00:00; upstream record id: NGC  2527; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51011,7 +51011,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.9416941779958714,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:24+00:00; upstream record id: NGC  2547; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51055,7 +51055,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 31.711167870003912,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:26+00:00; upstream record id: NGC  2925; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51097,7 +51097,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.397031045934294,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:27+00:00; upstream record id: NGC  3228; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51141,7 +51141,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 23.51585031941115,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:28+00:00; upstream record id: NGC  3532; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51182,7 +51182,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 28.23079015316204,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:29+00:00; upstream record id: NGC  5460; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51224,7 +51224,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 28.651988917939548,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:31+00:00; upstream record id: NGC  5662; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51265,7 +51265,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 53.104306869586985,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:32+00:00; upstream record id: NGC  6025; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51305,7 +51305,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 30.58291824161974,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:33+00:00; upstream record id: NGC  6124; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51350,7 +51350,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 26.262435137117464,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:35+00:00; upstream record id: NGC  6281; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51390,7 +51390,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 14.509961790587358,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:36+00:00; upstream record id: NGC  6633; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51430,7 +51430,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 98.52103556475028,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:37+00:00; upstream record id: NGC  6716; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51470,7 +51470,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.589557375302489,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:39+00:00; upstream record id: NGC  6793; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51508,7 +51508,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 11.231527430054197,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:40+00:00; upstream record id: NGC  6991; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51549,7 +51549,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.9437540716789754,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:41+00:00; upstream record id: NGC  7039; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51588,7 +51588,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.6968530545423949,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:42+00:00; upstream record id: NGC  7058; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51627,7 +51627,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 11.664488810570342,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:44+00:00; upstream record id: NGC  7063; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51669,7 +51669,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 28.168167134429435,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:45+00:00; upstream record id: NGC   752; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51712,7 +51712,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 47.88702804239641,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:46+00:00; upstream record id: Cl Pismis    4; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51753,7 +51753,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.0357977686012143,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:48+00:00; upstream record id: Cl Platais   10; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51794,7 +51794,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.351929042686084,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:49+00:00; upstream record id: NAME HIP 21974 Cluster; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51835,7 +51835,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.3928717305900955,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:50+00:00; upstream record id: Cl Platais    8; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51877,7 +51877,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 17.574727808300807,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:51+00:00; upstream record id: Cl Platais    9; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51915,7 +51915,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.8234517437660562,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:53+00:00; upstream record id: NAME Pozzo 1; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -51963,7 +51963,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 22.367088512742125,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:58+00:00; upstream record id: NGC  6475; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52001,7 +52001,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.610658371475551,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:15:59+00:00; upstream record id: Cl Alessi   96; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52038,7 +52038,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.138201810468582,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:00+00:00; upstream record id: RSG 5; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52073,7 +52073,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.1687715826741485,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:02+00:00; upstream record id: RSG 7; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52108,7 +52108,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.015878578312712,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:03+00:00; upstream record id: RSG 8; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52148,7 +52148,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 10.884780112534042,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:04+00:00; upstream record id: Cl Roslund    5; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52189,7 +52189,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 32.11012462531632,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:06+00:00; upstream record id: Cl Roslund    6; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52230,7 +52230,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 25.476467547519785,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:07+00:00; upstream record id: Cl Ruprecht  145; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52272,7 +52272,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.4978867372891904,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:08+00:00; upstream record id: NGC  6774; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52314,7 +52314,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 22.542710683115928,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:09+00:00; upstream record id: Cl Ruprecht   98; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52356,7 +52356,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.5648717754839923,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:11+00:00; upstream record id: NAME del Lyr Cluster; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52397,7 +52397,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.943700297896957,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:12+00:00; upstream record id: Cl Stock    1; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52437,7 +52437,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 18.212917123885404,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:13+00:00; upstream record id: Cl Stock   10; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52477,7 +52477,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 34.98745610853753,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:14+00:00; upstream record id: Cl Stock   12; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52519,7 +52519,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 73.79826602067541,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:15+00:00; upstream record id: Cl Stock    2; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52559,7 +52559,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.158575760395337,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:17+00:00; upstream record id: Cl Stock   23; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52601,7 +52601,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.38124739427539,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:18+00:00; upstream record id: Cl Mrk    6; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52640,7 +52640,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 49.81328813606523,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:21+00:00; upstream record id: Teutsch  35; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52675,7 +52675,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.146321615321368,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:22+00:00; upstream record id: Teutsch  38; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52718,7 +52718,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.861964965798552,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:23+00:00; upstream record id: Cl Trumpler   10; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52759,7 +52759,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 40.89403804601957,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:25+00:00; upstream record id: Cl Trumpler    2; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52800,7 +52800,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.2971311532031913,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:26+00:00; upstream record id: Cl Trumpler    3; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52839,7 +52839,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.74421482272486,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:27+00:00; upstream record id: Cl Turner    5; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52876,7 +52876,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 17.77238773400624,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:29+00:00; upstream record id: UBC 1; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52911,7 +52911,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.405545015396552,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:30+00:00; upstream record id: UBC 11; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52949,7 +52949,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.6416739199690706,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:31+00:00; upstream record id: UBC 12; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -52984,7 +52984,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 11.932021248015255,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:33+00:00; upstream record id: UBC 13; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53019,7 +53019,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 14.272676642859796,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:34+00:00; upstream record id: UBC 14; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53089,7 +53089,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.59668133851679,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:37+00:00; upstream record id: UBC 17a; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53124,7 +53124,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.9225832692708114,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:38+00:00; upstream record id: UBC 17b; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53162,7 +53162,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.8587574178390063,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:39+00:00; upstream record id: UBC 19; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53199,7 +53199,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.439642544073876,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:41+00:00; upstream record id: Cl Alessi   94; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53276,7 +53276,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.534022197445754,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:50+00:00; upstream record id: UBC 26; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53311,7 +53311,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 17.02351267488194,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:51+00:00; upstream record id: UBC 260; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53346,7 +53346,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 10.33224654513827,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:53+00:00; upstream record id: UBC 31; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53383,7 +53383,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 19.65797637136048,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:54+00:00; upstream record id: UBC 32; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53418,7 +53418,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 10.795850841386917,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:55+00:00; upstream record id: UBC 4; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53453,7 +53453,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 92.32851890686725,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:57+00:00; upstream record id: UBC 480; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53491,7 +53491,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.731843063013994,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:58+00:00; upstream record id: Cl Alessi  190; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53528,7 +53528,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.910517083934656,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:16:59+00:00; upstream record id: Cl Alessi   36; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53566,7 +53566,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.343414088644007,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:01+00:00; upstream record id: UBC 8; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53603,7 +53603,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.6564208048002773,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:02+00:00; upstream record id: Teutsch 179; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53638,7 +53638,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.343683432444936,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:05+00:00; upstream record id: UPK 113; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53673,7 +53673,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.0276119791771037,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:06+00:00; upstream record id: UPK 119; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53710,7 +53710,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.5863092407500328,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:08+00:00; upstream record id: UBC 98; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53745,7 +53745,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.612850476539845,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:09+00:00; upstream record id: UPK 136; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53780,7 +53780,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.95184429446246,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:10+00:00; upstream record id: UPK 166; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53815,7 +53815,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 37.78275666825037,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:12+00:00; upstream record id: UPK 167; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53850,7 +53850,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.270753466137874,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:13+00:00; upstream record id: UPK 168; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53885,7 +53885,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 29.085609098352425,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:14+00:00; upstream record id: UPK 17; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53920,7 +53920,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.35893250508381,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:16+00:00; upstream record id: UPK 18; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53958,7 +53958,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.201228036427826,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:17+00:00; upstream record id: UBC 171; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -53993,7 +53993,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.570179865318946,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:18+00:00; upstream record id: UPK 20; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54028,7 +54028,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.4948063102311306,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:20+00:00; upstream record id: UPK 21; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54063,7 +54063,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.814597072655533,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:21+00:00; upstream record id: UPK 230; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54100,7 +54100,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.32944331041901,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:22+00:00; upstream record id: UBC 408; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54135,7 +54135,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.5014690062468325,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:24+00:00; upstream record id: UPK 24; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54170,7 +54170,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.880758897077397,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:25+00:00; upstream record id: UPK 25; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54205,7 +54205,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.2183404231925237,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:26+00:00; upstream record id: UPK 29; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54240,7 +54240,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 11.213307385129552,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:28+00:00; upstream record id: UPK 294; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54275,7 +54275,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.034757158952281,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:29+00:00; upstream record id: UPK 296; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54310,7 +54310,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 74.60259871567492,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:30+00:00; upstream record id: UPK 303; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54345,7 +54345,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 12.219494818548204,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:32+00:00; upstream record id: UPK 305; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54380,7 +54380,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 10.795009805566997,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:33+00:00; upstream record id: UPK 31; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54415,7 +54415,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.655038901122857,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:34+00:00; upstream record id: UPK 312; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54450,7 +54450,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.6088483286615052,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:36+00:00; upstream record id: UPK 33; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54485,7 +54485,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.15519747816837,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:37+00:00; upstream record id: UPK 333; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54520,7 +54520,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.389436285685708,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:38+00:00; upstream record id: UPK 350; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54555,7 +54555,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.446902562762236,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:39+00:00; upstream record id: UPK 379; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54590,7 +54590,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.8539200633452553,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:41+00:00; upstream record id: UPK 38; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54625,7 +54625,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.07257641042025,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:42+00:00; upstream record id: UPK 381; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54660,7 +54660,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.9832021210631128,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:43+00:00; upstream record id: UPK 385; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54697,7 +54697,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.529974306760928,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:45+00:00; upstream record id: UBC 202; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54734,7 +54734,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.2121280995663213,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:46+00:00; upstream record id: NAME lambda Orion South Group; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54769,7 +54769,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 12.816200570758372,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:50+00:00; upstream record id: UPK 4; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54804,7 +54804,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.854344064746305,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:51+00:00; upstream record id: UPK 40; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54839,7 +54839,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.364779565282285,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:52+00:00; upstream record id: UPK 402; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54876,7 +54876,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.4706290766235983,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:54+00:00; upstream record id: UBC 115; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54911,7 +54911,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.891968486237139,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:55+00:00; upstream record id: UPK 422; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54946,7 +54946,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.077556824965006,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:57+00:00; upstream record id: UPK 431; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -54983,7 +54983,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.78204352658163,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:58+00:00; upstream record id: Teutsch 201; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55018,7 +55018,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 13.82678356443814,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:17:59+00:00; upstream record id: UPK 442; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55053,7 +55053,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.561654936853,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:01+00:00; upstream record id: UPK 445; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55088,7 +55088,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 60.45740387658181,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:04+00:00; upstream record id: UPK 452; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55123,7 +55123,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.30111695889122,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:06+00:00; upstream record id: UPK 46; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55158,7 +55158,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.319648592631542,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:07+00:00; upstream record id: UPK 467; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55193,7 +55193,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 12.758463857340791,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:09+00:00; upstream record id: UPK 495; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55228,7 +55228,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 93.8420969142124,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:10+00:00; upstream record id: UPK 5; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55263,7 +55263,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 1.863340912470622,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:11+00:00; upstream record id: UPK 502; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55298,7 +55298,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 10.546120010101308,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:13+00:00; upstream record id: UPK 524; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55333,7 +55333,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.570508675413716,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:14+00:00; upstream record id: UPK 526; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55370,7 +55370,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 22.09705495121085,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:16+00:00; upstream record id: UPK 53; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55405,7 +55405,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 7.184502741786158,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:18+00:00; upstream record id: UPK 533; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55440,7 +55440,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.941842378010924,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:19+00:00; upstream record id: UPK 535; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55475,7 +55475,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.954206031843855,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:21+00:00; upstream record id: UPK 537; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55510,7 +55510,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.327369817098619,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:22+00:00; upstream record id: UPK 540; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55545,7 +55545,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 98.67010122292048,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:23+00:00; upstream record id: UPK 545; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55580,7 +55580,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.5715772160880364,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:24+00:00; upstream record id: UPK 55; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55617,7 +55617,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.870919338431621,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:26+00:00; upstream record id: [PKV98] HIP  51688; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55652,7 +55652,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 13.372752748671664,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:27+00:00; upstream record id: UPK 560; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55687,7 +55687,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.726574547696861,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:29+00:00; upstream record id: UPK 567; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55722,7 +55722,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 26.43358451848508,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:30+00:00; upstream record id: UPK 579; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55757,7 +55757,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.9338378674284042,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:31+00:00; upstream record id: UPK 585; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55792,7 +55792,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 9.365475457711248,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:32+00:00; upstream record id: UPK 599; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55827,7 +55827,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.692316832860817,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:34+00:00; upstream record id: UPK 604; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55865,7 +55865,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.379994476569936,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:35+00:00; upstream record id: UBC 304; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55900,7 +55900,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 10.377962396349444,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:36+00:00; upstream record id: UPK 612; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55935,7 +55935,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.741557004738601,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:37+00:00; upstream record id: UPK 617; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -55970,7 +55970,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.346225029403753,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:39+00:00; upstream record id: UPK 624; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56005,7 +56005,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.8173334140944544,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:40+00:00; upstream record id: UPK 626; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56040,7 +56040,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.174453778527887,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:42+00:00; upstream record id: UPK 627; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56075,7 +56075,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.1790869289783,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:43+00:00; upstream record id: UPK 640; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56110,7 +56110,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.791015809967144,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:44+00:00; upstream record id: UPK 644; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56145,7 +56145,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.9619191914023406,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:46+00:00; upstream record id: UPK 645; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56180,7 +56180,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.539479002876508,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:47+00:00; upstream record id: UPK 65; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56215,7 +56215,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 14.523164762747973,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:48+00:00; upstream record id: UPK 654; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56250,7 +56250,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 3.543510711987519,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:50+00:00; upstream record id: UPK 66; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56285,7 +56285,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.4415077050161567,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:51+00:00; upstream record id: UPK 7; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56322,7 +56322,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.946047205974012,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:52+00:00; upstream record id: UPK 82; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56357,7 +56357,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.520206442885158,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:54+00:00; upstream record id: UPK 88; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56392,7 +56392,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 5.248454441053682,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:55+00:00; upstream record id: UPK 93; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56427,7 +56427,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 6.050102795385662,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:18:56+00:00; upstream record id: UPK 99; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56471,7 +56471,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 19.01621032808461,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:19:57+00:00; upstream record id: Cl Melotte  111; otype: OpC. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -56517,7 +56517,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 22.101983634499035,
+      "size_pc": null,
       "color_class": null
     },
     "notes": "Retrieved from SIMBAD on 2026-08-18T13:14:33+00:00; upstream record id: Cl Melotte   20; otype: MGr. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md."
@@ -72300,7 +72300,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.7583466702637401,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": "DAO.6",
       "absolute_magnitude": 6.138665364886453,
@@ -72376,7 +72376,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.2641730495899017,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": "DA(O?)",
       "absolute_magnitude": 6.287334622139721,
@@ -72446,7 +72446,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 2.2787065352936686,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": "DOZ",
       "absolute_magnitude": 4.82542603785193,
@@ -72519,7 +72519,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.7852355903400977,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": null,
       "absolute_magnitude": 6.234807667970955,
@@ -72624,7 +72624,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 4.072434921320102,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": null,
       "absolute_magnitude": null,
@@ -72687,7 +72687,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 8.313003227248993,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": null,
       "absolute_magnitude": null,
@@ -72807,7 +72807,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 41.1149411541656,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": null,
       "absolute_magnitude": null,
@@ -72878,7 +72878,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 0.7918623419592892,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": null,
       "absolute_magnitude": null,
@@ -72940,7 +72940,7 @@
       "catalog": "SIMBAD"
     },
     "visual": {
-      "size_pc": 10.309961826126841,
+      "size_pc": null,
       "color_class": null,
       "spectral_type": null,
       "absolute_magnitude": null,
