@@ -6,19 +6,25 @@ import type { SceneVelocity } from "./sceneTypes";
  * positions forward/backward in time from their known heliocentric space
  * velocities (Epic #229's `velocity.{vx,vy,vz}_kms`), plus the small set of
  * other pure decisions (time clamping, log-scale speed mapping, the
- * sphere-exit reset rule, the UI-lock predicate) `main.ts` wires up to the
- * DOM/Three.js layer. Deliberately DOM/Three.js-free throughout, unlike
- * `velocityVectors.ts`'s `createVelocityVectorsLayer`/
- * `createVelocitySpeedLabelsLayer` - every function here is directly
- * unit-testable (this repo's `vite.config.ts` runs Vitest with
- * `environment: "node"`).
+ * UI-lock predicate) `main.ts` wires up to the DOM/Three.js layer.
+ * Deliberately DOM/Three.js-free throughout, unlike `velocityVectors.ts`'s
+ * `createVelocityVectorsLayer`/`createVelocitySpeedLabelsLayer` - every
+ * function here is directly unit-testable (this repo's `vite.config.ts` runs
+ * Vitest with `environment: "node"`).
  *
  * The animated population itself is NOT re-derived here - `main.ts` reuses
- * `velocityVectors.ts`'s exported `starsWithVelocityInLocalBubble` (Story
- * #287: renamed from `starsWithVelocityInSphere`, widened from the ~127-star
- * RECONS sphere to the ~156-star Local Bubble) directly, per both this
- * Story's and Epic #238's explicit instruction not to reimplement that
- * selection (see `test/velocityVectors.test.ts` for its own coverage).
+ * `velocityVectors.ts`'s exported `starsWithVelocity` (Story #287: renamed
+ * from `starsWithVelocityInSphere` to `starsWithVelocityInLocalBubble`,
+ * widened from the ~127-star RECONS sphere to the ~156-star Local Bubble;
+ * Story #308: renamed again and widened further to every star with velocity
+ * data anywhere in the scene) directly, per both this Story's and Epic
+ * #238's explicit instruction not to reimplement that selection (see
+ * `test/velocityVectors.test.ts` for its own coverage).
+ *
+ * Story #308 (Epic #306): removed the "sphere-exit reset rule"
+ * (`nextPlayerStateForSphere`) this module used to also carry - the player
+ * is no longer gated to (or force-reset by leaving) the Local Bubble at all;
+ * see that former function's removal note further below.
  *
  * Story #243 (polish on this Epic, post-merge): replaced the single
  * play/pause toggle's implicit direction (the speed slider's sign) with the
@@ -412,39 +418,13 @@ export function nudgeRateSliderValue(
 }
 
 /**
- * Story #239 AC #8 (mirroring #231 AC #3's own `nextVelocityVectorsToggleOn`
- * pattern exactly): the player's next state given whether the camera is
- * currently inside the gating volume. Pure, so this specific "leaving the
- * volume force-resets the whole player" business rule - snapping the time
- * back to Today/t=0 FIRST, then pausing and hiding the panel, rather than
- * leaving stars mid-animation - is independently unit testable, mirroring
- * `velocityVectors.ts`'s own `nextVelocityVectorsToggleOn` precedent for the
- * exact same "exit force-resets" shape of rule.
- *
- * Story #287: widened from the original RECONS dense-batch sphere
- * (`lod.ts`'s `isCameraInsideDenseBatchSphere`) to the Local Bubble
- * (`isCameraInsideLocalBubble`) - this function's own logic is unchanged,
- * only what `main.ts`'s `applyPlayerSphereState` feeds it as
- * `insideLocalBubbleNow`. Retains its `...ForSphere` name (matching this
- * Story's own "sphere-exit-reset trigger" shorthand for the player's exit
- * rule in general) even though the gating volume itself is no longer the
- * RECONS sphere specifically.
- *
- * While inside the gating volume, every field of `state` passes through
- * untouched - this function makes no decisions at all about how
- * time/play/panel-open state evolves while the camera stays inside; that's
- * `advancePlayerTimeYears`/the panel's own event handlers' job. This
- * function's only job is the exit-triggered reset.
+ * Story #239 AC #8's original "leaving the gating volume force-resets the
+ * whole player" rule (`nextPlayerStateForSphere`, mirroring #231 AC #3's own
+ * `nextVelocityVectorsToggleOn`) is removed as of Story #308 (Epic #306):
+ * the player is no longer gated to the Local Bubble at all - Time Controls
+ * stay open, playing, and wherever they were left as the camera moves
+ * anywhere in the scene. `main.ts` no longer force-resets `playerTimeYears`/
+ * `playerPlaying`/`playerPanelOpen` on any camera-position transition; only
+ * the panel's own controls (Today, a scrub, Play reaching Today) change that
+ * state now.
  */
-export interface PlayerState {
-  timeYears: number;
-  playing: boolean;
-  panelOpen: boolean;
-}
-
-export function nextPlayerStateForSphere(state: PlayerState, insideLocalBubbleNow: boolean): PlayerState {
-  if (insideLocalBubbleNow) {
-    return state;
-  }
-  return { timeYears: 0, playing: false, panelOpen: false };
-}

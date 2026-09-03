@@ -4,9 +4,8 @@ import {
   createVelocityVectorsLayer,
   currentArrowScaleFactor,
   formatSpeedKms,
-  nextVelocityVectorsToggleOn,
   selectVisibleVelocitySpeedLabelIds,
-  starsWithVelocityInLocalBubble,
+  starsWithVelocity,
   updateVelocityVectorsScale,
   VELOCITY_SPEED_LABEL_MAX_VISIBLE,
   velocityArrowLengthPc,
@@ -294,48 +293,38 @@ describe("currentArrowScaleFactor", () => {
   });
 });
 
-describe("starsWithVelocityInLocalBubble", () => {
-  const IN_BUBBLE = makeObject({
-    id: "in-bubble",
+describe("starsWithVelocity", () => {
+  const NEAR_STAR = makeObject({
+    id: "near-star",
     distance_pc: 5,
     velocity: makeVelocity(),
   });
   // Story #287: a star beyond the old RECONS sphere (~11.26pc) but still
-  // within the wider Local Bubble (~60pc) - exactly the population Story
-  // #286 backfilled `velocity` for, and this Story's own reason for
-  // widening the radius this function checks against.
-  const IN_BUBBLE_BEYOND_OLD_SPHERE = makeObject({
-    id: "in-bubble-beyond-old-sphere",
+  // within the Local Bubble (~60pc).
+  const BUBBLE_STAR = makeObject({
+    id: "bubble-star",
     distance_pc: 30,
     velocity: makeVelocity(),
   });
   const NO_VELOCITY = makeObject({ id: "no-velocity", distance_pc: 3, velocity: null });
-  // Defensive case: has a velocity block but its real distance exceeds the
-  // bubble radius (shouldn't happen given Story #230/#286's own scoping,
-  // but Epic #229 explicitly asks for a real-distance check rather than
-  // trusting upstream scoping alone).
-  const OUT_OF_BUBBLE_WITH_VELOCITY = makeObject({
-    id: "out-of-bubble",
-    distance_pc: 90,
+  // Story #308: a star well beyond the Local Bubble entirely (e.g.
+  // Betelgeuse/Alpha Crucis scale, ~99-154pc) - exactly the population
+  // Story #307 backfilled `velocity` for, and this Story's own reason for
+  // dropping the distance check this function used to apply.
+  const OPEN_SPACE_STAR = makeObject({
+    id: "open-space-star",
+    distance_pc: 150,
     velocity: makeVelocity(),
   });
 
-  it("includes only objects with a non-null velocity within the real Local Bubble radius, including stars beyond the old RECONS sphere", () => {
-    const result = starsWithVelocityInLocalBubble(
-      [IN_BUBBLE, IN_BUBBLE_BEYOND_OLD_SPHERE, NO_VELOCITY, OUT_OF_BUBBLE_WITH_VELOCITY],
-      60,
-    );
-    expect(result.map((o) => o.id).sort()).toEqual(["in-bubble", "in-bubble-beyond-old-sphere"]);
+  it("includes every object with a non-null velocity, regardless of distance from the Sun", () => {
+    const result = starsWithVelocity([NEAR_STAR, BUBBLE_STAR, NO_VELOCITY, OPEN_SPACE_STAR]);
+    expect(result.map((o) => o.id).sort()).toEqual(["bubble-star", "near-star", "open-space-star"]);
   });
 
-  it("skips the distance check entirely when the bubble radius is not yet known (null)", () => {
-    const result = starsWithVelocityInLocalBubble([IN_BUBBLE, OUT_OF_BUBBLE_WITH_VELOCITY], null);
-    expect(result.map((o) => o.id).sort()).toEqual(["in-bubble", "out-of-bubble"]);
-  });
-
-  it("skips the distance check entirely when the bubble radius is non-positive (0)", () => {
-    const result = starsWithVelocityInLocalBubble([IN_BUBBLE, OUT_OF_BUBBLE_WITH_VELOCITY], 0);
-    expect(result.map((o) => o.id).sort()).toEqual(["in-bubble", "out-of-bubble"]);
+  it("excludes objects with a null velocity", () => {
+    const result = starsWithVelocity([NO_VELOCITY]);
+    expect(result).toEqual([]);
   });
 });
 
@@ -529,24 +518,14 @@ describe("updateVelocityVectorsScale", () => {
   });
 });
 
-describe("nextVelocityVectorsToggleOn", () => {
-  it("forces the toggle off when the camera has just left the sphere, regardless of prior state", () => {
-    expect(nextVelocityVectorsToggleOn(true, false)).toBe(false);
-    expect(nextVelocityVectorsToggleOn(false, false)).toBe(false);
-  });
-
-  it("leaves the toggle's own state untouched while inside the sphere", () => {
-    expect(nextVelocityVectorsToggleOn(true, true)).toBe(true);
-    expect(nextVelocityVectorsToggleOn(false, true)).toBe(false);
-  });
-});
+// Story #308 (Epic #306): removed the former `nextVelocityVectorsToggleOn` -
+// vectors are no longer gated by camera position at all, so there is no
+// "camera left the gating volume" force-off rule left to test.
 
 describe("velocityVectorsVisible", () => {
-  it("is visible only when the toggle is on AND the camera is inside the sphere", () => {
-    expect(velocityVectorsVisible(true, true)).toBe(true);
-    expect(velocityVectorsVisible(true, false)).toBe(false);
-    expect(velocityVectorsVisible(false, true)).toBe(false);
-    expect(velocityVectorsVisible(false, false)).toBe(false);
+  it("is visible exactly when the toggle is on - no camera-position gating (Story #308)", () => {
+    expect(velocityVectorsVisible(true)).toBe(true);
+    expect(velocityVectorsVisible(false)).toBe(false);
   });
 });
 

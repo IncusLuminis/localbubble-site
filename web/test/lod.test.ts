@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
   DENSE_BATCH_GROUP_TAG,
   denseBatchCollectionRadiusPc,
-  effectiveInsideLocalBubble,
   isCameraInsideDenseBatchSphere,
   isCameraInsideLocalBubble,
   isDenseBatchMember,
@@ -199,28 +198,9 @@ describe("isCameraInsideLocalBubble", () => {
   });
 });
 
-/**
- * Issue #290: the pure OR that folds `bubbleViewOverrideActive`
- * ("Fit to Local Bubble" was just clicked, or clicked more recently than any
- * other camera-repositioning control) into the same effective value
- * `main.ts` feeds `applyVelocityVectorsButtonState`/`applyPlayerSphereState`
- * - a real camera-distance crossing (`insideBubbleNow`) and the override are
- * each independently sufficient to activate Vectors/TIME CONTROLS.
- */
-describe("effectiveInsideLocalBubble", () => {
-  it("is true when actually inside the bubble and the override is off", () => {
-    expect(effectiveInsideLocalBubble(true, false)).toBe(true);
-  });
-
-  it("is true when outside the bubble but the override is active (the #290 case)", () => {
-    expect(effectiveInsideLocalBubble(false, true)).toBe(true);
-  });
-
-  it("is true when both inside the bubble and the override is active", () => {
-    expect(effectiveInsideLocalBubble(true, true)).toBe(true);
-  });
-
-  it("is false when outside the bubble and the override is off", () => {
-    expect(effectiveInsideLocalBubble(false, false)).toBe(false);
-  });
-});
+// Story #308 (Epic #306): removed the former `effectiveInsideLocalBubble` -
+// it existed solely to widen the Local-Bubble gate for the Vectors/player
+// toggle (issue #290's `bubbleViewOverrideActive` override), and that whole
+// gate is gone now that vectors/player are enabled anywhere in the scene.
+// `isCameraInsideLocalBubble` above is unchanged and still drives the
+// Gould-Belt/Radcliffe-Wave/Local-Bubble dimming tiers.

@@ -12,22 +12,21 @@ import {
   logSpeedSliderToYearsPerSecond,
   MAX_YEARS_PER_REAL_SECOND,
   MIN_YEARS_PER_REAL_SECOND,
-  nextPlayerStateForSphere,
   nudgeRateSliderValue,
   PLAYER_TIME_RANGE_YEARS,
   RATE_NUDGE_STEP,
   RATE_READOUT_ABBREVIATION_THRESHOLD_YEARS_PER_SECOND,
   starPositionAtTime,
-  type PlayerState,
 } from "../src/scene/motionPlayer";
-import { starsWithVelocityInLocalBubble } from "../src/scene/velocityVectors";
+import { starsWithVelocity } from "../src/scene/velocityVectors";
 import type { SceneObject, SceneVelocity } from "../src/scene/sceneTypes";
 
 /**
  * Story #239 (Epic #238's Story 1 of 2): the time-scrubbing motion player's
  * pure engine - extrapolation, time clamping, the log-scale speed mapping,
- * the sphere-exit reset rule, and the UI-lock predicate. See
- * `motionPlayer.ts`'s own top docstring for why this is kept entirely
+ * and the UI-lock predicate (Story #308: the former sphere-exit reset rule
+ * is removed - see `motionPlayer.ts`'s own top docstring). See that
+ * module's docstring for why this is kept entirely
  * DOM/Three.js-free (directly testable under this repo's `environment:
  * "node"` Vitest config, unlike `velocityVectors.ts`'s DOM-touching
  * `create*Layer` builders).
@@ -412,57 +411,35 @@ describe("Epic #238's speed-slider anchors", () => {
   });
 });
 
-describe("nextPlayerStateForSphere", () => {
-  const playingState: PlayerState = { timeYears: 250_000, playing: true, panelOpen: true };
+// Story #308 (Epic #306): removed the former `nextPlayerStateForSphere` -
+// the player is no longer gated to (or force-reset by leaving) the Local
+// Bubble, so there is no "camera left the gating volume" reset rule left to
+// test. Time Controls now stay exactly as the user left them regardless of
+// camera position.
 
-  it("leaves every field untouched while the camera stays inside the sphere", () => {
-    expect(nextPlayerStateForSphere(playingState, true)).toEqual(playingState);
-  });
-
-  it("force-resets to Today, paused, panel hidden the instant the camera leaves the sphere - even mid-animation", () => {
-    expect(nextPlayerStateForSphere(playingState, false)).toEqual({
-      timeYears: 0,
-      playing: false,
-      panelOpen: false,
-    });
-  });
-
-  it("force-resets even from an already-paused, away-from-Today state", () => {
-    const pausedAway: PlayerState = { timeYears: -800_000, playing: false, panelOpen: true };
-    expect(nextPlayerStateForSphere(pausedAway, false)).toEqual({
-      timeYears: 0,
-      playing: false,
-      panelOpen: false,
-    });
-  });
-
-  it("is a no-op when already at rest at Today and the camera leaves the sphere", () => {
-    const atRest: PlayerState = { timeYears: 0, playing: false, panelOpen: false };
-    expect(nextPlayerStateForSphere(atRest, false)).toEqual(atRest);
-  });
-});
-
-// Story #239 AC (Story #287: widened to the Local Bubble): the animated
-// population is `velocityVectors.ts`'s own `starsWithVelocityInLocalBubble`
-// (renamed from `starsWithVelocityInSphere`), reused directly - never
-// reimplemented. Full coverage of that function's own behavior lives in
+// Story #239 AC (Story #287: widened to the Local Bubble; Story #308:
+// widened further to every star with velocity data, anywhere in the scene):
+// the animated population is `velocityVectors.ts`'s own `starsWithVelocity`
+// (renamed from `starsWithVelocityInLocalBubble`, itself renamed from
+// `starsWithVelocityInSphere`), reused directly - never reimplemented. Full
+// coverage of that function's own behavior lives in
 // `test/velocityVectors.test.ts`; this is a small confirming test that the
 // motion player's population is exactly that same reused selection, not a
 // second, possibly-diverging one.
-describe("animated-star selection reuse (starsWithVelocityInLocalBubble)", () => {
-  it("the player's animated population is exactly starsWithVelocityInLocalBubble's result - no separate selection logic", () => {
-    const inBubbleWithVelocity = makeObject({
-      id: "in-bubble",
+describe("animated-star selection reuse (starsWithVelocity)", () => {
+  it("the player's animated population is exactly starsWithVelocity's result - no separate selection logic", () => {
+    const nearStarWithVelocity = makeObject({
+      id: "near-star",
       distance_pc: 5,
       velocity: makeVelocity(),
     });
     const noVelocity = makeObject({ id: "no-velocity", distance_pc: 3, velocity: null });
-    const outOfBubble = makeObject({ id: "out-of-bubble", distance_pc: 90, velocity: makeVelocity() });
+    const openSpaceStar = makeObject({ id: "open-space-star", distance_pc: 150, velocity: makeVelocity() });
 
-    const objects = [inBubbleWithVelocity, noVelocity, outOfBubble];
-    const animated = starsWithVelocityInLocalBubble(objects, 60);
+    const objects: SceneObject[] = [nearStarWithVelocity, noVelocity, openSpaceStar];
+    const animated = starsWithVelocity(objects);
 
-    expect(animated.map((o) => o.id)).toEqual(["in-bubble"]);
+    expect(animated.map((o) => o.id)).toEqual(["near-star", "open-space-star"]);
     // Every animated star necessarily carries a non-null `velocity`, which
     // `starPositionAtTime` requires - confirms the two functions compose
     // without any further null-checking gap.
