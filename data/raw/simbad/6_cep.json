@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "6 Cep",
-  "retrieved_utc": "2026-08-23T01:55:36+00:00",
+  "retrieved_utc": "2026-09-03T09:33:17+00:00",
   "record_id": "*   6 Cep",
   "raw": {
     "main_id": "*   6 Cep",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.179999828338623,
-    "plx_value": 2.4791,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B3IVe",
-    "plx_err": 0.07029999792575836,
+    "plx_value": 2.4791,
     "otype": "Be*",
+    "pmra": 5.472,
+    "pmdec": 5.921,
+    "plx_err": 0.07029999792575836,
+    "rvz_radvel": -16.5,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 275420565|Gaia DR3 2220601656582906880|PLX 5149|[JE82] 1083|*   6 Cep|AG+64 1042|BD+64  1527|CEL   5299|DG 174|EM* MWC  367|FK5 3703|GC 29875|GCRV 13420|GEN# +1.00203467|GSC 04256-03042|HD 203467|HIC 105268|HIP 105268|HR  8171|IRAS 21183+6439|LBN 102.78+10.64|LBN   472|N30 4715|PPM  22770|ROT  3113|SAO  19313|SKY# 40603|TD1 27995|TYC 4256-3042-1|UBV   18437|UBV M  25641|V* V382 Cep|uvby98 100203467|2MASS J21192217+6452186|ALS 17320|PLX 5149.00|Gaia DR1 2220601652284354048|WEB 19121|Gaia DR2 2220601656582906880",
     "matched_id": "*   6 Cep"
   }

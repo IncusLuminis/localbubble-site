@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "γ01 Nor",
-  "retrieved_utc": "2026-08-23T01:57:19+00:00",
+  "retrieved_utc": "2026-09-03T09:35:34+00:00",
   "record_id": "* gam01 Nor",
   "raw": {
     "main_id": "* gam01 Nor",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.090000152587891,
-    "plx_value": 1.2046,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "F9Ia",
-    "plx_err": 0.07490000128746033,
+    "plx_value": 1.2046,
     "otype": "*",
+    "pmra": -1.715,
+    "pmdec": -3.767,
+    "plx_err": 0.07490000128746033,
+    "rvz_radvel": -18.15,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 411380080|WISEA J161700.93-500405.0|HIP 79790|Gaia DR3 5935484313053503360|PLX 3686|* gam01 Nor|CD-49 10474|CPC  0 14522|CPD-49  9097|WISE J161700.98-500405.0|IRAS 16131-4956|GC 21871|GCRV  9357|GEN# +1.00146143|GSC 08319-01759|HD 146143|HIC  79790|HR  6058|PPM 344770|SAO 226619|SKY# 29384|TD1 18998|TYC 8319-1759-1|UBV   13799|UBV M  21283|uvby98 100146143|2MASS J16170095-5004051|PLX 3686.00|[L69c] 39 18|WEB 13503|Gaia DR2 5935484313048676096",
     "matched_id": "* gam01 Nor"
   }

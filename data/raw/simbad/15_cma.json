@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "15 CMa",
-  "retrieved_utc": "2026-08-23T01:54:50+00:00",
+  "retrieved_utc": "2026-09-03T09:32:17+00:00",
   "record_id": "*  15 CMa",
   "raw": {
     "main_id": "*  15 CMa",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.829999923706055,
-    "plx_value": 2.682,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B1IV",
-    "plx_err": 0.11249999701976776,
+    "plx_value": 2.682,
     "otype": "bC*",
+    "pmra": -5.838,
+    "pmdec": 4.56,
+    "plx_err": 0.11249999701976776,
+    "rvz_radvel": 28.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 78897024|Gaia DR3 2932263546963330176|HIP 33092|2MASS J06533290-2013273|FK5 2532|*  15 CMa|ALS    94|BD-20  1616|CSV   6523|GC  9034|GCRV  4503|GEN# +5.11210024|GSC 05958-03292|HD  50707|HIC  33092|HR  2571|JP11  4539|LS   94|MCW  484|N30 1498|PPM 251197|ROT  1112|SAO 172520|SKY# 12217|TD1  8484|TYC 5958-3292-1|UBV    6828|UBV M  40645|V* EY CMa|YZ   0  6888|YZ 110  2543|[GM99b] 10|UCAC4 349-018387|uvby98 511210024|WEB  6660|Gaia DR2 2932263546963330176",
     "matched_id": "*  15 CMa"
   }

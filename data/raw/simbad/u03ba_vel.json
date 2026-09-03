@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "κ Vel",
-  "retrieved_utc": "2026-08-23T02:03:35+00:00",
+  "retrieved_utc": "2026-09-03T09:43:38+00:00",
   "record_id": "* kap Vel",
   "raw": {
     "main_id": "* kap Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.4730000495910645,
-    "plx_value": 5.7,
+    "rvz_bibcode": "1979IAUS...30...57E",
     "sp_type": "B2IV",
-    "plx_err": 0.30000001192092896,
+    "plx_value": 5.7,
     "otype": "SB*",
+    "pmra": -11.4,
+    "pmdec": 11.52,
+    "plx_err": 0.30000001192092896,
+    "rvz_radvel": 21.9,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 387106852|HIP 45941|Gaia DR3 5310393535853560576|PLX 2237|SBC9 567|* kap Vel|CEL   3276|CPC 19  3421|CPD-54  2219|FK5  353|GC 12938|GCRV  6104|GEN# +1.00081188|GSC 08588-04200|HD  81188|HIC  45941|HR  3734|IRAS 09205-5447|JP11  1809|N30 2228|PPM 337874|ROT  1470|SAO 236891|SBC7   377|SKY# 18088|TD1 13872|TYC 8588-4200-1|UBV    8967|UBV M  15354|[B10]  2526|uvby98 100081188|2MASS J09220681-5500386|ALS 14934|PLX 2237.00|Renson 23050|WEB  8713|NAME Markeb",
     "matched_id": "* kap Vel"
   }

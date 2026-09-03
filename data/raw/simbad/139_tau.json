@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "139 Tau",
-  "retrieved_utc": "2026-08-23T01:54:45+00:00",
+  "retrieved_utc": "2026-09-03T09:32:10+00:00",
   "record_id": "* 139 Tau",
   "raw": {
     "main_id": "* 139 Tau",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.820000171661377,
-    "plx_value": 0.8615,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B1Ia",
-    "plx_err": 0.17900000512599945,
+    "plx_value": 0.8615,
     "otype": "s*b",
+    "pmra": -1.909,
+    "pmdec": -2.109,
+    "plx_err": 0.17900000512599945,
+    "rvz_radvel": 8.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 78878491|HIP 28237|Gaia DR3 3429829048565502848|2MASS J05575966+2557142|* 139 Tau|AG+25  595|ALS  8614|BD+25  1052|GC  7507|GCRV  3712|GEN# +1.00040111|GSC 01867-03204|HD  40111|HGAM    487|HIC  28237|HR  2084|Hilt  501|JP11  1289|LS   V +25   11|MCW  374|PPM  95153|ROT   949|SAO  77775|SKY#  9901|TD1  5649|TYC 1867-3204-1|UBV    6048|UBV M  11645|[KW97] 26-9|[M67b] +25 183|uvby98 100040111|WEB  5525|Gaia DR2 3429829048565502848",
     "matched_id": "* 139 Tau"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "IRAS 02531+4657",
-  "retrieved_utc": "2026-08-23T01:59:22+00:00",
+  "retrieved_utc": "2026-09-03T09:38:15+00:00",
   "record_id": "HD  18155",
   "raw": {
     "main_id": "HD  18155",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.03000020980835,
-    "plx_value": 1.6543,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "K3III:",
-    "plx_err": 0.10509999841451645,
+    "plx_value": 1.6543,
     "otype": "*",
+    "pmra": -3.839,
+    "pmdec": 0.875,
+    "plx_err": 0.10509999841451645,
+    "rvz_radvel": -11.18,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "IRAS 02531+4657|AKARI-IRC-V1 J0256333+470950|2MASS J02563330+4709504|TIC 238756249|WISEA J025633.29+470950.5|HIP 13713|Gaia DR3 434453160517450624|AG+46  302|BD+46   658|CSI+46   658  1|GC  3520|GCRV  1631|GSC 03301-02750|HD  18155|HIC  13713|HR   865|CCDM J02566+4710A|IDS 02497+4646 A|TYC 3301-2750-1|WDS J02566+4710A|BDS  1489 A|GEN# +1.00018155|Gaia DR2 434453160517450624|UCAC4 686-018690|WISE J025633.21+470951.6|PPM  45684|SAO  38455|SKY#  4419|UBV M   9221|WEB  2719",
     "matched_id": "IRAS 02531+4657"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LS CMa",
-  "retrieved_utc": "2026-08-23T02:05:33+00:00",
+  "retrieved_utc": "2026-09-03T09:46:11+00:00",
   "record_id": "V* LS CMa",
   "raw": {
     "main_id": "V* LS CMa",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.635000228881836,
-    "plx_value": 2.1591,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "B2/3III/IV",
-    "plx_err": 0.06129999831318855,
+    "plx_value": 2.1591,
     "otype": "EB*",
+    "pmra": -4.638,
+    "pmdec": 5.332,
+    "plx_err": 0.06129999831318855,
+    "rvz_radvel": 6.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 63427664|HIP 33804|Gaia DR3 2921234311465446272|2MASS J07010594-2512561|CD-25  3911|CEL   1508|CPD-25  1827|GC  9253|GCRV  4614|GEN# +1.00052670|GSC 06527-03496|HD  52670|HIC  33804|HR  2640|N30 1525|PPM 251438|ROT  1131|SAO 172763|SKY# 12543|SRS  41512|TD1  8881|TYC 6527-3496-1|UBV    6921|UBV M  12761|V* LS CMa|YZ 115  4304|uvby98 100052670|ALS 14874|EQ 065902-2508|WEB  6785|Gaia DR2 2921234311465446272",
     "matched_id": "V* LS CMa"
   }

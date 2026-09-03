@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V2141 Cyg",
-  "retrieved_utc": "2026-08-23T02:06:22+00:00",
+  "retrieved_utc": "2026-09-03T09:47:15+00:00",
   "record_id": "V* V2141 Cyg",
   "raw": {
     "main_id": "V* V2141 Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 7.480000019073486,
-    "plx_value": 1.9323,
+    "rvz_bibcode": "2022ApJS..259...35A",
     "sp_type": "MS",
-    "plx_err": 0.029400000348687172,
+    "plx_value": 1.9323,
     "otype": "S*",
+    "pmra": -12.005,
+    "pmdec": -7.973,
+    "plx_err": 0.029400000348687172,
+    "rvz_radvel": -11.5739,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 329329553|Gaia DR3 2163035449703587840|AP J20575316+4447171|AG+44 1861|BD+44  3649|CSS 1254|DO 39057|GEN# +1.00199799|GSC 03179-00265|HD 199799|HIC 103476|HIP 103476|IRC +40458|PPM  60761|S1* 670|SAO  50291|SKY# 39826|TYC 3179-265-1|UBV M  25330|V* V2141 Cyg|[C97] 65|[L75] 20|2MASS J20575316+4447171|Gaia DR2 2163035449703587840",
     "matched_id": "V* V2141 Cyg"
   }

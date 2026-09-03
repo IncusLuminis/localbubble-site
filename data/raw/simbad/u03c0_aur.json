@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "π Aur",
-  "retrieved_utc": "2026-08-23T02:04:29+00:00",
+  "retrieved_utc": "2026-09-03T09:44:50+00:00",
   "record_id": "* pi. Aur",
   "raw": {
     "main_id": "* pi. Aur",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.25,
-    "plx_value": 4.5154,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "M3IIb",
-    "plx_err": 0.2409999966621399,
+    "plx_value": 4.5154,
     "otype": "LP*",
+    "pmra": -3.755,
+    "pmdec": -7.785,
+    "plx_err": 0.2409999966621399,
+    "rvz_radvel": 0.71,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 440394658|HIP 28404|Gaia DR3 196944217825405184|2MASS J05595611+4556124|PLX 1375|*  35 Aur|* pi. Aur|AG+45  585|BD+45  1217|CSV    700|DO 29882|GC  7554|GCRV  3733|GEN# +1.00040239|GSC 03361-01787|HD  40239|HIC  28404|HR  2091|IRAS 05562+4556|IRC +50156|JP11  1294|PPM  48624|RAFGL  851|SAO  40756|SKY#  9965|SV* ZI   495|TYC 3361-1787-1|UBV    6056|UBV M  11654|V* pi. Aur|PLX 1375.00|WEB  5551|Gaia DR2 196944217827046784",
     "matched_id": "* pi. Aur"
   }

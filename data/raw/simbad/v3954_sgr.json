@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V3954 Sgr",
-  "retrieved_utc": "2026-08-23T02:06:32+00:00",
+  "retrieved_utc": "2026-09-03T09:47:27+00:00",
   "record_id": "V* V3954 Sgr",
   "raw": {
     "main_id": "V* V3954 Sgr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 7.46999979019165,
-    "plx_value": 1.8749,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "M4III",
-    "plx_err": 0.04830000177025795,
+    "plx_value": 1.8749,
     "otype": "LP?",
+    "pmra": 3.756,
+    "pmdec": -1.586,
+    "plx_err": 0.04830000177025795,
+    "rvz_radvel": -17.33,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 230933617|HIP 94224|Gaia DR3 4185063309148649984|AAVSO 1905-15|BD-15  5259|CSV   8116|GSC 06283-01087|HD 178882|HIC  94224|IRAS 19080-1509|IRC -20543|PPM 235605|RAFGL 2335|SAO 162278|SKY# 35536|SRS  15331|TYC 6283-1087-1|V* V3954 Sgr|YZ 105  7117|2MASS J19105155-1504401|Gaia DR2 4185063309148649984",
     "matched_id": "V* V3954 Sgr"
   }

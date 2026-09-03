@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HQ CMa",
-  "retrieved_utc": "2026-08-23T02:05:26+00:00",
+  "retrieved_utc": "2026-09-03T09:46:02+00:00",
   "record_id": "V* HQ CMa",
   "raw": {
     "main_id": "V* HQ CMa",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.986000061035156,
-    "plx_value": 1.5391,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "B3V",
-    "plx_err": 0.05730000138282776,
+    "plx_value": 1.5391,
     "otype": "EB*",
+    "pmra": -4.135,
+    "pmdec": 5.821,
+    "plx_err": 0.05730000138282776,
+    "rvz_radvel": 18.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 106830354|GEN# +1.00057593|HIP 35611|Gaia DR3 5613017756143699456|ADS  6015 A|CCDM J07209-2658A|CD-26  4223|CEL   1797|CPD-26  2013|CSI-26  4223 21|CSI-26  4223 23|GC  9805|GCRV 58679|GSC 06545-01765|HD  57593|HIC  35611|HR  2800|IDS 07169-2647 A|N30 1641|PPM 252187|SAO 173522|SKY# 13356|SRS  41602|TD1  9886|TYC 6545-1765-1|UBV M  13208|V* HQ CMa|YZ 116  4788|uvby98 100057593 ABV|2MASS J07205490-2657498|WDS J07209-2658A|Gaia DR1 5613017751838930816|WEB  7096|Gaia DR2 5613017756143699456",
     "matched_id": "V* HQ CMa"
   }

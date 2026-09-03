@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ι CMa",
-  "retrieved_utc": "2026-08-23T02:03:23+00:00",
+  "retrieved_utc": "2026-09-03T09:43:22+00:00",
   "record_id": "* iot CMa",
   "raw": {
     "main_id": "* iot CMa",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.385000228881836,
-    "plx_value": 0.9453,
+    "rvz_bibcode": "2023MNRAS.519.5472M",
     "sp_type": "B3Ib",
-    "plx_err": 0.18569999933242798,
+    "plx_value": 0.9453,
     "otype": "s*b",
+    "pmra": -3.547,
+    "pmdec": 3.19,
+    "plx_err": 0.18569999933242798,
+    "rvz_radvel": 10.7,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 146908355|Gaia DR3 2934094096385049728|WISE J065608.23-170315.2|HIP 33347|2MASS J06560822-1703154|PLX 1630|*  20 CMa|* iot CMa|ALS   104|BD-16  1661|CEL   1443|CSV   6531|FK5 2536|GC  9107|GCRV  4553|GEN# +5.11210026|GSC 05967-02618|HD  51309|HIC  33347|HR  2596|IRAS 06539-1659|JP11  4540|LS  104|MCW  488|N30 1509|NSV  3292|PPM 217897|ROT  1120|SAO 152126|SKY# 12328|TD1  8606|TYC 5967-2618-1|UBV    6858|UBV M  40647|V* iot CMa|YZ 106  2346|[GM99b] 14|PLX 1630.00|UCAC4 365-019740|uvby98 511210026|WEB  6700|Gaia DR2 2934094096383830400",
     "matched_id": "* iot CMa"
   }

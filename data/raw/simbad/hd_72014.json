@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 72014",
-  "retrieved_utc": "2026-08-23T02:02:36+00:00",
+  "retrieved_utc": "2026-09-03T09:42:22+00:00",
   "record_id": "HD  72014",
   "raw": {
     "main_id": "HD  72014",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.5879998207092285,
-    "plx_value": 1.3896,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B1/2(V)nne",
-    "plx_err": 0.04309999942779541,
+    "plx_value": 1.3896,
     "otype": "Be*",
+    "pmra": -8.25,
+    "pmdec": 8.835,
+    "plx_err": 0.04309999942779541,
+    "rvz_radvel": 5.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 140001327|WISEA J082852.05-423514.7|HIP 41599|Gaia DR3 5526573774005244800|2MASS J08285206-4235149|[JE82]  385|ALS  1082|CCDM J08288-4235A|CD-42  4290|CEL   2553|CPC  0  5980|CPD-42  2551|EM* CDS  724|GC 11617|GCRV 59695|GEN# +1.00072014A|GSC 07669-03714|HD  72014|HIC  41599|Hbg  179|IDS 08254-4215 A|LS 1082|N30 1974|PPM 313125|SAO 219977|SKY# 16150|TD1 12566|TYC 7669-3714-1|UBV    8101|UBV M  14383|uvby98 100072014 A|UCAC3 95-62065|WDS J08289-4235A|UCAC4 238-028752|WEB  8029|Gaia DR2 5526573774005244800|NSV 17900|WISE J082852.06-423514.8",
     "matched_id": "HD  72014"
   }

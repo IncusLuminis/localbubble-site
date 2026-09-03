@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Paikauhale",
-  "retrieved_utc": "2026-08-23T02:04:44+00:00",
+  "retrieved_utc": "2026-09-03T09:31:39+00:00",
   "record_id": "* tau Sco",
   "raw": {
     "main_id": "* tau Sco",
@@ -14,10 +14,18 @@
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.809999942779541,
     "plx_value": 6.88,
-    "sp_type": "B0V",
     "plx_err": 0.5299999713897705,
+    "rvz_radvel": -650.47,
+    "pmra": -9.89,
     "otype": "*",
+    "sp_type": "B0V",
+    "pmdec": -22.83,
+    "rvz_bibcode": "2023A&A...676A.129H",
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 205175750|GES J16355294-2812579|HIP 81266|Gaia DR3 6044420729667868928|PLX 3767.1|* tau Sco|*  23 Sco|1AXG J163553-2813|2E  3724|CD-27 11015|CPD-27  5427|FK5  620|GC 22303|GCRV  9538|GEN# +1.00149438|GSC 06807-01012|HD 149438|HGAM    657|HIC  81266|HR  6165|IRAS 16327-2806|JP11  2775|MCW  561|N30 3713|PMC 90-93   442|PPM 265701|ROT  2361|SAO 184481|SKY# 29892|SRS  30620|TD1 19318|TYC 6807-1012-1|UBV   14025|UBV M  21531|[B10]  4218|[SC96] Oph  72|uvby98 100149438|2MASS J16355295-2812576|ALS 14819|PLX 3767.10|1RXS J163553.7-281252|2E 1632.7-2806|EUVE J1635-28.2|WEB 13733|Gaia DR2 6044420729653939840|NAME Paikauhale|WISEA J163552.94-281258.0",
-    "matched_id": "NAME Paikauhale"
+    "matched_id": "NAME Paikauhale",
+    "rvz_radvel_corrected": 1.2000000476837158,
+    "rvz_bibcode_corrected": "1928PLicO..16....1C",
+    "rvz_correction_note": "Default SIMBAD rvz_radvel (-650.47 km/s, bibcode 2023A&A...676A.129H) is implausible for a resolved star (|rv| > 500.0 km/s) - likely a bad upstream cross-match. Corrected via SIMBAD's own mesVelocities table to a plausible independent measurement (1.2000000476837158 km/s, bibcode 1928PLicO..16....1C); never fabricated."
   }
 }

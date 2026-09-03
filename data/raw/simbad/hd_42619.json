@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 42619",
-  "retrieved_utc": "2026-08-23T02:01:12+00:00",
+  "retrieved_utc": "2026-09-03T09:40:37+00:00",
   "record_id": "HD  42619",
   "raw": {
     "main_id": "HD  42619",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 7.909999847412109,
-    "plx_value": 1.3462,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "M3III",
-    "plx_err": 0.024700000882148743,
+    "plx_value": 1.3462,
     "otype": "*",
+    "pmra": -1.049,
+    "pmdec": -2.428,
+    "plx_err": 0.024700000882148743,
+    "rvz_radvel": 17.39,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 72311250|Gaia DR3 3006151411241065728|2MASS J06112343-0715019|BD-07  1318|EIC   116|GSC 04795-00612|HD  42619|IRAS 06089-0714|IRC -10111|PPM 188891|RAFGL  892|SAO 132935|SKY# 10412|TYC 4795-612-1|YZ  97  1822|Gaia DR1 3006151411241065728|Gaia DR2 3006151411241065728",
     "matched_id": "HD  42619"
   }

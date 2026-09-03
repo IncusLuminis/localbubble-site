@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "m Vel",
-  "retrieved_utc": "2026-08-23T02:03:56+00:00",
+  "retrieved_utc": "2026-09-03T09:44:07+00:00",
   "record_id": "* m Vel",
   "raw": {
     "main_id": "* m Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.579999923706055,
-    "plx_value": 3.6857,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "sp_type": "G6IIa",
-    "plx_err": 0.12890000641345978,
+    "plx_value": 3.6857,
     "otype": "SB*",
+    "pmra": -25.119,
+    "pmdec": 10.305,
+    "plx_err": 0.12890000641345978,
+    "rvz_radvel": 10.8,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 35168827|HIP 48374|Gaia DR3 5411300287757211392|PLX 2343|SBC9 587|* m Vel|CD-45  5508|CPC  0  7885|CPD-45  4130|GC 13587|GCRV  6324|GEN# +1.00085622|GSC 08181-00868|HD  85622|HIC  48374|HR  3912|IRAS 09497-4618|JP11  1880|NSV  4658|PPM 314752|SAO 221553|SBC7   391|SKY# 19041|TYC 8181-868-1|UBV    9285|UBV M  15771|uvby98 100085622|2MASS J09514067-4632513|PLX 2343.00|WEB  9023|Gaia DR2 5411300287757211392",
     "matched_id": "* m Vel"
   }

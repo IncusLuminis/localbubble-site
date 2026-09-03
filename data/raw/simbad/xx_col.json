@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "XX Col",
-  "retrieved_utc": "2026-08-23T02:07:10+00:00",
+  "retrieved_utc": "2026-09-03T09:48:17+00:00",
   "record_id": "V* XX Col",
   "raw": {
     "main_id": "V* XX Col",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.869999885559082,
-    "plx_value": 1.8342,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "M3III",
-    "plx_err": 0.03150000050663948,
+    "plx_value": 1.8342,
     "otype": "LP*",
+    "pmra": 1.655,
+    "pmdec": 5.027,
+    "plx_err": 0.03150000050663948,
+    "rvz_radvel": 13.38,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 100508573|HIP 26959|Gaia DR3 2900987526385531520|2MASS J05431451-3325298|CD-33  2504|CPC 17  2315|CPD-33   894|FK5 4525|GC  7167|GSC 07061-01518|HD  38297|HIC  26959|IRAS 05414-3326|PPM 281803|RAFGL 4442S|SAO 196114|SKY#  9358|SRS   6582|TYC 7061-1518-1|V* XX Col|Gaia DR2 2900987526385531520",
     "matched_id": "V* XX Col"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Sadr",
-  "retrieved_utc": "2026-08-23T01:57:26+00:00",
+  "retrieved_utc": "2026-09-03T09:35:43+00:00",
   "record_id": "* gam Cyg",
   "raw": {
     "main_id": "* gam Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.2300000190734863,
-    "plx_value": 1.78,
+    "rvz_bibcode": "2018A&A...616A...7S",
     "sp_type": "F8Ib",
-    "plx_err": 0.27000001072883606,
+    "plx_value": 1.78,
     "otype": "*",
+    "pmra": 2.39,
+    "pmdec": -0.91,
+    "plx_err": 0.27000001072883606,
+    "rvz_radvel": -5.906,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 13431346|** BU  665A|Gaia DR3 2067518817314952576|PLX 4857|*  37 Cyg|* gam Cyg|ADS 13765 A|AG+40 2025|ALS 11235|BD+39  4159|CCDM J20222+4015A|CSI+39  4159  1|CSV 101987|FK5  765|GC 28338|GCRV 12723|GEN# +1.00194093|GSC 03156-02223|HD 194093|HIC 100453|HIP 100453|HR  7796|IDS 20186+3956 A|IRAS 20204+4005|IRC +40411|JP11  3239|LS  II +40   23|N30 4504|NSV 13048|PMC 90-93   540|PPM  59799|RAFGL 2565|ROT  2973|SAO  49528|SKY# 38484|TD1 26627|TYC 3156-2223-1|UBV   17671|UBV M  24788|[B10]  5229|uvby98 100194093|2MASS J20221370+4015241|PLX 4857.00|WDS J20222+4015A|WEB 18138|NAME Sadr",
     "matched_id": "NAME Sadr"
   }

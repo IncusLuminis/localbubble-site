@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ζ Per",
-  "retrieved_utc": "2026-08-23T02:07:30+00:00",
+  "retrieved_utc": "2026-09-03T09:48:45+00:00",
   "record_id": "* zet Per",
   "raw": {
     "main_id": "* zet Per",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.8499999046325684,
-    "plx_value": 3.8556,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B1Ib",
-    "plx_err": 0.41690000891685486,
+    "plx_value": 3.8556,
     "otype": "s*b",
+    "pmra": 7.274,
+    "pmdec": -9.141,
+    "plx_err": 0.41690000891685486,
+    "rvz_radvel": 20.6,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 94367286|Gaia DR3 168726523212358272|UCAC4 610-010865|WISE J035407.90+315301.8|HIP 18246|PLX  856|[GBA2007] 79|XEST 27-079|* zet Per|*  44 Per|2E   902|ADS  2843 A|AG+31  368|BD+31   666|CCDM J03541+3153A|CSI+31   666  1|CSV 100357|FK5  144|GC  4688|GCRV  2230|GEN# +1.00024398A|GSC 02361-02820|HD  24398|HGAM    301|HIC  18246|HR  1203|IDS 03478+3135 A|IRC +30068|JP11   828|MCW  252|N30  800|NSV  1397|PMC 90-93   104|PPM  68893|ROT   574|SAO  56799|SKY#  5968|SRS  30144|SV* ZI   260|TD1  2623|TYC 2361-2820-1|UBV    3778|YPAC  14|[C93] 149|[KSP2003] G162.2896-16.6902|uvby98 100024398 A|ALS 14763|1RXS J035407.3+315255|2E 0350.9+3144|[KSP2003] J035408.02+315300.2|2XMM J035407.8+315300|WDS J03541+3153A|2MASS J03540793+3153011|CSI+31   666  6|UBV M   9778|IRAS 03509+3144|AKARI-IRC-V1 J0354079+315300|WEB  3522|Gaia DR2 168726523211214592",
     "matched_id": "* zet Per"
   }

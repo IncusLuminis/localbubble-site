@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V1435 Aql",
-  "retrieved_utc": "2026-08-23T02:06:18+00:00",
+  "retrieved_utc": "2026-09-03T09:47:10+00:00",
   "record_id": "V* V1435 Aql",
   "raw": {
     "main_id": "V* V1435 Aql",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 7.460000038146973,
-    "plx_value": 1.3732,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "M3",
-    "plx_err": 0.032099999487400055,
+    "plx_value": 1.3732,
     "otype": "LP?",
+    "pmra": -0.518,
+    "pmdec": -5.355,
+    "plx_err": 0.032099999487400055,
+    "rvz_radvel": 1.08,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 97536264|HIP 92715|Gaia DR3 4311317862883465856|AAVSO 1848+09|AG+09 2336|AGKR 16847|BD+09  3911|DO  5176|GEN# +1.00175100|GSC 01030-02373|HD 175100|HIC  92715|IRAS 18511+0935|IRC +10383|PPM 166751|RAFGL 5317S|SAO 124013|SKY# 34778|TYC 1030-2373-1|UBV M  23288|V* V1435 Aql|YZ   9  8882|2MASS J18532990+0939307|Gaia DR1 4311317858538776704|Gaia DR2 4311317862883465856",
     "matched_id": "V* V1435 Aql"
   }

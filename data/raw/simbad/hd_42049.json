@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 42049",
-  "retrieved_utc": "2026-08-23T02:01:09+00:00",
+  "retrieved_utc": "2026-09-03T09:40:34+00:00",
   "record_id": "HD  42049",
   "raw": {
     "main_id": "HD  42049",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.9039998054504395,
-    "plx_value": 1.7811,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "sp_type": "K4III",
-    "plx_err": 0.13619999587535858,
+    "plx_value": 1.7811,
     "otype": "*",
+    "pmra": -6.534,
+    "pmdec": -3.877,
+    "plx_err": 0.13619999587535858,
+    "rvz_radvel": 7.8,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 45439935|HIP 29196|Gaia DR3 3423506272593153152|2MASS J06093244+2211249|AG+22  652|BD+22  1198|DO 11962|GC  7824|GCRV  3872|GEN# +1.00042049|GSC 01326-01732|HD  42049|HIC  29196|HR  2169|IRAS 06065+2211|IRC +20133|NSV 16789|PPM  95514|SAO  78045|SKY# 10323|TYC 1326-1732-1|UBV M  11795|YZ  22  2215|[M67b] +22 638|WEB  5724|Gaia DR2 3423506272593153152",
     "matched_id": "HD  42049"
   }

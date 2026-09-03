@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "37 Oph",
-  "retrieved_utc": "2026-08-23T01:55:19+00:00",
+  "retrieved_utc": "2026-09-03T09:32:55+00:00",
   "record_id": "*  37 Oph",
   "raw": {
     "main_id": "*  37 Oph",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.340000152587891,
-    "plx_value": 3.5584,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "M2III",
-    "plx_err": 0.13330000638961792,
+    "plx_value": 3.5584,
     "otype": "*",
+    "pmra": 5.442,
+    "pmdec": -26.27,
+    "plx_err": 0.13330000638961792,
+    "rvz_radvel": 22.2,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 459483638|HIP 84177|Gaia DR3 4539937082217201792|*  37 Oph|AG+10 2021|BD+10  3165|CCDM J17125+1035A|CSI+10  3165  1|DO  4240|FK5 3369|GC 23220|GCRV  9923|GEN# +1.00155644|GSC 00981-02008|HD 155644|HIC  84177|HR  6393|IDS 17078+1042 A|IRAS 17101+1038|IRAS 17101+1036|IRC +10320|NSV 21130|PMC 90-93  1394|PPM 133114|SAO 102646|SKY# 31013|TYC  981-2008-1|YZ  10  6011|2MASS J17122781+1035066|WDS J17125+1035A|WEB 14216|Gaia DR2 4539937082217201792",
     "matched_id": "*  37 Oph"
   }

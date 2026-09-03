@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "BD+60 2152",
-  "retrieved_utc": "2026-08-23T01:56:11+00:00",
+  "retrieved_utc": "2026-09-03T09:34:02+00:00",
   "record_id": "BD+60  2152",
   "raw": {
     "main_id": "BD+60  2152",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.289999961853027,
-    "plx_value": 1.2176,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "K0",
-    "plx_err": 0.01679999940097332,
+    "plx_value": 1.2176,
     "otype": "*",
+    "pmra": -3.147,
+    "pmdec": -2.022,
+    "plx_err": 0.01679999940097332,
+    "rvz_radvel": 5.25,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 343461588|Gaia DR3 2195057390130560640|BD+60  2152|AG+61 1214|GSC 04246-00260|IRAS 20411+6116|PPM  22334|SAO  18990|TYC 4246-260-1|2MASS J20420991+6127066|Gaia DR1 2195057385831362048|Gaia DR2 2195057390130560640",
     "matched_id": "BD+60  2152"
   }

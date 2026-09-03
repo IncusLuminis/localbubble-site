@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Azelfafage",
-  "retrieved_utc": "2026-08-23T02:04:23+00:00",
+  "retrieved_utc": "2026-09-03T09:44:41+00:00",
   "record_id": "* pi.01 Cyg",
   "raw": {
     "main_id": "* pi.01 Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.659999847412109,
-    "plx_value": 2.2726,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "B3III",
-    "plx_err": 0.17810000479221344,
+    "plx_value": 2.2726,
     "otype": "SB*",
+    "pmra": 4.934,
+    "pmdec": -3.583,
+    "plx_err": 0.17810000479221344,
+    "rvz_radvel": -8.2,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 387862539|Gaia DR3 1980828991263480448|SBC9 1325|*  80 Cyg|* pi.01 Cyg|AG+50 1683|ALS 11957|BD+50  3410|CEL   5369|FK5 3733|GC 30391|GCRV 13637|GEN# +1.00206672|HD 206672|HIC 107136|HIP 107136|HR  8301|IRAS 21403+5057|JP11  3389|LS III +50   29|N30 4786|PPM  39758|ROT  3156|SAO  33665|SBC7   871|SKY# 41369|TD1 28389|UBV   18647|UBV M  25897|uvby98 100206672|2MASS J21420566+5111225|TYC 3603-3215-1|NAME Azelfafage|WEB 19353|Gaia DR2 1980828986950827776",
     "matched_id": "NAME Azelfafage"
   }

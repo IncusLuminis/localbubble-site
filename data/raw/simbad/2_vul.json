@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "2 Vul",
-  "retrieved_utc": "2026-08-23T01:55:11+00:00",
+  "retrieved_utc": "2026-09-03T09:32:44+00:00",
   "record_id": "*   2 Vul",
   "raw": {
     "main_id": "*   2 Vul",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.429999828338623,
-    "plx_value": 1.8212,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B1IIIn",
-    "plx_err": 0.08799999952316284,
+    "plx_value": 1.8212,
     "otype": "Pu*",
+    "pmra": 0.956,
+    "pmdec": -6.636,
+    "plx_err": 0.08799999952316284,
+    "rvz_radvel": 1.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 354462452|WISEA J191743.61+230131.9|HIP 94827|Gaia DR3 2022245532721403776|*   2 Vul|AG+22 1930|ALS 10239|BD+22  3648|GC 26613|GCRV 11751|GSC 02124-02557|HD 180968|HIC  94827|HR  7318|IRAS 19156+2255|LS  II +22    3|MCW  729|N30 4271|PPM 108726|ROT  2764|SAO  87036|SKY# 35819|TD1 24364|TYC 2124-2557-1|UBV M  23653|V* ES Vul|YZ  22  6936|2MASS J19174364+2301319|ADS 12287 A|WDS J19177+2302A|CCDM J19177+2302A|IDS 19135+2251 A|** BU  248A|uvby98 100180968|WEB 16549|GEN# +1.00180968|WISE J191743.63+230131.8|Gaia DR2 2022245532721403776",
     "matched_id": "*   2 Vul"
   }

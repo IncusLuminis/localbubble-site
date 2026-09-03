@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "NO Vel",
-  "retrieved_utc": "2026-08-23T02:05:37+00:00",
+  "retrieved_utc": "2026-09-03T09:46:16+00:00",
   "record_id": "V* NO Vel",
   "raw": {
     "main_id": "V* NO Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.126999855041504,
-    "plx_value": 2.7446,
+    "rvz_bibcode": "2004A&A...424..727P",
     "sp_type": "B3III",
-    "plx_err": 0.0803999975323677,
+    "plx_value": 2.7446,
     "otype": "SB*",
+    "pmra": -8.143,
+    "pmdec": 10.357,
+    "plx_err": 0.0803999975323677,
+    "rvz_radvel": 24.4,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "AKARI-IRC-V1 J0813361-465929|WISE J081336.15-465929.8|TIC 81609273|WISEA J081336.13-465929.6|HIP 40285|Gaia DR3 5519315829032177152|2MASS J08133616-4659298|SBC9 2020|CCDM J08136-4659A|CD-46  3929|CEL   2256|CPC  0  5580|CPD-46  2281|GC 11207|GCRV  5461|GEN# +1.00069144A|GSC 08140-06531|HD  69144|HIC  40285|HR  3244|Hbg  145|IDS 08105-4641 A|PPM 312775|ROT  1321|SAO 219629|SKY# 15559|TD1 12069|TYC 8140-6531-1|UBV    7931|UBV M  14133|V* NO Vel|[B10]  2191|ALS 14061|WDS J08136-4700A|WEB  7855|Gaia DR2 5519315829032177152",
     "matched_id": "V* NO Vel"
   }

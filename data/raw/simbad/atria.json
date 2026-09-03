@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Atria",
-  "retrieved_utc": "2026-08-23T01:56:03+00:00",
+  "retrieved_utc": "2026-09-03T09:33:51+00:00",
   "record_id": "* alf TrA",
   "raw": {
     "main_id": "* alf TrA",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.8799999952316284,
-    "plx_value": 8.35,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "K2III_Ba1",
-    "plx_err": 0.15000000596046448,
+    "plx_value": 8.35,
     "otype": "*",
+    "pmra": 17.99,
+    "pmdec": -31.58,
+    "plx_err": 0.15000000596046448,
+    "rvz_radvel": -3.0,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 364216056|HIP 82273|PLX 3802|* alf TrA|CPC 21.1  3219|CPD-68  2822|FK5  625|GC 22558|GCRV  9640|GEN# +1.00150798|HD 150798|HIC  82273|HR  6217|IRAS 16433-6856|N30 3745|PPM 362330|SAO 253700|SKY# 30264|TD1 19468|UBV   14160|UBV M  21635|[L91b] 270|PLX 3802.00|TYC 9275-3641-1|1RXS J164840.4-690138|2MASS J16483989-6901398|2XMM J164840.1-690139|** WFC  179A|WDS J16487-6902A|NAME Atria|WEB 13888",
     "matched_id": "NAME Atria"
   }

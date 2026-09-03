@@ -1,0 +1,1023 @@
+{
+  "55_cyg": {
+    "name": "*  55 Cyg",
+    "aliases": [
+      "TIC 353210150",
+      "Gaia DR3 2166348110749083520",
+      "PLX 4980",
+      "AAVSO 2045+45",
+      "ADS 14337 A",
+      "AG+45 1758",
+      "ALS 11566",
+      "BD+45  3291",
+      "CCDM J20489+4607A",
+      "CEL   5176",
+      "CSI+45  3291  1",
+      "CSV 102035",
+      "EM* MWC  353",
+      "GC 29036",
+      "GCRV 13065",
+      "GEN# +1.00198478A",
+      "GSC 03575-06709",
+      "HD 198478",
+      "HGAM    952",
+      "HIC 102724",
+      "HIP 102724",
+      "HR  7977",
+      "Hilt 1013",
+      "IDS 20455+4545 A",
+      "JP11  3282",
+      "LS III +45   23",
+      "MCW  946",
+      "PPM  60515",
+      "ROT  3044",
+      "SAO  50099",
+      "SKY# 39481",
+      "TD1 27324",
+      "TYC 3575-6709-1",
+      "UBV   18033",
+      "UBV M  25202",
+      "V* V1661 Cyg",
+      "YPAC 203",
+      "[KW97] 49-52",
+      "2MASS J20485628+4606508",
+      "WDS J20489+4607A",
+      "AKARI-IRC-V1 J2048563+460650",
+      "IRAS 20472+4555",
+      "** HJ 1581A",
+      "WEB 18624",
+      "Gaia DR2 2166348110749083520"
+    ],
+    "coordinates": {
+      "ra_deg": 312.2345483006,
+      "dec_deg": 46.11413434584,
+      "galactic_l_deg": 85.75353039670514,
+      "galactic_b_deg": 1.4900297487617467
+    },
+    "distance": {
+      "value_pc": 1839.9264029438823,
+      "error_pc": 264.73273264375973
+    },
+    "cartesian": {
+      "x_pc": 136.19504056348845,
+      "y_pc": 1834.2549085670794,
+      "z_pc": 47.84359490564155
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:56:26+00:00; upstream record id: *  55 Cyg; otype: s*b. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "alf_cru": {
+    "name": "* alf Cru",
+    "aliases": [
+      "TIC 450568754",
+      "LLNS  8229",
+      "CD-62   652",
+      "HIP 60718",
+      "SBC9 725",
+      "CCDM J12266-6306AB",
+      "CEL   4105",
+      "CPD-62  2745",
+      "CSI-62  2745 43",
+      "HIC  60718",
+      "IDS 12210-6233 AB",
+      "JP11  2217",
+      "UBV   11169",
+      "AX J1226.6-6305",
+      "WDS J12266-6306AB",
+      "uvby98 100108248",
+      "IRAS 12237-6249",
+      "AKARI-IRC-V1 J1226360-630557",
+      "GEN# +1.00108248",
+      "SBC7   462",
+      "EUVE J1226-63.0",
+      "2MASS J12263615-6305571",
+      "1RXS J122634.8-630554",
+      "1ES 1223-62.8",
+      "NAME Acrux"
+    ],
+    "coordinates": {
+      "ra_deg": 186.64956340120452,
+      "dec_deg": -63.099092857925115,
+      "galactic_l_deg": 300.1265773848604,
+      "galactic_b_deg": -0.3627247851527576
+    },
+    "distance": {
+      "value_pc": 98.71668311944718,
+      "error_pc": 4.872491763052674
+    },
+    "cartesian": {
+      "x_pc": 49.54609446784958,
+      "y_pc": -85.38019379232934,
+      "z_pc": -0.6249456556798633
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:56:44+00:00; upstream record id: * alf Cru; otype: SB*. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "alf_ori": {
+    "name": "* alf Ori",
+    "aliases": [
+      "TIC 269273552",
+      "GEN# +1.00039801",
+      "HIP 27989",
+      "2MASS J05551028+0724255",
+      "PLX 1362",
+      "*  58 Ori",
+      "AAVSO 0549+07",
+      "ADS  4506 AP",
+      "AG+07  681",
+      "BD+07  1055",
+      "CCDM J05552+0724AP",
+      "CSI+07  1055  1",
+      "EIC   108",
+      "FK5  224",
+      "GC  7451",
+      "GCRV  3679",
+      "GSC 00129-01873",
+      "HD  39801",
+      "HIC  27989",
+      "HR  2061",
+      "IRAS 05524+0723",
+      "IRC +10100",
+      "JP11  1282",
+      "N30 1266",
+      "NAME Betelgeuse",
+      "PMC 90-93   162",
+      "PPM 149643",
+      "RAFGL  836",
+      "SAO 113271",
+      "SKY#  9804",
+      "TD1  5587",
+      "TYC  129-1873-1",
+      "UBV   21314",
+      "V* alf Ori",
+      "YZ   7  2503",
+      "[LFO93] 0552+07",
+      "JCMTSE J055510.1+072426",
+      "PLX 1362.00",
+      "JCMTSF J055510.1+072426",
+      "WDS J05552+0724Aa,Ab",
+      "** H  639A",
+      "WDS J05552+0724Aa,Ac",
+      "WDS J05552+0724A",
+      "** KAR    1",
+      "WEB  5485"
+    ],
+    "coordinates": {
+      "ra_deg": 88.79293899077537,
+      "dec_deg": 7.407063995272694,
+      "galactic_l_deg": 199.7872361863758,
+      "galactic_b_deg": -8.95860328596853
+    },
+    "distance": {
+      "value_pc": 152.67175572519085,
+      "error_pc": 19.346191557850933
+    },
+    "cartesian": {
+      "x_pc": -141.90497456409847,
+      "y_pc": -51.053227636113704,
+      "z_pc": -23.774169556685685
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:57:12+00:00; upstream record id: * alf Ori; otype: s*r. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_158476": {
+    "name": "HD 158476",
+    "aliases": [
+      "TIC 218586391",
+      "GEN# +1.00158476",
+      "HIP 85788",
+      "Gaia DR3 5952141982969420928",
+      "CCDM J17318-4602A",
+      "CD-45 11626",
+      "CPC  0 16308",
+      "CPD-45  8654",
+      "CSI-45 11626 21",
+      "GC 23713",
+      "GSC 08342-05941",
+      "HIC  85788",
+      "HR  6513",
+      "IDS 17244-4558 A",
+      "PPM 323068",
+      "SAO 228075",
+      "SKY# 31637",
+      "TYC 8342-5941-1",
+      "uvby98 100158476 A",
+      "WDS J17318-4602A",
+      "2MASS J17314909-4602126",
+      "Gaia DR2 5952141982969420928"
+    ],
+    "coordinates": {
+      "ra_deg": 262.95457708782,
+      "dec_deg": -46.03678643111,
+      "galactic_l_deg": 344.0266681025452,
+      "galactic_b_deg": -6.768925477900912
+    },
+    "distance": {
+      "value_pc": 567.8591709256104,
+      "error_pc": 14.83334577702933
+    },
+    "cartesian": {
+      "x_pc": 542.1286733131146,
+      "y_pc": -155.17985280333286,
+      "z_pc": -66.93095591741968
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:58:15+00:00; upstream record id: HD 158476; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_164432": {
+    "name": "HD 164432",
+    "aliases": [
+      "TIC 414570797",
+      "HIP 88213",
+      "Gaia DR3 4474760644265753984",
+      "AG+06 2167",
+      "ALS  9362",
+      "BD+06  3597",
+      "FK5 3432",
+      "GC 24515",
+      "GCRV 10444",
+      "GEN# +1.00164432",
+      "GSC 00442-00581",
+      "HGAM    685",
+      "HIC  88213",
+      "HR  6719",
+      "LS  IV +06    1",
+      "N30 4005",
+      "PPM 164995",
+      "SAO 123017",
+      "SKY# 32676",
+      "TD1 21430",
+      "TYC  442-581-1",
+      "UBV   15309",
+      "UBV M  22549",
+      "YZ   6  8225",
+      "uvby98 513590009",
+      "2MASS J18005285+0616057",
+      "GEN# +5.13590009",
+      "WEB 14906",
+      "Gaia DR2 4474760644265753984"
+    ],
+    "coordinates": {
+      "ra_deg": 270.22024561875,
+      "dec_deg": 6.26829386349,
+      "galactic_l_deg": 32.81346957199821,
+      "galactic_b_deg": 14.085028484267353
+    },
+    "distance": {
+      "value_pc": 689.4174422612892,
+      "error_pc": 20.58033410630738
+    },
+    "cartesian": {
+      "x_pc": 561.9937695940454,
+      "y_pc": 362.36728800117476,
+      "z_pc": 167.77771371146454
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:58:22+00:00; upstream record id: HD 164432; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_172680": {
+    "name": "HD 172680",
+    "aliases": [
+      "TIC 425631720",
+      "HIP 91714",
+      "Gaia DR3 4099577040361782272",
+      "BD-17  5291",
+      "GC 25574",
+      "GSC 06284-01745",
+      "HIC  91714",
+      "IRAS 18392-1703",
+      "PPM 234912",
+      "SAO 161738",
+      "SKY# 34323",
+      "SRS  15017",
+      "TYC 6284-1745-1",
+      "YZ 107  6883",
+      "2MASS J18421018-1700400",
+      "RAVE J184210.2-170040",
+      "Gaia DR2 4099577040361782272"
+    ],
+    "coordinates": {
+      "ra_deg": 280.54242105639,
+      "dec_deg": -17.01110936423,
+      "galactic_l_deg": 16.709130347537183,
+      "galactic_b_deg": -5.681244977192874
+    },
+    "distance": {
+      "value_pc": 684.8376934666484,
+      "error_pc": 13.132075064339826
+    },
+    "cartesian": {
+      "x_pc": 652.6997108983154,
+      "y_pc": 195.9326756681378,
+      "z_pc": -67.79484044894826
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:58:33+00:00; upstream record id: HD 172680; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_213021": {
+    "name": "HD 213021",
+    "aliases": [
+      "TIC 366834959",
+      "Gaia DR3 2279495931770850816",
+      "AGKR 20083",
+      "AG+74  655",
+      "BD+74   965",
+      "GCRV 14107",
+      "GSC 04488-00339",
+      "HIC 110681",
+      "HIP 110681",
+      "IRAS 22244+7434",
+      "PPM  11210",
+      "SAO  10363",
+      "SKY# 42682",
+      "TYC 4488-339-1",
+      "2MASS J22252357+7449414",
+      "Gaia DR1 2279495927474014592",
+      "WEB 19829",
+      "Gaia DR2 2279495931770850816"
+    ],
+    "coordinates": {
+      "ra_deg": 336.34840499624,
+      "dec_deg": 74.82819393381,
+      "galactic_l_deg": 113.67014906751467,
+      "galactic_b_deg": 14.648062698536545
+    },
+    "distance": {
+      "value_pc": 799.1688643810437,
+      "error_pc": 9.83553140316489
+    },
+    "cartesian": {
+      "x_pc": -310.41462205914803,
+      "y_pc": 708.1464459895246,
+      "z_pc": 202.09464921261127
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:59:37+00:00; upstream record id: HD 213021; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_23089": {
+    "name": "HD  23089",
+    "aliases": [
+      "TIC 392712613",
+      "HIP 17587",
+      "Gaia DR3 487286480940656768",
+      "2MASS J03460234+6320421",
+      "PLX  772",
+      "AG+63  279",
+      "BD+62   604",
+      "GC  4470",
+      "GCRV  2074",
+      "GEN# +1.00023089",
+      "GSC 04067-01935",
+      "HD  23090",
+      "HIC  17587",
+      "HR  1129",
+      "IRAS 03416+6311",
+      "IRC +60127",
+      "JP11   808",
+      "PPM  14471",
+      "ROT   546",
+      "SAO  12891",
+      "SKY#  5728",
+      "TD1  2431",
+      "TYC 4067-1935-1",
+      "UBV    3522",
+      "UBV M   9646",
+      "uvby98 100023089",
+      "PLX  772.00",
+      "WDS J03460+6321AB",
+      "** MCA   12",
+      "WEB  3342",
+      "Gaia DR2 487286480940656768"
+    ],
+    "coordinates": {
+      "ra_deg": 56.50971455266,
+      "dec_deg": 63.34505876123999,
+      "galactic_l_deg": 141.1033744610973,
+      "galactic_b_deg": 6.813058888193895
+    },
+    "distance": {
+      "value_pc": 342.1727972626176,
+      "error_pc": 18.311659131332128
+    },
+    "cartesian": {
+      "x_pc": -264.4257665646387,
+      "y_pc": 213.33898421200766,
+      "z_pc": 40.59205560964233
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:59:53+00:00; upstream record id: HD  23089; otype: **. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_24580": {
+    "name": "HD  24580",
+    "aliases": [
+      "TIC 86013925",
+      "HIP 18672",
+      "Gaia DR3 494992064585555200",
+      "2MASS J03595502+7027008",
+      "AG+70  185",
+      "AGKR  3483",
+      "BD+70   268",
+      "GSC 04331-01664",
+      "HIC  18672",
+      "IRAS 03545+7018",
+      "PPM   5439",
+      "SAO   5054",
+      "TYC 4331-1664-1",
+      "Gaia DR1 494992060286241792",
+      "Gaia DR2 494992064585555200"
+    ],
+    "coordinates": {
+      "ra_deg": 59.97927289463,
+      "dec_deg": 70.45021508521,
+      "galactic_l_deg": 137.51490569274094,
+      "galactic_b_deg": 13.123144277945492
+    },
+    "distance": {
+      "value_pc": 768.8759034291866,
+      "error_pc": 10.404594669404863
+    },
+    "cartesian": {
+      "x_pc": -552.2020532748348,
+      "y_pc": 505.73573785001827,
+      "z_pc": 174.56921462388948
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:59:55+00:00; upstream record id: HD  24580; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_37710": {
+    "name": "HD  37710",
+    "aliases": [
+      "TIC 59264509",
+      "HIP 26786",
+      "Gaia DR3 3396789475769063552",
+      "2MASS J05412260+1731198",
+      "AG+17  517",
+      "AGKR  5068",
+      "BD+17   979",
+      "DO 11484",
+      "FK5 4516",
+      "GEN# +1.00037710",
+      "GSC 01302-01142",
+      "HIC  26786",
+      "IRAS 05384+1729",
+      "IRC +20118",
+      "NSV 16630",
+      "PPM 121266",
+      "RAFGL  803",
+      "SAO  94760",
+      "SKY#  9289",
+      "TYC 1302-1142-1",
+      "UBV M  11362",
+      "YZ  17  1640",
+      "Gaia DR2 3396789475769063552"
+    ],
+    "coordinates": {
+      "ra_deg": 85.34417724862,
+      "dec_deg": 17.52217524076,
+      "galactic_l_deg": 189.2517354349794,
+      "galactic_b_deg": -6.784641279604127
+    },
+    "distance": {
+      "value_pc": 784.4983133286264,
+      "error_pc": 31.756581425036146
+    },
+    "cartesian": {
+      "x_pc": -768.8709539361814,
+      "y_pc": -125.24249253173485,
+      "z_pc": -92.67889659012802
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:00:16+00:00; upstream record id: HD  37710; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_39632": {
+    "name": "HD  39632",
+    "aliases": [
+      "TIC 139587976",
+      "HIP 27900",
+      "Gaia DR3 3336034144007602816",
+      "2MASS J05541334+1035108",
+      "AG+10  658",
+      "BD+10   927",
+      "GC  7420",
+      "GCRV  3664",
+      "GEN# +1.00039632",
+      "GSC 00720-01924",
+      "HIC  27900",
+      "HR  2048",
+      "IRAS 05514+1034",
+      "IRC +10099",
+      "PPM 121568",
+      "SAO  94977",
+      "SKY#  9758",
+      "TYC  720-1924-1",
+      "UBV    6004",
+      "UBV M  11588",
+      "YZ  10  1871",
+      "WEB  5461",
+      "Gaia DR2 3336034144007602816"
+    ],
+    "coordinates": {
+      "ra_deg": 88.55562224397,
+      "dec_deg": 10.58640578922,
+      "galactic_l_deg": 196.86968889907556,
+      "galactic_b_deg": -7.606512669537841
+    },
+    "distance": {
+      "value_pc": 466.2439388287952,
+      "error_pc": 6.847577540714582
+    },
+    "cartesian": {
+      "x_pc": -442.25401307591153,
+      "y_pc": -134.11152181972707,
+      "z_pc": -61.716271177359815
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:00:17+00:00; upstream record id: HD  39632; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_44506": {
+    "name": "HD  44506",
+    "aliases": [
+      "TIC 124921846",
+      "HIP 30143",
+      "Gaia DR3 2891652569589516160",
+      "2MASS J06203623-3408389",
+      "[JE82]  213",
+      "CD-34  2806",
+      "CEL   1193",
+      "CPC 17  2674",
+      "CPD-34   898",
+      "GC  8180",
+      "GCRV  4034",
+      "GEN# +1.00044506",
+      "GSC 07081-01572",
+      "HIC  30143",
+      "HR  2288",
+      "Hen 3-12",
+      "MCW  421",
+      "PPM 282541",
+      "ROT  1025",
+      "SAO 196707",
+      "SKY# 10786",
+      "SRS  41334",
+      "TD1  6886",
+      "TYC 7081-1572-1",
+      "UBV    6378",
+      "UBV M  12017",
+      "uvby98 100044506",
+      "ALS 14797",
+      "NSV  2931",
+      "Gaia DR1 2891652565291121536",
+      "WEB  5996",
+      "Gaia DR2 2891652569588715392"
+    ],
+    "coordinates": {
+      "ra_deg": 95.15099912862,
+      "dec_deg": -34.14414357456,
+      "galactic_l_deg": 241.6260869104938,
+      "galactic_b_deg": -20.777056325222027
+    },
+    "distance": {
+      "value_pc": 564.9398339076888,
+      "error_pc": 31.59654440641989
+    },
+    "cartesian": {
+      "x_pc": -251.01339732076735,
+      "y_pc": -464.74519909248215,
+      "z_pc": -200.40257039674526
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:00:26+00:00; upstream record id: HD  44506; otype: Be*. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_49091": {
+    "name": "HD  49091",
+    "aliases": [
+      "TIC 49243933",
+      "Gaia DR3 2927008083238006144",
+      "SBC9 2882",
+      "2MASS J06455746-2046301",
+      "Cl* NGC 2287    MMU      21",
+      "Cl* NGC 2287     AR      62",
+      "Cl* NGC 2287     GA      56",
+      "Cl* NGC 2287     GN      20",
+      "Cl* NGC 2287    UVA      63",
+      "Cl* NGC 2287   HFMR      21",
+      "BD-20  1555",
+      "CPD-20  1599",
+      "GC  8855",
+      "GCRV 58016",
+      "GEN# +2.22870021",
+      "GSC 05961-03331",
+      "HIC  32406",
+      "IRAS 06438-2043",
+      "NGC  2287    21",
+      "PPM 250962",
+      "SAO 172290",
+      "SKY# 11887",
+      "SRS   7284",
+      "TYC 5961-3331-1",
+      "uvby98 222870021",
+      "HIP 32406",
+      "Gaia DR1 2927008083238006144",
+      "Gaia DR2 2927008083238006144"
+    ],
+    "coordinates": {
+      "ra_deg": 101.48941992968,
+      "dec_deg": -20.7750440537,
+      "galactic_l_deg": 231.03046739688668,
+      "galactic_b_deg": -10.464900785443554
+    },
+    "distance": {
+      "value_pc": 748.8392990864161,
+      "error_pc": 13.626475020515722
+    },
+    "cartesian": {
+      "x_pc": -463.116696335582,
+      "y_pc": -572.5237127413903,
+      "z_pc": -136.01404258481793
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:00:38+00:00; upstream record id: HD  49091; otype: SB*. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "hd_58978": {
+    "name": "HD  58978",
+    "aliases": [
+      "TIC 139385056",
+      "HIP 36168",
+      "Gaia DR3 5618635367207942400",
+      "[JE82]  312",
+      "AAVSO 0722-22",
+      "ALS   418",
+      "BD-22  1874",
+      "CD-22  4526",
+      "CEL   1859",
+      "CPD-22  2178",
+      "EM* MWC  179",
+      "GC  9960",
+      "GCRV  4959",
+      "GEN# +5.11210035",
+      "GSC 06538-02654",
+      "HIC  36168",
+      "HR  2855",
+      "IRAS 07248-2259",
+      "JP11  4550",
+      "LS  418",
+      "MCW  533",
+      "N30 1667",
+      "PPM 252419",
+      "ROT  1208",
+      "SAO 173752",
+      "SKY# 13596",
+      "TD1 10176",
+      "TYC 6538-2654-1",
+      "UBV M  40656",
+      "V* FY CMa",
+      "YZ 112  4954",
+      "[GM99b] 43",
+      "2MASS J07265948-2305094",
+      "UCAC2  22410995",
+      "[L69b] 1-  2",
+      "UCAC4 335-028774",
+      "uvby98 511210035",
+      "WEB  7202",
+      "Gaia DR2 5618635367207942400"
+    ],
+    "coordinates": {
+      "ra_deg": 111.74784452361,
+      "dec_deg": -23.08602491098,
+      "galactic_l_deg": 237.41059826480236,
+      "galactic_b_deg": -2.997795910085406
+    },
+    "distance": {
+      "value_pc": 558.0668564093978,
+      "error_pc": 20.08778968826033
+    },
+    "cartesian": {
+      "x_pc": -300.1718145056866,
+      "y_pc": -469.55692220752746,
+      "z_pc": -29.185523912118036
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:00:55+00:00; upstream record id: HD  58978; otype: Be*. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "sig_sgr": {
+    "name": "* sig Sgr",
+    "aliases": [
+      "TIC 91093307",
+      "UCAC4 319-206211",
+      "WISE J185515.72-261750.5",
+      "HIP 92855",
+      "*  34 Sgr",
+      "CCDM J18552-2618A",
+      "CD-26 13595",
+      "CPD-26  6590",
+      "FK5  706",
+      "GC 25941",
+      "GCRV 11359",
+      "GEN# +1.00175191",
+      "GSC 06868-01829",
+      "HD 175191",
+      "HIC  92855",
+      "HR  7121",
+      "IDS 18491-2625 A",
+      "IRAS 18521-2621",
+      "IRC -30396",
+      "JP11  3036",
+      "N30 4193",
+      "NAME Nunki",
+      "PMC 90-93   501",
+      "PPM 269078",
+      "ROT  2679",
+      "SAO 187448",
+      "SKY# 34848",
+      "SRS  30706",
+      "TD1 23447",
+      "TYC 6868-1829-1",
+      "UBV   16048",
+      "UBV M  23293",
+      "[B10]  4784",
+      "uvby98 100175191 A",
+      "2MASS J18551592-2617481",
+      "ALS 15063",
+      "PLX 4365.01",
+      "WDS J18553-2618Aa,Ab",
+      "WEB 16074",
+      "** BED    1",
+      "** SMY    4A",
+      "WDS J18553-2618A"
+    ],
+    "coordinates": {
+      "ra_deg": 283.81636040649323,
+      "dec_deg": -26.29672411476388,
+      "galactic_l_deg": 9.555918749930584,
+      "galactic_b_deg": -12.435156747096626
+    },
+    "distance": {
+      "value_pc": 69.83240223463687,
+      "error_pc": 1.4142036358462093
+    },
+    "cartesian": {
+      "x_pc": 67.24789865630156,
+      "y_pc": 11.320919461663756,
+      "z_pc": -15.037330571428924
+    },
+    "group": {
+      "primary": null,
+      "secondary": [
+        "nearby-bright-star-gap-fill"
+      ]
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-24T04:19:56+00:00; upstream record id: * sig Sgr; otype: **; Nunki was found missing from the catalog (issue #213, Tier 3): RECONS's \"100 nearest star systems\" list is a research-consortium census weighted toward faint red/white dwarfs needing dedicated parallax work, and systematically misses evolved/luminous nearby stars whose distances were already well-established by other means (the same gap identified for Fomalhaut in issue #207). Not present in data/raw/recons/candidate_stars.json under any query form and not one of that batch's documented unresolved_stars.json entries either - a transcription gap in the original RECONS source list, not a resolution failure. Added here as a standalone, honestly-tagged gap-fill (group.secondary: [\"nearby-bright-star-gap-fill\"]) via the same SimbadResolver/acquire mechanism, not as a claimed member of the original RECONS-nearest-100 candidate batch - see data/raw/gap_fills/README.md.",
+    "velocity_before": null
+  },
+  "tau_sco": {
+    "name": "* tau Sco",
+    "aliases": [
+      "TIC 205175750",
+      "GES J16355294-2812579",
+      "HIP 81266",
+      "Gaia DR3 6044420729667868928",
+      "PLX 3767.1",
+      "*  23 Sco",
+      "1AXG J163553-2813",
+      "2E  3724",
+      "CD-27 11015",
+      "CPD-27  5427",
+      "FK5  620",
+      "GC 22303",
+      "GCRV  9538",
+      "GEN# +1.00149438",
+      "GSC 06807-01012",
+      "HD 149438",
+      "HGAM    657",
+      "HIC  81266",
+      "HR  6165",
+      "IRAS 16327-2806",
+      "JP11  2775",
+      "MCW  561",
+      "N30 3713",
+      "PMC 90-93   442",
+      "PPM 265701",
+      "ROT  2361",
+      "SAO 184481",
+      "SKY# 29892",
+      "SRS  30620",
+      "TD1 19318",
+      "TYC 6807-1012-1",
+      "UBV   14025",
+      "UBV M  21531",
+      "[B10]  4218",
+      "[SC96] Oph  72",
+      "uvby98 100149438",
+      "2MASS J16355295-2812576",
+      "ALS 14819",
+      "PLX 3767.10",
+      "1RXS J163553.7-281252",
+      "2E 1632.7-2806",
+      "EUVE J1635-28.2",
+      "WEB 13733",
+      "Gaia DR2 6044420729653939840",
+      "NAME Paikauhale",
+      "WISEA J163552.94-281258.0"
+    ],
+    "coordinates": {
+      "ra_deg": 248.97063688749995,
+      "dec_deg": -28.2160170875,
+      "galactic_l_deg": 351.53476816752647,
+      "galactic_b_deg": 12.808133486848302
+    },
+    "distance": {
+      "value_pc": 145.34883720930233,
+      "error_pc": 11.196930168963176
+    },
+    "cartesian": {
+      "x_pc": 140.18813231860358,
+      "y_pc": -20.864295742723307,
+      "z_pc": 32.221936600367755
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:02:36+00:00; upstream record id: * tau Sco; otype: *. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "v_iv_vel": {
+    "name": "V* IV Vel",
+    "aliases": [
+      "TIC 132916101",
+      "HIP 48799",
+      "Gaia DR3 5404746747471743232",
+      "CD-52  3465",
+      "CEL   3414",
+      "CPC 19  3717",
+      "CPD-52  2980",
+      "GC 13718",
+      "GCRV  6358",
+      "GEN# +1.00086466",
+      "GSC 08598-01404",
+      "HD  86466",
+      "HIC  48799",
+      "HR  3941",
+      "Hbg  348",
+      "N30 2378",
+      "PPM 338511",
+      "SAO 237526",
+      "SKY# 19201",
+      "TD1 14453",
+      "TYC 8598-1404-1",
+      "UBV    9332",
+      "UBV M  15850",
+      "2MASS J09571094-5238196",
+      "ALS 14146",
+      "uvby98 100086466",
+      "WEB  9074",
+      "Gaia DR2 5404746747471743232"
+    ],
+    "coordinates": {
+      "ra_deg": 149.29558309908,
+      "dec_deg": -52.638781863560006,
+      "galactic_l_deg": 278.1992395768297,
+      "galactic_b_deg": 1.6570378816503666
+    },
+    "distance": {
+      "value_pc": 624.180762748892,
+      "error_pc": 14.882781450758985
+    },
+    "cartesian": {
+      "x_pc": 88.98081203243814,
+      "y_pc": -617.542114781823,
+      "z_pc": 18.049269974985968
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T07:02:06+00:00; upstream record id: V* IV Vel; otype: bC*. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  },
+  "zet_ori": {
+    "name": "* zet Ori",
+    "aliases": [
+      "TIC 11360636",
+      "HIP 26727",
+      "*  50 Ori",
+      "2E  1500",
+      "AAVSO 0535-02",
+      "ADS  4263 AB",
+      "BD-02  1338",
+      "CCDM J05408-0156AB",
+      "CSI-02  1338  4",
+      "GSC 04771-01188",
+      "HIC  26727",
+      "IRC +00081",
+      "JP11  1219",
+      "NAME Alnitak",
+      "PPM 400076",
+      "UBV    5783",
+      "XSS J05421-0225",
+      "PLX 1301.00",
+      "PLX 1301",
+      "1ES 0538-01.9",
+      "1RXS J054045.4-015631",
+      "2E 0538.2-0157",
+      "EUVE J0540-01.9",
+      "[KSP2003] J054045.31-015636.8",
+      "2MASS J05404553-0156336",
+      "WDS J05407-0157AB",
+      "** STF  774AB",
+      "AKARI-IRC-V1 J0540454-015633",
+      "IRAS 05381-0158",
+      "HGAM    467",
+      "SKY#  9258",
+      "[HJ56]  71",
+      "CEL    921",
+      "EM* MWC  509",
+      "ROT   907",
+      "TD1  5127",
+      "GC  7089",
+      "MCW  349",
+      "SAO 132444",
+      "WH 460",
+      "[YKK2000] B2",
+      "uvby98 100037742",
+      "GEN# +1.00037742"
+    ],
+    "coordinates": {
+      "ra_deg": 85.18969442793068,
+      "dec_deg": -1.9425735859722049,
+      "galactic_l_deg": 206.45218456438798,
+      "galactic_b_deg": -16.585164605817212
+    },
+    "distance": {
+      "value_pc": 225.73363431151242,
+      "error_pc": 32.61163041314276
+    },
+    "cartesian": {
+      "x_pc": -193.69267515135382,
+      "y_pc": -96.36986371088702,
+      "z_pc": -64.43345885904891
+    },
+    "group": {
+      "primary": null,
+      "secondary": []
+    },
+    "notes": "Retrieved from SIMBAD on 2026-08-18T06:56:52+00:00; upstream record id: * zet Ori; otype: **. Candidate identified from Galaxy Map (galaxymap.org) 'Gaia star density map' poster, 2020; see local-galactic-structures/data/raw/galaxy_map/README.md.",
+    "velocity_before": null
+  }
+}

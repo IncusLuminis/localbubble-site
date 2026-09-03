@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 65257",
-  "retrieved_utc": "2026-08-23T02:02:16+00:00",
+  "retrieved_utc": "2026-09-03T09:41:57+00:00",
   "record_id": "HD  65257",
   "raw": {
     "main_id": "HD  65257",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.001999855041504,
-    "plx_value": 1.917,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "K0",
-    "plx_err": 0.04960000142455101,
+    "plx_value": 1.917,
     "otype": "*",
+    "pmra": -7.926,
+    "pmdec": -3.358,
+    "plx_err": 0.04960000142455101,
+    "rvz_radvel": 17.99,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 19002565|HIP 38975|Gaia DR3 667205134868536320|AG+16  830|BD+16  1598|GC 10773|GCRV  5292|GEN# +1.00065257|GSC 01363-02567|HD  65257|HIC  38975|HR  3104|IRAS 07556+1639|IRC +20193|PPM 124673|SAO  97429|SKY# 14927|TYC 1363-2567-1|UBV M  13831|YZ  16  3132|2MASS J07583147+1631073|WEB  7642|Gaia DR2 667205134868536320",
     "matched_id": "HD  65257"
   }

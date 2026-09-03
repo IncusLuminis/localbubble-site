@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Hatysa",
-  "retrieved_utc": "2026-08-23T02:03:24+00:00",
+  "retrieved_utc": "2026-09-03T09:43:24+00:00",
   "record_id": "* iot Ori",
   "raw": {
     "main_id": "* iot Ori",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.7699999809265137,
-    "plx_value": 1.9969,
+    "rvz_bibcode": "1970ApJS...19..387A",
     "sp_type": "O9IIIvar",
-    "plx_err": 0.7299000024795532,
+    "plx_value": 1.9969,
     "otype": "SB*",
+    "pmra": -2.816,
+    "pmdec": -1.693,
+    "plx_err": 0.7299000024795532,
+    "rvz_radvel": 27.6,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 427395774|HIP 26241|Gaia DR3 3017190546641718144|2MASS J05352597-0554357|PLX 1279|SBC9 343|* iot Ori|*  44 Ori|2E  1377|ADS  4193 A|BD-06  1241|CCDM J05355-0555A|CEL    829|CGO 100|CSI-06  1241  1|FK5  209|GC  6937|GCRV  3425|GEN# +9.00010721|GEN# +9.00010721D|GEN# +2.19760721|GOS G209.52-19.58 01|GSC 04778-01401|HD  37043|HGAM    444|HIC  26241|HR  1899|IDS 05305-0559 A|IRAS 05330-0556|JP11  5722|JP11  5724|JP11  5723|MCW  341|N30 1201|NGC  1976   721|PPM 188225|Parenago  2037|ROS -ORI 172|ROT  3502|SAO 132323|SBC7   242|SKY#  9032|TD1  4942|TYC 4778-1401-1|UBV M  51705|UBV    5526|UBV M  51706|WH 301|[GC94b] 144|[HJ56]  70|[SC93b] 313|[TVZ96] 226|uvby98 900010721|ALS 14790|PLX 1279.00|1ES 0532-05.9|1RXS J053526.3-055436|2E 0532.9-0556|EUVE J0535-05.9|[KSP2003] J053525.80-055436.8|WDS J05354-0555Aa,Ab|Brun 721|WDS J05354-0555A|** CHR  250|PMSC 05305-0559AP|PMSC 05305-0559Aab|PMSC 05305-0559A|** STF  752A|NAME Hatysa|SOXS 258|WEB  5136",
     "matched_id": "NAME Hatysa"
   }

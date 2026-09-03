@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "NP Pup",
-  "retrieved_utc": "2026-08-23T02:05:39+00:00",
+  "retrieved_utc": "2026-09-03T09:46:18+00:00",
   "record_id": "V* NP Pup",
   "raw": {
     "main_id": "V* NP Pup",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.269999980926514,
-    "plx_value": 1.7266,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "C-N4.5",
-    "plx_err": 0.0414000004529953,
+    "plx_value": 1.7266,
     "otype": "C*",
+    "pmra": -1.568,
+    "pmdec": 20.239,
+    "plx_err": 0.0414000004529953,
+    "rvz_radvel": 32.6,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 170403852|HIP 33189|Gaia DR3 5562479631873801984|2MASS J06542669-4221560|C*  623|CD-42  2818|CGCS 1478|CPC  0  3999|CPD-42  1122|FK5 2534|GC  9077|GCRV  4533|GEN# +1.00051208|GSC 07636-01316|HD  51208|HIC  33189|HR  2591|IRAS 06528-4218|JP11  1465|N30 1506|PPM 311251|RAFGL 4544S|SAO 218296|SKY# 12261|TYC 7636-1316-1|UBV M  12606|V* NP Pup|[ELL90]  32|Gaia DR1 5562479627575774208|WEB  6673|Gaia DR2 5562479631873801984",
     "matched_id": "V* NP Pup"
   }

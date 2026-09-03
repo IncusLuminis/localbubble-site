@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V Pup",
-  "retrieved_utc": "2026-08-23T02:06:55+00:00",
+  "retrieved_utc": "2026-09-03T09:47:58+00:00",
   "record_id": "V* V Pup",
   "raw": {
     "main_id": "V* V Pup",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.409999847412109,
-    "plx_value": 2.7207,
+    "rvz_bibcode": "2004A&A...424..727P",
     "sp_type": "B1Vp+B2:",
-    "plx_err": 0.19480000436306,
+    "plx_value": 2.7207,
     "otype": "SB*",
+    "pmra": -5.276,
+    "pmdec": 9.873,
+    "plx_err": 0.19480000436306,
+    "rvz_radvel": 19.4,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "Gaia DR3 5517171678276669696|TIC 269562415|GEN# +1.00065818|uvby98 100065818|HIP 38957|SBC9 489|2E  1896|CCDM J07582-4915A|CD-48  3349|CEL   2121|CPC  0  5127|CPD-48  1373|CSI-48  3349 21|GC 10802|GCRV  5307|GSC 08143-03239|HD  65818|HIC  38957|HR  3129|IDS 07554-4854 A|PPM 312389|ROT  1284|SAO 219226|SBC7   330|SKY# 14915|TD1 11520|TYC 8143-3239-1|UBV   21724|V* V Pup|[B10]  2119|ALS 14910|XMMSL1 J075815.2-491444|2E 0756.8-4906|EUVE J0758-49.2|WDS J07582-4915A|** HRG  137A|** HJ 4025A|2MASS J07581444-4914415|WEB  7635|Gaia DR2 5517171678268362880",
     "matched_id": "V* V Pup"
   }

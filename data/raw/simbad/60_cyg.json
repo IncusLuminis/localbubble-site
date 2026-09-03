@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "60 Cyg",
-  "retrieved_utc": "2026-08-23T01:55:32+00:00",
+  "retrieved_utc": "2026-09-03T09:33:12+00:00",
   "record_id": "*  60 Cyg",
   "raw": {
     "main_id": "*  60 Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.432000160217285,
-    "plx_value": 2.6621,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B1Ve",
-    "plx_err": 0.12430000305175781,
+    "plx_value": 2.6621,
     "otype": "Be*",
+    "pmra": 7.724,
+    "pmdec": 1.656,
+    "plx_err": 0.12430000305175781,
+    "rvz_radvel": -11.6,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 304114338|Gaia DR3 2163533670229171968|[JE82] 1072|*  60 Cyg|AG+45 1797|ALS 11678|BD+45  3364|CEL   5232|EM* MWC  360|GC 29354|GCRV 13207|GSC 03588-12112|HD 200310|HIC 103732|HIP 103732|HR  8053|LS III +45   45|MCW  966|N30 4649|PPM  60841|ROT  3066|RX J210110+46092|SAO  50359|SKY# 39940|TD1 27586|TYC 3588-12112-1|UBV   18206|V* V1931 Cyg|YPAC 592|[GS83]   5|[KW97] 54-17|2MASS J21011093+4609208|RX J2101.2+4609|UCAC3 273-206486|WEB 18880|CCDM J21012+4609A|** STT  426A|WDS J21012+4609A|ADS 14549 A|GEN# +1.00200310|IDS 20577+4546 A|uvby98 100200310|Gaia DR2 2163533670229171968",
     "matched_id": "*  60 Cyg"
   }

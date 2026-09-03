@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 94683",
-  "retrieved_utc": "2026-08-23T02:03:06+00:00",
+  "retrieved_utc": "2026-09-03T09:42:59+00:00",
   "record_id": "HD  94683",
   "raw": {
     "main_id": "HD  94683",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.900000095367432,
-    "plx_value": 1.5704,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "K4III",
-    "plx_err": 0.04520000144839287,
+    "plx_value": 1.5704,
     "otype": "*",
+    "pmra": 4.042,
+    "pmdec": -3.298,
+    "plx_err": 0.04520000144839287,
+    "rvz_radvel": -2.53,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 465507504|GEN# +1.00094683|HIP 53334|Gaia DR3 5241863999774969984|IRAS 10525-6133|AKARI-IRC-V1 J1054295-614935|CCDM J10545-6150A|CD-61  2854|CPC 20.1  2986|CPD-61  1960|CSI-61  1960 41|GC 15011|GSC 08958-00006|HD  94683|HIC  53334|HR  4266|IDS 10506-6118 A|IRSV 1052-6133|PPM 358327|SAO 251173|SKY# 20877|TYC 8958-6-1|UBV   10018|UBV M  16642|WDS J10545-6150A|[L69] 22- 10|2MASS J10542960-6149356|Gaia DR2 5241863999774969984",
     "matched_id": "HD  94683"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "19 Vul",
-  "retrieved_utc": "2026-08-23T01:54:55+00:00",
+  "retrieved_utc": "2026-09-03T09:32:24+00:00",
   "record_id": "*  19 Vul",
   "raw": {
     "main_id": "*  19 Vul",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.486999988555908,
-    "plx_value": 2.0171,
+    "rvz_bibcode": "2008A&A...485..303M",
     "sp_type": "K2IIIaCa0.5",
-    "plx_err": 0.06350000202655792,
+    "plx_value": 2.0171,
     "otype": "*",
+    "pmra": 1.48,
+    "pmdec": -10.248,
+    "plx_err": 0.06350000202655792,
+    "rvz_radvel": -19.33,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "WISE J201147.94+264834.5|IRAS 20096+2638|TIC 245288522|WISEA J201147.99+264832.2|HIP 99518|Gaia DR3 1836489640252776576|Cl* NGC 6882    MMU       1|*  19 Vul|AG+26 2242|BD+26  3825|DO 18687|GC 28037|GCRV 12558|GEN# +2.68820001|GSC 02162-01674|HD 192004|HIC  99518|HR  7718|IRC +30418|NGC  6882     1|PPM 110625|SAO  88330|SKY# 38027|TYC 2162-1674-1|UBV   17435|UBV M  37451|YZ  26 10974|[B10]  5177|[HFE83] 1349|2MASS J20114797+2648324|WEB 17798|Gaia DR2 1836489640252776576",
     "matched_id": "*  19 Vul"
   }

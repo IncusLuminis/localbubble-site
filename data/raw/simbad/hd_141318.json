@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 141318",
-  "retrieved_utc": "2026-08-23T01:58:23+00:00",
+  "retrieved_utc": "2026-09-03T09:36:58+00:00",
   "record_id": "HD 141318",
   "raw": {
     "main_id": "HD 141318",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.767000198364258,
-    "plx_value": 1.6512,
+    "rvz_bibcode": "1979IAUS...30...57E",
     "sp_type": "B2III",
-    "plx_err": 0.043800000101327896,
+    "plx_value": 1.6512,
     "otype": "Pu*",
+    "pmra": -3.446,
+    "pmdec": -4.067,
+    "plx_err": 0.043800000101327896,
+    "rvz_radvel": -0.7,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 80724706|HIP 77645|Gaia DR3 5884607985911748224|CD-54  6419|CPC 19  6075|CPD-54  6711|CSI-54  6711 41|GC 21273|GCRV  9121|GSC 08701-00350|HD 141318|HIC  77645|HR  5873|N30 3557|** DUN  193A|PPM 344285|SAO 243044|SKY# 28642|TD1 18573|UBV   13445|UBV M  20968|V* V360 Nor|[B10]  4013|uvby98 100141318 A|ALS 15016|CCDM J15511-5503A|GEN# +1.00141318A|IDS 15433-5445 A|TYC 8701-350-1|WDS J15511-5503A|UCAC4 175-142256|2MASS J15510680-5503198|WEB 13137|Gaia DR2 5884607985911748224",
     "matched_id": "HD 141318"
   }

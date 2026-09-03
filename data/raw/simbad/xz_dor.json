@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "XZ Dor",
-  "retrieved_utc": "2026-08-23T02:07:11+00:00",
+  "retrieved_utc": "2026-09-03T09:48:19+00:00",
   "record_id": "V* XZ Dor",
   "raw": {
     "main_id": "V* XZ Dor",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.604000091552734,
-    "plx_value": 2.0461,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "M2III",
-    "plx_err": 0.02669999934732914,
+    "plx_value": 2.0461,
     "otype": "LP?",
+    "pmra": -10.265,
+    "pmdec": 22.188,
+    "plx_err": 0.02669999934732914,
+    "rvz_radvel": 7.4,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 220424200|HIP 22381|Gaia DR3 4776157427341160064|2MASS J04490476-5639596|CD-56  1013|CPC 20  1218|CPD-56   734|CSV   6137|GC  5902|GCRV  1864 E|GEN# +1.00031009|GSC 08513-01766|HD  31009|HIC  22381|IRAS 04481-5645|PPM 333808|SAO 233694|SKY#  7482|TYC 8513-1766-1|UBV   21734|V* XZ Dor|WEB  4315|Gaia DR2 4776157427341160064",
     "matched_id": "V* XZ Dor"
   }

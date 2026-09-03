@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "66 Aur",
-  "retrieved_utc": "2026-08-23T01:55:33+00:00",
+  "retrieved_utc": "2026-09-03T09:33:14+00:00",
   "record_id": "*  66 Aur",
   "raw": {
     "main_id": "*  66 Aur",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.188000202178955,
-    "plx_value": 3.2175,
+    "rvz_bibcode": "2020AJ....160..120J",
     "sp_type": "K0.5IIIa",
-    "plx_err": 0.10350000113248825,
+    "plx_value": 3.2175,
     "otype": "*",
+    "pmra": -4.081,
+    "pmdec": -21.023,
+    "plx_err": 0.10350000113248825,
+    "rvz_radvel": 22.924801,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 9957346|AP J07240847+4040206|HIP 35907|Gaia DR3 948592288087009792|PLX 1733|*  66 Aur|AG+40  871|BD+40  1852|DO 12977|FK5 1191|GC  9850|GCRV  4905|GEN# +1.00057669|GSC 02961-02073|HD  57669|HIC  35907|HR  2805|IRAS 07207+4046|IRC +40175|N30 1648|PMC 90-93   805|PPM  49822|ROT  1184|SAO  41738|SKY# 13481|SRS  31191|TYC 2961-2073-1|UBV    7137|UBV M  13215|2MASS J07240847+4040206|PLX 1733.00|WEB  7149|Gaia DR2 948592288087009792",
     "matched_id": "*  66 Aur"
   }

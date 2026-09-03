@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "β Sct",
-  "retrieved_utc": "2026-08-23T01:56:30+00:00",
+  "retrieved_utc": "2026-09-03T09:34:28+00:00",
   "record_id": "* bet Sct",
   "raw": {
     "main_id": "* bet Sct",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.21999979019165,
-    "plx_value": 4.8549,
+    "rvz_bibcode": "2004A&A...424..727P",
     "sp_type": "G4IIa",
-    "plx_err": 0.3402999937534332,
+    "plx_value": 4.8549,
     "otype": "SB*",
+    "pmra": -7.972,
+    "pmdec": -16.398,
+    "plx_err": 0.3402999937534332,
+    "rvz_radvel": -21.3,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 226141978|HIP 92175|Gaia DR3 4255143126653060352|PLX 4332|SBC9 1081|* bet Sct|BD-04  4582|FK5 1489|GC 25730|GCRV 11226|GEN# +1.00173764|GSC 05122-01426|HD 173764|HIC  92175|HR  7063|IRAS 18445-0448|IRC +00376|JP11  3022|MSX6C G028.2206-01.2170|N30 4167|PPM 202135|RAFGL 2248|ROT  2662|SACS 412|SAO 142618|SBC7   702|SKY# 34532|TD1 23172|THA 14-12|TYC 5122-1426-1|UBV   15973|UBV M  23218|YZ  94  6310|uvby98 100173764|2MASS J18471047-0444524|PLX 4332.00|WEB 15894|Gaia DR2 4255143126619174528|*   6 Aql",
     "matched_id": "* bet Sct"
   }

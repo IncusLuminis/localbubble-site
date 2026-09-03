@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "CH Hyi",
-  "retrieved_utc": "2026-08-23T02:05:13+00:00",
+  "retrieved_utc": "2026-09-03T09:45:45+00:00",
   "record_id": "V* CH Hyi",
   "raw": {
     "main_id": "V* CH Hyi",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.840000152587891,
-    "plx_value": 1.7748,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "M5III",
-    "plx_err": 0.03709999844431877,
+    "plx_value": 1.7748,
     "otype": "LP*",
+    "pmra": 1.539,
+    "pmdec": -14.52,
+    "plx_err": 0.03709999844431877,
+    "rvz_radvel": 8.86,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 50308940|HIP 9472|Gaia DR3 4638288053723515136|2MASS J02015234-7426446|CD-75    70|CPC 21.2   285|CPD-75   144|FK5 2144|GC  2490|GSC 09149-00695|HD  12853|HIC   9472|IRAS 02013-7441|PPM 367508|SAO 255841|SKY#  2979|TYC 9149-695-1|V* CH Hyi|Gaia DR2 4638288053723515136",
     "matched_id": "V* CH Hyi"
   }

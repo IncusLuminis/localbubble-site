@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "δ Vol",
-  "retrieved_utc": "2026-08-23T01:56:56+00:00",
+  "retrieved_utc": "2026-09-03T09:35:06+00:00",
   "record_id": "* del Vol",
   "raw": {
     "main_id": "* del Vol",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.990000009536743,
-    "plx_value": 4.7522,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "F8Ib/II",
-    "plx_err": 0.20829999446868896,
+    "plx_value": 4.7522,
     "otype": "*",
+    "pmra": -4.288,
+    "pmdec": 8.491,
+    "plx_err": 0.20829999446868896,
+    "rvz_radvel": 24.62,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 300162674|HIP 35228|Gaia DR3 5269012591076800256|2MASS J07164982-6757256|PLX 1732|* del Vol|CPC 21  1353|CPD-67   730|FK5  281|GC  9747|GCRV  4851|GEN# +1.00057623|GSC 09179-02107|HD  57623|HIC  35228|HR  2803|IRAS 07168-6751|JP11  1541|N30 1629|PPM 355940|ROT  1183|SAO 249809|SKY# 13183|TD1  9894|TYC 9179-2107-1|UBV    7133|UBV M  13213|uvby98 100057623|PLX 1732.00|WEB  7038|Gaia DR2 5269012591076006272",
     "matched_id": "* del Vol"
   }

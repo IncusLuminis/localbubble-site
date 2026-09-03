@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "λ Cep",
-  "retrieved_utc": "2026-08-23T02:03:45+00:00",
+  "retrieved_utc": "2026-09-03T09:43:51+00:00",
   "record_id": "* lam Cep",
   "raw": {
     "main_id": "* lam Cep",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.050000190734863,
-    "plx_value": 1.1761,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "O6.5I(n)fp",
-    "plx_err": 0.08179999887943268,
+    "plx_value": 1.1761,
     "otype": "s*b",
+    "pmra": -7.02,
+    "pmdec": -10.812,
+    "plx_err": 0.08179999887943268,
+    "rvz_radvel": -75.1,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 329631736|Gaia DR3 2199904449710846720|PLX 5375|* lam Cep|*  22 Cep|1RXS J221131.0+592442|2E  4581|AG+59 1498|ALS 12181|BD+58  2402|CEL   5453|CGO 631|EM* CDS 1308|GC 31066|GCRV 13959|GEN# +1.00210839|GOS G103.83+02.61 01|GSC 03981-01585|HD 210839|HIC 109556|HIP 109556|HR  8469|Hilt 1092|IRAS 22098+5910|JP11  3463|LS III +59   23|MCW 1033|NSV 14069|PPM  40324|ROT  3235|SAO  34149|SKY# 42295|TD1 28876|TYC 3981-1585-1|UBV   18994|UBV M  26222|YZ  59 12926|[HJ56] 239|[KW97] 61-50|[PGH98b] Star 35|uvby98 100210839|2MASS J22113057+5924522|2E 2209.8+5909|UCAC3 299-165098|3XMM J221130.5+592452|WEB 19682|Gaia DR2 2199904449710846720",
     "matched_id": "* lam Cep"
   }

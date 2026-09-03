@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "58 Per",
-  "retrieved_utc": "2026-08-23T01:55:29+00:00",
+  "retrieved_utc": "2026-09-03T09:33:08+00:00",
   "record_id": "*  58 Per",
   "raw": {
     "main_id": "*  58 Per",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.260000228881836,
-    "plx_value": 3.6003,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "K0II-III+B9V",
-    "plx_err": 0.19499999284744263,
+    "plx_value": 3.6003,
     "otype": "SB*",
+    "pmra": -6.41,
+    "pmdec": -18.696,
+    "plx_err": 0.19499999284744263,
+    "rvz_radvel": 9.8,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 155794420|HIP 21476|Gaia DR3 203855713561818240|2MASS J04364144+4115534|[B10]  1074|PLX 1011|SBC9 255|*  58 Per|AG+41  457|BD+40  1000|CCDM J04367+4116A|FK5 2338|GC  5609|GCRV  2690|GEN# +1.00029094|GSC 02888-02054|HD  29094|HD  29095|HIC  21476|HR  1454|IRAS 04332+4109|IRC +40093|JP11   897|PPM  47216|RAFGL  602|ROT   654|SAO  39639|SBC7   182|SKY#  7153|TD1  3338|TYC 2888-2054-1|UBV    4413|UBV M  10218|WEB  4121|Gaia DR2 203855713557638528",
     "matched_id": "*  58 Per"
   }

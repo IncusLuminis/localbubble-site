@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ξ01 CMa",
-  "retrieved_utc": "2026-08-23T02:03:36+00:00",
+  "retrieved_utc": "2026-09-03T09:43:39+00:00",
   "record_id": "* ksi01 CMa",
   "raw": {
     "main_id": "* ksi01 CMa",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.329999923706055,
-    "plx_value": 2.166,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B0.7IV",
-    "plx_err": 0.1256999969482422,
+    "plx_value": 2.166,
     "otype": "bC*",
+    "pmra": -3.352,
+    "pmdec": 6.157,
+    "plx_err": 0.1256999969482422,
+    "rvz_radvel": 26.9,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 47763235|Gaia DR3 2924859847973986048|HIP 31125|* ksi01 CMa|*   4 CMa|2E  1686|ADS  5176 A|CCDM J06319-2325A|CD-23  3991|CPD-23  1312|CSI-23  3991 21|GC  8496|GCRV  4195|GEN# +5.11210022|HD  46328|HIC  31125|HR  2387|IDS 06277-2321 A|JP11  4534|MCW  441|N30 1415|PPM 250550|ROT  1054|SAO 171895|SKY# 11284|TD1  7390|UBV    6510|UBV M  40643|V* ksi01 CMa|YZ 113  3720|ALS 14798|XMMSL1 J063150.9-232509|2E 0629.7-2322|EUVE J0631-23.4|WDS J06319-2325A|TYC 6507-2920-1|2MASS J06315138-2325063|uvby98 511210022|WEB  6207|IRAS 06299-2323|AKARI-IRC-V1 J0631513-232506|1RXS J063151.2-232508|Gaia DR2 2924859847973986048",
     "matched_id": "* ksi01 CMa"
   }

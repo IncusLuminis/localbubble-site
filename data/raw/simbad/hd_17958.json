@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 17958",
-  "retrieved_utc": "2026-08-23T01:59:19+00:00",
+  "retrieved_utc": "2026-09-03T09:38:11+00:00",
   "record_id": "HD  17958",
   "raw": {
     "main_id": "HD  17958",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.166999816894531,
-    "plx_value": 1.4948,
+    "rvz_bibcode": "2018A&A...616A...7S",
     "sp_type": "K3Ib",
-    "plx_err": 0.07940000295639038,
+    "plx_value": 1.4948,
     "otype": "s*r",
+    "pmra": -4.133,
+    "pmdec": 0.091,
+    "plx_err": 0.07940000295639038,
+    "rvz_radvel": -21.301,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 390806332|HIP 13700|Gaia DR3 467907038749282560|2MASS J02562466+6419563|AG+64  190|BD+63   369|CCDM J02565+6419A|CSI+63   369  1|CSV 100245|DO 26390|GC  3497|GCRV  1624|GEN# +1.00017958|GSC 04056-01857|HD  17958|HIC  13700|HR   861|IDS 02481+6355 A|IRAS 02522+6407|IRC +60104|IRCO  3742|NSV   985|PPM  13968|RAFGL 4028|SAO  12519|SKY#  4413|SV* ZI   161|TYC 4056-1857-1|UBV    2801|WDS J02564+6420A|WEB  2716|Gaia DR2 467907038747132032",
     "matched_id": "HD  17958"
   }

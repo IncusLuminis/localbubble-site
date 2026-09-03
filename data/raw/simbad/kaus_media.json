@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Kaus Media",
-  "retrieved_utc": "2026-08-23T01:56:54+00:00",
+  "retrieved_utc": "2026-09-03T09:35:01+00:00",
   "record_id": "* del Sgr",
   "raw": {
     "main_id": "* del Sgr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 2.6679999828338623,
-    "plx_value": 7.8468,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "K2.5IIIaCN0.5",
-    "plx_err": 0.47909998893737793,
+    "plx_value": 7.8468,
     "otype": "*",
+    "pmra": 33.212,
+    "pmdec": -27.361,
+    "plx_err": 0.47909998893737793,
+    "rvz_radvel": -20.4,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 49231061|WISEA J182059.70-294941.9|Gaia DR3 4049506483413484672|GJ 710.1|GJ 9626|HIP 89931|PLX 4205|* del Sgr|*  19 Sgr|ADS 11264 A|CCDM J18210-2950A|CD-29 14834|CPD-29  5513|CSI-29 14834 21|FK5  687|GC 25024|GCRV 10810|GEN# +1.00168454|GSC 06856-02170|HD 168454|HIC  89931|HR  6859|IDS 18146-2952 A|IRAS 18177-2951|IRC -30376|JP11  2958|N30 4070|NSV 24403|PMC 90-93   490|PPM 268275|RAFGL 2126|SACS 400|SAO 186681|SKY# 33467|SRS  30687|TD1 22169|TYC 6856-2170-1|UBV   15597|UBV M  22841|YZ 119 11865|[L91b] 289|2MASS J18205962-2949412|PLX 4205.00|WDS J18210-2950A|** SEE  350A|UCAC4 301-222408|WISE J182059.56-294940.8|NAME Kaus Media|[M64] -29  48|WEB 15356|Gaia DR2 4049506483413484672",
     "matched_id": "NAME Kaus Media"
   }

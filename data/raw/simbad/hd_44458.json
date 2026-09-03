@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 44458",
-  "retrieved_utc": "2026-08-23T02:01:16+00:00",
+  "retrieved_utc": "2026-09-03T09:40:43+00:00",
   "record_id": "HD  44458",
   "raw": {
     "main_id": "HD  44458",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.550000190734863,
-    "plx_value": 1.8635,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "B1.5IVe",
-    "plx_err": 0.059700001031160355,
+    "plx_value": 1.8635,
     "otype": "Be*",
+    "pmra": -2.273,
+    "pmdec": 1.193,
+    "plx_err": 0.059700001031160355,
+    "rvz_radvel": 16.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "CCDM J06214-1146A|GEN# +1.00044458|uvby98 100044458|** STF 3116A|ADS  4978 A|IDS 06168-1144 A|WDS J06214-1146A|2MASS J06212472-1146236|WISE J062124.72-114623.3|TIC 443126408|HIP 30214|Gaia DR3 3001108264938556800|[JE82]  214|AAVSO 0616-11|ALS    38|BD-11  1460|CEL   1194|CSI-11  1460  1|EM* MWC  138|GC  8186|GCRV  4037|GSC 05371-02101|HD  44458|HIC  30214|HR  2284|JP11  1365|LS   38|MCW  419|N30 1371|PPM 217071|ROT  1023|SAO 151401|SKY# 10825|TD1  6871|TYC 5371-2101-1|UBV    6374|UBV M  12012|V* FR CMa|YZC 11  1902|IRAS 06190-1144|AKARI-IRC-V1 J0621247-114622|1RXS J062124.9-114624|UCAC4 392-013284|WEB  6010|Gaia DR2 3001108264938556800",
     "matched_id": "HD  44458"
   }

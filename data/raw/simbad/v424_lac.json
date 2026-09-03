@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V424 Lac",
-  "retrieved_utc": "2026-08-23T02:06:35+00:00",
+  "retrieved_utc": "2026-09-03T09:47:31+00:00",
   "record_id": "V* V424 Lac",
   "raw": {
     "main_id": "V* V424 Lac",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.940000057220459,
-    "plx_value": 1.4018,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "K5Ib",
-    "plx_err": 0.11289999634027481,
+    "plx_value": 1.4018,
     "otype": "s*r",
+    "pmra": -0.649,
+    "pmdec": -2.768,
+    "plx_err": 0.11289999634027481,
+    "rvz_radvel": -10.37,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 431316335|Gaia DR3 1985889115564260224|PLX 5564|AG+49 2035|BD+48  3887|CSV 102221|DO 42210|GC 31989|GCRV 14403|GEN# +1.00216946|GSC 03630-02520|HD 216946|HIC 113288|HIP 113288|HR  8726|IRAS 22542+4927|IRC +50452|JP11  3555|NSV 14368|PPM  63604|RAFGL 2992|SAO  52516|SKY# 43574|SV* ZI  2118|TYC 3630-2520-1|UBV   19670|UBV M  26730|V* V424 Lac|uvby98 100216946|2MASS J22562598+4944006|PLX 5564.00|WEB 20156|Gaia DR2 1985889115564260224|NAME-IAU Tengshe",
     "matched_id": "V* V424 Lac"
   }

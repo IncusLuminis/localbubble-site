@@ -742,3 +742,105 @@ from the Sun with a motion trail after +57,054 simulated years. Worked
 automatically via Epic #285's existing `starsWithVelocityInLocalBubble`
 population selection, exactly as expected - zero frontend code changes
 were needed.
+
+## Open-space velocity backfill (Story #307)
+
+Epic #306's first Story: backfill `velocity` for the ~587 EXISTING star
+records beyond the full Local Bubble (~60pc, up to ~1840pc) that had
+`velocity: null` since they were originally acquired - unlike Epic #294's
+Local Bubble gap-fill (Story #295/#296), these are not new records, this
+Story only merges a `velocity` block into records that already had real
+position/distance/notes/group/aliases.
+
+Scope re-derived live from the current catalog (not trusted as "587"
+without checking): every `object_type: "star"` record with real
+`distance.value_pc` strictly greater than the Local Bubble's outer radius
+(`bubble_outer_radius_pc`, the same live `(a_pc + b_pc) / 2` derivation
+`backfill_bubble_velocity.py` already uses - currently 60.0pc) and no
+`velocity` on file. Confirmed: **exactly 587** records matched, all 587
+with `velocity` absent.
+
+New script `scripts/backfill_open_space_velocity.py` reuses Story
+#230/#286/#296's exact pipeline (`SimbadResolver`, `coordinates.
+galactic_velocity_kms`, `schema.Velocity`, including the
+`_IMPLAUSIBLE_RV_KMS_THRESHOLD`/`mesVelocities` implausible-RV fallback)
+unchanged - it only widens scope to the complementary (`>` radius) side of
+`backfill_bubble_velocity.py`'s own boundary test, importing that script's
+`bubble_outer_radius_pc` helper directly rather than re-deriving the
+boundary a third way. Every one of the 587 already had a cache file under
+`data/raw/simbad/` from its original catalog acquisition, so no manual id
+list was needed. A small `--sleep` (0.3s) delay between live queries was
+added as a politeness measure this being real, ~587-query wall-clock
+acquisition, on top of the existing `--retries`/`--backoff` transient-
+failure handling.
+
+Result against live SIMBAD: **587/587 resolved, 0 query failures, 0
+honest-failures** (no star had `pmra`/`pmdec` entirely absent) - matching
+the Epic's own pre-acquisition 161-star stratified sample (100% full PM+RV
+coverage). Breakdown: **574/587 (97.8%) full 3D vectors**
+(`radial_velocity_known: true`), **13/587 (2.2%) tangential-only**
+(proper motion resolved, no `rvz_radvel` on file). Zero unresolvable.
+Implausible-speed scan (`|v| > 500` km/s): **none** - re-checked as a
+permanent `pytest` regression guard
+(`test_no_open_space_star_has_an_implausible_derived_speed`,
+`tests/test_open_space_velocity_backfill.py`).
+
+**tau Sco anomaly, confirmed and corrected exactly as the Epic
+predicted**: its default SIMBAD `rvz_radvel` cross-match is **-650.47
+km/s** (bibcode `2023A&A...676A.129H`), which `_query_upstream`'s existing
+`_IMPLAUSIBLE_RV_KMS_THRESHOLD` guard flagged and routed through
+`_query_mes_velocities`, which found a plausible independent measurement
+(**1.2 km/s**, bibcode `1928PLicO..16....1C`) - deriving a sane total
+space velocity of **17.2 km/s** instead of a nonsensical ~650 km/s one.
+No other star among the 587 tripped the implausible-RV guard.
+
+Honest-failure handling (this Story's own acceptance criterion): a star
+resolving against SIMBAD with no `pmra`/`pmdec` on file at all would get
+no `velocity` block, recorded with a clear explanation in
+`data/raw/simbad/backfill_open_space_velocity_unresolved.json` (checked in
+as `[]` - none occurred) - a separate checked-in artifact rather than text
+appended to the star's own `notes` field, since this Story's acceptance
+criteria explicitly forbid touching `notes` (or position/distance/group/
+aliases) on these already-curated records. A tangential-only star (proper
+motion resolved, radial velocity not) is NOT a failure - it is
+`_derive_velocity`'s own established partial-resolution case and still
+gets a real (if 2D) velocity block, same as every prior Story's stars.
+
+**Byte-identical regression guard** (mirroring Story #295/#296's own "no
+accidental field changes" tests and PR #183's clean-venv/pyarrow lesson):
+`tests/test_open_space_velocity_backfill.py` compares an 18-star sample
+(spanning the full ~70-1840pc distance range, including Betelgeuse, Alpha
+Crucis, and tau Sco) against a frozen pre-backfill snapshot
+(`tests/fixtures/pre_open_space_velocity_backfill_sample.json`, captured
+from this Story's own branch point) - `name`/`aliases`/`coordinates`/
+`distance`/`cartesian`/`group`/`notes` all byte-identical, only `velocity`
+added. Independently re-verified across **all 1079** catalog records (not
+just the 18-star test sample) by diffing every non-`velocity` field
+between the pre- and post-backfill `initial_catalog_records.json`: **zero**
+records had any other field change.
+
+Spot checks (Story #307's own required hand-verification, re-asserted as
+permanent regression guards):
+
+- **Betelgeuse** (`alf_ori`, ~152.7pc): derives to a total space velocity
+  of **30.7 km/s** (`radial_velocity_known: true`) - a physically sane
+  peculiar velocity for a well-studied nearby red supergiant.
+- **Alpha Crucis** (`alf_cru`, ~98.7pc): derives to **21.7 km/s**
+  (`radial_velocity_known: true`) - likewise unremarkable.
+- **tau Sco** (`tau_sco`, ~145.3pc): derives to **17.2 km/s** via the
+  `mesVelocities` correction above, not the implausible ~650 km/s default.
+
+`catalog.parquet`/`catalog.csv` rebuilt and `scene.json` re-exported the
+same way as every prior velocity Story (`galactic-structures build-catalog`
++ `galactic-structures export-scene --no-radius-filter --output
+web/public/data/scene.json`), from a clean venv matching the test-runtime
+pyarrow version (25.0.1, standing lesson from PR #183). `pytest` (333
+passed, 4 skipped) green.
+
+Frontend (`web/`) was not touched or re-verified in the browser for this
+Story - `sceneTypes.ts`'s `velocity` field is already exercised by the
+204 RECONS/Local-Bubble stars carrying it since Story #230/#286/#296, this
+Story only adds more data of the identical shape, and the UI gate that
+would let a user actually reach these open-space stars with Vectors/Time
+Controls enabled is Story #308's job (not yet done) - there is nothing new
+to browser-verify here yet.

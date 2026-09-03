@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "42 Cyg",
-  "retrieved_utc": "2026-08-23T01:55:23+00:00",
+  "retrieved_utc": "2026-09-03T09:33:00+00:00",
   "record_id": "*  42 Cyg",
   "raw": {
     "main_id": "*  42 Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.89900016784668,
-    "plx_value": 0.857,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "sp_type": "A2Iab-Ib",
-    "plx_err": 0.023399999365210533,
+    "plx_value": 0.857,
     "otype": "pA*",
+    "pmra": 2.143,
+    "pmdec": -2.223,
+    "plx_err": 0.023399999365210533,
+    "rvz_radvel": -18.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 16109048|Gaia DR3 2056972679739120000|MSX6C G075.8526-01.4693|GSC2 N0333032331|*  42 Cyg|AG+36 2027|ALS 11382|BD+35  4141|FK5 1535|GC 28515|GCRV 12803|GEN# +1.00195324|GSC 02697-01635|HD 195324|HIC 101067|HIP 101067|HR  7835|IRAS 20274+3617|LS  II +36   80|MSX5C G075.8538-01.4689|N30 4529|PPM  85042|SAO  70096|SKY# 38758|TD1 26814|TYC 2697-1635-1|UBV   17782|UBV M  24893|[HFE83] 1369|uvby98 100195324|2MASS J20292038+3627169|Gaia DR1 2056972675436812928|WEB 18251|Gaia DR2 2056972679739120000",
     "matched_id": "*  42 Cyg"
   }

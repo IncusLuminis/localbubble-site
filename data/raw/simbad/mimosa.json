@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Mimosa",
-  "retrieved_utc": "2026-08-23T01:56:24+00:00",
+  "retrieved_utc": "2026-09-03T09:34:19+00:00",
   "record_id": "* bet Cru",
   "raw": {
     "main_id": "* bet Cru",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.25,
-    "plx_value": 11.71,
+    "rvz_bibcode": "2004A&A...424..727P",
     "sp_type": "B1IV",
-    "plx_err": 0.9800000190734863,
+    "plx_value": 11.71,
     "otype": "bC*",
+    "pmra": -42.97,
+    "pmdec": -16.18,
+    "plx_err": 0.9800000190734863,
+    "rvz_radvel": 10.3,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 405567821|HIP 62434|SBC9 2446|* bet Cru|CCDM J12478-5940A|CEL   4154|CPC 20  3932|CPD-59  4451|CSI-59  4451 41|FK5  481|GC 17374|GCRV  7661|GEN# +1.00111123|GSC 08659-03107|HD 111123|HGAM   2011|HIC  62434|HR  4853|IDS 12419-5908 A|JP11  2298|N30 2947|NAME Mimosa|PPM 341305|ROT  1887|SAO 240259|SKY# 23820|TD1 16475|TYC 8659-3107-1|UBV   11480|UBV M  18628|V* bet Cru|[B10]  3328|2MASS J12474326-5941194|ALS 14974|PLX 2941.01|EUVE J1247-59.6|1RXS J124742.5-594125|WDS J12477-5941A|IRAS 12448-5925|AKARI-IRC-V1 J1247432-594119|uvby98 100111123|WEB 11084|[KCS2016] J124743.26-594119.5|CXOU J124743.8-594121",
     "matched_id": "NAME Mimosa"
   }

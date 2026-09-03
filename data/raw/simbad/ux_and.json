@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "UX And",
-  "retrieved_utc": "2026-08-23T02:06:08+00:00",
+  "retrieved_utc": "2026-09-03T09:46:56+00:00",
   "record_id": "V* UX And",
   "raw": {
     "main_id": "V* UX And",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.6899995803833,
-    "plx_value": 1.5186,
+    "rvz_bibcode": "1972MNRAS.158...23F",
     "sp_type": "M6IIIv",
-    "plx_err": 0.10369999706745148,
+    "plx_value": 1.5186,
     "otype": "AB*",
+    "pmra": -0.936,
+    "pmdec": -0.651,
+    "plx_err": 0.10369999706745148,
+    "rvz_radvel": -8.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 203102479|Gaia DR3 341798827472181504|2MASS J02332877+4539162|AAVSO 0227+45|AG+45  271|BD+45   624|GCRV 27345|IRAS 02302+4525|IRC +50068|PPM  45199|RAFGL  347|SAO  38115|V* UX And|TYC 3295-730-1|Gaia DR2 341798827472181504",
     "matched_id": "V* UX And"
   }

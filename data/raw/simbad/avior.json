@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Avior",
-  "retrieved_utc": "2026-08-23T01:57:01+00:00",
+  "retrieved_utc": "2026-09-03T09:35:12+00:00",
   "record_id": "* eps Car",
   "raw": {
     "main_id": "* eps Car",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.8600000143051147,
-    "plx_value": 5.39,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "K3:III+B2:V",
-    "plx_err": 0.41999998688697815,
+    "plx_value": 5.39,
     "otype": "**",
+    "pmra": -25.52,
+    "pmdec": 22.06,
+    "plx_err": 0.41999998688697815,
+    "rvz_radvel": 11.6,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 342884451|HIP 41037|2MASS J08223082-5930340|* eps Car|CPC 20  2212|CPD-59  1032|FAUST 2427|FK5  315|GC 11463|GCRV  5546|GEN# +1.00071129|GSC 08579-02692|HIC  41037|HR  3307|IRAS 08214-5920|JP11  1671|N30 1949|NSV  4058|PPM 336856|SACS 185|SAO 235932|SKY# 15897|TD1 12403|UBV    8042|UBV M  14307|WDS J08225-5931AB|NAME Avior|** HDS 1190|CCDM J08225-5931AB",
     "matched_id": "NAME Avior"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "IV Vel",
-  "retrieved_utc": "2026-08-23T02:05:29+00:00",
+  "retrieved_utc": "2026-09-03T09:46:06+00:00",
   "record_id": "V* IV Vel",
   "raw": {
     "main_id": "V* IV Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.114999771118164,
-    "plx_value": 1.6021,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B3III",
-    "plx_err": 0.03819999843835831,
+    "plx_value": 1.6021,
     "otype": "bC*",
+    "pmra": -9.655,
+    "pmdec": 4.66,
+    "plx_err": 0.03819999843835831,
+    "rvz_radvel": 19.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 132916101|HIP 48799|Gaia DR3 5404746747471743232|CD-52  3465|CEL   3414|CPC 19  3717|CPD-52  2980|GC 13718|GCRV  6358|GEN# +1.00086466|GSC 08598-01404|HD  86466|HIC  48799|HR  3941|Hbg  348|N30 2378|PPM 338511|SAO 237526|SKY# 19201|TD1 14453|TYC 8598-1404-1|UBV    9332|UBV M  15850|V* IV Vel|2MASS J09571094-5238196|ALS 14146|uvby98 100086466|WEB  9074|Gaia DR2 5404746747471743232",
     "matched_id": "V* IV Vel"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "f Vel",
-  "retrieved_utc": "2026-08-23T01:57:16+00:00",
+  "retrieved_utc": "2026-09-03T09:35:31+00:00",
   "record_id": "* f Vel",
   "raw": {
     "main_id": "* f Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.110000133514404,
-    "plx_value": 1.4174,
+    "rvz_bibcode": "2004A&A...424..727P",
     "sp_type": "B1Ib",
-    "plx_err": 0.08590000122785568,
+    "plx_value": 1.4174,
     "otype": "SB*",
+    "pmra": -4.301,
+    "pmdec": 3.322,
+    "plx_err": 0.08590000122785568,
+    "rvz_radvel": 27.17,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 29052041|WISEA J085033.47-463145.1|HIP 43413|Gaia DR3 5329693847558732288|SBC9 1947|* f Vel|ALS  1181|CD-46  4661|CEL   2987|CGO 192|CPC  0  6642|CPD-46  3120|GC 12227|GCRV  5828|GSC 08152-01394|HD  75821|HIC  43413|HR  3527|JP11  1728|LS 1181|MCW 1165|PPM 313681|ROT  1396|SAO 220561|SKY# 17016|TD1 13209|TYC 8152-1394-1|UBV    8597|UBV M  14822|V* KX Vel|[B10]  2382|[N75] 348|2MASS J08503346-4631450|UCAC4 218-033840|WEB  8365|Gaia DR2 5329693847558732288|** HDO  205A|CCDM J08506-4632A|WDS J08506-4632A|GEN# +1.00075821|IDS 08472-4609 A|uvby98 100075821|WISE J085033.48-463145.0",
     "matched_id": "* f Vel"
   }

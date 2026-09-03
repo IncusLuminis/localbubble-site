@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "IZ TrA",
-  "retrieved_utc": "2026-08-23T02:05:30+00:00",
+  "retrieved_utc": "2026-09-03T09:46:07+00:00",
   "record_id": "V* IZ TrA",
   "raw": {
     "main_id": "V* IZ TrA",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.65999984741211,
-    "plx_value": 1.4852,
+    "rvz_bibcode": "",
     "sp_type": "M6III",
-    "plx_err": 0.05130000039935112,
+    "plx_value": 1.4852,
     "otype": "AB*",
+    "pmra": -7.733,
+    "pmdec": -14.204,
+    "plx_err": 0.05130000039935112,
+    "rvz_radvel": null,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 426665045|Gaia DR3 5825432373172356864|AN  110.1907|CD-65  1989|CPD-65  3122|CSV   2400|GSC 09034-00617|HD 139535|IRAS 15380-6545|SV* BV   777|SV* HV  2962|SV* ZI  1141|TYC 9034-617-1|V* IZ TrA|2MASS J15424033-6555283|Gaia DR2 5825432373172356864",
     "matched_id": "V* IZ TrA"
   }
