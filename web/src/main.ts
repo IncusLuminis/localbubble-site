@@ -88,6 +88,14 @@ import {
   setRadcliffeWaveDimmed,
 } from "./scene/structures";
 import {
+  createDiffuseStructureLayer,
+  DIFFUSE_STRUCTURE_OBJECT_TYPES,
+  updateDiffuseStructureDimming,
+  updateDiffuseStructureVisibility,
+  visibleDiffuseStructureObjects,
+  type DiffuseStructureLayer,
+} from "./scene/diffuseStructures";
+import {
   createLabelRenderer,
   createLabelsLayer,
   createSunLabel,
@@ -521,6 +529,14 @@ let labelsInfo: ReturnType<typeof createLabelsLayer> | null = null;
 let gouldBeltGroup: ReturnType<typeof createGouldBeltLayer> | null = null;
 let radcliffeWaveGroup: ReturnType<typeof createRadcliffeWaveLayer> | null = null;
 let localBubbleGroup: ReturnType<typeof createLocalBubbleLayer> | null = null;
+/** Story #315: the four diffuse types' (`molecular_cloud`/`hii_region`/
+ * `planetary_nebula`/`supernova_remnant`) extended-volume mesh layer - built
+ * once, right alongside `catalogBuckets`, once the scene loads. `null` only
+ * means "scene hasn't loaded yet" (unlike `gouldBeltGroup`/etc.'s `| null`,
+ * which can also mean "this scene had no such structure" - every scene has
+ * *some* catalog, so once loaded this is always a real, possibly-empty
+ * layer, mirroring `velocityVectorsGroup`'s own convention). */
+let diffuseStructureLayer: DiffuseStructureLayer | null = null;
 /** Issue #138: the dense-batch collection-radius boundary shell - built
  * once, right after `denseBatchRadiusPc` below is computed from the loaded
  * scene data (see `denseBatchBoundary.ts`'s `createDenseBatchBoundaryLayer`
@@ -820,6 +836,20 @@ function applyCatalogVisibility(): void {
     bubbleOuterRadiusPc,
   );
   updateCatalogSizeScale(catalogBuckets, sizeScale);
+  // Story #315: the diffuse-structure layer isn't a `CatalogBucket` (no
+  // `InstancedMesh`, so `updateCatalogVisibility`/`updateCatalogSizeScale`
+  // above never touch it) - its own category-toggle/radius-filter
+  // visibility and "Object size" slider scaling are applied here instead,
+  // from the exact same chokepoint every other catalog-visibility change
+  // already runs through, so the two mechanisms can never disagree. The
+  // "Object size" slider is applied at the whole-group level (matching
+  // `updateCatalogSizeScale`'s own per-bucket-`Object3D.scale` approach)
+  // rather than per-mesh, since every diffuse-structure mesh shares one
+  // parent group.
+  if (diffuseStructureLayer) {
+    updateDiffuseStructureVisibility(diffuseStructureLayer, categoryVisibility, radiusPc);
+    diffuseStructureLayer.group.scale.setScalar(sizeScale);
+  }
   refreshSelectionVisibility();
 }
 
@@ -1396,6 +1426,15 @@ function applyBackgroundDimming(): void {
     setGouldBeltDimmed(gouldBeltGroup, insideSphere, insideBubble);
     setRadcliffeWaveDimmed(radcliffeWaveGroup, insideSphere, insideBubble);
     setLocalBubbleDimmed(localBubbleGroup, insideSphere);
+    // Story #315: the diffuse-structure meshes get the exact same
+    // three-tier treatment every other non-star catalog bucket already
+    // gets (see `diffuseStructures.ts`'s `updateDiffuseStructureDimming`
+    // docstring for why reusing `backgroundBucketOpacity` verbatim here
+    // keeps their dimming behavior visually unchanged across this Story's
+    // rendering-mode switch).
+    if (diffuseStructureLayer) {
+      updateDiffuseStructureDimming(diffuseStructureLayer, insideSphere, insideBubble);
+    }
   }
 }
 
@@ -1681,13 +1720,25 @@ function selectObject(obj: SceneObject | null): void {
 }
 
 function currentlyVisiblePositions(): [number, number, number][] {
-  return visibleCatalogObjects(
+  const bucketPositions = visibleCatalogObjects(
     catalogBuckets,
     categoryVisibility,
     radiusPc,
     camera.position.length(),
     denseBatchRadiusPc,
   ).map((obj): [number, number, number] => obj.position_pc);
+  // Story #315: the four diffuse types no longer live in `catalogBuckets`
+  // (they're `diffuseStructureLayer`'s individual meshes now), so
+  // `visibleCatalogObjects` above can no longer see them - without this,
+  // "Fit all"/"Show all" framing would silently stop accounting for ~19
+  // catalog objects it used to include. `visibleDiffuseStructureObjects`
+  // applies the exact same category/radius-filter visibility rule.
+  const diffusePositions = diffuseStructureLayer
+    ? visibleDiffuseStructureObjects(diffuseStructureLayer, categoryVisibility, radiusPc).map(
+        (obj): [number, number, number] => obj.position_pc,
+      )
+    : [];
+  return [...bucketPositions, ...diffusePositions];
 }
 
 function applyCameraPose(pose: CameraPose): void {
@@ -2067,13 +2118,35 @@ loadScene()
     );
     scene.add(velocitySpeedLabelsInfo.group);
 
+    // Story #315: the four diffuse types (`molecular_cloud`/`hii_region`/
+    // `planetary_nebula`/`supernova_remnant`) are excluded from the objects
+    // handed to `createCatalogObjectGroup` here - they get the new
+    // extended-volume mesh treatment (`diffuseStructureLayer` below)
+    // instead of a point-marker `InstancedMesh` bucket, and rendering both
+    // at once would double-draw the same real object. `createCatalogObjectGroup`
+    // itself stays completely generic/unmodified (still fully exercised by
+    // its own existing tests against arbitrary object types, `molecular_cloud`
+    // included) - the exclusion happens here at the call site, the same
+    // place `excludeDedicatedMarkerObjects` already filters out the Sun/
+    // Local-Bubble-centroid before this same call. `star_cluster`/
+    // `stellar_association` are deliberately NOT filtered here - Epic #313
+    // keeps their point-marker rendering unchanged in this Story.
+    const pointMarkerObjects = sceneData.objects.filter(
+      (obj) => !DIFFUSE_STRUCTURE_OBJECT_TYPES.has(obj.object_type),
+    );
     const catalogLayer = createCatalogObjectGroup(
-      sceneData.objects,
+      pointMarkerObjects,
       denseBatchRadiusPc,
       bubbleOuterRadiusPc,
     );
     catalogBuckets = catalogLayer.buckets;
     scene.add(catalogLayer.group);
+
+    // Story #315: the extended-volume layer for those same four diffuse
+    // types - built from the FULL, unfiltered `sceneData.objects` (it does
+    // its own type filtering internally, see `createDiffuseStructureLayer`).
+    diffuseStructureLayer = createDiffuseStructureLayer(sceneData.objects);
+    scene.add(diffuseStructureLayer.group);
 
     // Story #239: the id -> (bucket, index) lookup the motion player's
     // per-frame animation loop needs, built ONCE here (well before any
@@ -2303,7 +2376,12 @@ renderer.domElement.addEventListener("click", (event) => {
   }
   const rect = renderer.domElement.getBoundingClientRect();
   const ndc = toNdc(event.clientX, event.clientY, rect);
-  const hit = pickSceneObject(raycaster, camera, ndc, catalogBuckets);
+  // Story #315: also raycasts against the diffuse-structure layer's
+  // individual meshes - those four types are no longer part of
+  // `catalogBuckets` at all, so without this, clicking one of them would
+  // silently stop opening the Inspector (see `picking.ts`'s
+  // `pickSceneObject` docstring).
+  const hit = pickSceneObject(raycaster, camera, ndc, catalogBuckets, diffuseStructureLayer?.meshes ?? []);
   selectObject(hit);
 });
 

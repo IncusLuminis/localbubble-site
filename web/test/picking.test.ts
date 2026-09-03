@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Camera, PerspectiveCamera, Raycaster, Vector2 } from "three";
 import { createCatalogObjectGroup, setInstanceVisibility } from "../src/scene/objects";
+import { createDiffuseStructureLayer, updateDiffuseStructureVisibility } from "../src/scene/diffuseStructures";
 import { pickSceneObject, toNdc } from "../src/scene/picking";
 import type { SceneObject } from "../src/scene/sceneTypes";
 
@@ -136,5 +137,79 @@ describe("pickSceneObject", () => {
     const ndc = toNdc(100 + 400, 50 + 300, rect);
     expect(ndc.x).toBeCloseTo(0, 6);
     expect(ndc.y).toBeCloseTo(0, 6);
+  });
+});
+
+/**
+ * Story #315: the four diffuse-structure types moved out of `CatalogBucket`
+ * `InstancedMesh` buckets into `scene/diffuseStructures.ts`'s individual
+ * `Mesh`es - without a second raycast target list, clicking one of those
+ * ~19 objects would silently stop opening the Inspector. These tests cover
+ * `pickSceneObject`'s new `diffuseMeshes` parameter directly.
+ */
+describe("pickSceneObject with diffuse-structure meshes (Story #315)", () => {
+  it("resolves a hit on a diffuse-structure mesh back to its real SceneObject", () => {
+    const m42 = makeObject({
+      id: "m42_orion",
+      object_type: "hii_region",
+      position_pc: [0, 0, 0],
+      size_pc: 8,
+    });
+    const layer = createDiffuseStructureLayer([m42]);
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+
+    const hit = pickSceneObject(raycaster, camera, CENTER_NDC, [], layer.meshes);
+    expect(hit?.id).toBe("m42_orion");
+  });
+
+  it("picks the nearer of a bucket star and a diffuse-structure mesh both on the ray", () => {
+    const star = makeObject({ id: "star-near", object_type: "star", position_pc: [0, 0, 0] });
+    const cloud = makeObject({
+      id: "cloud-far",
+      object_type: "molecular_cloud",
+      position_pc: [0, 0, -200],
+      size_pc: 40,
+    });
+    const { buckets } = createCatalogObjectGroup([star]);
+    const layer = createDiffuseStructureLayer([cloud]);
+    const camera = makeLookDownZCamera(300);
+    const raycaster = new Raycaster();
+
+    const hit = pickSceneObject(raycaster, camera, CENTER_NDC, buckets, layer.meshes);
+    expect(hit?.id).toBe("star-near");
+  });
+
+  it("returns null when a diffuse-structure mesh is hidden (category toggled off)", () => {
+    const cloud = makeObject({ id: "cloud-hidden", object_type: "molecular_cloud", position_pc: [0, 0, 0], size_pc: 20 });
+    const layer = createDiffuseStructureLayer([cloud]);
+    updateDiffuseStructureVisibility(layer, new Map([["molecular_cloud", false]]), null);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    expect(pickSceneObject(raycaster, camera, CENTER_NDC, [], layer.meshes)).toBeNull();
+  });
+
+  it("is pickable again once its category is toggled back on", () => {
+    const cloud = makeObject({ id: "cloud-toggle", object_type: "molecular_cloud", position_pc: [0, 0, 0], size_pc: 20 });
+    const layer = createDiffuseStructureLayer([cloud]);
+    const off = new Map([["molecular_cloud", false]]);
+    const on = new Map([["molecular_cloud", true]]);
+    updateDiffuseStructureVisibility(layer, off, null);
+    updateDiffuseStructureVisibility(layer, on, null);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    const hit = pickSceneObject(raycaster, camera, CENTER_NDC, [], layer.meshes);
+    expect(hit?.id).toBe("cloud-toggle");
+  });
+
+  it("defaults diffuseMeshes to an empty list - pre-#315 callers passing only buckets are unaffected", () => {
+    const star = makeObject({ id: "star-only", object_type: "star", position_pc: [0, 0, 0] });
+    const { buckets } = createCatalogObjectGroup([star]);
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    const hit = pickSceneObject(raycaster, camera, CENTER_NDC, buckets);
+    expect(hit?.id).toBe("star-only");
   });
 });
