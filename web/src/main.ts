@@ -75,6 +75,7 @@ import {
 } from "./scene/motionPlayer";
 import {
   createMotionTrailsLayer,
+  currentTrailWindowYears,
   isTrailVisible,
   starTrailPositionsPc,
   updateStarTrail,
@@ -1407,10 +1408,9 @@ function applyPlayerAnimation(deltaSeconds: number): void {
   // to the signed rate `advancePlayerTimeYears` wants - no separate
   // direction multiply anymore (that was #243's shape, now removed).
   const yearsPerRealSecond = logSpeedSliderToYearsPerSecond(playerRateSliderValue);
-  // `motionTrail.ts`'s `starTrailPositionsPc` (unchanged by this Story)
-  // still wants the current playback direction as its own `PlayerDirection`
-  // sign - derived here from the signed rate value rather than tracked as
-  // separate state.
+  // `motionTrail.ts`'s `starTrailPositionsPc` still wants the current
+  // playback direction as its own `PlayerDirection` sign - derived here from
+  // the signed rate value rather than tracked as separate state.
   const playerRateDirection: PlayerDirection = playerRateSliderValue < 0 ? -1 : 1;
 
   if (playerPlaying) {
@@ -1446,6 +1446,24 @@ function applyPlayerAnimation(deltaSeconds: number): void {
   // use, so a star currently hidden by the category/radius filters stays
   // hidden here too rather than being forced visible by the player.
   const cameraDistancePc = camera.position.length();
+  // Story #302 (Epic #299's final Story): the trail's fixed simulated-time
+  // window (`motionTrail.ts`'s `TRAIL_WINDOW_YEARS`), scaled by the SAME
+  // `denseBatchRadiusPc`/`bubbleOuterRadiusPc` pair every other per-frame LOD
+  // effect in this file already benchmarks against (`applyDenseBatchLod`/
+  // `applySunCoreScale`/`applyVelocityVectorScale`) - exactly
+  // `TRAIL_WINDOW_YEARS` at/inside the RECONS sphere (today's exact trail
+  // length, reproduced bit-for-bit - see `currentTrailWindowYears`'s own
+  // docstring and this Story's RECONS-exact-reproduction test), growing
+  // smoothly beyond it so trails read as longer, clearly visible tails at
+  // Local Bubble zoom. Computed once per frame here (not change-detected
+  // like `applyVelocityVectorScale`'s `lastAppliedArrowScaleFactor`): unlike
+  // that function's per-arrow `ConeGeometry` rebuild, this loop's own
+  // `updateStarTrail` call already fully rewrites every visible trail's
+  // position buffer every frame regardless (driven by `playerTimeYears`
+  // advancing during playback), so this is one cheap extra scalar
+  // computation riding along on work that already happens, not a new
+  // per-frame cost class.
+  const trailWindowYears = currentTrailWindowYears(cameraDistancePc, denseBatchRadiusPc, bubbleOuterRadiusPc);
   for (const obj of animatedStars) {
     const ref = objectIndexLookup.get(obj.id);
     if (!ref || !obj.velocity) continue;
@@ -1483,7 +1501,13 @@ function applyPlayerAnimation(deltaSeconds: number): void {
       if (trailsVisible) {
         updateStarTrail(
           trail,
-          starTrailPositionsPc(obj.position_pc, obj.velocity, playerTimeYears, playerRateDirection),
+          starTrailPositionsPc(
+            obj.position_pc,
+            obj.velocity,
+            playerTimeYears,
+            playerRateDirection,
+            trailWindowYears,
+          ),
           camera.position,
         );
       }

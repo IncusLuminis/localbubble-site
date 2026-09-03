@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { KM_PER_S_TO_PC_PER_YEAR, PLAYER_TIME_RANGE_YEARS } from "../src/scene/motionPlayer";
 import {
+  currentTrailScaleFactor,
+  currentTrailWindowYears,
   isTrailVisible,
   starTrailPositionsPc,
   TRAIL_SEGMENT_COUNT,
@@ -9,6 +11,26 @@ import {
   trailWindowStartYears,
 } from "../src/scene/motionTrail";
 import type { SceneVelocity } from "../src/scene/sceneTypes";
+
+/** Story #302: a representative RECONS-scale reference radius (matching
+ * `viewScale.test.ts`'s/`velocityVectors.test.ts`'s own
+ * `DENSE_BATCH_RADIUS_PC`/`BUBBLE_OUTER_RADIUS_PC` convention) for tests that
+ * don't care about exact-reproduction against TODAY's real dataset value
+ * (that's `REAL_DENSE_BATCH_RADIUS_PC` below) - just that the camera is "at
+ * RECONS scale" (`currentTrailScaleFactor` exactly `1`). */
+const DENSE_BATCH_RADIUS_PC = 11.26;
+const BUBBLE_OUTER_RADIUS_PC = 60;
+/** Story #302: TODAY's real, live-data-derived RECONS dense-batch collection
+ * radius - the SAME exact value `velocityVectors.test.ts`'s own
+ * `REAL_DENSE_BATCH_RADIUS_PC` uses (`lod.ts`'s
+ * `denseBatchCollectionRadiusPc`, verified against the shipped
+ * `public/data/scene.json`), used ONLY by the dedicated RECONS-exact-
+ * reproduction test below, which needs the EXACT real value (not the
+ * representative `DENSE_BATCH_RADIUS_PC` above) to prove
+ * `currentTrailScaleFactor` is bit-exactly `1` - and so every trail sample
+ * time bit-exactly reproduced - at the real camera-distance boundary this
+ * app actually uses. */
+const REAL_DENSE_BATCH_RADIUS_PC = 11.258383273645139;
 
 /**
  * Story #240 (Epic #238's Story 2 of 2): the fixed-simulated-time-window
@@ -233,5 +255,144 @@ describe("starTrailPositionsPc", () => {
     expect(positions[0][0]).toBeCloseTo(position[0], 10);
     expect(positions[0][1]).toBeCloseTo(position[1], 10);
     expect(positions[0][2]).toBeCloseTo(position[2], 10);
+  });
+});
+
+/**
+ * Story #302 (Epic #299, the Epic's final Story): the trail's fixed
+ * simulated-time window, made camera-scale-relative - mirrors
+ * `velocityVectors.test.ts`'s own `currentArrowScaleFactor` test suite
+ * structure/conventions for this same Epic's established pattern.
+ */
+describe("currentTrailScaleFactor", () => {
+  it("is exactly 1 at or inside the RECONS sphere", () => {
+    expect(currentTrailScaleFactor(0, REAL_DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC)).toBe(1);
+    expect(
+      currentTrailScaleFactor(REAL_DENSE_BATCH_RADIUS_PC, REAL_DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC),
+    ).toBe(1);
+  });
+
+  it("grows smoothly and monotonically beyond the RECONS sphere", () => {
+    const a = currentTrailScaleFactor(20, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+    const b = currentTrailScaleFactor(40, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+    const c = currentTrailScaleFactor(55, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+    expect(a).toBeGreaterThan(1);
+    expect(b).toBeGreaterThan(a);
+    expect(c).toBeGreaterThan(b);
+  });
+
+  it("returns 0 when the scene hasn't loaded yet (denseBatchRadiusPc <= 0)", () => {
+    expect(currentTrailScaleFactor(100, 0, BUBBLE_OUTER_RADIUS_PC)).toBe(0);
+  });
+});
+
+describe("currentTrailWindowYears", () => {
+  // Story #302 (REQUIRED, per this Story's AC): at/inside the RECONS
+  // sphere, the scale-relative window must reproduce the OLD flat
+  // `TRAIL_WINDOW_YEARS` constant's value bit-for-bit, not just "close" -
+  // this is what guarantees today's exact trail appearance at RECONS-sphere
+  // camera distances is a genuine zero-regression change, and this test
+  // FAILS if the scale-relative logic is broken (e.g. a stray extra
+  // multiplier, or `currentTrailScaleFactor` not landing on exactly `1`).
+  describe("RECONS-sphere exact reproduction (Story #302)", () => {
+    it("reproduces the old flat TRAIL_WINDOW_YEARS bit-for-bit at camera distance 0 (deep inside RECONS)", () => {
+      expect(currentTrailWindowYears(0, REAL_DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC)).toBe(
+        TRAIL_WINDOW_YEARS,
+      );
+    });
+
+    it("reproduces the old flat TRAIL_WINDOW_YEARS bit-for-bit exactly AT the RECONS boundary itself", () => {
+      expect(
+        currentTrailWindowYears(REAL_DENSE_BATCH_RADIUS_PC, REAL_DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC),
+      ).toBe(TRAIL_WINDOW_YEARS);
+    });
+
+    it("reproduces the old flat TRAIL_WINDOW_YEARS bit-for-bit at a representative in-sphere camera distance (~half the RECONS radius)", () => {
+      const cameraDistancePc = REAL_DENSE_BATCH_RADIUS_PC / 2;
+      expect(
+        currentTrailWindowYears(cameraDistancePc, REAL_DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC),
+      ).toBe(TRAIL_WINDOW_YEARS);
+    });
+
+    it("also reproduces the old flat TRAIL_WINDOW_YEARS bit-for-bit with no Local Bubble layer loaded (bubbleOuterRadiusPc null)", () => {
+      expect(currentTrailWindowYears(0, REAL_DENSE_BATCH_RADIUS_PC, null)).toBe(TRAIL_WINDOW_YEARS);
+    });
+
+    it("end-to-end: starTrailPositionsPc's actual output at RECONS scale matches the old fixed-window output bit-for-bit", () => {
+      // Not just the window-years value in isolation - proves the whole
+      // pipeline (window -> sample times -> extrapolated positions) is
+      // unaffected at RECONS scale, the same "exact appearance" AC #301's
+      // own test file checks for arrows.
+      const position: [number, number, number] = [3, -2, 1];
+      const velocity = makeVelocity({ vx_kms: 40, vy_kms: -15, vz_kms: 5 });
+      const tYears = 250_000;
+      const oldWindowYears = TRAIL_WINDOW_YEARS;
+      const newWindowYears = currentTrailWindowYears(0, REAL_DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+      expect(newWindowYears).toBe(oldWindowYears);
+
+      const oldPositions = starTrailPositionsPc(position, velocity, tYears, 1, oldWindowYears);
+      const newPositions = starTrailPositionsPc(position, velocity, tYears, 1, newWindowYears);
+      expect(newPositions).toEqual(oldPositions);
+    });
+  });
+
+  // Story #302: at Local Bubble zoom, the window (and so the trail's real
+  // pc length, per `starPositionAtTime`'s linear extrapolation) must grow -
+  // smoothly, with no discontinuous jump at the RECONS boundary - so trails
+  // read as clearly visible tails rather than staying pinned to their
+  // RECONS-tuned length and getting lost at wider zoom.
+  describe("scale-relative growth beyond the RECONS sphere (Story #302)", () => {
+    it("grows past TRAIL_WINDOW_YEARS once the camera is outside the RECONS sphere", () => {
+      const windowYears = currentTrailWindowYears(40, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+      expect(windowYears).toBeGreaterThan(TRAIL_WINDOW_YEARS);
+    });
+
+    it("is continuous across the RECONS boundary - no discontinuous jump", () => {
+      const justInside = currentTrailWindowYears(
+        DENSE_BATCH_RADIUS_PC - 0.0001,
+        DENSE_BATCH_RADIUS_PC,
+        BUBBLE_OUTER_RADIUS_PC,
+      );
+      const justOutside = currentTrailWindowYears(
+        DENSE_BATCH_RADIUS_PC + 0.0001,
+        DENSE_BATCH_RADIUS_PC,
+        BUBBLE_OUTER_RADIUS_PC,
+      );
+      expect(Math.abs(justOutside - justInside)).toBeLessThan(10);
+    });
+
+    it("scales the resulting trail's real pc length by the same factor, thanks to starPositionAtTime's linear extrapolation", () => {
+      const position: [number, number, number] = [0, 0, 0];
+      const velocity = makeVelocity({ vx_kms: 40, vy_kms: 0, vz_kms: 0 });
+      const reconsWindowYears = currentTrailWindowYears(0, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+      const bubbleWindowYears = currentTrailWindowYears(40, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+      const scaleFactor = bubbleWindowYears / reconsWindowYears;
+
+      // Trail length is measured as the distance from the trail's oldest to
+      // newest sample, well past the Today-growth region (tYears far beyond
+      // either window), so the full window is in effect for both.
+      const tYears = 500_000;
+      const reconsPositions = starTrailPositionsPc(position, velocity, tYears, 1, reconsWindowYears);
+      const bubblePositions = starTrailPositionsPc(position, velocity, tYears, 1, bubbleWindowYears);
+      const reconsLength = Math.abs(reconsPositions[0][0] - reconsPositions[reconsPositions.length - 1][0]);
+      const bubbleLength = Math.abs(bubblePositions[0][0] - bubblePositions[bubblePositions.length - 1][0]);
+      expect(bubbleLength).toBeCloseTo(reconsLength * scaleFactor, 6);
+      expect(bubbleLength).toBeGreaterThan(reconsLength);
+    });
+
+    it("holds flat once the camera passes the open-space ceiling, matching currentTrailScaleFactor's own flattening", () => {
+      const ceilingPc = BUBBLE_OUTER_RADIUS_PC * 3; // VIEW_SCALE_OPEN_SPACE_CEILING_MULTIPLIER
+      const atCeiling = currentTrailWindowYears(ceilingPc, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
+      const beyondCeiling = currentTrailWindowYears(
+        ceilingPc * 2,
+        DENSE_BATCH_RADIUS_PC,
+        BUBBLE_OUTER_RADIUS_PC,
+      );
+      expect(beyondCeiling).toBe(atCeiling);
+    });
+  });
+
+  it("returns 0 when the scene hasn't loaded yet (denseBatchRadiusPc <= 0), matching currentTrailScaleFactor's own sentinel", () => {
+    expect(currentTrailWindowYears(100, 0, BUBBLE_OUTER_RADIUS_PC)).toBe(0);
   });
 });
