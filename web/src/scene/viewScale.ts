@@ -76,26 +76,67 @@
 
 /** The "open space" ceiling multiplier (segment 3 above) - how far beyond
  * `bubbleOuterRadiusPc` the view scale keeps growing before it flattens out
- * for good. `3`, mirroring `starMarkerScale.ts`'s own pre-existing
- * `STAR_MARKER_SHRINK_START_MULTIPLIER` "x3 of the nearer reference radius"
- * convention (not imported from there directly - this module stays
- * dependency-free like that one - just the same tuned constant chosen for
- * an analogous reason).
+ * for good.
  *
- * Verified live (issue #300) against real camera poses: with the shipped
- * scene's actual `bubbleOuterRadiusPc` (~60pc), `3x` puts the ceiling at
- * ~180pc - comfortably past "Fit to Local Bubble" (~318pc camera distance,
- * per `sun.ts`'s `SUN_BUBBLE_VIEW_OUTER_RADIUS_PC` docstring, is a camera
- * FRAMING distance with padding, not the bubble's own physical radius) is
- * actually beyond this ceiling, which is expected and fine - `currentViewScalePc`
- * is not trying to reach every camera pose's exact distance, only to keep
- * growing smoothly a while past the bubble's own edge before capping, so
- * open-space poses farther still don't scale sizes up without bound. No
- * different multiplier read better once observed against the default
- * "Perspective" (~1087pc) and "Fit all" poses - both comfortably beyond the
- * flat ceiling either way - so the mirrored `x3` was kept as-is rather than
- * retuned. */
-export const VIEW_SCALE_OPEN_SPACE_CEILING_MULTIPLIER = 3;
+ * Story #309 (Epic #306, the Epic's final Story): raised from the original
+ * `3` (issue #300) to `40` after live-verifying vectors/trails against real
+ * open-space data for the first time - #300 was tuned before Story #308
+ * enabled vectors/trails/Time Controls beyond the Local Bubble at all, so it
+ * was never actually checked against a moving arrow or trail out there, only
+ * against static camera poses. With `3x` (`ceilingPc` ~180pc for the shipped
+ * scene's real ~60pc `bubbleOuterRadiusPc`), `currentViewScalePc` - which,
+ * for any `bubbleOuterRadiusPc` between `denseBatchRadiusPc` and the
+ * ceiling, is mathematically just `cameraDistanceFromOriginPc` itself
+ * (segments 2 and 3's two linear-interpolation endpoints both lie exactly on
+ * the `y = x` line, so both segments simplify to the identity function, not
+ * merely an approach toward one - verify by substitution) - stops growing
+ * entirely once the camera is a mere ~180pc from the Sun, while a
+ * general-navigation camera's own FRAMING WIDTH keeps growing roughly
+ * linearly with its distance from the origin well past that (confirmed live
+ * via the app's own "View: W x H" readout: ~171pc wide at a 100pc camera
+ * distance, ~512pc wide at 300pc, ~1.71kpc wide at 1000pc - all comfortably
+ * past the old 180pc ceiling). The result: arrow/trail length (pinned flat
+ * at the `180pc`-ceiling's fixed scale factor, ~15.99x) shrinks steadily
+ * RELATIVE to the growing framing the farther out the camera goes - live
+ * screenshots at a 100pc camera distance (well inside the old ceiling, still
+ * growing) showed clear, differentiated, readable arrows; at 1000pc (deep
+ * past it) arrows were reduced to barely-visible few-pixel hairlines with no
+ * discernible arrowhead, on real named landmark stars (`* alf Cru`,
+ * ~98.7pc, `* alf Ori`/Betelgeuse, ~152.7pc) and the catalog's farther
+ * open-space population alike - exactly the "imperceptibly small... before
+ * ~1000pc+" failure mode this Story's own issue predicted as a possibility,
+ * confirmed live rather than assumed. Worse, the app's own DEFAULT
+ * "Perspective" pose (`cameraPresets.ts`'s fixed `[700,-700,450]`, ~1087pc
+ * from the origin) already sits well past the old 180pc ceiling - so a
+ * first-time user opening the app and toggling vectors on would see this
+ * degraded, flattened-out appearance immediately, not only at some rare
+ * extreme zoom.
+ *
+ * `40` (`ceilingPc` = 2400pc for the shipped scene) was chosen against the
+ * catalog's own real open-space extent: `starsWithVelocity`'s farthest
+ * member (`*  55 Cyg`, ~1840pc, checked directly against `public/data/
+ * scene.json` 2026-09-03) sits at scale factor ~163x under this ceiling -
+ * still on the growing (identity) segment, not yet flattened - with ~2400pc
+ * of headroom before the reference scale itself stops growing, comfortably
+ * past every real velocity-bearing star in the catalog today (~30% margin
+ * over the current ~1840pc max) without chasing every conceivable camera
+ * pose unboundedly (e.g. a `fitAllPose` framing that includes non-stellar
+ * deep-sky objects like `M76`, which has no velocity/vectors to draw in the
+ * first place and sits ~3.4kpc out, would still eventually flatten well
+ * beyond this ceiling, preserving the original "never grows without bound"
+ * intent for genuinely extreme zoom). Re-verified live at this new ceiling:
+ * a 1000pc camera distance (deep open space, past the old ceiling but well
+ * under the new one) now shows clearly visible, differentiated arrows again
+ * (scale factor ~88.8x, matching the same relative-to-framing proportions
+ * already approved at 100-300pc), and the RECONS-sphere/Bubble-edge segments
+ * (1/2 above) are mathematically untouched by this change - only segment 3's
+ * own upper bound moved, so `currentViewScalePc`'s existing
+ * exact-reproduction guarantee at/inside `denseBatchRadiusPc` and its
+ * continuity at the `bubbleOuterRadiusPc` boundary both still hold bit for
+ * bit (see `viewScale.test.ts`'s own segment-1/2 tests, unmodified and still
+ * green). See this Story's PR description for the full live-verification
+ * writeup and screenshots across all three zones. */
+export const VIEW_SCALE_OPEN_SPACE_CEILING_MULTIPLIER = 40;
 
 /**
  * The shared "current view scale" (pc) - see this module's own docstring for
