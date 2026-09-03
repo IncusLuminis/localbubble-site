@@ -283,6 +283,52 @@ describe("sunCoreRadiusPc - Local Bubble camera-driven taper stage (issue #219)"
   });
 });
 
+/**
+ * Issue #300 (Epic #299, Story 1): `sunCoreRadiusPc`'s new `bubbleOuterRadiusPc`
+ * parameter widens its shared inner bound (`starMarkerShrinkStartPc`) the
+ * exact same way `starMarkerRadiusPc`'s own shrink-start threshold widens -
+ * see that function's docstring in `starMarkerScale.ts`. This exercises the
+ * Sun-specific consequence: the "viewing the Local Bubble" taper stage now
+ * continues all the way to `bubbleOuterRadiusPc` instead of freezing at the
+ * old flat ~34pc threshold.
+ */
+describe("sunCoreRadiusPc's bubbleOuterRadiusPc parameter (issue #300)", () => {
+  const REALISTIC_BUBBLE_OUTER_RADIUS_PC = 60;
+  const oldShrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+
+  it("without bubbleOuterRadiusPc (default), behavior is unchanged from pre-#300", () => {
+    expect(sunCoreRadiusPc(oldShrinkStartPc, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(STAR_MARKER_NEAR_SUN_RADIUS_PC);
+  });
+
+  it("with bubbleOuterRadiusPc, keeps shrinking (below the near-Sun radius) past the old ~34pc threshold, reaching it only at bubbleOuterRadiusPc", () => {
+    // Pre-#300, this camera distance would already be flat at
+    // STAR_MARKER_NEAR_SUN_RADIUS_PC (the old shrink-start threshold); with
+    // the widened threshold it's still inside `starMarkerRadiusPc`'s own
+    // close-in shrink segment (now stretched all the way to
+    // bubbleOuterRadiusPc), so it should read STRICTLY BELOW that value.
+    const pastOldThreshold = sunCoreRadiusPc(
+      oldShrinkStartPc + 5,
+      REALISTIC_DENSE_BATCH_RADIUS_PC,
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC,
+    );
+    expect(pastOldThreshold).toBeGreaterThan(SUN_CORE_FLOOR_RADIUS_PC);
+    expect(pastOldThreshold).toBeLessThan(STAR_MARKER_NEAR_SUN_RADIUS_PC);
+
+    expect(
+      sunCoreRadiusPc(REALISTIC_BUBBLE_OUTER_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_BUBBLE_OUTER_RADIUS_PC),
+    ).toBe(STAR_MARKER_NEAR_SUN_RADIUS_PC);
+  });
+
+  it("is monotonic across the widened taper + close-in shrink ranges combined", () => {
+    const samples = [1.3, REALISTIC_DENSE_BATCH_RADIUS_PC, 20, 40, REALISTIC_BUBBLE_OUTER_RADIUS_PC, 400, 1087].map(
+      (d) => sunCoreRadiusPc(d, REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_BUBBLE_OUTER_RADIUS_PC),
+    );
+    for (let i = 1; i < samples.length; i++) {
+      expect(samples[i]).toBeGreaterThanOrEqual(samples[i - 1]);
+    }
+  });
+});
+
 describe("createSunMarker", () => {
   it("returns a group named 'sun' containing both the core and halo meshes, plus a direct core reference", () => {
     const { group, core } = createSunMarker();
