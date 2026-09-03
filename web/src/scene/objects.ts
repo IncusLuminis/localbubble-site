@@ -19,6 +19,7 @@ import {
   STAR_MARKER_MIN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
+  starMarkerShrinkStartPc,
   starBaselineRadiusPc,
 } from "./starMarkerScale";
 
@@ -29,12 +30,16 @@ import {
 // them too without a module cycle. Issue #219: `starBaselineRadiusPc`
 // (issue #215's own baseline-shape function) joins them for the same
 // reason - `sun.ts`'s new camera-driven taper stage reuses it directly,
-// see `starMarkerScale.ts`'s docstring on that function.
+// see `starMarkerScale.ts`'s docstring on that function. Issue #300:
+// `starMarkerShrinkStartPc` joins them too - `isStarMarkerShrinkEligible`
+// below shares it with `starMarkerRadiusPc` itself so the two thresholds
+// can't drift apart.
 export {
   STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_MIN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
+  starMarkerShrinkStartPc,
   starBaselineRadiusPc,
 };
 
@@ -358,21 +363,30 @@ export function markerRadiusPc(
  *
  * Eligibility is now purely geometric: `obj.distance_pc` compared against
  * `starMarkerRadiusPc`'s own shrink-start threshold
- * (`STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`) - the same
- * distance beyond which `starMarkerRadiusPc` returns the unshrunk
- * `STAR_MARKER_RADIUS_PC` for ANY camera position anyway. This is a
- * superset of the old tag-based eligibility, not a behavior change for
- * existing tagged stars: `denseBatchRadiusPc` (`lod.ts`'s
+ * (`starMarkerShrinkStartPc(denseBatchRadiusPc, bubbleOuterRadiusPc)`,
+ * `starMarkerScale.ts`) - the same distance beyond which `starMarkerRadiusPc`
+ * returns the unshrunk `STAR_MARKER_RADIUS_PC` for ANY camera position
+ * anyway. This is a superset of the old tag-based eligibility, not a
+ * behavior change for existing tagged stars: `denseBatchRadiusPc` (`lod.ts`'s
  * `denseBatchCollectionRadiusPc`, untouched by this issue - still keyed
  * off `recons-nearest-100` only) is BY DEFINITION the max `distance_pc`
  * among `recons-nearest-100`-tagged objects, so every one of those ~122
  * stars automatically satisfies `distance_pc <= denseBatchRadiusPc <
- * shrinkStartPc` (the multiplier is > 1) and stays eligible exactly as
- * before. Fomalhaut (7.70pc) now also satisfies it. The ~585 other
- * non-tagged stars remain far outside it (closest is ~76.6pc, well beyond
- * an ~11.26pc collection radius's 3x shrink-start line) and stay
- * ineligible, so they're unaffected - same as pre-#211, just verified by
- * real distance instead of assumed from the tag's absence.
+ * shrinkStartPc` (the threshold is always > `denseBatchRadiusPc`) and stays
+ * eligible exactly as before. Fomalhaut (7.70pc) now also satisfies it.
+ *
+ * Issue #300: `bubbleOuterRadiusPc` (defaulting to `null` for backward
+ * compatibility) is threaded through to `starMarkerShrinkStartPc` here too -
+ * when a Local Bubble layer is loaded, the threshold widens from the old flat
+ * ~33.8pc (`denseBatchRadiusPc * 3`) to `bubbleOuterRadiusPc` itself (~60pc),
+ * per the live investigation documented on `starMarkerShrinkStartPc`. This
+ * newly makes stars with `distance_pc` in the old gap (~34-60pc) eligible for
+ * camera-proximity shrink, which they weren't before - an intentional
+ * widening, not a bug, so their markers also get the smoothed-out shrink
+ * across the whole Local Bubble rather than sitting flat at their baseline
+ * ceiling for that whole range. The ~585 genuinely-far catalog stars
+ * (closest ~76.6pc, still beyond even the widened ~60pc threshold) remain
+ * ineligible and unaffected either way.
  *
  * `denseBatchRadiusPc <= 0` (scene not loaded yet) has nothing to compare
  * against, so nothing is eligible - matching `starMarkerRadiusPc`'s own
@@ -383,11 +397,15 @@ export function markerRadiusPc(
  * no longer gated behind the tag-membership array check first (see
  * `updateDenseBatchLod`'s docstring for the per-frame-walk performance
  * reasoning). */
-export function isStarMarkerShrinkEligible(obj: SceneObject, denseBatchRadiusPc: number): boolean {
+export function isStarMarkerShrinkEligible(
+  obj: SceneObject,
+  denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null = null,
+): boolean {
   if (!STAR_OBJECT_TYPES.has(obj.object_type) || denseBatchRadiusPc <= 0) {
     return false;
   }
-  return obj.distance_pc < denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+  return obj.distance_pc < starMarkerShrinkStartPc(denseBatchRadiusPc, bubbleOuterRadiusPc);
 }
 
 /** Issue #123's selection-reticle radius resolution, extracted (issue #130)
@@ -425,11 +443,11 @@ export function selectedMarkerRadiusPc(
   bubbleOuterRadiusPc: number | null = null,
 ): number {
   if (obj.id === sunObjectId) {
-    return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc);
+    return sunCoreRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, bubbleOuterRadiusPc);
   }
-  if (isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) {
+  if (isStarMarkerShrinkEligible(obj, denseBatchRadiusPc, bubbleOuterRadiusPc)) {
     const baselineRadiusPc = starBaselineRadiusPc(obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
-    return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc);
+    return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc, bubbleOuterRadiusPc);
   }
   return markerRadiusPc(obj.size_pc, obj.object_type, obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
 }
@@ -734,9 +752,9 @@ export function setInstanceVisibility(
 ): void {
   const obj = bucket.objects[index];
   let radiusPc = bucket.radiiPc[index];
-  if (visible && isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) {
+  if (visible && isStarMarkerShrinkEligible(obj, denseBatchRadiusPc, bubbleOuterRadiusPc)) {
     const baselineRadiusPc = starBaselineRadiusPc(obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
-    radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc);
+    radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc, bubbleOuterRadiusPc);
   }
   const effectiveRadiusPc = visible ? radiusPc : HIDDEN_INSTANCE_SCALE;
   bucket.mesh.setMatrixAt(index, instanceMatrixFor(obj, effectiveRadiusPc, positionPcOverride));
@@ -922,7 +940,7 @@ export function updateDenseBatchLod(
 ): void {
   for (const bucket of buckets) {
     bucket.objects.forEach((obj, i) => {
-      if (!isDenseBatchMember(obj) && !isStarMarkerShrinkEligible(obj, denseBatchRadiusPc)) return;
+      if (!isDenseBatchMember(obj) && !isStarMarkerShrinkEligible(obj, denseBatchRadiusPc, bubbleOuterRadiusPc)) return;
       setInstanceVisibility(
         bucket,
         i,

@@ -872,9 +872,15 @@ function applyDenseBatchLod(): void {
  * curve is now flat at its single floor for the entire range at or inside
  * `denseBatchRadiusPc` (mirroring `starMarkerRadiusPc` exactly), so there is
  * no longer a third, closer inner anchor for the camera's actual enforced
- * zoom limit to feed into. */
+ * zoom limit to feed into.
+ *
+ * Issue #300: also passes `bubbleOuterRadiusPc` (`null` until the scene
+ * loads, same as everywhere else this module threads it through) so the
+ * Sun's own curve picks up the widened Local-Bubble-relative shrink-start
+ * threshold exactly like every star's does - see `sunCoreRadiusPc`'s own
+ * docstring. */
 function applySunCoreScale(): void {
-  sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc));
+  sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc, bubbleOuterRadiusPc));
 }
 
 /** Issue #138: toggles the dense-batch collection-radius boundary shell's

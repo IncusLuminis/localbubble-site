@@ -65,6 +65,73 @@ export const STAR_MARKER_MIN_RADIUS_PC = 0.02;
 export const STAR_MARKER_SHRINK_START_MULTIPLIER = 3;
 
 /**
+ * Issue #300 (Epic #299, Story 1): `starMarkerRadiusPc`'s shrink-start
+ * threshold, hoisted into its own function (rather than left as an inline
+ * expression duplicated at each call site) so `objects.ts`'s
+ * `isStarMarkerShrinkEligible` - which needs the EXACT same threshold to
+ * decide which stars are close enough to bother camera-shrinking at all -
+ * can share it instead of maintaining a second, possibly-drifting copy.
+ * This mirrors this module's own established philosophy (see e.g.
+ * `sunCoreRadiusPc`'s docstring in `sun.ts`, or this module's own top
+ * docstring): whenever two curves/checks must agree on a boundary, make
+ * that agreement structural (one shared function) rather than two
+ * separately-tuned numbers that happen to match today.
+ *
+ * Investigated live (issue #300): with the pre-#300 flat
+ * `denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER` threshold
+ * (~33.8pc for the shipped scene's real ~11.26pc RECONS radius), star
+ * markers' camera-proximity shrink completes a little less than halfway
+ * across the ~60pc Local Bubble - every star's marker sits flat at its own
+ * real-distance-graduated `starBaselineRadiusPc` ceiling for the entire
+ * remaining ~34-60pc (and beyond) with zero further camera-distance
+ * feedback. Quantitatively (a representative star at `distance_pc = 45`,
+ * radius/cameraDistance as an angular-size proxy): the proxy climbs from
+ * ~0.018 at 15pc to a PEAK of ~0.0455 right at the old ~33.8pc threshold,
+ * then immediately starts FALLING again - 0.0385 at 40pc, 0.0256 at 60pc,
+ * 0.0128 at 120pc - for the rest of the Local Bubble and beyond, since nothing
+ * compensates for the camera's natural perspective shrink there anymore. That
+ * peak-then-reverse is a real, measurable artifact, not just a theoretical
+ * one: flying outward from the RECONS sphere toward "Fit to Local Bubble"
+ * framing, markers visibly grow most prominent a bit past the RECONS boundary
+ * and then start shrinking again well before the bubble's own edge - the same
+ * "loses proximity feedback, looks lost at the wider zoom" symptom Epic #299
+ * names for vectors/trails, just for star markers instead of arrow length.
+ *
+ * Fix: when a Local Bubble layer IS loaded (`bubbleOuterRadiusPc` a real
+ * positive value, and meaningfully outside `denseBatchRadiusPc` - a
+ * degenerate closer-in bubble radius would make "shrink start" narrower than
+ * the RECONS sphere itself, nonsensical), the shrink-start threshold becomes
+ * `bubbleOuterRadiusPc` itself (not a further multiple of it) rather than the
+ * old flat `denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER` - so
+ * the camera-proximity shrink now completes exactly as the camera crosses
+ * `isCameraInsideLocalBubble`'s own boundary, not partway through it. Re-run
+ * with this threshold, the same angular-size proxy above climbs
+ * monotonically for the star's entire real position range up to the bubble
+ * edge (0.0091 at 15pc -> 0.0251 at 55pc -> 0.0256 at 60pc) and only then
+ * starts the same natural perspective-only falloff beyond it (as expected -
+ * "you have now left the region this whole feature tracks proximity within"
+ * is a legitimate transition, not an artifact) - no more premature
+ * peak-and-reverse anywhere inside the bubble. Verified live in the browser
+ * at ~20/35/55/65pc camera distances against the shipped scene, alongside
+ * this numeric sweep.
+ *
+ * No Local Bubble layer at all (`bubbleOuterRadiusPc === null`/`<= 0`, or
+ * pathologically not outside `denseBatchRadiusPc`) falls back to the exact
+ * pre-#300 flat multiplier - zero behavior change for a scene without
+ * `structures.local_bubble`, matching this Story's other sentinel-handling
+ * (`currentViewScalePc`'s own "no bubble" degrade in `viewScale.ts`). */
+export function starMarkerShrinkStartPc(denseBatchRadiusPc: number, bubbleOuterRadiusPc: number | null = null): number {
+  if (
+    bubbleOuterRadiusPc !== null &&
+    Number.isFinite(bubbleOuterRadiusPc) &&
+    bubbleOuterRadiusPc > denseBatchRadiusPc
+  ) {
+    return bubbleOuterRadiusPc;
+  }
+  return denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+}
+
+/**
  * The star marker's camera-distance-dependent radius (pc), issue #119:
  * fixes the scale bug where a fixed marker radius (tuned for legibility at
  * the ~800pc overview) was larger than the real distance between the Sun and
@@ -74,9 +141,13 @@ export const STAR_MARKER_SHRINK_START_MULTIPLIER = 3;
  *
  * Two segments, continuous and monotonic, no discontinuous jump at either
  * boundary:
- * 1. At or beyond `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`
- *    (comfortably covering the ~800pc overview and the default ~1087pc
- *    "Perspective" pose): flat at `maxRadiusPc`.
+ * 1. At or beyond `starMarkerShrinkStartPc(denseBatchRadiusPc,
+ *    bubbleOuterRadiusPc)` (pre-#300: always the flat
+ *    `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`, comfortably
+ *    covering the ~800pc overview and the default ~1087pc "Perspective" pose;
+ *    issue #300 extends this to `bubbleOuterRadiusPc` itself when a Local
+ *    Bubble layer is loaded - see that function's own docstring for why):
+ *    flat at `maxRadiusPc`.
  * 2. From there down to `denseBatchRadiusPc` itself (the dense-LOD sphere's
  *    own boundary, #104): shrinks linearly to `STAR_MARKER_MIN_RADIUS_PC`,
  *    then stays clamped there for any distance at or inside
@@ -103,17 +174,25 @@ export const STAR_MARKER_SHRINK_START_MULTIPLIER = 3;
  * (passing its own `SUN_CORE_MAX_RADIUS_PC`, which is itself just
  * `STAR_MARKER_RADIUS_PC`) rather than maintaining a second, parallel
  * implementation of the identical curve - see that function's own docstring.
+ *
+ * Issue #300: `bubbleOuterRadiusPc` (defaulting to `null` for backward
+ * compatibility - every pre-#300 caller that doesn't pass it keeps its exact
+ * previous behavior) is threaded through to `starMarkerShrinkStartPc` alone -
+ * it does NOT otherwise change this function's shape, only where segment 1's
+ * boundary sits. See that function's docstring for the live investigation
+ * that motivated extending it past the flat RECONS-relative multiplier.
  */
 export function starMarkerRadiusPc(
   cameraDistanceFromOriginPc: number,
   denseBatchRadiusPc: number,
   maxRadiusPc: number = STAR_MARKER_RADIUS_PC,
+  bubbleOuterRadiusPc: number | null = null,
 ): number {
   if (denseBatchRadiusPc <= 0) {
     return maxRadiusPc;
   }
 
-  const shrinkStartPc = denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+  const shrinkStartPc = starMarkerShrinkStartPc(denseBatchRadiusPc, bubbleOuterRadiusPc);
   if (cameraDistanceFromOriginPc >= shrinkStartPc) {
     return maxRadiusPc;
   }

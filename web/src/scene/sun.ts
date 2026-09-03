@@ -2,8 +2,8 @@ import { Group, Mesh, MeshBasicMaterial, SphereGeometry } from "three";
 import {
   STAR_MARKER_RADIUS_PC,
   STAR_MARKER_MIN_RADIUS_PC,
-  STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
+  starMarkerShrinkStartPc,
   starBaselineRadiusPc,
 } from "./starMarkerScale";
 
@@ -21,8 +21,10 @@ import {
  */
 
 /** The core's radius (pc) at the ~800pc overview / any camera distance at
- * or beyond `STAR_MARKER_SHRINK_START_MULTIPLIER * denseBatchRadiusPc`
- * (issue #113) - i.e. the pre-#113 fixed radius, preserved as the upper
+ * or beyond `starMarkerShrinkStartPc(denseBatchRadiusPc, bubbleOuterRadiusPc)`
+ * (issue #113; issue #300 widened that threshold itself when a Local Bubble
+ * layer is loaded - see `starMarkerScale.ts`'s docstring) - i.e. the pre-#113
+ * fixed radius, preserved as the upper
  * bound of `sunCoreRadiusPc` below so overview-scale appearance doesn't
  * regress.
  *
@@ -119,8 +121,10 @@ export const SUN_BUBBLE_VIEW_OUTER_RADIUS_PC = 800;
  * while the camera is positioned to view the whole bubble (e.g. "Fit to
  * Local Bubble") - a camera distance well beyond where the Sun's own
  * pre-#219 flat 2pc ceiling started shrinking (`starMarkerRadiusPc`'s own
- * `denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER` threshold, only
- * ~34pc for the real RECONS boundary). The Sun's real distance from itself
+ * `starMarkerShrinkStartPc(denseBatchRadiusPc, bubbleOuterRadiusPc)`
+ * threshold - pre-#300 always ~34pc for the real RECONS boundary; #300
+ * widens it to ~60pc, the real Local Bubble radius, when that layer is
+ * loaded). The Sun's real distance from itself
  * is always 0, so it can't reuse #215's star-side formula the way a real
  * star does (there's no "how far is the Sun from the Sun" to graduate by) -
  * instead, this reuses `starMarkerScale.ts`'s `starBaselineRadiusPc` (the
@@ -138,20 +142,24 @@ export const SUN_BUBBLE_VIEW_OUTER_RADIUS_PC = 800;
  * docstring) is nowhere near the star tier's ~60pc physical-extent bound,
  * since `fitSpherePose` frames the whole scene with padding, not a tight
  * crop - a camera-distance scale needs camera-distance-appropriate bounds.
- * The INNER bound here is instead `denseBatchRadiusPc *
- * STAR_MARKER_SHRINK_START_MULTIPLIER` - `starMarkerRadiusPc`'s own
- * shrink-start threshold - so this new stage's floor (0.5pc) lands exactly
- * where the pre-existing close-in shrink's ceiling parameter already picks
- * up, by construction rather than by two separately-tuned numbers happening
- * to agree (the same continuity principle #217 established for the
- * boundary one level in, at `denseBatchRadiusPc` itself). The OUTER bound is
+ * The INNER bound here is instead
+ * `starMarkerShrinkStartPc(denseBatchRadiusPc, bubbleOuterRadiusPc)` -
+ * `starMarkerRadiusPc`'s own shrink-start threshold - so this new stage's
+ * floor (0.5pc) lands exactly where the pre-existing close-in shrink's
+ * ceiling parameter already picks up, by construction rather than by two
+ * separately-tuned numbers happening to agree (the same continuity principle
+ * #217 established for the boundary one level in, at `denseBatchRadiusPc`
+ * itself) - issue #300's widening of that shared threshold (see
+ * `starMarkerScale.ts`) is therefore picked up here automatically, with no
+ * separate change needed to keep the two aligned. The OUTER bound is
  * `SUN_BUBBLE_VIEW_OUTER_RADIUS_PC` (800pc) - see its own docstring.
  *
  * Net effect, camera distance decreasing from the default ~1087pc pose:
  * flat at `SUN_CORE_MAX_RADIUS_PC` (2pc) down to 800pc (unchanged from
  * pre-#219 - the confirmed-correct open-space/far-overview appearance);
- * NEW linearly tapering ceiling from 2pc down to 0.5pc between 800pc and
- * the RECONS shrink-start threshold (~34pc) - this is the "viewing the
+ * NEW (as of #219) linearly tapering ceiling from 2pc down to 0.5pc between
+ * 800pc and the shrink-start threshold (pre-#300 ~34pc; #300 widens it to
+ * ~60pc when a Local Bubble layer is loaded) - this is the "viewing the
  * Local Bubble" range this issue targets; then unchanged from #217,
  * `starMarkerRadiusPc`'s own close-in shrink continues from that (now
  * usually 0.5pc, not 2pc) ceiling down to `SUN_CORE_FLOOR_RADIUS_PC` at/
@@ -165,18 +173,25 @@ export const SUN_BUBBLE_VIEW_OUTER_RADIUS_PC = 800;
  * real catalog data, and the curve is flat at `SUN_CORE_FLOOR_RADIUS_PC` for
  * the entire inside-the-boundary region regardless of exactly how close the
  * camera can get - there is nothing left for that parameter to influence.
- */
+ *
+ * Issue #300: `bubbleOuterRadiusPc` (defaulting to `null` for backward
+ * compatibility) is threaded through to `starMarkerShrinkStartPc` and to
+ * `starMarkerRadiusPc` itself, so the Sun's curve stays IDENTICAL IN SHAPE to
+ * `starMarkerRadiusPc`'s own (this function's whole reason for existing, per
+ * issue #217 above) even after #300's extension - a scene with no
+ * `structures.local_bubble` layer sees no change to this function either. */
 export function sunCoreRadiusPc(
   cameraDistanceFromOriginPc: number,
   denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null = null,
 ): number {
-  const shrinkStartPc = denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+  const shrinkStartPc = starMarkerShrinkStartPc(denseBatchRadiusPc, bubbleOuterRadiusPc);
   const ceilingRadiusPc = starBaselineRadiusPc(
     cameraDistanceFromOriginPc,
     shrinkStartPc,
     SUN_BUBBLE_VIEW_OUTER_RADIUS_PC,
   );
-  return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, ceilingRadiusPc);
+  return starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, ceilingRadiusPc, bubbleOuterRadiusPc);
 }
 
 /** The Sun marker's constituent meshes, returned alongside the `Group` so

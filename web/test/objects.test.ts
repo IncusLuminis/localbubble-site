@@ -24,6 +24,7 @@ import {
   STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_SHRINK_START_MULTIPLIER,
   starMarkerRadiusPc,
+  starMarkerShrinkStartPc,
   STAR_OBJECT_TYPES,
   SUN_OBJECT_ID,
   updateBackgroundDimming,
@@ -338,6 +339,100 @@ describe("starMarkerRadiusPc (issue #119)", () => {
     // plus Proxima's shrunk marker must likewise stay well under the
     // 1.302pc Sun-Proxima gap.
     expect(SUN_CORE_FLOOR_RADIUS_PC + shrunkRadius).toBeLessThan(proximaToSunPc);
+  });
+});
+
+/**
+ * Issue #300 (Epic #299, Story 1): `starMarkerShrinkStartPc` and
+ * `starMarkerRadiusPc`'s new `bubbleOuterRadiusPc` parameter - the live
+ * investigation (documented on `starMarkerShrinkStartPc` in
+ * `starMarkerScale.ts`) found the pre-#300 flat
+ * `denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER` shrink-start
+ * threshold made star markers stop responding to camera proximity a little
+ * past a third of the way across the Local Bubble, so this widens it to
+ * `bubbleOuterRadiusPc` itself when that layer is loaded.
+ */
+describe("starMarkerShrinkStartPc / starMarkerRadiusPc's bubbleOuterRadiusPc parameter (issue #300)", () => {
+  const REALISTIC_DENSE_BATCH_RADIUS_PC = 11.26;
+  const REALISTIC_BUBBLE_OUTER_RADIUS_PC = 60;
+
+  it("starMarkerShrinkStartPc is bubbleOuterRadiusPc itself when a valid Local Bubble layer is loaded", () => {
+    expect(starMarkerShrinkStartPc(REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_BUBBLE_OUTER_RADIUS_PC)).toBe(
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC,
+    );
+  });
+
+  it("starMarkerShrinkStartPc falls back to the flat multiplier when bubbleOuterRadiusPc is null/non-positive/non-finite", () => {
+    const flatThreshold = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    expect(starMarkerShrinkStartPc(REALISTIC_DENSE_BATCH_RADIUS_PC, null)).toBe(flatThreshold);
+    expect(starMarkerShrinkStartPc(REALISTIC_DENSE_BATCH_RADIUS_PC, 0)).toBe(flatThreshold);
+    expect(starMarkerShrinkStartPc(REALISTIC_DENSE_BATCH_RADIUS_PC, -5)).toBe(flatThreshold);
+    expect(starMarkerShrinkStartPc(REALISTIC_DENSE_BATCH_RADIUS_PC, Number.NaN)).toBe(flatThreshold);
+  });
+
+  it("starMarkerShrinkStartPc falls back to the flat multiplier when bubbleOuterRadiusPc is degenerately <= denseBatchRadiusPc", () => {
+    const flatThreshold = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    expect(
+      starMarkerShrinkStartPc(REALISTIC_DENSE_BATCH_RADIUS_PC, REALISTIC_DENSE_BATCH_RADIUS_PC - 1),
+    ).toBe(flatThreshold);
+  });
+
+  it("starMarkerRadiusPc's default (no bubbleOuterRadiusPc passed) is unaffected - exact pre-#300 behavior", () => {
+    const shrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    expect(starMarkerRadiusPc(shrinkStartPc - 1, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBeLessThan(
+      markerRadiusPc(null, "star"),
+    );
+    expect(starMarkerRadiusPc(shrinkStartPc, REALISTIC_DENSE_BATCH_RADIUS_PC)).toBe(markerRadiusPc(null, "star"));
+  });
+
+  it("with bubbleOuterRadiusPc supplied, keeps shrinking past the old ~34pc threshold, all the way to the bubble edge", () => {
+    const oldShrinkStartPc = REALISTIC_DENSE_BATCH_RADIUS_PC * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    const maxRadiusPc = markerRadiusPc(null, "star");
+
+    // Just past the OLD threshold: pre-#300 this would already be flat at
+    // maxRadiusPc; with bubbleOuterRadiusPc supplied it should still be
+    // strictly mid-shrink (less than the ceiling).
+    const pastOldThreshold = starMarkerRadiusPc(
+      oldShrinkStartPc + 5,
+      REALISTIC_DENSE_BATCH_RADIUS_PC,
+      maxRadiusPc,
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC,
+    );
+    expect(pastOldThreshold).toBeLessThan(maxRadiusPc);
+
+    // Exactly at the new (bubble-relative) threshold: flat at the ceiling.
+    const atNewThreshold = starMarkerRadiusPc(
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC,
+      REALISTIC_DENSE_BATCH_RADIUS_PC,
+      maxRadiusPc,
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC,
+    );
+    expect(atNewThreshold).toBe(maxRadiusPc);
+
+    // Monotonic across the widened range (ascending camera distance).
+    const samples = [oldShrinkStartPc, 40, oldShrinkStartPc + 10, 50, REALISTIC_BUBBLE_OUTER_RADIUS_PC].map((d) =>
+      starMarkerRadiusPc(d, REALISTIC_DENSE_BATCH_RADIUS_PC, maxRadiusPc, REALISTIC_BUBBLE_OUTER_RADIUS_PC),
+    );
+    for (let i = 1; i < samples.length; i++) {
+      expect(samples[i]).toBeGreaterThanOrEqual(samples[i - 1]);
+    }
+  });
+
+  it("is continuous at the widened threshold boundary (no jump crossing bubbleOuterRadiusPc)", () => {
+    const maxRadiusPc = markerRadiusPc(null, "star");
+    const justInside = starMarkerRadiusPc(
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC - 0.001,
+      REALISTIC_DENSE_BATCH_RADIUS_PC,
+      maxRadiusPc,
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC,
+    );
+    const justOutside = starMarkerRadiusPc(
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC + 0.001,
+      REALISTIC_DENSE_BATCH_RADIUS_PC,
+      maxRadiusPc,
+      REALISTIC_BUBBLE_OUTER_RADIUS_PC,
+    );
+    expect(Math.abs(justOutside - justInside)).toBeLessThan(0.001);
   });
 });
 
@@ -1424,6 +1519,56 @@ describe("isStarMarkerShrinkEligible (issue #211)", () => {
     });
     expect(isStarMarkerShrinkEligible(justInside, collectionRadiusPc)).toBe(true);
     expect(isStarMarkerShrinkEligible(justOutside, collectionRadiusPc)).toBe(false);
+  });
+});
+
+/**
+ * Issue #300 (Epic #299, Story 1): with a Local Bubble layer loaded,
+ * `isStarMarkerShrinkEligible`'s threshold widens from the flat
+ * `denseBatchRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER` (~33.8pc for
+ * this collection radius) to `bubbleOuterRadiusPc` itself (~60pc) - see
+ * `starMarkerShrinkStartPc`'s docstring in `starMarkerScale.ts` for the live
+ * investigation that motivated this.
+ */
+describe("isStarMarkerShrinkEligible with bubbleOuterRadiusPc (issue #300)", () => {
+  const collectionRadiusPc = 11.26;
+  const bubbleOuterRadiusPc = 60;
+
+  it("is eligible for a star in the old ~34-60pc gap once bubbleOuterRadiusPc is supplied", () => {
+    const gapStar = makeObject({ id: "gap-star", object_type: "star", distance_pc: 45 });
+    expect(isStarMarkerShrinkEligible(gapStar, collectionRadiusPc)).toBe(false);
+    expect(isStarMarkerShrinkEligible(gapStar, collectionRadiusPc, bubbleOuterRadiusPc)).toBe(true);
+  });
+
+  it("is exactly at the widened boundary: eligible just inside bubbleOuterRadiusPc, ineligible just outside", () => {
+    const justInside = makeObject({ id: "just-inside-bubble", object_type: "star", distance_pc: bubbleOuterRadiusPc - 0.001 });
+    const justOutside = makeObject({ id: "just-outside-bubble", object_type: "star", distance_pc: bubbleOuterRadiusPc + 0.001 });
+    expect(isStarMarkerShrinkEligible(justInside, collectionRadiusPc, bubbleOuterRadiusPc)).toBe(true);
+    expect(isStarMarkerShrinkEligible(justOutside, collectionRadiusPc, bubbleOuterRadiusPc)).toBe(false);
+  });
+
+  it("stays false for a genuinely-far star (beyond even the widened bubbleOuterRadiusPc threshold)", () => {
+    const genuinelyFarStar = makeObject({ id: "genuinely-far", object_type: "star", distance_pc: 76.6 });
+    expect(isStarMarkerShrinkEligible(genuinelyFarStar, collectionRadiusPc, bubbleOuterRadiusPc)).toBe(false);
+  });
+
+  it("STAR_B (50pc) is now eligible with bubbleOuterRadiusPc, unlike the flat pre-#300 threshold", () => {
+    expect(isStarMarkerShrinkEligible(STAR_B, collectionRadiusPc)).toBe(false);
+    expect(isStarMarkerShrinkEligible(STAR_B, collectionRadiusPc, bubbleOuterRadiusPc)).toBe(true);
+  });
+
+  it("falls back to the flat denseBatchRadiusPc*3 threshold when bubbleOuterRadiusPc is null/non-positive", () => {
+    const shrinkStartPc = collectionRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    const justInside = makeObject({ id: "just-inside-flat", object_type: "star", distance_pc: shrinkStartPc - 0.001 });
+    expect(isStarMarkerShrinkEligible(justInside, collectionRadiusPc, null)).toBe(true);
+    expect(isStarMarkerShrinkEligible(justInside, collectionRadiusPc, 0)).toBe(true);
+    expect(isStarMarkerShrinkEligible(justInside, collectionRadiusPc, -5)).toBe(true);
+  });
+
+  it("falls back to the flat threshold when bubbleOuterRadiusPc is degenerately <= denseBatchRadiusPc", () => {
+    const shrinkStartPc = collectionRadiusPc * STAR_MARKER_SHRINK_START_MULTIPLIER;
+    const justInside = makeObject({ id: "degenerate-bubble", object_type: "star", distance_pc: shrinkStartPc - 0.001 });
+    expect(isStarMarkerShrinkEligible(justInside, collectionRadiusPc, collectionRadiusPc - 1)).toBe(true);
   });
 });
 
