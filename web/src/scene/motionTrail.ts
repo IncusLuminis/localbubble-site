@@ -12,6 +12,7 @@ import {
 import { clampPlayerTimeYears, starPositionAtTime } from "./motionPlayer";
 import type { PlayerDirection } from "./motionPlayer";
 import type { SceneObject, SceneVelocity } from "./sceneTypes";
+import { currentViewScalePc } from "./viewScale";
 
 /**
  * Story #240 (Epic #238's Story 2 of 2): a fixed-simulated-time-window
@@ -75,8 +76,105 @@ import type { SceneObject, SceneVelocity } from "./sceneTypes";
  * readable. Live-verified in the running viewer at "Fit to nearest-stars
  * sphere" zoom (see the PR description); adjust here if it ever reads too
  * long/short.
+ *
+ * Story #302 (Epic #299, the Epic's final Story): this constant itself is
+ * UNCHANGED - still the RECONS-scale base window tuned above, and still
+ * exactly what every consumer gets at/inside the RECONS sphere (see
+ * `currentTrailWindowYears` below, which returns exactly this value there).
+ * What changed is that callers (`main.ts`'s `applyPlayerAnimation`) no
+ * longer pass this constant directly to `starTrailPositionsPc`'s
+ * `windowYears` parameter - they pass `currentTrailWindowYears`'s
+ * camera-scale-relative result instead, which EQUALS this constant at RECONS
+ * scale and grows smoothly beyond it. This constant remains the correct
+ * default for every direct/test caller that doesn't pass its own
+ * `windowYears` (unchanged - see every function below).
  */
 export const TRAIL_WINDOW_YEARS = 60_000;
+
+/**
+ * Story #302 (Epic #299): the same scale-relative factor
+ * `velocityVectors.ts`'s `currentArrowScaleFactor` uses, duplicated here
+ * (not imported from there - that module stays a sibling leaf consumer of
+ * `viewScale.ts`, not a dependency of this one, mirroring how neither
+ * imports from the other) rather than centralized, per this Epic's own
+ * "each consumer owns its own scale-factor wrapper around the shared
+ * `currentViewScalePc` primitive" pattern established by Story #301.
+ *
+ * Exactly `1` at or inside the RECONS dense-batch sphere (`currentViewScalePc`
+ * returns EXACTLY `denseBatchRadiusPc` there, so this is `x / x`, always
+ * exactly `1` under IEEE 754 for finite nonzero `x`) - see
+ * `currentTrailWindowYears` below for how that guarantees today's exact
+ * trail appearance is reproduced bit-for-bit at RECONS scale. Grows smoothly
+ * and monotonically beyond it, per `currentViewScalePc`'s own three-segment
+ * shape - no discontinuous jump at either boundary.
+ *
+ * `denseBatchRadiusPc <= 0` (scene not loaded yet) returns `0`, the same
+ * "nothing to scale yet" sentinel `currentArrowScaleFactor` uses - in
+ * practice never hit for a real trail, since `main.ts` only calls
+ * `currentTrailWindowYears` from inside its `animatedStars` loop, itself only
+ * populated after the scene (and so `denseBatchRadiusPc`) has loaded.
+ */
+export function currentTrailScaleFactor(
+  cameraDistanceFromOriginPc: number,
+  denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null,
+): number {
+  if (denseBatchRadiusPc <= 0) {
+    return 0;
+  }
+  return (
+    currentViewScalePc(cameraDistanceFromOriginPc, denseBatchRadiusPc, bubbleOuterRadiusPc) / denseBatchRadiusPc
+  );
+}
+
+/**
+ * Story #302's chosen lever (see this Story's PR description for the full
+ * "which lever" reasoning): scales the trail's effective LENGTH by scaling
+ * the fixed simulated-TIME WINDOW itself (`windowYears`) by
+ * `currentTrailScaleFactor`, rather than leaving the time window flat and
+ * capping/rescaling the resulting rendered pc length after the fact.
+ *
+ * This works because `starPositionAtTime` (`motionPlayer.ts`) is a plain
+ * LINEAR extrapolation (`position + velocity * t`) - a star's real physical
+ * distance traveled over a time window is therefore always EXACTLY
+ * proportional to that window's length, for any fixed velocity. Scaling
+ * `windowYears` by a factor `s` therefore scales the resulting trail's real
+ * pc length by that exact same factor `s`, for every star, regardless of its
+ * own individual speed - unlike `velocityVectors.ts`'s arrow length (an
+ * artistic, clamped speed-to-length mapping with no single natural
+ * "underlying" quantity to scale), motion trails already have one: real
+ * elapsed simulated time. Scaling that one quantity is simpler than deriving
+ * an equivalent pc-length clamp/rescale, and reuses
+ * `trailWindowStartYears`/`trailSampleTimesYears`/`starTrailPositionsPc`'s
+ * EXISTING `windowYears` parameter (already threaded through all three,
+ * long before this Story, as an overridable default) rather than requiring
+ * any change to those functions' own bodies - so #240's growth-from-Today/
+ * shrink-to-Today mechanism (`distanceFromTodayYears = min(|currentTimeYears|,
+ * windowYears)`) is untouched code-wise; only the VALUE `main.ts` passes for
+ * `windowYears` differs per frame now.
+ *
+ * Exactly `TRAIL_WINDOW_YEARS` (the default `windowYears` argument) at or
+ * inside the RECONS sphere (`currentTrailScaleFactor` is exactly `1` there),
+ * which is what makes today's exact trail appearance reproduce bit-for-bit
+ * at that scale - see this module's test file's dedicated RECONS-exact-
+ * reproduction test. Grows smoothly beyond it, so a fast mover's trail
+ * covers proportionally more real distance at wider Local Bubble zoom, the
+ * same way it already does across different stars' own speeds at a single
+ * fixed zoom (per `TRAIL_WINDOW_YEARS`'s own docstring above) - reading as a
+ * clearly longer, more visible tail rather than staying pinned to its
+ * RECONS-tuned length and getting lost against the much larger Local Bubble
+ * scale.
+ */
+export function currentTrailWindowYears(
+  cameraDistanceFromOriginPc: number,
+  denseBatchRadiusPc: number,
+  bubbleOuterRadiusPc: number | null,
+  windowYears: number = TRAIL_WINDOW_YEARS,
+): number {
+  return (
+    windowYears * currentTrailScaleFactor(cameraDistanceFromOriginPc, denseBatchRadiusPc, bubbleOuterRadiusPc)
+  );
+}
 
 /**
  * Number of ribbon segments per trail (so `TRAIL_SEGMENT_COUNT + 1` sampled
