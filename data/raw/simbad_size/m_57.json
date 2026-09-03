@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "M  57",
+  "retrieved_utc": "2026-09-03T14:18:13+00:00",
+  "record_id": "M  57",
+  "raw": {
+    "main_id": "M  57",
+    "ra": 283.39623652463,
+    "dec": 33.029134246539996,
+    "coo_err_maj": 0.0333000011742115,
+    "coo_err_min": 0.03830000013113022,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "galdim_minaxis": 1.152999997138977,
+    "galdim_majaxis": 1.152999997138977,
+    "galdim_qual": "D",
+    "galdim_angle": 90,
+    "galdim_bibcode": "2008ApJ...689..194S",
+    "matched_id": "M  57"
+  }
+}

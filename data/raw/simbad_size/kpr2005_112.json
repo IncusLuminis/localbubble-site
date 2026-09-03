@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "[KPR2005] 112",
+  "retrieved_utc": "2026-09-03T14:17:36+00:00",
+  "record_id": "[KPR2005] 112",
+  "raw": {
+    "main_id": "[KPR2005] 112",
+    "ra": 304.12708333333325,
+    "dec": 52.0511111111111,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_minaxis": 30.799999237060547,
+    "galdim_majaxis": 30.799999237060547,
+    "galdim_qual": "D",
+    "galdim_angle": 0,
+    "galdim_bibcode": "2020A&A...633A..99C",
+    "matched_id": "[KPR2005] 112"
+  }
+}

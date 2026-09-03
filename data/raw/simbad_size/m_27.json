@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "M  27",
+  "retrieved_utc": "2026-09-03T14:18:12+00:00",
+  "record_id": "M  27",
+  "raw": {
+    "main_id": "M  27",
+    "ra": 299.90151327087,
+    "dec": 22.721197794319995,
+    "coo_err_maj": 0.021900000050663948,
+    "coo_err_min": 0.02810000069439411,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "galdim_minaxis": 6.699999809265137,
+    "galdim_majaxis": 6.699999809265137,
+    "galdim_qual": "C",
+    "galdim_angle": 90,
+    "galdim_bibcode": "1992ESOPN...1....1A",
+    "matched_id": "M  27"
+  }
+}

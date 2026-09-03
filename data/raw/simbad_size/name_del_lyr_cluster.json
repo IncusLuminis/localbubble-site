@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "NAME del Lyr Cluster",
+  "retrieved_utc": "2026-09-03T14:17:53+00:00",
+  "record_id": "NAME del Lyr Cluster",
+  "raw": {
+    "main_id": "NAME del Lyr Cluster",
+    "ra": 283.56791666666663,
+    "dec": 36.89888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_minaxis": 29.899999618530273,
+    "galdim_majaxis": 29.899999618530273,
+    "galdim_qual": "D",
+    "galdim_angle": 0,
+    "galdim_bibcode": "2020A&A...633A..99C",
+    "matched_id": "NAME del Lyr Cluster"
+  }
+}

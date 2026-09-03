@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "M  76",
+  "retrieved_utc": "2026-09-03T14:18:15+00:00",
+  "record_id": "M  76",
+  "raw": {
+    "main_id": "M  76",
+    "ra": 25.58189905342,
+    "dec": 51.57542638057,
+    "coo_err_maj": 0.1257999986410141,
+    "coo_err_min": 0.13249999284744263,
+    "coo_err_angle": 90,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020yCat.1350....0G",
+    "galdim_minaxis": 2.306999921798706,
+    "galdim_majaxis": 2.306999921798706,
+    "galdim_qual": "D",
+    "galdim_angle": 90,
+    "galdim_bibcode": "2008ApJ...689..194S",
+    "matched_id": "M  76"
+  }
+}

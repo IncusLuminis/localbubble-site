@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "Rho Ophiuchi cloud",
+  "retrieved_utc": "2026-09-03T14:17:27+00:00",
+  "record_id": "NAME Ophiuchus Molecular Cloud",
+  "raw": {
+    "main_id": "NAME Ophiuchus Molecular Cloud",
+    "ra": 247.02499999999995,
+    "dec": -24.541666666666668,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "galdim_minaxis": 480.0,
+    "galdim_majaxis": 600.0,
+    "galdim_qual": "D",
+    "galdim_angle": null,
+    "galdim_bibcode": "2018MNRAS.474.4672L",
+    "matched_id": "NAME rho Ophiuchi Cloud"
+  }
+}

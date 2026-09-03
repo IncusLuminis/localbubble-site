@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "Cl Alessi   36",
+  "retrieved_utc": "2026-09-03T14:17:59+00:00",
+  "record_id": "Cl Alessi   36",
+  "raw": {
+    "main_id": "Cl Alessi   36",
+    "ra": 106.78583333333334,
+    "dec": -37.72888888888889,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_minaxis": 71.19999694824219,
+    "galdim_majaxis": 71.19999694824219,
+    "galdim_qual": "D",
+    "galdim_angle": 0,
+    "galdim_bibcode": "2020A&A...633A..99C",
+    "matched_id": "Cl Alessi   36"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "Cl Alessi   94",
+  "retrieved_utc": "2026-09-03T14:17:56+00:00",
+  "record_id": "Cl Alessi   94",
+  "raw": {
+    "main_id": "Cl Alessi   94",
+    "ra": 5.584166666666666,
+    "dec": 46.53194444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_minaxis": 65.5999984741211,
+    "galdim_majaxis": 65.5999984741211,
+    "galdim_qual": "D",
+    "galdim_angle": 0,
+    "galdim_bibcode": "2020A&A...633A..99C",
+    "matched_id": "Cl Alessi   94"
+  }
+}

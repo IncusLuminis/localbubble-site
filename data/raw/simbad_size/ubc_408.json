@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "UBC 408",
+  "retrieved_utc": "2026-09-03T14:18:04+00:00",
+  "record_id": "UBC 408",
+  "raw": {
+    "main_id": "UBC 408",
+    "ra": 5.352083333333334,
+    "dec": 65.495,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_minaxis": 30.399999618530273,
+    "galdim_majaxis": 30.399999618530273,
+    "galdim_qual": "D",
+    "galdim_angle": 0,
+    "galdim_bibcode": "2020A&A...633A..99C",
+    "matched_id": "UBC 408"
+  }
+}

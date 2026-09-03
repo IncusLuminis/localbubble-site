@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "UBC 115",
+  "retrieved_utc": "2026-09-03T14:18:08+00:00",
+  "record_id": "UBC 115",
+  "raw": {
+    "main_id": "UBC 115",
+    "ra": 293.9041666666666,
+    "dec": -3.6483333333333334,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2020A&A...633A..99C",
+    "galdim_minaxis": 28.299999237060547,
+    "galdim_majaxis": 28.299999237060547,
+    "galdim_qual": "D",
+    "galdim_angle": 0,
+    "galdim_bibcode": "2020A&A...633A..99C",
+    "matched_id": "UBC 115"
+  }
+}
