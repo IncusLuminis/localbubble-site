@@ -145,7 +145,13 @@ export function catalogObjectTypes(objects: SceneObject[]): string[] {
   return Array.from(types).sort();
 }
 
-const OBJECT_TYPE_COLORS: Record<string, number> = {
+/** Issue #315: exported so `scene/diffuseStructures.ts`'s generic extended-
+ * volume mesh factory can color each diffuse-structure mesh with the exact
+ * same per-`object_type` color this module's point-marker buckets already
+ * used for the same types - reusing this table verbatim (spec's own "reuse
+ * existing per-type color... conventions" instruction) rather than
+ * maintaining a second, possibly-drifting copy. */
+export const OBJECT_TYPE_COLORS: Record<string, number> = {
   star: 0xffffff,
   star_cluster: 0xffd27f,
   stellar_association: 0xff9f6b,
@@ -163,7 +169,11 @@ const OBJECT_TYPE_COLORS: Record<string, number> = {
   reference_point: 0x9aa7bd,
 };
 
-const DEFAULT_COLOR = 0xaab4c8;
+/** Issue #315: exported alongside `OBJECT_TYPE_COLORS` for the same reason
+ * - `scene/diffuseStructures.ts` needs the identical "unrecognized type"
+ * color fallback `createCatalogObjectGroup`/`updateBackgroundDimming` below
+ * already use, rather than inventing a second fallback color. */
+export const DEFAULT_COLOR = 0xaab4c8;
 
 /** Visual-only marker radius tiers (pc) - issue #103, spec
  * `Idea-v1.3-visual-fidelity-and-navigation.md` §2.3. This is display
@@ -215,7 +225,14 @@ const DEFAULT_COLOR = 0xaab4c8;
 const CLUSTER_MIN_RADIUS_PC = 5;
 const CLUSTER_MAX_RADIUS_PC = 9;
 
-const STRUCTURE_MIN_RADIUS_PC = 10;
+/** Issue #315: exported so `scene/diffuseStructures.ts` can reuse this
+ * exact same floor as its own fallback radius for a diffuse-structure
+ * record that still lacks `size_pc` after Story #314's honest-failure
+ * backfill (one record today: M8/Lagoon Nebula) - the object then renders
+ * at exactly the same visual radius its old point marker used to (this was
+ * already that marker's own floor for every `size_pc`-less structure/
+ * diffuse-type object pre-#315), rather than an arbitrary new default. */
+export const STRUCTURE_MIN_RADIUS_PC = 10;
 const STRUCTURE_MAX_RADIUS_PC = 45;
 
 /** `size_pc` divisor shared by the cluster and structure tiers (unchanged
