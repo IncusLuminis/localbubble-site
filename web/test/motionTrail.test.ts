@@ -11,6 +11,7 @@ import {
   trailWindowStartYears,
 } from "../src/scene/motionTrail";
 import type { SceneVelocity } from "../src/scene/sceneTypes";
+import { VIEW_SCALE_OPEN_SPACE_CEILING_MULTIPLIER } from "../src/scene/viewScale";
 
 /** Story #302: a representative RECONS-scale reference radius (matching
  * `viewScale.test.ts`'s/`velocityVectors.test.ts`'s own
@@ -381,7 +382,14 @@ describe("currentTrailWindowYears", () => {
     });
 
     it("holds flat once the camera passes the open-space ceiling, matching currentTrailScaleFactor's own flattening", () => {
-      const ceilingPc = BUBBLE_OUTER_RADIUS_PC * 3; // VIEW_SCALE_OPEN_SPACE_CEILING_MULTIPLIER
+      // Story #309: reads the real, live multiplier (raised from 3 to 40 -
+      // see viewScale.ts's own docstring) rather than a hardcoded literal,
+      // so this test can't silently drift out of sync with that tuning
+      // again the way it did before this Story (the pre-#309 hardcoded `* 3`
+      // here kept passing by coincidence right up until the multiplier
+      // actually changed, at which point it would have started asserting
+      // the OLD ceiling instead of today's real one).
+      const ceilingPc = BUBBLE_OUTER_RADIUS_PC * VIEW_SCALE_OPEN_SPACE_CEILING_MULTIPLIER;
       const atCeiling = currentTrailWindowYears(ceilingPc, DENSE_BATCH_RADIUS_PC, BUBBLE_OUTER_RADIUS_PC);
       const beyondCeiling = currentTrailWindowYears(
         ceilingPc * 2,
