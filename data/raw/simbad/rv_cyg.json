@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "RV Cyg",
-  "retrieved_utc": "2026-08-23T02:05:46+00:00",
+  "retrieved_utc": "2026-09-03T09:46:28+00:00",
   "record_id": "V* RV Cyg",
   "raw": {
     "main_id": "V* RV Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 10.800000190734863,
-    "plx_value": 1.4923,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "sp_type": "C-N5:",
-    "plx_err": 0.0868000015616417,
+    "plx_value": 1.4923,
     "otype": "C*",
+    "pmra": -6.912,
+    "pmdec": -5.88,
+    "plx_err": 0.0868000015616417,
+    "rvz_radvel": 2.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 351564058|Gaia DR3 1952830855365548416|AAVSO 2139+37|AG+37 2138|BD+37  4407|C* 3063|CCDM J21434+3801A|CGCS 5425|CSI+37  4407  1|DO 20811|GC 30416|GCRV 13647|HD 206750|HIC 107242|HIP 107242|IDS 21391+3734 A|IRAS 21412+3747|IRC +40491|LEE 230|RAFGL 2798|SAO  71642|SKY# 41408|V* RV Cyg|[HFE83] 1458|[LFO93] 2141+37|2MASS J21431632+3801029|WDS J21432+3801A|TYC 3184-2150-1|WEB 19370|WDS J21432+3801Aa,Ab|** HDS 3094|** BLL   55A|Gaia DR2 1952830855359293312",
     "matched_id": "V* RV Cyg"
   }

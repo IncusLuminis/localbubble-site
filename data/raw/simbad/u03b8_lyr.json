@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "θ Lyr",
-  "retrieved_utc": "2026-08-23T02:04:53+00:00",
+  "retrieved_utc": "2026-09-03T09:45:19+00:00",
   "record_id": "* tet Lyr",
   "raw": {
     "main_id": "* tet Lyr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.380000114440918,
-    "plx_value": 4.2005,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "K0II",
-    "plx_err": 0.10530000180006027,
+    "plx_value": 4.2005,
     "otype": "*",
+    "pmra": -2.864,
+    "pmdec": 4.114,
+    "plx_err": 0.10530000180006027,
+    "rvz_radvel": -31.05,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 121937415|HIP 94713|Gaia DR3 2099385000742174592|PLX 4498|*  21 Lyr|* tet Lyr|AAVSO 1912+37|AG+38 1814|BD+37  3398|BDS  9186 A|CCDM J19164+3808A|CSI+37  3398  1|FK5  724|GC 26585|GCRV 11738|GEN# +1.00180809|GSC 03121-02287|HD 180809|HIC  94713|HR  7314|IDS 19129+3757 A|IRC +40341|JP11  3088|N30 4268|NSV 11873|PMC 90-93   514|PPM  82611|ROT  2760|SAO  68065|SKY# 35769|TD1 24338|TYC 3121-2287-1|UBV   16324|UBV M  23645|[B10]  4912|uvby98 100180809|PLX 4498.00|WDS J19164+3808A|2MASS J19162210+3808015|IRAS 19146+3802|WEB 16518|Gaia DR2 2099385000747599104",
     "matched_id": "* tet Lyr"
   }

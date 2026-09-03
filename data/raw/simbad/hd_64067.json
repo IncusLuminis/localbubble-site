@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 64067",
-  "retrieved_utc": "2026-08-23T02:02:14+00:00",
+  "retrieved_utc": "2026-09-03T09:41:53+00:00",
   "record_id": "HD  64067",
   "raw": {
     "main_id": "HD  64067",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.570000171661377,
-    "plx_value": 2.4426,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "G5II",
-    "plx_err": 0.11500000208616257,
+    "plx_value": 2.4426,
     "otype": "*",
+    "pmra": -5.124,
+    "pmdec": 12.902,
+    "plx_err": 0.11500000208616257,
+    "rvz_radvel": 18.91,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 264768896|GEN# +1.00064067|HD  64067A|HIP 38152|Gaia DR3 5295639013192061184|2MASS J07490672-5624372|CCDM J07491-5625A|AC2000 4045396|UCAC2  50011609|USNO-B1.0 0335-00077899|HR  3062|GC 10589|SRS  41745|CD-56  2011|ACRS  80588|IRAS F07480-5616|IRAS 07480-5616|CPC  7  2053|CPD-56  1442|GCRV  5221|GSC 08561-01521|HD  64067|HD  64067D|HIC  38152|IDS 07470-5610 A|PPM 336415|SAO 235539|SKY# 14521|TYC 8561-1521-1|UBV M  13725|WDS J07491-5625A|uvby98 100064067|WEB  7519|Gaia DR2 5295639013192061184",
     "matched_id": "HD  64067"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ω Gem",
-  "retrieved_utc": "2026-08-23T02:04:11+00:00",
+  "retrieved_utc": "2026-09-03T09:44:26+00:00",
   "record_id": "* ome Gem",
   "raw": {
     "main_id": "* ome Gem",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.181000232696533,
-    "plx_value": 3.5179,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "G5IIa",
-    "plx_err": 0.09539999812841415,
+    "plx_value": 3.5179,
     "otype": "Ce*",
+    "pmra": -7.054,
+    "pmdec": -0.392,
+    "plx_err": 0.09539999812841415,
+    "rvz_radvel": -8.09,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 91614224|HIP 33927|Gaia DR3 3380630129471406848|2MASS J07022479+2412555|PLX 1645|* ome Gem|*  42 Gem|AG+24  761|BD+24  1502|CSV 100792|FK5 1182|GC  9263|GCRV  4616|GEN# +1.00052497|GSC 01895-02276|HD  52497|HIC  33927|HR  2630|IRAS 06593+2417|IRC +20165|N30 1527|PMC 90-93   798|PPM  96934|ROT  1130|SAO  78999|SKY# 12603|SRS  31182|SV* P   421|TYC 1895-2276-1|UBV    6914|UBV M  12742|V* ome Gem|YZ  24  2735|PLX 1645.00|uvby98 100052497|WEB  6807|Gaia DR2 3380630129471406848",
     "matched_id": "* ome Gem"
   }

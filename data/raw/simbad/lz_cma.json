@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "LZ CMa",
-  "retrieved_utc": "2026-08-23T02:01:46+00:00",
+  "retrieved_utc": "2026-09-03T09:41:21+00:00",
   "record_id": "HD  54912",
   "raw": {
     "main_id": "HD  54912",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.690000057220459,
-    "plx_value": 1.5724,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B2V",
-    "plx_err": 0.07850000262260437,
+    "plx_value": 1.5724,
     "otype": "**",
+    "pmra": -4.494,
+    "pmdec": 3.394,
+    "plx_err": 0.07850000262260437,
+    "rvz_radvel": 27.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 64789187|GEN# +1.00054912|HIP 34579|Gaia DR3 5611395220573653504|2MASS J07094301-2513516|CCDM J07097-2514A|CD-25  4120|CEL   1630|CPD-25  2012|CSI-25  4120 21|CSI-25  4120 23|GC  9473|GCRV  4717|GSC 06528-04220|HD  54912|HIC  34579|HR  2704|IDS 07056-2504 A|PPM 251771|SAO 173101|SKY# 12885|SRS  41544|TD1  9318|UBV M  12953|V* LZ CMa|YZ 115  4527|ALS 14877|TYC 6528-4220-1|WDS J07097-2514Aa,Ab|uvby98 100054912|WEB  6920|Gaia DR2 5611395220573653504",
     "matched_id": "V* LZ CMa"
   }

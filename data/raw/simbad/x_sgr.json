@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "X Sgr",
-  "retrieved_utc": "2026-08-23T02:07:06+00:00",
+  "retrieved_utc": "2026-09-03T09:48:12+00:00",
   "record_id": "V* X Sgr",
   "raw": {
     "main_id": "V* X Sgr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.539999961853027,
-    "plx_value": 2.8057,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "F7II",
-    "plx_err": 0.14000000059604645,
+    "plx_value": 2.8057,
     "otype": "cC*",
+    "pmra": -4.948,
+    "pmdec": -10.553,
+    "plx_err": 0.14000000059604645,
+    "rvz_radvel": -10.1,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 126247328|WISEA J174733.61-274951.1|HIP 87072|Gaia DR3 4057701830728920064|PLX 4055|*   3 Sgr|AAVSO 1741-27|CD-27 11930|CPD-27  5764|FK5 1464|GC 24135|GCRV 10284|GEN# +1.00161592|GSC 06836-00118|HD 161592|HIC  87072|HR  6616|IRAS 17444-2748|IRC -30324|N30 3952|PMC 90-93  1038|PPM 267303|ROT  2487|SAO 185755|SKY# 32165|SRS  31464|TD1 20956|TYC 6836-118-1|UBV   21663|V* X Sgr|YZ 117 11292|2MASS J17473363-2749507|PLX 4055.00|UCAC4 311-127539|WISE J174733.63-274953.1|AKARI-IRC-V1 J1747335-274951|SBC9 3099|uvby98 100161592|WEB 14691|Gaia DR2 4057701830728920064",
     "matched_id": "V* X Sgr"
   }

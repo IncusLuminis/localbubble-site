@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "χ Pup",
-  "retrieved_utc": "2026-08-23T01:56:34+00:00",
+  "retrieved_utc": "2026-09-03T09:34:33+00:00",
   "record_id": "* chi Pup",
   "raw": {
     "main_id": "* chi Pup",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.789999961853027,
-    "plx_value": 1.7157,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "A7III",
-    "plx_err": 0.10019999742507935,
+    "plx_value": 1.7157,
     "otype": "*",
+    "pmra": -8.22,
+    "pmdec": 6.546,
+    "plx_err": 0.10019999742507935,
+    "rvz_radvel": 31.95,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 151845521|HIP 38901|Gaia DR3 5596975125580580736|2MASS J07574010-3020044|PLX 1887|CD-29  5236|CPC 17  3666|CPD-30  2135|CSV 100909|FK5 1210|GC 10774|GCRV  5293|GEN# +1.00065456|GSC 07120-02422|HD  65456|HIC  38901|HR  3113|IRAS 07556-3011|JP11  1615|N30 1824|NSV  3830|PMC 90-93   820|PPM 284622|RF E1-1|ROT  1277|SAO 198636|SKY# 14887|SRS  31210|SV* ZI   674|TD1 11455|TYC 7120-2422-1|UBV    7669|UBV M  13853|YZ 120  4615|[FM75] Puppis  24|[FWS69]    I-24|uvby98 100065456|PLX 1887.00|* chi Pup|WEB  7622|Gaia DR2 5596975125579300352",
     "matched_id": "* chi Pup"
   }

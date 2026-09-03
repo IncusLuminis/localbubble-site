@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 209339",
-  "retrieved_utc": "2026-08-23T02:00:11+00:00",
+  "retrieved_utc": "2026-09-03T09:39:19+00:00",
   "record_id": "HD 209339",
   "raw": {
     "main_id": "HD 209339",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.510000228881836,
-    "plx_value": 1.0386,
+    "rvz_bibcode": "2020AJ....160..120J",
     "sp_type": "O9.7IV",
-    "plx_err": 0.0284000001847744,
+    "plx_value": 1.0386,
     "otype": "**",
+    "pmra": -1.45,
+    "pmdec": -2.382,
+    "plx_err": 0.0284000001847744,
+    "rvz_radvel": 18.923,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 333965286|WISEA J220039.25+622915.9|AP J22003925+6229161|Gaia DR3 2204409870400823936|AG+62 1299|ALS 12087|BD+61  2233|CCDM J22007+6229AB|CEL   5418|GC 30812|GCRV 13835|GSC 04267-01699|HD 209339|HGAM   1049|HIC 108650|HIP 108650|HR  8399|IDS 21576+6201 AB|LS III +62    6|MCW 1021|PPM  23382|SAO  19792|SKY# 41936|TD1 28710|UBV   18823|[PGH98b] Star  8|2MASS J22003925+6229161|WDS J22007+6229AB|** KPR  110|Renson 58240|GOS G104.58+05.87 01|Gaia DR1 2204409866095738496|WEB 19551|UCAC4 763-065522|WISE J220039.25+622915.9|** KUI  110|GEN# +1.00209339|Gaia DR2 2204409870400823936|uvby98 100209339",
     "matched_id": "HD 209339"
   }

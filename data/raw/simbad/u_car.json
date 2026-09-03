@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "u Car",
-  "retrieved_utc": "2026-08-23T02:06:05+00:00",
+  "retrieved_utc": "2026-09-03T09:46:53+00:00",
   "record_id": "V* U Car",
   "raw": {
     "main_id": "V* U Car",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.110000133514404,
-    "plx_value": 0.553,
+    "rvz_bibcode": "2012ApJ...748..107P",
     "sp_type": "G5/8Iab",
-    "plx_err": 0.022600000724196434,
+    "plx_value": 0.553,
     "otype": "cC*",
+    "pmra": -5.963,
+    "pmdec": 2.397,
+    "plx_err": 0.022600000724196434,
+    "rvz_radvel": 2.1,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 303519120|HIP 53589|Gaia DR3 5338359442320395904|AAVSO 1053-59|CD-59  3448|CPC 20  3236|CPD-59  2888|GC 15071|GCRV 61750|GEN# +1.00095109|HD  95109|HIC  53589|HR  4276|PPM 339614|SAO 238635|SKY# 20957|UBV M  16683|V* U Car|2MASS J10574819-5943557|TYC 8627-435-1|Gaia DR1 5338359437977488896|uvby98 100095109|WEB  9723|Gaia DR2 5338359442320395904",
     "matched_id": "V* U Car"
   }

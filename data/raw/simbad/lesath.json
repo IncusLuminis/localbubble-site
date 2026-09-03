@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Lesath",
-  "retrieved_utc": "2026-08-23T02:04:56+00:00",
+  "retrieved_utc": "2026-09-03T09:45:23+00:00",
   "record_id": "* ups Sco",
   "raw": {
     "main_id": "* ups Sco",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.6500000953674316,
-    "plx_value": 5.66,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B2IV",
-    "plx_err": 0.18000000715255737,
+    "plx_value": 5.66,
     "otype": "*",
+    "pmra": -2.37,
+    "pmdec": -30.09,
+    "plx_err": 0.18000000715255737,
+    "rvz_radvel": 8.0,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 175627991|HIP 85696|* ups Sco|*  34 Sco|2E  3910|CD-37 11638|CPC 18  8762|CPD-37  7239|FK5  649|GC 23693|GCRV 10113|GEN# +1.00158408|HD 158408|HIC  85696|HR  6508|IRAS 17273-3715|JP11  2858|N30 3897|PMC 90-93   461|PPM 296424|ROT  2454|SAO 208896|SKY# 31604|SRS  30649|TD1 20494|UBV M  22214|UBV   14908|[B10]  4429|[SC95] ZET 437|[SC96] Mis  495|[SC96] GC  87|uvby98 100158408|2MASS J17304581-3717450|ALS 15049|1RXS J173047.4-371727|2E 1727.4-3715|TYC 7387-1249-1|NAME Lesath|WEB 14463",
     "matched_id": "NAME Lesath"
   }

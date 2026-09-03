@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "MW Vel",
-  "retrieved_utc": "2026-08-23T02:05:34+00:00",
+  "retrieved_utc": "2026-09-03T09:46:13+00:00",
   "record_id": "V* MW Vel",
   "raw": {
     "main_id": "V* MW Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.260000228881836,
-    "plx_value": 1.2358,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "M7II",
-    "plx_err": 0.06040000170469284,
+    "plx_value": 1.2358,
     "otype": "AB*",
+    "pmra": -10.206,
+    "pmdec": 0.489,
+    "plx_err": 0.06040000170469284,
+    "rvz_radvel": 10.23,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 80840548|Gaia DR3 5361535463759372032|CD-50  5655|CF  8573|CPD-50  3921|GSC 08212-01230|HD  96134|IRAS 11022-5057|TYC 8212-1230-1|V* MW Vel|2MASS J11043137-5113192|Gaia DR2 5361535463759372032",
     "matched_id": "V* MW Vel"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Mekbuda",
-  "retrieved_utc": "2026-08-23T02:07:26+00:00",
+  "retrieved_utc": "2026-09-03T09:48:39+00:00",
   "record_id": "* zet Gem",
   "raw": {
     "main_id": "* zet Gem",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.7899999618530273,
-    "plx_value": 3.0729,
+    "rvz_bibcode": "2022ApJS..259...35A",
     "sp_type": "G1Ib",
-    "plx_err": 0.21770000457763672,
+    "plx_value": 3.0729,
     "otype": "cC*",
+    "pmra": -7.738,
+    "pmdec": -0.943,
+    "plx_err": 0.21770000457763672,
+    "rvz_radvel": 9.5325,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 436949033|UCAC4 553-036128|Gaia DR3 3366754155291545344|HIP 34088|2MASS J07040653+2034131|* zet Gem|PLX 1651|*  43 Gem|AAVSO 0658+20|ADS  5742 A|AG+20  786|BD+20  1687|CCDM J07041+2035A|CSI+20  1687  1|FK5  269|GC  9313|GCRV  4639|GEN# +1.00052973A|GSC 01353-01550|HD  52973|HIC  34088|HR  2650|IDS 06582+2043 A|IRAS 07011+2038|IRC +20169|N30 1536|PMC 90-93   193|PPM  96982|RAFGL 4552S|ROT  1136|SAO  79031|SKY# 12677|SRS  30269|TD1  8933|TYC 1353-1550-1|UBV   21353|V* zet Gem|YPAC  30|YZ  20  2753|WDS J07041+2034A|** OCC  293|** SHJ   77A|WDS J07041+2034Aa,Ab|NAME Mekbuda|WEB  6834|Gaia DR2 3366754155291077632",
     "matched_id": "NAME Mekbuda"
   }

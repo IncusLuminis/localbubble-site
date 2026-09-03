@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "13 Sge",
-  "retrieved_utc": "2026-08-23T01:54:46+00:00",
+  "retrieved_utc": "2026-09-03T09:32:12+00:00",
   "record_id": "*  13 Sge",
   "raw": {
     "main_id": "*  13 Sge",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.349999904632568,
-    "plx_value": 3.4239,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "M3/5III",
-    "plx_err": 0.17440000176429749,
+    "plx_value": 3.4239,
     "otype": "LP*",
+    "pmra": 1.272,
+    "pmdec": -13.365,
+    "plx_err": 0.17440000176429749,
+    "rvz_radvel": -17.56,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 388218863|HIP 98438|Gaia DR3 1820484908501127040|*  13 Sge|AAVSO 1955+17|AG+17 2113|BD+17  4183|CSI+17  4183  1|GC 27711|GCRV 12341|GEN# +1.00189577|GSC 01621-02189|HD 189577|HIC  98438|HR  7645|IRAS 19577+1722|IRC +20446|PPM 137383|RAFGL 2486|SAO 105522|SKY# 37496|UBV M  24380|V* VZ Sge|YZ  17  7842|[B10]  5125|[DS98] 283|2MASS J20000332+1730594|CCDM J20001+1731A|ADS 13230 A|TYC 1621-2189-1|IDS 19555+1715 A|WDS J20001+1731C|UCAC3 216-263320|** BU 1477C|WEB 17377|Gaia DR2 1820484908471787008",
     "matched_id": "*  13 Sge"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "BR Lyn",
-  "retrieved_utc": "2026-08-23T02:05:12+00:00",
+  "retrieved_utc": "2026-09-03T09:45:43+00:00",
   "record_id": "V* BR Lyn",
   "raw": {
     "main_id": "V* BR Lyn",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.010000228881836,
-    "plx_value": 1.5381,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "M6",
-    "plx_err": 0.03929999843239784,
+    "plx_value": 1.5381,
     "otype": "LP*",
+    "pmra": -4.143,
+    "pmdec": -7.324,
+    "plx_err": 0.03929999843239784,
+    "rvz_radvel": -7.73,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 88334683|HIP 33100|Gaia DR3 1003780143938148608|2MASS J06533804+6100559|AG+61  509|AGKR  6141|BD+61   915|DO 30947|GSC 04110-01120|HD  49671|HIC  33100|IRAS 06490+6104|IRC +60176|NSV  3241|PPM  15944|RAFGL 1021|SAO  13997|SKY# 12220|TYC 4110-1120-1|V* BR Lyn|Gaia DR2 1003780143938148608",
     "matched_id": "V* BR Lyn"
   }

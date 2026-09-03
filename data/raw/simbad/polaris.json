@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Polaris",
-  "retrieved_utc": "2026-08-23T01:56:04+00:00",
+  "retrieved_utc": "2026-09-03T09:33:53+00:00",
   "record_id": "* alf UMi",
   "raw": {
     "main_id": "* alf UMi",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.0199999809265137,
-    "plx_value": 7.54,
+    "rvz_bibcode": "2004A&A...424..727P",
     "sp_type": "F8Ib",
-    "plx_err": 0.10999999940395355,
+    "plx_value": 7.54,
     "otype": "cC*",
+    "pmra": 44.48,
+    "pmdec": -11.85,
+    "plx_err": 0.10999999940395355,
+    "rvz_radvel": -16.42,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 303256075|NAME Lodestar|PLX  299|SBC9 76|*   1 UMi|* alf UMi|AAVSO 0122+88|ADS  1477 A|AG+89    4|BD+88     8|CCDM J02319+8915A|CSI+88     8  1|FK5  907|GC  2243|GCRV  1037|GEN# +1.00008890A|GSC 04628-00237|HD   8890|HIC  11767|HIP 11767|HR   424|IDS 01226+8846 A|IRAS 01490+8901|JP11   498|N30  381|NAME Polaris|PMC 90-93   640|PPM    431|ROT  3491|SAO    308|SBC7    51|SKY#  3738|TD1   835|TYC 4628-237-1|UBV   21589|UBV M   8201|V* alf UMi|PLX  299.00|WDS J02318+8916Aa,Ab|ADS  1477 AP|** WRH   39|WDS J02318+8916A|** STF   93A|2MASS J02314822+8915503|NAME North Star|WEB  2438",
     "matched_id": "NAME Polaris"
   }

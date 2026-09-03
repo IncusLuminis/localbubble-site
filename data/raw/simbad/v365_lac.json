@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V365 Lac",
-  "retrieved_utc": "2026-08-23T02:06:26+00:00",
+  "retrieved_utc": "2026-09-03T09:47:18+00:00",
   "record_id": "V* V365 Lac",
   "raw": {
     "main_id": "V* V365 Lac",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.254000186920166,
-    "plx_value": 1.612,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "sp_type": "B2V",
-    "plx_err": 0.041200000792741776,
+    "plx_value": 1.612,
     "otype": "SB*",
+    "pmra": -1.57,
+    "pmdec": -4.244,
+    "plx_err": 0.041200000792741776,
+    "rvz_radvel": -17.8,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 325908108|Gaia DR3 1975770825454738944|SBC9 1353|AG+47 1854|BD+47  3692|CEL   5434|GC 30917|GCRV 13889|GEN# +1.00209961|GSC 03609-02651|HD 209961|HIC 109082|HIP 109082|HR  8427|PPM  62472|ROT  3217|SAO  51645|SBC7   896|SKY# 42097|TD1 28785|TYC 3609-2651-1|UBV   18895|UBV M  26134|V* V365 Lac|2MASS J22055120+4813532|ALS 16641|uvby98 100209961|WEB 19614|Gaia DR2 1975770825454738944",
     "matched_id": "V* V365 Lac"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ω Ori",
-  "retrieved_utc": "2026-08-23T02:04:12+00:00",
+  "retrieved_utc": "2026-09-03T09:44:28+00:00",
   "record_id": "* ome Ori",
   "raw": {
     "main_id": "* ome Ori",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.590000152587891,
-    "plx_value": 1.9761,
+    "rvz_bibcode": "2023ApJS..266...11B",
     "sp_type": "B3Ve",
-    "plx_err": 0.15080000460147858,
+    "plx_value": 1.9761,
     "otype": "Be*",
+    "pmra": -0.21,
+    "pmdec": 0.436,
+    "plx_err": 0.15080000460147858,
+    "rvz_radvel": 24.77,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 281047621|HIP 26594|Gaia DR3 3224479171721217280|WISE J053911.26+040717.3|2MASS J05391115+0407172|[JE82]  179|* ome Ori|*  47 Ori|AAVSO 0533+04|AG+04  628|ALS  8477|BD+04  1002|CEL    898|EM* MWC  117|FK5 2423|FMC 12|GC  7042|GCRV  3493|GEN# +1.00037490|HD  37490|HIC  26594|HR  1934|IRAS 05365+0405|JP11  1209|LS  VI +04    1|MCW  346|PPM 149277|ROT   898|SAO 113001|SKY#  9193|TD1  5058|UBV    5706|V* ome Ori|VDB  49|WH 421|YZ   4  1834|TYC  123-2200-1|uvby98 100037490|WEB  5244|Gaia DR2 3224479171721217280",
     "matched_id": "* ome Ori"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "72 Leo",
-  "retrieved_utc": "2026-08-23T01:55:41+00:00",
+  "retrieved_utc": "2026-09-03T09:33:24+00:00",
   "record_id": "*  72 Leo",
   "raw": {
     "main_id": "*  72 Leo",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.630000114440918,
-    "plx_value": 4.2936,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "M3IIb:",
-    "plx_err": 0.2815000116825104,
+    "plx_value": 4.2936,
     "otype": "LP*",
+    "pmra": -25.612,
+    "pmdec": -5.995,
+    "plx_err": 0.2815000116825104,
+    "rvz_radvel": 14.76,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 159525372|HIP 54951|Gaia DR3 3992011061833780096|PLX 2616|*  72 Leo|AAVSO 1109+23|AG+23 1150|BD+23  2322|CSV 101191|DO 14381|FK5 2897|GC 15460|GCRV  6901|GEN# +1.00097778|GSC 01981-02471|HD  97778|HIC  54951|HR  4362|IRC +20227|JP11  2043|N30 2642|NSV  5147|PPM 101007|SAO  81736|SKY# 21431|SV* P   721|TYC 1981-2471-1|UBV   10253|UBV M  16916|V* FN Leo|YPAC 258|YZ  23  4219|2MASS J11151222+2305439|PLX 2616.00|WEB  9916|Gaia DR2 3992011061833526528",
     "matched_id": "*  72 Leo"
   }

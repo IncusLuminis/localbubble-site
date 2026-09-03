@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 77321",
-  "retrieved_utc": "2026-08-23T02:02:43+00:00",
+  "retrieved_utc": "2026-09-03T09:42:31+00:00",
   "record_id": "HD  77321",
   "raw": {
     "main_id": "HD  77321",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.900000095367432,
-    "plx_value": 1.3079,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "K1/2II",
-    "plx_err": 0.014499999582767487,
+    "plx_value": 1.3079,
     "otype": "*",
+    "pmra": -12.595,
+    "pmdec": 7.726,
+    "plx_err": 0.014499999582767487,
+    "rvz_radvel": 13.04,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 401120275|IRAS 08583-4921|WISE J090001.07-493328.3|AKARI-IRC-V1 J0900011-493328|CCDM J09000-4933A|IDS 08567-4910 A|TYC 8173-169-1|WDS J09000-4933A|GEN# +1.00077321|UCAC4 203-026666|Gaia DR2 5325367681607022080|WISEA J090001.05-493328.3|HIP 44181|Gaia DR3 5325367681607022080|CD-49  4042|CPC  0  6854|CPD-49  2089|CSI-49  4042 22|GC 12460|GSC 08173-00169|HD  77321|HIC  44181|PPM 313855|SAO 220735|SKY# 17368|UBV M  15011|2MASS J09000108-4933285",
     "matched_id": "HD  77321"
   }

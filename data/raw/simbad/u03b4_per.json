@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "δ Per",
-  "retrieved_utc": "2026-08-23T01:56:49+00:00",
+  "retrieved_utc": "2026-09-03T09:34:53+00:00",
   "record_id": "* del Per",
   "raw": {
     "main_id": "* del Per",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.009999990463257,
-    "plx_value": 6.2435,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "B5III",
-    "plx_err": 0.499099999666214,
+    "plx_value": 6.2435,
     "otype": "Be*",
+    "pmra": 29.038,
+    "pmdec": -23.365,
+    "plx_err": 0.499099999666214,
+    "rvz_radvel": 4.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 431863107|HIP 17358|Gaia DR3 248577867988535296|FK5  131|PLX  765|* del Per|*  39 Per|AAVSO 0335+47|AG+47  395|ALS  7764|BD+47   876|CEL    308|CSI+47   876  1|CSV 100296|GC  4427|GCRV  2039|GEN# +1.00022928|HD  22928|HGAM    249|HIC  17358|HR  1122|JP11   807|LS   V +47    7|N30  753|PMC 90-93    93|PPM  46457|ROT   544|SAO  39053|SKY#  5634|SV* ZI   203|TD1  2414|UBV    3499|UBV M   9635|V* del Per|[HFE83]  247|PLX  765.00|TYC 3317-3034-1|IRAS 03393+4737|AKARI-IRC-V1 J0342555+474714|2MASS J03425548+4747150|uvby98 100022928|WEB  3280|Gaia DR2 248577867983633152|WDS J03429+4747Aa|** HDS  473A",
     "matched_id": "* del Per"
   }

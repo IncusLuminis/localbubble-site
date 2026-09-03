@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 124471",
-  "retrieved_utc": "2026-08-23T01:57:55+00:00",
+  "retrieved_utc": "2026-09-03T09:36:21+00:00",
   "record_id": "HD 124471",
   "raw": {
     "main_id": "HD 124471",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.75,
-    "plx_value": 2.1003,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B2III/IV",
-    "plx_err": 0.07329999655485153,
+    "plx_value": 2.1003,
     "otype": "bC?",
+    "pmra": -7.706,
+    "pmdec": -6.359,
+    "plx_err": 0.07329999655485153,
+    "rvz_radvel": -9.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 448888783|HIP 69763|Gaia DR3 5849408186303563008|uvby98 100124471|GEN# +1.00124471|HR  5320|CPC 21  3152|CPD-66  2490|CSI-66  2490 41|GC 19230|GCRV  8337|GSC 09017-01607|HD 124471|HIC  69763|N30 3226|PPM 360662|ROT  7296|SAO 252678|SKY# 26056|TD1 17320|TYC 9017-1607-1|UBV   12521|UBV M  20041|[B10]  3646|2MASS J14163872-6635163|ALS 14994|Gaia DR1 5849408181961985024|WEB 12145|Gaia DR2 5849408186303563008",
     "matched_id": "HD 124471"
   }

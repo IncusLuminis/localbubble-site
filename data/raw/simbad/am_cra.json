@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "AM CrA",
-  "retrieved_utc": "2026-08-23T02:05:00+00:00",
+  "retrieved_utc": "2026-09-03T09:45:28+00:00",
   "record_id": "V* AM CrA",
   "raw": {
     "main_id": "V* AM CrA",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.600000381469727,
-    "plx_value": 1.5059,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "M5/6III",
-    "plx_err": 0.11599999666213989,
+    "plx_value": 1.5059,
     "otype": "AB*",
+    "pmra": 1.432,
+    "pmdec": -3.401,
+    "plx_err": 0.11599999666213989,
+    "rvz_radvel": -38.48,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 316338236|Gaia DR3 6730372048146793856|AAVSO 1834-37E|AN   92.1901|CD-37 12785|CPC 18  9640|CPD-37  8277|GCRV 27207|GSC 07419-00244|HD 172321|IRAS 18378-3731|PPM 298035|SAO 210455|SV* HV  4479|TYC 7419-244-1|V* AM CrA|2MASS J18411546-3729049|Gaia DR2 6730372048146793856",
     "matched_id": "V* AM CrA"
   }

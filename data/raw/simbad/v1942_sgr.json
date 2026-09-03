@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V1942 Sgr",
-  "retrieved_utc": "2026-08-23T02:06:19+00:00",
+  "retrieved_utc": "2026-09-03T09:47:12+00:00",
   "record_id": "V* V1942 Sgr",
   "raw": {
     "main_id": "V* V1942 Sgr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.860000133514404,
-    "plx_value": 1.5759,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "C-N5+",
-    "plx_err": 0.04089999943971634,
+    "plx_value": 1.5759,
     "otype": "C*",
+    "pmra": 9.354,
+    "pmdec": -5.025,
+    "plx_err": 0.04089999943971634,
+    "rvz_radvel": -45.1,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 130940288|HIP 94940|Gaia DR3 4183978404714220672|AAVSO 1913-16|BD-16  5272|C* 2721|CGCS 4229|GC 26630|GCRV 11765|GEN# +1.00180953|GSC 06296-00819|HD 180953|HIC  94940|IRAS 19162-1600|IRC -20554|JP11  3091|PPM 235828|RAFGL 2363|SAO 162465|SKY# 35883|TYC 6296-819-1|UBV   16330|V* V1942 Sgr|YZ 106  7212|[LFO93] 1916-16|[V58] 76|2MASS J19190959-1554300|ASAS J191909-1554.4|WEB 16578|Gaia DR2 4183978404714220672",
     "matched_id": "V* V1942 Sgr"
   }

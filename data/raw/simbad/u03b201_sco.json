@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "β01 Sco",
-  "retrieved_utc": "2026-08-23T01:56:15+00:00",
+  "retrieved_utc": "2026-09-03T09:34:07+00:00",
   "record_id": "* bet01 Sco",
   "raw": {
     "main_id": "* bet01 Sco",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.619999885559082,
-    "plx_value": 8.07,
+    "rvz_bibcode": "1979IAUS...30...57E",
     "sp_type": "B1V",
-    "plx_err": 0.7799999713897705,
+    "plx_value": 8.07,
     "otype": "bC*",
+    "pmra": -5.2,
+    "pmdec": -24.04,
+    "plx_err": 0.7799999713897705,
+    "rvz_radvel": -1.0,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 9921163|GEN# +1.00144217|Gaia DR3 6247207266946218112|HIP 78820|2E 1602.5-1940|PLX 3640|SBC9 881|2E  3578|ADS  9913 AB|BD-19  4307|CCDM J16054-1948AB|CEL   4412|CPD-19  5945|CSI-19  4307  1|CSV 101548|FK5  597|GC 21609|GCRV  9245|HD 144217|HGAM    648|HIC  78820|HR  5984|JP11  2705|MCW  557|N30 3609|NSV  7424|PMC 90-93   426|PPM 231174|ROT  2274|SACS 352|SAO 159682|SBC7   561|SKY# 29046|SV* ZI  1189|UBV   13614|UBV M  21133|UBV M  21134|[B10]  4086|[HFE83] 1165|ALS 14816|PLX 3640.00|1RXS J160525.4-194828|EUVE J1605-19.8|2MASS J16052624-1948185|WDS J16054-1948AB|TYC 6208-1623-1|* bet01 Sco|CSI-19  4307  3|PMSC 15596-1932AB|** BU  947|CSI-19  4307  4|*   8 Sco A|* bet Sco A|uvby98 100144217|WEB 13322|Gaia DR2 6247207266936828288|WISEA J160526.25-194818.3",
     "matched_id": "* bet01 Sco"
   }

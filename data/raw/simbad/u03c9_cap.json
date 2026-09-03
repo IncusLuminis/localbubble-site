@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ω Cap",
-  "retrieved_utc": "2026-08-23T02:04:08+00:00",
+  "retrieved_utc": "2026-09-03T09:44:22+00:00",
   "record_id": "* ome Cap",
   "raw": {
     "main_id": "* ome Cap",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.119999885559082,
-    "plx_value": 5.8975,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "M0IIIBa0.5",
-    "plx_err": 0.30640000104904175,
+    "plx_value": 5.8975,
     "otype": "*",
+    "pmra": -9.016,
+    "pmdec": -2.048,
+    "plx_err": 0.30640000104904175,
+    "rvz_radvel": 9.1,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 29281992|Gaia DR3 6801963487915169920|PLX 4982|* ome Cap|*  18 Cap|CD-27 15082|CPD-27  7123|FK5 1546|GC 29079|GCRV 13085|GEN# +1.00198542|GSC 06930-00987|HD 198542|HIC 102978|HIP 102978|HR  7980|IRAS 20488-2706|IRC -30437|JP11  3284|N30 4619|NSV 13351|PMC 90-93  1095|PPM 271732|RAFGL 2665|SAO 189781|SKY# 39596|SRS  31546|TYC 6930-987-1|UBV   18041|YZ 117 13737|[L91b] 330|2MASS J20514929-2655085|PLX 4982.00|WEB 18687|Gaia DR2 6801963487910582144",
     "matched_id": "* ome Cap"
   }

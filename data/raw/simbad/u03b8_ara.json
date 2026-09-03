@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "θ Ara",
-  "retrieved_utc": "2026-08-23T02:04:46+00:00",
+  "retrieved_utc": "2026-09-03T09:45:11+00:00",
   "record_id": "* tet Ara",
   "raw": {
     "main_id": "* tet Ara",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.6600000858306885,
-    "plx_value": 2.947,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B0.5Iab",
-    "plx_err": 0.29600000381469727,
+    "plx_value": 2.947,
     "otype": "s*b",
+    "pmra": -8.709,
+    "pmdec": -9.672,
+    "plx_err": 0.29600000381469727,
+    "rvz_radvel": 3.4,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 364875523|HIP 88714|Gaia DR3 6705977119250947712|* tet Ara|2E 1803.0-5003|2E  4005|CD-50 11720|CPC  0 17018|CPD-50 10538|FK5 1471|GC 24635|GCRV 10529|GEN# +1.00165024|GSC 08365-01698|HD 165024|HIC  88714|HR  6743|IRAS 18027-5005|N30 4014|PPM 346577|ROT  2534|SAO 245242|SKY# 32898|TD1 21533|TYC 8365-1698-1|UBV   15355|UBV M  22588|[B10]  4565|uvby98 100165024|2MASS J18063786-5005292|ALS 15053|2XMM J180637.8-500528|SWIFT J1806.9-5003|WEB 15030|Gaia DR2 6705977119240144768",
     "matched_id": "* tet Ara"
   }

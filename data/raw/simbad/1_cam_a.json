@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "1 Cam A",
-  "retrieved_utc": "2026-08-23T01:54:57+00:00",
+  "retrieved_utc": "2026-09-03T09:32:26+00:00",
   "record_id": "*   1 Cam A",
   "raw": {
     "main_id": "*   1 Cam A",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.769999980926514,
-    "plx_value": 1.263,
+    "rvz_bibcode": "",
     "sp_type": "O9.7IIn",
-    "plx_err": 0.04859999939799309,
+    "plx_value": 1.263,
     "otype": "*",
+    "pmra": 2.775,
+    "pmdec": -3.783,
+    "plx_err": 0.04859999939799309,
+    "rvz_radvel": null,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 9197715|Gaia DR3 273895291446188288|ADS  3274 A|CCDM J04320+5354A|CSI+53   779  1|GEN# +1.00028446A|IDS 04241+5342 A|TYC 3732-1028-1|uvby98 100028446 A|WDS J04320+5355A|*   1 Cam A|** STF  550A|UCAC4 720-034655|2MASS J04320185+5354389|WISE J043201.85+535438.9|HD  28446A|GOS G151.91+03.95 01|Gaia DR2 273895291446188288",
     "matched_id": "*   1 Cam A"
   }

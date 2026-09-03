@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "β Dor",
-  "retrieved_utc": "2026-08-23T01:56:25+00:00",
+  "retrieved_utc": "2026-09-03T09:34:21+00:00",
   "record_id": "* bet Dor",
   "raw": {
     "main_id": "* bet Dor",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.759999990463257,
-    "plx_value": 2.9308,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "F8/G0Ib",
-    "plx_err": 0.13910000026226044,
+    "plx_value": 2.9308,
     "otype": "cC*",
+    "pmra": -0.611,
+    "pmdec": 12.95,
+    "plx_err": 0.13910000026226044,
+    "rvz_radvel": 7.06,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 149346418|HIP 26069|Gaia DR3 4757601523650165120|2MASS J05333753-6229232|PLX 1288|* bet Dor|AAVSO 0532-62|CD-62   214|CPC 20.1  1271|CPD-62   487|FK5  212|GC  6944|GCRV  3440|GEN# +1.00037350|GSC 08883-01641|HD  37350|HIC  26069|HR  1922|IRAS 05331-6231|JP11  1194|N30 1203|PPM 354837|ROT   892|SAO 249311|SKY#  8943|SV* HV  4010|TD1  5025|TYC 8883-1641-1|V* bet Dor|PLX 1288.00|uvby98 100037350|WEB  5075|Gaia DR2 4757601523650165120",
     "matched_id": "* bet Dor"
   }

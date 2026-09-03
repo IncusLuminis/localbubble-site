@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "d Cen",
-  "retrieved_utc": "2026-08-23T01:56:37+00:00",
+  "retrieved_utc": "2026-09-03T09:34:37+00:00",
   "record_id": "* d Cen",
   "raw": {
     "main_id": "* d Cen",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 3.880000114440918,
-    "plx_value": 3.6,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "G8II/III",
-    "plx_err": 0.49000000953674316,
+    "plx_value": 3.6,
     "otype": "**",
+    "pmra": -15.67,
+    "pmdec": -10.49,
+    "plx_err": 0.49000000953674316,
+    "rvz_radvel": -2.4,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 461235343|GEN# +1.00117440|HIP 65936|PLX 3082|* d Cen|CCDM J13310-3924AB|CD-38  8592|CPC 18  6489|CPD-38  5526|CSI-38  8592 21|CSV 101388|GC 18254|GCRV  8015|GSC 07792-02393|HD 117440|HIC  65936|HR  5089|IDS 13252-3854 AB|IRAS 13281-3909|JP11  2402|N30 3083|NSV  6283|PPM 291480|SAO 204545|SKY# 24883|SV* ZI  1008|TD1 16879|TYC 7792-2393-1|UBV   12146|UBV M  19457|2MASS J13310266-3924262|PLX 3082.00|WDS J13310-3924AB|** SEE  179|uvby98 100117440|CSI-38  8592 22|WEB 11660|Gaia DR2 6161403234933132032",
     "matched_id": "* d Cen"
   }

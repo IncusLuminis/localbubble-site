@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "31 Cyg",
-  "retrieved_utc": "2026-08-23T01:55:14+00:00",
+  "retrieved_utc": "2026-09-03T09:32:48+00:00",
   "record_id": "*  31 Cyg",
   "raw": {
     "main_id": "*  31 Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.799999952316284,
-    "plx_value": 2.9167,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "K3Ib+B2IV-V",
-    "plx_err": 0.13269999623298645,
+    "plx_value": 2.9167,
     "otype": "SB*",
+    "pmra": 1.744,
+    "pmdec": 3.39,
+    "plx_err": 0.13269999623298645,
+    "rvz_radvel": -7.24,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "Gaia DR3 2082600852679281408|HIC  99675|WDS J20136+4644Aa,Ab|HIP 99675|PLX 4811|* omi01 Cyg|*  31 Cyg|AAVSO 2010+46|AG+46 1595|BD+46  2882|FK5  757|GC 28099|GCRV 12599|GCRV  7265 E|HD 192577|HR  7735|IDS 20105+4626|IRAS 20120+4635|IRC +50320|JP11  3195|N30 4471|PMC 90-93   536|PPM  59524|RAFGL 2531|ROT  2938|SAO  49337|SBC7   794|SKY# 38106|UBV   17506|UBV M  24644|V* V695 Cyg|[B10]  5187|WEB 17871|CCDM J20135+4646AP|** WRH   33|SBC9 1215|CSI+46  2882  2|HD 192578|ROT  7647|WDS J20136+4644A|IDS 20105+4626 AP|TYC 3559-2797-1|Gaia DR2 2082600852678091904|** STFA   50A|** HJ 1495A|** BU 1483A|** STF 4050A|ADS 13554 AP|2MASS J20133789+4644288|WISE J201338.12+464427.6|TIC 378268070",
     "matched_id": "*  31 Cyg"
   }

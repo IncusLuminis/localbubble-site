@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "UX Dra",
-  "retrieved_utc": "2026-08-23T02:06:10+00:00",
+  "retrieved_utc": "2026-09-03T09:46:59+00:00",
   "record_id": "V* UX Dra",
   "raw": {
     "main_id": "V* UX Dra",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.940000057220459,
-    "plx_value": 2.1294,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "C-N5",
-    "plx_err": 0.09440000355243683,
+    "plx_value": 2.1294,
     "otype": "C*",
+    "pmra": -6.351,
+    "pmdec": -0.287,
+    "plx_err": 0.09440000355243683,
+    "rvz_radvel": 4.8,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 420129036|HIP 95154|Gaia DR3 2289510386756671872|AAVSO 1925+76|AG+76  726|BD+76   734|C* 2738|CGCS 4302|DIRBE D19213546P7633345|DO 37296|GC 26826|GCRV 11870|GSC 04584-02918|HD 183556|HIC  95154|IRAS 19233+7627|IRC +80036|LEE 309|N30 4304|PPM  10163|RAFGL 2384|SAO   9404|SKY# 35986|TYC 4584-2918-1|UBV   21585|V* UX Dra|[LFO93] 1923+76|2MASS J19213546+7633345|WEB 16622|Gaia DR2 2289510386753947392",
     "matched_id": "V* UX Dra"
   }

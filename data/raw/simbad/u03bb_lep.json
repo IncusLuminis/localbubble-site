@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "λ Lep",
-  "retrieved_utc": "2026-08-23T02:03:47+00:00",
+  "retrieved_utc": "2026-09-03T09:43:53+00:00",
   "record_id": "* lam Lep",
   "raw": {
     "main_id": "* lam Lep",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.289999961853027,
-    "plx_value": 3.3378,
+    "rvz_bibcode": "2023ApJS..266...41P",
     "sp_type": "B0.5V",
-    "plx_err": 0.17900000512599945,
+    "plx_value": 3.3378,
     "otype": "**",
+    "pmra": 3.04,
+    "pmdec": -4.801,
+    "plx_err": 0.17900000512599945,
+    "rvz_radvel": 20.2,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 442871031|Gaia DR3 2988329637719192960|WISEA J051934.51-131036.3|HIP 24845|PLX 1215|* lam Lep|*   6 Lep|BD-13  1127|FK5 1146|GC  6531|GCRV  3179|GEN# +1.00034816|GSC 05343-01529|HD  34816|HGAM    387|HIC  24845|HR  1756|JP11  1033|MCW  294|N30 1141|PMC 90-93   768|PPM 215598|ROT   769|SAO 150340|SKY#  8424|TD1  4430|TYC 5343-1529-1|UBV    5080|UBV M  10849|YZC 11  1403|uvby98 100034816|ALS 14773|PLX 1215.00|1RXS J051935.1-131037|2MASS J05193452-1310364|AKARI-IRC-V1 J0519344-131036|IRAS 05172-1313|WISE J051934.51-131036.3|IRAS F05172-1313|WEB  4815|Gaia DR2 2988329637719192960",
     "matched_id": "* lam Lep"
   }

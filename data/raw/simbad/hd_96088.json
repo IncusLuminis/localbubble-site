@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 96088",
-  "retrieved_utc": "2026-08-23T02:03:10+00:00",
+  "retrieved_utc": "2026-09-03T09:43:05+00:00",
   "record_id": "HD  96088",
   "raw": {
     "main_id": "HD  96088",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.130000114440918,
-    "plx_value": 1.758,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B2III",
-    "plx_err": 0.0471000000834465,
+    "plx_value": 1.758,
     "otype": "*",
+    "pmra": -16.887,
+    "pmdec": 1.379,
+    "plx_err": 0.0471000000834465,
+    "rvz_radvel": 12.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 305572547|LLNS  3815|HIP 54082|Gaia DR3 5340254725491703424|CD-57  3681|CEL   3790|CPC 20  3276|CPD-57  4174|GC 15221|GCRV 61859|GEN# +1.00096088|GSC 08623-00281|HD  96088|HIC  54082|JP11  2028|PPM 339717|SAO 238730|SKY# 21131|TD1 15352|TYC 8623-281-1|UBV   10116|UBV M  16757|uvby98 100096088|2MASS J11040024-5757193|ALS 15402|WEB  9780|Gaia DR2 5340254725491703424",
     "matched_id": "HD  96088"
   }

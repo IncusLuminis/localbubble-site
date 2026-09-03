@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "e Vel",
-  "retrieved_utc": "2026-08-23T01:56:58+00:00",
+  "retrieved_utc": "2026-09-03T09:35:08+00:00",
   "record_id": "* e Vel",
   "raw": {
     "main_id": "* e Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.139999866485596,
-    "plx_value": 1.5188,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "A7Ia",
-    "plx_err": 0.1776999980211258,
+    "plx_value": 1.5188,
     "otype": "*",
+    "pmra": -10.474,
+    "pmdec": 9.912,
+    "plx_err": 0.1776999980211258,
+    "rvz_radvel": 19.3,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 141301715|HIP 42312|Gaia DR3 5523539671667837952|2MASS J08373863-4259205|PLX 2064|* e Vel|ALS  1103|CD-42  4451|CEL   2720|CPC  0  6238|CPD-42  2754|FK5  324|GC 11852|GCRV  5682|GEN# +1.00073634|GSC 07670-00866|HD  73634|HIC  42312|HR  3426|IRAS 08358-4248|JP11  1695|LS 1103|N30 2010|PPM 313335|ROT  1360|SACS 187|SAO 220204|SKY# 16482|SRS  30324|TD1 12840|TYC 7670-866-1|UBV    8262|UBV M  14554|uvby98 100073634|PLX 2064.00|Renson 20470|UCAC4 236-030089|WEB  8130|Gaia DR2 5523539671665274624",
     "matched_id": "* e Vel"
   }

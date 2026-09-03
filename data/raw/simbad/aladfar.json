@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Aladfar",
-  "retrieved_utc": "2026-08-23T01:57:13+00:00",
+  "retrieved_utc": "2026-09-03T09:35:27+00:00",
   "record_id": "* eta Lyr",
   "raw": {
     "main_id": "* eta Lyr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.3979997634887695,
-    "plx_value": 2.9107,
+    "rvz_bibcode": "2023ApJS..264...17Z",
     "sp_type": "B6",
-    "plx_err": 0.11249999701976776,
+    "plx_value": 2.9107,
     "otype": "SB*",
+    "pmra": -1.476,
+    "pmdec": -1.393,
+    "plx_err": 0.11249999701976776,
+    "rvz_radvel": -32.9,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 121605728|Gaia DR3 2099679223187100800|HIP 94481|LAMOST J191345.93+390845.4|PLX 4486|SBC9 1136|*  20 Lyr|* eta Lyr|AAVSO 1910+38|ADS 12197 A|AG+39 1911|BD+38  3490|CCDM J19138+3908A|CEL   4724|CSI+38  3490  1|GC 26507|GCRV 11687|GEN# +1.00180163A|GSC 03121-02285|HD 180163|HGAM    740|HIC  94481|HR  7298|IDS 19104+3858 A|JP11  3082|N30 4257|NSV 11839|PPM  82545|ROT  2748|SAO  68010|SKY# 35657|TD1 24249|TYC 3121-2285-1|UBV   16296|UBV M  23607|YPAC 198|uvby98 100180163 A|ALS 16387|PLX 4486.00|WDS J19138+3909A|UCAC3 259-149035|2MASS J19134547+3908454|AKARI-IRC-V1 J1913454+390845|IRAS 19120+3903|NAME Aladfar|WEB 16467|Gaia DR2 2099679223187100800",
     "matched_id": "NAME Aladfar"
   }

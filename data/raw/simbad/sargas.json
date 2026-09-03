@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Sargas",
-  "retrieved_utc": "2026-08-23T02:04:54+00:00",
+  "retrieved_utc": "2026-09-03T09:45:21+00:00",
   "record_id": "* tet Sco",
   "raw": {
     "main_id": "* tet Sco",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.850000023841858,
-    "plx_value": 10.86,
+    "rvz_bibcode": "2023ApJS..266...11B",
     "sp_type": "F1III",
-    "plx_err": 1.4900000095367432,
+    "plx_value": 10.86,
     "otype": "*",
+    "pmra": 5.54,
+    "pmdec": -3.12,
+    "plx_err": 1.4900000095367432,
+    "rvz_radvel": 5.18,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 17158018|WISEA J173719.12-425952.1|HIP 86228|PLX 3998|* tet Sco|CD-42 12312|CEL   4542|CPC  0 16458|CPD-42  7856|FK5  654|GC 23857|GCRV 10165|GEN# +1.00159532|GSC 07892-07679|HD 159532|HIC  86228|HR  6553|IRAS 17337-4258|JP11  2866|N30 3918|NSV  9233|PPM 323186|ROT  2465|SAO 228201|SKY# 31826|TD1 20659|UBV   14975|UBV M  22276|[CS62] E7  88|[SC95] ZET 482|[SC96] Mis  563|uvby98 100159532|2MASS J17371913-4259522|PLX 3998.00|NAME Sargas|WEB 14543|WISE J173719.06-425951.7|* tet Sco A|HD 159532A|CD-42 12312A|** SEE  510A|CCDM J17373-4300A|WDS J17373-4300A|UCAC4 236-132816|TYC 7892-7679-1",
     "matched_id": "NAME Sargas"
   }

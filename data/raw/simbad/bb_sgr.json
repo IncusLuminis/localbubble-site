@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "BB Sgr",
-  "retrieved_utc": "2026-08-23T02:05:03+00:00",
+  "retrieved_utc": "2026-09-03T09:45:31+00:00",
   "record_id": "V* BB Sgr",
   "raw": {
     "main_id": "V* BB Sgr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.690000057220459,
-    "plx_value": 1.1516,
+    "rvz_bibcode": "2022ApJS..259...35A",
     "sp_type": "G0Ib",
-    "plx_err": 0.02370000071823597,
+    "plx_value": 1.1516,
     "otype": "cC*",
+    "pmra": 0.353,
+    "pmdec": -5.057,
+    "plx_err": 0.02370000071823597,
+    "rvz_radvel": -3.2169,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 225085597|HIP 92491|Gaia DR3 4085919765884068736|AAVSO 1845-20|AN   40.1908|BD-20  5286|CPD-20  7221|GC 25842|GCRV 11290|GEN# +1.00174383|GSC 06289-03062|HD 174383|HIC  92491|PPM 268971|SAO 187349|SKY# 34677|SV* HV  3082|TYC 6289-3062-1|UBV M  23254|V* BB Sgr|YZ 110  7931|uvby98 100174383|2MASS J18505986-2017428|IRAS 18480-2021|AKARI-IRC-V1 J1850598-201743|Gaia DR1 4085919761555706624|WEB 15983|Gaia DR2 4085919765884068736",
     "matched_id": "V* BB Sgr"
   }

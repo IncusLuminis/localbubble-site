@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "omi And",
-  "retrieved_utc": "2026-08-23T02:04:15+00:00",
+  "retrieved_utc": "2026-09-03T09:44:31+00:00",
   "record_id": "* omi And",
   "raw": {
     "main_id": "* omi And",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.619999885559082,
-    "plx_value": 9.3051,
+    "rvz_bibcode": "1993BICDS..43....5T",
     "sp_type": "B6IV/V_sh",
-    "plx_err": 0.5781999826431274,
+    "plx_value": 9.3051,
     "otype": "Be*",
+    "pmra": 18.841,
+    "pmdec": -6.589,
+    "plx_err": 0.5781999826431274,
+    "rvz_radvel": -14.0,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 155030422|Gaia DR3 1931192500887330688|PLX 5578|SBC9 1415|[JE82] 1139|* omi And|*   1 And|AAVSO 2257+41|AG+42 2238|BD+41  4664|CEL   5556|EM* CDS 1436|FK5  869|GC 32095|GCRV 14449|GSC 03224-03434|HD 217675|HD 217676|HIC 113726|HIP 113726|HR  8762|JP11  3570|N30 5064|PMC 90-93   612|PPM  63726|ROT  3351|SAO  52609|SKY# 43727|TD1 29549|TYC 3224-3434-1|UBV M  26780|UBV   19739|V* omi And|VDB 156|[HFE83] 1539|2MASS J23015527+4219334|ALS 17648|WDS J23019+4220AB|WEB 20208|** WRH   37|GEN# +1.00217675|CCDM J23019+4220APB|IRAS F22595+4203|NAME-IAU Alfarasalkamil",
     "matched_id": "* omi And"
   }

@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Menkhib",
-  "retrieved_utc": "2026-08-23T02:03:40+00:00",
+  "retrieved_utc": "2026-09-03T09:43:44+00:00",
   "record_id": "* ksi Per",
   "raw": {
     "main_id": "* ksi Per",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.059999942779541,
-    "plx_value": 2.4457,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "O7.5III(n)((f))",
-    "plx_err": 0.26159998774528503,
+    "plx_value": 2.4457,
     "otype": "**",
+    "pmra": 0.778,
+    "pmdec": 2.621,
+    "plx_err": 0.26159998774528503,
+    "rvz_radvel": 65.4,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 94614234|HIP 18614|Gaia DR3 219375904303684224|2MASS J03585791+3547276|NAME Menkhib|PLX  872|* ksi Per|*  46 Per|2E   916|AG+35  395|ALS  7841|BD+35   775|CEL    374|CGO  75|CSV 100364|EM* CDS  401|FK5  148|GC  4779|GCRV  2275|GEN# +1.00024912|GOS G160.37-13.11 01|GSC 02369-02273|GSC 02369-01642|HD  24912|HIC  18614|HR  1228|Hilt  416|IRAS 03557+3538|JP11   838|LS   V +35    1|MCW  262|N30  817|NSV  1427|PMC 90-93   106|PPM  68961|ROT   586|SAO  56856|SKY#  6082|SV* ZI   264|TD1  2694|TYC 2369-2273-1|UBV    3862|UBV M   9845|YPAC  15|[C93] 163|[HJ56]  55|[LH98] 121|[VGK85] NGC  1499 +35  45|XMMSL1 J035857.3+354731|PLX  872.00|1RXS J035857.8+354737|2E 0355.7+3538|[SCB2001] 108|WDS J03590+3547AB|V* ksi Per|NAME Menkib|uvby98 100024912|WEB  3587|Gaia DR2 219375900005174272",
     "matched_id": "NAME Menkhib"
   }

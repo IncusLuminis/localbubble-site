@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ζ Cen",
-  "retrieved_utc": "2026-08-23T02:07:24+00:00",
+  "retrieved_utc": "2026-09-03T09:48:36+00:00",
   "record_id": "* zet Cen",
   "raw": {
     "main_id": "* zet Cen",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 2.549999952316284,
-    "plx_value": 8.54,
+    "rvz_bibcode": "1953GCRV..C......0W",
     "sp_type": "B2.5IV",
-    "plx_err": 0.12999999523162842,
+    "plx_value": 8.54,
     "otype": "SB*",
+    "pmra": -57.37,
+    "pmdec": -44.55,
+    "plx_err": 0.12999999523162842,
+    "rvz_radvel": 6.5,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 113350416|HIP 68002|SBC9 793|* zet Cen|CD-46  8949|CPC  0 11820|CPD-46  6560|FK5  512|GC 18809|GCRV  8207|GEN# +1.00121263|GSC 08267-03545|HD 121263|HIC  68002|HR  5231|IRAS 13524-4702|JP11  2454|N30 3163|PPM 318991|ROT  2009|SACS 301|SAO 224538|SBC7   502|SKY# 25534|TD1 17140|TYC 8267-3545-1|UBV   12371|UBV M  19824|[B10]  3593|uvby98 100121263|2MASS J13553239-4717183|ALS 14989|WEB 11943|NAME-IAU Leepwal",
     "matched_id": "* zet Cen"
   }

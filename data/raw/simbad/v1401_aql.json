@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V1401 Aql",
-  "retrieved_utc": "2026-08-23T02:06:17+00:00",
+  "retrieved_utc": "2026-09-03T09:47:08+00:00",
   "record_id": "V* V1401 Aql",
   "raw": {
     "main_id": "V* V1401 Aql",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.389999866485596,
-    "plx_value": 1.3355,
+    "rvz_bibcode": "2023ApJS..266...41P",
     "sp_type": "F2II",
-    "plx_err": 0.02710000053048134,
+    "plx_value": 1.3355,
     "otype": "pA*",
+    "pmra": -2.755,
+    "pmdec": -15.756,
+    "plx_err": 0.02710000053048134,
+    "rvz_radvel": -12.1,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 70878779|HIP 98910|Gaia DR3 4190636669164572928|GSC2 S3023120285|AAVSO 1959-11|ALS 10785|BD-12  5641|BDS  9861 A|CCDM J20051-1136A|CSI-12  5641  1|GC 27850|GCRV 12439|GEN# +1.00190390|GSC 05747-02219|HD 190390|HIC  98910|HR  7671|IDS 19596-1153 A|IRAS 20023-1144|LS  IV -11   51|NSV 12766|PPM 236910|ROT  7639|SAO 163245|SKY# 37727|SRS  15903|SV* BV   592|TD1 25976|TYC 5747-2219-1|V* V1401 Aql|YZC 11  7070|2MASS J20050541-1135579|WDS J20051-1136A|** H    43A|DENIS J200505.4-113557|Gaia DR1 4190636664864918016|uvby98 100190390|WEB 17557|Gaia DR2 4190636669164572928|*  64 Sgr",
     "matched_id": "V* V1401 Aql"
   }

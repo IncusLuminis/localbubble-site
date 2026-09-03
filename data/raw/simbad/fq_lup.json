@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "FQ Lup",
-  "retrieved_utc": "2026-08-23T02:05:20+00:00",
+  "retrieved_utc": "2026-09-03T09:45:54+00:00",
   "record_id": "V* FQ Lup",
   "raw": {
     "main_id": "V* FQ Lup",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 8.579999923706055,
-    "plx_value": 1.6607,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "M5/6(II)",
-    "plx_err": 0.09920000284910202,
+    "plx_value": 1.6607,
     "otype": "AB*",
+    "pmra": 11.769,
+    "pmdec": -1.495,
+    "plx_err": 0.09920000284910202,
+    "rvz_radvel": 17.62,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 177337039|HIP 77023|Gaia DR3 6009827929191367296|CD-36 10360|CPC 18  7755|CPD-36  6858|CSV   2423|GSC 07339-01070|HD 140145|HIC  77023|IRAS 15402-3700|PPM 294189|RAFGL 4218|SAO 206905|SRS  13109|SV* SON  5014|TYC 7339-1070-1|V* FQ Lup|2MASS J15433361-3710101|Gaia DR2 6009827929191367296",
     "matched_id": "V* FQ Lup"
   }

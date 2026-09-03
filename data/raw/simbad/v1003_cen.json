@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V1003 Cen",
-  "retrieved_utc": "2026-08-23T02:06:14+00:00",
+  "retrieved_utc": "2026-09-03T09:47:05+00:00",
   "record_id": "V* V1003 Cen",
   "raw": {
     "main_id": "V* V1003 Cen",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 7.880000114440918,
-    "plx_value": 1.633,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "M5II",
-    "plx_err": 0.06769999861717224,
+    "plx_value": 1.633,
     "otype": "LP?",
+    "pmra": -0.49,
+    "pmdec": -7.625,
+    "plx_err": 0.06769999861717224,
+    "rvz_radvel": 7.64,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 414205172|HIP 70290|Gaia DR3 5892756535278366080|CD-55  5659|CPC 19  5442|CPD-55  6001|GC 19366|GSC 08682-02013|HD 125687|HIC  70290|IRAS 14193-5544|PPM 342798|SAO 241679|SKY# 26215|SRS  12237|TYC 8682-2013-1|V* V1003 Cen|2MASS J14225225-5557443|Gaia DR2 5892756535294414976",
     "matched_id": "V* V1003 Cen"
   }

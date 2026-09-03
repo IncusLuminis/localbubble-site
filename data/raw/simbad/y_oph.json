@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Y Oph",
-  "retrieved_utc": "2026-08-23T02:07:15+00:00",
+  "retrieved_utc": "2026-09-03T09:48:24+00:00",
   "record_id": "V* Y Oph",
   "raw": {
     "main_id": "V* Y Oph",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.210000038146973,
-    "plx_value": 1.3126,
+    "rvz_bibcode": "2012ApJ...748..107P",
     "sp_type": "G3Ia",
-    "plx_err": 0.03620000183582306,
+    "plx_value": 1.3126,
     "otype": "cC*",
+    "pmra": -3.043,
+    "pmdec": -4.723,
+    "plx_err": 0.03620000183582306,
+    "rvz_radvel": -7.2,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 7385410|HIP 87495|Gaia DR3 4175017625462647168|PLX 4077|SBC9 1004|AAVSO 1747-06|ALS  9356|BD-06  4672|GC 24288|GCRV 10337|GEN# +1.00162714|GSC 05095-00339|HD 162714|HIC  87495|HR  6661|IRAS 17499-0607|IRC -10382|LS  IV -06    5|PPM 201153|SAO 141926|SKY# 32373|TYC 5095-339-1|UBV   21623|V* Y Oph|YZ   0  4365|YZ  96  6018|2MASS J17523871-0608368|PLX 4077.00|uvby98 100162714|WEB 14757|Gaia DR2 4175017625462647168|** EVS   32A|** KRV   46A|WDS J17526-0609A",
     "matched_id": "V* Y Oph"
   }

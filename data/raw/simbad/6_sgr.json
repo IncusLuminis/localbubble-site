@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "6 Sgr",
-  "retrieved_utc": "2026-08-23T01:55:39+00:00",
+  "retrieved_utc": "2026-09-03T09:33:20+00:00",
   "record_id": "*   6 Sgr",
   "raw": {
     "main_id": "*   6 Sgr",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.261000156402588,
-    "plx_value": 1.8024,
+    "rvz_bibcode": "2018yCat.1345....0G",
     "sp_type": "K2III",
-    "plx_err": 0.06769999861717224,
+    "plx_value": 1.8024,
     "otype": "*",
+    "pmra": 0.316,
+    "pmdec": -6.454,
+    "plx_err": 0.06769999861717224,
+    "rvz_radvel": -15.47,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 358482817|HIP 88258|Gaia DR3 4144228413737011712|*   6 Sgr|BD-17  4987|FK5 1470|GC 24517|GCRV 10445|GEN# +1.00164358|GSC 06255-01958|HD 164358|HIC  88258|HR  6715|IRAS 17584-1709|IRC -20415|N30 4006|PMC 90-93  1044|PPM 233913|RAFGL 5175S|SAO 160998|SKY# 32692|TYC 6255-1958-1|YZ 107  6487|2MASS J18012313-1709245|WEB 14910|Gaia DR2 4144228413737011712",
     "matched_id": "*   6 Sgr"
   }

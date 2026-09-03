@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 9353",
-  "retrieved_utc": "2026-08-23T02:03:04+00:00",
+  "retrieved_utc": "2026-09-03T09:42:58+00:00",
   "record_id": "HD   9353",
   "raw": {
     "main_id": "HD   9353",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.709000110626221,
-    "plx_value": 1.7207,
+    "rvz_bibcode": "2005A&A...430..165F",
     "sp_type": "K3Ib-II+B7/8:",
-    "plx_err": 0.07119999825954437,
+    "plx_value": 1.7207,
     "otype": "**",
+    "pmra": 5.674,
+    "pmdec": -8.047,
+    "plx_err": 0.07119999825954437,
+    "rvz_radvel": -9.51,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 470820211|HIP 7251|Gaia DR3 509008535743225600|2MASS J01332570+5819385|AG+58  154|BD+57   320|GC  1870|GCRV   872|GEN# +1.00009352|GSC 03683-02186|HD   9352|HD   9353|HIC   7251|HR   439|IRAS 01301+5804|IRC +60055|PPM  26459|RAFGL 4114S|SAO  22389|SKY#  2343|TYC 3683-2186-1|UBV    1600|UBV M   8246|YZ  58  1327|uvby98 100009352|WDS J01334+5820AB|** MCA    3|WEB  1558|Gaia DR2 509008535743225600",
     "matched_id": "HD   9353"
   }

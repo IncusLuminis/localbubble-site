@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "λ Lup",
-  "retrieved_utc": "2026-08-23T02:03:48+00:00",
+  "retrieved_utc": "2026-09-03T09:43:55+00:00",
   "record_id": "* lam Lup",
   "raw": {
     "main_id": "* lam Lup",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2018yCat.1345....0G",
     "V": 4.050000190734863,
-    "plx_value": 3.5406,
+    "rvz_bibcode": "2007AN....328..889K",
     "sp_type": "B3V",
-    "plx_err": 0.5960999727249146,
+    "plx_value": 3.5406,
     "otype": "SB*",
+    "pmra": -15.707,
+    "pmdec": -18.158,
+    "plx_err": 0.5960999727249146,
+    "rvz_radvel": 9.8,
+    "pm_bibcode": "2018yCat.1345....0G",
     "ids": "TIC 160630615|WISEA J150850.59-451647.4|HIP 74117|Gaia DR3 5907202503156812032|* lam Lup|CCDM J15088-4517AB|CD-44  9889|CEL   4342|CPC  0 12987|CPD-44  7186|CSI-44  9889 21|GC 20356|GCRV  8755|GSC 08293-03877|HD 133955|HIC  74117|HR  5626|IDS 15021-4454 AB|JP11  2574|PPM 320280|ROT  2146|SAO 225483|SKY# 27457|TD1 17959|TYC 8293-3877-1|UBV   13071|UBV M  20560|[B10]  3852|2MASS J15085063-4516475|ALS 16737|WDS J15088-4517AB|** SEE  219|CSI-44  9889 23|AKARI-IRC-V1 J1508505-451647|IRAS 15054-4505|WISE J150850.59-451647.7|IRAS F15054-4505|PMSC 15021-4454|CSI-44  9889 22|uvby98 100133955|WEB 12661|Gaia DR2 5907202503153332224|GEN# +1.00133955",
     "matched_id": "* lam Lup"
   }

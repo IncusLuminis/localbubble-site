@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "φ Vel",
-  "retrieved_utc": "2026-08-23T02:04:21+00:00",
+  "retrieved_utc": "2026-09-03T09:44:40+00:00",
   "record_id": "* phi Vel",
   "raw": {
     "main_id": "* phi Vel",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 3.450000047683716,
-    "plx_value": 1.903,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B5Ib",
-    "plx_err": 0.18299999833106995,
+    "plx_value": 1.903,
     "otype": "*",
+    "pmra": -13.378,
+    "pmdec": 4.11,
+    "plx_err": 0.18299999833106995,
+    "rvz_radvel": 13.9,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 274684383|HIP 48774|Gaia DR3 5308225539451195520|* phi Vel|CCDM J09569-5434A|CEL   3412|CPC 19  3715|CPD-53  3075|CSI-53  3075 41|FK5  375|GC 13711|GCRV  6356|GEN# +1.00086440A|HD  86440|HIC  48774|HR  3940|IDS 09534-5406 A|JP11  1883|N30 2377|PPM 338507|ROT  1523|SAO 237522|SKY# 19194|TD1 14450|UBV    9331|UBV M  15846|[B10]  2674|uvby98 100086440 A|2MASS J09565173-5434041|ALS 14940|WDS J09569-5434A|TYC 8602-2024-1|GSC 08602-02024|[L69] 18  1|CD-53  3251|WEB  9069|Gaia DR2 5308225539443672064|IRAS 09550-5419|AKARI-IRC-V1 J0956517-543404",
     "matched_id": "* phi Vel"
   }

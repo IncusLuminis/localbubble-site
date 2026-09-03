@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "Deneb",
-  "retrieved_utc": "2026-08-23T01:55:53+00:00",
+  "retrieved_utc": "2026-09-03T09:33:38+00:00",
   "record_id": "* alf Cyg",
   "raw": {
     "main_id": "* alf Cyg",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2007A&A...474..653V",
     "V": 1.25,
-    "plx_value": 2.31,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "A2Ia",
-    "plx_err": 0.3199999928474426,
+    "plx_value": 2.31,
     "otype": "sg*",
+    "pmra": 2.01,
+    "pmdec": 1.85,
+    "plx_err": 0.3199999928474426,
+    "rvz_radvel": -4.9,
+    "pm_bibcode": "2007A&A...474..653V",
     "ids": "TIC 195554360|PLX 4935|* alf Cyg|*  50 Cyg|ADS 14172 A|AG+45 1730|ALS 11488|BD+44  3541|CCDM J20415+4517A|CEL   5144|CSI+44  3541  1|EM* MWC  351|FK5  777|GC 28846|GCRV 12971|GEN# +1.00197345|GSC 03574-03347|HD 197345|HIC 102098|HIP 102098|HR  7924|IDS 20380+4455 A|IRC +50337|JP11  3264|LS III +45   15|MCW  940|N30 4579|PMC 90-93   546|PPM  60323|RAFGL 2633|ROT  3019|SAO  49941|SKY# 39204|SV* ZI  1938|TD1 27159|TYC 3574-3347-1|UBV   17953|UBV M  25099|V* alf Cyg|[HFE83] 1387|[KW97] 48-33|2MASS J20412592+4516491|PLX 4935.00|WDS J20414+4517A|NAME Deneb|uvby98 100197345|WEB 18466",
     "matched_id": "NAME Deneb"
   }

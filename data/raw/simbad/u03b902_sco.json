@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "ι02 Sco",
-  "retrieved_utc": "2026-08-23T02:03:19+00:00",
+  "retrieved_utc": "2026-09-03T09:43:17+00:00",
   "record_id": "* iot02 Sco",
   "raw": {
     "main_id": "* iot02 Sco",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.802999973297119,
-    "plx_value": 0.8148,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "A2Ib",
-    "plx_err": 0.1265999972820282,
+    "plx_value": 0.8148,
     "otype": "*",
+    "pmra": 2.686,
+    "pmdec": -2.117,
+    "plx_err": 0.1265999972820282,
+    "rvz_radvel": -17.15,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 464139856|WISEA J175011.10-400525.6|HIP 87294|Gaia DR3 5957938608303888896|PLX 4068|* iot02 Sco|ALS  4430|CCDM J17502-4005A|CD-40 11886|CPC 18  9002|CPD-40  8138|CSI-40 11886 21|GC 24197|GCRV 10312|GEN# +1.00161912|GSC 07890-02436|HD 161912|HIC  87294|HR  6631|IDS 17432-4003 A|WISE J175011.11-400525.5|IRAS 17466-4004|LS 4430|PPM 323443|ROT  2493|SAO 228466|SKY# 32270|TD1 21017|TYC 7890-2436-1|UBV   15152|UBV M  22413|[SC96] Mis  709|[SC96] GC 192|uvby98 100161912|PLX 4068.00|WDS J17502-4005A|2MASS J17501111-4005254|UCAC4 250-137170|WEB 14725|Gaia DR2 5957938608303888896",
     "matched_id": "* iot02 Sco"
   }

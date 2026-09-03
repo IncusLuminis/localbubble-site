@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "κ Aql",
-  "retrieved_utc": "2026-08-23T02:03:28+00:00",
+  "retrieved_utc": "2026-09-03T09:43:29+00:00",
   "record_id": "* kap Aql",
   "raw": {
     "main_id": "* kap Aql",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 4.960000038146973,
-    "plx_value": 1.9758,
+    "rvz_bibcode": "2006AstL...32..759G",
     "sp_type": "B0.5IIIn",
-    "plx_err": 0.15330000221729279,
+    "plx_value": 1.9758,
     "otype": "*",
+    "pmra": 0.974,
+    "pmdec": -3.241,
+    "plx_err": 0.15330000221729279,
+    "rvz_radvel": -19.4,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 242716217|Gaia DR3 4207167654692390400|HIP 96483|* kap Aql|*  39 Aql|ALS 10359|BD-07  5006|FK5  737|GC 27107|GCRV 12012|GEN# +1.00184915|GSC 05156-03185|HD 184915|HIC  96483|HR  7446|IRAS 19342-0708|JP11  3119|LS  IV -07   36|MCW  736|N30 4340|PPM 203088|ROT  2820|SAO 143600|SKY# 36608|TD1 25033|TYC 5156-3185-1|UBV   16628|UBV M  23923|YZ  97  6837|uvby98 100184915|2MASS J19365345-0701388|WEB 16928|Gaia DR2 4207167654692390400",
     "matched_id": "* kap Aql"
   }

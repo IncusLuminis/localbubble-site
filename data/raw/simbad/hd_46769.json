@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "HD 46769",
-  "retrieved_utc": "2026-08-23T02:01:24+00:00",
+  "retrieved_utc": "2026-09-03T09:40:53+00:00",
   "record_id": "HD  46769",
   "raw": {
     "main_id": "HD  46769",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 5.860000133514404,
-    "plx_value": 1.302,
+    "rvz_bibcode": "2022yCat.1355....0G",
     "sp_type": "B7Ib-II",
-    "plx_err": 0.08510000258684158,
+    "plx_value": 1.302,
     "otype": "*",
+    "pmra": -1.509,
+    "pmdec": -1.372,
+    "plx_err": 0.08510000258684158,
+    "rvz_radvel": 12.9,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 281148636|AP J06351582+0053248|HIP 31446|Gaia DR3 3120595698224445312|2MASS J06351582+0053248|AG+00  715|ALS  9034|BD+00  1491|GC  8571|GCRV  4247|GEN# +1.00046769|GSC 00146-01678|HD  46769|HIC  31446|HR  2409|LS  VI +00    9|PPM 150810|SAO 114097|SKY# 11435|TD1  7505|TYC  146-1678-1|UBV    6539|UBV M  12242|YPAC 428|YZ   0  2274|uvby98 100046769|CoRoT 614|WEB  6293|Gaia DR2 3120595698224445312",
     "matched_id": "HD  46769"
   }

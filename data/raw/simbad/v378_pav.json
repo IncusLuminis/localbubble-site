@@ -1,7 +1,7 @@
 {
   "source": "simbad",
   "query": "V378 Pav",
-  "retrieved_utc": "2026-08-23T02:06:29+00:00",
+  "retrieved_utc": "2026-09-03T09:47:24+00:00",
   "record_id": "V* V378 Pav",
   "raw": {
     "main_id": "V* V378 Pav",
@@ -13,10 +13,15 @@
     "coo_wavelength": "O",
     "coo_bibcode": "2020yCat.1350....0G",
     "V": 6.760000228881836,
-    "plx_value": 1.8489,
+    "rvz_bibcode": "",
     "sp_type": "S4,4",
-    "plx_err": 0.03539999946951866,
+    "plx_value": 1.8489,
     "otype": "S*",
+    "pmra": -1.98,
+    "pmdec": -7.065,
+    "plx_err": 0.03539999946951866,
+    "rvz_radvel": null,
+    "pm_bibcode": "2020yCat.1350....0G",
     "ids": "TIC 466232301|HIP 99758|Gaia DR3 6430929264731821952|CD-62  1317|CPC 20.1  6090|CPD-62  6147|CSS 1195|GC 28053|GSC 09090-01247|GSC 09090-00367|HD 191630|HIC  99758|Hen 4-197|IRAS 20100-6225|PPM 364486|S1* 636|SAO 254758|TYC 9090-1247-1|V* V378 Pav|2MASS J20142578-6216449|Gaia DR1 6430929264731821952|Gaia DR2 6430929264731821952",
     "matched_id": "V* V378 Pav"
   }
