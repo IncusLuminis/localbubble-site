@@ -53,9 +53,12 @@ import { loadScene } from "./scene/sceneData";
 import {
   createVelocitySpeedLabelsLayer,
   createVelocityVectorsLayer,
+  currentArrowScaleFactor,
   nextVelocityVectorsToggleOn,
   selectVisibleVelocitySpeedLabelIds,
   starsWithVelocityInLocalBubble,
+  updateVelocitySpeedLabelPositions,
+  updateVelocityVectorsScale,
   VELOCITY_SPEED_LABEL_MAX_VISIBLE,
   velocityVectorsVisible,
 } from "./scene/velocityVectors";
@@ -532,9 +535,13 @@ let denseBatchBoundaryMesh: ReturnType<typeof createDenseBatchBoundaryLayer> | n
 
 /** Issue #231: the velocity-vectors layer - built once, right alongside
  * `denseBatchBoundaryMesh` above, once the scene has loaded. Always a real
- * (possibly empty) `Group` once built (see `createVelocityVectorsLayer`'s
- * docstring for why this differs from the optional `structures.*` layers'
- * `| null` convention) - `null` here only means "scene hasn't loaded yet". */
+ * (possibly empty) `{ group, handles }` once built (see
+ * `createVelocityVectorsLayer`'s docstring for why this differs from the
+ * optional `structures.*` layers' `| null` convention) - `null` here only
+ * means "scene hasn't loaded yet". Story #301: `.handles` is what
+ * `applyVelocityVectorScale` (called every frame from `animate()`) re-scales
+ * as the camera moves; `.group` is what gets added to the scene/toggled
+ * `.visible`, same as before. */
 let velocityVectorsGroup: ReturnType<typeof createVelocityVectorsLayer> | null = null;
 
 /** Issue #236: the density-controlled per-arrow speed labels ("31.5 km/s")
@@ -883,6 +890,50 @@ function applySunCoreScale(): void {
   sunMarker.core.scale.setScalar(sunCoreRadiusPc(camera.position.length(), denseBatchRadiusPc, bubbleOuterRadiusPc));
 }
 
+/** Story #301: the last camera-scale-relative arrow factor
+ * (`velocityVectors.ts`'s `currentArrowScaleFactor`) actually applied to the
+ * velocity-vector arrows/speed labels - change-detection for
+ * `applyVelocityVectorScale` below, mirroring `applyBackgroundDimming`'s own
+ * crossing-detection philosophy just below it. `-1` is never a real
+ * `currentArrowScaleFactor` result (always `>= 0`), so the very first call
+ * always applies regardless of the camera's starting distance. */
+let lastAppliedArrowScaleFactor = -1;
+
+/** Story #301: re-scales every velocity-vector arrow's length (and its
+ * matching speed label's tip position) to the camera's CURRENT distance
+ * each frame - reuses the exact same `denseBatchRadiusPc`/
+ * `bubbleOuterRadiusPc` pair `applyDenseBatchLod`/`applySunCoreScale` above
+ * already benchmark against every frame, rather than recomputing either
+ * independently, per this Story's own explicit instruction.
+ *
+ * Change-detected against `lastAppliedArrowScaleFactor`: `currentArrowScaleFactor`
+ * is flat (unchanging) both at/inside the RECONS sphere and beyond the
+ * Local Bubble's open-space ceiling (`currentViewScalePc`'s own segment 1/
+ * flat-ceiling shape - see that function's docstring), so a stationary or
+ * RECONS-sphere-confined camera skips this entirely most frames rather than
+ * re-touching all ~156 arrows' geometry unconditionally - cheap either way
+ * at this population size, but this keeps the cost proportional to actual
+ * camera movement through the scale-relevant zone, matching this file's
+ * existing "only touch geometry on frames that actually changed something"
+ * convention (`applyBackgroundDimming`'s own crossing-detection). */
+function applyVelocityVectorScale(): void {
+  if (!velocityVectorsGroup) return;
+  const cameraDistancePc = camera.position.length();
+  const scaleFactor = currentArrowScaleFactor(cameraDistancePc, denseBatchRadiusPc, bubbleOuterRadiusPc);
+  if (scaleFactor === lastAppliedArrowScaleFactor) return;
+  lastAppliedArrowScaleFactor = scaleFactor;
+
+  updateVelocityVectorsScale(velocityVectorsGroup.handles, cameraDistancePc, denseBatchRadiusPc, bubbleOuterRadiusPc);
+  if (velocitySpeedLabelsInfo) {
+    updateVelocitySpeedLabelPositions(
+      velocitySpeedLabelsInfo.labels,
+      cameraDistancePc,
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+    );
+  }
+}
+
 /** Issue #138: toggles the dense-batch collection-radius boundary shell's
  * visibility each frame, "as soon as we enter this sphere" per the human
  * owner's request - reuses the same `denseBatchRadiusPc` that
@@ -1038,7 +1089,7 @@ function applyVelocityVectorsButtonState(insideLocalBubble: boolean): void {
   velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
   velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
   if (velocityVectorsGroup) {
-    velocityVectorsGroup.visible = velocityVectorsVisible(velocityVectorsOn, insideLocalBubble);
+    velocityVectorsGroup.group.visible = velocityVectorsVisible(velocityVectorsOn, insideLocalBubble);
   }
 }
 
@@ -1176,7 +1227,7 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
   velocityVectorsButton.setAttribute("aria-pressed", "false");
   velocityVectorsButton.classList.remove("active");
   if (velocityVectorsGroup) {
-    velocityVectorsGroup.visible = false;
+    velocityVectorsGroup.group.visible = false;
   }
 }
 
@@ -1717,7 +1768,7 @@ function updateLabelVisibility(): void {
     }));
     const visibleSpeedLabelIds = selectVisibleVelocitySpeedLabelIds(
       speedLabelCandidates,
-      velocityVectorsGroup?.visible ?? false,
+      velocityVectorsGroup?.group.visible ?? false,
       VELOCITY_SPEED_LABEL_MAX_VISIBLE,
     );
     for (const label of velocitySpeedLabelsInfo.labels) {
@@ -2068,7 +2119,7 @@ velocityVectorsButton.addEventListener(
     velocityVectorsButton.setAttribute("aria-pressed", String(velocityVectorsOn));
     velocityVectorsButton.classList.toggle("active", velocityVectorsOn);
     if (velocityVectorsGroup) {
-      velocityVectorsGroup.visible = velocityVectorsVisible(
+      velocityVectorsGroup.group.visible = velocityVectorsVisible(
         velocityVectorsOn,
         cameraWasInsideLocalBubble,
       );
@@ -2215,8 +2266,20 @@ loadScene()
     // in `animate()`, is what turns it on/off from here on. Story #287:
     // widened from `denseBatchRadiusPc` (the RECONS sphere) to
     // `bubbleOuterRadiusPc` (the Local Bubble), per Epic #285.
-    velocityVectorsGroup = createVelocityVectorsLayer(sceneData.objects, bubbleOuterRadiusPc);
-    scene.add(velocityVectorsGroup);
+    //
+    // Story #301: also passes `camera.position.length()`/`denseBatchRadiusPc`
+    // now, so each arrow's initial length is already camera-scale-relative
+    // as of this exact moment - `applyVelocityVectorScale()` (called from
+    // `animate()`, alongside `applySunCoreScale()`) keeps every arrow's
+    // length current as the camera moves from here on, via the `handles`
+    // this now returns alongside `group`.
+    velocityVectorsGroup = createVelocityVectorsLayer(
+      sceneData.objects,
+      camera.position.length(),
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+    );
+    scene.add(velocityVectorsGroup.group);
 
     // Issue #236: the speed-label pool for those same arrows - built once
     // here too. Every label starts life un-toggled either way (visibility
@@ -2224,7 +2287,17 @@ loadScene()
     // called right after this `.then()` finishes below, before the first
     // real frame renders). Story #287: widened alongside the arrows layer
     // above.
-    velocitySpeedLabelsInfo = createVelocitySpeedLabelsLayer(sceneData.objects, bubbleOuterRadiusPc);
+    //
+    // Story #301: also passes `camera.position.length()`/`denseBatchRadiusPc`
+    // - see `velocityVectorsGroup`'s own construction just above for why;
+    // `applyVelocityVectorScale()` keeps each label's tip position current
+    // alongside its arrow's length from here on.
+    velocitySpeedLabelsInfo = createVelocitySpeedLabelsLayer(
+      sceneData.objects,
+      camera.position.length(),
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+    );
     scene.add(velocitySpeedLabelsInfo.group);
 
     const catalogLayer = createCatalogObjectGroup(
@@ -2618,6 +2691,7 @@ function animate(): void {
   // player's own override right back to the static position every frame.
   applyDenseBatchLod();
   applySunCoreScale();
+  applyVelocityVectorScale();
   applyDenseBatchBoundaryVisibility();
   // May reset the player's time/playing/panel state to Today/paused/hidden
   // on a sphere-exit crossing frame (`applyPlayerSphereState`, called from
