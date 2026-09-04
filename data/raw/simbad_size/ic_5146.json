@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "IC 5146",
+  "retrieved_utc": "2026-09-04T10:04:39+00:00",
+  "record_id": "IC 5146",
+  "raw": {
+    "main_id": "IC 5146",
+    "ra": 328.37199999999996,
+    "dec": 47.246,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_angle": 0,
+    "galdim_minaxis": 8.199999809265137,
+    "galdim_bibcode": "2020A&A...633A..99C",
+    "galdim_qual": "D",
+    "galdim_majaxis": 8.199999809265137,
+    "matched_id": "IC 5146"
+  }
+}

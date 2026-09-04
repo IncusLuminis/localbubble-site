@@ -71852,6 +71852,325 @@
         "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
       },
       "notes": "Story #318 new-record gap-fill (data/raw/gap_fills/README.md convention, adapted for molecular clouds): the actively star-forming core of the Serpens cloud, resolving the issue's own 'Serpens/Aquila Rift complex' weaker/optional candidate. The real Zucker+2020 table shows 'Serpens'/'Serpens_Main' and 'Aquila_Rift' are genuinely DISTINCT sightline groups at different median distances (Aquila_Rift's own 5 tabulated sightlines run 163-280 pc, well short of Serpens'/Serpens_Main's ~425-556 pc) - not one combined complex, contrary to the issue's own '260-440pc per inconsistent secondary sources' framing. Aquila Rift was investigated as a possible separate record but NOT added: SIMBAD's own single-point identification for it ('NAME Aql Rift', ra=278.0, dec=-1.0) sits >9 deg from every one of the Zucker table's own 'Aquila_Rift'-named rows (nearest same-named row 9.586 deg away), while its SIMBAD galdim_majaxis (1530 arcmin, ~25.5 deg) confirms it is an enormous extended superposition/extinction feature spanning much of the sky, not a single coherent cloud - a poor fit for this catalog's single-point/single-distance object model, and not force-fit here (honest exclusion, not a fabricated match). This Serpens Molecular Cloud record stands alone as the cleanly resolvable representative of the issue's combined candidate. visual.size_pc is an honest failure, left null: 'NAME Serpens Main Cloud' and several tried aliases (Serpens, Serpens Cloud Core, Serpens dark cloud, Serpens Nebula, Serpens South, GF 9, W 40, Serpens molecular cloud core, MWSC 2790) were queried live against data_sources.simbad_size.resolve_angular_diameter; only 'W 40' and 'GF 9' returned a galdim value, but both are small, specific, physically distinct sub-features (an embedded HII region and an unrelated dark cloud, respectively, each at their own different sightline distance) rather than a size for Serpens Main Cloud itself, so neither is used. Never fabricated/approximated."
+    },
+    {
+      "id": "north-america-nebula",
+      "name": "North America Nebula",
+      "aliases": [
+        "NGC 7000",
+        "Sh 2-117",
+        "Caldwell 20"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        64.2334054201891,
+        781.2875525324612,
+        -10.94668378833492
+      ],
+      "distance_pc": 784.0,
+      "distance_error_pc": 84.1837,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME North America Nebula' (identification only; otype Cl* (open cluster; nebula position confirmed via RA/Dec, same otype quirk documented for M8/M16/M17/M20 in this directory's issue #221 section), main_id 'NGC  7000', ra=314.6958333333333, dec=44.33 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=85.30000305175781 deg, b=-0.800000011920929 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.273 deg): d50=784 pc, d16=753 pc, d84=902 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 84.1837 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill (data/raw/gap_fills/README.md convention, adapted for molecular clouds, follow-on to Story #318): the human owner's explicitly requested addition. Story #318 had re-confirmed this candidate against the real Vizier table and found it borderline (mean ~809pc across all North_America-named rows, treated as 'at/over the 800pc boundary, skip') - this Story's own nearest-sightline match (0.273 deg separation, d50=784pc, the North_America-named row closest to SIMBAD's own identification position) resolves cleanly under 800pc, so it is added here as the issue explicitly asked. visual.size_pc is an honest failure, left null: SIMBAD's 'NAME North America Nebula'/'NGC 7000' identifiers carry no galdim_majaxis on file for the nebula as a whole."
+    },
+    {
+      "id": "pelican-nebula",
+      "name": "Pelican Nebula",
+      "aliases": [
+        "IC 5070",
+        "Sh 2-119"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        74.53378618131651,
+        788.483865184179,
+        1.3816879875040402
+      ],
+      "distance_pc": 792.0,
+      "distance_error_pc": 40.4,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME Pelican Nebula' (identification only; otype HII, main_id 'IC 5070', ra=312.75, dec=44.36666666666667 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=84.5999984741211 deg, b=0.10000000149011612 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.031 deg - the closest possible match in the whole table, essentially the same physical sightline as the North America Nebula record above, consistent with the two being the same complex split by a dust lane): d50=792 pc, d16=784 pc, d84=800 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 40.4000 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: the issue's own optional 'twin' of the North America Nebula (same physical star-forming complex, IC 5070, separated from NGC 7000 by the intervening LDN 935 dust lane, not a distinct Zucker table entry of its own) - added because it resolves cleanly via SIMBAD ('NAME Pelican Nebula' -> IC 5070, otype HII) with its own distinct id/aliases/coordinates, per the issue's own 'add as optional twin if it resolves cleanly, your call' instruction. Its own nearest Zucker sightline match (0.031 deg separation - essentially exact) is the same North_America-named group as the North America Nebula record, at a very slightly different d50 (792pc vs. 784pc), consistent with two adjacent sightlines through the same complex rather than a data error. visual.size_pc is an honest failure, left null: SIMBAD has no galdim_majaxis on file for 'NAME Pelican Nebula'/'IC 5070'."
+    },
+    {
+      "id": "ic-5146-cocoon-nebula",
+      "name": "IC 5146 (Cocoon Nebula)",
+      "aliases": [
+        "Cocoon Nebula",
+        "Caldwell 19"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -57.350869699982454,
+        745.3393242280032,
+        -71.98034109393
+      ],
+      "distance_pc": 751.0,
+      "distance_error_pc": 38.6135,
+      "size_pc": 1.7913,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME Cocoon Nebula' (identification only; otype OpC (embedded cluster; nebula position confirmed via RA/Dec, same otype quirk as M16/M17/M20), main_id 'IC 5146', ra=328.372, dec=47.246 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=94.4000015258789 deg, b=-5.5 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.027 deg): d50=751 pc, d16=743 pc, d84=761 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 38.6135 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: Story #318 wrongly excluded this candidate at ~950pc-1kpc, sourced from a bad secondary source at that Story's own research stage (data/raw/gap_fills/README.md's Story #318 section: 'IC5146/Cocoon Nebula (730-792pc - still excluded per the issue's explicit list even though this is measurably closer than the issue's own ~950pc-1kpc prior estimate)'). This Story's own live re-verification against the real, cached Zucker table confirms the corrected figure: nearest sightline (0.027 deg separation, essentially exact) gives d50=751pc, well under 800pc. visual.size_pc=1.79pc is a real DIAMETER (this catalog's established molecular_cloud convention, Story #314) derived from SIMBAD's own galdim_majaxis=8.2 arcmin for 'NAME Cocoon Nebula'/IC 5146 (bibcode 2020A&A...633A..99C) - a compact figure for the visible reflection/emission nebula itself (not the surrounding molecular cloud's full extent), same convention as every other size_pc in this catalog (an angular measurement of the named object as SIMBAD catalogues it, not a manually-estimated cloud extent)."
+    },
+    {
+      "id": "circinus-molecular-cloud",
+      "name": "Circinus Molecular Cloud",
+      "aliases": [
+        "Circinus Cloud"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        491.71846015330965,
+        -460.141540220458,
+        -45.909899891006496
+      ],
+      "distance_pc": 675.0,
+      "distance_error_pc": 33.8092,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'Circinus Cloud' (identification only; otype Cld, main_id 'NAME Circinus Cloud', ra=225.5, dec=-63.0 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=316.8999938964844 deg, b=-3.9000000953674316 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.263 deg): d50=675 pc, d16=672 pc, d84=676 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 33.8092 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: Story #318 wrongly excluded this candidate as 'confirmed too far, kpc-scale' from a bad secondary source at that Story's own research stage. This Story's own live re-verification against the real, cached Zucker table confirms it is not: nearest sightline (0.263 deg separation) gives d50=675pc, well under 800pc (matching the issue's own researched 675-683pc range exactly). visual.size_pc is an honest failure, left null: SIMBAD's 'Circinus Cloud'/'NAME Circinus Cloud' identifier carries no galdim_majaxis on file."
+    },
+    {
+      "id": "norma-molecular-cloud",
+      "name": "Norma Molecular Cloud",
+      "aliases": [
+        "Norma Cloud",
+        "Sandqvist 187-188"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        671.8740450134883,
+        -260.6019471360857,
+        22.647136377332888
+      ],
+      "distance_pc": 721.0,
+      "distance_error_pc": 62.4548,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'Norma Cloud' (identification only; otype Cld, main_id 'NAME Norma Cloud', ra=248.5, dec=-45.0 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=338.79998779296875 deg, b=1.7999999523162842 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.153 deg): d50=721 pc, d16=675 pc, d84=777 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 62.4548 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: Story #318 wrongly excluded this candidate for the same 'kpc-scale' bad-secondary-source reason as Circinus above. This Story's own live re-verification against the real, cached Zucker table confirms it is not: the table's own single 'Norma'-named sightline row (0.153 deg separation from SIMBAD's identification position) gives d50=721pc, well under 800pc, matching the issue's own researched ~721pc figure exactly. visual.size_pc is an honest failure, left null: SIMBAD's 'Norma Cloud'/'NAME Norma Cloud' identifier carries no galdim_majaxis on file."
+    },
+    {
+      "id": "mon-ob1-ngc-2264",
+      "name": "Mon OB1 / NGC 2264 (Christmas Tree Cluster)",
+      "aliases": [
+        "NGC 2264",
+        "Christmas Tree Cluster",
+        "Cone Nebula",
+        "Sh 2-273"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -699.1305054920882,
+        -293.88724392489667,
+        30.46020598427897
+      ],
+      "distance_pc": 759.0,
+      "distance_error_pc": 42.0024,
+      "size_pc": 52.9882,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NGC 2264' (identification only; otype OpC (embedded cluster; nebula/Cone Nebula position confirmed via RA/Dec, same otype quirk as M16/M17/M20/IC 5146), main_id 'NGC  2264', ra=100.21708333333333, dec=9.876944444444444 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=202.8000030517578 deg, b=2.299999952316284 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.194 deg): d50=759 pc, d16=733 pc, d84=769 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 42.0024 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: the Mon OB1 association's embedded young cluster and star-forming region (the Christmas Tree Cluster, with the Cone Nebula at its southern tip), one of this Story's strong new candidates. Nearest sightline (0.194 deg separation) gives d50=759pc, well under 800pc, matching the issue's own researched 715-780pc range. visual.size_pc is a real DIAMETER (Story #314 convention) derived from SIMBAD's own galdim_majaxis=240.0 arcmin for 'NGC 2264' (bibcode 2022A&A...664A..66M)."
+    },
+    {
+      "id": "ic-2118-witch-head-nebula",
+      "name": "IC 2118 (Witch Head Nebula)",
+      "aliases": [
+        "Witch Head Nebula",
+        "NGC 1909"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -215.76582416550582,
+        -111.36476338138581,
+        -124.78781430567595
+      ],
+      "distance_pc": 273.0,
+      "distance_error_pc": 16.6305,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'IC 2118' (identification only; otype RNe, main_id 'NGC  1909', ra=75.5, dec=-7.9 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=207.3000030517578 deg, b=-27.200000762939453 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.697 deg): d50=273 pc, d16=262 pc, d84=281 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 16.6305 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: a reflection nebula near Rigel, illuminated by it. Nearest sightline (0.697 deg separation - looser than most of this batch, but still the closest tabulated sightline and within the same IC2118-named group) gives d50=273pc, matching the issue's own researched 273-328pc range. visual.size_pc is an honest failure, left null: neither 'IC 2118' nor 'NGC 1909' nor 'NAME Witch Head Nebula' carries a galdim_majaxis on file (the last of those three does not even resolve on SIMBAD as a separate query - IC 2118/NGC 1909 is the only identifier that resolves)."
+    },
+    {
+      "id": "orion-lam-lambda-orionis-ring",
+      "name": "Lambda Orionis Ring",
+      "aliases": [
+        "Orion_Lam",
+        "Sh 2-264",
+        "Meissa Ring",
+        "lam Ori Molecular Ring"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -399.88025202547493,
+        -105.65314496619565,
+        -88.66903066344275
+      ],
+      "distance_pc": 423.0,
+      "distance_error_pc": 23.1856,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'Sh 2-264' (identification only; otype HII, main_id 'NAME lam Ori Molecular Ring', ra=83.825, dec=9.933333333333332 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=194.8000030517578 deg, b=-12.100000381469727 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.301 deg): d50=423 pc, d16=416 pc, d84=435 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 23.1856 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: a ring-shaped molecular cloud/HII region surrounding the lambda Orionis (Meissa) OB association, in the same general Orion direction as the already-loaded Orion Molecular Cloud Complex record but a genuinely distinct structure - REDUNDANCY CHECK (issue's own explicit requirement): SIMBAD's identification-only position for this candidate ('Sh 2-264' -> main_id 'NAME lam Ori Molecular Ring', ra=83.825, dec=9.933) sits 11.527 deg away from the already-loaded orion-molecular-cloud-complex record's own stored position (ra=86.2152, dec=-1.3456) - a real angular separation computed via astropy SkyCoord, not a name-only comparison. This is far outside any plausible single-object measurement scatter (every genuine same-object match in this Story and Story #318 landed under ~1.8 deg), confirming these are two physically distinct objects: the Lambda Orionis ring at dec~+6 to +14 deg (north of the Orion Belt/Sword region) vs. the Orion Nebula/M42-anchored complex at dec~-1 to -8 deg. Not a duplicate - added as its own record. Nearest sightline (0.301 deg separation, the table's own Orion_Lam-named group) gives d50=423pc, matching the issue's own researched 393-426pc range. visual.size_pc is an honest failure, left null: neither 'Sh 2-264' nor 'NAME lam Ori Molecular Ring' carries a galdim_majaxis on file."
+    },
+    {
+      "id": "draco-cloud",
+      "name": "Draco Cloud",
+      "aliases": [
+        "Draco Molecular Cloud",
+        "Draco MC"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        3.2895617147077156,
+        376.94231176839963,
+        298.77194042014673
+      ],
+      "distance_pc": 481.0,
+      "distance_error_pc": 53.688,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME Draco Cloud' (identification only; otype MoC, main_id 'NAME Draco Cloud', ra=252.07083333333333, dec=60.19666666666667 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=89.5 deg, b=38.400001525878906 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.308 deg): d50=481 pc, d16=436 pc, d84=532 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 53.6880 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #324 new-record gap-fill: a high-Galactic-latitude (b~+38 deg) intermediate-velocity molecular cloud, previously flagged in an earlier, less rigorous research pass as 'uncertain' - the real cached Zucker table gives a concrete figure. Nearest sightline (0.308 deg separation, the table's own single Draco-named row) gives d50=481pc, matching the issue's own researched ~481pc figure exactly. visual.size_pc is an honest failure, left null: SIMBAD's 'NAME Draco Cloud' identifier carries no galdim_majaxis on file."
     }
   ],
   "structures": {

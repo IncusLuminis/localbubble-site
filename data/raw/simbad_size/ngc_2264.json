@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "NGC 2264",
+  "retrieved_utc": "2026-09-04T10:01:57+00:00",
+  "record_id": "NGC  2264",
+  "raw": {
+    "main_id": "NGC  2264",
+    "ra": 100.21708333333333,
+    "dec": 9.876944444444444,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "2021A&A...647A..19T",
+    "galdim_bibcode": "2022A&A...664A..66M",
+    "galdim_qual": "C",
+    "galdim_minaxis": 240.0,
+    "galdim_angle": 0,
+    "galdim_majaxis": 240.0,
+    "matched_id": "NGC  2264"
+  }
+}

@@ -204,16 +204,28 @@ def test_original_eight_molecular_clouds_are_unchanged(catalog_objects):
         assert TAG not in obj.group.secondary
 
 
-def test_catalog_now_has_exactly_12_molecular_cloud_records(catalog_objects):
+def test_catalog_has_at_least_the_12_story_318_molecular_cloud_records(catalog_objects):
+    # No longer a strict ==12 equality: the catalog has since legitimately
+    # grown via Story #324's own 9 new molecular_cloud records (see
+    # tests/test_molecular_cloud_gap_fill_tier1.py), the same "nothing
+    # pre-existing disappeared, count only grows" relaxation
+    # test_structure_size_backfill.py's own Story #314 regression guard
+    # already established for exactly this kind of later, legitimate growth.
     molecular_clouds = [obj for obj in catalog_objects if obj.object_type == "molecular_cloud"]
     ids = {obj.id for obj in molecular_clouds}
-    assert len(molecular_clouds) == 12
-    assert ids == ORIGINAL_EIGHT_IDS | {oid for oid, _ in NEW_MOLECULAR_CLOUDS}
+    expected = ORIGINAL_EIGHT_IDS | {oid for oid, _ in NEW_MOLECULAR_CLOUDS}
+    assert expected <= ids, f"missing Story #307/#318 molecular_cloud id(s): {sorted(expected - ids)}"
+    assert len(molecular_clouds) >= 12
 
 
 def test_gap_fill_tag_does_not_leak_into_other_batches(catalog_objects):
+    # No longer a strict ==4 equality: TAG ("molecular-cloud-gap-fill") is a
+    # per-object-type batch tag, not a per-Story one, and Story #324's own 9
+    # new records (tests/test_molecular_cloud_gap_fill_tier1.py) legitimately
+    # share it - that Story's own test module asserts the up-to-date total.
+    # This test's job is just the disjointness guarantee below.
     tagged = [obj for obj in catalog_objects if TAG in obj.group.secondary]
-    assert len(tagged) == 4
+    assert len(tagged) >= 4
     for obj in tagged:
         assert not OTHER_GAP_FILL_TAGS.intersection(obj.group.secondary), (
             f"{obj.id} carries {TAG!r} plus a conflicting batch tag {obj.group.secondary!r}"
