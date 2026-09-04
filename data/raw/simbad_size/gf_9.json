@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "GF 9",
+  "retrieved_utc": "2026-09-04T05:44:23+00:00",
+  "record_id": "LDN 1082",
+  "raw": {
+    "main_id": "LDN 1082",
+    "ra": 312.775,
+    "dec": 60.18333333333333,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "galdim_minaxis": 20.0,
+    "galdim_qual": "D",
+    "galdim_angle": 90,
+    "galdim_bibcode": "2002A&A...383..631D",
+    "galdim_majaxis": 20.0,
+    "matched_id": "GF  9"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "California Molecular Cloud",
+  "retrieved_utc": "2026-09-04T05:43:50+00:00",
+  "record_id": "NAME California Molecular Cloud",
+  "raw": {
+    "main_id": "NAME California Molecular Cloud",
+    "ra": 62.50000000000001,
+    "dec": 39.0,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2009ApJ...703...52L",
+    "galdim_angle": null,
+    "galdim_majaxis": 330.0,
+    "galdim_minaxis": 300.0,
+    "galdim_qual": "D",
+    "galdim_bibcode": "2018MNRAS.474.4672L",
+    "matched_id": "NAME California Molecular Cloud"
+  }
+}

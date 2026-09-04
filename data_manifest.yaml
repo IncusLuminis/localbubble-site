@@ -8803,3 +8803,67 @@ sources:
   retrieved: '2026-09-03T14:18:21+00:00'
   record_id: M  20
   cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-314/local-galactic-structures/data/raw/simbad_size/m_20.json
+- id: simbad_size:NAME Corona Australis Cloud
+  source: simbad_size
+  query: NAME Corona Australis Cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:43:44+00:00'
+  record_id: NAME Corona Australis Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/name_corona_australis_cloud.json
+- id: simbad_size:CrA cloud
+  source: simbad_size
+  query: CrA cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:43:46+00:00'
+  record_id: NAME Corona Australis Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/cra_cloud.json
+- id: simbad_size:NAME California Molecular Cloud
+  source: simbad_size
+  query: NAME California Molecular Cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:43:49+00:00'
+  record_id: NAME California Molecular Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/name_california_molecular_cloud.json
+- id: simbad_size:California Molecular Cloud
+  source: simbad_size
+  query: California Molecular Cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:43:50+00:00'
+  record_id: NAME California Molecular Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/california_molecular_cloud.json
+- id: simbad_size:W 40
+  source: simbad_size
+  query: W 40
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:44:20+00:00'
+  record_id: LBN 028.77+03.43
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/w_40.json
+- id: simbad_size:GF 9
+  source: simbad_size
+  query: GF 9
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:44:23+00:00'
+  record_id: LDN 1082
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/gf_9.json
+- id: simbad_size:NAME Aql Rift
+  source: simbad_size
+  query: NAME Aql Rift
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:45:39+00:00'
+  record_id: NAME Aql Rift
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/name_aql_rift.json
+- id: simbad_size:Aquila Rift
+  source: simbad_size
+  query: Aquila Rift
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T05:45:40+00:00'
+  record_id: NAME Aql Rift
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/aquila_rift.json

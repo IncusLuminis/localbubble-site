@@ -425,3 +425,148 @@ the 77 newly-acquired Local Bubble stars (Story #296)" section for the
 full writeup, spot-checks, and live-verification result. Confirmed live
 in the web viewer with zero frontend code changes, exactly as this
 Story's own note above anticipated.
+
+## 4 more named molecular clouds beyond the original 8-record seed list (issue #318)
+
+The catalog's 8 `molecular_cloud` records were, until this Story, exactly
+spec `Idea.md` §9's own minimum seed list (Cepheus Flare, Chamaeleon,
+Lupus, Ophiuchus/Rho Ophiuchi, Orion Molecular Cloud Complex, Perseus,
+Pipe Nebula, Taurus) - never expanded, despite the spec's own stated scope
+("structures within approximately 800 pc of the Sun") leaving clear room
+for more. This is a NEW-RECORD gap-fill (unlike Story #307/#314, both
+BACKFILLS onto already-curated records) following this directory's own
+established convention, adapted for molecular clouds: each new record's
+DISTANCE and POSITION are sourced via the same two-step convention the
+original 8 already use (see e.g. `chamaeleon-molecular-cloud`'s own
+`source.reference` in `initial_catalog_records.json`) - DISTANCE from
+Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner,
+D. P., Goodman, A. A., & Alves, J. (2020), "A compendium of distances to
+molecular clouds in the Star Formation Handbook", A&A, 633, A51
+(arXiv:2001.00591), POSITION from a separate SIMBAD identification-only
+cross-match - except that unlike the original 8 (hand-cited from the
+paper's own Table A.1 at curation time), this Story live-queries the real,
+machine-readable VizieR table (`J/A+A/633/A51/handbook`) directly via a
+new adapter, `data_sources/zucker_molecular_clouds.py`, specifically to
+avoid the trap this Story's own first research pass hit: extracting
+distances from a scraped/AI-summarized version of the paper's prose got at
+least one value visibly wrong. `visual.size_pc` uses the same SIMBAD
+`galdim_majaxis`-based DIAMETER convention `data_sources/simbad_size.py`
+(Story #314) already established for this object type - confirmed by two
+independent Validator passes during that Story, and re-confirmed (not
+reversed to a radius) here.
+
+**Matching convention:** a candidate's distance-anchor sightline is the
+VizieR table row with the smallest angular separation from that
+candidate's own SIMBAD identification position, regardless of which
+`Name` label that row happens to carry in the paper's own loose
+sightline-grouping scheme - not a requirement that the row's group name
+textually match the candidate's common name. This matters: it is exactly
+why Aquila Rift (below) was excluded rather than mismatched onto a
+distant same-named group, and exactly why the closest real match for it
+turned out to carry the (different) label `"Serpens"`.
+
+**4 candidates added**, all well under the 800pc cap:
+
+| Record | Distance | Nearest sightline sep. | size_pc |
+| --- | --- | --- | --- |
+| Corona Australis Molecular Cloud | 147 pc | 0.386 deg | 25.66 pc (SIMBAD galdim) |
+| Coalsack Nebula | 182 pc | 1.781 deg | null (honest failure) |
+| California Molecular Cloud | 454 pc | 1.405 deg | 43.58 pc (SIMBAD galdim) |
+| Serpens Molecular Cloud | 425 pc | 0.273 deg | null (honest failure) |
+
+Corona Australis and Coalsack are the issue's own "strong candidate" list
+(one of the nearest star-forming regions/Coronet Cluster; the famous
+naked-eye dark nebula by the Southern Cross). California and Serpens are
+the issue's own "weaker/optional" candidates, included because the real
+Vizier distances confirm both well within 800pc and both are genuinely
+notable (California: the cloud behind NGC 1499, illuminated by xi Persei;
+Serpens Main: the actively star-forming core of the Serpens cloud).
+Corona Australis is one of the paper's own three explicitly-named "~7%
+systematic uncertainty" southern clouds (ReadMe); the other three use the
+paper's general ~5% (all are <1.5kpc).
+
+**2 honest-failure size_pc's**, same shape as Story #314's own M8/Lagoon
+Nebula precedent: Coalsack Nebula and Serpens Molecular Cloud both
+resolve cleanly on SIMBAD (multiple aliases tried live for each) but
+neither carries a `galdim_majaxis` on file for the named object as a
+whole - left `null`, not fabricated.
+
+**2 candidates investigated, deliberately NOT added:**
+
+- **Musca Molecular Cloud** - the issue's own third "strong candidate".
+  SIMBAD identifies "NAME Musca" cleanly, but no VizieR
+  `J/A+A/633/A51/handbook` sightline resolves within a reasonable angular
+  separation of it - the nearest tabulated sightline overall (in the
+  unrelated "Coalsack" group) is 6.0 deg away, and Musca has no
+  `Name`-labeled sightline group of its own in the table at all (94 named
+  groups, none of them "Musca"). Honest failure, not fabricated/
+  approximated.
+- **Aquila Rift**, as a record distinct from Serpens Molecular Cloud - the
+  issue's own "Serpens/Aquila Rift complex" framing turned out, on the
+  real Vizier data, to conflate two genuinely distinct sightline groups at
+  different median distances (`Aquila_Rift`: 163-280pc across 5 rows;
+  `Serpens`/`Serpens_Main`: ~425-556pc). Serpens Molecular Cloud (above)
+  resolves cleanly as its own record. Aquila Rift was investigated
+  separately but not added: SIMBAD's own single-point identification for
+  it ("NAME Aql Rift") sits >9 deg from every one of the table's own
+  `Aquila_Rift`-named rows (nearest same-named row: 9.586 deg) - its
+  closest real match in the whole table (0.223 deg) actually carries the
+  *different* label `"Serpens"` (d50=501pc) - and its own SIMBAD
+  `galdim_majaxis` (1530 arcmin, ~25.5 deg on the sky) confirms it is an
+  enormous extended superposition/extinction feature, not a single
+  coherent 3D cloud - a poor fit for this catalog's single-point/
+  single-distance object model. Excluded rather than force-fit.
+
+**Explicitly out-of-scope candidates re-confirmed against the real
+table** (issue's own list, default-to-exclude instruction honored
+regardless of the exact live figure): North America Nebula (VizieR d50
+731-878pc, mean ~809pc - at/over the 800pc boundary, confirms the issue's
+own "borderline, skip" call); IC5146/Cocoon Nebula (730-792pc - still
+excluded per the issue's explicit list even though this is measurably
+closer than the issue's own ~950pc-1kpc prior estimate); Maddalena's
+Cloud/Circinus/Norma/W3/W4/W5/Mon R2 (present in the table at kpc-scale
+distances, or absent entirely, consistent with exclusion); NGC 6334 does
+not appear in the table's 94 named groups at all.
+
+All 4 new records carry `group.secondary: ["molecular-cloud-gap-fill"]` -
+a distinct tag from every prior batch's own tag, per this directory's
+established convention. `data_sources/zucker_molecular_clouds.py`
+caches the full 326-row VizieR table once (`data/raw/zucker_molecular_clouds/`,
+no per-fetch manifest entry, mirroring `cluster_radius.py`'s own bulk
+whole-table precedent); the per-candidate SIMBAD `galdim_majaxis` size
+queries go through the existing, already-manifested
+`data_sources/simbad_size.py` unchanged. `scripts/
+acquire_molecular_cloud_gap_fill.py` reproduces every distance/error/
+nearest-sightline figure above from a clean checkout (independently
+re-verified to reproduce this Story's own numbers exactly before this PR
+was opened) - it does not mechanically regenerate the catalog records
+themselves, since this Story's candidate selection involved real judgment
+calls (which regions to add, which to honestly exclude) not meant to be
+silently re-decided by blind automation on a future re-run.
+
+`tests/test_molecular_cloud_gap_fill.py` (new-record well-formedness,
+tagging, distance/size_pc sanity, dual provenance, original-8
+non-regression, excluded-candidate regression guard) and `tests/
+test_zucker_molecular_clouds.py` (the new adapter's pure nearest-
+sightline/systematic-fraction/quadrature-error logic) cover this Story;
+`tests/test_structure_size_backfill.py`'s own Story #314 regression guard
+(`test_record_count_and_id_set_are_unchanged`) was updated from a strict
+1079-record equality check to a "nothing pre-existing disappeared, count
+only grows" check, since it was asserting an incidental invariant of its
+own PR's diff rather than a permanent catalog-size ceiling - this Story's
+4 new records are exactly the kind of legitimate future growth that
+invariant was never meant to block. Catalog grew from 1079 to 1083
+objects; `galactic-structures build-catalog` + `galactic-structures
+export-scene --no-radius-filter --output web/public/data/scene.json`
+regenerated the checked-in catalog/scene artifacts, run from this
+worktree's own clean `.venv` (pyarrow 25.0.1, matching the version the
+test suite runs against - standing lesson from PR #183). Full suite: 378
+passed, 4 skipped.
+
+Not part of this Story: any rendering/visual change (these 4 records
+render through whatever `molecular_cloud` rendering is live on `master`
+at merge time), or `star_forming_region` records (none of the candidates
+considered read as a clear-cut case for that type over `molecular_cloud`,
+per the issue's own judgment note - all 4 added keep the existing
+seed-list precedent of classifying even actively star-forming clouds like
+Ophiuchus/Orion as `molecular_cloud`).
