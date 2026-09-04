@@ -72171,6 +72171,145 @@
         "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
       },
       "notes": "Story #324 new-record gap-fill: a high-Galactic-latitude (b~+38 deg) intermediate-velocity molecular cloud, previously flagged in an earlier, less rigorous research pass as 'uncertain' - the real cached Zucker table gives a concrete figure. Nearest sightline (0.308 deg separation, the table's own single Draco-named row) gives d50=481pc, matching the issue's own researched ~481pc figure exactly. visual.size_pc is an honest failure, left null: SIMBAD's 'NAME Draco Cloud' identifier carries no galdim_majaxis on file."
+    },
+    {
+      "id": "hercules-cloud",
+      "name": "Hercules Cloud",
+      "aliases": [
+        "Hercules Molecular Cloud"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        158.34166126083645,
+        153.4436285381721,
+        33.346231724108364
+      ],
+      "distance_pc": 223.0,
+      "distance_error_pc": 11.426832456984744,
+      "size_pc": 13.622294811815742,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME Hercules Cloud' (identification only; otype MoC, main_id 'NAME Hercules Cloud', ra=279.96577748102004, dec=14.335865159713974 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=44.099998474121094 deg, b=8.600000381469727 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.562 deg): d50=223 pc, d16=221 pc, d84=226 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 11.4268 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #325 new-record gap-fill (second tier, less mainstream-famous than Story #324's tier): a nearby high-latitude molecular cloud in Hercules. SIMBAD's 'NAME Hercules Cloud' identification position sits 0.562 deg from the table's own closest Hercules-named sightline (well within this Story's established clean-match range, consistent with every accepted Story #318/#324 candidate) - a confident, non-ambiguous match, not a false-cognate risk like Aquila_Rift/Cam/Lacerta/Polaris (see data/raw/gap_fills/README.md's Story #325 section for the full comparison). visual.size_pc uses SIMBAD's real galdim_majaxis (210 arcmin) for 'NAME Hercules Cloud', converted via the DIAMETER convention."
+    },
+    {
+      "id": "pegasus-cloud",
+      "name": "Pegasus Cloud",
+      "aliases": [
+        "Pegasus Molecular Cloud"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -19.27816775382036,
+        207.81310713954431,
+        -149.9702128726358
+      ],
+      "distance_pc": 257.0,
+      "distance_error_pc": 21.310150163713068,
+      "size_pc": 53.82595413150513,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME Pegasus Cloud' (identification only; otype MoC, main_id 'NAME Pegasus Cloud', ra=347.8296038123825, dec=23.38431319300129 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=95.30000305175781 deg, b=-35.70000076293945 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (1.718 deg): d50=257 pc, d16=242 pc, d84=276 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 21.3102 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #325 new-record gap-fill (second tier): a nearby high-latitude molecular cloud in Pegasus. SIMBAD's 'NAME Pegasus Cloud' identification position sits 1.718 deg from the table's own closest Pegasus-named sightline - within this Story's established clean-match range (the largest accepted separation in Story #318 was 1.781 deg for Coalsack Nebula), a confident match. visual.size_pc uses SIMBAD's real galdim_majaxis (720 arcmin) for 'NAME Pegasus Cloud', converted via the DIAMETER convention."
+    },
+    {
+      "id": "spider-cirrus",
+      "name": "Spider Cirrus",
+      "aliases": [
+        "Spider Molecular Cloud",
+        "Spider Cloud"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -197.71311706126977,
+        199.09846687936516,
+        239.64624726501128
+      ],
+      "distance_pc": 369.0,
+      "distance_error_pc": 27.579929296501106,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME Spider Cirrus' (identification only; otype MoC, main_id 'NAME Spider Cirrus', ra=159.5958241224749, dec=73.47814354099695 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=134.8000030517578 deg, b=40.5 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.058 deg): d50=369 pc, d16=347 pc, d84=388 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 27.5799 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #325 new-record gap-fill (second tier): a nearby high-latitude cirrus molecular cloud near Ursa Minor/Draco. SIMBAD's 'NAME Spider Cirrus' identification position sits only 0.058 deg from the table's own single Spider-named sightline - an essentially exact match, the tightest of this Story's 4 additions. visual.size_pc is an honest failure, left null: SIMBAD's 'NAME Spider Cirrus' identifier carries no galdim_majaxis on file."
+    },
+    {
+      "id": "ursa-major-cloud",
+      "name": "Ursa Major Cloud",
+      "aliases": [
+        "Ursa Major Cirrus",
+        "UMa Cloud",
+        "MBM 32"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -256.3430677432814,
+        190.37692036911025,
+        253.98594412041146
+      ],
+      "distance_pc": 408.0,
+      "distance_error_pc": 21.26405417600322,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "molecular-cloud-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Position: SIMBAD, 'NAME UMa Cloud' (identification only; otype MoC, main_id 'NAME UMa Cloud', ra=143.75, dec=70.0 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=143.39999389648438 deg, b=38.5 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns) and took the row nearest the SIMBAD identification position by angular separation (0.918 deg): d50=408 pc, d16=404 pc, d84=416 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = 21.2641 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+        "url": "https://doi.org/10.1051/0004-6361/201936145",
+        "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+      },
+      "notes": "Story #325 new-record gap-fill (second tier): a nearby high-latitude cirrus molecular cloud (MBM 32) in Ursa Major. This candidate required extra scrutiny per this Story's own mandate: the table's Ursa_Major-group SimbadName column and a naive 'NAME UMa Region' query both point 19.457 deg away from the real sightline data (otype 'reg', a generic region label, not a specific cloud) - the same false-cognate risk this Story excluded Cam/Lacerta/Polaris for. But unlike those three, an alternate SIMBAD identifier for the SAME physical object genuinely exists and resolves cleanly: 'NAME UMa Cloud' (aka MBM 32, aka 'Ursa Major Cirrus' in the literature, otype MoC) sits only 0.918 deg from the table's own closest Ursa_Major-named sightline - well within this Story's clean-match range. Added under this corrected identifier, not the misleading 'NAME UMa Region' alias. visual.size_pc is an honest failure, left null: 'NAME UMa Cloud' carries no galdim_majaxis on file (MBM 32 alias tried too, same result)."
     }
   ],
   "structures": {

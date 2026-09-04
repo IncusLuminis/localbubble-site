@@ -691,3 +691,137 @@ merges (same files touched); any rendering/visual change; or bright
 emission/reflection nebulae not found in the Zucker molecular-cloud table
 (Iris Nebula, Veil Nebula, Horsehead/Flame) - a separate consideration per
 the issue's own scope note.
+
+## The "second tier" remaining Zucker regions (issue #325)
+
+Follow-on to #324 (this Story's own out-of-scope note above). The same
+already-cached Zucker table has 8 more real, well-under-800pc named
+regions less mainstream-famous than #324's tier: Cam (Camelopardalis),
+Hercules, Pegasus, Polaris (Flare), Ursa Major, Lacerta, Spider, and
+Aquila_Rift - the human owner's own "add all of them, don't be stingy"
+instruction's second half. The issue's own explicit mandate for this
+Story: apply the same real-angular-size/offset-from-sightline-group
+scrutiny #318 used to exclude Aquila Rift to **every** candidate here, not
+just Aquila_Rift, since this tier's lower literature prominence makes the
+same false-cognate/superposition trap more likely to recur.
+
+That scrutiny paid off: **4 candidates added, 4 excluded** - a
+meaningfully lower success rate than #324's 9/10, but the issue itself
+anticipated and explicitly sanctioned exactly this ("a non-trivial
+honest-failure rate here would not be surprising or a sign of a bug").
+
+**Matching-quality bar established across #318/#324/#325:** every genuine
+same-object match across all three Stories - accepted records and
+redundancy checks alike - lands under **~1.8 deg** separation between a
+candidate's SIMBAD identification position and the nearest individual row
+of the matching Zucker `Name` group (the largest accepted separation
+remains #318's Coalsack Nebula at 1.781 deg). This Story treats that
+~1.8 deg line as the practical clean-match/false-cognate boundary,
+corroborated below by a second, independent check (a `Simbad.query_region`
+around each candidate's real Zucker-group centroid, looking for *any*
+`NAME`-prefixed common name near the actual data - not just the one alias
+first tried).
+
+**4 candidates added** (all comfortably under 1.8 deg):
+
+| Record | Distance | Nearest sightline sep. | size_pc |
+| --- | --- | --- | --- |
+| Hercules Cloud | 223 pc | 0.562 deg | 13.62 pc (SIMBAD galdim) |
+| Pegasus Cloud | 257 pc | 1.718 deg | 53.83 pc (SIMBAD galdim) |
+| Spider Cirrus | 369 pc | 0.058 deg | null (honest failure) |
+| Ursa Major Cloud | 408 pc | 0.918 deg | null (honest failure) |
+
+Hercules Cloud, Pegasus Cloud, and Spider Cirrus each resolved cleanly on
+the first SIMBAD identifier tried (`NAME Hercules Cloud`, `NAME Pegasus
+Cloud`, `NAME Spider Cirrus` respectively - all otype `MoC`/"Molecular
+Cloud" or `Cld`/"Cloud", not a generic/ambiguous otype). Ursa Major Cloud
+needed a corrected identifier - see below.
+
+**4 candidates investigated, deliberately NOT added - all the same
+false-cognate/superposition-feature problem #318 first hit for Aquila
+Rift and #324 re-hit for Northern Coalsack:**
+
+- **Aquila_Rift** - re-examined per this Story's own explicit mandate
+  (not re-attempted blindly; the issue itself warned this candidate was
+  already investigated once). Reproduces #318's exact prior finding, cited
+  rather than re-derived: SIMBAD's own single-point identification (`NAME
+  Aql Rift`) sits **9.586 deg** from the nearest `Aquila_Rift`-named
+  sightline, and its own `galdim_majaxis` (1530 arcmin, **~25.5 deg** on
+  the sky) confirms it is an enormous superposition/foreground-extinction
+  feature, not a single coherent cloud. Same conclusion, same precedent
+  cited, not a fresh acquisition attempt.
+- **Cam** - SIMBAD's only resolvable identifier, `NAME Cam Cloud` (the
+  same string the table's own `SimbadName` column echoes for every
+  `Cam`-named row), sits **6.280 deg** from the nearest real `Cam`-named
+  sightline. A `Simbad.query_region` (4 deg radius) around the real
+  `Cam`-group centroid (ra=84.62, dec=65.91, averaged over its 5 rows)
+  found only catalog-only PGCC/TGU/DOBASHI designations there - no
+  popularly `NAME`-prefixed common name to anchor a corrected record to
+  (the identical search #324 ran for Northern Coalsack, same empty
+  result). A few plausible alternate identifiers were tried live (`MBM 3`,
+  `LDN 1355`) and each resolved to an unrelated position, not a tighter
+  match for this group.
+- **Lacerta** - `NAME Lacerta Cloud` sits **6.744 deg** from the nearest
+  real `Lacerta`-named sightline. Same empty-region-search result around
+  the real centroid (ra=334.67, dec=43.88) - only `NAME BL Lac` (an
+  unrelated blazar) within 4 deg, nothing cloud-like.
+- **Polaris** - `NAME Polaris Cirrus Cloud` sits **4.440 deg** from the
+  nearest real `Polaris`-named sightline. An alternate identifier, `NAME
+  Polaris Flare` (also otype `MoC`, with a real `galdim_majaxis` of 360
+  arcmin/6 deg), was tried too - **7.511 deg**, worse, not better. Same
+  empty-region-search result around the real centroid (ra=92.45,
+  dec=80.33) - only unrelated stars/galaxy-group designations within 4
+  deg, no cloud-like `NAME`-prefixed object.
+
+**1 candidate required an alias correction rather than exclusion: Ursa
+Major.** The most obvious SIMBAD identifier, `NAME UMa Region` (otype
+`reg` - a generic region label, not a specific cloud), sits **19.457
+deg** from the nearest real `Ursa_Major`-named sightline - worse than the
+Aquila Rift exclusion threshold, and would have been excluded under the
+identical reasoning used for Cam/Lacerta/Polaris above. But unlike those
+three, a *different* SIMBAD identifier for the same physical object
+exists and resolves cleanly: `NAME UMa Cloud` (otype `MoC`, also
+catalogued as `MBM 32` and known in the literature as "Ursa Major
+Cirrus") sits only **0.918 deg** away - a clean match, well inside this
+Story's established bar. Added under this corrected identifier, per
+`data_sources/simbad_size.py`'s own established "caller tries alternates,
+adapter itself never guesses" convention (already used live here, not
+just in the abstract) - not under the misleading `NAME UMa Region` alias.
+
+**2 honest-failure `size_pc`'s** (Spider Cirrus, Ursa Major Cloud): each
+resolves cleanly on SIMBAD but carries no `galdim_majaxis` on file under
+any alias tried live - the same honest-failure shape #318/#324 hit
+repeatedly. Never fabricated/approximated.
+
+All 4 new records carry the same `group.secondary:
+["molecular-cloud-gap-fill"]` tag #318/#324's records use (a
+per-object-type batch tag, not a per-Story one - this Story's new
+`tests/test_molecular_cloud_gap_fill_tier2.py` asserts the up-to-date
+total of 17 tagged records, and further relaxed #324's own
+`tests/test_molecular_cloud_gap_fill_tier1.py` exact-count checks
+(`==21`/`==13`) to growth-tolerant `>=` ones, mirroring the same
+precedent #324 itself established for #318's checks). `scripts/
+acquire_molecular_cloud_gap_fill.py` was extended (not replaced) with
+this Story's own 4 candidates, its 3 exclusions (now carrying a 5th
+tuple element - the Zucker `Name` group to check same-named rows
+against, fixing a previously-unused `same_name` computation left over
+from #318), and a new `FALSE_COGNATE_CHECKS` block reproducing the
+side-by-side clean-match/false-cognate comparison for Cam/Lacerta/
+Polaris/Ursa Major above.
+
+Catalog grew from 1092 to 1096 objects; `galactic-structures build-catalog`
++ `galactic-structures export-scene --no-radius-filter --output
+web/public/data/scene.json` regenerated the checked-in catalog/scene
+artifacts, run from this worktree's own clean `.venv` (pyarrow 25.0.1,
+matching the version the test suite runs against - standing lesson from
+PR #183). Full suite: 423 passed, 4 skipped (19 new tests in
+`test_molecular_cloud_gap_fill_tier2.py`, covering presence/type/tagging/
+distance-sanity/size-sanity/provenance for all 4 new records, the
+misleading-alias regression guard, the corrected-identifier check, the
+4-candidate exclusion regression guard, and non-regression of #318's and
+#324's own 13 records).
+
+Not part of this Story: any rendering/visual change; or bright
+emission/reflection nebulae not found in the Zucker molecular-cloud table
+(Iris Nebula, Veil Nebula, Horsehead/Flame) - issue #326's own scope,
+which depends on this Story merging first (same files touched).
