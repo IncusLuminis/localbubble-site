@@ -229,10 +229,21 @@ def test_full_record_set_is_byte_identical_except_visual_size_pc(
 
 
 def test_record_count_and_id_set_are_unchanged(pre_backfill_records, post_backfill_records):
-    assert len(pre_backfill_records) == len(post_backfill_records) == 1079
+    """Story #314's own non-destructiveness guarantee: the size_pc backfill
+    itself did not add, remove, or rename any record - every pre-backfill
+    id is still present. This no longer asserts an exact fixed count/
+    id-set *equality*: the catalog has since legitimately grown via later
+    new-record gap-fill Stories (e.g. Story #318's 4 new molecular_cloud
+    records), which is expected growth, not a regression of this Story's
+    own invariant. `test_pre_backfill_snapshot_has_the_full_1079_record_
+    catalog` above still pins the frozen pre-backfill snapshot itself to
+    exactly 1079."""
     pre_ids = {r["id"] for r in pre_backfill_records}
     post_ids = {r["id"] for r in post_backfill_records}
-    assert pre_ids == post_ids
+    assert pre_ids <= post_ids, f"pre-backfill record(s) disappeared: {sorted(pre_ids - post_ids)}"
+    assert len(post_backfill_records) >= len(pre_backfill_records), (
+        "post-backfill catalog must never be smaller than the pre-backfill snapshot"
+    )
 
 
 def test_only_target_records_size_pc_changed(

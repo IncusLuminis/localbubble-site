@@ -80568,5 +80568,167 @@
       }
     },
     "notes": "Retrieved from SIMBAD on 2026-09-02T17:22:07+00:00; upstream record id: * alf Sgr; otype: PM*. Acquired via Story #295 (Epic #294): re-derived live from SIMBAD TAP (V<4.0 apparent magnitude, parallax corresponding to 11-60pc distance, a genuine 'NAME '-prefixed common-name alias, cross-checked absent from the catalog at acquisition time) as part of the 77-star Local Bubble named-bright-star batch. Not a member of any prior curated batch (RECONS nearest-100, Galaxy Map poster, or earlier gap-fill batches) - see data/raw/gap_fills/README.md for the full writeup. No velocity derived in this Story (Story #296's job)."
+  },
+  {
+    "id": "corona-australis-molecular-cloud",
+    "name": "Corona Australis Molecular Cloud",
+    "aliases": [
+      "Corona Australis Cloud",
+      "CrA Cloud",
+      "CrA Dark Cloud"
+    ],
+    "object_type": "molecular_cloud",
+    "coordinates": {
+      "ra_deg": 285.2282,
+      "dec_deg": -37.3192,
+      "galactic_l_deg": 359.49997707148987,
+      "galactic_b_deg": -17.79999302221812
+    },
+    "distance": {
+      "value_pc": 147.0,
+      "error_pc": 11.4405
+    },
+    "cartesian": {
+      "x_pc": 139.95769635383067,
+      "y_pc": -1.221448324634848,
+      "z_pc": -44.937192784142155
+    },
+    "group": {
+      "primary": null,
+      "secondary": [
+        "molecular-cloud-gap-fill"
+      ]
+    },
+    "source": {
+      "reference": "Position: SIMBAD, \"NAME Corona Australis Cloud\" (identification only; otype MoC, ra=285.4625, dec=-36.9817 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=359.5 deg, b=-17.8 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook (astroquery.vizier, all columns, not any scraped/summarized prose version of the paper) for the 'Corona_Australis'-named sightline group (3 rows, 147-165 pc) and took the row nearest the SIMBAD identification position by angular separation (0.386 deg): d50=147 pc, d16=142 pc, d84=152 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = sqrt(5.0^2 + 10.29^2) = 11.44 pc, using the paper's own explicitly-named ~7% systematic for 'the southern clouds Lupus, Chamaeleon, and Corona Australis' (ReadMe), not the general ~5%.",
+      "url": "https://doi.org/10.1051/0004-6361/201936145",
+      "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+    },
+    "visual": {
+      "size_pc": 25.656340004316643,
+      "color_class": null
+    },
+    "notes": "Story #318 new-record gap-fill (data/raw/gap_fills/README.md convention, adapted for molecular clouds): one of the catalog's original 8 molecular_cloud records (spec Idea.md \u00a79's minimum seed list) never expanded beyond it; this is one of the issue's own strong, well-under-800pc candidates - one of the nearest star-forming regions, parent cloud of the Coronet Cluster. visual.size_pc is a DIAMETER (this catalog's established molecular_cloud convention, confirmed twice by Story #314's independent validator passes) derived from SIMBAD's own galdim_majaxis=600.0 arcmin for 'NAME Corona Australis Cloud' (bibcode 2018MNRAS.474.4672L) via this record's own distance_pc, the same data_sources.simbad_size.resolve_angular_diameter/diameter_pc_from_angular_size pair Story #314 established, queried live for this new record rather than backfilled after the fact."
+  },
+  {
+    "id": "coalsack-nebula",
+    "name": "Coalsack Nebula",
+    "aliases": [
+      "Coalsack",
+      "Southern Coalsack",
+      "Coal Sack"
+    ],
+    "object_type": "molecular_cloud",
+    "coordinates": {
+      "ra_deg": 189.1772,
+      "dec_deg": -65.4279,
+      "galactic_l_deg": 301.3999887553972,
+      "galactic_b_deg": -2.59997309916365
+    },
+    "distance": {
+      "value_pc": 182.0,
+      "error_pc": 10.633
+    },
+    "cartesian": {
+      "x_pc": 94.72611012251953,
+      "y_pc": -155.18634888560126,
+      "z_pc": -8.255978477002403
+    },
+    "group": {
+      "primary": null,
+      "secondary": [
+        "molecular-cloud-gap-fill"
+      ]
+    },
+    "source": {
+      "reference": "Position: SIMBAD, \"NAME Coalsack Nebula\" (identification only; otype DNe, aliases NAME Coalsack/NAME Southern Coalsack/NAME COAL SACK, ra=187.829, dec=-63.743 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=301.4 deg, b=-2.6 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook for the 'Coalsack'-named sightline group (6 rows, 182-193 pc, all in close agreement) and took the row nearest the SIMBAD identification position by angular separation (1.78 deg - looser than this Story's other 3 new records since the Coalsack's own real angular extent is large, ~7x5 deg on the sky, but still the closest tabulated sightline and within the same named group): d50=182 pc, d16=176 pc, d84=187 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = sqrt(5.5^2 + 9.1^2) = 10.63 pc, using the paper's general ~5% systematic for clouds <1.5kpc (the Coalsack is not one of the three southern clouds the paper singles out for the higher ~7% figure).",
+      "url": "https://doi.org/10.1051/0004-6361/201936145",
+      "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+    },
+    "visual": {
+      "size_pc": null,
+      "color_class": null
+    },
+    "notes": "Story #318 new-record gap-fill (data/raw/gap_fills/README.md convention, adapted for molecular clouds): the famous naked-eye dark nebula next to the Southern Cross, one of the issue's own strong, well-under-800pc candidates. visual.size_pc is an honest failure, left null: every SIMBAD alias of this object ('NAME Coalsack Nebula', 'NAME Coalsack', 'NAME Southern Coalsack', 'NAME COAL SACK') was queried live against data_sources.simbad_size.resolve_angular_diameter and none carries a galdim_majaxis on file for the named object as a whole (a targeted SIMBAD TAP search for extended objects with galdim data within 5 deg of this position turned up only much smaller individual sub-clumps/globules, not a size for the Coalsack itself) - the same 'resolved identifier, no angular-size measurement' honest-failure shape Story #314 hit for M8/the Lagoon Nebula. Never fabricated/approximated."
+  },
+  {
+    "id": "california-molecular-cloud",
+    "name": "California Molecular Cloud",
+    "aliases": [
+      "Auriga-California Molecular Cloud",
+      "California Cloud"
+    ],
+    "object_type": "molecular_cloud",
+    "coordinates": {
+      "ra_deg": 64.0034,
+      "dec_deg": 38.2296,
+      "galactic_l_deg": 161.20003275468937,
+      "galactic_b_deg": -8.999989157412573
+    },
+    "distance": {
+      "value_pc": 454.0,
+      "error_pc": 28.6625
+    },
+    "cartesian": {
+      "x_pc": -424.48756966398645,
+      "y_pc": 144.50708532925526,
+      "z_pc": -71.02116227157488
+    },
+    "group": {
+      "primary": null,
+      "secondary": [
+        "molecular-cloud-gap-fill"
+      ]
+    },
+    "source": {
+      "reference": "Position: SIMBAD, \"NAME California Molecular Cloud\" (identification only; otype MoC, aliases NAME California MCld/NAME Auriga-California Molecular Cloud, ra=62.500, dec=39.000 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=161.2 deg, b=-9.0 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook for the 'California'-named sightline group (3 rows, 436-466 pc, all in close agreement) and took the row nearest the SIMBAD identification position by angular separation (1.41 deg): d50=454 pc, d16=436 pc, d84=471 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = sqrt(17.5^2 + 22.7^2) = 28.66 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+      "url": "https://doi.org/10.1051/0004-6361/201936145",
+      "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+    },
+    "visual": {
+      "size_pc": 43.58087142229841,
+      "color_class": null
+    },
+    "notes": "Story #318 new-record gap-fill (data/raw/gap_fills/README.md convention, adapted for molecular clouds): the issue's own 'weaker/optional' candidate, included because the real Vizier distance (454 pc) confirms it well within the 800pc cap and it is genuinely notable - the dust cloud associated with NGC 1499, the California Nebula, illuminated by xi Persei. visual.size_pc is a DIAMETER (this catalog's established molecular_cloud convention, Story #314) derived from SIMBAD's own galdim_majaxis=330.0 arcmin for 'NAME California Molecular Cloud' (bibcode 2018MNRAS.474.4672L, the same bibcode as this Story's Corona Australis record) via this record's own distance_pc."
+  },
+  {
+    "id": "serpens-molecular-cloud",
+    "name": "Serpens Molecular Cloud",
+    "aliases": [
+      "Serpens Main Cloud",
+      "Serpens Main"
+    ],
+    "object_type": "molecular_cloud",
+    "coordinates": {
+      "ra_deg": 277.4429,
+      "dec_deg": 0.8331,
+      "galactic_l_deg": 31.200023909928777,
+      "galactic_b_deg": 5.200005864714933
+    },
+    "distance": {
+      "value_pc": 425.0,
+      "error_pc": 25.4472
+    },
+    "cartesian": {
+      "x_pc": 362.0335719073961,
+      "y_pc": 219.25553113267722,
+      "z_pc": 38.51888990741655
+    },
+    "group": {
+      "primary": null,
+      "secondary": [
+        "molecular-cloud-gap-fill"
+      ]
+    },
+    "source": {
+      "reference": "Position: SIMBAD, \"NAME Serpens Main Cloud\" (identification only; otype MoC, ra=277.300, dec=0.600 - used solely to identify the region and pick the nearest tabulated sightline below; RA/Dec stored here are the VizieR-computed ICRS coordinates, _RA.icrs/_DE.icrs, of that nearest sightline itself, l=31.2 deg, b=5.2 deg). Distance: Zucker, C., Speagle, J. S., Schlafly, E. F., Green, G. M., Finkbeiner, D. P., Goodman, A. A., & Alves, J. (2020), \"A compendium of distances to molecular clouds in the Star Formation Handbook\", Astronomy & Astrophysics, 633, A51 (arXiv:2001.00591). Live-queried the real, machine-readable VizieR table J/A+A/633/A51/handbook for the 'Serpens_Main'-named sightline group (2 rows, 425-490 pc) and took the row nearest the SIMBAD identification position by angular separation (0.273 deg): d50=425 pc, d16=409 pc, d84=437 pc. distance.error_pc = sqrt(mean(|d50-d16|,|d84-d50|)^2 + systematic^2) = sqrt(14.0^2 + 21.25^2) = 25.45 pc, using the paper's general ~5% systematic for clouds <1.5kpc.",
+      "url": "https://doi.org/10.1051/0004-6361/201936145",
+      "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
+    },
+    "visual": {
+      "size_pc": null,
+      "color_class": null
+    },
+    "notes": "Story #318 new-record gap-fill (data/raw/gap_fills/README.md convention, adapted for molecular clouds): the actively star-forming core of the Serpens cloud, resolving the issue's own 'Serpens/Aquila Rift complex' weaker/optional candidate. The real Zucker+2020 table shows 'Serpens'/'Serpens_Main' and 'Aquila_Rift' are genuinely DISTINCT sightline groups at different median distances (Aquila_Rift's own 5 tabulated sightlines run 163-280 pc, well short of Serpens'/Serpens_Main's ~425-556 pc) - not one combined complex, contrary to the issue's own '260-440pc per inconsistent secondary sources' framing. Aquila Rift was investigated as a possible separate record but NOT added: SIMBAD's own single-point identification for it ('NAME Aql Rift', ra=278.0, dec=-1.0) sits >9 deg from every one of the Zucker table's own 'Aquila_Rift'-named rows (nearest same-named row 9.586 deg away), while its SIMBAD galdim_majaxis (1530 arcmin, ~25.5 deg) confirms it is an enormous extended superposition/extinction feature spanning much of the sky, not a single coherent cloud - a poor fit for this catalog's single-point/single-distance object model, and not force-fit here (honest exclusion, not a fabricated match). This Serpens Molecular Cloud record stands alone as the cleanly resolvable representative of the issue's combined candidate. visual.size_pc is an honest failure, left null: 'NAME Serpens Main Cloud' and several tried aliases (Serpens, Serpens Cloud Core, Serpens dark cloud, Serpens Nebula, Serpens South, GF 9, W 40, Serpens molecular cloud core, MWSC 2790) were queried live against data_sources.simbad_size.resolve_angular_diameter; only 'W 40' and 'GF 9' returned a galdim value, but both are small, specific, physically distinct sub-features (an embedded HII region and an unrelated dark cloud, respectively, each at their own different sightline distance) rather than a size for Serpens Main Cloud itself, so neither is used. Never fabricated/approximated."
   }
 ]

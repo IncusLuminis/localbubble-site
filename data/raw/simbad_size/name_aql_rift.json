@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "NAME Aql Rift",
+  "retrieved_utc": "2026-09-04T05:45:39+00:00",
+  "record_id": "NAME Aql Rift",
+  "raw": {
+    "main_id": "NAME Aql Rift",
+    "ra": 278.0,
+    "dec": -1.0,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "galdim_qual": "D",
+    "galdim_minaxis": 660.0,
+    "galdim_bibcode": "2002A&A...383..631D",
+    "galdim_majaxis": 1530.0,
+    "galdim_angle": 90,
+    "matched_id": "NAME Aql Rift"
+  }
+}

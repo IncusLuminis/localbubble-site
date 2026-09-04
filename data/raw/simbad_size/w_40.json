@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "W 40",
+  "retrieved_utc": "2026-09-04T05:44:20+00:00",
+  "record_id": "LBN 028.77+03.43",
+  "raw": {
+    "main_id": "LBN 028.77+03.43",
+    "ra": 277.8604,
+    "dec": -2.0727999999999995,
+    "coo_err_maj": 20000.0,
+    "coo_err_min": 20000.0,
+    "coo_err_angle": 0,
+    "coo_wavelength": "R",
+    "coo_bibcode": "1992ApJS...79..331W",
+    "galdim_minaxis": 8.5,
+    "galdim_qual": "D",
+    "galdim_angle": 90,
+    "galdim_bibcode": "2006ApJ...653.1226Q",
+    "galdim_majaxis": 8.5,
+    "matched_id": "W 40"
+  }
+}
