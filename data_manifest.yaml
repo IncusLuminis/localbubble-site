@@ -8899,3 +8899,19 @@ sources:
   retrieved: '2026-09-04T10:04:39+00:00'
   record_id: IC 5146
   cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-324/local-galactic-structures/data/raw/simbad_size/ic_5146.json
+- id: simbad_size:NAME Hercules Cloud
+  source: simbad_size
+  query: NAME Hercules Cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T10:27:42+00:00'
+  record_id: NAME Hercules Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-325/local-galactic-structures/data/raw/simbad_size/name_hercules_cloud.json
+- id: simbad_size:NAME Pegasus Cloud
+  source: simbad_size
+  query: NAME Pegasus Cloud
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T10:27:43+00:00'
+  record_id: NAME Pegasus Cloud
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-325/local-galactic-structures/data/raw/simbad_size/name_pegasus_cloud.json

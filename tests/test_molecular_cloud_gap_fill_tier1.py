@@ -219,7 +219,13 @@ def test_story_318_records_are_unchanged(catalog_objects):
         assert obj.distance.value_pc == distance_pc
 
 
-def test_catalog_has_the_21_expected_molecular_cloud_records(catalog_objects):
+def test_catalog_has_at_least_the_21_story_324_molecular_cloud_records(catalog_objects):
+    # No longer a strict ==21 equality: the catalog has since legitimately
+    # grown via Story #325's own 4 new molecular_cloud records (see
+    # tests/test_molecular_cloud_gap_fill_tier2.py), the same "nothing
+    # pre-existing disappeared, count only grows" relaxation
+    # test_molecular_cloud_gap_fill.py's own Story #318 regression guard
+    # already established when this Story (#324) itself grew the catalog.
     molecular_clouds = [obj for obj in catalog_objects if obj.object_type == "molecular_cloud"]
     ids = {obj.id for obj in molecular_clouds}
     original_eight = {
@@ -233,19 +239,21 @@ def test_catalog_has_the_21_expected_molecular_cloud_records(catalog_objects):
         "taurus-molecular-cloud",
     }
     expected = original_eight | STORY_318_IDS | {oid for oid, _ in NEW_MOLECULAR_CLOUDS}
-    assert len(molecular_clouds) == 21
-    assert ids == expected
+    assert expected <= ids, f"missing Story #318/#324 molecular_cloud id(s): {sorted(expected - ids)}"
+    assert len(molecular_clouds) >= 21
 
 
-def test_gap_fill_tag_now_covers_exactly_13_records(catalog_objects):
-    # 4 from Story #318 + 9 from this Story - the up-to-date total for the
-    # shared "molecular-cloud-gap-fill" batch tag (see
-    # tests/test_molecular_cloud_gap_fill.py's own note on why its sibling
-    # check no longer pins an exact count).
+def test_gap_fill_tag_now_covers_at_least_13_records(catalog_objects):
+    # No longer a strict ==13 equality: TAG ("molecular-cloud-gap-fill") is
+    # a per-object-type batch tag, not a per-Story one, and Story #325's
+    # own 4 new records (tests/test_molecular_cloud_gap_fill_tier2.py)
+    # legitimately share it - that Story's own test module asserts the
+    # up-to-date total. This test's job is just the "at least 13, all of
+    # Story #318+#324's own ids still present" guarantee.
     tagged = [obj for obj in catalog_objects if TAG in obj.group.secondary]
     tagged_ids = {obj.id for obj in tagged}
-    assert len(tagged) == 13
-    assert tagged_ids == STORY_318_IDS | {oid for oid, _ in NEW_MOLECULAR_CLOUDS}
+    assert len(tagged) >= 13
+    assert (STORY_318_IDS | {oid for oid, _ in NEW_MOLECULAR_CLOUDS}) <= tagged_ids
 
 
 def test_redundancy_check_pairs_are_both_present_and_genuinely_distinct(catalog_objects):

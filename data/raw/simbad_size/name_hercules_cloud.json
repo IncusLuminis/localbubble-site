@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "NAME Hercules Cloud",
+  "retrieved_utc": "2026-09-04T10:27:42+00:00",
+  "record_id": "NAME Hercules Cloud",
+  "raw": {
+    "main_id": "NAME Hercules Cloud",
+    "ra": 279.96577748102004,
+    "dec": 14.335865159713974,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2018MNRAS.474.4672L",
+    "galdim_angle": null,
+    "galdim_qual": "D",
+    "galdim_majaxis": 210.0,
+    "galdim_bibcode": "2018MNRAS.474.4672L",
+    "galdim_minaxis": 180.0,
+    "matched_id": "NAME Hercules Cloud"
+  }
+}

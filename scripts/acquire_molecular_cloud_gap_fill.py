@@ -2,12 +2,16 @@
 new `molecular_cloud` catalog records (Corona Australis Molecular Cloud,
 Coalsack Nebula, California Molecular Cloud, Serpens Molecular Cloud) plus
 the 2 candidates investigated and deliberately excluded (Musca, Aquila
-Rift), AND Story #324's follow-on batch (North America Nebula, Pelican
+Rift), Story #324's follow-on batch (North America Nebula, Pelican
 Nebula, IC 5146/Cocoon Nebula, Circinus, Norma, Mon OB1/NGC 2264, IC 2118/
 Witch Head Nebula, Orion_Lam/Lambda Orionis Ring, Draco Cloud, Northern
-Coalsack) - see `data/raw/gap_fills/README.md`'s Story #318/#324 sections
-and each new record's own `source`/`notes` fields in
-`data/normalized/initial_catalog_records.json` for the full narrative.
+Coalsack), AND Story #325's "second tier" batch (Hercules Cloud, Pegasus
+Cloud, Spider Cirrus, Ursa Major Cloud, plus 3 candidates investigated and
+deliberately excluded for the same false-cognate reason as Aquila Rift/
+Northern Coalsack: Cam, Lacerta, Polaris) - see `data/raw/gap_fills/
+README.md`'s Story #318/#324/#325 sections and each new record's own
+`source`/`notes` fields in `data/normalized/initial_catalog_records.json`
+for the full narrative.
 
 This is NOT a mechanical re-run-to-regenerate script like
 `scripts/backfill_structure_size.py`/`backfill_open_space_velocity.py`:
@@ -77,13 +81,55 @@ CANDIDATES = [
     ("orion-lam-lambda-orionis-ring", "Sh 2-264", 83.825, 9.933333333333332),
     ("draco-cloud", "NAME Draco Cloud", 252.07083333333333, 60.19666666666667),
     ("northern-coalsack", "NAME Northern Coalsack", 305.25, 37.0),
+    # --- Story #325 "second tier" batch below ---
+    ("hercules-cloud", "NAME Hercules Cloud", 279.96577748102004, 14.335865159713974),
+    ("pegasus-cloud", "NAME Pegasus Cloud", 347.8296038123825, 23.38431319300129),
+    ("spider-cirrus", "NAME Spider Cirrus", 159.5958241224749, 73.47814354099695),
+    # NOT "NAME UMa Region" (misleading generic-region alias, see
+    # FALSE_COGNATE_CHECKS below) - the corrected identifier for the same
+    # physical object (MBM 32 / "Ursa Major Cirrus" in the literature).
+    ("ursa-major-cloud", "NAME UMa Cloud", 143.75, 70.0),
 ]
 
 #: Investigated and NOT added - printed for audit completeness, not
-#: turned into records by this script.
+#: turned into records by this script. (label, SIMBAD query, ra, dec,
+#: Zucker table Name-column group to check same-named rows against, or
+#: None if no such group exists in the table at all).
 EXCLUDED_CANDIDATES = [
-    ("Musca Molecular Cloud", "NAME Musca", 185.75, -71.3),
-    ("Aquila Rift", "NAME Aql Rift", 278.0, -1.0),
+    ("Musca Molecular Cloud", "NAME Musca", 185.75, -71.3, None),
+    ("Aquila Rift", "NAME Aql Rift", 278.0, -1.0, "Aquila_Rift"),
+    # --- Story #325 "second tier" batch below: same false-cognate/
+    # superposition-feature problem as Aquila Rift above, and Northern
+    # Coalsack (Story #324) - the only resolvable SIMBAD "NAME ... Cloud"
+    # identifier for each of these 3 sits several deg away from the real
+    # Zucker sightline data, and a `Simbad.query_region` around the real
+    # sightline centroid finds only catalog-only PGCC/TGU/DOBASHI
+    # designations there, no popular NAME-prefixed common name to anchor a
+    # corrected record to (see FALSE_COGNATE_CHECKS below and
+    # data/raw/gap_fills/README.md's Story #325 section for the full
+    # per-candidate writeup, including the alternate aliases tried).
+    ("Cam Molecular Cloud", "NAME Cam Cloud", 97.75, 71.2, "Cam"),
+    ("Lacerta Cloud", "NAME Lacerta Cloud", 344.2888413773558, 43.678195637682904, "Lacerta"),
+    ("Polaris Cirrus Cloud", "NAME Polaris Cirrus Cloud", 28.12333333333333, 87.67527777777778, "Polaris"),
+]
+
+#: Story #325's own false-cognate scrutiny (issue's own explicit mandate,
+#: applied to every candidate in this tier, not just Aquila_Rift): for each
+#: excluded candidate above plus the one corrected-alias case (Ursa Major),
+#: the SIMBAD identification position vs. the nearest individual row of the
+#: matching Zucker `Name` group, by real angular separation - not by name
+#: match alone. Every genuine same-object match in Story #318/#324/#325
+#: landed under ~1.8 deg; anything well beyond that, with no tighter
+#: alternate SIMBAD identifier available, is treated as a false cognate.
+#: (label, candidate ra/dec, Zucker group name, best same-group row sep
+#: already computed above via CANDIDATES/EXCLUDED_CANDIDATES - this table
+#: exists only to print the side-by-side comparison clearly.)
+FALSE_COGNATE_CHECKS = [
+    ("Cam: 'NAME Cam Cloud' vs. real Cam-group sightlines", "Cam", 97.75, 71.2),
+    ("Lacerta: 'NAME Lacerta Cloud' vs. real Lacerta-group sightlines", "Lacerta", 344.2888413773558, 43.678195637682904),
+    ("Polaris: 'NAME Polaris Cirrus Cloud' vs. real Polaris-group sightlines", "Polaris", 28.12333333333333, 87.67527777777778),
+    ("Ursa Major: 'NAME UMa Region' (misleading) vs. real Ursa_Major-group sightlines", "Ursa_Major", 165.0, 50.0),
+    ("Ursa Major: 'NAME UMa Cloud' (corrected) vs. real Ursa_Major-group sightlines", "Ursa_Major", 143.75, 70.0),
 ]
 
 #: Story #324's own redundancy checks (issue's own explicit requirement):
@@ -155,14 +201,37 @@ def main() -> int:
         print()
 
     print("=== Investigated, NOT added (honest exclusions) ===\n")
-    for label, query, ra, dec in EXCLUDED_CANDIDATES:
+    for label, query, ra, dec, group_name in EXCLUDED_CANDIDATES:
         row, sep_deg = zucker.nearest_row(ra, dec, rows)
-        same_name = zucker.nearest_row_within_group(ra, dec, rows, label.split()[0])
         print(f"{label} (SIMBAD query {query!r}, ra={ra}, dec={dec})")
         print(
             f"  nearest sightline OVERALL: Name={row['Name']!r} sep={sep_deg:.3f} deg "
             f"d50={row['d50']} pc"
         )
+        if group_name is not None:
+            same_group = zucker.nearest_row_within_group(ra, dec, rows, group_name)
+            if same_group is not None:
+                sg_row, sg_sep = same_group
+                print(
+                    f"  nearest sightline WITHIN {group_name!r} group: sep={sg_sep:.3f} deg "
+                    f"d50={sg_row['d50']} pc"
+                )
+            else:
+                print(f"  no {group_name!r}-named rows in the table at all")
+        print()
+
+    print("=== Story #325 false-cognate scrutiny (real position separation to the nearest\n"
+          "    row WITHIN the matching Zucker group, not just overall nearest) ===\n")
+    for label, group_name, ra, dec in FALSE_COGNATE_CHECKS:
+        same_group = zucker.nearest_row_within_group(ra, dec, rows, group_name)
+        print(f"{label}")
+        print(f"  candidate position: ra={ra} dec={dec}")
+        if same_group is not None:
+            sg_row, sg_sep = same_group
+            verdict = "CLEAN MATCH" if sg_sep <= 1.8 else "FALSE COGNATE (too far, no size-based justification found)"
+            print(f"  nearest {group_name!r}-group row: sep={sg_sep:.3f} deg d50={sg_row['d50']} pc -> {verdict}")
+        else:
+            print(f"  no {group_name!r}-named rows in the table at all")
         print()
 
     return 0
