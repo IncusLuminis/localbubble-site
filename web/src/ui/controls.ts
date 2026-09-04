@@ -87,26 +87,23 @@ export interface LayersPanelOptions {
 }
 
 /**
- * Story #239's UI lock (Epic #238: category/structure checkboxes must
- * disable whenever the motion player's time is away from Today) carries
- * over unchanged onto this panel - deliberately NOT the "Labels" checkbox
- * (display-only, not a scene-state filter Epic #238's UI-lock AC lists).
+ * Story #239's UI lock (Epic #238: category/structure checkboxes disabled
+ * whenever the motion player's time is away from Today) used to carry over
+ * onto this panel via `setLocked` below. Story #330 removed that mechanism
+ * entirely (confirmed decision: these controls, like the toolbar buttons,
+ * are now always fully active regardless of player time/play state), so
+ * this handle no longer has a lock capability.
  */
-export interface LayersPanelHandle extends SidePanelHandle {
-  setLocked: (locked: boolean) => void;
-}
+export type LayersPanelHandle = SidePanelHandle;
 
 export function createLayersPanel(options: LayersPanelOptions): LayersPanelHandle {
   const { panel } = createSidePanel("layers-panel", "Layers");
 
-  const lockableInputs: HTMLInputElement[] = [];
-
   // --- Object categories (spec §23: stars/clusters/associations/etc) ---
   const categoriesSection = makeSection("Object categories");
   for (const item of options.categories) {
-    const { row, input } = makeCheckbox(item, options.onCategoryToggle);
+    const { row } = makeCheckbox(item, options.onCategoryToggle);
     categoriesSection.body.appendChild(row);
-    lockableInputs.push(input);
   }
   panel.appendChild(categoriesSection.section);
 
@@ -116,9 +113,8 @@ export function createLayersPanel(options: LayersPanelOptions): LayersPanelHandl
   // read as a duplicate of this panel's own "Layers" title above. ---
   const structuresSection = makeSection("Structures");
   for (const item of options.structureLayers) {
-    const { row, input } = makeCheckbox(item, options.onStructureToggle);
+    const { row } = makeCheckbox(item, options.onStructureToggle);
     structuresSection.body.appendChild(row);
-    lockableInputs.push(input);
   }
   const { row: labelsRow } = makeCheckbox(
     { key: "labels", label: "Labels", defaultChecked: options.labelsDefaultChecked ?? true },
@@ -132,11 +128,6 @@ export function createLayersPanel(options: LayersPanelOptions): LayersPanelHandl
     setOpen(open: boolean) {
       panel.classList.toggle("open", open);
     },
-    setLocked(locked: boolean) {
-      for (const input of lockableInputs) {
-        input.disabled = locked;
-      }
-    },
   };
 }
 
@@ -149,12 +140,10 @@ export interface SettingsPanelOptions {
   onExportPng: () => void;
 }
 
-/** Same UI-lock carry-over as `LayersPanelHandle` - only the Radius
- * `<select>` is lockable here (Epic #238's AC does not list "Object size"
- * or "Save PNG": cosmetic-only/export controls stay live throughout). */
-export interface SettingsPanelHandle extends SidePanelHandle {
-  setLocked: (locked: boolean) => void;
-}
+/** Same UI-lock removal as `LayersPanelHandle` (Story #330) - the Radius
+ * `<select>` used to be the one lockable control here; it's always live now,
+ * like every other control in this panel. */
+export type SettingsPanelHandle = SidePanelHandle;
 
 export function createSettingsPanel(options: SettingsPanelOptions): SettingsPanelHandle {
   const { panel } = createSidePanel("settings-panel", "Settings");
@@ -206,9 +195,6 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
     element: panel,
     setOpen(open: boolean) {
       panel.classList.toggle("open", open);
-    },
-    setLocked(locked: boolean) {
-      radiusSelect.disabled = locked;
     },
   };
 }
