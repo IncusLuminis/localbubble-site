@@ -177,12 +177,13 @@ body {
   cursor: pointer;
 }
 
-/* Story #239: the UI lock - category/structure checkboxes and the radius
-   `<select>` are disabled outright (`ui/controls.ts`'s `setLocked`)
-   whenever the motion player's time is away from Today; this just gives
-   that native `disabled` state a slightly stronger, more visible dimming
-   than the browser default so "you can't touch this right now" reads
-   clearly at a glance. */
+/* Story #239 introduced a UI lock that disabled category/structure
+   checkboxes and the radius `<select>` outright whenever the motion
+   player's time was away from Today (`ui/controls.ts`'s `setLocked`); Story
+   #330 removed that mechanism entirely, so neither control is ever disabled
+   for that reason any more. This generic `:disabled` dimming rule is kept
+   as harmless, reusable styling for these input types in case anything
+   else disables them in the future. */
 .toggle-row input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -771,22 +772,20 @@ body {
   background: #24304a;
 }
 
-/* Issue #292: `.toolbar-button--locked` is a VISUAL-only twin of the
-   `:disabled` rules below - added by `main.ts`'s `setToolbarButtonLocked`
-   to the 8 `syncUiLock`-gated toolbar buttons while the player's time is
-   away from Today, instead of the native `disabled` attribute, so the
-   button keeps receiving click events (its own click handler turns that
-   click into the "reset to Today" escape hatch). Shares the exact same
-   declaration blocks as `:disabled` via the combined selector below so the
-   two states can never visually drift apart. */
-#left-toolbar .toolbar-button:disabled,
-#left-toolbar .toolbar-button--locked {
+/* Issue #292 added a `.toolbar-button--locked` VISUAL-only twin of the
+   `:disabled` rules below, applied by `main.ts`'s (now-removed)
+   `setToolbarButtonLocked` to 8-9 toolbar buttons while the player's time
+   was away from Today. Story #330 removed that entire mechanism (confirmed
+   decision: toolbar buttons are always fully active), so `.toolbar-button--
+   locked` is gone - only the native `:disabled` state remains, still used
+   for `fitLocalBubbleButton`'s genuinely structural "no Local Bubble layer
+   to fit to" case (`applyLocalBubbleButtonState` in `main.ts`). */
+#left-toolbar .toolbar-button:disabled {
   opacity: 0.35;
   cursor: default;
 }
 
-#left-toolbar .toolbar-button:disabled:hover,
-#left-toolbar .toolbar-button--locked:hover {
+#left-toolbar .toolbar-button:disabled:hover {
   background: rgba(10, 14, 24, 0.82);
 }
 
