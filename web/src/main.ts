@@ -23,6 +23,7 @@ import {
   bubbleOuterRadiusPcFrom,
   buildObjectIndexLookup,
   catalogObjectTypes,
+  CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
   excludeDedicatedMarkerObjects,
   isCatalogObjectVisible,
@@ -88,6 +89,7 @@ import {
   setRadcliffeWaveDimmed,
 } from "./scene/structures";
 import {
+  clusterOrAssociationShapeRadiusPc,
   createDiffuseStructureLayer,
   DIFFUSE_STRUCTURE_OBJECT_TYPES,
   updateDiffuseStructureDimming,
@@ -1457,8 +1459,28 @@ function applyBackgroundDimming(): void {
  * `denseBatchRadiusPc`) that function can't see on its own. Issue #217's
  * scope expansion dropped the `controls.minDistance` argument this used to
  * pass through - `sunCoreRadiusPc`'s curve no longer has a segment that
- * depends on it, see that function's docstring. */
+ * depends on it, see that function's docstring.
+ *
+ * PR #321 Validator-found regression fix: `star_cluster`/`stellar_association`
+ * (`objects.ts`'s `CLUSTER_OBJECT_TYPES`) are special-cased here, BEFORE
+ * falling through to `selectedMarkerRadiusPc`, because Story #320 moved
+ * their actual rendering out of the generic `InstancedMesh` point-marker
+ * buckets `selectedMarkerRadiusPc`/`markerRadiusPc` describe and into
+ * `diffuseStructureLayer`'s own shapes instead (see
+ * `DIFFUSE_STRUCTURE_OBJECT_TYPES`) - but never updated the reticle's own
+ * radius source to match, leaving it stuck on the stale pre-#320 point-marker
+ * tier formula. `clusterOrAssociationShapeRadiusPc` (`diffuseStructures.ts`)
+ * is the exact same radius computation `createDiffuseStructureLayer` uses to
+ * build these two types' actual proxy/shape, so the reticle can no longer
+ * drift out of sync with what's really on screen. Every other object type
+ * (including every other `DIFFUSE_STRUCTURE_OBJECT_TYPES` member -
+ * `molecular_cloud`/`hii_region`/`supernova_remnant`/`planetary_nebula`,
+ * none of which changed radius source in Story #320) is unaffected, still
+ * falling straight through to `selectedMarkerRadiusPc` exactly as before. */
 function selectedObjectMarkerRadiusPc(obj: SceneObject): number {
+  if (CLUSTER_OBJECT_TYPES.has(obj.object_type)) {
+    return clusterOrAssociationShapeRadiusPc(obj);
+  }
   return selectedMarkerRadiusPc(
     obj,
     SUN_OBJECT_ID,
@@ -2118,19 +2140,22 @@ loadScene()
     );
     scene.add(velocitySpeedLabelsInfo.group);
 
-    // Story #315: the four diffuse types (`molecular_cloud`/`hii_region`/
-    // `planetary_nebula`/`supernova_remnant`) are excluded from the objects
-    // handed to `createCatalogObjectGroup` here - they get the new
-    // extended-volume mesh treatment (`diffuseStructureLayer` below)
-    // instead of a point-marker `InstancedMesh` bucket, and rendering both
-    // at once would double-draw the same real object. `createCatalogObjectGroup`
-    // itself stays completely generic/unmodified (still fully exercised by
-    // its own existing tests against arbitrary object types, `molecular_cloud`
-    // included) - the exclusion happens here at the call site, the same
-    // place `excludeDedicatedMarkerObjects` already filters out the Sun/
-    // Local-Bubble-centroid before this same call. `star_cluster`/
-    // `stellar_association` are deliberately NOT filtered here - Epic #313
-    // keeps their point-marker rendering unchanged in this Story.
+    // Story #315 (extended to Story #320): every
+    // `DIFFUSE_STRUCTURE_OBJECT_TYPES` record is excluded from the objects
+    // handed to `createCatalogObjectGroup` here - each gets its own
+    // extended-volume treatment (`diffuseStructureLayer` below) instead of a
+    // point-marker `InstancedMesh` bucket, and rendering both at once would
+    // double-draw the same real object. `createCatalogObjectGroup` itself
+    // stays completely generic/unmodified (still fully exercised by its own
+    // existing tests against arbitrary object types) - the exclusion
+    // happens here at the call site, the same place
+    // `excludeDedicatedMarkerObjects` already filters out the Sun/
+    // Local-Bubble-centroid before this same call. Story #320 grew
+    // `DIFFUSE_STRUCTURE_OBJECT_TYPES` to also cover `star_cluster`/
+    // `stellar_association` (previously point markers under Epic #313's
+    // original scope, now rendered exclusively through
+    // `diffuseStructures.ts`'s own shapes) - since this filter is driven by
+    // that one shared set, no second exclusion list needed updating here.
     const pointMarkerObjects = sceneData.objects.filter(
       (obj) => !DIFFUSE_STRUCTURE_OBJECT_TYPES.has(obj.object_type),
     );
@@ -2142,9 +2167,10 @@ loadScene()
     catalogBuckets = catalogLayer.buckets;
     scene.add(catalogLayer.group);
 
-    // Story #315: the extended-volume layer for those same four diffuse
-    // types - built from the FULL, unfiltered `sceneData.objects` (it does
-    // its own type filtering internally, see `createDiffuseStructureLayer`).
+    // Story #315 (extended to Story #320): the extended-volume layer for
+    // every `DIFFUSE_STRUCTURE_OBJECT_TYPES` type - built from the FULL,
+    // unfiltered `sceneData.objects` (it does its own type filtering
+    // internally, see `createDiffuseStructureLayer`).
     diffuseStructureLayer = createDiffuseStructureLayer(sceneData.objects);
     scene.add(diffuseStructureLayer.group);
 

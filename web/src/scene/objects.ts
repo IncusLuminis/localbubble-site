@@ -153,11 +153,25 @@ export function catalogObjectTypes(objects: SceneObject[]): string[] {
  * maintaining a second, possibly-drifting copy. */
 export const OBJECT_TYPE_COLORS: Record<string, number> = {
   star: 0xffffff,
-  star_cluster: 0xffd27f,
+  // Story #320: yellow, confirmed via live testing - was 0xffd27f. The
+  // sphere shape itself (`diffuseStructures.ts`'s `buildClusterGroup`) is
+  // deliberately a neutral gray, NOT this color; this is instead the tint
+  // used by nothing today except any future generic-bucket fallback path
+  // and this constant's own re-export for other callers.
+  star_cluster: 0xffe066,
   stellar_association: 0xff9f6b,
-  molecular_cloud: 0x7fb8ff,
+  // Story #320: pink/H-alpha reddish-pink, confirmed via live testing (the
+  // human owner's own framing: "science-pop traditionally shows
+  // hydrogen-alpha as pinkish-red") - was 0x7fb8ff (blue).
+  molecular_cloud: 0xff6f9f,
   star_forming_region: 0xff7fb0,
-  hii_region: 0xb07fff,
+  // Story #320: warm coral/orange-red, confirmed via live testing - same
+  // H-alpha-emission color family as `molecular_cloud` above (real
+  // astrophotos of both often read reddish-pink), but a visibly different
+  // hue so the two stay distinguishable at a glance, per the human owner's
+  // own "slightly different but still related" instruction - was 0xb07fff
+  // (violet).
+  hii_region: 0xff8f5f,
   supernova_remnant: 0xff5f5f,
   // Issue #221: teal/green, distinct from `bubble`'s cyan (0x5fffe0) and
   // `hii_region`'s violet (0xb07fff) - real planetary nebulae commonly
@@ -451,7 +465,21 @@ export function isStarMarkerShrinkEligible(
  * shrink-eligible branch (as `starMarkerRadiusPc`'s new per-star ceiling,
  * via `starBaselineRadiusPc`) and the generic `markerRadiusPc` fallback, so
  * the reticle around ANY star - shrink-eligible or not - matches that same
- * star's graduated baseline, not just the flat overview radius. */
+ * star's graduated baseline, not just the flat overview radius.
+ *
+ * PR #321 (Story #320 follow-up): `main.ts`'s `selectedObjectMarkerRadiusPc`
+ * now special-cases `CLUSTER_OBJECT_TYPES` (`star_cluster`/
+ * `stellar_association`) BEFORE calling this function at all, sourcing
+ * their radius from `diffuseStructures.ts`'s `clusterOrAssociationShapeRadiusPc`
+ * instead - Story #320 moved those two types' actual rendering out of the
+ * generic point-marker buckets this function describes and into
+ * `diffuseStructureLayer`'s own shapes, so this function's own `markerRadiusPc`
+ * fallback for those two types is now stale/unused in the live reticle path
+ * (kept here only as this function's still-correct behavior for any other
+ * direct caller/test). This module deliberately does NOT import from
+ * `diffuseStructures.ts` to make that special-case here instead - that
+ * module already imports FROM this one, and reversing it would create an
+ * import cycle; `main.ts` sits above both, so it does the special-casing. */
 export function selectedMarkerRadiusPc(
   obj: SceneObject,
   sunObjectId: string,
