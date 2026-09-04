@@ -1,8 +1,15 @@
-# Local Galactic Structures
+# Local Bubble
 
 Scientifically grounded 3D model and data pipeline for the Solar neighborhood
 (Gould Belt, Radcliffe Wave, Local Bubble, and nearby stellar/interstellar
-structures). Full project spec: [`spec/Idea.md`](spec/Idea.md).
+structures). Live at [localbubble.space](https://localbubble.space). Full
+project spec: [`spec/Idea.md`](spec/Idea.md).
+
+This repository was extracted (with full commit history) from the
+`local-galactic-structures/` subdirectory of the private
+`IncusLuminis/visualization-studio-tools` monorepo as part of the 1.0
+release - see [`MIGRATION.md`](MIGRATION.md) for that history and a summary
+of the work since.
 
 ## Status
 
@@ -37,7 +44,6 @@ doesn't clutter the default/overview zoom - see
 ## Setup
 
 ```bash
-cd local-galactic-structures
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"

@@ -1,9 +1,9 @@
 {
-  "name": "local-galactic-structures-web",
+  "name": "localbubble-web",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "Three.js MVP web viewer for the Local Galactic Structures scene export (spec Idea.md §22, §31; Story #64).",
+  "description": "Local Bubble - an interactive 3D map of the Solar neighborhood (Three.js viewer), published at localbubble.space.",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
