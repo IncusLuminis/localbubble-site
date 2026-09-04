@@ -137,6 +137,7 @@ import {
 } from "./ui/controls";
 import { Inspector } from "./ui/inspector";
 import { InfoDialog } from "./ui/infoDialog";
+import { SimplificationsDialog } from "./ui/simplificationsDialog";
 import { SearchDialog } from "./ui/searchDialog";
 import { createSearchBox } from "./ui/search";
 import { createPlayerPanel } from "./ui/playerPanel";
@@ -333,6 +334,12 @@ searchToggle.addEventListener("click", withLockedButtonEscapeHatch(() => searchD
 const infoDialog = new InfoDialog();
 app.appendChild(infoDialog.element);
 
+// The "S" (Simplifications and Sources) button's dialog - same pattern as
+// `infoDialog` immediately above (container/instance created here, button
+// itself built alongside the other `createToolbarButton` calls below).
+const simplificationsDialog = new SimplificationsDialog();
+app.appendChild(simplificationsDialog.element);
+
 // Story #256: the new unified vertical, left-edge-docked toolbar (Epic
 // #255, styled after NASA "Eyes on the Solar System"'s own left toolbar)
 // replaces BOTH the old top-left row (`#menu-toggle`+`#search-toggle`) AND
@@ -500,6 +507,15 @@ velocityVectorsButton.setAttribute("aria-pressed", "false");
 // aria-label, and click behavior (`infoDialog.show()`) are unchanged from
 // #164 - only its container/position/size moved.
 const infoToggleButton = createToolbarButton("info-toggle", "i", "About Local Galactic Structures");
+
+// The "S" (Simplifications and Sources) button - placed immediately after
+// Info at the bottom of the toolbar, same `createToolbarButton` sizing as
+// its neighbors, same non-icon single-glyph styling as Info's "i".
+const simplificationsToggleButton = createToolbarButton(
+  "simplifications-toggle",
+  "S",
+  "Simplifications and Sources",
+);
 
 // Story #275: the toolbar Play button (Story #239's `player-toggle`,
 // Epic #255's item #13) is removed entirely - the motion player is now
@@ -1027,7 +1043,7 @@ function resetPlayerToToday(): void {
   playerTimeYears = 0;
 }
 
-/** Issue #292: wraps one of `syncUiLock`'s 8 locked toolbar buttons' own
+/** Issue #292: wraps one of `syncUiLock`'s 9 locked toolbar buttons' own
  * click handler so that, at the moment of the click, if the toolbar is
  * currently locked (the same `isUiLockedForPlayerTime(playerTimeYears)`
  * condition `syncUiLock` itself uses), the button's normal `action` is
@@ -1122,8 +1138,9 @@ function forceVelocityVectorsOffIfAwayFromToday(): void {
   }
 }
 
-/** Issue #292: original title/aria-label text for each of `syncUiLock`'s 8
- * locked toolbar buttons, captured once here (module init, before
+/** Issue #292: original title/aria-label text for each of `syncUiLock`'s 9
+ * locked toolbar buttons (Story: extended to `simplificationsToggleButton`),
+ * captured once here (module init, before
  * `syncUiLock` ever runs) so `setToolbarButtonLocked` below can restore each
  * button's own label exactly on unlock, after swapping it for the escape
  * hatch's discoverability cue while locked. */
@@ -1137,6 +1154,7 @@ const TOOLBAR_BUTTON_DEFAULT_LABEL: ReadonlyMap<HTMLButtonElement, string> = new
     fitNearestStarsButton,
     velocityVectorsButton,
     infoToggleButton,
+    simplificationsToggleButton,
   ].map((button) => [button, button.title] as const),
 );
 
@@ -1219,6 +1237,7 @@ function syncUiLock(): void {
   setToolbarButtonLocked(fitNearestStarsButton, uiLocked);
   setToolbarButtonLocked(velocityVectorsButton, uiLocked);
   setToolbarButtonLocked(infoToggleButton, uiLocked);
+  setToolbarButtonLocked(simplificationsToggleButton, uiLocked);
 }
 
 /** Story #239 AC #8's original "sync the player's gated visibility state and
@@ -1989,6 +2008,10 @@ velocityVectorsButton.addEventListener(
 // #308: leaving the Local Bubble no longer resets/closes it either - see
 // `collapsePlayerPanel`'s own docstring.
 infoToggleButton.addEventListener("click", withLockedButtonEscapeHatch(() => infoDialog.show()));
+simplificationsToggleButton.addEventListener(
+  "click",
+  withLockedButtonEscapeHatch(() => simplificationsDialog.show()),
+);
 
 /** Search / go-to-object (issue #106, spec §2.6): frames the camera closely
  * on `obj` (via `objectCenteredPose`, distance proportional to the

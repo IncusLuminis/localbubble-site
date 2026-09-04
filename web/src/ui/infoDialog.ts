@@ -77,19 +77,23 @@ export function isScrimClick(event: ClickLike, scrim: EventTarget): boolean {
   return event.target === scrim;
 }
 
-function appendParagraph(parent: HTMLElement, html: string): void {
+/** Exported for reuse by `simplificationsDialog.ts`, which follows this
+ * file's exact same "small DOM-building helpers over a plain content tree"
+ * pattern for its own static-content modal - kept here rather than
+ * duplicated so the two dialogs' markup structure can't silently drift. */
+export function appendParagraph(parent: HTMLElement, html: string): void {
   const p = document.createElement("p");
   p.innerHTML = html;
   parent.appendChild(p);
 }
 
-function appendHeading(parent: HTMLElement, level: "h2" | "h3", text: string): void {
+export function appendHeading(parent: HTMLElement, level: "h2" | "h3", text: string): void {
   const heading = document.createElement(level);
   heading.textContent = text;
   parent.appendChild(heading);
 }
 
-function appendSourceList(parent: HTMLElement, items: string[]): void {
+export function appendSourceList(parent: HTMLElement, items: string[]): void {
   const ul = document.createElement("ul");
   for (const item of items) {
     const li = document.createElement("li");
