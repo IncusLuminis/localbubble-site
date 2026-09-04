@@ -1,0 +1,27 @@
+{
+  "source": "simbad",
+  "query": "NGC 6995",
+  "retrieved_utc": "2026-09-04T11:07:37+00:00",
+  "record_id": "NGC  6995",
+  "raw": {
+    "main_id": "NGC  6995",
+    "ra": 314.25,
+    "dec": 31.216666666666665,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2001AJ....122..938D",
+    "plx_value": null,
+    "pmdec": null,
+    "plx_err": null,
+    "rvz_radvel": null,
+    "pm_bibcode": "",
+    "rvz_bibcode": "",
+    "sp_type": "",
+    "pmra": null,
+    "otype": "",
+    "ids": "NGC  6995",
+    "matched_id": "NGC  6995"
+  }
+}

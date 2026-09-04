@@ -72310,6 +72310,115 @@
         "catalog": "Zucker et al. 2020 (SF Handbook compendium, VizieR J/A+A/633/A51/handbook)"
       },
       "notes": "Story #325 new-record gap-fill (second tier): a nearby high-latitude cirrus molecular cloud (MBM 32) in Ursa Major. This candidate required extra scrutiny per this Story's own mandate: the table's Ursa_Major-group SimbadName column and a naive 'NAME UMa Region' query both point 19.457 deg away from the real sightline data (otype 'reg', a generic region label, not a specific cloud) - the same false-cognate risk this Story excluded Cam/Lacerta/Polaris for. But unlike those three, an alternate SIMBAD identifier for the SAME physical object genuinely exists and resolves cleanly: 'NAME UMa Cloud' (aka MBM 32, aka 'Ursa Major Cirrus' in the literature, otype MoC) sits only 0.918 deg from the table's own closest Ursa_Major-named sightline - well within this Story's clean-match range. Added under this corrected identifier, not the misleading 'NAME UMa Region' alias. visual.size_pc is an honest failure, left null: 'NAME UMa Cloud' carries no galdim_majaxis on file (MBM 32 alias tried too, same result)."
+    },
+    {
+      "id": "iris-nebula",
+      "name": "Iris Nebula",
+      "aliases": [
+        "NGC 7023",
+        "NAME IRIS Nebula",
+        "Ced 187",
+        "AAVSO 2044+67",
+        "C 2059+679",
+        "IRAS 20599+6755",
+        "IRAS F20599+6755",
+        "LBN 104.08+14.21",
+        "LBN   487",
+        "OCISM  50",
+        "OCl  235",
+        "[BDB2003] G104.06+14.19",
+        "Cl VDB  139",
+        "PSCz P20599+6755",
+        "[RK68] 105",
+        "[SPB96] 2161",
+        "IRAS F21009+6758",
+        "RAFGL 2695",
+        "PSCz P21009+6758",
+        "IRAS 21009+6758",
+        "GN 21.01.0"
+      ],
+      "object_type": "molecular_cloud",
+      "position_pc": [
+        -81.08413099396749,
+        323.72691680245947,
+        84.39993070605486
+      ],
+      "distance_pc": 344.2340791738382,
+      "distance_error_pc": 9.124276747938001,
+      "size_pc": null,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "non-zucker-nebula-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "SIMBAD astronomical database (CDS), record NGC  7023",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC  7023",
+        "catalog": "SIMBAD"
+      },
+      "notes": "Story #326 new-record gap-fill (data/raw/gap_fills/README.md convention): a bright, well-known reflection nebula surrounding the young star HD 200775, not part of the Zucker et al. 2020 molecular-cloud compendium Stories #318/#324/#325 mined (that paper is specifically about molecular clouds, not reflection nebulae). Classification judgment call (issue's own explicit request): SIMBAD's primary catalog entry for the commonly-used identifier 'NAME Iris Nebula' resolves to NGC 7023 with otype 'OpC' (Open Cluster - the young embedded cluster, not the nebula itself); a live SIMBAD region search around that position found the nebula's own distinct entry, 'Ced 187' (Cederblad 187), otype 'RNe' (Reflection Nebula), just 0.026 deg away (same physical object, essentially coincident) - confirming this genuinely is a reflection nebula, physically distinct from the 5 already-loaded Messier hii_region records (M42/M8/M16/M17/M20), which are true ionized emission nebulae. Reflection nebulae are non-ionized dust clouds scattering starlight, not emission-line gas - a poor physical fit for hii_region. Classified as molecular_cloud instead, extending this catalog's own established precedent (Pipe Nebula, Coalsack Nebula) of using molecular_cloud for non-ionized diffuse dust/dark-nebula structures, not only literal star-forming molecular gas. Position/distance anchored to NGC 7023's own SIMBAD entry (co-located with Ced 187, the RNe-typed entry, at 0.026 deg separation) rather than Ced 187 itself, since NGC 7023 carries a real usable parallax (plx_value=2.905+/-0.077 mas -> 344.23+/-9.12 pc) while Ced 187 has none on file - the same 'named-nebula identifier resolves to a co-located companion object, use that object's own position/distance anyway' pattern issue #221 already documented for M8/M16/M17/M20 resolving to their embedded open clusters. 344 pc is comfortably under the issue's own unverified ~400pc estimate and the 800pc cap. visual.size_pc is an honest failure: no galdim_majaxis on file under any alias tried live (NAME Iris Nebula, NGC 7023, Ced 187, LBN 487, Cl VDB 139) - never fabricated. SIMBAD also carries a tangential-only proper-motion vector for the embedded cluster (no radial velocity on file); not carried into this record, matching this catalog's existing convention of leaving velocity unpopulated for every molecular_cloud/hii_region/supernova_remnant/planetary_nebula record to date (including the Messier-nebula-gap-fill batch, which resolved through this exact same SimbadResolver path)."
+    },
+    {
+      "id": "veil-nebula-cygnus-loop",
+      "name": "Veil Nebula",
+      "aliases": [
+        "Cygnus Loop",
+        "Veil Nebula",
+        "Cirrus Nebula",
+        "Filamentary Nebula",
+        "NGC 6960",
+        "NGC 6992",
+        "NGC 6995",
+        "NGC 6979",
+        "Witch's Broom Nebula",
+        "Network Nebula",
+        "SNR G074.0-08.6",
+        "NAME Cyg Loop",
+        "SNR G074.3-08.5",
+        "SNR G072.4-09.5",
+        "SNR G074.0-08.5",
+        "Sh  2-103",
+        "CTB 99",
+        "CTA  93",
+        "DA 528",
+        "DB 119",
+        "4U 2046+31",
+        "W  78"
+      ],
+      "object_type": "supernova_remnant",
+      "position_pc": [
+        197.8304475803668,
+        689.0796981973558,
+        -107.96890081126226
+      ],
+      "distance_pc": 725.0,
+      "distance_error_pc": 15.0,
+      "size_pc": 48.50560879500908,
+      "color_class": null,
+      "spectral_type": null,
+      "absolute_magnitude": null,
+      "apparent_magnitude": null,
+      "exoplanets": null,
+      "velocity": null,
+      "group": {
+        "primary": null,
+        "secondary": [
+          "non-zucker-nebula-gap-fill"
+        ]
+      },
+      "source": {
+        "reference": "Fesen, R. A., Weil, K. E., Cisneros, I. A., Blair, W. P., & Raymond, J. C. (2021), \"An updated distance to the Cygnus Loop based on Gaia Early DR3\", MNRAS, 507, 244 (arXiv:2109.05368, doi:10.1093/mnras/stab2066). Distance is the paper's own revised remnant-centre distance (725 +/- 15 pc), derived from Gaia EDR3 parallaxes of several stars identified (via high-velocity interstellar absorption lines) as located inside/behind the remnant - the same 'literature paper directly measuring the remnant's own distance' convention this catalog's other supernova_remnant record (Vela SNR) already uses (see that record's own source.reference), not a SIMBAD parallax/mesDistance value (SIMBAD carries neither for this extended object).",
+        "url": "https://arxiv.org/abs/2109.05368",
+        "catalog": "Fesen et al. 2021 (MNRAS 507, 244)"
+      },
+      "notes": "Story #326 new-record gap-fill: a supernova remnant (issue's own explicit framing: \"not a cloud/HII region\"), NOT part of the Zucker et al. 2020 molecular-cloud compendium Stories #318/#324/#325 mined (that paper covers molecular clouds only) and NOT run through the molecular-cloud-specific acquisition script - acquired via this catalog's supernova_remnant convention instead, matching Vela SNR (the catalog's only other supernova_remnant record) field-for-field: a literature paper is the distance source (SIMBAD itself has no parallax and no mesDistance on file for any Cygnus Loop identifier tried live - 'NAME Cygnus Loop', 'NAME Veil Nebula'/NGC 6960, NGC 6992, NGC 6995 all confirmed empty), while position is SIMBAD's own identification-only query. Position/otype anchor: live SIMBAD query for 'NAME Cygnus Loop' resolves to main_id 'NAME Cyg Loop' (ra=312.75, dec=30.6667), otype 'SNR' (confirmed genuine SuperNova Remnant classification, not a generic ISM/shell label) - chosen over the sibling SIMBAD entry 'NAME Veil Nebula'/NGC 6960 (otype 'ISM', generic Interstellar Medium Object, one specific western filament/the 'Witch's Broom', 1.155 deg away - well within this remnant's own ~1.9 deg angular radius per its galdim_majaxis below) because 'NAME Cyg Loop' is SIMBAD's own whole-remnant SNR-typed entry, the correct anchor for a single-point/single-distance record representing the entire structure (same logic as Vela SNR anchoring to its own SNR-typed centroid rather than one filament). 725 pc is within the issue's own unverified ~700-735pc estimate and comfortably under the 800pc cap. The issue itself described this as \"the catalog's SECOND supernova_remnant record (currently only Vela SNR exists)\" - that framing turns out to be factually imprecise, caught during this Story's own acquisition rather than trusted blindly: M1/the Crab Nebula (id m1_crab, added by the earlier Messier-nebula-gap-fill batch, issue #221) is already object_type supernova_remnant too, so this is actually the catalog's THIRD supernova_remnant record (Vela SNR, M1/Crab Nebula, now Veil Nebula/Cygnus Loop), not the second - noted here rather than silently left uncorrected. visual.size_pc = 48.51 pc is a DIAMETER (this catalog's established supernova_remnant/molecular_cloud/hii_region/planetary_nebula convention, Story #314) derived from SIMBAD's own galdim_majaxis=230.0 arcmin for 'NAME Cyg Loop' (bibcode 2014BASI...42...47G, qual='D') via this record's own 725pc distance - qual 'D' (SIMBAD's own lowest angular-size quality flag) is noted honestly rather than silently treated as equivalent to the better-quality galdim values other records in this catalog carry."
     }
   ],
   "structures": {

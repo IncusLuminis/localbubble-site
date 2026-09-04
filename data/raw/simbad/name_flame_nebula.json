@@ -1,0 +1,27 @@
+{
+  "source": "simbad",
+  "query": "NAME Flame Nebula",
+  "retrieved_utc": "2026-09-04T11:04:56+00:00",
+  "record_id": "NAME Flame Nebula",
+  "raw": {
+    "main_id": "NAME Flame Nebula",
+    "ra": 85.42791666666668,
+    "dec": -1.912222222222222,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "1997ApJ...488..224K",
+    "rvz_radvel": null,
+    "pm_bibcode": "",
+    "plx_value": null,
+    "rvz_bibcode": "",
+    "pmra": null,
+    "plx_err": null,
+    "sp_type": "",
+    "otype": "HII",
+    "pmdec": null,
+    "ids": "SNR G206.5-16.4|LBN   953|LBN 206.90-16.56|RAFGL  807|[KC97c] G206.5-16.4|[WMG70] 206.5-16.4|[WCO2009] J054143-015349|GRS G206.50 -16.40|W 12|NAME Flame Nebula",
+    "matched_id": "NAME Flame Nebula"
+  }
+}

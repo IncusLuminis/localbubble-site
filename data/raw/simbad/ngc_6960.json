@@ -1,0 +1,27 @@
+{
+  "source": "simbad",
+  "query": "NGC 6960",
+  "retrieved_utc": "2026-09-04T11:07:30+00:00",
+  "record_id": "NGC  6960",
+  "raw": {
+    "main_id": "NGC  6960",
+    "ra": 311.4083333333333,
+    "dec": 30.708333333333332,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "plx_value": null,
+    "pmdec": null,
+    "plx_err": null,
+    "rvz_radvel": null,
+    "pm_bibcode": "",
+    "rvz_bibcode": "",
+    "sp_type": "",
+    "pmra": null,
+    "otype": "ISM",
+    "ids": "LBN   191|LBN 074.53-08.42|NAME Cirrus Nebula|NAME Filamentary Nebula|NGC  6960|NAME Veil Nebula",
+    "matched_id": "NGC  6960"
+  }
+}

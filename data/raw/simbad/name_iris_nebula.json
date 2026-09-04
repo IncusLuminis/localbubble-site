@@ -1,0 +1,27 @@
+{
+  "source": "simbad",
+  "query": "NAME Iris Nebula",
+  "retrieved_utc": "2026-09-04T11:03:16+00:00",
+  "record_id": "NGC  7023",
+  "raw": {
+    "main_id": "NGC  7023",
+    "ra": 315.40374999999995,
+    "dec": 68.16333333333334,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "O",
+    "coo_bibcode": "",
+    "pmdec": -1.086,
+    "pm_bibcode": "2022ApJS..262....7H",
+    "otype": "OpC",
+    "sp_type": "",
+    "plx_err": 0.07699999958276749,
+    "pmra": 7.815,
+    "rvz_radvel": null,
+    "plx_value": 2.905,
+    "rvz_bibcode": "",
+    "ids": "AAVSO 2044+67|C 2059+679|IRAS 20599+6755|IRAS F20599+6755|LBN 104.08+14.21|LBN   487|NGC  7023|OCISM  50|OCl  235|[BDB2003] G104.06+14.19|Cl VDB  139|PSCz P20599+6755|NAME IRIS Nebula|[RK68] 105|[SPB96] 2161|IRAS F21009+6758|RAFGL 2695|PSCz P21009+6758|IRAS 21009+6758|GN 21.01.0",
+    "matched_id": "NAME IRIS Nebula"
+  }
+}
