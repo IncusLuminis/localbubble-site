@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "NAME Northern Coalsack",
+  "retrieved_utc": "2026-09-04T10:02:01+00:00",
+  "record_id": "NAME Northern Coalsack",
+  "raw": {
+    "main_id": "NAME Northern Coalsack",
+    "ra": 305.25,
+    "dec": 37.0,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "galdim_bibcode": "2002A&A...383..631D",
+    "galdim_qual": "D",
+    "galdim_minaxis": 480.0,
+    "galdim_angle": 90,
+    "galdim_majaxis": 1410.0,
+    "matched_id": "NAME Northern Coalsack"
+  }
+}

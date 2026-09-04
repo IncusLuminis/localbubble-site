@@ -8867,3 +8867,35 @@ sources:
   retrieved: '2026-09-04T05:45:40+00:00'
   record_id: NAME Aql Rift
   cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-318/local-galactic-structures/data/raw/simbad_size/aquila_rift.json
+- id: simbad_size:NAME Cocoon Nebula
+  source: simbad_size
+  query: NAME Cocoon Nebula
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T10:04:38+00:00'
+  record_id: IC 5146
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-324/local-galactic-structures/data/raw/simbad_size/name_cocoon_nebula.json
+- id: simbad_size:NGC 2264
+  source: simbad_size
+  query: NGC 2264
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T10:01:57+00:00'
+  record_id: NGC  2264
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-324/local-galactic-structures/data/raw/simbad_size/ngc_2264.json
+- id: simbad_size:NAME Northern Coalsack
+  source: simbad_size
+  query: NAME Northern Coalsack
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T10:02:01+00:00'
+  record_id: NAME Northern Coalsack
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-324/local-galactic-structures/data/raw/simbad_size/name_northern_coalsack.json
+- id: simbad_size:IC 5146
+  source: simbad_size
+  query: IC 5146
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T10:04:39+00:00'
+  record_id: IC 5146
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-324/local-galactic-structures/data/raw/simbad_size/ic_5146.json

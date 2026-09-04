@@ -570,3 +570,124 @@ considered read as a clear-cut case for that type over `molecular_cloud`,
 per the issue's own judgment note - all 4 added keep the existing
 seed-list precedent of classifying even actively star-forming clouds like
 Ophiuchus/Orion as `molecular_cloud`).
+
+## 9 more named molecular clouds, "strong tier" (issue #324)
+
+Follow-on to issue #318 above. A more thorough mining of the same
+already-cached Zucker et al. 2020 table found real, well-under-800pc
+candidates that #318's earlier research pass either missed (North America
+Nebula - explicitly requested by the human owner - and its optional twin
+the Pelican Nebula, IC 5070) or WRONGLY excluded based on bad secondary
+sources: #318's own README text above quotes IC5146/Cocoon Nebula at
+"~950pc-1kpc" and separately excludes Circinus/Norma as "kpc-scale" -
+both guessed from garbled web text at that Story's research stage, not
+from the real cached table, which puts all three well under 800pc. This
+Story live-re-verified every one of the issue's own quoted distance
+ranges directly against the actual cached VizieR rows (not re-trusted
+blindly) before acquiring anything, and confirmed every one matches
+closely. `scripts/acquire_molecular_cloud_gap_fill.py` was extended (not
+replaced) with this Story's own 9 candidates plus a new
+`REDUNDANCY_CHECKS` block computing the two required real-position
+comparisons below via `astropy.coordinates.SkyCoord`.
+
+**9 candidates added**, all resolved cleanly via SIMBAD, all under 800pc:
+
+| Record | Distance | Nearest sightline sep. | size_pc |
+| --- | --- | --- | --- |
+| North America Nebula | 784 pc | 0.273 deg | null (honest failure) |
+| Pelican Nebula | 792 pc | 0.031 deg | null (honest failure) |
+| IC 5146 (Cocoon Nebula) | 751 pc | 0.027 deg | 1.79 pc (SIMBAD galdim) |
+| Circinus Molecular Cloud | 675 pc | 0.263 deg | null (honest failure) |
+| Norma Molecular Cloud | 721 pc | 0.153 deg | null (honest failure) |
+| Mon OB1 / NGC 2264 | 759 pc | 0.194 deg | 52.99 pc (SIMBAD galdim) |
+| IC 2118 (Witch Head Nebula) | 273 pc | 0.697 deg | null (honest failure) |
+| Lambda Orionis Ring (Orion_Lam) | 423 pc | 0.301 deg | null (honest failure) |
+| Draco Cloud | 481 pc | 0.308 deg | null (honest failure) |
+
+North America Nebula is the human owner's own explicit request. Pelican
+Nebula is the issue's own optional twin (same physical complex as North
+America Nebula, split by an intervening dust lane, not a distinct Zucker
+table entry of its own) - included because it resolved essentially
+exactly (0.031 deg) via SIMBAD's own `NAME Pelican Nebula` identifier, per
+the issue's "add if it resolves cleanly, your call" instruction. IC 5146,
+Circinus, and Norma are the three candidates #318 wrongly excluded, now
+corrected. Mon OB1/NGC 2264, IC 2118, Lambda Orionis Ring, and Draco Cloud
+are new strong candidates this Story's own table-mining pass surfaced.
+
+**Two redundancy checks, both explicitly required by the issue, both
+performed via real SIMBAD-resolved positions (not name matching):**
+
+- **Orion_Lam (Lambda Orionis Ring) vs. the already-loaded Orion Molecular
+  Cloud Complex record - PASSED, genuinely distinct.** SIMBAD's
+  identification-only position for this candidate (`Sh 2-264` -> main_id
+  `NAME lam Ori Molecular Ring`, ra=83.825, dec=9.933) sits **11.527 deg**
+  from the existing `orion-molecular-cloud-complex` record's own stored
+  position (ra=86.2152, dec=-1.3456) - far outside any plausible
+  single-object measurement scatter (every genuine same-object match in
+  this Story and #318 landed under ~1.8 deg). The Lambda Orionis ring
+  sits north of the Orion Belt/Sword region (dec ~+6 to +14 deg); the
+  existing Orion Complex record is anchored near M42 (dec ~-1 to -8 deg).
+  Added as its own record.
+- **Northern Coalsack vs. the already-loaded Coalsack Nebula record -
+  PASSED, genuinely distinct... but excluded anyway, for a different,
+  unanticipated reason.** SIMBAD's real `NAME Northern Coalsack` position
+  (ra=305.25, dec=37.0) sits **133.890 deg** from Coalsack Nebula's own
+  stored position (ra=189.1772, dec=-65.4279) - opposite general regions
+  of the sky, obviously not a duplicate. However, acquiring this candidate
+  surfaced a second, separate problem: SIMBAD's actual `NAME Northern
+  Coalsack` record turns out to be an alias for the **Cygnus Rift**
+  (`NAME Cyg Rift`/`NAME Cygnus Rift`, otype DNe, galactic l=74.75,
+  b=0.00) - a completely different sky position from the Zucker table's
+  own `Northern_Coalsack`-named sightline group (l=91.3-92.6, b=3.5-4.3),
+  which sits **16.4 deg** away from that real SIMBAD identification (the
+  table's own `SimbadName` column for those rows literally reads
+  "Northern_Coalsack" too, but that is the paper's own group-label string
+  echoed back, not an independent cross-match confirmation - the exact
+  same false-cognate trap #318 documented for Aquila Rift above). A region
+  search around the Zucker table's actual `Northern_Coalsack` coordinates
+  (ra~314-317, dec~52-53) found only catalog-only dark-nebula designations
+  (LDN 1018/1027, DOBASHI 3003/3008/3009/3016/3044, TGU H541 P11) - no
+  popularly `NAME`-prefixed SIMBAD identifier exists there to anchor a
+  corrected record to. And the real SIMBAD "Northern Coalsack"/Cygnus
+  Rift object's own `galdim_majaxis` (1410 arcmin, ~23.5 deg on the sky)
+  confirms it is itself an enormous extended dark-lane/superposition
+  feature spanning much of Cygnus, not a single coherent cloud - the
+  identical "poor fit for this catalog's single-point/single-distance
+  object model" reasoning that excluded Aquila Rift in #318. **Excluded**
+  as an honest failure, not force-matched/fabricated; the live query that
+  led to this discovery (`NAME Northern Coalsack`'s own galdim) is still
+  cached/manifested for anyone who wants to independently re-verify it.
+
+**7 honest-failure `size_pc`'s** (North America Nebula, Pelican Nebula,
+Circinus, Norma, IC 2118, Lambda Orionis Ring, Draco Cloud): each resolves
+cleanly on SIMBAD but carries no `galdim_majaxis` on file under any alias
+tried live (`data_sources/simbad_size.py`'s `resolve_angular_diameter`
+returned `None` for every alternate identifier attempted for each - see
+each record's own `notes` field) - the same honest-failure shape #318 hit
+for Coalsack Nebula/Serpens Molecular Cloud and #314 hit for M8/the Lagoon
+Nebula. Never fabricated/approximated.
+
+All 9 new records carry the same `group.secondary: ["molecular-cloud-gap-fill"]`
+tag #318's own 4 records use (a per-object-type batch tag, not a
+per-Story one - `tests/test_molecular_cloud_gap_fill.py`'s own exact-count
+checks were relaxed to growth-tolerant ones, mirroring
+`tests/test_structure_size_backfill.py`'s own #314 precedent, and this
+Story's new `tests/test_molecular_cloud_gap_fill_tier1.py` asserts the
+up-to-date total of 13 tagged records). Catalog grew from 1083 to 1092
+objects; `galactic-structures build-catalog` + `galactic-structures
+export-scene --no-radius-filter --output web/public/data/scene.json`
+regenerated the checked-in catalog/scene artifacts, run from this
+worktree's own clean `.venv` (pyarrow 25.0.1, matching the version the
+test suite runs against - standing lesson from PR #183). Full suite: 404
+passed, 4 skipped (18 new tests in `test_molecular_cloud_gap_fill_tier1.py`,
+covering presence/type/tagging/distance-sanity/size-sanity/provenance for
+all 9 new records, both redundancy checks, the Northern Coalsack exclusion
+regression guard, and non-regression of #318's own 4 records).
+
+Not part of this Story: the "second tier" lesser-known Zucker regions
+(Cam, Hercules, Pegasus, Polaris Flare, Ursa Major, Lacerta, Spider,
+Aquila_Rift) - issue #325's own scope, to start only after this Story
+merges (same files touched); any rendering/visual change; or bright
+emission/reflection nebulae not found in the Zucker molecular-cloud table
+(Iris Nebula, Veil Nebula, Horsehead/Flame) - a separate consideration per
+the issue's own scope note.
