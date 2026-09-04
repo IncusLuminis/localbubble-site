@@ -256,6 +256,13 @@ def test_story_318_and_324_records_are_unchanged(catalog_objects):
 
 
 def test_catalog_has_at_least_the_25_expected_molecular_cloud_records(catalog_objects):
+    # Relaxed from a strict `== 25` to a growth-tolerant `>=` (Story #326,
+    # mirroring this same test's own #324 -> #325 precedent below): #326
+    # adds Iris Nebula as a 26th molecular_cloud record (a non-Zucker
+    # reflection nebula, tagged "non-zucker-nebula-gap-fill", not part of
+    # this test's own #318/#324/#325 Zucker-batch id sets) - this test's
+    # own job is confirming nothing pre-existing disappeared, not acting
+    # as a permanent ceiling on legitimate future growth.
     molecular_clouds = [obj for obj in catalog_objects if obj.object_type == "molecular_cloud"]
     ids = {obj.id for obj in molecular_clouds}
     original_eight = {
@@ -269,8 +276,8 @@ def test_catalog_has_at_least_the_25_expected_molecular_cloud_records(catalog_ob
         "taurus-molecular-cloud",
     }
     expected = original_eight | STORY_318_IDS | STORY_324_IDS | {oid for oid, _ in NEW_MOLECULAR_CLOUDS}
-    assert len(molecular_clouds) == 25
-    assert ids == expected
+    assert len(molecular_clouds) >= 25
+    assert expected <= ids
 
 
 def test_gap_fill_tag_now_covers_exactly_17_records(catalog_objects):

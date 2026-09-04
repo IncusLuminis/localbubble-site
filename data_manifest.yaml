@@ -8915,3 +8915,75 @@ sources:
   retrieved: '2026-09-04T10:27:43+00:00'
   record_id: NAME Pegasus Cloud
   cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-325/local-galactic-structures/data/raw/simbad_size/name_pegasus_cloud.json
+- id: simbad_size:NAME Cygnus Loop
+  source: simbad_size
+  query: NAME Cygnus Loop
+  dataset: SIMBAD angular-size query (galdim_majaxis, galdim_minaxis, galdim_angle,
+    galdim_qual, galdim_bibcode)
+  retrieved: '2026-09-04T11:02:04+00:00'
+  record_id: NAME Cyg Loop
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad_size/name_cygnus_loop.json
+- id: simbad:NAME Iris Nebula
+  source: simbad
+  query: NAME Iris Nebula
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:03:16+00:00'
+  record_id: NGC  7023
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/name_iris_nebula.json
+- id: simbad:NAME Cygnus Loop
+  source: simbad
+  query: NAME Cygnus Loop
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:04:36+00:00'
+  record_id: NAME Cyg Loop
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/name_cygnus_loop.json
+- id: simbad:NAME Veil Nebula
+  source: simbad
+  query: NAME Veil Nebula
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:04:50+00:00'
+  record_id: NGC  6960
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/name_veil_nebula.json
+- id: simbad:NAME Horsehead Nebula
+  source: simbad
+  query: NAME Horsehead Nebula
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:04:53+00:00'
+  record_id: NAME Horsehead Nebula
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/name_horsehead_nebula.json
+- id: simbad:NAME Flame Nebula
+  source: simbad
+  query: NAME Flame Nebula
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:04:56+00:00'
+  record_id: NAME Flame Nebula
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/name_flame_nebula.json
+- id: simbad:NGC 6960
+  source: simbad
+  query: NGC 6960
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:07:30+00:00'
+  record_id: NGC  6960
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/ngc_6960.json
+- id: simbad:NGC 6992
+  source: simbad
+  query: NGC 6992
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:07:34+00:00'
+  record_id: NGC  6992
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/ngc_6992.json
+- id: simbad:NGC 6995
+  source: simbad
+  query: NGC 6995
+  dataset: SIMBAD basic identifier query (ra, dec, parallax, sp_type, V, pmra, pmdec,
+    rvz_radvel)
+  retrieved: '2026-09-04T11:07:37+00:00'
+  record_id: NGC  6995
+  cache_path: /Users/mloktionov/Projects/IncusLuminis/products/visualization-studio/vst-story-326/local-galactic-structures/data/raw/simbad/ngc_6995.json

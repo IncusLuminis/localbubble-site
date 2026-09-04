@@ -1,0 +1,27 @@
+{
+  "source": "simbad",
+  "query": "NAME Cygnus Loop",
+  "retrieved_utc": "2026-09-04T11:04:36+00:00",
+  "record_id": "NAME Cyg Loop",
+  "raw": {
+    "main_id": "NAME Cyg Loop",
+    "ra": 312.75,
+    "dec": 30.666666666666668,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "R",
+    "coo_bibcode": "2009BASI...37...45G",
+    "sp_type": "",
+    "pmra": null,
+    "otype": "SNR",
+    "plx_value": null,
+    "plx_err": null,
+    "rvz_radvel": null,
+    "pmdec": null,
+    "rvz_bibcode": "",
+    "pm_bibcode": "",
+    "ids": "4FGL J2051.0+3049e|SNR G074.0-08.6|AJG 102|SNR G074.3-08.5|SNR G072.4-09.5|SNR G074.0-08.5|1H 2050+310|1M 2051+309|2RE J2057+311|2RE J205730+311130|4U 2046+31|CTA  93|CTB 99|DA 528|DB 119|NAME Cyg Loop|NAME Cygnus Loop|SH  2-103|X Cyg X-5|[DGW65] 137|1E 2049.4+3050|2FGL J2051.0+3040e|W 78|1FGL J2046.4+3041|3FGL J2051.0+3040e|3FHL J2051.0+3040e",
+    "matched_id": "NAME Cygnus Loop"
+  }
+}

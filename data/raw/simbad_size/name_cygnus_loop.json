@@ -1,0 +1,22 @@
+{
+  "source": "simbad_size",
+  "query": "NAME Cygnus Loop",
+  "retrieved_utc": "2026-09-04T11:02:04+00:00",
+  "record_id": "NAME Cyg Loop",
+  "raw": {
+    "main_id": "NAME Cyg Loop",
+    "ra": 312.75,
+    "dec": 30.666666666666668,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "R",
+    "coo_bibcode": "2009BASI...37...45G",
+    "galdim_qual": "D",
+    "galdim_bibcode": "2014BASI...42...47G",
+    "galdim_majaxis": 230.0,
+    "galdim_angle": null,
+    "galdim_minaxis": 160.0,
+    "matched_id": "NAME Cygnus Loop"
+  }
+}

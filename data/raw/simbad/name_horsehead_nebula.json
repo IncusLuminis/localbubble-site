@@ -1,0 +1,27 @@
+{
+  "source": "simbad",
+  "query": "NAME Horsehead Nebula",
+  "retrieved_utc": "2026-09-04T11:04:53+00:00",
+  "record_id": "NAME Horsehead Nebula",
+  "raw": {
+    "main_id": "NAME Horsehead Nebula",
+    "ra": 85.24583333333334,
+    "dec": -2.4583333333333335,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "",
+    "rvz_radvel": null,
+    "pm_bibcode": "",
+    "plx_value": null,
+    "rvz_bibcode": "",
+    "pmra": null,
+    "plx_err": null,
+    "sp_type": "",
+    "otype": "DNe",
+    "pmdec": null,
+    "ids": "Barnard  33|M3T 31|[OS98] 52|[DB2002b] G206.95-16.80|NAME Horsehead Nebula",
+    "matched_id": "NAME Horsehead Nebula"
+  }
+}

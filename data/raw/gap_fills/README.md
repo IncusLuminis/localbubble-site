@@ -825,3 +825,211 @@ Not part of this Story: any rendering/visual change; or bright
 emission/reflection nebulae not found in the Zucker molecular-cloud table
 (Iris Nebula, Veil Nebula, Horsehead/Flame) - issue #326's own scope,
 which depends on this Story merging first (same files touched).
+
+## Bright non-Zucker nebulae: Iris Nebula and Veil Nebula added, Horsehead/Flame excluded (issue #326)
+
+Follow-on to #318/#324/#325 (this Story's own out-of-scope note above),
+but a deliberately different acquisition shape: none of this Story's 4
+candidates (Iris Nebula, Veil Nebula/Cygnus Loop, Horsehead Nebula, Flame
+Nebula) are molecular clouds in the Zucker et al. 2020 compendium at all -
+they were flagged during the same original research pass as notable,
+likely-in-scope bright nebulae/a supernova remnant, but explicitly
+UNVERIFIED against any real cached data (unlike #318/#324/#325's
+Zucker-table tiers). Every distance/position/classification below was
+independently confirmed via a live SIMBAD query before anything was added,
+per the issue's own explicit rigor requirement - none of the issue's own
+quoted approximate distances were trusted blindly. `scripts/
+acquire_nebula_gap_fill.py` (a new, separate script - NOT an extension of
+`acquire_molecular_cloud_gap_fill.py`, since none of this Story's
+candidates go through the Zucker adapter) reproduces every query and the
+redundancy-check numbers below from a clean checkout.
+
+**2 candidates added, 2 investigated and deliberately excluded:**
+
+| Record | object_type | Distance | size_pc | Outcome |
+| --- | --- | --- | --- | --- |
+| Iris Nebula (NGC 7023) | molecular_cloud | 344.2 +/- 9.1 pc | null (honest failure) | Added |
+| Veil Nebula (Cygnus Loop) | supernova_remnant | 725 +/- 15 pc | 48.51 pc (SIMBAD galdim) | Added |
+| Horsehead Nebula | - | (no SIMBAD distance) | - | Excluded - redundant |
+| Flame Nebula | - | (no SIMBAD distance) | - | Excluded - redundant |
+
+### Iris Nebula (NGC 7023) - added as `molecular_cloud`
+
+The issue's own framing flagged this as a genuine classification judgment
+call: is a reflection nebula a `hii_region` (like the 5 already-loaded
+Messier emission nebulae), a `molecular_cloud`, or neither? Live SIMBAD
+resolution settled it with real data, not a guess. `NAME Iris Nebula`
+resolves to main_id `NGC  7023`, SIMBAD otype **`OpC`** (Open Cluster -
+the young embedded cluster, not the nebula itself; the identical
+"named-nebula identifier resolves to a co-located companion object"
+quirk issue #221 already documented for the Messier batch's M8/M16/M17/
+M20 resolving to their own embedded open clusters, `data_sources/
+simbad.py`'s own module docstring). A live `Simbad.query_region` around
+that position turned up the nebula's own distinct entry, **`Ced 187`**
+(Cederblad 187), otype **`RNe`** (Reflection Nebula), just **0.026 deg**
+away - essentially coincident, confirming this genuinely is a reflection
+nebula (dust scattering starlight), a different physical process from the
+5 existing `hii_region` records (ionized emission gas) and a poor fit for
+that type. `molecular_cloud` was chosen instead, extending this catalog's
+own established precedent of using `molecular_cloud` for non-ionized
+diffuse dust/dark-nebula structures generally, not only literal
+star-forming molecular gas - the catalog already classifies Pipe Nebula
+and Coalsack Nebula (both SIMBAD otype `DNe`, Dark Nebula, the same
+non-ionized-dust family as `RNe`) as `molecular_cloud`, not as their own
+separate type.
+
+Position/distance are anchored to NGC 7023's own SIMBAD entry rather than
+Ced 187 (same "use the co-located companion object's own position/
+distance" pattern issue #221 established), because NGC 7023 carries a
+real usable parallax (`plx_value=2.905 +/- 0.077 mas`) while Ced 187 has
+none on file: distance = 1000/2.905 = **344.23 +/- 9.12 pc**, comfortably
+under both the issue's own unverified ~400pc estimate and the 800pc cap.
+`visual.size_pc` is an honest failure: no `galdim_majaxis` on file under
+any of 5 aliases tried live (`NAME Iris Nebula`, `NGC 7023`, `Ced 187`,
+`LBN 487`, `Cl VDB 139`) - never fabricated.
+
+### Veil Nebula (Cygnus Loop) - added as `supernova_remnant`
+
+A supernova remnant, not a cloud/HII region (the issue's own explicit
+framing) - acquired via this catalog's `supernova_remnant` convention,
+matching Vela SNR (the catalog's only other `supernova_remnant` record,
+`vela-supernova-remnant`) field-for-field, per the issue's explicit
+instruction NOT to force this through the molecular-cloud-specific
+pipeline. `NAME Cygnus Loop` resolves to main_id `NAME Cyg Loop`, SIMBAD
+otype **`SNR`** (a confirmed, genuine SuperNova Remnant classification,
+not a generic `ISM`/shell label) - chosen as the position anchor over the
+sibling SIMBAD entry `NAME Veil Nebula`/`NGC 6960` (otype `ISM`, one
+specific western filament nicknamed "the Witch's Broom", **1.155 deg**
+away, well within this remnant's own ~1.9 deg angular radius) because
+`NAME Cyg Loop` is SIMBAD's own whole-remnant SNR-typed entry, the
+correct single-point anchor for a record meant to represent the entire
+structure (the same logic Vela SNR's own record already uses, anchoring
+to the SNR-typed centroid rather than one filament/component).
+
+SIMBAD has neither a parallax nor a `mesDistance` measurement on file for
+any Cygnus Loop identifier tried live (`NAME Cygnus Loop`, `NAME Veil
+Nebula`/NGC 6960, NGC 6992, NGC 6995 - all confirmed empty), so distance
+comes from a literature paper directly, the same convention Vela SNR's
+own record already uses (that record cites Dodson et al. 2003's VLBI
+pulsar parallax rather than any SIMBAD field): Fesen, R. A., Weil, K. E.,
+Cisneros, I. A., Blair, W. P., & Raymond, J. C. (2021), "An updated
+distance to the Cygnus Loop based on Gaia Early DR3", MNRAS, 507, 244
+(arXiv:2109.05368, doi:10.1093/mnras/stab2066) - a Gaia EDR3-parallax-based
+revised distance to the remnant itself (from stars identified via
+high-velocity interstellar absorption lines as located inside/behind it):
+**725 +/- 15 pc**, within the issue's own unverified ~700-735pc estimate
+and comfortably under the 800pc cap. `visual.size_pc` = **48.51 pc**, a
+DIAMETER (this catalog's established `supernova_remnant`/`molecular_cloud`/
+`hii_region`/`planetary_nebula` convention, Story #314) derived from
+SIMBAD's own `galdim_majaxis=230.0 arcmin` for `NAME Cyg Loop` (bibcode
+`2014BASI...42...47G`) at this record's own 725pc distance - that
+bibcode's own SIMBAD quality flag is `'D'` (SIMBAD's lowest angular-size
+quality tier), noted honestly in the record's own `notes` rather than
+silently presented as equivalent to a better-quality measurement.
+
+**Correction to the issue's own framing:** the issue describes this as
+"the catalog's SECOND `supernova_remnant` record (currently only Vela
+SNR exists)". That turns out to be factually imprecise - caught during
+this Story's own acquisition rather than trusted blindly, the same
+"don't re-trust an unverified prior claim" rigor #324 already applied to
+#318's own bad IC5146/Circinus/Norma exclusions: M1/the Crab Nebula (id
+`m1_crab`) is already `object_type: supernova_remnant` too, added by the
+earlier Messier-nebula-gap-fill batch (issue #221, `## 10 popular
+Messier nebulae...` above). Veil Nebula is therefore the catalog's
+**THIRD** `supernova_remnant` record, not the second - corrected in this
+record's own `notes` field and in `tests/test_nebula_gap_fill.py`.
+
+### Horsehead Nebula / Flame Nebula - both EXCLUDED as redundant with the already-loaded Orion Molecular Cloud Complex record (mandatory redundancy check, performed and documented regardless of outcome)
+
+Both resolve cleanly and unambiguously on live SIMBAD: `NAME Horsehead
+Nebula` (main_id unchanged, otype **`DNe`**, Dark Nebula - the classic
+Barnard 33 silhouette) and `NAME Flame Nebula` (main_id unchanged, otype
+**`HII`**, HII Region - the nebula associated with NGC 2024). Neither is
+ambiguous or a false-cognate/superposition-feature problem like Aquila
+Rift/Northern Coalsack/Cam/Lacerta/Polaris in #318/#324/#325 - both are
+real, well-defined, individually-named SIMBAD objects. But neither
+carries a usable SIMBAD parallax or `mesDistance` measurement of its own
+(both confirmed empty live), and the issue's own explicit mandate required
+a real-position redundancy check against the already-loaded Orion
+Molecular Cloud Complex record (`orion-molecular-cloud-complex`,
+ra=86.2152, dec=-1.3456, distance=433pc, `visual.size_pc`=52.90pc i.e. a
+**26.45pc radius**, per this catalog's DIAMETER convention) before adding
+either:
+
+- **Horsehead Nebula**: real SIMBAD position (ra=85.246, dec=-2.458) sits
+  **1.475 deg** from the Orion Complex record's own stored position -
+  at 433pc, that is **~11.15 pc** of physical offset, well INSIDE the
+  existing record's own 26.45pc rendered radius.
+- **Flame Nebula**: real SIMBAD position (ra=85.428, dec=-1.912) sits
+  **0.970 deg** away - **~7.33 pc** of physical offset, also well INSIDE
+  the existing record's own radius. (Horsehead and Flame are themselves
+  only 0.576 deg apart - both sit in the same corner of the wider Orion B
+  cloud, near Alnitak/NGC 2024, well inside the single blob the existing
+  complex-level record already represents.)
+
+This is a different exclusion shape from #318/#324/#325's false-cognate
+cases (which were "the candidate's real position doesn't match its
+claimed catalog sightline group at all"): here, both candidates
+genuinely, unambiguously resolve to real, individually-named,
+well-classified SIMBAD objects - the problem is that their real positions
+already sit inside the volume the existing single-point, single-distance
+Orion Molecular Cloud Complex record renders as, and neither carries an
+independent SIMBAD distance measurement of its own that would justify
+treating it as a genuinely distinct 3D structure rather than a named
+sub-feature of the same already-represented cloud. Unlike Story #324's
+Pelican Nebula (physically adjacent to North America Nebula, 0.031 deg,
+but included because it carried its own genuine, independently-measured
+Zucker-table distance), adding Horsehead/Flame here would mean assigning
+each a "new" record with no distance of its own other than the parent
+complex's already-stored 433pc - exactly the kind of forced/near-duplicate
+inclusion the issue itself says to skip and document rather than force.
+Excluded as an honest, documented judgment call, not a resolution
+failure - the live queries that produced these numbers are still
+cached/reproducible via `scripts/acquire_nebula_gap_fill.py` for anyone
+who wants to independently re-verify them, or re-add either in a future
+Story if a genuine independent distance measurement for one of them
+surfaces.
+
+### Tests, provenance, catalog rebuild
+
+Both new records carry `group.secondary: ["non-zucker-nebula-gap-fill"]` -
+a new, distinct tag from every prior batch's own tag (per this directory's
+established convention), reflecting that neither came through the
+Zucker-table pipeline #318/#324/#325 share. Raw provenance: `data/raw/
+simbad/name_iris_nebula.json`, `name_cygnus_loop.json`,
+`name_veil_nebula.json`, `name_horsehead_nebula.json`,
+`name_flame_nebula.json` (live SIMBAD identification queries, cached even
+where `SimbadResolver.resolve()` itself went on to raise - the raw
+identification response is cached before the distance-derivation step
+that fails, exactly like Vela SNR's own `data/raw/simbad/vela_snr.json`
+precedent); `data/raw/simbad_size/name_cygnus_loop.json` (the galdim
+query behind Veil Nebula's `size_pc`); `data/raw/gap_fills/iris_nebula.json`
+and `veil_nebula_cygnus_loop.json` (the two new records' own audit
+copies, matching the Messier-nebula-gap-fill batch's `m42_orion.json`-
+style precedent for non-Zucker acquisitions, rather than #318/#324/#325's
+no-individual-file convention, since Iris/Veil never touch the Zucker
+adapter this directory's other convention is built around).
+
+New `tests/test_nebula_gap_fill.py` covers presence/type/tagging/
+distance-sanity/size-sanity/provenance for both new records, an explicit
+Iris-Nebula-is-not-hii_region regression guard (documenting the
+classification judgment call), the Horsehead/Flame exclusion regression
+guard (neither id present in the catalog), the redundancy-check
+separation/physical-offset numbers above, and non-regression of #318's/
+#324's/#325's own 17 tagged molecular-cloud-gap-fill records plus the
+pre-existing Vela SNR record. Catalog grew from 1096 to 1098 objects;
+`galactic-structures build-catalog` + `galactic-structures export-scene
+--no-radius-filter --output web/public/data/scene.json` regenerated the
+checked-in catalog/scene artifacts, run from this worktree's own clean
+`.venv` (pyarrow 25.0.1, matching the version the test suite runs against -
+standing lesson from PR #183). Full suite: 427 passed, 4 skipped.
+
+Not part of this Story: any rendering/visual change (these 2 records
+render through whatever `molecular_cloud`/`supernova_remnant` rendering is
+live on `master` at merge time - `supernova_remnant` already has its own
+established rendering since Vela SNR, `molecular_cloud` since the
+original 8-record seed list); the Rosette Nebula, Heart & Soul Nebulae, or
+Wizard Nebula (already confirmed too far, ~1300pc+, in the original
+research pass - explicitly out of scope, not re-investigated here). This
+is the last Story in the "add more nebulae/clouds" line that started at
+#318.

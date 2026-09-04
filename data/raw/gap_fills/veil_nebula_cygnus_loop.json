@@ -1,0 +1,64 @@
+{
+  "id": "veil-nebula-cygnus-loop",
+  "name": "Veil Nebula",
+  "aliases": [
+    "Cygnus Loop",
+    "Veil Nebula",
+    "Cirrus Nebula",
+    "Filamentary Nebula",
+    "NGC 6960",
+    "NGC 6992",
+    "NGC 6995",
+    "NGC 6979",
+    "Witch's Broom Nebula",
+    "Network Nebula",
+    "SNR G074.0-08.6",
+    "NAME Cyg Loop",
+    "SNR G074.3-08.5",
+    "SNR G072.4-09.5",
+    "SNR G074.0-08.5",
+    "Sh  2-103",
+    "CTB 99",
+    "CTA  93",
+    "DA 528",
+    "DB 119",
+    "4U 2046+31",
+    "W  78"
+  ],
+  "object_type": "supernova_remnant",
+  "coordinates": {
+    "ra_deg": 312.75,
+    "dec_deg": 30.666666666666668,
+    "galactic_l_deg": 73.9815604428497,
+    "galactic_b_deg": -8.564496086488356
+  },
+  "distance": {
+    "value_pc": 725.0,
+    "error_pc": 15.0
+  },
+  "cartesian": {
+    "x_pc": 197.8304475803668,
+    "y_pc": 689.0796981973558,
+    "z_pc": -107.96890081126226
+  },
+  "group": {
+    "primary": null,
+    "secondary": [
+      "non-zucker-nebula-gap-fill"
+    ]
+  },
+  "source": {
+    "reference": "Fesen, R. A., Weil, K. E., Cisneros, I. A., Blair, W. P., & Raymond, J. C. (2021), \"An updated distance to the Cygnus Loop based on Gaia Early DR3\", MNRAS, 507, 244 (arXiv:2109.05368, doi:10.1093/mnras/stab2066). Distance is the paper's own revised remnant-centre distance (725 +/- 15 pc), derived from Gaia EDR3 parallaxes of several stars identified (via high-velocity interstellar absorption lines) as located inside/behind the remnant - the same 'literature paper directly measuring the remnant's own distance' convention this catalog's other supernova_remnant record (Vela SNR) already uses (see that record's own source.reference), not a SIMBAD parallax/mesDistance value (SIMBAD carries neither for this extended object).",
+    "url": "https://arxiv.org/abs/2109.05368",
+    "catalog": "Fesen et al. 2021 (MNRAS 507, 244)"
+  },
+  "visual": {
+    "size_pc": 48.50560879500908,
+    "color_class": null,
+    "spectral_type": null,
+    "absolute_magnitude": null,
+    "apparent_magnitude": null
+  },
+  "exoplanets": null,
+  "notes": "Story #326 new-record gap-fill: a supernova remnant (issue's own explicit framing: \"not a cloud/HII region\"), NOT part of the Zucker et al. 2020 molecular-cloud compendium Stories #318/#324/#325 mined (that paper covers molecular clouds only) and NOT run through the molecular-cloud-specific acquisition script - acquired via this catalog's supernova_remnant convention instead, matching Vela SNR (the catalog's only other supernova_remnant record) field-for-field: a literature paper is the distance source (SIMBAD itself has no parallax and no mesDistance on file for any Cygnus Loop identifier tried live - 'NAME Cygnus Loop', 'NAME Veil Nebula'/NGC 6960, NGC 6992, NGC 6995 all confirmed empty), while position is SIMBAD's own identification-only query. Position/otype anchor: live SIMBAD query for 'NAME Cygnus Loop' resolves to main_id 'NAME Cyg Loop' (ra=312.75, dec=30.6667), otype 'SNR' (confirmed genuine SuperNova Remnant classification, not a generic ISM/shell label) - chosen over the sibling SIMBAD entry 'NAME Veil Nebula'/NGC 6960 (otype 'ISM', generic Interstellar Medium Object, one specific western filament/the 'Witch's Broom', 1.155 deg away - well within this remnant's own ~1.9 deg angular radius per its galdim_majaxis below) because 'NAME Cyg Loop' is SIMBAD's own whole-remnant SNR-typed entry, the correct anchor for a single-point/single-distance record representing the entire structure (same logic as Vela SNR anchoring to its own SNR-typed centroid rather than one filament). 725 pc is within the issue's own unverified ~700-735pc estimate and comfortably under the 800pc cap. The issue itself described this as \"the catalog's SECOND supernova_remnant record (currently only Vela SNR exists)\" - that framing turns out to be factually imprecise, caught during this Story's own acquisition rather than trusted blindly: M1/the Crab Nebula (id m1_crab, added by the earlier Messier-nebula-gap-fill batch, issue #221) is already object_type supernova_remnant too, so this is actually the catalog's THIRD supernova_remnant record (Vela SNR, M1/Crab Nebula, now Veil Nebula/Cygnus Loop), not the second - noted here rather than silently left uncorrected. visual.size_pc = 48.51 pc is a DIAMETER (this catalog's established supernova_remnant/molecular_cloud/hii_region/planetary_nebula convention, Story #314) derived from SIMBAD's own galdim_majaxis=230.0 arcmin for 'NAME Cyg Loop' (bibcode 2014BASI...42...47G, qual='D') via this record's own 725pc distance - qual 'D' (SIMBAD's own lowest angular-size quality flag) is noted honestly rather than silently treated as equivalent to the better-quality galdim values other records in this catalog carry."
+}

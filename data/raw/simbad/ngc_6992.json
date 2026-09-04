@@ -1,0 +1,27 @@
+{
+  "source": "simbad",
+  "query": "NGC 6992",
+  "retrieved_utc": "2026-09-04T11:07:34+00:00",
+  "record_id": "NGC  6992",
+  "raw": {
+    "main_id": "NGC  6992",
+    "ra": 314.07916666666665,
+    "dec": 31.743333333333336,
+    "coo_err_maj": null,
+    "coo_err_min": null,
+    "coo_err_angle": null,
+    "coo_wavelength": "",
+    "coo_bibcode": "2004yCat.7239....0C",
+    "plx_value": null,
+    "pmdec": null,
+    "plx_err": null,
+    "rvz_radvel": null,
+    "pm_bibcode": "",
+    "rvz_bibcode": "",
+    "sp_type": "",
+    "pmra": null,
+    "otype": "sh",
+    "ids": "NGC  6992",
+    "matched_id": "NGC  6992"
+  }
+}
