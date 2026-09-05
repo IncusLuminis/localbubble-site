@@ -1,3 +1,8 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
 https://localbubble.pages.dev/*
   X-Robots-Tag: noindex
 
