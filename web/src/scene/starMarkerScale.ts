@@ -51,8 +51,34 @@ export const STAR_MARKER_RADIUS_PC = 2;
  * real `distance_pc` is at or inside the RECONS dense-batch sphere's edge. */
 export const STAR_MARKER_NEAR_SUN_RADIUS_PC = 0.5;
 
-/** The star marker's fully-camera-zoom-shrunk floor (pc), issue #119. */
-export const STAR_MARKER_MIN_RADIUS_PC = 0.02;
+/** The star marker's fully-camera-zoom-shrunk floor (pc), issue #119.
+ *
+ * Issue #1: raised from the original 0.02pc to 0.03pc (50% larger radius,
+ * ~2.25x larger on-screen area) as a best-effort mitigation for "star
+ * markers disappear entirely on mobile, inside the RECONS sphere" -
+ * investigated live (desktop Chrome only - no real mobile device or true
+ * mobile-GPU emulation was available; see the PR description for the full
+ * writeup). Confirmed live: at this floor, a shrink-eligible star's actual
+ * on-screen size at a typical "Fit to Nearest-Stars Sphere" pose is already
+ * only ~9px diameter on a generous desktop-class render target (1654px-tall
+ * buffer), and a plausible-but-not-extreme worse camera geometry (a star
+ * near the far side of the ~11.26pc RECONS sphere from the camera) plus a
+ * smaller/mobile-class buffer height pushes the SAME computed world radius
+ * down toward ~1.5-2px - a regime where mobile GPUs' antialiasing/small-
+ * primitive rasterization coverage rules (known to vary by vendor/driver,
+ * unlike this app's shader float precision - see this constant's own
+ * `objects.ts`/`createScene.ts` callers, and the PR description, for why
+ * `mediump`-vs-`highp` was investigated and ruled out as the cause here)
+ * become a live risk of a marker not rasterizing at all, not just rendering
+ * small. This 50% bump was chosen as the largest value that stayed visually
+ * indistinguishable from the original 0.02pc in a live side-by-side at the
+ * default RECONS-sphere fit pose (verified via screenshot comparison) -
+ * i.e. it's deliberately conservative, NOT a confident full fix: it was not
+ * possible to reproduce the reported full-disappearance on any GPU
+ * available for this investigation, so this raises the floor's margin
+ * against the mechanism the evidence best supports without confirming it
+ * eliminates the symptom on the real affected device. */
+export const STAR_MARKER_MIN_RADIUS_PC = 0.03;
 
 /** How far out (as a multiple of the dense batch's own collection radius)
  * the star radius starts shrinking from `maxRadiusPc`, reaching
