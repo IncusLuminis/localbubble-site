@@ -2306,7 +2306,22 @@ renderer.domElement.addEventListener("click", (event) => {
   // `catalogBuckets` at all, so without this, clicking one of them would
   // silently stop opening the Inspector (see `picking.ts`'s
   // `pickSceneObject` docstring).
-  const hit = pickSceneObject(raycaster, camera, ndc, catalogBuckets, diffuseStructureLayer?.meshes ?? []);
+  //
+  // Issue #5: also passes the canvas's own CSS-pixel dimensions as a
+  // `tapTolerance` - when the exact raycast above finds nothing, this lets
+  // `pickSceneObject` fall back to `findTapFallbackObject`'s screen-space
+  // near-miss scan, so an already-tiny RECONS-sphere-floor star marker (#1/
+  // #4) stays tappable even when a fingertip (or an imprecise mouse click)
+  // lands a few pixels off its actual, tiny geometry. Passed unconditionally
+  // for both mouse and touch input (not gated on `PointerEvent.pointerType`)
+  // - see `findTapFallbackObject`'s own docstring for why this stays scoped
+  // to small/shrunk markers regardless of input device, so this doesn't
+  // loosen precision for any marker already comfortably sized to click
+  // exactly.
+  const hit = pickSceneObject(raycaster, camera, ndc, catalogBuckets, diffuseStructureLayer?.meshes ?? [], {
+    canvasWidthPx: rect.width,
+    canvasHeightPx: rect.height,
+  });
   selectObject(hit);
 });
 
