@@ -9,7 +9,9 @@ This repository was extracted (with full commit history) from the
 `local-galactic-structures/` subdirectory of the private
 `IncusLuminis/visualization-studio-tools` monorepo as part of the 1.0
 release - see [`MIGRATION.md`](MIGRATION.md) for that history and a summary
-of the work since.
+of the work since, [`CHANGELOG.md`](CHANGELOG.md) for the 1.0 release notes,
+and [`DEVELOPMENT_TIMELINE.md`](DEVELOPMENT_TIMELINE.md) for how long it
+actually took.
 
 ## Status
 
