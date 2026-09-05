@@ -12,9 +12,22 @@ body {
     sans-serif;
 }
 
+/* Issue #2: `height: 100vh` alone is calculated against the LARGEST
+   possible mobile-browser viewport (as if the address bar/bottom toolbar
+   chrome were already hidden), even while that chrome is actually on-screen
+   taking up real space - so on mobile this box was reported taller than
+   what's actually visible, pushing bottom-anchored children (the "TIME
+   CONTROLS" collapsed indicator/`#player-panel`, both `position: absolute`
+   with a `bottom` offset relative to this element) below the fold, under
+   the browser's own UI. `100dvh` (the dynamic-viewport-height unit) tracks
+   the ACTUALLY-visible viewport instead, shrinking/growing live as mobile
+   chrome shows/hides - the second declaration overrides the first in
+   browsers that support `dvh` and is simply ignored as invalid in ones that
+   don't, so no `@supports` query is needed for the `100vh` fallback. */
 #app {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   position: relative;
 }
 
