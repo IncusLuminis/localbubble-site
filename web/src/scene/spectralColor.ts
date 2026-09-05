@@ -51,14 +51,16 @@ export enum SpectralClass {
   UNKNOWN = "unknown",
 }
 
-/** Approximate blackbody-tinted colors for each OBAFGKM class (hottest/
- * bluest O through coolest/reddest M), in the same vein as the commonly
- * cited Mitchell Charity stellar-color-index approximations - close enough
- * for a schematic marker color, not a photometrically exact render. M is
- * pushed a bit more saturated/orange-red than a literal blackbody tint so it
- * reads unambiguously "reddish" next to G's whitish-yellow at marker scale
- * (Definition of Done: "a real M dwarf reads distinctly reddish/orange vs. a
- * real G-type star reading whiteish-yellow").
+/** Deliberately bold, saturated colors for each OBAFGKM class (hottest/
+ * bluest O through coolest/reddest M) - not a photometrically literal
+ * blackbody tint (those read as near-white pastels that wash out against
+ * each other at marker scale), but a stylized palette tuned so every class
+ * reads as an unambiguous, distinct hue at a glance: O a white-blue, B a
+ * bluish-white, A pure white, F a whitish-yellow, G a clear yellow, K an
+ * orange-red, and M a clearly saturated red. The values form a smooth
+ * blue -> white -> yellow -> orange -> red gradient across the O -> B -> A ->
+ * F -> G -> K -> M sequence, matching the real hot-to-cool physical ordering
+ * while staying visually distinct class-to-class.
  *
  * `UNKNOWN` is a light neutral gray deliberately close to the pre-#173 flat
  * white every star used to render as (`OBJECT_TYPE_COLORS['star'] =
@@ -66,13 +68,13 @@ export enum SpectralClass {
  * "an ordinary, unclassified star" rather than looking broken or singled
  * out. */
 const SPECTRAL_CLASS_COLORS: Record<SpectralClass, number> = {
-  [SpectralClass.O]: 0x9bb0ff,
-  [SpectralClass.B]: 0xaabfff,
-  [SpectralClass.A]: 0xcad7ff,
-  [SpectralClass.F]: 0xf8f7ff,
-  [SpectralClass.G]: 0xfff4ea,
-  [SpectralClass.K]: 0xffcc99,
-  [SpectralClass.M]: 0xff7a4d,
+  [SpectralClass.O]: 0x5588ff,
+  [SpectralClass.B]: 0x99bbff,
+  [SpectralClass.A]: 0xffffff,
+  [SpectralClass.F]: 0xfff0b3,
+  [SpectralClass.G]: 0xffd23f,
+  [SpectralClass.K]: 0xff7f2a,
+  [SpectralClass.M]: 0xf8341c,
   [SpectralClass.UNKNOWN]: 0xc7ccd6,
 };
 
