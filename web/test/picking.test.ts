@@ -1,12 +1,19 @@
 import { describe, expect, it } from "vitest";
-import { Camera, PerspectiveCamera, Raycaster, Vector2 } from "three";
+import { Camera, PerspectiveCamera, Raycaster, Vector2, Vector3 } from "three";
 import { createCatalogObjectGroup, setInstanceVisibility } from "../src/scene/objects";
 import {
   createDiffuseStructureLayer,
   updateDiffuseStructureVisibility,
   type DiffuseStructureLayer,
 } from "../src/scene/diffuseStructures";
-import { pickSceneObject, toNdc } from "../src/scene/picking";
+import {
+  apparentRadiusPx,
+  findTapFallbackObject,
+  pickSceneObject,
+  TAP_FALLBACK_RADIUS_PX,
+  toNdc,
+  type TapTolerance,
+} from "../src/scene/picking";
 import type { SceneObject } from "../src/scene/sceneTypes";
 
 /**
@@ -369,5 +376,186 @@ describe("pickSceneObject: picking-proxy radius cap (Story #320 bug fix)", () =>
     const raycaster = new Raycaster();
     const hit = pickSceneObject(raycaster, offCenterCamera, CENTER_NDC, [], layer.meshes);
     expect(hit?.id).toBe("vela-snr-x30");
+  });
+});
+
+/**
+ * Issue #5 ("Mobile: RECONS-sphere star markers are visible but not
+ * tappable"): once #1/#4 raised `STAR_MARKER_MIN_RADIUS_PC` so shrink-
+ * floor stars are at least visible again, the human owner confirmed on a
+ * real device that tapping one still didn't open the Inspector - the exact
+ * `Raycaster` geometry at that radius is only a few on-screen pixels wide,
+ * far smaller than a fingertip's real precision. These tests cover the
+ * screen-space fallback (`findTapFallbackObject`, wired into
+ * `pickSceneObject` via its optional `tapTolerance` parameter) added to fix
+ * that, using a shared 800x800 CSS-pixel test canvas and a camera whose
+ * exact geometry is worked out below so every expected pixel distance is a
+ * real, checked number rather than an assumption.
+ *
+ * Camera: `makeLookDownZCamera(100)` - 50deg vertical FOV, aspect 1, at
+ * (0, 0, 100) looking down -Z. At distance D from the camera, a world-space
+ * length L projects to `(canvasHeightPx / 2) * L / (D * tan(25deg))` CSS
+ * pixels (half the *vertical* FOV, since aspect is 1 here so horizontal and
+ * vertical scale identically). At D=100 on an 800px-tall canvas, that
+ * factor is `400 / (100 * tan(25deg))` ~= 8.579 px per world unit (pc) -
+ * `PX_PER_PC_AT_D100` below, reused by every test in this block so the
+ * expected pixel numbers in each test's own comments are independently
+ * checkable.
+ */
+describe("pickSceneObject: tap-fallback tolerance for tiny/shrunk markers (issue #5)", () => {
+  const TAP_CANVAS: TapTolerance = { canvasWidthPx: 800, canvasHeightPx: 800 };
+  /** See this block's own docstring for the derivation: `400 / (100 *
+   * tan(25deg))`. */
+  const PX_PER_PC_AT_D100 = 400 / (100 * Math.tan((25 * Math.PI) / 180));
+
+  /** Converts a desired CSS-pixel offset from screen-center into the NDC
+   * x-offset that produces it on `TAP_CANVAS` (a square canvas, so the same
+   * conversion factor applies to both axes) - the inverse of `toNdc`'s own
+   * pixel-to-NDC conversion. */
+  function pxToNdcOffset(offsetPx: number): number {
+    return offsetPx / (TAP_CANVAS.canvasWidthPx / 2);
+  }
+
+  /** Forces `star`'s baked instance radius down to the real production
+   * shrink floor (`STAR_MARKER_MIN_RADIUS_PC`, 0.03pc) via the same
+   * `setInstanceVisibility` code path `updateCatalogVisibility` uses every
+   * frame for a genuinely nearby, shrink-eligible star - rather than
+   * fabricating a small radius directly, this exercises the exact
+   * production mechanism that produces the tiny markers issue #5 reports,
+   * per that function's own "camera at/inside `denseBatchRadiusPc`" floor
+   * branch (`starMarkerRadiusPc`). `distancePc: 5` (well under
+   * `denseBatchRadiusPc: 15`'s own `* 3` shrink-start threshold) keeps the
+   * object shrink-eligible; `cameraDistanceFromOriginPc: 10` (at/inside
+   * `denseBatchRadiusPc: 15`) lands it exactly on the floor. */
+  function shrinkToFloor(bucket: ReturnType<typeof createCatalogObjectGroup>["buckets"][number], index: number): void {
+    setInstanceVisibility(bucket, index, true, 10, 15, null);
+  }
+
+  it("apparentRadiusPx: scales as expected for an on-axis sphere, and is 0 behind the camera or for a non-positive radius", () => {
+    const camera = makeLookDownZCamera(100);
+    const centerOfScreen = new Vector3(0, 0, 0);
+
+    const radiusPc = 5;
+    const expectedPx = radiusPc * PX_PER_PC_AT_D100;
+    expect(apparentRadiusPx(camera, centerOfScreen, radiusPc, 800, 800)).toBeCloseTo(expectedPx, 1);
+
+    // Halving the radius halves the apparent size (linear at this scale).
+    expect(apparentRadiusPx(camera, centerOfScreen, radiusPc / 2, 800, 800)).toBeCloseTo(expectedPx / 2, 1);
+
+    // Behind the camera (camera at z=100 looking down -Z; z=150 is behind it).
+    expect(apparentRadiusPx(camera, new Vector3(0, 0, 150), radiusPc, 800, 800)).toBe(0);
+
+    // Non-positive radius.
+    expect(apparentRadiusPx(camera, centerOfScreen, 0, 800, 800)).toBe(0);
+  });
+
+  it("picks a shrink-floor star the exact raycast misses, when the tap lands within tolerance of it", () => {
+    const star = makeObject({ id: "tiny-star", object_type: "star", position_pc: [0, 0, 0], distance_pc: 5 });
+    const { buckets } = createCatalogObjectGroup([star]);
+    shrinkToFloor(buckets[0], 0);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+
+    // The star's own apparent radius here is ~0.03 * 8.579 ~= 0.26px - a
+    // 10px-off tap unambiguously misses its real geometry (confirmed by the
+    // very next assertion) while comfortably inside the 20px tolerance.
+    const nearMissNdc = new Vector2(pxToNdcOffset(10), 0);
+
+    expect(pickSceneObject(raycaster, camera, nearMissNdc, buckets)).toBeNull();
+    const hit = pickSceneObject(raycaster, camera, nearMissNdc, buckets, [], TAP_CANVAS);
+    expect(hit?.id).toBe("tiny-star");
+  });
+
+  it("does not fall back at all when tapTolerance is omitted - opt-in, zero behavior change for every pre-#5 caller", () => {
+    const star = makeObject({ id: "tiny-star-optin", object_type: "star", position_pc: [0, 0, 0], distance_pc: 5 });
+    const { buckets } = createCatalogObjectGroup([star]);
+    shrinkToFloor(buckets[0], 0);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    const nearMissNdc = new Vector2(pxToNdcOffset(10), 0);
+
+    expect(pickSceneObject(raycaster, camera, nearMissNdc, buckets)).toBeNull();
+    expect(pickSceneObject(raycaster, camera, nearMissNdc, buckets, [])).toBeNull();
+  });
+
+  it("does not pick anything beyond the tolerance radius - the fallback is not an unlimited-range catch-all", () => {
+    const star = makeObject({ id: "tiny-star-far-miss", object_type: "star", position_pc: [0, 0, 0], distance_pc: 5 });
+    const { buckets } = createCatalogObjectGroup([star]);
+    shrinkToFloor(buckets[0], 0);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    // 25px > TAP_FALLBACK_RADIUS_PX (20px).
+    const farMissNdc = new Vector2(pxToNdcOffset(25), 0);
+
+    expect(pickSceneObject(raycaster, camera, farMissNdc, buckets, [], TAP_CANVAS)).toBeNull();
+  });
+
+  it("dense-field disambiguation: among two shrink-floor stars both within tolerance, picks the one nearer the tap in screen-space pixels", () => {
+    // World-space x offsets chosen so starNear/starFar project to exactly
+    // 5px/15px from screen-center at D=100 - both well within the 20px
+    // tolerance, and both far enough from a dead-center tap that the exact
+    // raycast misses both (their own apparent radius is ~0.26px).
+    const starNearX = 5 / PX_PER_PC_AT_D100;
+    const starFarX = 15 / PX_PER_PC_AT_D100;
+    const starNear = makeObject({ id: "star-near-tap", object_type: "star", position_pc: [starNearX, 0, 0], distance_pc: 5 });
+    const starFar = makeObject({ id: "star-far-tap", object_type: "star", position_pc: [starFarX, 0, 0], distance_pc: 5 });
+
+    const { buckets } = createCatalogObjectGroup([starNear, starFar]);
+    shrinkToFloor(buckets[0], 0);
+    shrinkToFloor(buckets[0], 1);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+
+    expect(pickSceneObject(raycaster, camera, CENTER_NDC, buckets)).toBeNull(); // sanity: exact ray hits neither
+    const hit = pickSceneObject(raycaster, camera, CENTER_NDC, buckets, [], TAP_CANVAS);
+    expect(hit?.id).toBe("star-near-tap");
+  });
+
+  it("does not resurrect a hidden (zero-scale) instance via the tap fallback", () => {
+    const star = makeObject({ id: "tiny-star-hidden", object_type: "star", position_pc: [0, 0, 0], distance_pc: 5 });
+    const { buckets } = createCatalogObjectGroup([star]);
+    shrinkToFloor(buckets[0], 0);
+    setInstanceVisibility(buckets[0], 0, false);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    const nearMissNdc = new Vector2(pxToNdcOffset(10), 0);
+
+    expect(pickSceneObject(raycaster, camera, nearMissNdc, buckets, [], TAP_CANVAS)).toBeNull();
+  });
+
+  it("findTapFallbackObject: excludes an already-comfortably-sized marker even when the tap lands within the raw pixel tolerance of its center", () => {
+    // A star_cluster with no size_pc falls back to CLUSTER_MIN_RADIUS_PC
+    // (5pc, see objects.ts's markerRadiusPc) - apparent radius here is
+    // ~5 * 8.579 ~= 42.9px, well over TAP_FALLBACK_RADIUS_PX (20px), so it
+    // must never be a fallback candidate regardless of tap proximity.
+    const cluster = makeObject({ id: "big-cluster", object_type: "star_cluster", position_pc: [0, 0, 0], size_pc: null });
+    const { buckets } = createCatalogObjectGroup([cluster]);
+
+    const camera = makeLookDownZCamera(100);
+    const nearNdc = new Vector2(pxToNdcOffset(15), 0); // within the 20px tolerance radius
+
+    expect(findTapFallbackObject(camera, nearNdc, buckets, TAP_CANVAS)).toBeNull();
+  });
+
+  it("findTapFallbackObject: still finds a tiny marker directly, independent of pickSceneObject's own exact-raycast pass", () => {
+    const star = makeObject({ id: "tiny-star-direct", object_type: "star", position_pc: [0, 0, 0], distance_pc: 5 });
+    const { buckets } = createCatalogObjectGroup([star]);
+    shrinkToFloor(buckets[0], 0);
+
+    const camera = makeLookDownZCamera(100);
+    const nearMissNdc = new Vector2(pxToNdcOffset(10), 0);
+
+    const hit = findTapFallbackObject(camera, nearMissNdc, buckets, TAP_CANVAS);
+    expect(hit?.id).toBe("tiny-star-direct");
+  });
+
+  it("TAP_FALLBACK_RADIUS_PX is a small, deliberate constant (~40px comfortable-touch-target diameter), not an arbitrarily large catch-all", () => {
+    expect(TAP_FALLBACK_RADIUS_PX).toBeGreaterThan(0);
+    expect(TAP_FALLBACK_RADIUS_PX).toBeLessThanOrEqual(30);
   });
 });
