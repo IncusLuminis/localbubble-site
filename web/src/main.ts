@@ -22,6 +22,7 @@ import {
 import {
   bubbleOuterRadiusPcFrom,
   buildObjectIndexLookup,
+  buildStarCatalogBucket,
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
@@ -40,6 +41,7 @@ import {
   type CatalogBucket,
   type CatalogObjectRef,
 } from "./scene/objects";
+import { loadStarRenderStyle, saveStarRenderStyle, type StarRenderStyle } from "./scene/starRenderStyle";
 import {
   denseBatchCollectionRadiusPc,
   isCameraInsideDenseBatchSphere,
@@ -542,6 +544,12 @@ const structureVisibility = new Map<string, boolean>([
 
 // Populated once the scene loads.
 let catalogBuckets: CatalogBucket[] = [];
+/** Issue #10 (Epic #7): the `Group` `createCatalogObjectGroup` parents every
+ * bucket's `InstancedMesh` under - kept as its own module binding (mirroring
+ * every other layer group below) so `rebuildStarBucket`'s live Settings-panel
+ * toggle handler can remove/re-add just the star bucket's mesh from/to it,
+ * without needing to rebuild (or re-`scene.add`) the whole catalog group. */
+let catalogGroup: ReturnType<typeof createCatalogObjectGroup>["group"] | null = null;
 let catalogObjects: SceneObject[] = [];
 let labelsInfo: ReturnType<typeof createLabelsLayer> | null = null;
 let gouldBeltGroup: ReturnType<typeof createGouldBeltLayer> | null = null;
@@ -836,6 +844,89 @@ let localBubbleStructure: LocalBubbleStructure | null = null;
  * already treats as "fall back to the flat, unchanged `STAR_MARKER_RADIUS_PC`
  * behavior" (spec §38: an absent optional structure must not error). */
 let bubbleOuterRadiusPc: number | null = null;
+
+/** Issue #10 (Epic #7): `window.localStorage` guarded by a `try/catch` at
+ * the single point this app touches it - accessing the property itself (not
+ * just calling a method on it) can throw in some restrictive browser privacy
+ * configurations. `null` degrades every persistence call below to "use the
+ * in-memory default only, don't persist" per this codebase's existing
+ * "missing optional capability degrades gracefully" convention (spec §38). */
+function browserLocalStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
+/** Issue #10 (Epic #7): the active MODEL/REALWORLD star-rendering style -
+ * loaded once, up front, from whatever was previously persisted (or the
+ * `MODEL` default on a first visit / failed read). `settingsPanelHandle`'s
+ * "Star Rendering" `<select>` (built once the scene loads, like the rest of
+ * that panel) is preselected from this same value, and its `onChange`
+ * handler below is what reassigns this binding afterward. */
+let starRenderStyle: StarRenderStyle = loadStarRenderStyle(browserLocalStorage());
+
+/** Issue #10 (Epic #7): rebuilds JUST the star bucket in place - its
+ * `InstancedMesh` swapped out of/into the existing `catalogGroup`, its
+ * `CatalogBucket` entry swapped in `catalogBuckets` - using the CURRENT
+ * `starRenderStyle`. This is the Settings-panel toggle's live-switch
+ * mechanism: no full page reload needed.
+ *
+ * Deliberately does NOT rebuild the whole catalog group (i.e. does not call
+ * `createCatalogObjectGroup` again from scratch): every OTHER bucket's
+ * material may currently be in a dimmed state
+ * (`applyBackgroundDimming`'s change-detected `updateBackgroundDimming`
+ * call, driven by `cameraWasInsideDenseBatchSphere`/
+ * `cameraWasInsideLocalBubbleRaw`, which only fire on a camera-position
+ * *transition* - not on every frame) - a full rebuild would silently reset
+ * every non-star bucket back to its undimmed default material until the
+ * camera next crosses a dimming boundary. Rebuilding only the star bucket
+ * (which `updateBackgroundDimming` never dims in the first place - see
+ * `objects.ts`'s `shouldDimBackground`) sidesteps that risk entirely. See
+ * `objects.ts`'s `buildStarCatalogBucket` docstring for the same reasoning
+ * from the other side of this split.
+ *
+ * No-op if the scene hasn't finished loading yet (`catalogGroup === null`)
+ * or the catalog has no star bucket at all (shouldn't happen for a real
+ * scene, but mirrors `buildStarCatalogBucket`'s own empty-input guard
+ * returning `null`). */
+function rebuildStarBucket(): void {
+  if (!catalogGroup) return;
+  const starBucketIndex = catalogBuckets.findIndex((bucket) => bucket.objectType === "star");
+  if (starBucketIndex === -1) return;
+  const oldBucket = catalogBuckets[starBucketIndex];
+
+  const newBucket = buildStarCatalogBucket(
+    oldBucket.objects,
+    denseBatchRadiusPc,
+    bubbleOuterRadiusPc,
+    starRenderStyle,
+  );
+  if (!newBucket) return;
+
+  catalogGroup.remove(oldBucket.mesh);
+  catalogGroup.add(newBucket.mesh);
+  catalogBuckets = [
+    ...catalogBuckets.slice(0, starBucketIndex),
+    newBucket,
+    ...catalogBuckets.slice(starBucketIndex + 1),
+  ];
+
+  // Story #239's id -> (bucket, index) lookup holds direct bucket
+  // references, which just changed for every star id - rebuilt wholesale
+  // here (cheap, well under a thousand entries, and only on this rare
+  // user-triggered toggle, never per frame) rather than patched in place.
+  objectIndexLookup = buildObjectIndexLookup(catalogBuckets);
+
+  // Reapplies category-visibility/radius-filter/size-scale/camera-distance
+  // LOD-radius state to the freshly-built instances (a brand new
+  // `InstancedMesh` starts with every instance at its raw baked-in radius,
+  // not yet filtered/shrunk) - the same chokepoint every other filter
+  // change already runs through, so this can never disagree with what's
+  // currently supposed to be on screen.
+  applyCatalogVisibility();
+}
 
 function applyCatalogVisibility(): void {
   updateCatalogVisibility(
@@ -2064,9 +2155,14 @@ loadScene()
       pointMarkerObjects,
       denseBatchRadiusPc,
       bubbleOuterRadiusPc,
+      starRenderStyle,
     );
     catalogBuckets = catalogLayer.buckets;
-    scene.add(catalogLayer.group);
+    // Issue #10 (Epic #7): kept as its own module binding (see its
+    // declaration) so `rebuildStarBucket`'s live Settings-panel toggle
+    // handler can add/remove just the star bucket's mesh from it later.
+    catalogGroup = catalogLayer.group;
+    scene.add(catalogGroup);
 
     // Story #315 (extended to Story #320): the extended-volume layer for
     // every `DIFFUSE_STRUCTURE_OBJECT_TYPES` type - built from the FULL,
@@ -2194,6 +2290,12 @@ loadScene()
       onSizeScaleChange: (scale) => {
         sizeScale = scale;
         applyCatalogVisibility();
+      },
+      starRenderStyle,
+      onStarRenderStyleChange: (style) => {
+        starRenderStyle = style;
+        saveStarRenderStyle(style, browserLocalStorage());
+        rebuildStarBucket();
       },
       onExportPng: () => {
         // Render both the WebGL canvas and re-sync the label layer just
