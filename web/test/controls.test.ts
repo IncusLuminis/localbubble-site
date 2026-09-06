@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { shouldShowModelTuning, shouldShowRealworldTuning } from "../src/ui/controls";
+import { shouldShowModelTuning, shouldShowRealworldTuning, shouldShowSizeSlider } from "../src/ui/controls";
 import { STAR_RENDER_STYLES } from "../src/scene/starRenderStyle";
 
 /**
@@ -56,6 +56,33 @@ describe("shouldShowModelTuning", () => {
   it("is never true for the same style shouldShowRealworldTuning is true for", () => {
     for (const style of STAR_RENDER_STYLES) {
       expect(shouldShowModelTuning(style)).toBe(!shouldShowRealworldTuning(style));
+    }
+  });
+});
+
+/**
+ * Issue #26: the human owner's own feedback - "there's already a lot in
+ * Visual mode, remove that slider from Visual" - hides the Settings panel's
+ * "Object size" section while VISUAL is active, reusing this exact same
+ * DOM-free predicate + `.visible` CSS class convention.
+ */
+describe("shouldShowSizeSlider", () => {
+  it("is true for MODEL", () => {
+    expect(shouldShowSizeSlider("MODEL")).toBe(true);
+  });
+
+  it("is false for VISUAL", () => {
+    expect(shouldShowSizeSlider("VISUAL")).toBe(false);
+  });
+
+  it("agrees with STAR_RENDER_STYLES on exactly one style showing the slider", () => {
+    const shown = STAR_RENDER_STYLES.filter(shouldShowSizeSlider);
+    expect(shown).toEqual(["MODEL"]);
+  });
+
+  it("agrees with shouldShowModelTuning on every style (today's two styles happen to coincide)", () => {
+    for (const style of STAR_RENDER_STYLES) {
+      expect(shouldShowSizeSlider(style)).toBe(shouldShowModelTuning(style));
     }
   });
 });

@@ -248,6 +248,12 @@ function buildDiffuseStructureMesh(obj: SceneObject): Mesh {
   mesh.name = `diffuse-structure-${obj.id}`;
   mesh.scale.setScalar(radiusPc);
   mesh.position.set(obj.position_pc[0], obj.position_pc[1], obj.position_pc[2]);
+  // Issue #26: stashed so `updateDiffuseStructureSizeScale` can recompute
+  // `baseRadiusPc * sizeScale` fresh on every "Object size" slider change,
+  // rather than compounding repeated multiplications of `mesh.scale`'s own
+  // live value - mirrors this module's existing `userData.baseOpacity`
+  // convention (same "need the pre-effect base value later" problem).
+  mesh.userData.baseRadiusPc = radiusPc;
   return mesh;
 }
 
@@ -299,8 +305,14 @@ function buildPickProxyMesh(obj: SceneObject, radiusPc: number): Mesh {
   });
   const mesh = new Mesh(UNIT_SPHERE_GEOMETRY, material);
   mesh.name = `diffuse-structure-proxy-${obj.id}`;
-  mesh.scale.setScalar(Math.min(radiusPc, PICK_PROXY_RADIUS_CAP_PC));
+  const cappedRadiusPc = Math.min(radiusPc, PICK_PROXY_RADIUS_CAP_PC);
+  mesh.scale.setScalar(cappedRadiusPc);
   mesh.position.set(obj.position_pc[0], obj.position_pc[1], obj.position_pc[2]);
+  // Issue #26: same `updateDiffuseStructureSizeScale` bookkeeping as
+  // `buildDiffuseStructureMesh` above - stores the CAPPED radius (not the
+  // shape's own uncapped `radiusPc`) since that's the value actually baked
+  // into `mesh.scale` here, and is what should be scaled by the size slider.
+  mesh.userData.baseRadiusPc = cappedRadiusPc;
   return mesh;
 }
 
@@ -744,6 +756,53 @@ export function updateDiffuseStructureVisibility(
     mesh.visible = visible;
     if (spriteGroup) {
       spriteGroup.visible = visible;
+    }
+  }
+}
+
+/**
+ * Applies the "Object size" slider (issue #26) to every diffuse-structure
+ * entry IN PLACE, one entry at a time - never to `layer.group` (the shared
+ * top-level container every entry lives inside, sitting at the Sun's own
+ * origin). Scaling `layer.group` itself was the bug this replaces: each
+ * entry's `mesh`/`spriteGroup` already has its real Sun-relative POSITION
+ * baked in at construction (`obj.position_pc`, via `mesh.position.set(...)`/
+ * `group.position.set(...)`), and Three.js composes a child's final world
+ * transform as `parent.matrixWorld * child.matrix` - so scaling the shared
+ * parent multiplies every child's own local position too, moving every
+ * nebula/cluster/association radially toward or away from the Sun as the
+ * slider moved, instead of just resizing each one in place. Scaling each
+ * entry's OWN transform instead leaves `layer.group` (and therefore every
+ * child's position) untouched; only geometry actually changes size.
+ *
+ * The two fields need different treatment, since they encode radius
+ * differently:
+ *  - `mesh` (the invisible picking proxy for a shaped type, or the plain
+ *    visible sphere itself for `planetary_nebula`) bakes its OWN radius
+ *    directly into `.scale` at construction (`buildDiffuseStructureMesh`/
+ *    `buildPickProxyMesh`) - so this recomputes `baseRadiusPc * sizeScale`
+ *    fresh each call, using the ORIGINAL radius stashed in
+ *    `mesh.userData.baseRadiusPc` by those builders (rather than compounding
+ *    repeated multiplications of `mesh.scale`'s own already-live value).
+ *  - `spriteGroup`, when present, is a wrapping `Group` whose OWN `.scale`
+ *    is never touched at construction (only `.position` is set) - every
+ *    child sprite/mesh inside it already encodes its own position/radius
+ *    relative to the group's own origin (that structure's real position).
+ *    Setting the group's `.scale` directly to `sizeScale` therefore already
+ *    means "resize every child around this structure's own center", with no
+ *    separate base value to track - and produces the exact same effective
+ *    on-screen magnitude the old (buggy) `layer.group.scale.setScalar(sizeScale)`
+ *    did for these children, since a nested group's default scale was
+ *    already 1 (so scaling the-then-shared top-level container by
+ *    `sizeScale` was mathematically equivalent to scaling this group alone
+ *    by `sizeScale` - only the now-fixed position side effect differs).
+ */
+export function updateDiffuseStructureSizeScale(layer: DiffuseStructureLayer, sizeScale: number): void {
+  for (const { mesh, spriteGroup } of layer.meshes) {
+    const baseRadiusPc = (mesh.userData.baseRadiusPc as number | undefined) ?? 1;
+    mesh.scale.setScalar(baseRadiusPc * sizeScale);
+    if (spriteGroup) {
+      spriteGroup.scale.setScalar(sizeScale);
     }
   }
 }

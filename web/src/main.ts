@@ -109,6 +109,7 @@ import {
   createDiffuseStructureLayer,
   DIFFUSE_STRUCTURE_OBJECT_TYPES,
   updateDiffuseStructureDimming,
+  updateDiffuseStructureSizeScale,
   updateDiffuseStructureVisibility,
   visibleDiffuseStructureObjects,
   type DiffuseStructureLayer,
@@ -1119,20 +1120,34 @@ function applyCatalogVisibility(): void {
     denseBatchRadiusPc,
     bubbleOuterRadiusPc,
   );
-  updateCatalogSizeScale(catalogBuckets, sizeScale);
+  // Issue #26: `updateCatalogSizeScale` now rewrites each visible instance's
+  // own matrix (radius * sizeScale) rather than the bucket's own
+  // `Object3D.scale` - a dense-batch/shrink-eligible star's radius depends on
+  // camera distance, so the same camera/LOD state `updateCatalogVisibility`
+  // above just used is threaded through here too, keeping the two in sync.
+  updateCatalogSizeScale(
+    catalogBuckets,
+    sizeScale,
+    camera.position.length(),
+    denseBatchRadiusPc,
+    bubbleOuterRadiusPc,
+  );
   // Story #315: the diffuse-structure layer isn't a `CatalogBucket` (no
   // `InstancedMesh`, so `updateCatalogVisibility`/`updateCatalogSizeScale`
   // above never touch it) - its own category-toggle/radius-filter
   // visibility and "Object size" slider scaling are applied here instead,
   // from the exact same chokepoint every other catalog-visibility change
-  // already runs through, so the two mechanisms can never disagree. The
-  // "Object size" slider is applied at the whole-group level (matching
-  // `updateCatalogSizeScale`'s own per-bucket-`Object3D.scale` approach)
-  // rather than per-mesh, since every diffuse-structure mesh shares one
-  // parent group.
+  // already runs through, so the two mechanisms can never disagree.
+  // Issue #26: the "Object size" slider used to be applied at the shared
+  // `diffuseStructureLayer.group` level, which (since every structure's real
+  // Sun-relative position is a CHILD of that one container) multiplied every
+  // structure's position along with its size, moving nebulae/clusters
+  // radially as the slider moved. `updateDiffuseStructureSizeScale` instead
+  // scales each structure's own mesh/spriteGroup in place - see its own
+  // docstring.
   if (diffuseStructureLayer) {
     updateDiffuseStructureVisibility(diffuseStructureLayer, categoryVisibility, radiusPc);
-    diffuseStructureLayer.group.scale.setScalar(sizeScale);
+    updateDiffuseStructureSizeScale(diffuseStructureLayer, sizeScale);
   }
   // Issue #11 (Epic #7): REALWORLD's star layer is likewise not a
   // `CatalogBucket` - its own category-toggle/radius-filter visibility and

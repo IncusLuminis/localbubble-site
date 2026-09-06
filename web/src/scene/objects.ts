@@ -743,12 +743,36 @@ export function instanceColorFor(obj: SceneObject): Color {
 /** One `InstancedMesh` per `object_type` bucket, plus the index -> real
  * `SceneObject` mapping (and the per-object visual radius baked into each
  * instance) that picking (`scene/picking.ts`) and visibility updates need.
- * `objects[i]`/`radiiPc[i]` correspond to instance `i` of `mesh`. */
+ * `objects[i]`/`radiiPc[i]`/`visible[i]` correspond to instance `i` of `mesh`.
+ *
+ * Bug fix (issue #26): `sizeScale`/`visible` are bucket-level MUTABLE state,
+ * not construction-time-only inputs. `updateCatalogSizeScale` used to scale
+ * `mesh` itself (`Object3D.scale`), which multiplies every instance's
+ * baked-in position along with its size - moving every object radially
+ * instead of just resizing it. The fix rewrites each instance's own matrix
+ * with `radiiPc[i] * sizeScale` instead (position untouched), via
+ * `setInstanceVisibility` - but `setInstanceVisibility` is also called every
+ * frame by `updateDenseBatchLod` and per filter-change by
+ * `updateCatalogVisibility`, neither of which know about the size slider.
+ * Stashing the CURRENT `sizeScale` on the bucket itself (rather than
+ * threading it through every one of those call sites) means any of them can
+ * apply it just by reading `bucket.sizeScale`, so a LOD/visibility pass
+ * occurring after a size-scale change can never silently reset an instance
+ * back to its unscaled radius. `visible[i]` is the same idea for the reverse
+ * direction: `updateCatalogSizeScale` must never resurrect a
+ * category/radius-filtered-out instance just because its size changed, so it
+ * needs to know which instances are currently hidden without re-deriving
+ * that from `categoryVisibility`/`radiusPc` (which it isn't given). Both
+ * default to "everything visible, no scaling" at construction time, matching
+ * every bucket's actual initial state (full radius, unfiltered) before the
+ * first real `updateCatalogVisibility()`/`updateCatalogSizeScale()` call. */
 export interface CatalogBucket {
   objectType: string;
   mesh: InstancedMesh;
   objects: SceneObject[];
   radiiPc: number[];
+  sizeScale: number;
+  visible: boolean[];
 }
 
 /** MODEL star-bucket instance construction (issue #10, Epic #7) - the exact
@@ -839,7 +863,14 @@ export function buildStarCatalogBucket(
 
   buildModelStarInstances(mesh, starObjects, radiiPc);
 
-  return { objectType: "star", mesh, objects: starObjects, radiiPc };
+  return {
+    objectType: "star",
+    mesh,
+    objects: starObjects,
+    radiiPc,
+    sizeScale: 1,
+    visible: starObjects.map(() => true),
+  };
 }
 
 /** True if `obj` should currently be shown, given the category-toggle,
@@ -899,6 +930,17 @@ export function isCatalogObjectVisible(
  * per-distance ceiling, which is then passed as `starMarkerRadiusPc`'s
  * `maxRadiusPc` instead of the flat `STAR_MARKER_RADIUS_PC`.
  *
+ * Issue #26: also records `visible` on `bucket.visible[index]`, and - only
+ * when actually visible - multiplies the resolved radius by
+ * `bucket.sizeScale` (the "Object size" slider's current value, patched onto
+ * the bucket by `updateCatalogSizeScale`; 1 until the slider is ever moved).
+ * This is what lets a category/radius-filter or per-frame LOD pass (this
+ * function's other callers, none of which know about the size slider) keep
+ * respecting the current size scale instead of silently resetting a
+ * visible instance back to its unscaled radius. A HIDDEN instance is never
+ * scaled by `sizeScale` (it's already `HIDDEN_INSTANCE_SCALE`, i.e. 0), so
+ * this can never resurrect a filtered-out instance.
+ *
  * Story #239 (scope expansion): `positionPcOverride`, forwarded straight
  * through to `instanceMatrixFor` (see that function's own docstring), lets
  * the motion player display an animated star at its time-extrapolated
@@ -922,12 +964,13 @@ export function setInstanceVisibility(
   positionPcOverride?: readonly [number, number, number],
 ): void {
   const obj = bucket.objects[index];
+  bucket.visible[index] = visible;
   let radiusPc = bucket.radiiPc[index];
   if (visible && isStarMarkerShrinkEligible(obj, denseBatchRadiusPc, bubbleOuterRadiusPc)) {
     const baselineRadiusPc = starBaselineRadiusPc(obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc);
     radiusPc = starMarkerRadiusPc(cameraDistanceFromOriginPc, denseBatchRadiusPc, baselineRadiusPc, bubbleOuterRadiusPc);
   }
-  const effectiveRadiusPc = visible ? radiusPc : HIDDEN_INSTANCE_SCALE;
+  const effectiveRadiusPc = visible ? radiusPc * bucket.sizeScale : HIDDEN_INSTANCE_SCALE;
   bucket.mesh.setMatrixAt(index, instanceMatrixFor(obj, effectiveRadiusPc, positionPcOverride));
   bucket.mesh.instanceMatrix.needsUpdate = true;
 }
@@ -1046,7 +1089,14 @@ export function createCatalogObjectGroup(
     mesh.instanceMatrix.needsUpdate = true;
 
     group.add(mesh);
-    buckets.push({ objectType, mesh, objects: bucketObjects, radiiPc });
+    buckets.push({
+      objectType,
+      mesh,
+      objects: bucketObjects,
+      radiiPc,
+      sizeScale: 1,
+      visible: bucketObjects.map(() => true),
+    });
   }
 
   return { group, buckets };
@@ -1055,9 +1105,13 @@ export function createCatalogObjectGroup(
 /** Applies the current category-toggle/radius-filter state to every
  * instance across all buckets (the zero-scale visibility mechanism) -
  * called by `main.ts` whenever either changes. Object *size* (the
- * `sizeScale` slider) is a separate, cheaper concern - see
- * `updateCatalogSizeScale`, which scales each bucket's `InstancedMesh`
- * itself rather than touching per-instance matrices. */
+ * `sizeScale` slider) is a separate concern - see `updateCatalogSizeScale`,
+ * which (issue #26) rewrites each visible instance's own matrix with its
+ * radius times the current scale, rather than touching `mesh.scale` (which
+ * would also scale every instance's baked-in position). This function
+ * itself is unaffected by `sizeScale` changes - it always re-derives each
+ * instance's radius via `setInstanceVisibility`, which reads `bucket.sizeScale`
+ * on its own. */
 export function updateCatalogVisibility(
   buckets: CatalogBucket[],
   categoryVisibility: ReadonlyMap<string, boolean>,
@@ -1149,14 +1203,84 @@ export function updateDenseBatchLod(
 }
 
 /** The "Object size" slider (spec §23) scales every instance uniformly.
- * Applied at the `InstancedMesh` container level (its own `Object3D.scale`
- * multiplies through every instance's local matrix at render time) rather
- * than by rewriting every instance matrix - cheap regardless of catalog
- * size, and composes correctly with the zero-scale hidden state (0 *
- * anything is still 0). */
-export function updateCatalogSizeScale(buckets: CatalogBucket[], sizeScale: number): void {
+ *
+ * Bug fix (issue #26): this used to set `bucket.mesh.scale` (the whole
+ * `InstancedMesh` container's own `Object3D.scale`) directly. That multiplies
+ * every instance's baked-in TRANSLATION along with its geometry - Three.js
+ * computes each instance's final world position as `mesh.matrixWorld *
+ * instanceMatrix[i]`, and `mesh.matrixWorld` bakes in `mesh.scale` - so every
+ * marker's real position (already encoded in `instanceMatrix[i]` via
+ * `instanceMatrixFor`) got scaled too, moving every object radially toward
+ * or away from the Sun as the slider moved instead of just resizing it in
+ * place.
+ *
+ * The fix instead rewrites each instance's own matrix with its baked-in
+ * radius (`radiiPc[i]`) times the new `sizeScale`, leaving `instanceMatrixFor`'s
+ * position argument (`bucket.objects[i].position_pc`, or the LOD/motion-
+ * player's current override - see below) completely untouched, so this only
+ * ever changes the geometry's scale component, never its translation.
+ *
+ * Two things this delegates to `setInstanceVisibility` rather than
+ * reimplementing inline, both to avoid fighting other code paths that also
+ * rewrite instance matrices after a bucket is built:
+ *  - Skips any instance currently marked hidden (`bucket.visible[i] ===
+ *    false`, per the category/radius filter or dense-batch LOD) - applying
+ *    `radiiPc[i] * sizeScale` unconditionally would un-hide it by giving it a
+ *    nonzero scale again.
+ *  - For a currently-visible instance, calls `setInstanceVisibility(bucket,
+ *    i, true, ...)` rather than composing the matrix here directly, so a
+ *    dense-batch/shrink-eligible star's camera-distance-dependent radius
+ *    (`starMarkerRadiusPc`, not the flat baked-in `radiiPc[i]`) is still
+ *    correctly recomputed and THEN scaled - matching exactly what
+ *    `updateCatalogVisibility`/`updateDenseBatchLod` would compute for it.
+ *
+ * Also stashes `sizeScale` on the bucket itself (`bucket.sizeScale`, read by
+ * `setInstanceVisibility`) so that `updateDenseBatchLod`'s own per-frame
+ * matrix rewrites (for the dense-batch/shrink-eligible subset, run every
+ * frame independently of this function) keep applying the current size scale
+ * too, instead of resetting those instances back to their unscaled radius on
+ * the very next frame after the slider moves.
+ *
+ * `cameraDistanceFromOriginPc`/`denseBatchRadiusPc`/`bubbleOuterRadiusPc`
+ * default to the same "no LOD gating" sentinels every other function here
+ * uses, so a caller/test that doesn't pass them (i.e. no dense-batch/star-
+ * shrink stars in play) sees each visible instance scaled by exactly
+ * `radiiPc[i] * sizeScale`, matching the pre-fix magnitude - just without
+ * moving anything.
+ *
+ * Motion-player interaction: this doesn't pass an animated star's
+ * time-extrapolated `positionPcOverride` (`main.ts`'s `applyPlayerAnimation`
+ * owns that), so calling this while the player sits on a nonzero time
+ * momentarily snaps a currently-visible animated star back to its real
+ * static position for one frame. This is the same tradeoff `main.ts`'s
+ * `animate()` already documents for `applyDenseBatchLod` (which does the
+ * same "reset to static position" every frame, unconditionally) - the
+ * player's own per-frame loop runs every `requestAnimationFrame` regardless
+ * of play/pause state and immediately re-applies the correct animated
+ * position, so this is a self-correcting single-frame artifact, not a
+ * persistent bug, exactly like the pre-existing LOD interaction. */
+export function updateCatalogSizeScale(
+  buckets: CatalogBucket[],
+  sizeScale: number,
+  cameraDistanceFromOriginPc: number = Number.POSITIVE_INFINITY,
+  denseBatchRadiusPc: number = Number.POSITIVE_INFINITY,
+  bubbleOuterRadiusPc: number | null = null,
+): void {
   for (const bucket of buckets) {
-    bucket.mesh.scale.setScalar(sizeScale);
+    bucket.sizeScale = sizeScale;
+    bucket.objects.forEach((_, i) => {
+      if (!bucket.visible[i]) {
+        return;
+      }
+      setInstanceVisibility(
+        bucket,
+        i,
+        true,
+        cameraDistanceFromOriginPc,
+        denseBatchRadiusPc,
+        bubbleOuterRadiusPc,
+      );
+    });
   }
 }
 

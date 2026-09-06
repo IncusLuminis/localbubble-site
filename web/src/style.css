@@ -274,6 +274,21 @@ body {
   width: 100%;
 }
 
+/* Issue #26: "Object size" section - hidden while Star Rendering is VISUAL
+   (human owner: "there's already a lot in Visual mode, remove that slider
+   from Visual"), shown via `.visible` when `ui/controls.ts`'s
+   `createSettingsPanel` toggles it on selecting MODEL. Same on/off
+   convention as `.model-tuning`/`.realworld-tuning` below - one shared
+   show/hide mechanism for every conditional group in this panel. */
+.size-tuning {
+  display: none;
+}
+
+.size-tuning.visible {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Issue #18 follow-up: MODEL-only tuning section (Marker opacity/Diffuse
    structure opacity sliders) - hidden by default, shown via `.visible` when
    `ui/controls.ts`'s `createSettingsPanel` toggles it on selecting MODEL.

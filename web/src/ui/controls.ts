@@ -25,6 +25,22 @@ export function shouldShowModelTuning(style: StarRenderStyle): boolean {
   return style === "MODEL";
 }
 
+/** Issue #26: the human owner's own feedback - "there's already a lot in
+ * Visual mode, remove that slider from Visual" - hides the "Object size"
+ * section while VISUAL is active. Named for what it gates (not just
+ * mirroring `shouldShowModelTuning`, even though the two agree on every
+ * style today) so it reads correctly on its own terms if `StarRenderStyle`
+ * ever grows a third value - same reasoning `shouldShowModelTuning`'s own
+ * docstring already gives for not just being `!shouldShowRealworldTuning`.
+ * This only ever hides the CONTROL, not the underlying `sizeScale`
+ * mechanism - `main.ts`'s `sizeScale` variable, and everything that reads
+ * it, is untouched; a MODEL scene that was resized before switching to
+ * VISUAL keeps that size, it's just no longer adjustable from this panel
+ * until switching back. */
+export function shouldShowSizeSlider(style: StarRenderStyle): boolean {
+  return style !== "VISUAL";
+}
+
 /**
  * Story #257 (Epic #255): the old single combined `#controls` panel
  * (Object categories + Layers checkboxes + Radius + Object size + Camera
@@ -349,14 +365,24 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   const starRenderStyleToggle = createStarRenderStyleToggle(options.starRenderStyle, (style) => {
     setModelTuningVisible(shouldShowModelTuning(style));
     setRealworldTuningVisible(shouldShowRealworldTuning(style));
+    setSizeSliderVisible(shouldShowSizeSlider(style));
     options.onStarRenderStyleChange(style);
   });
   starRenderStyleSection.body.appendChild(starRenderStyleToggle);
   panel.appendChild(starRenderStyleSection.section);
 
   // --- Object size scale (spec §23: "opacity / size ... where relevant") -
-  // applies uniformly to BOTH styles (see this option's own docstring in
-  // `main.ts`), so unlike the REALWORLD-only groups below it's never hidden. ---
+  // the underlying `sizeScale` mechanism still applies uniformly to BOTH
+  // styles (see this option's own docstring in `main.ts`), but issue #26
+  // hides the CONTROL itself while VISUAL is active (human owner: "there's
+  // already a lot in Visual mode, remove that slider from Visual") - shown
+  // only while `shouldShowSizeSlider` says so (`.visible` toggled below and
+  // on every toggle-click above), the exact same show/hide convention this
+  // panel's `.model-tuning`/`.realworld-tuning` containers already use, not
+  // a new mechanism invented for this one section. ---
+  const sizeTuningContainer = document.createElement("div");
+  sizeTuningContainer.className = "size-tuning";
+
   const sizeSection = makeSection("Object size");
   const sizeSlider = document.createElement("input");
   sizeSlider.type = "range";
@@ -369,7 +395,13 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
     options.onSizeScaleChange(Number(sizeSlider.value));
   });
   sizeSection.body.appendChild(sizeSlider);
-  panel.appendChild(sizeSection.section);
+  sizeTuningContainer.appendChild(sizeSection.section);
+  panel.appendChild(sizeTuningContainer);
+
+  function setSizeSliderVisible(visible: boolean): void {
+    sizeTuningContainer.classList.toggle("visible", visible);
+  }
+  setSizeSliderVisible(shouldShowSizeSlider(options.starRenderStyle));
 
   // --- MODEL tuning (issue #18 follow-up): the human owner pushed back on
   // this panel's original MODEL audit (which stopped at "Object size" -
