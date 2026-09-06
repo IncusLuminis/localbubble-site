@@ -114,13 +114,39 @@ varying vec3 vColor;
 varying float vVariant;
 uniform float uPixelRatio;
 uniform float uSizeScale;
+uniform float uBrilliantBoost;
+uniform float uMinSizePx;
+uniform float uAttenStartPc;
+uniform float uAttenStrength;
 
 void main() {
   vColor = aColor;
   vVariant = aVariant;
   vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
   gl_Position = projectionMatrix * mvPosition;
-  gl_PointSize = aSize * uPixelRatio * uSizeScale;
+  float boost = mix(1.0, uBrilliantBoost, step(0.5, aVariant));
+  float size = aSize * uPixelRatio * uSizeScale * boost;
+  // PROTOTYPE: soft, capped falloff by each star's real distance from the
+  // SUN (this catalog's own heliocentric-cartesian origin - position is
+  // already in that frame, no camera/view transform needed) - NOT camera
+  // distance. A first version used camera distance and had a real bug: a
+  // star physically near the Sun (e.g. Betelgeuse, 153pc) would ALSO taper
+  // whenever the camera simply zoomed out far away to frame a wider view,
+  // even though the star's true distance from the Local Bubble never
+  // changed - exactly backwards from the intent ("outside-the-Bubble giants
+  // shouldn't read as titanic," not "anything far from wherever the camera
+  // happens to be shouldn't"). Sun-relative distance is fixed regardless of
+  // camera position, so a star's size now reflects a stable, physically
+  // meaningful property. Deliberately never reaches zero - Story #12's
+  // zone-crossing reveal/fade owns hiding stars, this only tames size.
+  float sunDist = length(position.xyz);
+  float atten = sunDist > uAttenStartPc ? pow(uAttenStartPc / sunDist, uAttenStrength) : 1.0;
+  size *= atten;
+  // PROTOTYPE: aSize is 0 for a category/radius-filtered-out star (the
+  // HIDDEN_SPRITE_PX convention) - the floor must not resurrect those, only
+  // lift genuinely-visible-but-tiny sprites (faint M dwarfs) up to a legible
+  // minimum.
+  gl_PointSize = aSize > 0.0 ? max(size, uMinSizePx * uPixelRatio) : 0.0;
 }
 `;
 
@@ -139,6 +165,8 @@ void main() {
 const FRAGMENT_SHADER = `
 precision mediump float;
 uniform sampler2D uMap;
+uniform float uIntensity;
+uniform float uColorBloomCompensation;
 varying vec3 vColor;
 varying float vVariant;
 
@@ -149,7 +177,20 @@ void main() {
   if (texel.a < 0.02) {
     discard;
   }
-  gl_FragColor = vec4(vColor * texel.rgb * texel.a, texel.a);
+  // PROTOTYPE: the bloom pass thresholds on standard perceptual luminance
+  // (green-weighted ~0.71, red ~0.21, blue ~0.07) - found live that this
+  // makes a saturated red/orange M or K supergiant (e.g. Betelgeuse,
+  // Arcturus) bloom far less than a blue/white O/B/A star of the SAME
+  // brightness tier and SAME sprite pixel size, even though both are
+  // equally luminous astrophysically. This corrects for the star's OWN
+  // spectral color's luma bias (not its brightness tier - that's still
+  // entirely encoded by aSize/gl_PointSize, untouched here), so a red
+  // supergiant reads as genuinely blazing instead of a flat matte dot.
+  vec3 base = vColor * texel.rgb * texel.a * uIntensity;
+  float colorLuma = dot(vColor, vec3(0.2126, 0.7152, 0.0722));
+  float compensation = colorLuma > 0.001 ? min(1.0 / colorLuma, 4.0) : 1.0;
+  vec3 compensated = base * mix(1.0, compensation, uColorBloomCompensation);
+  gl_FragColor = vec4(compensated, texel.a);
 }
 `;
 
@@ -232,6 +273,12 @@ export function buildRealworldStarLayer(starObjects: SceneObject[]): RealworldSt
       uMap: { value: getStarTwinkleAtlasTexture() },
       uPixelRatio: { value: pixelRatio },
       uSizeScale: { value: 1 },
+      uBrilliantBoost: { value: 1 }, // PROTOTYPE: live-tunable extra size/spike-length for the brightest tier only
+      uMinSizePx: { value: 0 }, // PROTOTYPE: legibility floor so faint stars' spikes stay visible
+      uIntensity: { value: 1 }, // PROTOTYPE: live-tunable light intensity for all stars
+      uAttenStartPc: { value: 1e9 }, // PROTOTYPE: distance (pc) beyond which size starts tapering; huge default = off
+      uAttenStrength: { value: 0 }, // PROTOTYPE: 0 = no falloff (original design), higher = more aggressive taper
+      uColorBloomCompensation: { value: 0 }, // PROTOTYPE: 0 = off (raw spectral color), 1 = fully luma-corrected so red/orange stars bloom as much as blue/white ones of the same tier
     },
     vertexShader: VERTEX_SHADER,
     fragmentShader: FRAGMENT_SHADER,
