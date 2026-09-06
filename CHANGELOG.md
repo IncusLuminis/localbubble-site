@@ -3,6 +3,50 @@
 All notable changes to this project are documented in this file. Format
 loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased]
+
+### Added
+
+- **Visual star-rendering style**: a second, toggleable way to render the
+  catalog's ~820 stars (Settings panel, "Star Rendering: Model / Visual"),
+  alongside the original marker-sphere rendering (now labeled "Model").
+  Visual renders each star as a single twinkle/spike sprite whose size,
+  color, and glow are driven by its real absolute magnitude and spectral
+  type, with a Sun-relative distance falloff that tapers very luminous but
+  very distant giants back down so they don't dominate the view when
+  zoomed out to the catalog's full extent. A live-tunable surface in the
+  Settings panel (bloom strength/radius/threshold, color-bloom
+  compensation, per-tier size boost, faint-star minimum size, spike
+  length/width, intensity, and the distance-falloff pair) lets the whole
+  look be adjusted without a rebuild. Click-to-inspect picking, the
+  radius filter, category visibility, and the "Object size" slider all
+  work the same way under both styles. Model separately gained its own
+  Marker opacity / Diffuse structure opacity sliders.
+- Cookie-consent banner; Settings-panel choices (star rendering style,
+  radius filter, and every tuning slider) now persist across visits.
+
+### Fixed
+
+- A GPU memory leak: switching away from Model repeatedly (Model → Visual
+  → Model → ...) never freed the outgoing Model star bucket's own
+  `InstancedMesh` buffers, growing GPU memory usage without bound over
+  many toggles. The outgoing bucket's mesh is now disposed on teardown
+  (its shared geometry/material caches are untouched, since those are
+  reused by every bucket).
+- Visual's distance-falloff defaults had shipped effectively disabled
+  (threshold above every real star's distance, strength at "off"), so the
+  very largest, most distant giants in the catalog still rendered
+  oversized at extreme zoom - exactly the look the falloff was added to
+  prevent. Re-tuned the defaults so the falloff actually engages beyond
+  the Local Bubble.
+- The "Object size" slider used to move Model markers' and diffuse
+  structures' real positions outward/inward along with their size; it now
+  scales size only, and is hidden entirely while Visual is active (Visual
+  has its own, position-safe size control).
+- A stale guard in the click handler silently disabled all picking under
+  Visual for one revision; click-to-inspect now works correctly for both
+  styles.
+
 ## [1.0.0] - 2026-09-04
 
 First public release. Live at [localbubble.space](https://localbubble.space).
