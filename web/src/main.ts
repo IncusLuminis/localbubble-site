@@ -26,8 +26,8 @@ import {
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
-  DEFAULT_MARKER_OPACITY_TUNING,
   excludeDedicatedMarkerObjects,
+  getMarkerOpacityTuning,
   isCatalogObjectVisible,
   isSelectedObjectVisible,
   markerRadiusPc,
@@ -47,7 +47,6 @@ import {
 import {
   applyRealworldStarTuning,
   buildRealworldStarLayer,
-  DEFAULT_REALWORLD_STAR_TUNING,
   disposeRealworldStarLayer,
   updateRealworldStarSizeScale,
   updateRealworldStarVisibility,
@@ -55,7 +54,7 @@ import {
   type RealworldStarLayer,
   type RealworldStarTuning,
 } from "./scene/realworldStars";
-import { loadStarRenderStyle, saveStarRenderStyle, type StarRenderStyle } from "./scene/starRenderStyle";
+import type { StarRenderStyle } from "./scene/starRenderStyle";
 import {
   denseBatchCollectionRadiusPc,
   isCameraInsideDenseBatchSphere,
@@ -130,7 +129,7 @@ import {
   type DenseBatchLabelRankCandidate,
   type LabelRankCandidate,
 } from "./scene/labels";
-import { DEFAULT_RADIUS_PC, RADIUS_PRESETS_PC, isWithinRadius } from "./scene/radiusFilter";
+import { RADIUS_PRESETS_PC, isWithinRadius } from "./scene/radiusFilter";
 import {
   denseBatchObjectFrameMaxDistancePc,
   edgeOnPose,
@@ -148,7 +147,6 @@ import {
   createLayersPanel,
   createSettingsPanel,
   createCameraPanel,
-  type BloomTuning,
   type LayersPanelHandle,
   type SettingsPanelHandle,
   type SidePanelHandle,
@@ -161,6 +159,16 @@ import { createSearchBox } from "./ui/search";
 import { createPlayerPanel } from "./ui/playerPanel";
 import { createFovReadout } from "./ui/fovReadout";
 import { createFullscreenToggle } from "./ui/fullscreenToggle";
+import { createCookieConsentBanner, shouldShowConsentBanner } from "./ui/cookieConsentBanner";
+import {
+  DEFAULT_PERSISTED_SETTINGS,
+  loadConsentDecision,
+  loadPersistedSettings,
+  saveConsentDecision,
+  savePersistedSettings,
+  type ConsentDecision,
+  type PersistedSettings,
+} from "./ui/settingsPersistence";
 import { fovExtentPc } from "./scene/fov";
 import type { LocalBubbleStructure, SceneObject } from "./scene/sceneTypes";
 
@@ -191,6 +199,67 @@ app.appendChild(status);
 
 const renderer = createRenderer(app);
 const scene = createScene();
+
+/** Issue #10 (Epic #7): `window.localStorage` guarded by a `try/catch` at
+ * the single point this app touches it - accessing the property itself (not
+ * just calling a method on it) can throw in some restrictive browser privacy
+ * configurations. `null` degrades every persistence call below to "use the
+ * in-memory default only, don't persist" per this codebase's existing
+ * "missing optional capability degrades gracefully" convention (spec §38).
+ * Issue #19 moved this up from its own original spot further down this file
+ * (right before the old dedicated `starRenderStyle` load) - `bloomPass`
+ * below is now the earliest thing in this file that needs a possibly-
+ * restored Settings value, so this has to exist before that. */
+function browserLocalStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
+/** Issue #19 (Epic #7): whether the user has ever answered the cookie-
+ * consent banner, read once up front - `"undecided"` (the default) covers
+ * both a genuine first visit and a previously-failed/never-attempted read.
+ * Reassigned by `handleConsentAccept`/`handleConsentDecline` (defined
+ * further down) the moment the user actually answers, so the rest of this
+ * session starts respecting that answer immediately, with no reload
+ * needed. */
+let consentDecision: ConsentDecision = loadConsentDecision(browserLocalStorage());
+
+/** Issue #19 (Epic #7): every Settings-panel control's initial value for
+ * THIS load - the persisted blob if (and only if) consent was previously
+ * accepted, or the hardcoded defaults otherwise (declined, or not yet
+ * decided - exactly today's pre-#19 behavior, nothing read or written).
+ * Every binding below that used to hardcode its own default (`radiusPc`,
+ * `sizeScale`, `realworldStarTuning`, `starRenderStyle`, and `bloomPass`'s
+ * constructor args) now seeds from this instead. `scene/objects.ts` owns its
+ * marker-opacity tuning as its own internal module state rather than a value
+ * this file threads through, so priming it is a function call
+ * (`setMarkerOpacityTuning` below) rather than an initial value assignment
+ * like the others. */
+const initialSettings: PersistedSettings =
+  consentDecision === "accepted" ? loadPersistedSettings(browserLocalStorage()) : DEFAULT_PERSISTED_SETTINGS;
+setMarkerOpacityTuning(initialSettings.modelMarkerOpacityTuning);
+
+// Issue #19 (Epic #7): shown immediately - not gated behind scene load,
+// which can take a few seconds - whenever the user hasn't yet answered.
+// Must appear before any non-essential storage write happens; every setting
+// change anywhere below only actually persists once
+// `consentDecision === "accepted"` (see `persistSettingsIfConsented`,
+// defined further down once every setting it snapshots has a home to read
+// from). `handleConsentAccept`/`handleConsentDecline` are likewise defined
+// further down as ordinary hoisted `function` declarations - referencing
+// them here, before their own textual definition, is fine since they're
+// never actually CALLED until the user clicks a button, well after this
+// whole module has finished evaluating.
+if (shouldShowConsentBanner(consentDecision)) {
+  const consentBanner = createCookieConsentBanner({
+    onAccept: () => handleConsentAccept(),
+    onDecline: () => handleConsentDecline(),
+  });
+  app.appendChild(consentBanner);
+}
 
 // Issue #16/#18: SELECTIVE bloom - only objects placed on BLOOM_SCENE layer
 // (just the REALWORLD star Points layer, see `rebuildStarRenderLayer`'s two
@@ -245,20 +314,19 @@ function restoreMaterial(obj: Object3D): void {
   }
 }
 
-/** Issue #18's final tuned bloom-pass defaults (human owner decision, from
- * live testing against the real Settings panel - supersedes issue #16's
- * earlier debug-HUD-tuned numbers), recorded here as the single source of
- * truth for both `bloomPass`'s own construction below and the Settings
- * panel's "Bloom" slider defaults (`settingsPanelHandle`'s `bloomTuning`
- * option) - so the two can never drift apart the way two separately-
- * hardcoded copies could. */
-const DEFAULT_BLOOM_TUNING: BloomTuning = { strength: 1, radius: 0.4, threshold: 0.16 };
-
+// `DEFAULT_BLOOM_TUNING` itself now lives in `ui/controls.ts` (issue #19
+// moved it there - see that file's own docstring) so it's one shared value
+// this construction, the Settings panel's own slider defaults, AND
+// `ui/settingsPersistence.ts`'s `DEFAULT_PERSISTED_SETTINGS` can all import.
+// `initialSettings.bloomTuning` (above) is that same default UNLESS consent
+// was accepted and a different value was persisted, in which case it's the
+// restored value instead - either way, this always constructs with
+// whatever this load should actually start from.
 const bloomPass = new UnrealBloomPass(
   new Vector2(window.innerWidth, window.innerHeight),
-  DEFAULT_BLOOM_TUNING.strength,
-  DEFAULT_BLOOM_TUNING.radius,
-  DEFAULT_BLOOM_TUNING.threshold,
+  initialSettings.bloomTuning.strength,
+  initialSettings.bloomTuning.radius,
+  initialSettings.bloomTuning.threshold,
 );
 const camera = createCamera();
 const bloomComposer = new EffectComposer(renderer);
@@ -648,8 +716,11 @@ const simplificationsToggleButton = createToolbarButton(
 
 const raycaster = new Raycaster();
 
-let radiusPc = DEFAULT_RADIUS_PC;
-let sizeScale = 1;
+// Issue #19 (Epic #7): seeded from `initialSettings` (the persisted value if
+// consent was accepted, else the same hardcoded defaults these used to
+// literally be initialized to before this issue - `DEFAULT_RADIUS_PC`/`1`).
+let radiusPc = initialSettings.radiusPc;
+let sizeScale = initialSettings.sizeScale;
 let labelsEnabled = true;
 let selectedObjectId: string | null = null;
 
@@ -686,8 +757,11 @@ let realworldStarLayer: RealworldStarLayer | null = null;
  * otherwise reset to the shader's own hardcoded defaults on every MODEL<->
  * REALWORLD toggle - see `applyRealworldStarTuning`'s own docstring). A
  * fresh copy (not the shared `DEFAULT_REALWORLD_STAR_TUNING` object itself)
- * since this binding is mutated in place. */
-let realworldStarTuning: RealworldStarTuning = { ...DEFAULT_REALWORLD_STAR_TUNING };
+ * since this binding is mutated in place. Issue #19: seeded from
+ * `initialSettings.realworldStarTuning` (the persisted value if consent was
+ * accepted, else these same tuned defaults) rather than
+ * `DEFAULT_REALWORLD_STAR_TUNING` directly. */
+let realworldStarTuning: RealworldStarTuning = { ...initialSettings.realworldStarTuning };
 /** Issue #11: every `object_type === "star"` `SceneObject`, captured once at
  * scene-load time - the stable input BOTH `buildStarCatalogBucket` (MODEL)
  * and `buildRealworldStarLayer` (REALWORLD) build from on every style toggle.
@@ -991,27 +1065,68 @@ let localBubbleStructure: LocalBubbleStructure | null = null;
  * behavior" (spec §38: an absent optional structure must not error). */
 let bubbleOuterRadiusPc: number | null = null;
 
-/** Issue #10 (Epic #7): `window.localStorage` guarded by a `try/catch` at
- * the single point this app touches it - accessing the property itself (not
- * just calling a method on it) can throw in some restrictive browser privacy
- * configurations. `null` degrades every persistence call below to "use the
- * in-memory default only, don't persist" per this codebase's existing
- * "missing optional capability degrades gracefully" convention (spec §38). */
-function browserLocalStorage(): Storage | null {
-  try {
-    return window.localStorage;
-  } catch {
-    return null;
+/** Issue #10 (Epic #7): the active MODEL/REALWORLD star-rendering style -
+ * loaded once, up front, from whatever was previously persisted (or the
+ * `MODEL` default on a first visit / failed read / declined-or-undecided
+ * consent - issue #19). `settingsPanelHandle`'s "Star Rendering" `<select>`
+ * (built once the scene loads, like the rest of that panel) is preselected
+ * from this same value, and its `onChange` handler below is what reassigns
+ * this binding afterward. */
+let starRenderStyle: StarRenderStyle = initialSettings.starRenderStyle;
+
+/** Issue #19 (Epic #7): a snapshot of every Settings-panel control's CURRENT
+ * value, in `PersistedSettings` shape - what `persistSettingsIfConsented`
+ * below actually writes. Reads each value from wherever it already lives
+ * (this file's own mutable bindings for most of them, `bloomPass` itself for
+ * bloom - it has no separate tracked copy, `getMarkerOpacityTuning` for the
+ * one whose live state lives in `scene/objects.ts` instead) rather than this
+ * file keeping yet another parallel copy of any of them. */
+function currentPersistedSettings(): PersistedSettings {
+  return {
+    starRenderStyle,
+    radiusPc,
+    sizeScale,
+    modelMarkerOpacityTuning: getMarkerOpacityTuning(),
+    bloomTuning: { strength: bloomPass.strength, radius: bloomPass.radius, threshold: bloomPass.threshold },
+    realworldStarTuning: { ...realworldStarTuning },
+  };
+}
+
+/** Issue #19 (Epic #7): the one place every Settings-panel control's
+ * `onChange` handler below calls after applying its own change - a no-op
+ * unless consent has actually been accepted, exactly like `main.ts` doing
+ * nothing with these values at all before this issue. Centralizing the
+ * consent check here (rather than each handler re-checking
+ * `consentDecision` itself) is the "avoid two different consent-check
+ * mechanisms" this issue asks for, extended to "avoid N of them". */
+function persistSettingsIfConsented(): void {
+  if (consentDecision === "accepted") {
+    savePersistedSettings(currentPersistedSettings(), browserLocalStorage());
   }
 }
 
-/** Issue #10 (Epic #7): the active MODEL/REALWORLD star-rendering style -
- * loaded once, up front, from whatever was previously persisted (or the
- * `MODEL` default on a first visit / failed read). `settingsPanelHandle`'s
- * "Star Rendering" `<select>` (built once the scene loads, like the rest of
- * that panel) is preselected from this same value, and its `onChange`
- * handler below is what reassigns this binding afterward. */
-let starRenderStyle: StarRenderStyle = loadStarRenderStyle(browserLocalStorage());
+/** Issue #19 (Epic #7): the cookie-consent banner's own two button handlers
+ * - defined here (not inline at the banner's construction site, much
+ * earlier in this file) because persisting "the CURRENT settings state" on
+ * Accept needs every setting's own binding to already exist, and this is
+ * the earliest point in the file where that's true. Referenced by the
+ * banner's `onAccept`/`onDecline` via ordinary hoisted-`function`-
+ * declaration lookup - see that call site's own comment. */
+function handleConsentAccept(): void {
+  consentDecision = "accepted";
+  saveConsentDecision("accepted", browserLocalStorage());
+  // Nothing has actually been changed yet at this point (the banner is
+  // shown before any settings interaction in the ordinary flow), so this
+  // persists `initialSettings` in every practical case - but reads the
+  // CURRENT live state regardless, in case the user did tweak something
+  // before answering the banner (it isn't a blocking modal).
+  persistSettingsIfConsented();
+}
+
+function handleConsentDecline(): void {
+  consentDecision = "declined";
+  saveConsentDecision("declined", browserLocalStorage());
+}
 
 /** Issue #10 (Epic #7), rewritten by issue #11: rebuilds JUST the star
  * rendering layer in place, using the CURRENT `starRenderStyle` - the
@@ -2529,24 +2644,35 @@ loadScene()
     });
 
     settingsPanelHandle = createSettingsPanel({
+      // Issue #19: every one of this panel's `on*Change` handlers below now
+      // ends with `persistSettingsIfConsented()` - a no-op unless the user
+      // has accepted the cookie-consent banner, in which case it re-persists
+      // the WHOLE settings blob (not just the one field that changed) so a
+      // returning visitor's next load restores everything, not just
+      // whichever control was touched last.
+      radiusPc,
       onRadiusChange: (newRadiusPc) => {
         radiusPc = newRadiusPc;
         applyCatalogVisibility();
         updateLabelVisibility();
+        persistSettingsIfConsented();
       },
+      sizeScale,
       onSizeScaleChange: (scale) => {
         sizeScale = scale;
         applyCatalogVisibility();
+        persistSettingsIfConsented();
       },
       starRenderStyle,
       onStarRenderStyleChange: (style) => {
         starRenderStyle = style;
-        saveStarRenderStyle(style, browserLocalStorage());
         rebuildStarRenderLayer();
+        persistSettingsIfConsented();
       },
-      bloomTuning: { ...DEFAULT_BLOOM_TUNING },
+      bloomTuning: { strength: bloomPass.strength, radius: bloomPass.radius, threshold: bloomPass.threshold },
       onBloomTuningChange: (patch) => {
         Object.assign(bloomPass, patch);
+        persistSettingsIfConsented();
       },
       realworldStarTuning: { ...realworldStarTuning },
       onRealworldStarTuningChange: (patch) => {
@@ -2554,8 +2680,9 @@ loadScene()
         if (realworldStarLayer) {
           applyRealworldStarTuning(realworldStarLayer, realworldStarTuning);
         }
+        persistSettingsIfConsented();
       },
-      modelMarkerOpacityTuning: { ...DEFAULT_MARKER_OPACITY_TUNING },
+      modelMarkerOpacityTuning: getMarkerOpacityTuning(),
       onModelMarkerOpacityChange: (patch) => {
         // `setMarkerOpacityTuning` (objects.ts) is the single source of
         // truth `markerOpacityFor` reads, so this alone is enough for every
@@ -2579,6 +2706,7 @@ loadScene()
             cameraWasInsideLocalBubbleRaw,
           );
         }
+        persistSettingsIfConsented();
       },
     });
 
