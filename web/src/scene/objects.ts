@@ -14,7 +14,7 @@ import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
 import { sunCoreRadiusPc } from "./sun";
 import { spectralColorFor } from "./spectralColor";
 import { absoluteMagnitudeToBrightness } from "./magnitudeBrightness";
-import { DEFAULT_STAR_RENDER_STYLE, type StarRenderStyle } from "./starRenderStyle";
+import type { StarRenderStyle } from "./starRenderStyle";
 import {
   STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_MIN_RADIUS_PC,
@@ -853,12 +853,19 @@ function buildModelStarInstances(mesh: InstancedMesh, starObjects: SceneObject[]
  * creates a bucket for a type with at least one object present), AND
  * (issue #11) for `style === "VISUAL"` - see this section's own docstring
  * above for why REALWORLD's star rendering deliberately lives entirely
- * outside the `CatalogBucket`/`InstancedMesh` system instead. */
+ * outside the `CatalogBucket`/`InstancedMesh` system instead.
+ *
+ * `style`'s own default is the literal `"MODEL"`, deliberately NOT
+ * `DEFAULT_STAR_RENDER_STYLE` (issue #33: that constant became `"VISUAL"`
+ * once Epic #7 graduated to the default *visitor* experience) - `main.ts`
+ * always passes `style` explicitly at runtime, so this parameter default is
+ * purely a caller/test convenience meaning "give me a MODEL bucket," which
+ * must keep meaning MODEL regardless of what a first-time visitor now sees. */
 export function buildStarCatalogBucket(
   starObjects: SceneObject[],
   denseBatchRadiusPc = 0,
   bubbleOuterRadiusPc: number | null = null,
-  style: StarRenderStyle = DEFAULT_STAR_RENDER_STYLE,
+  style: StarRenderStyle = "MODEL",
 ): CatalogBucket | null {
   if (starObjects.length === 0 || style === "VISUAL") {
     return null;
@@ -1029,17 +1036,19 @@ export function buildObjectIndexLookup(buckets: CatalogBucket[]): Map<string, Ca
  * `markerRadiusPc`, so a star's OWN baseline radius - not just the flat
  * `STAR_MARKER_RADIUS_PC` - is what gets baked in at scene-load time.
  *
- * Issue #10 (Epic #7): `starRenderStyle` (defaulting to
- * `DEFAULT_STAR_RENDER_STYLE`, i.e. `MODEL` - every pre-#10 caller/test that
- * doesn't pass it keeps today's exact, unchanged behavior) is forwarded to
- * the star bucket's own construction (`buildStarCatalogBucket`) only - every
- * other object_type's bucket below is built exactly as before this issue,
- * completely untouched by the style. */
+ * Issue #10 (Epic #7): `starRenderStyle` (defaulting to the literal
+ * `"MODEL"` - every pre-#10 caller/test that doesn't pass it keeps today's
+ * exact, unchanged behavior, regardless of `DEFAULT_STAR_RENDER_STYLE`'s own
+ * current value - see `buildStarCatalogBucket`'s own docstring on why issue
+ * #33 deliberately decoupled the two) is forwarded to the star bucket's own
+ * construction (`buildStarCatalogBucket`) only - every other object_type's
+ * bucket below is built exactly as before this issue, completely untouched
+ * by the style. */
 export function createCatalogObjectGroup(
   objects: SceneObject[],
   denseBatchRadiusPc = 0,
   bubbleOuterRadiusPc: number | null = null,
-  starRenderStyle: StarRenderStyle = DEFAULT_STAR_RENDER_STYLE,
+  starRenderStyle: StarRenderStyle = "MODEL",
 ): {
   group: Group;
   buckets: CatalogBucket[];

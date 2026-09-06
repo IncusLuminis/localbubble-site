@@ -30,8 +30,8 @@ describe("parseStarRenderStyle", () => {
 });
 
 describe("DEFAULT_STAR_RENDER_STYLE / STAR_RENDER_STYLES", () => {
-  it("defaults to MODEL, per issue #10's explicit acceptance criteria", () => {
-    expect(DEFAULT_STAR_RENDER_STYLE).toBe("MODEL");
+  it("defaults to VISUAL, per issue #33 (Epic #7 graduating to the default experience)", () => {
+    expect(DEFAULT_STAR_RENDER_STYLE).toBe("VISUAL");
   });
 
   it("lists exactly MODEL and REALWORLD, nothing else, for this Story", () => {
