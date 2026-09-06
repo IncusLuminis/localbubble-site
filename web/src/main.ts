@@ -26,12 +26,14 @@ import {
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
+  DEFAULT_MARKER_OPACITY_TUNING,
   excludeDedicatedMarkerObjects,
   isCatalogObjectVisible,
   isSelectedObjectVisible,
   markerRadiusPc,
   selectedMarkerRadiusPc,
   setInstanceVisibility,
+  setMarkerOpacityTuning,
   STAR_OBJECT_TYPES,
   SUN_OBJECT_ID,
   updateBackgroundDimming,
@@ -242,12 +244,14 @@ function restoreMaterial(obj: Object3D): void {
   }
 }
 
-/** Issue #16's final tuned bloom-pass defaults (human owner decision),
- * recorded here as the single source of truth for both `bloomPass`'s own
- * construction below and the Settings panel's "Bloom" slider defaults
- * (`settingsPanelHandle`'s `bloomTuning` option) - so the two can never
- * drift apart the way two separately-hardcoded copies could. */
-const DEFAULT_BLOOM_TUNING: BloomTuning = { strength: 1.5, radius: 0.7, threshold: 0.25 };
+/** Issue #18's final tuned bloom-pass defaults (human owner decision, from
+ * live testing against the real Settings panel - supersedes issue #16's
+ * earlier debug-HUD-tuned numbers), recorded here as the single source of
+ * truth for both `bloomPass`'s own construction below and the Settings
+ * panel's "Bloom" slider defaults (`settingsPanelHandle`'s `bloomTuning`
+ * option) - so the two can never drift apart the way two separately-
+ * hardcoded copies could. */
+const DEFAULT_BLOOM_TUNING: BloomTuning = { strength: 1, radius: 0.4, threshold: 0.16 };
 
 const bloomPass = new UnrealBloomPass(
   new Vector2(window.innerWidth, window.innerHeight),
@@ -2534,6 +2538,31 @@ loadScene()
         Object.assign(realworldStarTuning, patch);
         if (realworldStarLayer) {
           applyRealworldStarTuning(realworldStarLayer, realworldStarTuning);
+        }
+      },
+      modelMarkerOpacityTuning: { ...DEFAULT_MARKER_OPACITY_TUNING },
+      onModelMarkerOpacityChange: (patch) => {
+        // `setMarkerOpacityTuning` (objects.ts) is the single source of
+        // truth `markerOpacityFor` reads, so this alone is enough for every
+        // FUTURE bucket/mesh build (a fresh scene load, or a MODEL/REALWORLD
+        // toggle rebuilding the star bucket) to pick up the new value with
+        // no further plumbing. Already-built materials need pushing
+        // explicitly though - reusing `updateBackgroundDimming`/
+        // `updateDiffuseStructureDimming` (both already exist for the
+        // unrelated camera-distance dimming feature, and both already
+        // recompute every material's opacity from `markerOpacityFor`/
+        // `backgroundBucketOpacity` fresh on every call) does exactly that,
+        // for the star bucket and every cluster/association/diffuse-
+        // structure shape respectively, without writing a second bucket-
+        // iteration mechanism just for this slider.
+        setMarkerOpacityTuning(patch);
+        updateBackgroundDimming(catalogBuckets, cameraWasInsideDenseBatchSphere, cameraWasInsideLocalBubbleRaw);
+        if (diffuseStructureLayer) {
+          updateDiffuseStructureDimming(
+            diffuseStructureLayer,
+            cameraWasInsideDenseBatchSphere,
+            cameraWasInsideLocalBubbleRaw,
+          );
         }
       },
     });

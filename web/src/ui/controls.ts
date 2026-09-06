@@ -1,6 +1,7 @@
 import { RADIUS_PRESETS_PC, DEFAULT_RADIUS_PC } from "../scene/radiusFilter";
 import { STAR_RENDER_STYLES, type StarRenderStyle } from "../scene/starRenderStyle";
 import type { RealworldStarTuning } from "../scene/realworldStars";
+import type { MarkerOpacityTuning } from "../scene/objects";
 
 /** Issue #18: whether the REALWORLD tuning groups (Bloom/Stars/Spikes/
  * Distance) should be visible for a given Star Rendering style - pulled out
@@ -11,6 +12,17 @@ import type { RealworldStarTuning } from "../scene/realworldStars";
  * docstring for the same split elsewhere in this codebase). */
 export function shouldShowRealworldTuning(style: StarRenderStyle): boolean {
   return style === "REALWORLD";
+}
+
+/** Issue #18 follow-up: the MODEL-only mirror of `shouldShowRealworldTuning`
+ * above, gating the new "Model" tuning section's (Marker opacity/Diffuse
+ * structure opacity) visibility. Kept as its own named predicate rather than
+ * just calling `!shouldShowRealworldTuning(style)` at the two show/hide call
+ * sites - reads as "should this section show" at a glance, same as its
+ * REALWORLD counterpart, and stays correct on its own terms even though
+ * `StarRenderStyle` only has two members today. */
+export function shouldShowModelTuning(style: StarRenderStyle): boolean {
+  return style === "MODEL";
 }
 
 /**
@@ -187,6 +199,12 @@ export interface SettingsPanelOptions {
   onBloomTuningChange: (patch: Partial<BloomTuning>) => void;
   realworldStarTuning: RealworldStarTuning;
   onRealworldStarTuningChange: (patch: Partial<RealworldStarTuning>) => void;
+  /** Issue #18 follow-up: current values to seed the new MODEL-only "Model"
+   * tuning section's sliders with - `main.ts` passes its own
+   * `DEFAULT_MARKER_OPACITY_TUNING` copy (no persistence yet, same as
+   * `bloomTuning` above). */
+  modelMarkerOpacityTuning: MarkerOpacityTuning;
+  onModelMarkerOpacityChange: (patch: Partial<MarkerOpacityTuning>) => void;
 }
 
 /** Shared slider-row builder for the REALWORLD tuning controls (issue #18,
@@ -225,14 +243,72 @@ function makeSlider(
   return row;
 }
 
-/** Human-readable labels for the "Star Rendering" `<select>` below - kept as
- * its own small table (rather than showing the raw `StarRenderStyle` value
- * verbatim) so the UI can read as a plain sentence ("Model (default)")
- * without the underlying dispatch-key casing/wording being a UI concern. */
+/** Human-readable labels for the "Star Rendering" toggle below - kept as its
+ * own small table (rather than showing the raw `StarRenderStyle` value
+ * verbatim) so the underlying dispatch-key casing/wording is never a UI
+ * concern. Issue #18 follow-up: shortened from the old `<select>`'s
+ * "Model (default)"/"Real World (experimental)" option text - a compact
+ * two-segment toggle has no room for the parenthetical, and the segment
+ * that's currently active already reads as "the current choice" without
+ * needing "(default)" spelled out. */
 const STAR_RENDER_STYLE_LABELS: Record<StarRenderStyle, string> = {
-  MODEL: "Model (default)",
-  REALWORLD: "Real World (experimental)",
+  MODEL: "Model",
+  REALWORLD: "Real World",
 };
+
+/**
+ * Issue #18 follow-up: replaces the old plain `<select>` (human owner
+ * feedback: "чудовищно"/hideous) with a compact pill-shaped two-segment
+ * toggle - one `<button>` per `StarRenderStyle`, the active one highlighted
+ * via the same `.active` background-fill convention `#left-toolbar`'s own
+ * toggle-style buttons already use for "which of two states is active"
+ * (`style.css`'s `.toolbar-button.active`/`.player-transport.active`),
+ * rather than inventing a new visual language for the same idea. Native
+ * `<button>`s (not styled `<div>`s) so the control stays keyboard/
+ * screen-reader accessible for free, same reasoning as every other clickable
+ * control in this panel.
+ *
+ * Fires `onChange` only on an actual style change (clicking the
+ * already-active segment is a no-op) - mirrors the old `<select>`'s
+ * `change` event, which likewise never fired for reselecting the current
+ * option. */
+function createStarRenderStyleToggle(
+  initialStyle: StarRenderStyle,
+  onChange: (style: StarRenderStyle) => void,
+): HTMLDivElement {
+  const toggle = document.createElement("div");
+  toggle.className = "star-render-toggle";
+  toggle.setAttribute("role", "group");
+
+  let currentStyle = initialStyle;
+  const buttons = new Map<StarRenderStyle, HTMLButtonElement>();
+
+  function setActive(style: StarRenderStyle): void {
+    currentStyle = style;
+    for (const [candidateStyle, button] of buttons) {
+      button.classList.toggle("active", candidateStyle === style);
+    }
+  }
+
+  for (const style of STAR_RENDER_STYLES) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "star-render-toggle-option";
+    button.textContent = STAR_RENDER_STYLE_LABELS[style];
+    button.addEventListener("click", () => {
+      if (style === currentStyle) {
+        return;
+      }
+      setActive(style);
+      onChange(style);
+    });
+    buttons.set(style, button);
+    toggle.appendChild(button);
+  }
+
+  setActive(initialStyle);
+  return toggle;
+}
 
 /** Same UI-lock removal as `LayersPanelHandle` (Story #330) - the Radius
  * `<select>` used to be the one lockable control here; it's always live now,
@@ -264,27 +340,18 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   // --- Star rendering style (issue #10, Epic #7): MODEL (today's exact,
   // unchanged rendering, default) vs REALWORLD (issue #11's own
   // `THREE.Points`-based twinkle-sprite/magnitude-driven-size system, see
-  // `scene/realworldStars.ts`). Same `<select>` pattern as the Radius
-  // control just above, for visual consistency with this panel's existing
-  // controls. ---
+  // `scene/realworldStars.ts`). Issue #18 follow-up: a compact two-segment
+  // toggle (`createStarRenderStyleToggle` above) instead of the original
+  // `<select>` - same underlying wiring (`onStarRenderStyleChange` plus this
+  // panel's own tuning-section visibility toggles below), just a different
+  // DOM element/interaction responding to it. ---
   const starRenderStyleSection = makeSection("Star Rendering");
-  const starRenderStyleSelect = document.createElement("select");
-  starRenderStyleSelect.className = "star-render-style-select";
-  for (const style of STAR_RENDER_STYLES) {
-    const option = document.createElement("option");
-    option.value = style;
-    option.textContent = STAR_RENDER_STYLE_LABELS[style];
-    if (style === options.starRenderStyle) {
-      option.selected = true;
-    }
-    starRenderStyleSelect.appendChild(option);
-  }
-  starRenderStyleSelect.addEventListener("change", () => {
-    const style = starRenderStyleSelect.value as StarRenderStyle;
+  const starRenderStyleToggle = createStarRenderStyleToggle(options.starRenderStyle, (style) => {
+    setModelTuningVisible(shouldShowModelTuning(style));
     setRealworldTuningVisible(shouldShowRealworldTuning(style));
     options.onStarRenderStyleChange(style);
   });
-  starRenderStyleSection.body.appendChild(starRenderStyleSelect);
+  starRenderStyleSection.body.appendChild(starRenderStyleToggle);
   panel.appendChild(starRenderStyleSection.section);
 
   // --- Object size scale (spec §23: "opacity / size ... where relevant") -
@@ -304,23 +371,61 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   sizeSection.body.appendChild(sizeSlider);
   panel.appendChild(sizeSection.section);
 
+  // --- MODEL tuning (issue #18 follow-up): the human owner pushed back on
+  // this panel's original MODEL audit (which stopped at "Object size" -
+  // marker radius/`markerRadiusPc` - as MODEL's only exposable knob) and
+  // asked specifically for opacity controls. `objects.ts`'s `markerOpacityFor`
+  // already tiers every marker's opacity by type (stars/clusters/
+  // associations opaque, diffuse structures translucent - see that
+  // function's own docstring) off two now-configurable values
+  // (`MarkerOpacityTuning`), so both tiers are exposed here as their own
+  // slider rather than one shared control that would conflate two visually
+  // distinct object kinds. Shown only while Star Rendering is MODEL
+  // (`.visible` toggled below and on every toggle-click above), mirroring
+  // the REALWORLD tuning container's own show/hide mechanism exactly - no
+  // second visibility convention invented for this section. Per this
+  // issue's explicit scope, MODEL's per-magnitude color-darkening table
+  // (`magnitudeBrightness.ts`'s `BRIGHTNESS_BUCKETS`, a fitted 8-bucket
+  // lookup, not a single scalar a slider could sensibly represent) is left
+  // untouched - these two opacity sliders are the full scope, not a
+  // springboard for a bigger MODEL feature. ---
+  const modelTuningContainer = document.createElement("div");
+  modelTuningContainer.className = "model-tuning";
+
+  const modelOpacitySection = makeSection("Model");
+  modelOpacitySection.body.appendChild(
+    makeSlider(
+      "Marker opacity",
+      0,
+      1,
+      0.05,
+      options.modelMarkerOpacityTuning.opaqueMarkerOpacity,
+      (v) => options.onModelMarkerOpacityChange({ opaqueMarkerOpacity: v }),
+    ),
+  );
+  modelOpacitySection.body.appendChild(
+    makeSlider(
+      "Diffuse structure opacity",
+      0,
+      1,
+      0.05,
+      options.modelMarkerOpacityTuning.extendedStructureOpacity,
+      (v) => options.onModelMarkerOpacityChange({ extendedStructureOpacity: v }),
+    ),
+  );
+  modelTuningContainer.appendChild(modelOpacitySection.section);
+
+  panel.appendChild(modelTuningContainer);
+
+  function setModelTuningVisible(visible: boolean): void {
+    modelTuningContainer.classList.toggle("visible", visible);
+  }
+  setModelTuningVisible(shouldShowModelTuning(options.starRenderStyle));
+
   // --- REALWORLD tuning (issue #18, promoted from #16's debug HUD): bloom/
   // brightness/spike/distance-falloff controls. Shown only while Star
-  // Rendering is REALWORLD (`.visible` toggled below and on every select
-  // change above) since none of them affect MODEL's rendering.
-  //
-  // MODEL's own star-bucket code (`objects.ts`) was audited for this issue:
-  // its marker radius (`markerRadiusPc`/`starBaselineRadiusPc`) is already
-  // scaled by the shared "Object size" slider above, and its only other
-  // per-star knob, marker opacity (`markerOpacityFor`), is one flat constant
-  // shared across stars AND clusters/associations together (not a
-  // star-specific value) - exposing it as a "MODEL star opacity" slider
-  // would either silently also restyle clusters/associations or require
-  // splitting that shared constant apart for no rendering benefit. Its
-  // per-magnitude color-darkening table (`magnitudeBrightness.ts`'s
-  // `BRIGHTNESS_BUCKETS`) is a fitted 8-bucket lookup, not a single scalar a
-  // slider could sensibly represent. Conclusion: MODEL has nothing further
-  // worth exposing beyond "Object size" - no MODEL-only section exists here. ---
+  // Rendering is REALWORLD (`.visible` toggled below and on every toggle-
+  // click above) since none of them affect MODEL's rendering. ---
   const realworldTuningContainer = document.createElement("div");
   realworldTuningContainer.className = "realworld-tuning";
 

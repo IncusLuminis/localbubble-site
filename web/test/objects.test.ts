@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { Matrix4, Quaternion, Vector3 } from "three";
 import type { InstancedMesh, MeshBasicMaterial } from "three";
 import {
@@ -9,6 +9,7 @@ import {
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
   createCatalogObjectGroup,
+  DEFAULT_MARKER_OPACITY_TUNING,
   excludeDedicatedMarkerObjects,
   instanceColorFor,
   isCatalogObjectVisible,
@@ -17,6 +18,7 @@ import {
   LOCAL_BUBBLE_OBJECT_ID,
   markerOpacityFor,
   markerRadiusPc,
+  setMarkerOpacityTuning,
   selectedMarkerRadiusPc,
   setInstanceVisibility,
   shouldDimBackground,
@@ -760,6 +762,48 @@ describe("markerOpacityFor (issue #115 opacity tiers)", () => {
     expect(opacityOf(starBucket)).toBe(markerOpacityFor("star"));
     expect(opacityOf(structureBucket)).toBeLessThan(opacityOf(clusterBucket));
     expect(opacityOf(starBucket)).toBe(opacityOf(clusterBucket));
+  });
+});
+
+/**
+ * Issue #18 follow-up: `markerOpacityFor`'s two tiers are now live-
+ * configurable (Settings panel "Model" section's "Marker opacity"/"Diffuse
+ * structure opacity" sliders) instead of fixed constants - `setMarkerOpacityTuning`
+ * is the setter `main.ts`'s slider `onChange` handlers call. Every test here
+ * restores `DEFAULT_MARKER_OPACITY_TUNING` afterward so this module-level
+ * state can't leak into any other test in this file.
+ */
+describe("setMarkerOpacityTuning (issue #18 follow-up)", () => {
+  afterEach(() => {
+    setMarkerOpacityTuning(DEFAULT_MARKER_OPACITY_TUNING);
+  });
+
+  it("changes markerOpacityFor's opaque (star/cluster/association) tier", () => {
+    setMarkerOpacityTuning({ opaqueMarkerOpacity: 0.5 });
+    expect(markerOpacityFor("star")).toBe(0.5);
+    expect(markerOpacityFor("star_cluster")).toBe(0.5);
+  });
+
+  it("changes markerOpacityFor's extended-structure tier independently of the opaque tier", () => {
+    setMarkerOpacityTuning({ extendedStructureOpacity: 0.1 });
+    expect(markerOpacityFor("molecular_cloud")).toBe(0.1);
+    expect(markerOpacityFor("star")).toBe(DEFAULT_MARKER_OPACITY_TUNING.opaqueMarkerOpacity);
+  });
+
+  it("a freshly-built bucket's material picks up the current tuning, not the original default", () => {
+    setMarkerOpacityTuning({ opaqueMarkerOpacity: 0.2, extendedStructureOpacity: 0.6 });
+    const { buckets } = createCatalogObjectGroup([STAR_A, CLOUD_A]);
+    const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const cloudBucket = buckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    expect((starBucket.mesh.material as MeshBasicMaterial).opacity).toBe(0.2);
+    expect((cloudBucket.mesh.material as MeshBasicMaterial).opacity).toBe(0.6);
+  });
+
+  it("restoring DEFAULT_MARKER_OPACITY_TUNING brings markerOpacityFor back to its original values", () => {
+    setMarkerOpacityTuning({ opaqueMarkerOpacity: 0.5, extendedStructureOpacity: 0.1 });
+    setMarkerOpacityTuning(DEFAULT_MARKER_OPACITY_TUNING);
+    expect(markerOpacityFor("star")).toBe(0.85);
+    expect(markerOpacityFor("molecular_cloud")).toBe(0.35);
   });
 });
 

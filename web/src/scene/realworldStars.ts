@@ -411,21 +411,24 @@ export interface RealworldStarTuning {
   spikeWidth: number;
 }
 
-/** The final tuned values from issue #16's live tuning HUD (human owner
- * decision, recorded on issue #18) - what every fresh REALWORLD session now
- * starts from, replacing both the shader's own neutral hardcoded uniform
- * defaults (`buildRealworldStarLayer`'s `uniforms` block above) and the
- * debug HUD's separate copy of the same numbers. */
+/** The final tuned values (human owner decision) - what every fresh
+ * REALWORLD session now starts from, replacing both the shader's own
+ * neutral hardcoded uniform defaults (`buildRealworldStarLayer`'s
+ * `uniforms` block above) and the debug HUD's separate copy of the same
+ * numbers. Issue #16's own debug-HUD tuning pass first converged on a set
+ * of values; issue #18 promoted those into the real Settings panel and this
+ * is that panel's own further-converged result, from the human owner's live
+ * testing against the real UI rather than the throwaway HUD. */
 export const DEFAULT_REALWORLD_STAR_TUNING: RealworldStarTuning = {
-  colorBloomCompensation: 0.7,
-  normalBoost: 1,
-  brilliantBoost: 1,
-  minSizePx: 9,
-  intensity: 1,
+  colorBloomCompensation: 0.05,
+  normalBoost: 3.2,
+  brilliantBoost: 1.4,
+  minSizePx: 31,
+  intensity: 1.85,
   attenStartPc: 2000,
   attenStrength: 0,
-  spikeLength: 1.8,
-  brilliantSpikeLength: 2.6,
+  spikeLength: 1.4,
+  brilliantSpikeLength: 2.8,
   spikeWidth: 1,
 };
 
