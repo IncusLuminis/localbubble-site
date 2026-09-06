@@ -5,6 +5,8 @@ loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-06
+
 ### Added
 
 - **Visual star-rendering style**: a second, toggleable way to render the
