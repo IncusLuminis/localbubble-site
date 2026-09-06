@@ -19,7 +19,7 @@
  * `THREE.Points`-based twinkle-sprite/magnitude-driven-size system (see
  * `scene/realworldStars.ts`).
  */
-export type StarRenderStyle = "MODEL" | "REALWORLD";
+export type StarRenderStyle = "MODEL" | "VISUAL";
 
 export const DEFAULT_STAR_RENDER_STYLE: StarRenderStyle = "MODEL";
 
@@ -28,7 +28,7 @@ export const DEFAULT_STAR_RENDER_STYLE: StarRenderStyle = "MODEL";
  * `ui/controls.ts`'s Settings-panel `<select>` options, so the two can never
  * silently drift apart (e.g. a third style added to the type but forgotten
  * in one of the two places). */
-export const STAR_RENDER_STYLES: readonly StarRenderStyle[] = ["MODEL", "REALWORLD"];
+export const STAR_RENDER_STYLES: readonly StarRenderStyle[] = ["MODEL", "VISUAL"];
 
 /** `localStorage` key for the persisted choice. Namespaced with an `lb-`
  * prefix: a repo-wide search turned up no prior `localStorage` usage

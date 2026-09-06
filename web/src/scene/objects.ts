@@ -796,7 +796,7 @@ function buildModelStarInstances(mesh: InstancedMesh, starObjects: SceneObject[]
  * docstring for the full reasoning).
  *
  * Concretely, this means `buildStarCatalogBucket` below now returns `null`
- * for `style === "REALWORLD"` - REALWORLD has NO `CatalogBucket`/
+ * for `style === "VISUAL"` - REALWORLD has NO `CatalogBucket`/
  * `InstancedMesh` entry for the `star` type at all, matching this function's
  * own pre-existing "return `null`, nothing to build" convention for an empty
  * `starObjects` input. `main.ts`'s `rebuildStarRenderLayer` is what builds
@@ -815,7 +815,7 @@ function buildModelStarInstances(mesh: InstancedMesh, starObjects: SceneObject[]
  * Returns `null` for an empty `starObjects` input (nothing to build,
  * matching `createCatalogObjectGroup`'s own loop, which likewise only ever
  * creates a bucket for a type with at least one object present), AND
- * (issue #11) for `style === "REALWORLD"` - see this section's own docstring
+ * (issue #11) for `style === "VISUAL"` - see this section's own docstring
  * above for why REALWORLD's star rendering deliberately lives entirely
  * outside the `CatalogBucket`/`InstancedMesh` system instead. */
 export function buildStarCatalogBucket(
@@ -824,7 +824,7 @@ export function buildStarCatalogBucket(
   bubbleOuterRadiusPc: number | null = null,
   style: StarRenderStyle = DEFAULT_STAR_RENDER_STYLE,
 ): CatalogBucket | null {
-  if (starObjects.length === 0 || style === "REALWORLD") {
+  if (starObjects.length === 0 || style === "VISUAL") {
     return null;
   }
 

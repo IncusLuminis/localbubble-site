@@ -66,7 +66,7 @@ describe("DEFAULT_STAR_RENDER_STYLE / STAR_RENDER_STYLES", () => {
   });
 
   it("lists exactly MODEL and REALWORLD, nothing else, for this Story", () => {
-    expect(STAR_RENDER_STYLES).toEqual(["MODEL", "REALWORLD"]);
+    expect(STAR_RENDER_STYLES).toEqual(["MODEL", "VISUAL"]);
   });
 });
 
@@ -81,8 +81,8 @@ describe("loadStarRenderStyle", () => {
   });
 
   it("returns the persisted REALWORLD choice when present", () => {
-    const storage = makeFakeStorage({ [STAR_RENDER_STYLE_STORAGE_KEY]: "REALWORLD" });
-    expect(loadStarRenderStyle(storage)).toBe("REALWORLD");
+    const storage = makeFakeStorage({ [STAR_RENDER_STYLE_STORAGE_KEY]: "VISUAL" });
+    expect(loadStarRenderStyle(storage)).toBe("VISUAL");
   });
 
   it("returns the persisted MODEL choice when present", () => {
@@ -107,19 +107,19 @@ describe("loadStarRenderStyle", () => {
 
 describe("saveStarRenderStyle", () => {
   it("does nothing (never throws) when storage is null", () => {
-    expect(() => saveStarRenderStyle("REALWORLD", null)).not.toThrow();
+    expect(() => saveStarRenderStyle("VISUAL", null)).not.toThrow();
   });
 
   it("writes the style under STAR_RENDER_STYLE_STORAGE_KEY", () => {
     const storage = makeFakeStorage();
-    saveStarRenderStyle("REALWORLD", storage);
-    expect(storage.data[STAR_RENDER_STYLE_STORAGE_KEY]).toBe("REALWORLD");
+    saveStarRenderStyle("VISUAL", storage);
+    expect(storage.data[STAR_RENDER_STYLE_STORAGE_KEY]).toBe("VISUAL");
   });
 
   it("round-trips through loadStarRenderStyle", () => {
     const storage = makeFakeStorage();
-    saveStarRenderStyle("REALWORLD", storage);
-    expect(loadStarRenderStyle(storage)).toBe("REALWORLD");
+    saveStarRenderStyle("VISUAL", storage);
+    expect(loadStarRenderStyle(storage)).toBe("VISUAL");
     saveStarRenderStyle("MODEL", storage);
     expect(loadStarRenderStyle(storage)).toBe("MODEL");
   });
@@ -130,6 +130,6 @@ describe("saveStarRenderStyle", () => {
         throw new Error("simulated quota-exceeded failure");
       },
     };
-    expect(() => saveStarRenderStyle("REALWORLD", throwingStorage)).not.toThrow();
+    expect(() => saveStarRenderStyle("VISUAL", throwingStorage)).not.toThrow();
   });
 });

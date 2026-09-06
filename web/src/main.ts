@@ -1066,7 +1066,7 @@ function rebuildStarRenderLayer(): void {
     realworldStarLayer = null;
   }
 
-  if (starRenderStyle === "REALWORLD") {
+  if (starRenderStyle === "VISUAL") {
     const newLayer = buildRealworldStarLayer(starCatalogObjects);
     if (newLayer) {
       newLayer.points.layers.enable(BLOOM_SCENE); // selective bloom (issue #16/#18)
@@ -1138,7 +1138,7 @@ function applyCatalogVisibility(): void {
   // `CatalogBucket` - its own category-toggle/radius-filter visibility and
   // "Object size" slider scaling are applied from this same chokepoint,
   // mirroring the diffuse-structure layer immediately above. Only ever
-  // non-null while `starRenderStyle === "REALWORLD"` (see its own
+  // non-null while `starRenderStyle === "VISUAL"` (see its own
   // docstring), so this is a no-op under MODEL.
   if (realworldStarLayer) {
     updateRealworldStarVisibility(realworldStarLayer, categoryVisibility, radiusPc);
@@ -2373,13 +2373,13 @@ loadScene()
     starCatalogObjects = pointMarkerObjects.filter((obj) => STAR_OBJECT_TYPES.has(obj.object_type));
     // Issue #11: `createCatalogObjectGroup`/`buildStarCatalogBucket` above
     // already skip building a `star` `CatalogBucket` at all when
-    // `starRenderStyle === "REALWORLD"` (see that function's docstring) -
+    // `starRenderStyle === "VISUAL"` (see that function's docstring) -
     // this is the initial build of REALWORLD's own separate `Points` layer
     // for that case, mirroring `rebuildStarRenderLayer`'s own REALWORLD
     // branch exactly (kept in sync deliberately, not by sharing code, since
     // this one-time initial build has no "old layer to tear down first" step
     // that function needs).
-    if (starRenderStyle === "REALWORLD") {
+    if (starRenderStyle === "VISUAL") {
       const initialRealworldLayer = buildRealworldStarLayer(starCatalogObjects);
       if (initialRealworldLayer) {
         initialRealworldLayer.points.layers.enable(BLOOM_SCENE); // selective bloom (issue #16/#18)

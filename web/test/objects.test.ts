@@ -1264,7 +1264,7 @@ describe("createCatalogObjectGroup star-bucket instanceColor (issue #173)", () =
  * `THREE.Points`-based system (`scene/realworldStars.ts`), which lives
  * entirely OUTSIDE `CatalogBucket`/`InstancedMesh` (see
  * `buildStarCatalogBucket`'s own docstring for why) - so `createCatalogObjectGroup`
- * now builds NO `star` `CatalogBucket` at all when `style === "REALWORLD"`,
+ * now builds NO `star` `CatalogBucket` at all when `style === "VISUAL"`,
  * the opposite of issue #10's original "identical to MODEL" behavior.
  */
 describe("createCatalogObjectGroup star-rendering style dispatch (issue #10)", () => {
@@ -1316,7 +1316,7 @@ describe("createCatalogObjectGroup star-rendering style dispatch (issue #10)", (
       [STYLE_STAR_A, STYLE_STAR_B],
       denseBatchRadiusPc,
       bubbleOuterRadiusPc,
-      "REALWORLD",
+      "VISUAL",
     );
 
     expect(modelBuckets.find((b) => b.objectType === "star")).toBeDefined();
@@ -1329,7 +1329,7 @@ describe("createCatalogObjectGroup star-rendering style dispatch (issue #10)", (
       [STYLE_STAR_A, CLOUD_A, CLOUD_B],
       0,
       null,
-      "REALWORLD",
+      "VISUAL",
     );
     const modelCloudBucket = modelBuckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
     const realworldCloudBucket = realworldBuckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
@@ -1384,7 +1384,7 @@ describe("buildStarCatalogBucket (issue #10: standalone star-bucket rebuild for 
   });
 
   it("issue #11: returns null for REALWORLD - no InstancedMesh/CatalogBucket is built for that style", () => {
-    expect(buildStarCatalogBucket([REBUILD_STAR_A, REBUILD_STAR_B], 11.26, 60, "REALWORLD")).toBeNull();
+    expect(buildStarCatalogBucket([REBUILD_STAR_A, REBUILD_STAR_B], 11.26, 60, "VISUAL")).toBeNull();
   });
 });
 
