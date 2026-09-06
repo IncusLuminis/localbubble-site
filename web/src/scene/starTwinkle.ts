@@ -197,8 +197,11 @@ let starTwinkleAtlasTexture: CanvasTexture | null | undefined;
  * `getMistySpriteTexture` - every real caller (`realworldStars.ts`) already
  * treats a `null` map as "no texture, flat-shaded fallback," so the geometry/
  * attribute-building logic stays fully unit-testable without a real canvas. */
-/** PROTOTYPE (not for merge): rebuilds the atlas fresh (no caching) with
- * adjustable spike length/width, for `main.ts`'s live tuning HUD.
+/** Issue #11's live tuning HUD prototype originally built this to rebuild
+ * the atlas fresh (no caching) with adjustable spike length/width; issue #18
+ * promoted it to the real Settings-panel spike controls, wired via
+ * `realworldStars.ts`'s `applyRealworldStarTuning` - the redraw logic itself
+ * is unchanged.
  *
  * Deliberately keeps the DESIGN proportions (`designCellSize`, fed to
  * `drawNormalTwinkle`/`drawBrilliantTwinkle`) fixed at the same

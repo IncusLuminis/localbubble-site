@@ -1,5 +1,17 @@
 import { RADIUS_PRESETS_PC, DEFAULT_RADIUS_PC } from "../scene/radiusFilter";
 import { STAR_RENDER_STYLES, type StarRenderStyle } from "../scene/starRenderStyle";
+import type { RealworldStarTuning } from "../scene/realworldStars";
+
+/** Issue #18: whether the REALWORLD tuning groups (Bloom/Stars/Spikes/
+ * Distance) should be visible for a given Star Rendering style - pulled out
+ * as its own pure function (rather than inlined into the `.classList.toggle`
+ * call site below) so it's unit-testable without a real DOM, mirroring
+ * `ui/fullscreenToggle.ts`'s `fullscreenButtonState` (this repo's
+ * `environment: "node"` Vitest config has no jsdom - see that function's own
+ * docstring for the same split elsewhere in this codebase). */
+export function shouldShowRealworldTuning(style: StarRenderStyle): boolean {
+  return style === "REALWORLD";
+}
 
 /**
  * Story #257 (Epic #255): the old single combined `#controls` panel
@@ -141,6 +153,18 @@ export function createLayersPanel(options: LayersPanelOptions): LayersPanelHandl
 // out to the Camera panel (issue #20) since it's a camera/view-export
 // concern, not a settings one. ---
 
+/** `main.ts`'s `UnrealBloomPass` config (strength/radius/threshold) - not a
+ * type this module owns any deeper meaning for, just the shape
+ * `onBloomTuningChange` below patches. Kept separate from
+ * `RealworldStarTuning` (`scene/realworldStars.ts`) since it's a render-pass
+ * concern `main.ts` applies directly to its own `bloomPass`, not a
+ * `RealworldStarLayer` uniform. */
+export interface BloomTuning {
+  strength: number;
+  radius: number;
+  threshold: number;
+}
+
 export interface SettingsPanelOptions {
   onRadiusChange: (radiusPc: number) => void;
   onSizeScaleChange: (scale: number) => void;
@@ -152,6 +176,53 @@ export interface SettingsPanelOptions {
    * of always visually resetting to `MODEL`. */
   starRenderStyle: StarRenderStyle;
   onStarRenderStyleChange: (style: StarRenderStyle) => void;
+  /** Issue #18 (Epic #7): current values to seed the REALWORLD tuning
+   * sliders below with - `main.ts` passes its own live `bloomPass`
+   * strength/radius/threshold and `realworldStarTuning` state (starting at
+   * `DEFAULT_REALWORLD_STAR_TUNING`, issue #16's final tuned defaults) so a
+   * panel rebuild (there isn't one today, but nothing here assumes a single
+   * page-load call) would reflect the current values, not the sliders'
+   * historical prototype defaults. */
+  bloomTuning: BloomTuning;
+  onBloomTuningChange: (patch: Partial<BloomTuning>) => void;
+  realworldStarTuning: RealworldStarTuning;
+  onRealworldStarTuningChange: (patch: Partial<RealworldStarTuning>) => void;
+}
+
+/** Shared slider-row builder for the REALWORLD tuning controls (issue #18,
+ * promoted from #16's debug HUD `addSlider`) - a label showing the current
+ * value plus a `<input type=range>`, styled via `.tuning-slider-row`
+ * (`style.css`) rather than the HUD's own inline styles. */
+function makeSlider(
+  label: string,
+  min: number,
+  max: number,
+  step: number,
+  initial: number,
+  onInput: (value: number) => void,
+): HTMLDivElement {
+  const row = document.createElement("div");
+  row.className = "tuning-slider-row";
+
+  const labelEl = document.createElement("div");
+  labelEl.className = "tuning-slider-label";
+  labelEl.textContent = `${label}: ${initial}`;
+  row.appendChild(labelEl);
+
+  const input = document.createElement("input");
+  input.type = "range";
+  input.min = String(min);
+  input.max = String(max);
+  input.step = String(step);
+  input.value = String(initial);
+  input.addEventListener("input", () => {
+    const value = Number(input.value);
+    labelEl.textContent = `${label}: ${value}`;
+    onInput(value);
+  });
+  row.appendChild(input);
+
+  return row;
 }
 
 /** Human-readable labels for the "Star Rendering" `<select>` below - kept as
@@ -209,12 +280,16 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
     starRenderStyleSelect.appendChild(option);
   }
   starRenderStyleSelect.addEventListener("change", () => {
-    options.onStarRenderStyleChange(starRenderStyleSelect.value as StarRenderStyle);
+    const style = starRenderStyleSelect.value as StarRenderStyle;
+    setRealworldTuningVisible(shouldShowRealworldTuning(style));
+    options.onStarRenderStyleChange(style);
   });
   starRenderStyleSection.body.appendChild(starRenderStyleSelect);
   panel.appendChild(starRenderStyleSection.section);
 
-  // --- Object size scale (spec §23: "opacity / size ... where relevant") ---
+  // --- Object size scale (spec §23: "opacity / size ... where relevant") -
+  // applies uniformly to BOTH styles (see this option's own docstring in
+  // `main.ts`), so unlike the REALWORLD-only groups below it's never hidden. ---
   const sizeSection = makeSection("Object size");
   const sizeSlider = document.createElement("input");
   sizeSlider.type = "range";
@@ -228,6 +303,155 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   });
   sizeSection.body.appendChild(sizeSlider);
   panel.appendChild(sizeSection.section);
+
+  // --- REALWORLD tuning (issue #18, promoted from #16's debug HUD): bloom/
+  // brightness/spike/distance-falloff controls. Shown only while Star
+  // Rendering is REALWORLD (`.visible` toggled below and on every select
+  // change above) since none of them affect MODEL's rendering.
+  //
+  // MODEL's own star-bucket code (`objects.ts`) was audited for this issue:
+  // its marker radius (`markerRadiusPc`/`starBaselineRadiusPc`) is already
+  // scaled by the shared "Object size" slider above, and its only other
+  // per-star knob, marker opacity (`markerOpacityFor`), is one flat constant
+  // shared across stars AND clusters/associations together (not a
+  // star-specific value) - exposing it as a "MODEL star opacity" slider
+  // would either silently also restyle clusters/associations or require
+  // splitting that shared constant apart for no rendering benefit. Its
+  // per-magnitude color-darkening table (`magnitudeBrightness.ts`'s
+  // `BRIGHTNESS_BUCKETS`) is a fitted 8-bucket lookup, not a single scalar a
+  // slider could sensibly represent. Conclusion: MODEL has nothing further
+  // worth exposing beyond "Object size" - no MODEL-only section exists here. ---
+  const realworldTuningContainer = document.createElement("div");
+  realworldTuningContainer.className = "realworld-tuning";
+
+  const bloomSection = makeSection("Bloom");
+  bloomSection.body.appendChild(
+    makeSlider("Bloom strength", 0, 3, 0.05, options.bloomTuning.strength, (v) =>
+      options.onBloomTuningChange({ strength: v }),
+    ),
+  );
+  bloomSection.body.appendChild(
+    makeSlider("Bloom radius", 0, 1, 0.02, options.bloomTuning.radius, (v) =>
+      options.onBloomTuningChange({ radius: v }),
+    ),
+  );
+  bloomSection.body.appendChild(
+    makeSlider("Bloom threshold", 0, 1, 0.02, options.bloomTuning.threshold, (v) =>
+      options.onBloomTuningChange({ threshold: v }),
+    ),
+  );
+  bloomSection.body.appendChild(
+    makeSlider(
+      "Color bloom compensation",
+      0,
+      1,
+      0.05,
+      options.realworldStarTuning.colorBloomCompensation,
+      (v) => options.onRealworldStarTuningChange({ colorBloomCompensation: v }),
+    ),
+  );
+  realworldTuningContainer.appendChild(bloomSection.section);
+
+  const starsSection = makeSection("Stars");
+  starsSection.body.appendChild(
+    makeSlider(
+      "Normal-tier size boost",
+      0.5,
+      6,
+      0.1,
+      options.realworldStarTuning.normalBoost,
+      (v) => options.onRealworldStarTuningChange({ normalBoost: v }),
+    ),
+  );
+  starsSection.body.appendChild(
+    makeSlider(
+      "Brilliant-tier boost",
+      1,
+      3,
+      0.05,
+      options.realworldStarTuning.brilliantBoost,
+      (v) => options.onRealworldStarTuningChange({ brilliantBoost: v }),
+    ),
+  );
+  starsSection.body.appendChild(
+    makeSlider(
+      "Faint-star minimum size (px)",
+      0,
+      80,
+      1,
+      options.realworldStarTuning.minSizePx,
+      (v) => options.onRealworldStarTuningChange({ minSizePx: v }),
+    ),
+  );
+  realworldTuningContainer.appendChild(starsSection.section);
+
+  const spikesSection = makeSection("Spikes");
+  spikesSection.body.appendChild(
+    makeSlider(
+      "Spike length (all stars)",
+      0.5,
+      3,
+      0.05,
+      options.realworldStarTuning.spikeLength,
+      (v) => options.onRealworldStarTuningChange({ spikeLength: v }),
+    ),
+  );
+  spikesSection.body.appendChild(
+    makeSlider(
+      "Spike length (brightest)",
+      0.5,
+      4,
+      0.05,
+      options.realworldStarTuning.brilliantSpikeLength,
+      (v) => options.onRealworldStarTuningChange({ brilliantSpikeLength: v }),
+    ),
+  );
+  spikesSection.body.appendChild(
+    makeSlider("Spike width", 0.5, 3, 0.05, options.realworldStarTuning.spikeWidth, (v) =>
+      options.onRealworldStarTuningChange({ spikeWidth: v }),
+    ),
+  );
+  spikesSection.body.appendChild(
+    makeSlider(
+      "Intensity (all stars)",
+      0.2,
+      4,
+      0.05,
+      options.realworldStarTuning.intensity,
+      (v) => options.onRealworldStarTuningChange({ intensity: v }),
+    ),
+  );
+  realworldTuningContainer.appendChild(spikesSection.section);
+
+  const distanceSection = makeSection("Distance");
+  distanceSection.body.appendChild(
+    makeSlider(
+      "Distance falloff start (pc)",
+      20,
+      2000,
+      10,
+      options.realworldStarTuning.attenStartPc,
+      (v) => options.onRealworldStarTuningChange({ attenStartPc: v }),
+    ),
+  );
+  distanceSection.body.appendChild(
+    makeSlider(
+      "Distance falloff strength",
+      0,
+      1.5,
+      0.05,
+      options.realworldStarTuning.attenStrength,
+      (v) => options.onRealworldStarTuningChange({ attenStrength: v }),
+    ),
+  );
+  realworldTuningContainer.appendChild(distanceSection.section);
+
+  panel.appendChild(realworldTuningContainer);
+
+  function setRealworldTuningVisible(visible: boolean): void {
+    realworldTuningContainer.classList.toggle("visible", visible);
+  }
+  setRealworldTuningVisible(shouldShowRealworldTuning(options.starRenderStyle));
 
   return {
     element: panel,
