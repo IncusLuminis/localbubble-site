@@ -2490,14 +2490,6 @@ loadScene()
         saveStarRenderStyle(style, browserLocalStorage());
         rebuildStarRenderLayer();
       },
-      onExportPng: () => {
-        // Render both the WebGL canvas and re-sync the label layer just
-        // before capture so the exported PNG reflects the current view
-        // (label text itself is DOM/CSS2D, outside the canvas, and is not
-        // part of the PNG - spec §39 asks for "at minimum" a WebGL PNG
-        // screenshot, which this provides).
-        exportSceneAsPng(renderer, scene, camera);
-      },
     });
 
     // Story #257 AC: the Camera panel omits "Fit all" - that preset is
@@ -2512,6 +2504,15 @@ loadScene()
     cameraPanelHandle = createCameraPanel({
       cameraPresets: CAMERA_PRESETS.filter((preset) => preset.key !== "fit-all"),
       onCameraPreset: applyCameraPreset,
+      onExportPng: () => {
+        // Render both the WebGL canvas and re-sync the label layer just
+        // before capture so the exported PNG reflects the current view
+        // (label text itself is DOM/CSS2D, outside the canvas, and is not
+        // part of the PNG - spec §39 asks for "at minimum" a WebGL PNG
+        // screenshot, which this provides). Issue #20: moved here from the
+        // Settings panel wiring above - callback itself is unchanged.
+        exportSceneAsPng(renderer, scene, camera);
+      },
     });
 
     // Issue #203: `onSelect` now also closes the search modal after
