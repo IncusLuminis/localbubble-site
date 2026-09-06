@@ -6,6 +6,7 @@ import {
   DEFAULT_REALWORLD_STAR_TUNING,
   disposeRealworldStarLayer,
   REALWORLD_BASE_SPRITE_PX,
+  updateRealworldStarPositions,
   updateRealworldStarSizeScale,
   updateRealworldStarVisibility,
   visibleRealworldStarObjects,
@@ -118,6 +119,13 @@ describe("buildRealworldStarLayer", () => {
     const layer = buildRealworldStarLayer([BRIGHT_STAR]);
     expect(layer?.material.uniforms.uMap.value).toBeNull();
   });
+
+  it("issue #31: builds an id -> vertex-index map matching each star's position in `objects`", () => {
+    const layer = buildRealworldStarLayer([BRIGHT_STAR, FAINT_STAR])!;
+    expect(layer.indexById.get(BRIGHT_STAR.id)).toBe(0);
+    expect(layer.indexById.get(FAINT_STAR.id)).toBe(1);
+    expect(layer.indexById.get("no-such-star")).toBeUndefined();
+  });
 });
 
 describe("updateRealworldStarVisibility", () => {
@@ -165,6 +173,42 @@ describe("updateRealworldStarSizeScale", () => {
     updateRealworldStarSizeScale(layer, 2.5);
     expect(layer.material.uniforms.uSizeScale.value).toBe(2.5);
     expect([position.getX(0), position.getY(0), position.getZ(0)]).toEqual(before);
+  });
+});
+
+describe("updateRealworldStarPositions (issue #31: Time Controls player under VISUAL)", () => {
+  it("writes each update's new position into the matching vertex", () => {
+    const layer = buildRealworldStarLayer([BRIGHT_STAR, FAINT_STAR])!;
+    const position = layer.geometry.getAttribute("position") as BufferAttribute;
+
+    updateRealworldStarPositions(layer, [
+      { index: 0, positionPc: [100, 200, 300] },
+      { index: 1, positionPc: [-1, -2, -3] },
+    ]);
+
+    expect([position.getX(0), position.getY(0), position.getZ(0)]).toEqual([100, 200, 300]);
+    expect([position.getX(1), position.getY(1), position.getZ(1)]).toEqual([-1, -2, -3]);
+  });
+
+  it("leaves every position untouched and skips the GPU-upload version bump for an empty update list", () => {
+    const layer = buildRealworldStarLayer([BRIGHT_STAR])!;
+    const position = layer.geometry.getAttribute("position") as BufferAttribute;
+    const versionBefore = position.version;
+
+    updateRealworldStarPositions(layer, []);
+
+    expect([position.getX(0), position.getY(0), position.getZ(0)]).toEqual([1, 2, 3]);
+    expect(position.version).toBe(versionBefore);
+  });
+
+  it("bumps the GPU-upload version (needsUpdate) exactly once for a non-empty batch, not once per star", () => {
+    const layer = buildRealworldStarLayer([BRIGHT_STAR, FAINT_STAR])!;
+    const position = layer.geometry.getAttribute("position") as BufferAttribute;
+    const versionBefore = position.version;
+
+    updateRealworldStarPositions(layer, [{ index: 0, positionPc: [9, 9, 9] }]);
+
+    expect(position.version).toBe(versionBefore + 1);
   });
 });
 
