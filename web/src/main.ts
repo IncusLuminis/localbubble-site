@@ -2361,7 +2361,10 @@ loadScene()
     // about than two different "when do these toolbar buttons start
     // working" timings.
     layersPanelHandle = createLayersPanel({
-      categories: categories.map((type) => ({ key: type, label: humanizeCategory(type) })),
+      categories: categories.map((type) => ({
+        key: type,
+        label: pluralizeCategoryLabel(humanizeCategory(type)),
+      })),
       structureLayers: structureLayerItems,
       onCategoryToggle: (key, visible) => {
         categoryVisibility.set(key, visible);
@@ -2462,6 +2465,24 @@ function humanizeCategory(objectType: string): string {
     .split("_")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+}
+
+/**
+ * Issue #21: the Layers panel's per-`object_type` checkboxes each control a
+ * whole category of objects ("Star" really means "every star"), so their
+ * labels should read as plural - unlike `humanizeCategory` output shown for
+ * a single object elsewhere (`ui/inspector.ts`'s own separate, deliberately
+ * NOT reused, `humanizeType`), which stays singular. Only called on this
+ * one `categories.map` call site above, so it's fine to bake pluralization
+ * in here rather than parameterizing `humanizeCategory` itself.
+ *
+ * Handles today's one irregular case in the catalog's object types - the
+ * Latin "-a" -> "-ae" plural ("Planetary Nebula" -> "Planetary Nebulae") -
+ * and falls back to a plain trailing "s" for every other type (also correct
+ * for any future object type this simple catalog doesn't have yet).
+ */
+function pluralizeCategoryLabel(label: string): string {
+  return label.endsWith("a") ? `${label}e` : `${label}s`;
 }
 
 // `OrbitControls` also listens for pointer drags on this same element - a
