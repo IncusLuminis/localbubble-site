@@ -10,7 +10,11 @@ import type { SceneObject } from "./sceneTypes";
 import { isCatalogObjectVisible } from "./objects";
 import { spectralColorFor } from "./spectralColor";
 import { absoluteMagnitudeToRealworldStyle } from "./magnitudeBrightness";
-import { getStarTwinkleAtlasTexture } from "./starTwinkle";
+import {
+  getStarTwinkleAtlasTexture,
+  getTunableStarTwinkleAtlasTexture,
+  redrawStarTwinkleAtlas,
+} from "./starTwinkle";
 
 /**
  * Issue #11 (Epic #7, Story 2/4): REALWORLD's own star-bucket rendering - a
@@ -282,13 +286,19 @@ export function buildRealworldStarLayer(starObjects: SceneObject[]): RealworldSt
       uMap: { value: getStarTwinkleAtlasTexture() },
       uPixelRatio: { value: pixelRatio },
       uSizeScale: { value: 1 },
-      uNormalBoost: { value: 1 }, // PROTOTYPE: live-tunable size boost for the non-brilliant (everything but the top ~9%) tier
-      uBrilliantBoost: { value: 1 }, // PROTOTYPE: live-tunable extra size/spike-length for the brightest tier only
-      uMinSizePx: { value: 0 }, // PROTOTYPE: legibility floor so faint stars' spikes stay visible
-      uIntensity: { value: 1 }, // PROTOTYPE: live-tunable light intensity for all stars
-      uAttenStartPc: { value: 1e9 }, // PROTOTYPE: distance (pc) beyond which size starts tapering; huge default = off
-      uAttenStrength: { value: 0 }, // PROTOTYPE: 0 = no falloff (original design), higher = more aggressive taper
-      uColorBloomCompensation: { value: 0 }, // PROTOTYPE: 0 = off (raw spectral color), 1 = fully luma-corrected so red/orange stars bloom as much as blue/white ones of the same tier
+      // Issue #18: these six start at the shader's own neutral defaults
+      // (matching pre-#16 appearance) - `main.ts`'s `rebuildStarRenderLayer`
+      // immediately overwrites them via `applyRealworldStarTuning` with the
+      // user's current Settings-panel values (`DEFAULT_REALWORLD_STAR_TUNING`
+      // on a fresh page load), so a bare `buildRealworldStarLayer` call (e.g.
+      // in tests) is the only place these neutral values are ever observed.
+      uNormalBoost: { value: 1 }, // size boost for the non-brilliant (everything but the top ~9%) tier
+      uBrilliantBoost: { value: 1 }, // extra size/spike-length for the brightest tier only
+      uMinSizePx: { value: 0 }, // legibility floor so faint stars' spikes stay visible
+      uIntensity: { value: 1 }, // light intensity for all stars
+      uAttenStartPc: { value: 1e9 }, // distance (pc) beyond which size starts tapering; huge default = off
+      uAttenStrength: { value: 0 }, // 0 = no falloff (original design), higher = more aggressive taper
+      uColorBloomCompensation: { value: 0 }, // 0 = off (raw spectral color), 1 = fully luma-corrected so red/orange stars bloom as much as blue/white ones of the same tier
     },
     vertexShader: VERTEX_SHADER,
     fragmentShader: FRAGMENT_SHADER,
@@ -378,4 +388,77 @@ export function visibleRealworldStarObjects(
 export function disposeRealworldStarLayer(layer: RealworldStarLayer): void {
   layer.geometry.dispose();
   layer.material.dispose();
+}
+
+/** Issue #18 (Epic #7): every REALWORLD Settings-panel control from #16's
+ * tuning prototype that isn't already covered by `uSizeScale`/
+ * `updateRealworldStarSizeScale` above (a different axis - a manual,
+ * zoom-independent multiplier shared with MODEL) - bundled as one object so
+ * `main.ts` can hold "the user's current REALWORLD tuning" as a single piece
+ * of state and re-apply it wholesale via `applyRealworldStarTuning` below,
+ * both per-slider and to a freshly (re)built layer, rather than needing a
+ * separate re-init call per field. */
+export interface RealworldStarTuning {
+  colorBloomCompensation: number;
+  normalBoost: number;
+  brilliantBoost: number;
+  minSizePx: number;
+  intensity: number;
+  attenStartPc: number;
+  attenStrength: number;
+  spikeLength: number;
+  brilliantSpikeLength: number;
+  spikeWidth: number;
+}
+
+/** The final tuned values from issue #16's live tuning HUD (human owner
+ * decision, recorded on issue #18) - what every fresh REALWORLD session now
+ * starts from, replacing both the shader's own neutral hardcoded uniform
+ * defaults (`buildRealworldStarLayer`'s `uniforms` block above) and the
+ * debug HUD's separate copy of the same numbers. */
+export const DEFAULT_REALWORLD_STAR_TUNING: RealworldStarTuning = {
+  colorBloomCompensation: 0.7,
+  normalBoost: 1,
+  brilliantBoost: 1,
+  minSizePx: 9,
+  intensity: 1,
+  attenStartPc: 2000,
+  attenStrength: 0,
+  spikeLength: 1.8,
+  brilliantSpikeLength: 2.6,
+  spikeWidth: 1,
+};
+
+/** Applies every REALWORLD tuning value at once to `layer` - the seven plain
+ * shader uniforms directly, plus the spike length/width trio which (per
+ * `starTwinkle.ts`'s own docstring) are baked into a canvas texture rather
+ * than a uniform, so they go through a redraw + `uMap` reassignment instead.
+ * Always redraws/reassigns `uMap` unconditionally (rather than only on a
+ * spike-specific change) - simpler than tracking which field changed, and a
+ * ~256x128 canvas redraw is cheap enough that #16's own prototype already
+ * did this on every slider drag with no issue.
+ *
+ * Two callers, per issue #18: each individual Settings-panel slider's
+ * `onChange` (with the full current tuning snapshot, not just the one field
+ * that changed - see `main.ts`'s `realworldStarTuning`), and `main.ts`'s
+ * `rebuildStarRenderLayer`, right after building a fresh REALWORLD layer - a
+ * brand-new `ShaderMaterial`'s uniforms start at the shader's own hardcoded
+ * defaults, not the user's current Settings values, so without this second
+ * call site every REALWORLD<->MODEL toggle would silently reset the user's
+ * tuning back to those defaults. */
+export function applyRealworldStarTuning(layer: RealworldStarLayer, tuning: RealworldStarTuning): void {
+  const uniforms = layer.material.uniforms;
+  uniforms.uColorBloomCompensation.value = tuning.colorBloomCompensation;
+  uniforms.uNormalBoost.value = tuning.normalBoost;
+  uniforms.uBrilliantBoost.value = tuning.brilliantBoost;
+  uniforms.uMinSizePx.value = tuning.minSizePx;
+  uniforms.uIntensity.value = tuning.intensity;
+  uniforms.uAttenStartPc.value = tuning.attenStartPc;
+  uniforms.uAttenStrength.value = tuning.attenStrength;
+
+  const texture = getTunableStarTwinkleAtlasTexture();
+  if (texture) {
+    redrawStarTwinkleAtlas(tuning.spikeLength, tuning.spikeWidth, tuning.brilliantSpikeLength);
+    uniforms.uMap.value = texture;
+  }
 }

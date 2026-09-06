@@ -220,6 +220,36 @@ body {
   width: 100%;
 }
 
+/* Issue #18: REALWORLD-only tuning groups (Bloom/Stars/Spikes/Distance),
+   promoted from #16's debug HUD - hidden by default (MODEL is the default
+   Star Rendering style), shown via `.visible` when `ui/controls.ts`'s
+   `createSettingsPanel` toggles it on selecting REALWORLD. Same on/off
+   convention as `.side-panel.open`/`#player-panel.open` above. */
+.realworld-tuning {
+  display: none;
+}
+
+.realworld-tuning.visible {
+  display: flex;
+  flex-direction: column;
+}
+
+.tuning-slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.tuning-slider-label {
+  font-size: 11px;
+  color: #b7c4de;
+}
+
+.tuning-slider-row input[type="range"] {
+  width: 100%;
+}
+
 .camera-preset-row {
   display: flex;
   flex-wrap: wrap;
