@@ -32,6 +32,7 @@ import {
   markerRadiusPc,
   selectedMarkerRadiusPc,
   setInstanceVisibility,
+  STAR_OBJECT_TYPES,
   SUN_OBJECT_ID,
   updateBackgroundDimming,
   updateCatalogSizeScale,
@@ -41,6 +42,14 @@ import {
   type CatalogBucket,
   type CatalogObjectRef,
 } from "./scene/objects";
+import {
+  buildRealworldStarLayer,
+  disposeRealworldStarLayer,
+  updateRealworldStarSizeScale,
+  updateRealworldStarVisibility,
+  visibleRealworldStarObjects,
+  type RealworldStarLayer,
+} from "./scene/realworldStars";
 import { loadStarRenderStyle, saveStarRenderStyle, type StarRenderStyle } from "./scene/starRenderStyle";
 import {
   denseBatchCollectionRadiusPc,
@@ -546,11 +555,28 @@ const structureVisibility = new Map<string, boolean>([
 let catalogBuckets: CatalogBucket[] = [];
 /** Issue #10 (Epic #7): the `Group` `createCatalogObjectGroup` parents every
  * bucket's `InstancedMesh` under - kept as its own module binding (mirroring
- * every other layer group below) so `rebuildStarBucket`'s live Settings-panel
+ * every other layer group below) so `rebuildStarRenderLayer`'s live Settings-panel
  * toggle handler can remove/re-add just the star bucket's mesh from/to it,
  * without needing to rebuild (or re-`scene.add`) the whole catalog group. */
 let catalogGroup: ReturnType<typeof createCatalogObjectGroup>["group"] | null = null;
 let catalogObjects: SceneObject[] = [];
+/** Issue #11 (Epic #7, Story 2/4): the currently-active REALWORLD star layer
+ * (`scene/realworldStars.ts`), or `null` whenever `starRenderStyle` is
+ * `MODEL` (REALWORLD's own `star`-type objects then have no on-screen
+ * representation via THIS layer - `catalogBuckets`' own `star` `CatalogBucket`
+ * entry, built by `buildStarCatalogBucket`, covers MODEL instead. The two are
+ * mutually exclusive by construction - `rebuildStarRenderLayer` below always
+ * tears down whichever one is currently active before building the other. */
+let realworldStarLayer: RealworldStarLayer | null = null;
+/** Issue #11: every `object_type === "star"` `SceneObject`, captured once at
+ * scene-load time - the stable input BOTH `buildStarCatalogBucket` (MODEL)
+ * and `buildRealworldStarLayer` (REALWORLD) build from on every style toggle.
+ * Needed as its own binding (rather than reading `oldBucket.objects` the way
+ * issue #10's original version of this rebuild function - then named
+ * `rebuildStarBucket` - did) because a `CatalogBucket` for `star` doesn't
+ * exist at all while REALWORLD is active - toggling FROM REALWORLD back TO
+ * MODEL has no bucket to read the object list back out of. */
+let starCatalogObjects: SceneObject[] = [];
 let labelsInfo: ReturnType<typeof createLabelsLayer> | null = null;
 let gouldBeltGroup: ReturnType<typeof createGouldBeltLayer> | null = null;
 let radcliffeWaveGroup: ReturnType<typeof createRadcliffeWaveLayer> | null = null;
@@ -867,11 +893,22 @@ function browserLocalStorage(): Storage | null {
  * handler below is what reassigns this binding afterward. */
 let starRenderStyle: StarRenderStyle = loadStarRenderStyle(browserLocalStorage());
 
-/** Issue #10 (Epic #7): rebuilds JUST the star bucket in place - its
- * `InstancedMesh` swapped out of/into the existing `catalogGroup`, its
- * `CatalogBucket` entry swapped in `catalogBuckets` - using the CURRENT
- * `starRenderStyle`. This is the Settings-panel toggle's live-switch
- * mechanism: no full page reload needed.
+/** Issue #10 (Epic #7), rewritten by issue #11: rebuilds JUST the star
+ * rendering layer in place, using the CURRENT `starRenderStyle` - the
+ * Settings-panel toggle's live-switch mechanism, no full page reload needed.
+ *
+ * Issue #11 widened this from issue #10's original "swap the `star`
+ * `CatalogBucket`'s `InstancedMesh`" (both styles used one) to "tear down
+ * whichever of the two mutually-exclusive star systems is currently active,
+ * then build whichever the new style calls for" - REALWORLD is no longer an
+ * `InstancedMesh`/`CatalogBucket` at all (see `objects.ts`'s
+ * `buildStarCatalogBucket` docstring and `realworldStars.ts`'s own module
+ * docstring for why). Reads the stable `starCatalogObjects` list (captured
+ * once at scene-load time) rather than an existing bucket's own `.objects` -
+ * unlike issue #10's original version, this must work even when NEITHER a
+ * `CatalogBucket` nor a `RealworldStarLayer` currently exists for stars
+ * (toggling FROM REALWORLD back TO MODEL has no bucket to read the object
+ * list back out of).
  *
  * Deliberately does NOT rebuild the whole catalog group (i.e. does not call
  * `createCatalogObjectGroup` again from scratch): every OTHER bucket's
@@ -881,50 +918,69 @@ let starRenderStyle: StarRenderStyle = loadStarRenderStyle(browserLocalStorage()
  * `cameraWasInsideLocalBubbleRaw`, which only fire on a camera-position
  * *transition* - not on every frame) - a full rebuild would silently reset
  * every non-star bucket back to its undimmed default material until the
- * camera next crosses a dimming boundary. Rebuilding only the star bucket
+ * camera next crosses a dimming boundary. Rebuilding only the star layer
  * (which `updateBackgroundDimming` never dims in the first place - see
- * `objects.ts`'s `shouldDimBackground`) sidesteps that risk entirely. See
- * `objects.ts`'s `buildStarCatalogBucket` docstring for the same reasoning
- * from the other side of this split.
+ * `objects.ts`'s `shouldDimBackground`) sidesteps that risk entirely.
  *
  * No-op if the scene hasn't finished loading yet (`catalogGroup === null`)
- * or the catalog has no star bucket at all (shouldn't happen for a real
- * scene, but mirrors `buildStarCatalogBucket`'s own empty-input guard
- * returning `null`). */
-function rebuildStarBucket(): void {
+ * or the catalog has no stars at all (shouldn't happen for a real scene, but
+ * mirrors `buildStarCatalogBucket`'s/`buildRealworldStarLayer`'s own
+ * empty-input guards returning `null`). */
+function rebuildStarRenderLayer(): void {
   if (!catalogGroup) return;
+  if (starCatalogObjects.length === 0) return;
+
+  // Tear down whichever of the two mutually-exclusive systems is currently
+  // active - see this function's own docstring on why both must be handled
+  // (either could be the "old" one being switched away from).
   const starBucketIndex = catalogBuckets.findIndex((bucket) => bucket.objectType === "star");
-  if (starBucketIndex === -1) return;
-  const oldBucket = catalogBuckets[starBucketIndex];
+  if (starBucketIndex !== -1) {
+    catalogGroup.remove(catalogBuckets[starBucketIndex].mesh);
+    catalogBuckets = [
+      ...catalogBuckets.slice(0, starBucketIndex),
+      ...catalogBuckets.slice(starBucketIndex + 1),
+    ];
+  }
+  if (realworldStarLayer) {
+    catalogGroup.remove(realworldStarLayer.points);
+    disposeRealworldStarLayer(realworldStarLayer);
+    realworldStarLayer = null;
+  }
 
-  const newBucket = buildStarCatalogBucket(
-    oldBucket.objects,
-    denseBatchRadiusPc,
-    bubbleOuterRadiusPc,
-    starRenderStyle,
-  );
-  if (!newBucket) return;
-
-  catalogGroup.remove(oldBucket.mesh);
-  catalogGroup.add(newBucket.mesh);
-  catalogBuckets = [
-    ...catalogBuckets.slice(0, starBucketIndex),
-    newBucket,
-    ...catalogBuckets.slice(starBucketIndex + 1),
-  ];
+  if (starRenderStyle === "REALWORLD") {
+    const newLayer = buildRealworldStarLayer(starCatalogObjects);
+    if (newLayer) {
+      catalogGroup.add(newLayer.points);
+      realworldStarLayer = newLayer;
+    }
+  } else {
+    const newBucket = buildStarCatalogBucket(
+      starCatalogObjects,
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+      starRenderStyle,
+    );
+    if (newBucket) {
+      catalogGroup.add(newBucket.mesh);
+      catalogBuckets = [...catalogBuckets, newBucket];
+    }
+  }
 
   // Story #239's id -> (bucket, index) lookup holds direct bucket
-  // references, which just changed for every star id - rebuilt wholesale
-  // here (cheap, well under a thousand entries, and only on this rare
-  // user-triggered toggle, never per frame) rather than patched in place.
+  // references, which just changed for every star id under MODEL - rebuilt
+  // wholesale here (cheap, well under a thousand entries, and only on this
+  // rare user-triggered toggle, never per frame) rather than patched in
+  // place. Under REALWORLD this simply has no `star` entries at all (see
+  // `realworldStarLayer`'s own docstring on the resulting motion-player
+  // limitation).
   objectIndexLookup = buildObjectIndexLookup(catalogBuckets);
 
   // Reapplies category-visibility/radius-filter/size-scale/camera-distance
   // LOD-radius state to the freshly-built instances (a brand new
-  // `InstancedMesh` starts with every instance at its raw baked-in radius,
-  // not yet filtered/shrunk) - the same chokepoint every other filter
-  // change already runs through, so this can never disagree with what's
-  // currently supposed to be on screen.
+  // `InstancedMesh`/`RealworldStarLayer` starts with every star at its raw
+  // baked-in size, not yet filtered) - the same chokepoint every other
+  // filter change already runs through, so this can never disagree with
+  // what's currently supposed to be on screen.
   applyCatalogVisibility();
 }
 
@@ -951,6 +1007,16 @@ function applyCatalogVisibility(): void {
   if (diffuseStructureLayer) {
     updateDiffuseStructureVisibility(diffuseStructureLayer, categoryVisibility, radiusPc);
     diffuseStructureLayer.group.scale.setScalar(sizeScale);
+  }
+  // Issue #11 (Epic #7): REALWORLD's star layer is likewise not a
+  // `CatalogBucket` - its own category-toggle/radius-filter visibility and
+  // "Object size" slider scaling are applied from this same chokepoint,
+  // mirroring the diffuse-structure layer immediately above. Only ever
+  // non-null while `starRenderStyle === "REALWORLD"` (see its own
+  // docstring), so this is a no-op under MODEL.
+  if (realworldStarLayer) {
+    updateRealworldStarVisibility(realworldStarLayer, categoryVisibility, radiusPc);
+    updateRealworldStarSizeScale(realworldStarLayer, sizeScale);
   }
   refreshSelectionVisibility();
 }
@@ -1757,7 +1823,17 @@ function currentlyVisiblePositions(): [number, number, number][] {
         (obj): [number, number, number] => obj.position_pc,
       )
     : [];
-  return [...bucketPositions, ...diffusePositions];
+  // Issue #11 (Epic #7): mirrors the diffuse-structure union just above -
+  // REALWORLD's stars likewise aren't in `catalogBuckets`, so without this
+  // "Fit all"/"Show all" framing would silently exclude every star (~707 of
+  // them) the moment REALWORLD is active. Only ever non-empty under
+  // REALWORLD (see `realworldStarLayer`'s own docstring).
+  const realworldStarPositions = realworldStarLayer
+    ? visibleRealworldStarObjects(realworldStarLayer, categoryVisibility, radiusPc).map(
+        (obj): [number, number, number] => obj.position_pc,
+      )
+    : [];
+  return [...bucketPositions, ...diffusePositions, ...realworldStarPositions];
 }
 
 function applyCameraPose(pose: CameraPose): void {
@@ -2159,10 +2235,31 @@ loadScene()
     );
     catalogBuckets = catalogLayer.buckets;
     // Issue #10 (Epic #7): kept as its own module binding (see its
-    // declaration) so `rebuildStarBucket`'s live Settings-panel toggle
+    // declaration) so `rebuildStarRenderLayer`'s live Settings-panel toggle
     // handler can add/remove just the star bucket's mesh from it later.
     catalogGroup = catalogLayer.group;
     scene.add(catalogGroup);
+
+    // Issue #11 (Epic #7): the stable star-object list `rebuildStarRenderLayer`
+    // reuses on every future style toggle - see its own declaration's
+    // docstring for why this can't just be read back out of a `CatalogBucket`
+    // (REALWORLD has none).
+    starCatalogObjects = pointMarkerObjects.filter((obj) => STAR_OBJECT_TYPES.has(obj.object_type));
+    // Issue #11: `createCatalogObjectGroup`/`buildStarCatalogBucket` above
+    // already skip building a `star` `CatalogBucket` at all when
+    // `starRenderStyle === "REALWORLD"` (see that function's docstring) -
+    // this is the initial build of REALWORLD's own separate `Points` layer
+    // for that case, mirroring `rebuildStarRenderLayer`'s own REALWORLD
+    // branch exactly (kept in sync deliberately, not by sharing code, since
+    // this one-time initial build has no "old layer to tear down first" step
+    // that function needs).
+    if (starRenderStyle === "REALWORLD") {
+      const initialRealworldLayer = buildRealworldStarLayer(starCatalogObjects);
+      if (initialRealworldLayer) {
+        catalogGroup.add(initialRealworldLayer.points);
+        realworldStarLayer = initialRealworldLayer;
+      }
+    }
 
     // Story #315 (extended to Story #320): the extended-volume layer for
     // every `DIFFUSE_STRUCTURE_OBJECT_TYPES` type - built from the FULL,
@@ -2295,7 +2392,7 @@ loadScene()
       onStarRenderStyleChange: (style) => {
         starRenderStyle = style;
         saveStarRenderStyle(style, browserLocalStorage());
-        rebuildStarBucket();
+        rebuildStarRenderLayer();
       },
       onExportPng: () => {
         // Render both the WebGL canvas and re-sync the label layer just

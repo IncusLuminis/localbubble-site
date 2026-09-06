@@ -12,12 +12,12 @@
  * `RADIUS_PRESETS_PC`/`DEFAULT_RADIUS_PC` import from `scene/radiusFilter`).
  *
  * `MODEL` is today's exact, unchanged star-rendering code path - issue #10's
- * own explicit requirement is that this Story must not alter `MODEL`'s
- * behavior/appearance/performance in any way. `REALWORLD` is, for this Story
- * only, a stub alias of `MODEL` (see `scene/objects.ts`'s
- * `buildRealworldStarInstances`) so the switch mechanism itself can be built
- * and verified end-to-end before Story #11 (Epic #7) gives REALWORLD its own
- * real sprite/magnitude-driven implementation.
+ * own explicit requirement was that that Story must not alter `MODEL`'s
+ * behavior/appearance/performance in any way, and issue #11 (Epic #7, Story
+ * 2/4) preserves that constraint. `REALWORLD` was, for issue #10 only, a stub
+ * alias of `MODEL`; issue #11 replaced that stub with its own real
+ * `THREE.Points`-based twinkle-sprite/magnitude-driven-size system (see
+ * `scene/realworldStars.ts`).
  */
 export type StarRenderStyle = "MODEL" | "REALWORLD";
 

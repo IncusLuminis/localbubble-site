@@ -1212,14 +1212,16 @@ describe("createCatalogObjectGroup star-bucket instanceColor (issue #173)", () =
 });
 
 /**
- * Issue #10 (Epic #7, Story 1/4): the MODEL/REALWORLD star-rendering-style
- * dispatch point. `REALWORLD` is a deliberate stub for THIS Story only - it
- * must produce a BYTE-IDENTICAL star bucket to `MODEL` (same matrices, same
- * per-instance colors), proving the switch mechanism fires correctly without
- * yet having any real independent visual system to compare against (that's
- * Story #11's job). These tests would need to change the moment Story #11
- * gives REALWORLD its own real implementation - until then, "identical to
- * MODEL" IS the correct, intended behavior.
+ * Issue #10 (Epic #7, Story 1/4) / issue #11 (Story 2/4): the MODEL/REALWORLD
+ * star-rendering-style dispatch point. Issue #10 originally made `REALWORLD`
+ * a deliberate stub - a byte-identical alias of `MODEL` - purely to prove the
+ * switch mechanism fired correctly before any real independent visual system
+ * existed. Issue #11 replaced that stub with REALWORLD's own real
+ * `THREE.Points`-based system (`scene/realworldStars.ts`), which lives
+ * entirely OUTSIDE `CatalogBucket`/`InstancedMesh` (see
+ * `buildStarCatalogBucket`'s own docstring for why) - so `createCatalogObjectGroup`
+ * now builds NO `star` `CatalogBucket` at all when `style === "REALWORLD"`,
+ * the opposite of issue #10's original "identical to MODEL" behavior.
  */
 describe("createCatalogObjectGroup star-rendering style dispatch (issue #10)", () => {
   const STYLE_STAR_A = makeObject({
@@ -1257,7 +1259,7 @@ describe("createCatalogObjectGroup star-rendering style dispatch (issue #10)", (
     });
   });
 
-  it("REALWORLD renders the star bucket byte-identical to MODEL (stub fallback, issue #10)", () => {
+  it("issue #11: REALWORLD produces NO star CatalogBucket at all (its stars render via realworldStars.ts's own Points layer instead)", () => {
     const denseBatchRadiusPc = 11.26;
     const bubbleOuterRadiusPc = 60;
     const { buckets: modelBuckets } = createCatalogObjectGroup(
@@ -1272,22 +1274,9 @@ describe("createCatalogObjectGroup star-rendering style dispatch (issue #10)", (
       bubbleOuterRadiusPc,
       "REALWORLD",
     );
-    const modelBucket = modelBuckets.find((b) => b.objectType === "star") as CatalogBucket;
-    const realworldBucket = realworldBuckets.find((b) => b.objectType === "star") as CatalogBucket;
 
-    expect(realworldBucket.radiiPc).toEqual(modelBucket.radiiPc);
-    modelBucket.objects.forEach((_, i) => {
-      const modelTransform = decomposeInstanceMatrix(modelBucket, i);
-      const realworldTransform = decomposeInstanceMatrix(realworldBucket, i);
-      expect(realworldTransform.position.toArray()).toEqual(modelTransform.position.toArray());
-      expect(realworldTransform.scale.x).toBeCloseTo(modelTransform.scale.x, 10);
-
-      const modelColor = new Color();
-      const realworldColor = new Color();
-      modelBucket.mesh.getColorAt(i, modelColor);
-      realworldBucket.mesh.getColorAt(i, realworldColor);
-      expect(realworldColor.getHex()).toBe(modelColor.getHex());
-    });
+    expect(modelBuckets.find((b) => b.objectType === "star")).toBeDefined();
+    expect(realworldBuckets.find((b) => b.objectType === "star")).toBeUndefined();
   });
 
   it("leaves every non-star bucket completely unaffected by the style parameter", () => {
@@ -1348,6 +1337,10 @@ describe("buildStarCatalogBucket (issue #10: standalone star-bucket rebuild for 
   it("defaults to MODEL/no-LOD-gating when optional parameters are omitted", () => {
     const bucket = buildStarCatalogBucket([REBUILD_STAR_A]) as CatalogBucket;
     expect(bucket.radiiPc[0]).toBe(markerRadiusPc(null, "star"));
+  });
+
+  it("issue #11: returns null for REALWORLD - no InstancedMesh/CatalogBucket is built for that style", () => {
+    expect(buildStarCatalogBucket([REBUILD_STAR_A, REBUILD_STAR_B], 11.26, 60, "REALWORLD")).toBeNull();
   });
 });
 

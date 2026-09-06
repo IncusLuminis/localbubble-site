@@ -720,8 +720,9 @@ export interface CatalogBucket {
 /** MODEL star-bucket instance construction (issue #10, Epic #7) - the exact
  * per-instance matrix + color logic this module used to inline directly in
  * `createCatalogObjectGroup`'s main loop, extracted verbatim (no behavior
- * change) so it can be dispatched by `StarRenderStyle` via
- * `buildStarInstancesForStyle` below. Mutates `mesh` in place; `radiiPc[i]`
+ * change) so `buildStarCatalogBucket` below can call it only for `MODEL`
+ * (issue #11: REALWORLD no longer dispatches through this function at all -
+ * see that function's own docstring). Mutates `mesh` in place; `radiiPc[i]`
  * must already be `starObjects[i]`'s resolved marker radius (from
  * `markerRadiusPc`, computed by the caller). */
 function buildModelStarInstances(mesh: InstancedMesh, starObjects: SceneObject[], radiiPc: number[]): void {
@@ -740,32 +741,33 @@ function buildModelStarInstances(mesh: InstancedMesh, starObjects: SceneObject[]
   }
 }
 
-/** REALWORLD star-bucket instance construction - for THIS Story (issue #10)
- * a deliberate ALIAS of `buildModelStarInstances`, not a duplicate copy: an
- * alias guarantees REALWORLD stays byte-identical to MODEL for as long as
- * this stub exists, with zero risk of the two silently drifting apart before
- * Story #11 (Epic #7) gives REALWORLD its own real sprite/magnitude-driven
- * implementation, independent of this function. */
-const buildRealworldStarInstances = buildModelStarInstances;
-
-/** The star-bucket construction dispatch point issue #10 asks for: routes to
- * one of the two functions above based on `style`. An unrecognized style
- * value (shouldn't happen - `StarRenderStyle`/`parseStarRenderStyle` in
- * `scene/starRenderStyle.ts` already constrain this at every real entry
- * point) falls back to `MODEL`, matching this codebase's "invalid optional
- * input degrades to a safe default" convention rather than throwing. */
-function buildStarInstancesForStyle(
-  style: StarRenderStyle,
-  mesh: InstancedMesh,
-  starObjects: SceneObject[],
-  radiiPc: number[],
-): void {
-  if (style === "REALWORLD") {
-    buildRealworldStarInstances(mesh, starObjects, radiiPc);
-    return;
-  }
-  buildModelStarInstances(mesh, starObjects, radiiPc);
-}
+/** Issue #11 (Epic #7, Story 2/4): REALWORLD's star bucket is no longer an
+ * alias of `buildModelStarInstances` - it's now a genuinely separate
+ * `THREE.Points`-based rendering system (`scene/realworldStars.ts`'s
+ * `buildRealworldStarLayer`) with its own texture, per-star size/color
+ * attributes, and visibility/size-scale update functions, built and owned
+ * entirely by `main.ts` alongside (not through) `CatalogBucket`/
+ * `InstancedMesh`. It deliberately does NOT reuse `CatalogBucket`'s shape:
+ * that interface hard-codes `InstancedMesh`-only APIs (`setMatrixAt`,
+ * `instanceColor`, the zero-scale-instance hiding convention) throughout
+ * `objects.ts`/`picking.ts`, none of which have an equivalent on a `Points`
+ * object with no per-vertex transform matrices at all - forcing the two
+ * systems into one shared interface would mean sprinkling
+ * `instanceof Points` branches through every function that walks
+ * `CatalogBucket[]` today (`setInstanceVisibility`, `updateDenseBatchLod`,
+ * `updateCatalogSizeScale`, `updateBackgroundDimming`, `picking.ts`'s
+ * `pickSceneObject`/`findTapFallbackObject`) for a style that explicitly
+ * doesn't need most of what those functions do (no per-frame camera-distance
+ * LOD radius, no picking support yet - see `realworldStars.ts`'s own
+ * docstring for the full reasoning).
+ *
+ * Concretely, this means `buildStarCatalogBucket` below now returns `null`
+ * for `style === "REALWORLD"` - REALWORLD has NO `CatalogBucket`/
+ * `InstancedMesh` entry for the `star` type at all, matching this function's
+ * own pre-existing "return `null`, nothing to build" convention for an empty
+ * `starObjects` input. `main.ts`'s `rebuildStarRenderLayer` is what builds
+ * (and tears down) the separate `RealworldStarLayer` instead, exactly
+ * mirroring how it already calls this function for `MODEL`. */
 
 /** Builds the `star`-type `CatalogBucket` on its own - extracted out of
  * `createCatalogObjectGroup`'s main per-type loop (issue #10, Epic #7) so it
@@ -776,16 +778,19 @@ function buildStarInstancesForStyle(
  * losing `updateBackgroundDimming`'s current dimmed-material state) every
  * other bucket too.
  *
- * Returns `null` for an empty `starObjects` (nothing to build), matching
- * `createCatalogObjectGroup`'s own loop, which likewise only ever creates a
- * bucket for a type with at least one object present. */
+ * Returns `null` for an empty `starObjects` input (nothing to build,
+ * matching `createCatalogObjectGroup`'s own loop, which likewise only ever
+ * creates a bucket for a type with at least one object present), AND
+ * (issue #11) for `style === "REALWORLD"` - see this section's own docstring
+ * above for why REALWORLD's star rendering deliberately lives entirely
+ * outside the `CatalogBucket`/`InstancedMesh` system instead. */
 export function buildStarCatalogBucket(
   starObjects: SceneObject[],
   denseBatchRadiusPc = 0,
   bubbleOuterRadiusPc: number | null = null,
   style: StarRenderStyle = DEFAULT_STAR_RENDER_STYLE,
 ): CatalogBucket | null {
-  if (starObjects.length === 0) {
+  if (starObjects.length === 0 || style === "REALWORLD") {
     return null;
   }
 
@@ -798,7 +803,7 @@ export function buildStarCatalogBucket(
     markerRadiusPc(obj.size_pc, obj.object_type, obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc),
   );
 
-  buildStarInstancesForStyle(style, mesh, starObjects, radiiPc);
+  buildModelStarInstances(mesh, starObjects, radiiPc);
 
   return { objectType: "star", mesh, objects: starObjects, radiiPc };
 }
