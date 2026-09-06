@@ -560,6 +560,18 @@ export function setMarkerOpacityTuning(patch: Partial<MarkerOpacityTuning>): voi
   Object.assign(markerOpacityTuning, patch);
 }
 
+/** Issue #19 (Epic #7): a snapshot of the current tuning values - this
+ * module's own state is otherwise write-only from the outside
+ * (`setMarkerOpacityTuning` above has no matching getter), but
+ * `ui/settingsPersistence.ts`'s "persist the CURRENT Settings state" needs
+ * to read it back at Accept-time and on every subsequent change, rather than
+ * `main.ts` keeping its own second, redundant copy of the same two numbers
+ * just to have something to read. Returns a fresh copy (not the live
+ * object) so a caller can't mutate this module's state by reference. */
+export function getMarkerOpacityTuning(): MarkerOpacityTuning {
+  return { ...markerOpacityTuning };
+}
+
 /** Exported for tests - the type-aware opacity a marker's material should
  * use, mirroring `markerRadiusPc`'s tiering (see the comment above). */
 export function markerOpacityFor(objectType: string): number {
