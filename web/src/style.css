@@ -31,8 +31,21 @@ body {
   position: relative;
 }
 
+/* Issue #35: without this, the browser's own native touch-gesture
+   recognizer competes with `OrbitControls`' JS-based `pointermove` handling
+   for a single-finger drag on mobile - the browser can intermittently claim
+   the gesture as its own pan/scroll attempt, fighting or interrupting the
+   JS-driven camera rotation (reported as the scene feeling like it rotates
+   the "wrong way" under a dragging finger). `body`/`html`'s `overflow:
+   hidden` above only stops page *scrolling*; `touch-action` is a separate,
+   necessary mechanism. The Time Controls player's own arc-slider tracks
+   already needed and use this same fix (`.player-rate-arc-track`/
+   `.player-time-arc-track` below) - the main viewport canvas itself was
+   simply missed. Desktop mouse dragging is completely unaffected by
+   `touch-action` (it only governs touch/pen input). */
 #app canvas {
   display: block;
+  touch-action: none;
 }
 
 /* Issue #201: swapped back to the actual bottom-left corner (12px). Story

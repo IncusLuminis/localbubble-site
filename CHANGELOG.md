@@ -5,6 +5,15 @@ loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Fixed
+
+- The 3D viewport canvas had no `touch-action` rule, letting the browser's
+  native touch-gesture recognizer compete with `OrbitControls`' own
+  single-finger-drag camera rotation on mobile - reported as the scene
+  feeling like it rotates the "wrong way" under a dragging finger. Set
+  `touch-action: none` on the canvas so the browser never intercepts the
+  gesture.
+
 ## [1.1.0] - 2026-09-06
 
 ### Added
