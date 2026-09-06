@@ -242,9 +242,11 @@ describe("applyRealworldStarTuning", () => {
     expect(layer.material.uniforms.uColorBloomCompensation.value).toBe(
       DEFAULT_REALWORLD_STAR_TUNING.colorBloomCompensation,
     );
-    // uNormalBoost's shader default (1) already matches the tuned default -
-    // confirms applying it is still a no-op-safe assignment, not skipped.
+    // uNormalBoost's shader neutral default is 1 (the "off" value); issue
+    // #18's further-converged tuned default (3.2) is a genuine change from
+    // that bare-build value, confirming this is a real re-init and not a
+    // skipped/no-op assignment.
     expect(before.value).toBe(1);
-    expect(layer.material.uniforms.uNormalBoost.value).toBe(1);
+    expect(layer.material.uniforms.uNormalBoost.value).toBe(DEFAULT_REALWORLD_STAR_TUNING.normalBoost);
   });
 });
