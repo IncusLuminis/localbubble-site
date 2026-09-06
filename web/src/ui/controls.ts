@@ -12,6 +12,10 @@ import { STAR_RENDER_STYLES, type StarRenderStyle } from "../scene/starRenderSty
  * this replaces. All underlying category/structure/labels/radius/size/
  * camera-preset/export callback wiring is unchanged from that panel - only
  * presentation and entry points are reorganized here.
+ *
+ * Issue #20: Save PNG export subsequently moved from the Settings panel to
+ * the Camera panel (a camera/view-export concern, not a settings one) -
+ * `onExportPng` wiring itself is unchanged, only which panel renders it.
  */
 
 export interface ToggleItem {
@@ -132,13 +136,14 @@ export function createLayersPanel(options: LayersPanelOptions): LayersPanelHandl
   };
 }
 
-// --- Settings panel (toolbar position #3): Radius + Object size + Save
-// PNG export - confirmed placement with the human owner (Story #257 brief). ---
+// --- Settings panel (toolbar position #3): Radius + Object size - confirmed
+// placement with the human owner (Story #257 brief). Save PNG export moved
+// out to the Camera panel (issue #20) since it's a camera/view-export
+// concern, not a settings one. ---
 
 export interface SettingsPanelOptions {
   onRadiusChange: (radiusPc: number) => void;
   onSizeScaleChange: (scale: number) => void;
-  onExportPng: () => void;
   /** Issue #10 (Epic #7): the persisted style to preselect this panel's new
    * "Star Rendering" control with at build time - `main.ts` passes whatever
    * `loadStarRenderStyle` already resolved (from `localStorage`, or the
@@ -224,15 +229,6 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   sizeSection.body.appendChild(sizeSlider);
   panel.appendChild(sizeSection.section);
 
-  // --- Export (spec §39) ---
-  const exportSection = makeSection("Export");
-  const exportButton = document.createElement("button");
-  exportButton.type = "button";
-  exportButton.textContent = "Save PNG";
-  exportButton.addEventListener("click", () => options.onExportPng());
-  exportSection.body.appendChild(exportButton);
-  panel.appendChild(exportSection.section);
-
   return {
     element: panel,
     setOpen(open: boolean) {
@@ -251,6 +247,7 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
 export interface CameraPanelOptions {
   cameraPresets: CameraPresetItem[];
   onCameraPreset: (key: string) => void;
+  onExportPng: () => void;
 }
 
 export function createCameraPanel(options: CameraPanelOptions): SidePanelHandle {
@@ -268,6 +265,16 @@ export function createCameraPanel(options: CameraPanelOptions): SidePanelHandle 
   }
   cameraSection.body.appendChild(cameraButtonRow);
   panel.appendChild(cameraSection.section);
+
+  // --- Export (spec §39) - moved here from the Settings panel (issue #20):
+  // framing/presets/view export are all camera-adjacent concerns. ---
+  const exportSection = makeSection("Export");
+  const exportButton = document.createElement("button");
+  exportButton.type = "button";
+  exportButton.textContent = "Save PNG";
+  exportButton.addEventListener("click", () => options.onExportPng());
+  exportSection.body.appendChild(exportButton);
+  panel.appendChild(exportSection.section);
 
   return {
     element: panel,
