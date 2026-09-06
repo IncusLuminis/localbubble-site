@@ -1,6 +1,18 @@
-import { Camera, InstancedMesh, Matrix4, Mesh, Object3D, Quaternion, Raycaster, Vector2, Vector3 } from "three";
+import {
+  BufferAttribute,
+  Camera,
+  InstancedMesh,
+  Matrix4,
+  Mesh,
+  Object3D,
+  Quaternion,
+  Raycaster,
+  Vector2,
+  Vector3,
+} from "three";
 import type { CatalogBucket } from "./objects";
 import type { DiffuseStructureMesh } from "./diffuseStructures";
+import type { RealworldStarLayer } from "./realworldStars";
 import type { SceneObject } from "./sceneTypes";
 
 /**
@@ -73,6 +85,16 @@ export function toNdc(clientX: number, clientY: number, rect: DOMRect): Vector2 
  * exists and how it's scoped; omitting the argument (every pre-#5 caller,
  * including every pre-#5 test in `test/picking.test.ts`) keeps this
  * function's exact prior behavior with zero change.
+ *
+ * Issue #12: accepts an optional `realworldStarLayer` - `main.ts` only ever
+ * passes one non-null while `starRenderStyle === "VISUAL"` (see that
+ * variable's own docstring: MODEL has no `RealworldStarLayer` at all while
+ * active, so this parameter naturally does nothing for MODEL). When given
+ * and the exact raycast above finds nothing, tries `pickRealworldStar`
+ * (below) before falling through to the bucket tap-tolerance fallback -
+ * see that function's own docstring for why VISUAL stars need a dedicated
+ * screen-space mechanism rather than reusing `findTapFallbackObject` or
+ * `Raycaster.params.Points.threshold` directly.
  */
 export function pickSceneObject(
   raycaster: Raycaster,
@@ -81,6 +103,7 @@ export function pickSceneObject(
   buckets: CatalogBucket[],
   diffuseMeshes: readonly DiffuseStructureMesh[] = [],
   tapTolerance?: TapTolerance,
+  realworldStarLayer?: RealworldStarLayer | null,
 ): SceneObject | null {
   raycaster.setFromCamera(ndc, camera);
 
@@ -113,6 +136,19 @@ export function pickSceneObject(
     const diffuseObject = meshToObject.get(hit.object as Mesh);
     if (diffuseObject) {
       return diffuseObject;
+    }
+  }
+
+  // `pickRealworldStar` needs the same canvas CSS-pixel dimensions as the
+  // bucket tap-fallback (both convert an NDC delta to an on-screen pixel
+  // distance) - `main.ts`'s click handler always supplies `tapTolerance`
+  // unconditionally in practice, so gating on it here (rather than adding a
+  // second, separately-optional canvas-dimensions parameter) costs nothing
+  // real while keeping `pickRealworldStar` itself free of undefined-checks.
+  if (realworldStarLayer && tapTolerance) {
+    const starHit = pickRealworldStar(camera, ndc, realworldStarLayer, tapTolerance);
+    if (starHit) {
+      return starHit;
     }
   }
 
@@ -322,6 +358,191 @@ export function findTapFallbackObject(
         bestDistancePx = distancePx;
         bestObject = bucket.objects[index] ?? null;
       }
+    }
+  }
+
+  return bestObject;
+}
+
+const scratchStarPosition = new Vector3();
+const scratchStarNdc = new Vector3();
+
+/** The live shader-uniform values `computeRealworldStarRadiusPx` needs -
+ * lifted straight out of a `RealworldStarLayer.material.uniforms` by
+ * `pickRealworldStar` so picking always matches whatever the user is
+ * CURRENTLY seeing (Settings-panel tuning sliders included), never a stale
+ * snapshot. Named/shaped as its own interface purely so the pure-math
+ * function below can be unit-tested with plain numbers, independent of a
+ * real `ShaderMaterial`. */
+export interface RealworldStarSizeTuning {
+  sizeScale: number;
+  normalBoost: number;
+  brilliantBoost: number;
+  minSizePx: number;
+  attenStartPc: number;
+  attenStrength: number;
+}
+
+/**
+ * Issue #12: the on-screen CSS-pixel RADIUS a VISUAL star's sprite actually
+ * renders at right now - i.e. `realworldStars.ts`'s `VERTEX_SHADER` gl_PointSize
+ * math, mirrored exactly (read that shader's source fresh if it ever changes;
+ * this comment describes the formula as of issue #12, not a promise it'll
+ * stay in sync automatically). Deliberately reimplemented in plain JS rather
+ * than read back from the GPU: there is no way to ask a `ShaderMaterial` "what
+ * would gl_PointSize resolve to for vertex i" without literally recomputing
+ * the same expression, and doing so here (once per click, over ~800-1100
+ * stars) is trivially cheap compared to a frame's own render cost.
+ *
+ * One simplification made deliberately: the shader's `gl_PointSize` is in
+ * DEVICE pixels (`aSize * uPixelRatio * ...`, floored by `uMinSizePx *
+ * uPixelRatio`) because that's what GLSL's `gl_PointSize` is specified in,
+ * but `pickSceneObject`'s whole coordinate system (canvas `getBoundingClientRect`
+ * width/height, `apparentRadiusPx`, `findTapFallbackObject`) is CSS pixels
+ * throughout. `uPixelRatio` cancels exactly when converting device px back to
+ * CSS px (`deviceSize / uPixelRatio`), on both the multiplied term AND the
+ * floor term, so this function never needs to know the current
+ * `devicePixelRatio` at all - it works entirely in the same CSS-pixel `aSize`
+ * baseline `realworldStars.ts`'s own docstring describes `aSize` as being
+ * defined in.
+ *
+ * Returns `0` for a hidden star (`aSize <= 0`, the exact same
+ * `HIDDEN_SPRITE_PX`/category-radius-filter gate the shader itself checks) so
+ * a caller can treat "radius 0" as "never pickable" without a separate
+ * visibility flag. */
+export function computeRealworldStarRadiusPx(
+  aSize: number,
+  variant: number,
+  sunDistancePc: number,
+  tuning: RealworldStarSizeTuning,
+): number {
+  if (aSize <= 0) {
+    return 0;
+  }
+  // mix(uNormalBoost, uBrilliantBoost, step(0.5, aVariant)): aVariant is
+  // always exactly 0 or 1 (buildRealworldStarLayer), so this is just a
+  // two-way branch, not a real interpolation.
+  const boost = variant >= 0.5 ? tuning.brilliantBoost : tuning.normalBoost;
+  const atten =
+    sunDistancePc > tuning.attenStartPc
+      ? Math.pow(tuning.attenStartPc / sunDistancePc, tuning.attenStrength)
+      : 1;
+  const diameterCssPx = Math.max(aSize * tuning.sizeScale * boost * atten, tuning.minSizePx);
+  return diameterCssPx / 2;
+}
+
+/**
+ * Issue #12 ("Story 3/4 REALWORLD ... picking"): VISUAL/REALWORLD's stars
+ * live in a single `THREE.Points` object (`realworldStars.ts`), not
+ * `CatalogBucket` `InstancedMesh`es - `pickSceneObject`'s ordinary
+ * `Raycaster.intersectObjects` pass never targets `layer.points` at all (see
+ * that function's own docstring), so this is the ENTIRE picking mechanism for
+ * a VISUAL star, not a last-resort fallback the way `findTapFallbackObject`
+ * is for MODEL.
+ *
+ * Why screen-space, not `Raycaster.params.Points.threshold`: that native
+ * mechanism is a single WORLD-SPACE radius, uniform across every point in the
+ * `Points` object. Two properties of VISUAL's own rendering make a uniform
+ * world-space threshold a poor fit here specifically:
+ *  1. VISUAL's sprites deliberately have NO `sizeAttenuation` (see
+ *     `realworldStars.ts`'s own `VERTEX_SHADER` docstring) - a star's
+ *     apparent SCREEN size is fixed regardless of camera distance, by
+ *     design. A world-space threshold's on-screen footprint shrinks as the
+ *     camera moves away (same as any world-space quantity under
+ *     perspective), so it would drift completely out of sync with the
+ *     fixed-pixel sprites it's supposed to match at any zoom level other
+ *     than the one it was tuned for.
+ *  2. Even at one fixed camera distance, `gl_PointSize` varies enormously
+ *     star-to-star - a ~4px faint M-dwarf up to a 100+px "brilliant" giant,
+ *     after the brightness-tier size table, the Settings-panel boost/floor
+ *     sliders, and the Sun-relative distance falloff are all applied. One
+ *     uniform threshold can't correctly match every star's own actual
+ *     on-screen footprint: generous enough for a giant's edge and it's a
+ *     false-positive magnet among a tight faint cluster; tight enough for a
+ *     faint dwarf and it clips a giant's own visible disc.
+ * Recomputing a per-star, size-aware CSS-pixel radius from the exact same
+ * live formula the vertex shader itself uses (`computeRealworldStarRadiusPx`
+ * above) picks exactly what the user visually SEES, at every star's own
+ * actual size, independent of zoom - the tradeoff is a CPU-side loop over
+ * every star per click rather than one native raycast call, acceptable
+ * because picking only runs on click/tap (not per frame) against a catalog
+ * of ~800-1100 stars.
+ *
+ * Visibility: reads each star's LIVE `aSize` buffer attribute value (already
+ * zeroed by `updateRealworldStarVisibility` for a category/radius-filtered-
+ * out star - see `HIDDEN_SPRITE_PX`) rather than re-deriving visibility from
+ * scratch, so this can never disagree with what `updateRealworldStarVisibility`
+ * last wrote and can never pick a star currently hidden.
+ *
+ * Tie-breaking mirrors `findTapFallbackObject`'s own explicit design choice
+ * (nearest-to-the-click-point-in-screen-pixels, not nearest-to-camera-in-3D):
+ * among every star whose own resolved on-screen radius covers the click
+ * point, the one whose projected center is closest to the click wins - the
+ * natural reading of "which star did the user actually click," and the same
+ * principle `pickSceneObject`'s ordinary raycast pass gets for free from
+ * `Raycaster.intersectObjects` already returning hits nearest-ray-origin-first
+ * for true 3D geometry. */
+export function pickRealworldStar(
+  camera: Camera,
+  ndc: Vector2,
+  layer: RealworldStarLayer,
+  tapTolerance: TapTolerance,
+): SceneObject | null {
+  const { canvasWidthPx, canvasHeightPx } = tapTolerance;
+  const sizeAttribute = layer.geometry.getAttribute("aSize") as BufferAttribute;
+  const variantAttribute = layer.geometry.getAttribute("aVariant") as BufferAttribute;
+  const uniforms = layer.material.uniforms;
+  const tuning: RealworldStarSizeTuning = {
+    sizeScale: uniforms.uSizeScale.value,
+    normalBoost: uniforms.uNormalBoost.value,
+    brilliantBoost: uniforms.uBrilliantBoost.value,
+    minSizePx: uniforms.uMinSizePx.value,
+    attenStartPc: uniforms.uAttenStartPc.value,
+    attenStrength: uniforms.uAttenStrength.value,
+  };
+
+  scratchCameraForward.setFromMatrixColumn(camera.matrixWorld, 2).negate();
+
+  let bestObject: SceneObject | null = null;
+  let bestDistancePx = Number.POSITIVE_INFINITY;
+
+  for (let i = 0; i < layer.objects.length; i++) {
+    const aSize = sizeAttribute.getX(i);
+    if (aSize <= 0) {
+      continue; // Category/radius-filtered-out star (HIDDEN_SPRITE_PX) - never pickable.
+    }
+
+    const [x, y, z] = layer.objects[i].position_pc;
+    scratchStarPosition.set(x, y, z);
+
+    // Behind the camera - same on-axis check `apparentRadiusPx` uses above;
+    // `Vector3.project` on a behind-camera point produces a NDC coordinate
+    // that isn't meaningfully comparable to the click's own NDC position.
+    scratchEdgePosition.copy(scratchStarPosition).sub(camera.position);
+    if (scratchEdgePosition.dot(scratchCameraForward) <= 0) {
+      continue;
+    }
+
+    // Sun-relative distance, NOT camera distance - matches the shader's own
+    // `length(position.xyz)` exactly (this catalog's positions are already
+    // heliocentric, see realworldStars.ts's VERTEX_SHADER docstring).
+    const sunDistancePc = scratchStarPosition.length();
+    const radiusPx = computeRealworldStarRadiusPx(aSize, variantAttribute.getX(i), sunDistancePc, tuning);
+    if (radiusPx <= 0) {
+      continue;
+    }
+
+    scratchStarNdc.copy(scratchStarPosition).project(camera);
+    if (!Number.isFinite(scratchStarNdc.x) || !Number.isFinite(scratchStarNdc.y)) {
+      continue;
+    }
+    const dxPx = ((scratchStarNdc.x - ndc.x) / 2) * canvasWidthPx;
+    const dyPx = ((ndc.y - scratchStarNdc.y) / 2) * canvasHeightPx;
+    const distancePx = Math.hypot(dxPx, dyPx);
+
+    if (distancePx <= radiusPx && distancePx < bestDistancePx) {
+      bestDistancePx = distancePx;
+      bestObject = layer.objects[i];
     }
   }
 
