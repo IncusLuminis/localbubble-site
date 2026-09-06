@@ -11,6 +11,7 @@ import {
   createCatalogObjectGroup,
   DEFAULT_MARKER_OPACITY_TUNING,
   excludeDedicatedMarkerObjects,
+  getMarkerOpacityTuning,
   instanceColorFor,
   isCatalogObjectVisible,
   isSelectedObjectVisible,
@@ -805,6 +806,21 @@ describe("setMarkerOpacityTuning (issue #18 follow-up)", () => {
     setMarkerOpacityTuning(DEFAULT_MARKER_OPACITY_TUNING);
     expect(markerOpacityFor("star")).toBe(0.85);
     expect(markerOpacityFor("molecular_cloud")).toBe(0.35);
+  });
+
+  it("getMarkerOpacityTuning reads back the current tuning (issue #19)", () => {
+    expect(getMarkerOpacityTuning()).toEqual(DEFAULT_MARKER_OPACITY_TUNING);
+    setMarkerOpacityTuning({ opaqueMarkerOpacity: 0.42 });
+    expect(getMarkerOpacityTuning()).toEqual({
+      opaqueMarkerOpacity: 0.42,
+      extendedStructureOpacity: DEFAULT_MARKER_OPACITY_TUNING.extendedStructureOpacity,
+    });
+  });
+
+  it("getMarkerOpacityTuning returns a fresh copy, not a live reference", () => {
+    const snapshot = getMarkerOpacityTuning();
+    setMarkerOpacityTuning({ opaqueMarkerOpacity: 0.1 });
+    expect(snapshot.opaqueMarkerOpacity).toBe(DEFAULT_MARKER_OPACITY_TUNING.opaqueMarkerOpacity);
   });
 });
 

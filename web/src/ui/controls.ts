@@ -1,4 +1,4 @@
-import { RADIUS_PRESETS_PC, DEFAULT_RADIUS_PC } from "../scene/radiusFilter";
+import { RADIUS_PRESETS_PC } from "../scene/radiusFilter";
 import { STAR_RENDER_STYLES, type StarRenderStyle } from "../scene/starRenderStyle";
 import type { RealworldStarTuning } from "../scene/realworldStars";
 import type { MarkerOpacityTuning } from "../scene/objects";
@@ -193,8 +193,24 @@ export interface BloomTuning {
   threshold: number;
 }
 
+/** Issue #18's final tuned bloom-pass defaults (human owner decision, from
+ * live testing against the real Settings panel - supersedes issue #16's
+ * earlier debug-HUD-tuned numbers). Lives here (rather than in `main.ts`,
+ * where it originated) so it's one shared value `main.ts`'s own `bloomPass`
+ * construction, this panel's "Bloom" slider defaults, AND (issue #19)
+ * `ui/settingsPersistence.ts`'s `DEFAULT_PERSISTED_SETTINGS` can all import,
+ * rather than two or three separately-hardcoded copies drifting apart. */
+export const DEFAULT_BLOOM_TUNING: BloomTuning = { strength: 1, radius: 0.4, threshold: 0.16 };
+
 export interface SettingsPanelOptions {
+  /** Issue #19 (Epic #7): the persisted (or default) radius to preselect
+   * this panel's "Max Distance from Sun" `<select>` with at build time -
+   * same idea as `starRenderStyle` below, just for this control. */
+  radiusPc: number;
   onRadiusChange: (radiusPc: number) => void;
+  /** Issue #19 (Epic #7): same idea as `radiusPc` above, for the "Object
+   * size" slider. */
+  sizeScale: number;
   onSizeScaleChange: (scale: number) => void;
   /** Issue #10 (Epic #7): the persisted style to preselect this panel's new
    * "Star Rendering" control with at build time - `main.ts` passes whatever
@@ -342,7 +358,7 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
     const option = document.createElement("option");
     option.value = String(radiusPc);
     option.textContent = radiusPc >= 1000 ? `${radiusPc / 1000} kpc` : `${radiusPc} pc`;
-    if (radiusPc === DEFAULT_RADIUS_PC) {
+    if (radiusPc === options.radiusPc) {
       option.selected = true;
     }
     radiusSelect.appendChild(option);
@@ -389,7 +405,7 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   sizeSlider.min = "0.5";
   sizeSlider.max = "3";
   sizeSlider.step = "0.1";
-  sizeSlider.value = "1";
+  sizeSlider.value = String(options.sizeScale);
   sizeSlider.className = "size-slider";
   sizeSlider.addEventListener("input", () => {
     options.onSizeScaleChange(Number(sizeSlider.value));

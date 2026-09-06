@@ -1652,3 +1652,44 @@ body {
   font-size: 16px;
   line-height: 1;
 }
+
+/* Issue #19 (Epic #7): the first-visit cookie-consent banner
+ * (`ui/cookieConsentBanner.ts`) - keeps `.panel`'s shared dark-theme box
+ * styling (background/border/text color/shadow/button rules) but overrides
+ * its top-left-anchored positioning to instead dock full-width to the
+ * viewport bottom, the standard placement for a banner like this. Same
+ * override pattern `.side-panel`/`.info-dialog` already use on `.panel` for
+ * their own different placements, not a new convention. `z-index: 1000`
+ * matches `.info-dialog-scrim`/`.search-dialog-scrim`'s own value (see that
+ * rule's docstring for the full z-index ordering in this app) - this banner
+ * must always be visible above every other panel/toolbar/label the moment
+ * it's shown, same "always topmost" reasoning as those two modals. */
+.cookie-consent-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  width: auto;
+  max-height: none;
+  border-radius: 0;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 14px 20px;
+}
+
+.cookie-consent-banner p {
+  margin: 0;
+  flex: 1 1 320px;
+  line-height: 1.5;
+}
+
+.cookie-consent-banner-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
