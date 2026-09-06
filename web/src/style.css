@@ -216,8 +216,70 @@ body {
   cursor: not-allowed;
 }
 
+/* Issue #18 follow-up: compact pill-shaped two-segment toggle
+   (`ui/controls.ts`'s `createStarRenderStyleToggle`) replacing the
+   previously-unstyled "Star Rendering" `<select>` (human owner feedback:
+   "чудовищно"/hideous - it had no dedicated rule here at all, just default
+   browser `<select>` chrome). One shared rounded pill container with
+   `overflow: hidden` clipping both segment buttons to its own rounded
+   corners, rather than each button rounding its own - reads as one control
+   with two positions, not two separate buttons that happen to touch. */
+.star-render-toggle {
+  display: flex;
+  border: 1px solid rgba(143, 163, 200, 0.35);
+  border-radius: 999px;
+  overflow: hidden;
+  background: #111726;
+}
+
+.star-render-toggle-option {
+  flex: 1 1 50%;
+  background: transparent;
+  color: #b7c4de;
+  border: none;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+}
+
+.star-render-toggle-option:hover {
+  background: rgba(143, 163, 200, 0.12);
+}
+
+/* The active segment - same blue-cyan "this is the current choice" accent
+   `.player-transport.active` (this file, player-panel section) already
+   established for a persistent two-state control, deliberately NOT
+   `.toolbar-button.active`'s green (that color specifically means "vectors
+   are ON", not "this is the selected option" - a different semantic this
+   toggle doesn't share). */
+.star-render-toggle-option.active {
+  background: rgba(95, 201, 255, 0.22);
+  color: #5fc9ff;
+}
+
+.star-render-toggle-option.active:hover {
+  background: rgba(95, 201, 255, 0.3);
+}
+
 .size-slider {
   width: 100%;
+}
+
+/* Issue #18 follow-up: MODEL-only tuning section (Marker opacity/Diffuse
+   structure opacity sliders) - hidden by default, shown via `.visible` when
+   `ui/controls.ts`'s `createSettingsPanel` toggles it on selecting MODEL.
+   Exact same on/off convention as `.realworld-tuning` below (and
+   `.side-panel.open`/`#player-panel.open` above it) - one shared show/hide
+   mechanism for every conditional group in this panel, not a second one
+   invented for this section. */
+.model-tuning {
+  display: none;
+}
+
+.model-tuning.visible {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Issue #18: REALWORLD-only tuning groups (Bloom/Stars/Spikes/Distance),
