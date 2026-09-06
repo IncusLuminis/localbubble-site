@@ -17,6 +17,7 @@ import {
   MISTY_CLOUD_SPRITE_COUNT,
   randomPointStrictlyInsideUnitSphere,
   updateDiffuseStructureDimming,
+  updateDiffuseStructureSizeScale,
   updateDiffuseStructureVisibility,
   visibleDiffuseStructureObjects,
 } from "../src/scene/diffuseStructures";
@@ -586,6 +587,124 @@ describe("updateDiffuseStructureVisibility", () => {
     updateDiffuseStructureVisibility(layer, on, null);
     expect(layer.meshes[0].mesh.visible).toBe(true);
     expect(layer.meshes[0].spriteGroup!.visible).toBe(true);
+  });
+});
+
+/**
+ * Issue #26: the "Object size" slider must resize each structure WITHOUT
+ * moving it. It used to scale `layer.group` itself (the shared top-level
+ * container every structure's real position lives inside, sitting at the
+ * Sun) - since Three.js composes a child's world position as
+ * `parent.matrixWorld * child.matrix`, that multiplied every structure's
+ * baked-in `position_pc` too, moving it radially. `updateDiffuseStructureSizeScale`
+ * instead scales each structure's own `mesh`/`spriteGroup`, leaving
+ * `layer.group` (and thus every child's position) untouched.
+ */
+describe("updateDiffuseStructureSizeScale", () => {
+  it("never touches the shared layer.group's own scale", () => {
+    const nebula = makeObject({ id: "ring-nebula", object_type: "planetary_nebula", size_pc: 6 });
+    const layer = createDiffuseStructureLayer([nebula]);
+    updateDiffuseStructureSizeScale(layer, 2.5);
+    expect(layer.group.scale.x).toBe(1);
+    expect(layer.group.scale.y).toBe(1);
+    expect(layer.group.scale.z).toBe(1);
+  });
+
+  it("planetary_nebula: resizes the visible mesh in place, position unchanged", () => {
+    const nebula = makeObject({
+      id: "ring-nebula",
+      object_type: "planetary_nebula",
+      size_pc: 6, // diffuseStructureRadiusPc(6) === 3pc radius
+      position_pc: [12, -34, 56],
+    });
+    const layer = createDiffuseStructureLayer([nebula]);
+    const mesh = layer.meshes[0].mesh;
+    const originalScale = mesh.scale.x;
+
+    updateDiffuseStructureSizeScale(layer, 2);
+
+    expect(mesh.position.x).toBe(12);
+    expect(mesh.position.y).toBe(-34);
+    expect(mesh.position.z).toBe(56);
+    expect(mesh.scale.x).toBeCloseTo(originalScale * 2, 10);
+  });
+
+  it("star_cluster: resizes both the invisible proxy and the decorative spriteGroup, position unchanged", () => {
+    const cluster = makeObject({
+      id: "pleiades",
+      object_type: "star_cluster",
+      size_pc: 6, // well under the 8pc proxy cap
+      position_pc: [1, 2, 3],
+    });
+    const layer = createDiffuseStructureLayer([cluster]);
+    const { mesh, spriteGroup } = layer.meshes[0];
+    const originalProxyScale = mesh.scale.x;
+
+    updateDiffuseStructureSizeScale(layer, 2);
+
+    // Proxy mesh: position untouched, scale doubled from its own baked radius.
+    expect(mesh.position.x).toBe(1);
+    expect(mesh.position.y).toBe(2);
+    expect(mesh.position.z).toBe(3);
+    expect(mesh.scale.x).toBeCloseTo(originalProxyScale * 2, 10);
+
+    // spriteGroup: position (the structure's own real coordinates) untouched;
+    // its own scale is set directly to sizeScale, resizing every child sprite
+    // around the group's own center without moving the group itself.
+    expect(spriteGroup!.position.x).toBe(1);
+    expect(spriteGroup!.position.y).toBe(2);
+    expect(spriteGroup!.position.z).toBe(3);
+    expect(spriteGroup!.scale.x).toBe(2);
+    expect(spriteGroup!.scale.y).toBe(2);
+    expect(spriteGroup!.scale.z).toBe(2);
+  });
+
+  it("caps the picking proxy's scaled radius relative to its OWN capped base, not the shape's uncapped visual radius", () => {
+    // Same huge-cloud fixture the picking-proxy-cap regression test above
+    // uses: 200pc visual radius, but the proxy itself is built capped at 8pc
+    // (Story #320). The size slider must scale from that 8pc base, not from
+    // the shape's real 200pc radius.
+    const hugeCloud = makeObject({ id: "huge-cloud", object_type: "molecular_cloud", size_pc: 400 });
+    const layer = createDiffuseStructureLayer([hugeCloud]);
+    const mesh = layer.meshes[0].mesh;
+    expect(mesh.scale.x).toBe(8);
+
+    updateDiffuseStructureSizeScale(layer, 2);
+
+    expect(mesh.scale.x).toBe(16); // 8 * 2, not 200 * 2
+  });
+
+  it("repeated calls with different scales don't compound - each call recomputes fresh from the base radius", () => {
+    const nebula = makeObject({ id: "ring-nebula", object_type: "planetary_nebula", size_pc: 6 });
+    const layer = createDiffuseStructureLayer([nebula]);
+    const mesh = layer.meshes[0].mesh;
+    const baseRadiusPc = mesh.scale.x;
+
+    updateDiffuseStructureSizeScale(layer, 3);
+    updateDiffuseStructureSizeScale(layer, 0.5);
+
+    expect(mesh.scale.x).toBeCloseTo(baseRadiusPc * 0.5, 10);
+  });
+
+  it("does not move a structure whose real position is far from the origin (regression for the exact reported bug)", () => {
+    const farAssociation = makeObject({
+      id: "far-assoc",
+      object_type: "stellar_association",
+      size_pc: 30,
+      position_pc: [500, -200, 75],
+    });
+    const layer = createDiffuseStructureLayer([farAssociation]);
+    const { mesh, spriteGroup } = layer.meshes[0];
+
+    for (const sizeScale of [0.5, 1, 2, 3]) {
+      updateDiffuseStructureSizeScale(layer, sizeScale);
+      expect(mesh.position.x).toBe(500);
+      expect(mesh.position.y).toBe(-200);
+      expect(mesh.position.z).toBe(75);
+      expect(spriteGroup!.position.x).toBe(500);
+      expect(spriteGroup!.position.y).toBe(-200);
+      expect(spriteGroup!.position.z).toBe(75);
+    }
   });
 });
 
