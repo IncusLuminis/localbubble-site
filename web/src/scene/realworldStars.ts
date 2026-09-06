@@ -66,17 +66,12 @@ import {
  *    catalog (matching this Story's own "confirm reasonable performance with
  *    the full ~820-star catalog visible" verification requirement) renders
  *    at once under REALWORLD regardless of where the camera is.
- *  - Picking/click-to-inspect - see `main.ts`'s own docstring on why this
- *    layer isn't registered with `picking.ts`'s `pickSceneObject` in this
- *    Story.
- *  - The Time Controls motion player's per-frame animated-star repositioning
- *    (`main.ts`'s `objectIndexLookup`/`CatalogObjectRef`, Story #239) - that
- *    lookup is built from `catalogBuckets` alone (`buildObjectIndexLookup`),
- *    which has no entry for any star while REALWORLD is active (this layer
- *    isn't a `CatalogBucket`). Animated RECONS stars therefore stay at their
- *    present-day catalog position under REALWORLD rather than moving with
- *    `playerTimeYears` - a real, deliberately-accepted gap for this
- *    core-rendering Story, called out in the PR description.
+ *
+ * (Picking/click-to-inspect and the Time Controls motion player were both
+ * originally out of this Story's scope too - `picking.ts`'s `pickRealworldStar`
+ * (issue #12) and this module's own `indexById`/`updateRealworldStarPositions`
+ * (issue #31, driving `main.ts`'s `animate()`) closed those two gaps in later
+ * Stories, so both now work identically under either style.)
  */
 
 /** Base sprite pixel size (CSS pixels, before the per-star
@@ -222,6 +217,13 @@ export interface RealworldStarLayer {
    * uniform) and BEFORE any visibility hiding - the value `aSize` is reset to
    * whenever `updateRealworldStarVisibility` finds a star visible again. */
   baseSizesPx: Float32Array;
+  /** `obj.id -> vertex index` for O(1) per-frame position updates from the
+   * Story #239 time-travel player (issue #31, `main.ts`'s `animate()`).
+   * `objects.ts`'s `buildObjectIndexLookup` can't cover this layer - it walks
+   * `CatalogBucket[]`, and stars have none of those under VISUAL (see this
+   * module's own docstring) - so this is VISUAL's own equivalent, built once
+   * alongside `objects`/`baseSizesPx` above. */
+  indexById: Map<string, number>;
 }
 
 /** Effective sprite pixel size used for a category-toggled-off/radius-
@@ -317,7 +319,9 @@ export function buildRealworldStarLayer(starObjects: SceneObject[]): RealworldSt
   // `buildMistyCloudGroup` sprites (no explicit culling logic either).
   points.frustumCulled = false;
 
-  return { points, geometry, material, objects: starObjects, baseSizesPx };
+  const indexById = new Map(starObjects.map((obj, i) => [obj.id, i]));
+
+  return { points, geometry, material, objects: starObjects, baseSizesPx, indexById };
 }
 
 /**
@@ -361,6 +365,28 @@ export function updateRealworldStarVisibility(
  * untouched). */
 export function updateRealworldStarSizeScale(layer: RealworldStarLayer, sizeScale: number): void {
   layer.material.uniforms.uSizeScale.value = sizeScale;
+}
+
+/** Batched per-frame position update for the Story #239 time-travel player
+ * (issue #31): MODEL's own per-star player loop (`main.ts`'s `animate()`)
+ * writes each animated star's time-extrapolated position straight into its
+ * own instance matrix. VISUAL has no instance matrices at all - every star's
+ * position lives in this one shared `position` `BufferAttribute` - so
+ * `main.ts` instead collects every animated star's new position for the
+ * current frame (via `indexById` above) and applies them all here in a
+ * single pass, flipping `needsUpdate` only once regardless of how many stars
+ * moved this frame. A no-op when `updates` is empty (e.g. the player is
+ * paused at Today) so a wasted GPU upload never happens on a still frame. */
+export function updateRealworldStarPositions(
+  layer: RealworldStarLayer,
+  updates: ReadonlyArray<{ index: number; positionPc: readonly [number, number, number] }>,
+): void {
+  if (updates.length === 0) return;
+  const positionAttribute = layer.geometry.getAttribute("position") as BufferAttribute;
+  for (const { index, positionPc } of updates) {
+    positionAttribute.setXYZ(index, positionPc[0], positionPc[1], positionPc[2]);
+  }
+  positionAttribute.needsUpdate = true;
 }
 
 /** The REALWORLD-layer analogue of `diffuseStructures.ts`'s

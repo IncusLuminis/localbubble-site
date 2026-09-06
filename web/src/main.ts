@@ -48,6 +48,7 @@ import {
   applyRealworldStarTuning,
   buildRealworldStarLayer,
   disposeRealworldStarLayer,
+  updateRealworldStarPositions,
   updateRealworldStarSizeScale,
   updateRealworldStarVisibility,
   visibleRealworldStarObjects,
@@ -1225,9 +1226,10 @@ function rebuildStarRenderLayer(): void {
   // references, which just changed for every star id under MODEL - rebuilt
   // wholesale here (cheap, well under a thousand entries, and only on this
   // rare user-triggered toggle, never per frame) rather than patched in
-  // place. Under REALWORLD this simply has no `star` entries at all (see
-  // `realworldStarLayer`'s own docstring on the resulting motion-player
-  // limitation).
+  // place. Under REALWORLD this simply has no `star` entries at all - the
+  // freshly-built `realworldStarLayer` above carries its own equivalent
+  // (`indexById`), which `animate()`'s per-frame player loop (issue #31)
+  // falls back to whenever a star has no entry here.
   objectIndexLookup = buildObjectIndexLookup(catalogBuckets);
 
   // Reapplies category-visibility/radius-filter/size-scale/camera-distance
@@ -1645,26 +1647,47 @@ function applyPlayerAnimation(deltaSeconds: number): void {
   // computation riding along on work that already happens, not a new
   // per-frame cost class.
   const trailWindowYears = currentTrailWindowYears(cameraDistancePc, denseBatchRadiusPc, bubbleOuterRadiusPc);
+  // Issue #31: VISUAL stars have no `objectIndexLookup` entry at all (see
+  // that map's own docstring) - `ref` below is simply absent for every
+  // animated star while VISUAL is active. Their new positions are collected
+  // here instead and applied to `realworldStarLayer` in one batched call
+  // after the loop, rather than one `needsUpdate` GPU upload per star.
+  const realworldPositionUpdates: { index: number; positionPc: readonly [number, number, number] }[] = [];
   for (const obj of animatedStars) {
-    const ref = objectIndexLookup.get(obj.id);
-    if (!ref || !obj.velocity) continue;
+    if (!obj.velocity) continue;
     const positionPc = starPositionAtTime(obj.position_pc, obj.velocity, playerTimeYears);
-    const visible = isCatalogObjectVisible(
-      obj,
-      categoryVisibility,
-      radiusPc,
-      cameraDistancePc,
-      denseBatchRadiusPc,
-    );
-    setInstanceVisibility(
-      ref.bucket,
-      ref.index,
-      visible,
-      cameraDistancePc,
-      denseBatchRadiusPc,
-      bubbleOuterRadiusPc,
-      positionPc,
-    );
+    const ref = objectIndexLookup.get(obj.id);
+    let visible: boolean;
+    if (ref) {
+      visible = isCatalogObjectVisible(
+        obj,
+        categoryVisibility,
+        radiusPc,
+        cameraDistancePc,
+        denseBatchRadiusPc,
+      );
+      setInstanceVisibility(
+        ref.bucket,
+        ref.index,
+        visible,
+        cameraDistancePc,
+        denseBatchRadiusPc,
+        bubbleOuterRadiusPc,
+        positionPc,
+      );
+    } else if (realworldStarLayer) {
+      // Matches `updateRealworldStarVisibility`'s own deliberate convention
+      // (no camera-distance/dense-batch-radius args) - Story #12 explicitly
+      // deferred zone-crossing reveal/fade for VISUAL, and this per-frame
+      // player loop must not quietly introduce it through the back door.
+      visible = isCatalogObjectVisible(obj, categoryVisibility, radiusPc);
+      const index = realworldStarLayer.indexById.get(obj.id);
+      if (index !== undefined) {
+        realworldPositionUpdates.push({ index, positionPc });
+      }
+    } else {
+      visible = false;
+    }
     const label = labelById.get(obj.id);
     if (label) {
       label.css2dObject.position.set(positionPc[0], positionPc[1], positionPc[2]);
@@ -1693,6 +1716,9 @@ function applyPlayerAnimation(deltaSeconds: number): void {
         );
       }
     }
+  }
+  if (realworldStarLayer) {
+    updateRealworldStarPositions(realworldStarLayer, realworldPositionUpdates);
   }
 
   playerPanelHandle.update({
