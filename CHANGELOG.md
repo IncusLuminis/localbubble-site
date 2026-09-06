@@ -5,6 +5,8 @@ loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-06
+
 ### Fixed
 
 - The 3D viewport canvas had no `touch-action` rule, letting the browser's
