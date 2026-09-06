@@ -2814,6 +2814,15 @@ animate();
   title.style.cssText = "font-weight:bold;margin-bottom:6px;";
   panel.appendChild(title);
 
+  function addSectionHeader(label: string): void {
+    const header = document.createElement("div");
+    header.textContent = label;
+    header.style.cssText =
+      "font-weight:bold;margin:10px 0 4px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.15);" +
+      "letter-spacing:0.05em;font-size:11px;color:#9db4e0;";
+    panel.appendChild(header);
+  }
+
   function addSlider(
     label: string,
     min: number,
@@ -2865,25 +2874,11 @@ animate();
     }, 100);
   }
 
-  addSlider("Bloom strength", 0, 3, 0.05, bloomPass.strength, (v) => {
-    bloomPass.strength = v;
-  });
-  addSlider("Bloom radius", 0, 1, 0.02, bloomPass.radius, (v) => {
-    bloomPass.radius = v;
-  });
-  addSlider("Bloom threshold", 0, 1, 0.02, bloomPass.threshold, (v) => {
-    bloomPass.threshold = v;
-  });
-  addSlider("Brilliant-tier boost", 1, 3, 0.05, 1, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uBrilliantBoost.value = v;
-    }
-  });
-
   // PROTOTYPE: regenerates the twinkle sprite atlas (spike length/width are
-  // baked into the canvas texture, not a shader uniform) - both sliders
-  // trigger the same rebuild since a fresh texture needs both current
-  // values together.
+  // baked into the canvas texture, not a shader uniform) - all three
+  // sliders trigger the same rebuild since a fresh texture needs all
+  // current values together. Declared up top since the BLOOM/STARS groups
+  // below don't need it, but SPIKES does.
   let spikeLength = 1;
   let brilliantSpikeLength = 1;
   let spikeWidth = 1;
@@ -2898,6 +2893,41 @@ animate();
     redrawStarTwinkleAtlas(spikeLength, spikeWidth, brilliantSpikeLength);
     realworldStarLayer.material.uniforms.uMap.value = texture;
   }
+
+  addSectionHeader("BLOOM");
+  addSlider("Bloom strength", 0, 3, 0.05, bloomPass.strength, (v) => {
+    bloomPass.strength = v;
+  });
+  addSlider("Bloom radius", 0, 1, 0.02, bloomPass.radius, (v) => {
+    bloomPass.radius = v;
+  });
+  addSlider("Bloom threshold", 0, 1, 0.02, bloomPass.threshold, (v) => {
+    bloomPass.threshold = v;
+  });
+  addSlider("Color bloom compensation", 0, 1, 0.05, 0.7, (v) => {
+    if (realworldStarLayer) {
+      realworldStarLayer.material.uniforms.uColorBloomCompensation.value = v;
+    }
+  });
+
+  addSectionHeader("STARS");
+  addSlider("Normal-tier size boost", 0.5, 6, 0.1, 1, (v) => {
+    if (realworldStarLayer) {
+      realworldStarLayer.material.uniforms.uNormalBoost.value = v;
+    }
+  });
+  addSlider("Brilliant-tier boost", 1, 3, 0.05, 1, (v) => {
+    if (realworldStarLayer) {
+      realworldStarLayer.material.uniforms.uBrilliantBoost.value = v;
+    }
+  });
+  addSlider("Faint-star minimum size (px)", 0, 80, 1, 9, (v) => {
+    if (realworldStarLayer) {
+      realworldStarLayer.material.uniforms.uMinSizePx.value = v;
+    }
+  });
+
+  addSectionHeader("SPIKES");
   addSlider("Spike length (all stars)", 0.5, 3, 0.05, 1.8, (v) => {
     spikeLength = v;
     regenerateTwinkleTexture();
@@ -2910,16 +2940,13 @@ animate();
     spikeWidth = v;
     regenerateTwinkleTexture();
   });
-  addSlider("Faint-star minimum size (px)", 0, 40, 1, 9, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uMinSizePx.value = v;
-    }
-  });
   addSlider("Intensity (all stars)", 0.2, 4, 0.05, 1, (v) => {
     if (realworldStarLayer) {
       realworldStarLayer.material.uniforms.uIntensity.value = v;
     }
   });
+
+  addSectionHeader("DISTANCE");
   addSlider("Distance falloff start (pc)", 20, 2000, 10, 2000, (v) => {
     if (realworldStarLayer) {
       realworldStarLayer.material.uniforms.uAttenStartPc.value = v;
@@ -2928,11 +2955,6 @@ animate();
   addSlider("Distance falloff strength", 0, 1.5, 0.05, 0, (v) => {
     if (realworldStarLayer) {
       realworldStarLayer.material.uniforms.uAttenStrength.value = v;
-    }
-  });
-  addSlider("Color bloom compensation", 0, 1, 0.05, 0.7, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uColorBloomCompensation.value = v;
     }
   });
   (window as unknown as { __getRealworldLayer: () => RealworldStarLayer | null }).__getRealworldLayer = () =>
