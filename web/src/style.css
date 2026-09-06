@@ -148,6 +148,14 @@ body {
   top: 50%;
   transform: translateY(-50%);
   width: 230px;
+  /* Same fix as `#inspector`'s own `z-index: 600 !important` (issue #193):
+     CSS2DRenderer sets a per-frame inline z-index on every scene label,
+     routinely exceeding `.panel`'s inherited `z-index: 2` - labels bled
+     through the open Settings/Layers/Camera panel. `!important` wins over
+     that inline style; `600` matches `#inspector`'s own value (same
+     reasoning: above every ordinary/selected label, below the `1000` modal
+     scrims). */
+  z-index: 600 !important;
 }
 
 .side-panel.open {
@@ -936,9 +944,10 @@ body {
    (vs. e.g. `50`, which today's ~130 labels would already exceed), so this
    class of bug can't recur from ordinary label-count growth. This value is
    deliberately far above every other z-index in the app (#status/#fov-
-   readout: 1, .panel/.side-panel: 2, #left-toolbar (Story #256, replacing
+   readout: 1, .panel: 2, #left-toolbar (Story #256, replacing
    #menu-toggle/#search-toggle (#203)/#bottom-left-toolbar (#197/#201)): 3,
-   #154's edge-indicator: 20) - none of those need to change, since a modal is meant to be
+   #154's edge-indicator: 20, #inspector/.side-panel: 600 !important - both hit
+   this exact same label-bleed-through bug and share the fix) - none of those need to change, since a modal is meant to be
    unconditionally topmost. Issue #203's search modal reuses this same
    `1000` (both modals are "primary action" modals per that issue's brief) -
    they aren't expected to be open simultaneously, but since DOM order alone

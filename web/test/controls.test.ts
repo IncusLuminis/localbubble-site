@@ -20,7 +20,7 @@ import { STAR_RENDER_STYLES } from "../src/scene/starRenderStyle";
  */
 describe("shouldShowRealworldTuning", () => {
   it("is true for REALWORLD", () => {
-    expect(shouldShowRealworldTuning("REALWORLD")).toBe(true);
+    expect(shouldShowRealworldTuning("VISUAL")).toBe(true);
   });
 
   it("is false for MODEL", () => {
@@ -29,7 +29,7 @@ describe("shouldShowRealworldTuning", () => {
 
   it("agrees with STAR_RENDER_STYLES on exactly one style showing the tuning groups", () => {
     const shown = STAR_RENDER_STYLES.filter(shouldShowRealworldTuning);
-    expect(shown).toEqual(["REALWORLD"]);
+    expect(shown).toEqual(["VISUAL"]);
   });
 });
 
@@ -45,7 +45,7 @@ describe("shouldShowModelTuning", () => {
   });
 
   it("is false for REALWORLD", () => {
-    expect(shouldShowModelTuning("REALWORLD")).toBe(false);
+    expect(shouldShowModelTuning("VISUAL")).toBe(false);
   });
 
   it("agrees with STAR_RENDER_STYLES on exactly one style showing the tuning section", () => {

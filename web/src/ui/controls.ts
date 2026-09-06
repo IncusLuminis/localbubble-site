@@ -11,7 +11,7 @@ import type { MarkerOpacityTuning } from "../scene/objects";
  * `environment: "node"` Vitest config has no jsdom - see that function's own
  * docstring for the same split elsewhere in this codebase). */
 export function shouldShowRealworldTuning(style: StarRenderStyle): boolean {
-  return style === "REALWORLD";
+  return style === "VISUAL";
 }
 
 /** Issue #18 follow-up: the MODEL-only mirror of `shouldShowRealworldTuning`
@@ -253,7 +253,7 @@ function makeSlider(
  * needing "(default)" spelled out. */
 const STAR_RENDER_STYLE_LABELS: Record<StarRenderStyle, string> = {
   MODEL: "Model",
-  REALWORLD: "Real World",
+  VISUAL: "Visual",
 };
 
 /**
