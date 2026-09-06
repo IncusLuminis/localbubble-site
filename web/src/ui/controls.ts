@@ -1,4 +1,5 @@
 import { RADIUS_PRESETS_PC, DEFAULT_RADIUS_PC } from "../scene/radiusFilter";
+import { STAR_RENDER_STYLES, type StarRenderStyle } from "../scene/starRenderStyle";
 
 /**
  * Story #257 (Epic #255): the old single combined `#controls` panel
@@ -138,7 +139,24 @@ export interface SettingsPanelOptions {
   onRadiusChange: (radiusPc: number) => void;
   onSizeScaleChange: (scale: number) => void;
   onExportPng: () => void;
+  /** Issue #10 (Epic #7): the persisted style to preselect this panel's new
+   * "Star Rendering" control with at build time - `main.ts` passes whatever
+   * `loadStarRenderStyle` already resolved (from `localStorage`, or the
+   * default) before this panel is built, so a page reload's initial
+   * `<select>` state correctly reflects the previously-chosen style instead
+   * of always visually resetting to `MODEL`. */
+  starRenderStyle: StarRenderStyle;
+  onStarRenderStyleChange: (style: StarRenderStyle) => void;
 }
+
+/** Human-readable labels for the "Star Rendering" `<select>` below - kept as
+ * its own small table (rather than showing the raw `StarRenderStyle` value
+ * verbatim) so the UI can read as a plain sentence ("Model (default)")
+ * without the underlying dispatch-key casing/wording being a UI concern. */
+const STAR_RENDER_STYLE_LABELS: Record<StarRenderStyle, string> = {
+  MODEL: "Model (default)",
+  REALWORLD: "Real World (experimental)",
+};
 
 /** Same UI-lock removal as `LayersPanelHandle` (Story #330) - the Radius
  * `<select>` used to be the one lockable control here; it's always live now,
@@ -166,6 +184,30 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   });
   radiusSection.body.appendChild(radiusSelect);
   panel.appendChild(radiusSection.section);
+
+  // --- Star rendering style (issue #10, Epic #7): MODEL (today's exact,
+  // unchanged rendering, default) vs REALWORLD (Story #11+'s new sprite/
+  // magnitude-driven system - for now, a stub that just re-invokes MODEL's
+  // own code, see `scene/objects.ts`'s `buildRealworldStarInstances`). Same
+  // `<select>` pattern as the Radius control just above, for visual
+  // consistency with this panel's existing controls. ---
+  const starRenderStyleSection = makeSection("Star Rendering");
+  const starRenderStyleSelect = document.createElement("select");
+  starRenderStyleSelect.className = "star-render-style-select";
+  for (const style of STAR_RENDER_STYLES) {
+    const option = document.createElement("option");
+    option.value = style;
+    option.textContent = STAR_RENDER_STYLE_LABELS[style];
+    if (style === options.starRenderStyle) {
+      option.selected = true;
+    }
+    starRenderStyleSelect.appendChild(option);
+  }
+  starRenderStyleSelect.addEventListener("change", () => {
+    options.onStarRenderStyleChange(starRenderStyleSelect.value as StarRenderStyle);
+  });
+  starRenderStyleSection.body.appendChild(starRenderStyleSelect);
+  panel.appendChild(starRenderStyleSection.section);
 
   // --- Object size scale (spec §23: "opacity / size ... where relevant") ---
   const sizeSection = makeSection("Object size");

@@ -14,6 +14,7 @@ import { isDenseBatchMember, passesDenseBatchLod } from "./lod";
 import { sunCoreRadiusPc } from "./sun";
 import { spectralColorFor } from "./spectralColor";
 import { absoluteMagnitudeToBrightness } from "./magnitudeBrightness";
+import { DEFAULT_STAR_RENDER_STYLE, type StarRenderStyle } from "./starRenderStyle";
 import {
   STAR_MARKER_NEAR_SUN_RADIUS_PC,
   STAR_MARKER_MIN_RADIUS_PC,
@@ -716,6 +717,92 @@ export interface CatalogBucket {
   radiiPc: number[];
 }
 
+/** MODEL star-bucket instance construction (issue #10, Epic #7) - the exact
+ * per-instance matrix + color logic this module used to inline directly in
+ * `createCatalogObjectGroup`'s main loop, extracted verbatim (no behavior
+ * change) so it can be dispatched by `StarRenderStyle` via
+ * `buildStarInstancesForStyle` below. Mutates `mesh` in place; `radiiPc[i]`
+ * must already be `starObjects[i]`'s resolved marker radius (from
+ * `markerRadiusPc`, computed by the caller). */
+function buildModelStarInstances(mesh: InstancedMesh, starObjects: SceneObject[], radiiPc: number[]): void {
+  starObjects.forEach((obj, i) => {
+    mesh.setMatrixAt(i, instanceMatrixFor(obj, radiiPc[i]));
+  });
+  mesh.instanceMatrix.needsUpdate = true;
+
+  // Issue #173: per-instance color (spectral class x magnitude brightness) -
+  // the star bucket's own distinguishing visual, unchanged by this Story.
+  starObjects.forEach((obj, i) => {
+    mesh.setColorAt(i, instanceColorFor(obj));
+  });
+  if (mesh.instanceColor) {
+    mesh.instanceColor.needsUpdate = true;
+  }
+}
+
+/** REALWORLD star-bucket instance construction - for THIS Story (issue #10)
+ * a deliberate ALIAS of `buildModelStarInstances`, not a duplicate copy: an
+ * alias guarantees REALWORLD stays byte-identical to MODEL for as long as
+ * this stub exists, with zero risk of the two silently drifting apart before
+ * Story #11 (Epic #7) gives REALWORLD its own real sprite/magnitude-driven
+ * implementation, independent of this function. */
+const buildRealworldStarInstances = buildModelStarInstances;
+
+/** The star-bucket construction dispatch point issue #10 asks for: routes to
+ * one of the two functions above based on `style`. An unrecognized style
+ * value (shouldn't happen - `StarRenderStyle`/`parseStarRenderStyle` in
+ * `scene/starRenderStyle.ts` already constrain this at every real entry
+ * point) falls back to `MODEL`, matching this codebase's "invalid optional
+ * input degrades to a safe default" convention rather than throwing. */
+function buildStarInstancesForStyle(
+  style: StarRenderStyle,
+  mesh: InstancedMesh,
+  starObjects: SceneObject[],
+  radiiPc: number[],
+): void {
+  if (style === "REALWORLD") {
+    buildRealworldStarInstances(mesh, starObjects, radiiPc);
+    return;
+  }
+  buildModelStarInstances(mesh, starObjects, radiiPc);
+}
+
+/** Builds the `star`-type `CatalogBucket` on its own - extracted out of
+ * `createCatalogObjectGroup`'s main per-type loop (issue #10, Epic #7) so it
+ * can also be called standalone, independent of every other bucket, when
+ * `main.ts`'s Settings-panel toggle switches the active `StarRenderStyle`
+ * live: rebuild the star bucket alone and swap it into the existing catalog
+ * group, rather than rebuilding (and thereby visually resetting - e.g.
+ * losing `updateBackgroundDimming`'s current dimmed-material state) every
+ * other bucket too.
+ *
+ * Returns `null` for an empty `starObjects` (nothing to build), matching
+ * `createCatalogObjectGroup`'s own loop, which likewise only ever creates a
+ * bucket for a type with at least one object present. */
+export function buildStarCatalogBucket(
+  starObjects: SceneObject[],
+  denseBatchRadiusPc = 0,
+  bubbleOuterRadiusPc: number | null = null,
+  style: StarRenderStyle = DEFAULT_STAR_RENDER_STYLE,
+): CatalogBucket | null {
+  if (starObjects.length === 0) {
+    return null;
+  }
+
+  const color = OBJECT_TYPE_COLORS.star ?? DEFAULT_COLOR;
+  const opacity = markerOpacityFor("star");
+  const mesh = new InstancedMesh(UNIT_SPHERE_GEOMETRY, materialFor(color, opacity), starObjects.length);
+  mesh.name = "catalog-star";
+
+  const radiiPc = starObjects.map((obj) =>
+    markerRadiusPc(obj.size_pc, obj.object_type, obj.distance_pc, denseBatchRadiusPc, bubbleOuterRadiusPc),
+  );
+
+  buildStarInstancesForStyle(style, mesh, starObjects, radiiPc);
+
+  return { objectType: "star", mesh, objects: starObjects, radiiPc };
+}
+
 /** True if `obj` should currently be shown, given the category-toggle,
  * radius-filter, and dense-batch LOD (issue #104) state - the single
  * predicate `updateCatalogVisibility`/`updateDenseBatchLod` (which drive
@@ -846,11 +933,19 @@ export function buildObjectIndexLookup(buckets: CatalogBucket[]): Map<string, Ca
  * "no graduated sizing", matching `markerRadiusPc`'s own defaults) are
  * forwarded into each star instance's baked-in `radiiPc` entry via
  * `markerRadiusPc`, so a star's OWN baseline radius - not just the flat
- * `STAR_MARKER_RADIUS_PC` - is what gets baked in at scene-load time. */
+ * `STAR_MARKER_RADIUS_PC` - is what gets baked in at scene-load time.
+ *
+ * Issue #10 (Epic #7): `starRenderStyle` (defaulting to
+ * `DEFAULT_STAR_RENDER_STYLE`, i.e. `MODEL` - every pre-#10 caller/test that
+ * doesn't pass it keeps today's exact, unchanged behavior) is forwarded to
+ * the star bucket's own construction (`buildStarCatalogBucket`) only - every
+ * other object_type's bucket below is built exactly as before this issue,
+ * completely untouched by the style. */
 export function createCatalogObjectGroup(
   objects: SceneObject[],
   denseBatchRadiusPc = 0,
   bubbleOuterRadiusPc: number | null = null,
+  starRenderStyle: StarRenderStyle = DEFAULT_STAR_RENDER_STYLE,
 ): {
   group: Group;
   buckets: CatalogBucket[];
@@ -871,6 +966,29 @@ export function createCatalogObjectGroup(
   const buckets: CatalogBucket[] = [];
   for (const objectType of Array.from(byType.keys()).sort()) {
     const bucketObjects = byType.get(objectType) as SceneObject[];
+
+    // Issue #10 (Epic #7): the star bucket's construction is dispatched by
+    // the active `StarRenderStyle` via the extracted `buildStarCatalogBucket`
+    // - kept as its own standalone function (rather than inlined here, as
+    // it was pre-#10) specifically so `main.ts` can also call it alone to
+    // rebuild JUST the star bucket on a live Settings-panel toggle, without
+    // rebuilding (and thereby visually resetting) every other bucket too.
+    // Every non-star bucket below keeps this loop's original, completely
+    // unmodified construction.
+    if (STAR_OBJECT_TYPES.has(objectType)) {
+      const starBucket = buildStarCatalogBucket(
+        bucketObjects,
+        denseBatchRadiusPc,
+        bubbleOuterRadiusPc,
+        starRenderStyle,
+      );
+      if (starBucket) {
+        group.add(starBucket.mesh);
+        buckets.push(starBucket);
+      }
+      continue;
+    }
+
     const color = OBJECT_TYPE_COLORS[objectType] ?? DEFAULT_COLOR;
     const opacity = markerOpacityFor(objectType);
     const mesh = new InstancedMesh(
@@ -887,19 +1005,6 @@ export function createCatalogObjectGroup(
       mesh.setMatrixAt(i, instanceMatrixFor(obj, radiiPc[i]));
     });
     mesh.instanceMatrix.needsUpdate = true;
-
-    // Issue #173: per-instance color, scoped to the star bucket only - every
-    // other object_type keeps sharing one flat `materialFor` color as
-    // before. `setColorAt` lazily allocates `mesh.instanceColor` on first
-    // call, so nothing needs to be pre-created for non-star buckets.
-    if (STAR_OBJECT_TYPES.has(objectType)) {
-      bucketObjects.forEach((obj, i) => {
-        mesh.setColorAt(i, instanceColorFor(obj));
-      });
-      if (mesh.instanceColor) {
-        mesh.instanceColor.needsUpdate = true;
-      }
-    }
 
     group.add(mesh);
     buckets.push({ objectType, mesh, objects: bucketObjects, radiiPc });

@@ -4,6 +4,7 @@ import type { InstancedMesh, MeshBasicMaterial } from "three";
 import {
   backgroundBucketOpacity,
   buildObjectIndexLookup,
+  buildStarCatalogBucket,
   bubbleOuterRadiusPcFrom,
   catalogObjectTypes,
   CLUSTER_OBJECT_TYPES,
@@ -1207,6 +1208,146 @@ describe("createCatalogObjectGroup star-bucket instanceColor (issue #173)", () =
     const starBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
     const material = starBucket.mesh.material as MeshBasicMaterial;
     expect(material.color.getHex()).toBe(0xffffff);
+  });
+});
+
+/**
+ * Issue #10 (Epic #7, Story 1/4): the MODEL/REALWORLD star-rendering-style
+ * dispatch point. `REALWORLD` is a deliberate stub for THIS Story only - it
+ * must produce a BYTE-IDENTICAL star bucket to `MODEL` (same matrices, same
+ * per-instance colors), proving the switch mechanism fires correctly without
+ * yet having any real independent visual system to compare against (that's
+ * Story #11's job). These tests would need to change the moment Story #11
+ * gives REALWORLD its own real implementation - until then, "identical to
+ * MODEL" IS the correct, intended behavior.
+ */
+describe("createCatalogObjectGroup star-rendering style dispatch (issue #10)", () => {
+  const STYLE_STAR_A = makeObject({
+    id: "style-star-a",
+    object_type: "star",
+    position_pc: [4, 0, 0],
+    distance_pc: 4,
+    spectral_type: "B3V",
+    absolute_magnitude: -1.5,
+  });
+  const STYLE_STAR_B = makeObject({
+    id: "style-star-b",
+    object_type: "star",
+    position_pc: [0, 9, 0],
+    distance_pc: 9,
+    spectral_type: "K0III",
+    absolute_magnitude: 4,
+  });
+
+  it("defaults to MODEL when no style is given (no regression for pre-#10 callers)", () => {
+    const withDefault = createCatalogObjectGroup([STYLE_STAR_A, STYLE_STAR_B]);
+    const withExplicitModel = createCatalogObjectGroup([STYLE_STAR_A, STYLE_STAR_B], 0, null, "MODEL");
+    const defaultBucket = withDefault.buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const modelBucket = withExplicitModel.buckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    defaultBucket.objects.forEach((_, i) => {
+      expect(decomposeInstanceMatrix(defaultBucket, i).scale.x).toBe(
+        decomposeInstanceMatrix(modelBucket, i).scale.x,
+      );
+      const defaultColor = new Color();
+      const modelColor = new Color();
+      defaultBucket.mesh.getColorAt(i, defaultColor);
+      modelBucket.mesh.getColorAt(i, modelColor);
+      expect(defaultColor.getHex()).toBe(modelColor.getHex());
+    });
+  });
+
+  it("REALWORLD renders the star bucket byte-identical to MODEL (stub fallback, issue #10)", () => {
+    const denseBatchRadiusPc = 11.26;
+    const bubbleOuterRadiusPc = 60;
+    const { buckets: modelBuckets } = createCatalogObjectGroup(
+      [STYLE_STAR_A, STYLE_STAR_B],
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+      "MODEL",
+    );
+    const { buckets: realworldBuckets } = createCatalogObjectGroup(
+      [STYLE_STAR_A, STYLE_STAR_B],
+      denseBatchRadiusPc,
+      bubbleOuterRadiusPc,
+      "REALWORLD",
+    );
+    const modelBucket = modelBuckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const realworldBucket = realworldBuckets.find((b) => b.objectType === "star") as CatalogBucket;
+
+    expect(realworldBucket.radiiPc).toEqual(modelBucket.radiiPc);
+    modelBucket.objects.forEach((_, i) => {
+      const modelTransform = decomposeInstanceMatrix(modelBucket, i);
+      const realworldTransform = decomposeInstanceMatrix(realworldBucket, i);
+      expect(realworldTransform.position.toArray()).toEqual(modelTransform.position.toArray());
+      expect(realworldTransform.scale.x).toBeCloseTo(modelTransform.scale.x, 10);
+
+      const modelColor = new Color();
+      const realworldColor = new Color();
+      modelBucket.mesh.getColorAt(i, modelColor);
+      realworldBucket.mesh.getColorAt(i, realworldColor);
+      expect(realworldColor.getHex()).toBe(modelColor.getHex());
+    });
+  });
+
+  it("leaves every non-star bucket completely unaffected by the style parameter", () => {
+    const { buckets: modelBuckets } = createCatalogObjectGroup([STYLE_STAR_A, CLOUD_A, CLOUD_B], 0, null, "MODEL");
+    const { buckets: realworldBuckets } = createCatalogObjectGroup(
+      [STYLE_STAR_A, CLOUD_A, CLOUD_B],
+      0,
+      null,
+      "REALWORLD",
+    );
+    const modelCloudBucket = modelBuckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+    const realworldCloudBucket = realworldBuckets.find((b) => b.objectType === "molecular_cloud") as CatalogBucket;
+
+    expect(realworldCloudBucket.radiiPc).toEqual(modelCloudBucket.radiiPc);
+    expect(realworldCloudBucket.mesh.instanceColor).toBeNull();
+    expect(modelCloudBucket.mesh.instanceColor).toBeNull();
+  });
+});
+
+describe("buildStarCatalogBucket (issue #10: standalone star-bucket rebuild for live style toggling)", () => {
+  const REBUILD_STAR_A = makeObject({
+    id: "rebuild-star-a",
+    object_type: "star",
+    position_pc: [1, 1, 1],
+    distance_pc: 5,
+  });
+  const REBUILD_STAR_B = makeObject({
+    id: "rebuild-star-b",
+    object_type: "star",
+    position_pc: [2, 2, 2],
+    distance_pc: 12,
+  });
+
+  it("returns null for an empty object list (nothing to build)", () => {
+    expect(buildStarCatalogBucket([])).toBeNull();
+  });
+
+  it("builds a standalone star bucket matching what createCatalogObjectGroup bakes in for the same inputs", () => {
+    const { buckets } = createCatalogObjectGroup([REBUILD_STAR_A, REBUILD_STAR_B], 11.26, 60, "MODEL");
+    const inlineBucket = buckets.find((b) => b.objectType === "star") as CatalogBucket;
+    const standaloneBucket = buildStarCatalogBucket(
+      [REBUILD_STAR_A, REBUILD_STAR_B],
+      11.26,
+      60,
+      "MODEL",
+    ) as CatalogBucket;
+
+    expect(standaloneBucket.objectType).toBe("star");
+    expect(standaloneBucket.radiiPc).toEqual(inlineBucket.radiiPc);
+    standaloneBucket.objects.forEach((_, i) => {
+      const inlineTransform = decomposeInstanceMatrix(inlineBucket, i);
+      const standaloneTransform = decomposeInstanceMatrix(standaloneBucket, i);
+      expect(standaloneTransform.position.toArray()).toEqual(inlineTransform.position.toArray());
+      expect(standaloneTransform.scale.x).toBeCloseTo(inlineTransform.scale.x, 10);
+    });
+  });
+
+  it("defaults to MODEL/no-LOD-gating when optional parameters are omitted", () => {
+    const bucket = buildStarCatalogBucket([REBUILD_STAR_A]) as CatalogBucket;
+    expect(bucket.radiiPc[0]).toBe(markerRadiusPc(null, "star"));
   });
 });
 
