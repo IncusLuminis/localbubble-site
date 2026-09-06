@@ -1,4 +1,24 @@
-import { CanvasTexture } from "three";
+import { CanvasTexture, LinearFilter } from "three";
+
+/** Both texture-construction sites below turn mipmapping off - found live
+ * (human owner: rotating the viewport made bright stars briefly "lose"
+ * their spike/glow shape mid-rotation, then snap back once the camera
+ * settled). `gl_PointCoord` (used to sample this atlas in
+ * `realworldStars.ts`'s fragment shader) has no well-defined screen-space
+ * derivative the way a normal textured triangle's UV does - it's a
+ * per-fragment coordinate special-cased for `THREE.Points`, not something
+ * hardware mipmap LOD selection was designed around. Some GPU/driver
+ * combinations visibly flicker between mip levels while the camera (and so
+ * the point's screen-space footprint) is moving, exactly matching the
+ * report. Since REALWORLD's whole premise is a FIXED, distance-independent
+ * sprite pixel size (no `sizeAttenuation`), the sprite is never minified
+ * enough for mipmapping to earn its cost anyway - `LinearFilter` alone
+ * samples the full-resolution atlas directly, sidestepping the flicker
+ * entirely. */
+function disableMipmaps(texture: CanvasTexture): void {
+  texture.generateMipmaps = false;
+  texture.minFilter = LinearFilter;
+}
 
 /**
  * Issue #11 (Epic #7, Story 2/4): canvas-drawn "twinkle" sprite texture for
@@ -124,10 +144,17 @@ function drawCore(ctx: CanvasRenderingContext2D, cx: number, cy: number, coreRad
 /** Draws the `"normal"` twinkle into the cell centered at `(cx, cy)` of size
  * `cellSize` - a modest halo, a plain 4-spike diffraction cross, and a small
  * bright core. This is every ordinary REALWORLD star's sprite. */
-function drawNormalTwinkle(ctx: CanvasRenderingContext2D, cx: number, cy: number, cellSize: number): void {
+function drawNormalTwinkle(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  cellSize: number,
+  spikeLengthMultiplier = 1,
+  spikeWidthMultiplier = 1,
+): void {
   drawHalo(ctx, cx, cy, cellSize * 0.3, 0.5);
   ctx.translate(cx, cy);
-  drawSpikeCross(ctx, 4, cellSize * 0.42, cellSize * 0.028);
+  drawSpikeCross(ctx, 4, cellSize * 0.42 * spikeLengthMultiplier, cellSize * 0.028 * spikeWidthMultiplier);
   ctx.translate(-cx, -cy);
   drawCore(ctx, cx, cy, cellSize * 0.13);
 }
@@ -139,12 +166,19 @@ function drawNormalTwinkle(ctx: CanvasRenderingContext2D, cx: number, cy: number
  * for REALWORLD's top brightness tier(s) - see this module's own docstring
  * for why this is a categorically different shape, not just a scaled-up
  * normal twinkle. */
-function drawBrilliantTwinkle(ctx: CanvasRenderingContext2D, cx: number, cy: number, cellSize: number): void {
+function drawBrilliantTwinkle(
+  ctx: CanvasRenderingContext2D,
+  cx: number,
+  cy: number,
+  cellSize: number,
+  spikeLengthMultiplier = 1,
+  spikeWidthMultiplier = 1,
+): void {
   drawHalo(ctx, cx, cy, cellSize * 0.46, 0.65);
   ctx.translate(cx, cy);
-  drawSpikeCross(ctx, 4, cellSize * 0.48, cellSize * 0.032);
+  drawSpikeCross(ctx, 4, cellSize * 0.48 * spikeLengthMultiplier, cellSize * 0.032 * spikeWidthMultiplier);
   ctx.rotate(Math.PI / 4);
-  drawSpikeCross(ctx, 4, cellSize * 0.3, cellSize * 0.02);
+  drawSpikeCross(ctx, 4, cellSize * 0.3 * spikeLengthMultiplier, cellSize * 0.02 * spikeWidthMultiplier);
   ctx.rotate(-Math.PI / 4);
   ctx.translate(-cx, -cy);
   drawCore(ctx, cx, cy, cellSize * 0.19);
@@ -163,6 +197,111 @@ let starTwinkleAtlasTexture: CanvasTexture | null | undefined;
  * `getMistySpriteTexture` - every real caller (`realworldStars.ts`) already
  * treats a `null` map as "no texture, flat-shaded fallback," so the geometry/
  * attribute-building logic stays fully unit-testable without a real canvas. */
+/** PROTOTYPE (not for merge): rebuilds the atlas fresh (no caching) with
+ * adjustable spike length/width, for `main.ts`'s live tuning HUD.
+ *
+ * Deliberately keeps the DESIGN proportions (`designCellSize`, fed to
+ * `drawNormalTwinkle`/`drawBrilliantTwinkle`) fixed at the same
+ * `STAR_TWINKLE_CELL_SIZE` the cached production texture uses - so a 1x
+ * multiplier reproduces the production look exactly - while placing each
+ * cell's drawing inside a much bigger, otherwise-blank CANVAS footprint
+ * (`canvasCellSize`). The baked spike-length constants above already reach
+ * ~0.48-0.96 of the design cell's own half-width at 1x (by design, to fill
+ * the frame), so scaling the design cell itself would clip almost
+ * immediately - padding the CANVAS instead (not the design proportions)
+ * gives real headroom: at `PADDING_FACTOR=4`, multipliers up to ~4x still
+ * fit before the spike tip (already faded near-transparent by then anyway)
+ * reaches the canvas edge. Normal and brilliant get independent length
+ * multipliers (the human owner's own ask: crank the brightest tier's spikes
+ * further than ordinary stars') but share one width multiplier. Caller owns
+ * disposing the previous texture.
+ *
+ * REAL BUG FOUND LIVE (not just theoretical): an earlier version of this
+ * function always padded the canvas by a FIXED 4x factor (enough headroom
+ * for the "brightest" slider's max 4x length), regardless of the actual
+ * multipliers in use. That fixed padding shrinks the drawn content's share
+ * of the sprite's total footprint - invisible for a big/bright "brilliant"
+ * star (plenty of pixels either way) but fatal for an ordinary faint star's
+ * tiny few-pixel-diameter sprite: the visible shape shrinks below what a
+ * few `gl_PointCoord` samples (or a coarse mip level) can resolve, so the
+ * fragment shader's `texel.a < 0.02` discard drops it entirely - it just
+ * vanishes. The human owner hit exactly this by touching "Spike width"
+ * alone (which doesn't even need length headroom) - because ANY redraw
+ * through the old fixed-4x path paid the same tax. Fix: size the canvas
+ * padding to only what today's actual length multipliers need (see
+ * `requiredCanvasCellSize` below) - at the 1x defaults this is now
+ * IDENTICAL to the production ratio (zero degradation), and padding only
+ * grows (degrading tiny-star legibility only as a deliberate, gradual
+ * tradeoff) when the user actually pushes a length slider past 1x. */
+let tunableCanvas: HTMLCanvasElement | null = null;
+let tunableTexture: CanvasTexture | null = null;
+
+/** Smallest canvas cell that still keeps a `spikeLengthMultiplier` from
+ * clipping before its already-near-transparent gradient tail reaches the
+ * cell edge (`drawSpikeCross`'s own baked constants reach ~0.48-0.96 of the
+ * design cell's half-width at 1x) - a small 1.15x safety margin so even the
+ * requested max multiplier doesn't hard-clip a still-visible portion. */
+function requiredCanvasCellSize(maxSpikeLengthMultiplier: number): number {
+  const factor = Math.max(1, maxSpikeLengthMultiplier * 1.15);
+  return Math.ceil(STAR_TWINKLE_CELL_SIZE * factor);
+}
+
+export function getTunableStarTwinkleAtlasTexture(): CanvasTexture | null {
+  if (typeof document === "undefined") {
+    return null;
+  }
+  if (!tunableCanvas) {
+    tunableCanvas = document.createElement("canvas");
+    tunableCanvas.width = STAR_TWINKLE_CELL_SIZE * 2;
+    tunableCanvas.height = STAR_TWINKLE_CELL_SIZE;
+    tunableTexture = new CanvasTexture(tunableCanvas);
+    disableMipmaps(tunableTexture);
+  }
+  return tunableTexture;
+}
+
+export function redrawStarTwinkleAtlas(
+  normalSpikeLengthMultiplier: number,
+  spikeWidthMultiplier: number,
+  brilliantSpikeLengthMultiplier: number,
+): void {
+  const texture = getTunableStarTwinkleAtlasTexture();
+  if (!tunableCanvas || !texture) {
+    return;
+  }
+  const ctx = tunableCanvas.getContext("2d");
+  if (!ctx) {
+    return;
+  }
+  const designCellSize = STAR_TWINKLE_CELL_SIZE;
+  const canvasCellSize = requiredCanvasCellSize(
+    Math.max(normalSpikeLengthMultiplier, brilliantSpikeLengthMultiplier),
+  );
+  if (tunableCanvas.width !== canvasCellSize * 2 || tunableCanvas.height !== canvasCellSize) {
+    tunableCanvas.width = canvasCellSize * 2;
+    tunableCanvas.height = canvasCellSize;
+  } else {
+    ctx.clearRect(0, 0, tunableCanvas.width, tunableCanvas.height);
+  }
+  drawNormalTwinkle(
+    ctx,
+    canvasCellSize * 0.5,
+    canvasCellSize * 0.5,
+    designCellSize,
+    normalSpikeLengthMultiplier,
+    spikeWidthMultiplier,
+  );
+  drawBrilliantTwinkle(
+    ctx,
+    canvasCellSize * 1.5,
+    canvasCellSize * 0.5,
+    designCellSize,
+    brilliantSpikeLengthMultiplier,
+    spikeWidthMultiplier,
+  );
+  texture.needsUpdate = true;
+}
+
 export function getStarTwinkleAtlasTexture(): CanvasTexture | null {
   if (starTwinkleAtlasTexture !== undefined) {
     return starTwinkleAtlasTexture;
@@ -185,5 +324,6 @@ export function getStarTwinkleAtlasTexture(): CanvasTexture | null {
   drawBrilliantTwinkle(ctx, cellSize * 1.5, cellSize * 0.5, cellSize);
 
   starTwinkleAtlasTexture = new CanvasTexture(canvas);
+  disableMipmaps(starTwinkleAtlasTexture);
   return starTwinkleAtlasTexture;
 }
