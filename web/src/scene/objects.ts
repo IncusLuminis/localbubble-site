@@ -523,16 +523,50 @@ export function selectedMarkerRadiusPc(
  * `reference_point` object is possible and must render *some* sensible way
  * rather than erroring), plus any future/unrecognized object_type, exactly
  * as `markerRadiusPc` already does for radius. */
-const OPAQUE_MARKER_OPACITY = 0.85; // unchanged pre-#115 value - star/cluster/association tier
-const EXTENDED_STRUCTURE_OPACITY = 0.35; // #115: visibly translucent - diffuse structure tier
+/** Issue #18: both tiers are now live-configurable from the Settings panel's
+ * "Model" tuning section (`ui/controls.ts`'s "Marker opacity"/"Diffuse
+ * structure opacity" sliders) instead of fixed constants - `main.ts` seeds
+ * the panel from `DEFAULT_MARKER_OPACITY_TUNING` below and pushes slider
+ * changes through `setMarkerOpacityTuning`. Module-level mutable state
+ * (rather than threading a tuning object through every `markerOpacityFor`
+ * call site - `objects.ts`, `diffuseStructures.ts`, and their own downstream
+ * `backgroundBucketOpacity` callers) mirrors this file's existing
+ * `materialCache` singleton, and keeps every consumer's fresh-build path
+ * automatically current with no plumbing changes needed there. */
+export interface MarkerOpacityTuning {
+  opaqueMarkerOpacity: number; // star/cluster/association tier (0.85 pre-#115/#18 value)
+  extendedStructureOpacity: number; // diffuse structure tier (0.35, #115)
+}
+
+export const DEFAULT_MARKER_OPACITY_TUNING: MarkerOpacityTuning = {
+  opaqueMarkerOpacity: 0.85,
+  extendedStructureOpacity: 0.35,
+};
+
+let markerOpacityTuning: MarkerOpacityTuning = { ...DEFAULT_MARKER_OPACITY_TUNING };
+
+/** Patches the live tuning values `markerOpacityFor` reads below. Only
+ * updates FRESHLY BUILT bucket/mesh materials on its own (any subsequent
+ * `createCatalogObjectGroup`/`buildStarCatalogBucket`/
+ * `createDiffuseStructureLayer` call) - reflecting the change onto
+ * ALREADY-BUILT materials is the caller's job, exactly as `main.ts`'s own
+ * `onModelMarkerOpacityChange` handler does by re-running
+ * `updateBackgroundDimming`/`updateDiffuseStructureDimming` (both already
+ * exist for the unrelated camera-distance dimming feature, and both already
+ * recompute every material's opacity from `markerOpacityFor`/
+ * `backgroundBucketOpacity` fresh on every call - reusing them here needs no
+ * new bucket-iteration code). */
+export function setMarkerOpacityTuning(patch: Partial<MarkerOpacityTuning>): void {
+  Object.assign(markerOpacityTuning, patch);
+}
 
 /** Exported for tests - the type-aware opacity a marker's material should
  * use, mirroring `markerRadiusPc`'s tiering (see the comment above). */
 export function markerOpacityFor(objectType: string): number {
   if (STAR_OBJECT_TYPES.has(objectType) || CLUSTER_OBJECT_TYPES.has(objectType)) {
-    return OPAQUE_MARKER_OPACITY;
+    return markerOpacityTuning.opaqueMarkerOpacity;
   }
-  return EXTENDED_STRUCTURE_OPACITY;
+  return markerOpacityTuning.extendedStructureOpacity;
 }
 
 /**
