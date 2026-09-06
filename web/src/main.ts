@@ -1170,7 +1170,20 @@ function rebuildStarRenderLayer(): void {
   // (either could be the "old" one being switched away from).
   const starBucketIndex = catalogBuckets.findIndex((bucket) => bucket.objectType === "star");
   if (starBucketIndex !== -1) {
-    catalogGroup.remove(catalogBuckets[starBucketIndex].mesh);
+    const oldMesh = catalogBuckets[starBucketIndex].mesh;
+    catalogGroup.remove(oldMesh);
+    // Issue #13: `oldMesh.geometry`/`.material` are `objects.ts`'s shared
+    // `UNIT_SPHERE_GEOMETRY`/`materialCache` singletons (reused by every
+    // bucket, every style toggle) and must never be disposed here - but
+    // `oldMesh.instanceMatrix`/`.instanceColor` are per-`InstancedMesh` GPU
+    // buffers unique to THIS bucket, not shared with anything. Removing a
+    // mesh from the scene graph frees no GPU memory by itself; only
+    // `InstancedMesh.dispose()` does (it dispatches a `dispose` event that
+    // `WebGLObjects` listens for to free exactly those two buffers, leaving
+    // the shared geometry/material alone since neither is `mesh` itself).
+    // Verified live: without this call, toggling MODEL -> VISUAL -> MODEL
+    // repeatedly leaked two GPU buffers per round trip, growing unbounded.
+    oldMesh.dispose();
     catalogBuckets = [
       ...catalogBuckets.slice(0, starBucketIndex),
       ...catalogBuckets.slice(starBucketIndex + 1),

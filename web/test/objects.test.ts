@@ -1403,6 +1403,34 @@ describe("buildStarCatalogBucket (issue #10: standalone star-bucket rebuild for 
   it("issue #11: returns null for REALWORLD - no InstancedMesh/CatalogBucket is built for that style", () => {
     expect(buildStarCatalogBucket([REBUILD_STAR_A, REBUILD_STAR_B], 11.26, 60, "VISUAL")).toBeNull();
   });
+
+  // Issue #13: `main.ts`'s `rebuildStarRenderLayer` disposes an outgoing
+  // MODEL star bucket's `InstancedMesh` (its `instanceMatrix`/`instanceColor`
+  // GPU buffers, unique per bucket) when a style toggle tears it down -
+  // verified live that omitting this leaked two GPU buffers per MODEL <->
+  // VISUAL round trip, growing unbounded. `InstancedMesh.dispose()` is safe
+  // to call unconditionally there ONLY because its `geometry`/`material` are
+  // this module's shared `UNIT_SPHERE_GEOMETRY`/`materialCache` singletons,
+  // which `InstancedMesh.dispose()` never touches (it only frees the mesh's
+  // own instance buffers) - these two tests pin both halves of that
+  // invariant so a future change to either side fails loudly instead of
+  // silently reintroducing the leak or corrupting the shared cache.
+  it("issue #13: two star buckets built back-to-back share the same geometry/material instances", () => {
+    const bucketA = buildStarCatalogBucket([REBUILD_STAR_A]) as CatalogBucket;
+    const bucketB = buildStarCatalogBucket([REBUILD_STAR_B]) as CatalogBucket;
+    expect(bucketB.mesh.geometry).toBe(bucketA.mesh.geometry);
+    expect(bucketB.mesh.material).toBe(bucketA.mesh.material);
+  });
+
+  it("issue #13: disposing an outgoing bucket's mesh leaves the shared geometry/material usable", () => {
+    const bucketA = buildStarCatalogBucket([REBUILD_STAR_A]) as CatalogBucket;
+    expect(() => bucketA.mesh.dispose()).not.toThrow();
+
+    const bucketB = buildStarCatalogBucket([REBUILD_STAR_B]) as CatalogBucket;
+    expect(bucketB.mesh.geometry).toBe(bucketA.mesh.geometry);
+    expect(bucketB.mesh.geometry.attributes.position).toBeDefined();
+    expect(bucketB.mesh.material).toBe(bucketA.mesh.material);
+  });
 });
 
 describe("setInstanceVisibility (zero-scale hide mechanism)", () => {

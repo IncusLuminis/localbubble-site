@@ -122,6 +122,16 @@ function buildContent(): HTMLDivElement {
       "spark\" points scattered inside cluster and association markers are decorative, not " +
       "real individual member-star positions.",
   );
+  appendParagraph(
+    content,
+    "The <strong>Visual</strong> star-rendering style (Settings panel toggle) goes further " +
+      "in the same direction: star size, twinkle/spike shape, and glow intensity are tuned " +
+      "for visual drama and legibility across a huge range of zoom levels, not derived from " +
+      "a photometric model. Brighter absolute magnitude does map to a larger, more " +
+      "prominent sprite, and a star's true distance from the Sun does taper very distant " +
+      "giants back down - but the exact size/brightness curve is a hand-tuned style choice, " +
+      "not a calibrated rendering of how these stars would actually appear.",
+  );
 
   appendHeading(content, "h3", "6. Positions for extended objects are single points, with real uncertainty");
   appendParagraph(

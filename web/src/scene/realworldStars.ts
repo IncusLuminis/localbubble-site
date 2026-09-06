@@ -418,15 +418,29 @@ export interface RealworldStarTuning {
  * numbers. Issue #16's own debug-HUD tuning pass first converged on a set
  * of values; issue #18 promoted those into the real Settings panel and this
  * is that panel's own further-converged result, from the human owner's live
- * testing against the real UI rather than the throwaway HUD. */
+ * testing against the real UI rather than the throwaway HUD.
+ *
+ * `attenStartPc`/`attenStrength` fixed by issue #13: these had been left at
+ * 2000 / 0 since #18 - both the slider's own max value and literally "off" -
+ * which made the falloff a complete no-op for every star in the catalog (the
+ * farthest is ~1840pc, so nothing ever crossed a 2000pc start, and a strength
+ * of 0 makes `pow(start/dist, 0) == 1` regardless). Live-verified this let
+ * kpc-scale giants (e.g. * 55 Cyg, 1840pc, M=-6.5) render exactly as
+ * "titanic" as the falloff was added to prevent, at the catalog's real edge.
+ * 200pc sits just beyond the Local Bubble's own longest semi-axis (162pc),
+ * so every near-field star (RECONS sphere, Local Bubble) this Story's other
+ * zoom-zone tuning targets is completely unaffected; strength 1.0 tapers
+ * smoothly beyond that, capped by `minSizePx`'s own legibility floor so a
+ * far giant shrinks but - per this shader's explicit design - never
+ * vanishes. */
 export const DEFAULT_REALWORLD_STAR_TUNING: RealworldStarTuning = {
   colorBloomCompensation: 0.05,
   normalBoost: 3.2,
   brilliantBoost: 1.4,
   minSizePx: 31,
   intensity: 1.85,
-  attenStartPc: 2000,
-  attenStrength: 0,
+  attenStartPc: 200,
+  attenStrength: 1,
   spikeLength: 1.4,
   brilliantSpikeLength: 2.8,
   spikeWidth: 1,
