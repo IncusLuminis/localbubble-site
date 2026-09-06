@@ -30,7 +30,14 @@
  */
 export type StarRenderStyle = "MODEL" | "VISUAL";
 
-export const DEFAULT_STAR_RENDER_STYLE: StarRenderStyle = "MODEL";
+/** Issue #33: VISUAL became the default for every new visitor once Epic #7's
+ * full arc (issues #10-#13, #16, #18-#21, #25, #26, #29-#31) had been
+ * reviewed end-to-end on staging. A returning visitor who explicitly chose
+ * Model (and accepted persistence) keeps seeing Model - `ui/
+ * settingsPersistence.ts`'s `PersistedSettings` blob stores their own choice
+ * independently of this default, which only applies to a brand-new visitor
+ * or anyone who declined/never saw the cookie-consent prompt. */
+export const DEFAULT_STAR_RENDER_STYLE: StarRenderStyle = "VISUAL";
 
 /** The complete, ordered set of valid `StarRenderStyle` values - single
  * source of truth for `parseStarRenderStyle`'s validation below AND for

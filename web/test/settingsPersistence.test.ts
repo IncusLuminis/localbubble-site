@@ -45,7 +45,7 @@ function makeFakeStorage(initial: Record<string, string> = {}): {
 describe("DEFAULT_PERSISTED_SETTINGS", () => {
   it("matches every field's own pre-#19 hardcoded default", () => {
     expect(DEFAULT_PERSISTED_SETTINGS).toEqual({
-      starRenderStyle: "MODEL",
+      starRenderStyle: "VISUAL",
       radiusPc: 800,
       sizeScale: 1,
       modelMarkerOpacityTuning: DEFAULT_MARKER_OPACITY_TUNING,
