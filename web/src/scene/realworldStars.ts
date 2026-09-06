@@ -114,6 +114,7 @@ varying vec3 vColor;
 varying float vVariant;
 uniform float uPixelRatio;
 uniform float uSizeScale;
+uniform float uNormalBoost;
 uniform float uBrilliantBoost;
 uniform float uMinSizePx;
 uniform float uAttenStartPc;
@@ -124,7 +125,15 @@ void main() {
   vVariant = aVariant;
   vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
   gl_Position = projectionMatrix * mvPosition;
-  float boost = mix(1.0, uBrilliantBoost, step(0.5, aVariant));
+  // PROTOTYPE: found live - boosting only the "brilliant" top tier and
+  // flooring only the very faintest left the broad MIDDLE population (the
+  // catalog's ordinary mag 0-6 stars scattered through the Local Bubble,
+  // 1.0x multiplier = 10px base) looking like plain dots sandwiched between
+  // now-dramatic bright giants and now-floored faint dwarfs. uNormalBoost
+  // gives that middle population its own independent size control instead
+  // of only ever inheriting whatever the brilliant-tier slider happens to
+  // be set to.
+  float boost = mix(uNormalBoost, uBrilliantBoost, step(0.5, aVariant));
   float size = aSize * uPixelRatio * uSizeScale * boost;
   // PROTOTYPE: soft, capped falloff by each star's real distance from the
   // SUN (this catalog's own heliocentric-cartesian origin - position is
@@ -273,6 +282,7 @@ export function buildRealworldStarLayer(starObjects: SceneObject[]): RealworldSt
       uMap: { value: getStarTwinkleAtlasTexture() },
       uPixelRatio: { value: pixelRatio },
       uSizeScale: { value: 1 },
+      uNormalBoost: { value: 1 }, // PROTOTYPE: live-tunable size boost for the non-brilliant (everything but the top ~9%) tier
       uBrilliantBoost: { value: 1 }, // PROTOTYPE: live-tunable extra size/spike-length for the brightest tier only
       uMinSizePx: { value: 0 }, // PROTOTYPE: legibility floor so faint stars' spikes stay visible
       uIntensity: { value: 1 }, // PROTOTYPE: live-tunable light intensity for all stars
