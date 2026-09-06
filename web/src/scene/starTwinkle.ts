@@ -1,4 +1,24 @@
-import { CanvasTexture } from "three";
+import { CanvasTexture, LinearFilter } from "three";
+
+/** Both texture-construction sites below turn mipmapping off - found live
+ * (human owner: rotating the viewport made bright stars briefly "lose"
+ * their spike/glow shape mid-rotation, then snap back once the camera
+ * settled). `gl_PointCoord` (used to sample this atlas in
+ * `realworldStars.ts`'s fragment shader) has no well-defined screen-space
+ * derivative the way a normal textured triangle's UV does - it's a
+ * per-fragment coordinate special-cased for `THREE.Points`, not something
+ * hardware mipmap LOD selection was designed around. Some GPU/driver
+ * combinations visibly flicker between mip levels while the camera (and so
+ * the point's screen-space footprint) is moving, exactly matching the
+ * report. Since REALWORLD's whole premise is a FIXED, distance-independent
+ * sprite pixel size (no `sizeAttenuation`), the sprite is never minified
+ * enough for mipmapping to earn its cost anyway - `LinearFilter` alone
+ * samples the full-resolution atlas directly, sidestepping the flicker
+ * entirely. */
+function disableMipmaps(texture: CanvasTexture): void {
+  texture.generateMipmaps = false;
+  texture.minFilter = LinearFilter;
+}
 
 /**
  * Issue #11 (Epic #7, Story 2/4): canvas-drawn "twinkle" sprite texture for
@@ -235,6 +255,7 @@ export function getTunableStarTwinkleAtlasTexture(): CanvasTexture | null {
     tunableCanvas.width = STAR_TWINKLE_CELL_SIZE * 2;
     tunableCanvas.height = STAR_TWINKLE_CELL_SIZE;
     tunableTexture = new CanvasTexture(tunableCanvas);
+    disableMipmaps(tunableTexture);
   }
   return tunableTexture;
 }
@@ -303,5 +324,6 @@ export function getStarTwinkleAtlasTexture(): CanvasTexture | null {
   drawBrilliantTwinkle(ctx, cellSize * 1.5, cellSize * 0.5, cellSize);
 
   starTwinkleAtlasTexture = new CanvasTexture(canvas);
+  disableMipmaps(starTwinkleAtlasTexture);
   return starTwinkleAtlasTexture;
 }
