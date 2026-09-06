@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Camera, PerspectiveCamera, Raycaster, Vector2, Vector3 } from "three";
+import { BufferAttribute, Camera, PerspectiveCamera, Raycaster, Vector2, Vector3 } from "three";
 import { createCatalogObjectGroup, setInstanceVisibility } from "../src/scene/objects";
 import {
   createDiffuseStructureLayer,
@@ -8,12 +8,16 @@ import {
 } from "../src/scene/diffuseStructures";
 import {
   apparentRadiusPx,
+  computeRealworldStarRadiusPx,
   findTapFallbackObject,
+  pickRealworldStar,
   pickSceneObject,
   TAP_FALLBACK_RADIUS_PX,
   toNdc,
+  type RealworldStarSizeTuning,
   type TapTolerance,
 } from "../src/scene/picking";
+import { buildRealworldStarLayer, updateRealworldStarVisibility } from "../src/scene/realworldStars";
 import type { SceneObject } from "../src/scene/sceneTypes";
 
 /**
@@ -557,5 +561,222 @@ describe("pickSceneObject: tap-fallback tolerance for tiny/shrunk markers (issue
   it("TAP_FALLBACK_RADIUS_PX is a small, deliberate constant (~40px comfortable-touch-target diameter), not an arbitrarily large catch-all", () => {
     expect(TAP_FALLBACK_RADIUS_PX).toBeGreaterThan(0);
     expect(TAP_FALLBACK_RADIUS_PX).toBeLessThanOrEqual(30);
+  });
+});
+
+/**
+ * Issue #12 (Epic #7, Story 3/4): VISUAL/REALWORLD star picking.
+ * `computeRealworldStarRadiusPx` is a plain-number reimplementation of
+ * `realworldStars.ts`'s `VERTEX_SHADER` gl_PointSize formula, used to pick
+ * exactly the CSS-pixel footprint a star's sprite currently renders at - see
+ * `pickRealworldStar`'s own docstring in `picking.ts` for why this
+ * screen-space, per-star approach was chosen over a native
+ * `Raycaster.params.Points.threshold` (a single world-space radius, wrong
+ * both because VISUAL sprites have no `sizeAttenuation`, size is fixed in
+ * screen pixels; and because sprite size varies enormously star-to-star).
+ *
+ * `uPixelRatio` deliberately doesn't appear anywhere below: it cancels
+ * exactly when converting the shader's device-pixel `gl_PointSize` back to
+ * the CSS-pixel space `pickSceneObject`'s own coordinate system uses
+ * throughout (`computeRealworldStarRadiusPx`'s own docstring works through
+ * why), so every number here is a plain CSS pixel.
+ */
+describe("computeRealworldStarRadiusPx", () => {
+  const NEUTRAL_TUNING: RealworldStarSizeTuning = {
+    sizeScale: 1,
+    normalBoost: 1,
+    brilliantBoost: 1,
+    minSizePx: 0,
+    attenStartPc: 1e9, // effectively "off" (see realworldStars.ts's own default)
+    attenStrength: 0,
+  };
+
+  it("a hidden star (aSize <= 0, the HIDDEN_SPRITE_PX convention) always has radius 0, regardless of tuning", () => {
+    expect(computeRealworldStarRadiusPx(0, 0, 10, NEUTRAL_TUNING)).toBe(0);
+    expect(computeRealworldStarRadiusPx(-1, 1, 10, { ...NEUTRAL_TUNING, minSizePx: 50 })).toBe(0);
+  });
+
+  it("under neutral tuning, the radius is simply half of aSize (aSize is already a CSS-pixel diameter)", () => {
+    expect(computeRealworldStarRadiusPx(20, 0, 10, NEUTRAL_TUNING)).toBe(10);
+    expect(computeRealworldStarRadiusPx(7, 1, 10, NEUTRAL_TUNING)).toBe(3.5);
+  });
+
+  it("applies uNormalBoost for aVariant < 0.5 and uBrilliantBoost for aVariant >= 0.5, matching the shader's mix/step", () => {
+    const tuning: RealworldStarSizeTuning = { ...NEUTRAL_TUNING, normalBoost: 2, brilliantBoost: 5 };
+    expect(computeRealworldStarRadiusPx(10, 0, 10, tuning)).toBe(10); // 10 * 2 / 2
+    expect(computeRealworldStarRadiusPx(10, 1, 10, tuning)).toBe(25); // 10 * 5 / 2
+  });
+
+  it("uSizeScale (the 'Object size' slider) multiplies straight through", () => {
+    const tuning: RealworldStarSizeTuning = { ...NEUTRAL_TUNING, sizeScale: 3 };
+    expect(computeRealworldStarRadiusPx(10, 0, 10, tuning)).toBe(15); // 10 * 3 / 2
+  });
+
+  it("uMinSizePx floors an otherwise-tiny resolved size up to a legible minimum, without resurrecting a truly hidden star", () => {
+    const tuning: RealworldStarSizeTuning = { ...NEUTRAL_TUNING, minSizePx: 8 };
+    expect(computeRealworldStarRadiusPx(1, 0, 10, tuning)).toBe(4); // floored to 8px diameter -> 4px radius
+    expect(computeRealworldStarRadiusPx(0, 0, 10, tuning)).toBe(0); // still hidden - floor never applies
+  });
+
+  it("Sun-relative distance falloff (uAttenStartPc/uAttenStrength) tapers size only beyond the start distance", () => {
+    const tuning: RealworldStarSizeTuning = { ...NEUTRAL_TUNING, attenStartPc: 10, attenStrength: 1 };
+    // Within the start distance: no falloff.
+    expect(computeRealworldStarRadiusPx(10, 0, 5, tuning)).toBe(5);
+    // Beyond it: atten = pow(10/20, 1) = 0.5 -> diameter 10*0.5=5 -> radius 2.5.
+    expect(computeRealworldStarRadiusPx(10, 0, 20, tuning)).toBe(2.5);
+  });
+
+  it("uAttenStrength: 0 means no falloff at all, even far beyond uAttenStartPc (pow(x, 0) === 1)", () => {
+    const tuning: RealworldStarSizeTuning = { ...NEUTRAL_TUNING, attenStartPc: 10, attenStrength: 0 };
+    expect(computeRealworldStarRadiusPx(10, 0, 100000, tuning)).toBe(5);
+  });
+});
+
+/**
+ * `pickRealworldStar` (the primary picking mechanism for VISUAL stars, called
+ * by `pickSceneObject` whenever a `RealworldStarLayer` is passed and the
+ * exact-geometry raycast pass above finds nothing) and `pickSceneObject`'s
+ * own wiring of it.
+ */
+describe("pickRealworldStar", () => {
+  const VISUAL_CANVAS: TapTolerance = { canvasWidthPx: 800, canvasHeightPx: 800 };
+  /** Same derivation as the tap-fallback block above: `makeLookDownZCamera(100)`
+   * is a 50deg-vertical-FOV, aspect-1 camera at (0,0,100) looking down -Z, so a
+   * world-space length L at that distance projects to
+   * `(canvasHeightPx / 2) * L / (100 * tan(25deg))` CSS pixels. */
+  const PX_PER_PC_AT_D100 = 400 / (100 * Math.tan((25 * Math.PI) / 180));
+  function pxOffsetToWorldX(offsetPx: number): number {
+    return offsetPx / PX_PER_PC_AT_D100;
+  }
+
+  /** Directly overwrites a built layer's per-vertex `aSize`/`aVariant` so
+   * each test controls the exact resolved on-screen radius
+   * (`computeRealworldStarRadiusPx`'s own tests above already cover the
+   * boost/floor/falloff math in isolation) without needing a real
+   * `absolute_magnitude`-driven size or a real WebGL-uploaded texture. */
+  function setStarSprite(
+    layer: NonNullable<ReturnType<typeof buildRealworldStarLayer>>,
+    index: number,
+    aSize: number,
+    variant = 0,
+  ): void {
+    (layer.geometry.getAttribute("aSize") as BufferAttribute).setX(index, aSize);
+    (layer.geometry.getAttribute("aVariant") as BufferAttribute).setX(index, variant);
+  }
+
+  it("picks a VISUAL star whose resolved on-screen radius covers a dead-center click", () => {
+    const star = makeObject({ id: "visual-star-hit", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 20); // neutral uniforms -> 10px radius
+
+    const camera = makeLookDownZCamera(100);
+    const hit = pickRealworldStar(camera, CENTER_NDC, layer, VISUAL_CANVAS);
+    expect(hit?.id).toBe("visual-star-hit");
+  });
+
+  it("returns null when the click misses every star's own resolved on-screen radius", () => {
+    const star = makeObject({ id: "visual-star-miss", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 4); // radius 2px
+
+    const camera = makeLookDownZCamera(100);
+    const missNdc = new Vector2(10 / (VISUAL_CANVAS.canvasWidthPx / 2), 0); // 10px right of center
+    expect(pickRealworldStar(camera, missNdc, layer, VISUAL_CANVAS)).toBeNull();
+  });
+
+  it("tie-breaking: among two stars both covering the click, picks whichever is nearer in screen-space pixels (not nearest-to-camera depth)", () => {
+    const nearX = pxOffsetToWorldX(3);
+    const farX = pxOffsetToWorldX(8);
+    const starNear = makeObject({ id: "star-near-click", position_pc: [nearX, 0, 0] });
+    const starFar = makeObject({ id: "star-far-click", position_pc: [farX, 0, 0] });
+    const layer = buildRealworldStarLayer([starNear, starFar])!;
+    setStarSprite(layer, 0, 20); // radius 10px - covers the click (3px away)
+    setStarSprite(layer, 1, 20); // radius 10px - also covers the click (8px away)
+
+    const camera = makeLookDownZCamera(100);
+    const hit = pickRealworldStar(camera, CENTER_NDC, layer, VISUAL_CANVAS);
+    expect(hit?.id).toBe("star-near-click");
+  });
+
+  it("never picks a star hidden by the category/radius visibility filter, even sitting dead-center under the click", () => {
+    const star = makeObject({ id: "visual-star-hidden", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 20);
+    updateRealworldStarVisibility(layer, new Map([["star", false]]), null);
+
+    const camera = makeLookDownZCamera(100);
+    expect(pickRealworldStar(camera, CENTER_NDC, layer, VISUAL_CANVAS)).toBeNull();
+  });
+
+  it("is pickable again once its category is toggled back on", () => {
+    const star = makeObject({ id: "visual-star-toggle", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 20);
+    updateRealworldStarVisibility(layer, new Map([["star", false]]), null);
+    updateRealworldStarVisibility(layer, new Map([["star", true]]), null);
+
+    const camera = makeLookDownZCamera(100);
+    const hit = pickRealworldStar(camera, CENTER_NDC, layer, VISUAL_CANVAS);
+    expect(hit?.id).toBe("visual-star-toggle");
+  });
+
+  it("excludes a star sitting behind the camera, even if its projection would otherwise land near the click", () => {
+    // Camera at (0,0,100) looking down -Z: z=150 is behind it.
+    const star = makeObject({ id: "visual-star-behind", position_pc: [0, 0, 150] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 40);
+
+    const camera = makeLookDownZCamera(100);
+    expect(pickRealworldStar(camera, CENTER_NDC, layer, VISUAL_CANVAS)).toBeNull();
+  });
+
+  it("reads tuning uniforms live off the material - a Settings-panel boost slider changes what's pickable without rebuilding the layer", () => {
+    const star = makeObject({ id: "visual-star-boosted", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 4); // radius 2px under neutral boost - too small to reach a 5px-off click
+
+    const camera = makeLookDownZCamera(100);
+    const missNdc = new Vector2(5 / (VISUAL_CANVAS.canvasWidthPx / 2), 0); // 5px right of center
+    expect(pickRealworldStar(camera, missNdc, layer, VISUAL_CANVAS)).toBeNull();
+
+    layer.material.uniforms.uNormalBoost.value = 10; // now radius 20px - covers the same click
+    const hit = pickRealworldStar(camera, missNdc, layer, VISUAL_CANVAS);
+    expect(hit?.id).toBe("visual-star-boosted");
+  });
+
+  it("pickSceneObject wires a VISUAL star hit through its own realworldStarLayer parameter, resolving to the same SceneObject shape MODEL picking returns", () => {
+    const star = makeObject({ id: "visual-star-via-pickscene", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 20);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    const hit = pickSceneObject(raycaster, camera, CENTER_NDC, [], [], VISUAL_CANVAS, layer);
+    expect(hit?.id).toBe("visual-star-via-pickscene");
+  });
+
+  it("MODEL is unaffected: omitting realworldStarLayer never picks a VISUAL star, even one that would otherwise resolve dead-center", () => {
+    const star = makeObject({ id: "visual-star-not-passed", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([star])!;
+    setStarSprite(layer, 0, 20);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    expect(pickSceneObject(raycaster, camera, CENTER_NDC, [], [], VISUAL_CANVAS)).toBeNull();
+    expect(pickSceneObject(raycaster, camera, CENTER_NDC, [], [], VISUAL_CANVAS, null)).toBeNull();
+  });
+
+  it("an exact-geometry hit on a MODEL bucket instance still wins over a coincidentally-overlapping VISUAL star (exact raycast pass runs first)", () => {
+    const modelStar = makeObject({ id: "model-bucket-star", object_type: "star", position_pc: [0, 0, 0] });
+    const { buckets } = createCatalogObjectGroup([modelStar]);
+
+    const visualStar = makeObject({ id: "visual-layer-star", position_pc: [0, 0, 0] });
+    const layer = buildRealworldStarLayer([visualStar])!;
+    setStarSprite(layer, 0, 20);
+
+    const camera = makeLookDownZCamera(100);
+    const raycaster = new Raycaster();
+    const hit = pickSceneObject(raycaster, camera, CENTER_NDC, buckets, [], VISUAL_CANVAS, layer);
+    expect(hit?.id).toBe("model-bucket-star");
   });
 });

@@ -2811,7 +2811,20 @@ renderer.domElement.addEventListener("pointerdown", (event) => {
 });
 
 renderer.domElement.addEventListener("click", (event) => {
-  if (catalogBuckets.length === 0) return;
+  // Issue #12: this used to read `catalogBuckets.length === 0` as its
+  // "hasn't the scene loaded yet" guard - correct back when `catalogBuckets`
+  // was the only thing ever built from `catalogObjects` after scene load,
+  // but VISUAL now legitimately leaves `catalogBuckets` PERMANENTLY empty
+  // (its only entry, the star bucket, always returns `null` under VISUAL -
+  // see `buildStarCatalogBucket`'s own docstring), even once the scene and
+  // `realworldStarLayer` are fully loaded and genuinely pickable. That old
+  // guard was silently disabling EVERY click in VISUAL - not just star
+  // picking, ALL of it, including the diffuse-structure meshes that never
+  // stopped working - since it returns before `pickSceneObject` is ever
+  // called. `catalogObjects` (the full pre-style-dispatch scene array,
+  // populated once at load and never emptied afterward regardless of style)
+  // is the correct "has the scene loaded" signal instead.
+  if (catalogObjects.length === 0) return;
   // Story #239 AC #9: star-click selection/Inspector-opening is disabled
   // whenever the player's time is away from Today - the canvas itself has no
   // `disabled` DOM property to toggle, so this is guarded directly here via
@@ -2850,10 +2863,24 @@ renderer.domElement.addEventListener("click", (event) => {
   // to small/shrunk markers regardless of input device, so this doesn't
   // loosen precision for any marker already comfortably sized to click
   // exactly.
-  const hit = pickSceneObject(raycaster, camera, ndc, catalogBuckets, diffuseStructureLayer?.meshes ?? [], {
-    canvasWidthPx: rect.width,
-    canvasHeightPx: rect.height,
-  });
+  //
+  // Issue #12: also passes `realworldStarLayer` - non-null only while
+  // `starRenderStyle === "VISUAL"`, `null` under MODEL (see that variable's
+  // own docstring), so this is a no-op for MODEL by construction. See
+  // `picking.ts`'s `pickRealworldStar` for why VISUAL stars need this
+  // dedicated screen-space mechanism instead of an exact raycast.
+  const hit = pickSceneObject(
+    raycaster,
+    camera,
+    ndc,
+    catalogBuckets,
+    diffuseStructureLayer?.meshes ?? [],
+    {
+      canvasWidthPx: rect.width,
+      canvasHeightPx: rect.height,
+    },
+    realworldStarLayer,
+  );
   selectObject(hit);
 });
 
