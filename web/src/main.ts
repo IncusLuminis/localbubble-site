@@ -43,15 +43,17 @@ import {
   type CatalogObjectRef,
 } from "./scene/objects";
 import {
+  applyRealworldStarTuning,
   buildRealworldStarLayer,
+  DEFAULT_REALWORLD_STAR_TUNING,
   disposeRealworldStarLayer,
   updateRealworldStarSizeScale,
   updateRealworldStarVisibility,
   visibleRealworldStarObjects,
   type RealworldStarLayer,
+  type RealworldStarTuning,
 } from "./scene/realworldStars";
 import { loadStarRenderStyle, saveStarRenderStyle, type StarRenderStyle } from "./scene/starRenderStyle";
-import { redrawStarTwinkleAtlas, getTunableStarTwinkleAtlasTexture } from "./scene/starTwinkle"; // PROTOTYPE: live spike length/width tuning
 import {
   denseBatchCollectionRadiusPc,
   isCameraInsideDenseBatchSphere,
@@ -143,6 +145,7 @@ import {
   createLayersPanel,
   createSettingsPanel,
   createCameraPanel,
+  type BloomTuning,
   type LayersPanelHandle,
   type SettingsPanelHandle,
   type SidePanelHandle,
@@ -186,13 +189,15 @@ app.appendChild(status);
 const renderer = createRenderer(app);
 const scene = createScene();
 
-// PROTOTYPE (not for merge): SELECTIVE bloom - only objects placed on
-// BLOOM_SCENE layer (just the REALWORLD star Points layer, see
-// `rebuildStarRenderLayer`'s two build sites below) feed the bloom pass.
-// Everything else (nebulae/clusters sprites, Gould Belt/Radcliffe Wave tubes,
-// RECONS-sphere/Local-Bubble wireframes) is darkened during the bloom-source
-// render, so bloom can't wash them out - they render at their existing,
-// already-tuned brightness in the final composite untouched.
+// Issue #16/#18: SELECTIVE bloom - only objects placed on BLOOM_SCENE layer
+// (just the REALWORLD star Points layer, see `rebuildStarRenderLayer`'s two
+// build sites below) feed the bloom pass. Everything else (nebulae/clusters
+// sprites, Gould Belt/Radcliffe Wave tubes, RECONS-sphere/Local-Bubble
+// wireframes) is darkened during the bloom-source render, so bloom can't
+// wash them out - they render at their existing, already-tuned brightness in
+// the final composite untouched. Bloom strength/radius/threshold themselves
+// are tunable via the Settings panel's REALWORLD "Bloom" group (issue #18) -
+// see `bloomPass` below and `settingsPanelHandle`'s `onBloomTuningChange`.
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
@@ -237,11 +242,18 @@ function restoreMaterial(obj: Object3D): void {
   }
 }
 
+/** Issue #16's final tuned bloom-pass defaults (human owner decision),
+ * recorded here as the single source of truth for both `bloomPass`'s own
+ * construction below and the Settings panel's "Bloom" slider defaults
+ * (`settingsPanelHandle`'s `bloomTuning` option) - so the two can never
+ * drift apart the way two separately-hardcoded copies could. */
+const DEFAULT_BLOOM_TUNING: BloomTuning = { strength: 1.5, radius: 0.7, threshold: 0.25 };
+
 const bloomPass = new UnrealBloomPass(
   new Vector2(window.innerWidth, window.innerHeight),
-  1.5, // strength
-  0.7, // radius
-  0.25, // threshold
+  DEFAULT_BLOOM_TUNING.strength,
+  DEFAULT_BLOOM_TUNING.radius,
+  DEFAULT_BLOOM_TUNING.threshold,
 );
 const camera = createCamera();
 const bloomComposer = new EffectComposer(renderer);
@@ -278,7 +290,6 @@ const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 composer.addPass(bloomCompositePass);
 
-(window as unknown as { __bloom: unknown }).__bloom = { bloomPass, BLOOM_SCENE };
 const controls = createControls(camera, renderer.domElement);
 const labelRenderer = createLabelRenderer(app);
 
@@ -662,6 +673,16 @@ let catalogObjects: SceneObject[] = [];
  * mutually exclusive by construction - `rebuildStarRenderLayer` below always
  * tears down whichever one is currently active before building the other. */
 let realworldStarLayer: RealworldStarLayer | null = null;
+/** Issue #18 (Epic #7): the user's current REALWORLD Settings-panel tuning -
+ * starts at #16's final tuned defaults, updated in place by each tuning
+ * slider's `onChange` (`settingsPanelHandle`'s `onRealworldStarTuningChange`
+ * below) and re-applied wholesale to every freshly (re)built REALWORLD layer
+ * by `rebuildStarRenderLayer` (a brand-new `ShaderMaterial`'s uniforms would
+ * otherwise reset to the shader's own hardcoded defaults on every MODEL<->
+ * REALWORLD toggle - see `applyRealworldStarTuning`'s own docstring). A
+ * fresh copy (not the shared `DEFAULT_REALWORLD_STAR_TUNING` object itself)
+ * since this binding is mutated in place. */
+let realworldStarTuning: RealworldStarTuning = { ...DEFAULT_REALWORLD_STAR_TUNING };
 /** Issue #11: every `object_type === "star"` `SceneObject`, captured once at
  * scene-load time - the stable input BOTH `buildStarCatalogBucket` (MODEL)
  * and `buildRealworldStarLayer` (REALWORLD) build from on every style toggle.
@@ -1044,9 +1065,15 @@ function rebuildStarRenderLayer(): void {
   if (starRenderStyle === "REALWORLD") {
     const newLayer = buildRealworldStarLayer(starCatalogObjects);
     if (newLayer) {
-      newLayer.points.layers.enable(BLOOM_SCENE); // PROTOTYPE: selective bloom
+      newLayer.points.layers.enable(BLOOM_SCENE); // selective bloom (issue #16/#18)
       catalogGroup.add(newLayer.points);
       realworldStarLayer = newLayer;
+      // Issue #18: a fresh `ShaderMaterial`'s uniforms start at the shader's
+      // own hardcoded defaults, not the user's current Settings-panel
+      // values - re-apply `realworldStarTuning` right away so toggling
+      // MODEL -> REALWORLD (or reloading the page) never silently resets
+      // the user's tuning back to those defaults.
+      applyRealworldStarTuning(realworldStarLayer, realworldStarTuning);
     }
   } else {
     const newBucket = buildStarCatalogBucket(
@@ -2351,9 +2378,14 @@ loadScene()
     if (starRenderStyle === "REALWORLD") {
       const initialRealworldLayer = buildRealworldStarLayer(starCatalogObjects);
       if (initialRealworldLayer) {
-        initialRealworldLayer.points.layers.enable(BLOOM_SCENE); // PROTOTYPE: selective bloom
+        initialRealworldLayer.points.layers.enable(BLOOM_SCENE); // selective bloom (issue #16/#18)
         catalogGroup.add(initialRealworldLayer.points);
         realworldStarLayer = initialRealworldLayer;
+        // Issue #18: same re-init as `rebuildStarRenderLayer`'s own REALWORLD
+        // branch (see that function's docstring) - a page load that starts
+        // on REALWORLD (a persisted `localStorage` choice) goes through THIS
+        // build site, not that one, so it needs the exact same call.
+        applyRealworldStarTuning(realworldStarLayer, realworldStarTuning);
       }
     }
 
@@ -2492,6 +2524,17 @@ loadScene()
         starRenderStyle = style;
         saveStarRenderStyle(style, browserLocalStorage());
         rebuildStarRenderLayer();
+      },
+      bloomTuning: { ...DEFAULT_BLOOM_TUNING },
+      onBloomTuningChange: (patch) => {
+        Object.assign(bloomPass, patch);
+      },
+      realworldStarTuning: { ...realworldStarTuning },
+      onRealworldStarTuningChange: (patch) => {
+        Object.assign(realworldStarTuning, patch);
+        if (realworldStarLayer) {
+          applyRealworldStarTuning(realworldStarLayer, realworldStarTuning);
+        }
       },
     });
 
@@ -2821,164 +2864,3 @@ function animate(): void {
 }
 animate();
 
-// PROTOTYPE (not for merge): live tuning HUD so the values above can be
-// dialed in by hand before they get baked into real Settings-panel defaults.
-(function createBloomTuningHud(): void {
-  const panel = document.createElement("div");
-  panel.style.cssText =
-    "position:fixed;bottom:12px;right:12px;z-index:9999;background:rgba(10,12,20,0.85);" +
-    "color:#dfe6f5;font:12px/1.4 monospace;padding:10px 12px;border-radius:6px;width:220px;" +
-    "border:1px solid rgba(255,255,255,0.15)";
-  document.body.appendChild(panel);
-
-  const title = document.createElement("div");
-  title.textContent = "Bloom tuning (prototype)";
-  title.style.cssText = "font-weight:bold;margin-bottom:6px;";
-  panel.appendChild(title);
-
-  function addSectionHeader(label: string): void {
-    const header = document.createElement("div");
-    header.textContent = label;
-    header.style.cssText =
-      "font-weight:bold;margin:10px 0 4px;padding-top:6px;border-top:1px solid rgba(255,255,255,0.15);" +
-      "letter-spacing:0.05em;font-size:11px;color:#9db4e0;";
-    panel.appendChild(header);
-  }
-
-  function addSlider(
-    label: string,
-    min: number,
-    max: number,
-    step: number,
-    initial: number,
-    onChange: (value: number) => void,
-  ): void {
-    const row = document.createElement("div");
-    row.style.cssText = "margin-bottom:6px;";
-    const labelEl = document.createElement("div");
-    labelEl.textContent = `${label}: ${initial}`;
-    row.appendChild(labelEl);
-    const input = document.createElement("input");
-    input.type = "range";
-    input.min = String(min);
-    input.max = String(max);
-    input.step = String(step);
-    input.value = String(initial);
-    input.style.cssText = "width:100%;";
-    input.addEventListener("input", () => {
-      const value = Number(input.value);
-      labelEl.textContent = `${label}: ${value}`;
-      onChange(value);
-    });
-    row.appendChild(input);
-    panel.appendChild(row);
-    // PROTOTYPE: realworldStarLayer isn't built yet at this synchronous
-    // setup point (found live - uAttenStartPc stayed stuck at the shader's
-    // own 1e9 default despite this slider's initial value of 2000, because
-    // the layer-dependent onChange callbacks all silently no-op on a null
-    // layer) - retry across a few animation frames instead of applying once
-    // immediately, so the starting value actually lands once the layer
-    // exists rather than only ever taking effect after the user's first
-    // manual drag.
-    // PROTOTYPE: realworldStarLayer isn't built synchronously (a
-    // requestAnimationFrame retry chain here never fired a second time -
-    // this tab's rAF appears throttled/coalesced under browser automation,
-    // unlike the app's own animate() loop which is already running) -
-    // setInterval sidesteps that. Applies the initial value the first time
-    // the layer exists, then stops.
-    let attemptsLeft = 100;
-    const timer = setInterval(() => {
-      attemptsLeft -= 1;
-      if (realworldStarLayer || attemptsLeft <= 0) {
-        clearInterval(timer);
-        onChange(initial);
-      }
-    }, 100);
-  }
-
-  // PROTOTYPE: regenerates the twinkle sprite atlas (spike length/width are
-  // baked into the canvas texture, not a shader uniform) - all three
-  // sliders trigger the same rebuild since a fresh texture needs all
-  // current values together. Declared up top since the BLOOM/STARS groups
-  // below don't need it, but SPIKES does.
-  let spikeLength = 1;
-  let brilliantSpikeLength = 1;
-  let spikeWidth = 1;
-  function regenerateTwinkleTexture(): void {
-    if (!realworldStarLayer) {
-      return;
-    }
-    const texture = getTunableStarTwinkleAtlasTexture();
-    if (!texture) {
-      return;
-    }
-    redrawStarTwinkleAtlas(spikeLength, spikeWidth, brilliantSpikeLength);
-    realworldStarLayer.material.uniforms.uMap.value = texture;
-  }
-
-  addSectionHeader("BLOOM");
-  addSlider("Bloom strength", 0, 3, 0.05, bloomPass.strength, (v) => {
-    bloomPass.strength = v;
-  });
-  addSlider("Bloom radius", 0, 1, 0.02, bloomPass.radius, (v) => {
-    bloomPass.radius = v;
-  });
-  addSlider("Bloom threshold", 0, 1, 0.02, bloomPass.threshold, (v) => {
-    bloomPass.threshold = v;
-  });
-  addSlider("Color bloom compensation", 0, 1, 0.05, 0.7, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uColorBloomCompensation.value = v;
-    }
-  });
-
-  addSectionHeader("STARS");
-  addSlider("Normal-tier size boost", 0.5, 6, 0.1, 1, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uNormalBoost.value = v;
-    }
-  });
-  addSlider("Brilliant-tier boost", 1, 3, 0.05, 1, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uBrilliantBoost.value = v;
-    }
-  });
-  addSlider("Faint-star minimum size (px)", 0, 80, 1, 9, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uMinSizePx.value = v;
-    }
-  });
-
-  addSectionHeader("SPIKES");
-  addSlider("Spike length (all stars)", 0.5, 3, 0.05, 1.8, (v) => {
-    spikeLength = v;
-    regenerateTwinkleTexture();
-  });
-  addSlider("Spike length (brightest)", 0.5, 4, 0.05, 2.6, (v) => {
-    brilliantSpikeLength = v;
-    regenerateTwinkleTexture();
-  });
-  addSlider("Spike width", 0.5, 3, 0.05, 1, (v) => {
-    spikeWidth = v;
-    regenerateTwinkleTexture();
-  });
-  addSlider("Intensity (all stars)", 0.2, 4, 0.05, 1, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uIntensity.value = v;
-    }
-  });
-
-  addSectionHeader("DISTANCE");
-  addSlider("Distance falloff start (pc)", 20, 2000, 10, 2000, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uAttenStartPc.value = v;
-    }
-  });
-  addSlider("Distance falloff strength", 0, 1.5, 0.05, 0, (v) => {
-    if (realworldStarLayer) {
-      realworldStarLayer.material.uniforms.uAttenStrength.value = v;
-    }
-  });
-  (window as unknown as { __getRealworldLayer: () => RealworldStarLayer | null }).__getRealworldLayer = () =>
-    realworldStarLayer;
-})();

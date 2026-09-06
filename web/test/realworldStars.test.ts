@@ -1,12 +1,15 @@
 import { describe, expect, it } from "vitest";
 import type { BufferAttribute } from "three";
 import {
+  applyRealworldStarTuning,
   buildRealworldStarLayer,
+  DEFAULT_REALWORLD_STAR_TUNING,
   disposeRealworldStarLayer,
   REALWORLD_BASE_SPRITE_PX,
   updateRealworldStarSizeScale,
   updateRealworldStarVisibility,
   visibleRealworldStarObjects,
+  type RealworldStarTuning,
 } from "../src/scene/realworldStars";
 import { absoluteMagnitudeToRealworldStyle } from "../src/scene/magnitudeBrightness";
 import { spectralColorFor } from "../src/scene/spectralColor";
@@ -178,5 +181,70 @@ describe("disposeRealworldStarLayer", () => {
   it("disposes geometry and material without throwing", () => {
     const layer = buildRealworldStarLayer([BRIGHT_STAR])!;
     expect(() => disposeRealworldStarLayer(layer)).not.toThrow();
+  });
+});
+
+/**
+ * Issue #18 (Epic #7): `applyRealworldStarTuning` is what both the Settings
+ * panel's per-slider `onChange` handlers and `main.ts`'s
+ * `rebuildStarRenderLayer` (re-initializing a freshly-built layer's uniforms
+ * from the user's current Settings, not the shader's own hardcoded
+ * defaults) go through - this is the one place that actually reaches the
+ * uniforms the old debug HUD wrote to directly. `uMap`'s reassignment
+ * degrades to a no-op here (`getTunableStarTwinkleAtlasTexture` returns
+ * `null` under this repo's DOM-free `environment: "node"` Vitest config,
+ * exactly like `getStarTwinkleAtlasTexture` - see `starTwinkle.ts`'s own
+ * docstring), so only the seven plain-number uniforms are asserted below.
+ */
+describe("applyRealworldStarTuning", () => {
+  function tuningWith(overrides: Partial<RealworldStarTuning>): RealworldStarTuning {
+    return { ...DEFAULT_REALWORLD_STAR_TUNING, ...overrides };
+  }
+
+  it("writes every scalar uniform from the given tuning", () => {
+    const layer = buildRealworldStarLayer([BRIGHT_STAR])!;
+    const tuning = tuningWith({
+      colorBloomCompensation: 0.4,
+      normalBoost: 2.2,
+      brilliantBoost: 1.8,
+      minSizePx: 12,
+      intensity: 1.5,
+      attenStartPc: 500,
+      attenStrength: 0.6,
+    });
+
+    applyRealworldStarTuning(layer, tuning);
+
+    const uniforms = layer.material.uniforms;
+    expect(uniforms.uColorBloomCompensation.value).toBe(0.4);
+    expect(uniforms.uNormalBoost.value).toBe(2.2);
+    expect(uniforms.uBrilliantBoost.value).toBe(1.8);
+    expect(uniforms.uMinSizePx.value).toBe(12);
+    expect(uniforms.uIntensity.value).toBe(1.5);
+    expect(uniforms.uAttenStartPc.value).toBe(500);
+    expect(uniforms.uAttenStrength.value).toBe(0.6);
+  });
+
+  it("never throws even though the spike-atlas texture is unavailable under this test environment", () => {
+    const layer = buildRealworldStarLayer([BRIGHT_STAR])!;
+    expect(() => applyRealworldStarTuning(layer, DEFAULT_REALWORLD_STAR_TUNING)).not.toThrow();
+  });
+
+  it("applying DEFAULT_REALWORLD_STAR_TUNING matches the layer's own fresh-build defaults for every field it covers", () => {
+    // Issue #18's acceptance criterion that a fresh REALWORLD session starts
+    // from #16's final tuned values, not the shader's neutral defaults -
+    // applying the defaults should be a genuine change from a bare
+    // `buildRealworldStarLayer` call for every field where the two differ.
+    const layer = buildRealworldStarLayer([BRIGHT_STAR])!;
+    const before = { ...layer.material.uniforms.uNormalBoost };
+    applyRealworldStarTuning(layer, DEFAULT_REALWORLD_STAR_TUNING);
+    expect(layer.material.uniforms.uMinSizePx.value).toBe(DEFAULT_REALWORLD_STAR_TUNING.minSizePx);
+    expect(layer.material.uniforms.uColorBloomCompensation.value).toBe(
+      DEFAULT_REALWORLD_STAR_TUNING.colorBloomCompensation,
+    );
+    // uNormalBoost's shader default (1) already matches the tuned default -
+    // confirms applying it is still a no-op-safe assignment, not skipped.
+    expect(before.value).toBe(1);
+    expect(layer.material.uniforms.uNormalBoost.value).toBe(1);
   });
 });
