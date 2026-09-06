@@ -2850,10 +2850,24 @@ renderer.domElement.addEventListener("click", (event) => {
   // to small/shrunk markers regardless of input device, so this doesn't
   // loosen precision for any marker already comfortably sized to click
   // exactly.
-  const hit = pickSceneObject(raycaster, camera, ndc, catalogBuckets, diffuseStructureLayer?.meshes ?? [], {
-    canvasWidthPx: rect.width,
-    canvasHeightPx: rect.height,
-  });
+  //
+  // Issue #12: also passes `realworldStarLayer` - non-null only while
+  // `starRenderStyle === "VISUAL"`, `null` under MODEL (see that variable's
+  // own docstring), so this is a no-op for MODEL by construction. See
+  // `picking.ts`'s `pickRealworldStar` for why VISUAL stars need this
+  // dedicated screen-space mechanism instead of an exact raycast.
+  const hit = pickSceneObject(
+    raycaster,
+    camera,
+    ndc,
+    catalogBuckets,
+    diffuseStructureLayer?.meshes ?? [],
+    {
+      canvasWidthPx: rect.width,
+      canvasHeightPx: rect.height,
+    },
+    realworldStarLayer,
+  );
   selectObject(hit);
 });
 
