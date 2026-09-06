@@ -186,11 +186,11 @@ export function createSettingsPanel(options: SettingsPanelOptions): SettingsPane
   panel.appendChild(radiusSection.section);
 
   // --- Star rendering style (issue #10, Epic #7): MODEL (today's exact,
-  // unchanged rendering, default) vs REALWORLD (Story #11+'s new sprite/
-  // magnitude-driven system - for now, a stub that just re-invokes MODEL's
-  // own code, see `scene/objects.ts`'s `buildRealworldStarInstances`). Same
-  // `<select>` pattern as the Radius control just above, for visual
-  // consistency with this panel's existing controls. ---
+  // unchanged rendering, default) vs REALWORLD (issue #11's own
+  // `THREE.Points`-based twinkle-sprite/magnitude-driven-size system, see
+  // `scene/realworldStars.ts`). Same `<select>` pattern as the Radius
+  // control just above, for visual consistency with this panel's existing
+  // controls. ---
   const starRenderStyleSection = makeSection("Star Rendering");
   const starRenderStyleSelect = document.createElement("select");
   starRenderStyleSelect.className = "star-render-style-select";
