@@ -24,6 +24,10 @@ loosely follows [Keep a Changelog](https://keepachangelog.com/).
   Marker opacity / Diffuse structure opacity sliders.
 - Cookie-consent banner; Settings-panel choices (star rendering style,
   radius filter, and every tuning slider) now persist across visits.
+- **Visual is now the default star-rendering style** for a first-time
+  visitor (or anyone who declined/never saw the cookie-consent prompt).
+  A returning visitor who explicitly chose Model, and accepted
+  persistence, keeps seeing Model exactly as they left it.
 
 ### Fixed
 
@@ -46,6 +50,9 @@ loosely follows [Keep a Changelog](https://keepachangelog.com/).
 - A stale guard in the click handler silently disabled all picking under
   Visual for one revision; click-to-inspect now works correctly for both
   styles.
+- The Time Controls player (scrubbing/playing through time) didn't move
+  animated stars, their labels, or their motion trails at all while
+  Visual was active - they now animate correctly under both styles.
 
 ## [1.0.0] - 2026-09-04
 
