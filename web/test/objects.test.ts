@@ -29,6 +29,7 @@ import {
   starMarkerRadiusPc,
   starMarkerShrinkStartPc,
   STAR_OBJECT_TYPES,
+  STRUCTURE_MIN_RADIUS_PC,
   SUN_OBJECT_ID,
   updateBackgroundDimming,
   updateCatalogSizeScale,
@@ -1869,15 +1870,110 @@ describe("isSelectedObjectVisible", () => {
   });
 });
 
+/**
+ * Issue #26: the "Object size" slider must resize markers WITHOUT moving
+ * them - it used to set `bucket.mesh.scale` directly, which (since each
+ * instance's real position is baked into its own `instanceMatrix`, and
+ * Three.js composes `mesh.matrixWorld * instanceMatrix[i]`) multiplied every
+ * instance's position too, moving every object radially as the slider moved.
+ * The fix rewrites each visible instance's own matrix instead, leaving
+ * `bucket.mesh.scale` untouched (always identity) and `bucket.mesh` itself
+ * out of the equation entirely.
+ */
 describe("updateCatalogSizeScale", () => {
-  it("scales the InstancedMesh container itself, not the per-instance matrices", () => {
+  it("never touches the InstancedMesh container's own scale", () => {
     const { buckets } = createCatalogObjectGroup([CLOUD_A]);
     updateCatalogSizeScale(buckets, 2.5);
     for (const bucket of buckets) {
-      expect(bucket.mesh.scale.x).toBe(2.5);
-      expect(bucket.mesh.scale.y).toBe(2.5);
-      expect(bucket.mesh.scale.z).toBe(2.5);
+      expect(bucket.mesh.scale.x).toBe(1);
+      expect(bucket.mesh.scale.y).toBe(1);
+      expect(bucket.mesh.scale.z).toBe(1);
     }
+  });
+
+  it("leaves every visible instance's decomposed POSITION unchanged while its scale grows", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B, STAR_A, STAR_B]);
+    const before = buckets.map((bucket) =>
+      bucket.objects.map((_, i) => decomposeInstanceMatrix(bucket, i)),
+    );
+
+    updateCatalogSizeScale(buckets, 2.5);
+
+    buckets.forEach((bucket, bucketIndex) => {
+      bucket.objects.forEach((_, i) => {
+        const beforeState = before[bucketIndex][i];
+        const after = decomposeInstanceMatrix(bucket, i);
+        // Position must be bit-for-bit unchanged - only size may change.
+        expect(after.position.x).toBe(beforeState.position.x);
+        expect(after.position.y).toBe(beforeState.position.y);
+        expect(after.position.z).toBe(beforeState.position.z);
+        // Scale must have grown by exactly the new sizeScale factor.
+        expect(after.scale.x).toBeCloseTo(beforeState.scale.x * 2.5, 6);
+      });
+    });
+  });
+
+  it("shrinking the slider back down also leaves position untouched", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, STAR_A]);
+    const bucket = buckets[0];
+    const originalPosition = decomposeInstanceMatrix(bucket, 0).position.clone();
+
+    updateCatalogSizeScale(buckets, 3);
+    updateCatalogSizeScale(buckets, 0.5);
+
+    const after = decomposeInstanceMatrix(bucket, 0);
+    expect(after.position.x).toBe(originalPosition.x);
+    expect(after.position.y).toBe(originalPosition.y);
+    expect(after.position.z).toBe(originalPosition.z);
+    expect(after.scale.x).toBeCloseTo(STRUCTURE_MIN_RADIUS_PC * 0.5, 6);
+  });
+
+  it("never resurrects an instance hidden by the category/radius filter", () => {
+    const { buckets } = createCatalogObjectGroup([CLOUD_A, CLOUD_B]);
+    const bucket = buckets[0];
+    const cloudBIndex = bucket.objects.findIndex((o) => o.id === "cloud-b");
+
+    // Hide cloud-b (out of the 150pc radius filter), keep cloud-a visible.
+    const categoryVisibility = new Map<string, boolean>([["molecular_cloud", true]]);
+    updateCatalogVisibility(buckets, categoryVisibility, 150);
+    expect(decomposeInstanceMatrix(bucket, cloudBIndex).scale.x).toBe(0);
+
+    updateCatalogSizeScale(buckets, 2.5);
+
+    // Still hidden - the size slider must never un-hide a filtered-out instance.
+    expect(decomposeInstanceMatrix(bucket, cloudBIndex).scale.x).toBe(0);
+  });
+
+  it("stores sizeScale on the bucket so a later LOD/visibility pass keeps applying it", () => {
+    // Regression guard for the exact half-fix risk flagged in issue #26:
+    // `updateDenseBatchLod` (called every frame, independent of the size
+    // slider) must not silently reset a dense-batch star's radius back to
+    // its unscaled value on the very next frame after the slider moves.
+    const nearbyStar = makeObject({
+      id: "proxima",
+      object_type: "star",
+      position_pc: [0.9, -0.9, -0.04],
+      distance_pc: 1.3,
+      group: { primary: null, secondary: [DENSE_BATCH_GROUP_TAG] },
+    });
+    const starsOn = new Map<string, boolean>([["star", true]]);
+    const collectionRadiusPc = 11.26;
+    const { buckets } = createCatalogObjectGroup([nearbyStar]);
+    const bucket = buckets[0];
+
+    // Establish the star's LOD-shrunk visible state first, matching the real
+    // `applyCatalogVisibility()` -> `applyDenseBatchLod()` call order.
+    updateCatalogVisibility(buckets, starsOn, null, 0, collectionRadiusPc);
+    const unscaledRadius = decomposeInstanceMatrix(bucket, 0).scale.x;
+    expect(unscaledRadius).toBeCloseTo(STAR_MARKER_MIN_RADIUS_PC, 6);
+
+    updateCatalogSizeScale(buckets, 2, 0, collectionRadiusPc);
+    expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(unscaledRadius * 2, 6);
+
+    // A later per-frame LOD pass (no knowledge of the slider) must still
+    // reflect the 2x size scale, not silently reset to `unscaledRadius`.
+    updateDenseBatchLod(buckets, starsOn, null, 0, collectionRadiusPc);
+    expect(decomposeInstanceMatrix(bucket, 0).scale.x).toBeCloseTo(unscaledRadius * 2, 6);
   });
 });
 

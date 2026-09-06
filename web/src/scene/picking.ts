@@ -253,8 +253,9 @@ export function apparentRadiusPx(
  *   matrix kept in perfect sync with the visible mesh's, at every one of
  *   `objects.ts`'s several existing per-instance matrix-writing call sites
  *   (`setInstanceVisibility` itself, plus the motion player's per-frame
- *   position overrides, plus `updateCatalogSizeScale`'s bucket-level
- *   scale) - real, ongoing duplication risk for a system that already
+ *   position overrides, plus `updateCatalogSizeScale`'s own per-instance
+ *   rewrite for the "Object size" slider) - real, ongoing duplication risk
+ *   for a system that already
  *   dynamically recomputes a shrink-eligible star's radius every frame,
  *   for a payoff (a real second raycast target) this screen-space
  *   approach gets without touching `objects.ts` at all.
