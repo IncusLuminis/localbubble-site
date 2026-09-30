@@ -5,6 +5,23 @@ Scientifically grounded 3D model and data pipeline for the Solar neighborhood
 structures). Live at [localbubble.space](https://localbubble.space). Full
 project spec: [`spec/Idea.md`](spec/Idea.md).
 
+## At a glance
+
+- **Live explorer:** [localbubble.space](https://localbubble.space)
+- **Scope:** an interactive 3D view of the Solar neighbourhood: nearby stars,
+  clusters, molecular clouds, the Gould Belt, Radcliffe Wave, and Local Bubble.
+- **Scientific inputs:** SIMBAD, Gaia, VizieR, the NASA Exoplanet Archive, and
+  cited literature. Retrieval-level provenance is kept in
+  [`data_manifest.yaml`](data_manifest.yaml).
+- **Architecture:** source adapters -> normalized catalog -> renderer-independent
+  `scene.json` -> Three.js web viewer.
+- **Interpretation:** this is a research and educational visualization, not an
+  authoritative survey catalogue. Consult the app's *Simplifications & Sources*
+  panel and the per-record provenance before drawing scientific conclusions.
+- **Reuse:** code, project-created material, and third-party data have separate
+  terms; see [`LICENSE`](LICENSE), [`DATA_LICENSE.md`](DATA_LICENSE.md), and
+  [`THIRD_PARTY_DATA.md`](THIRD_PARTY_DATA.md).
+
 This repository was extracted (with full commit history) from the
 `local-galactic-structures/` subdirectory of the private
 `IncusLuminis/visualization-studio-tools` monorepo as part of the 1.0
