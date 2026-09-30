@@ -195,6 +195,18 @@ def update_manifest(
     sources: list[dict[str, Any]] = data.setdefault("sources", [])
 
     entry_id = f"{source}:{query}"
+    # The manifest is a checked-in provenance record. Keep cache locations
+    # portable and avoid leaking a contributor's machine-specific path.
+    try:
+        manifest_cache_path = cache_path.resolve().relative_to(
+            manifest_path.parent.resolve()
+        ).as_posix()
+    except ValueError:
+        # Callers may deliberately store a cache outside the manifest's
+        # directory. Preserve that path rather than recording a misleading
+        # relative location.
+        manifest_cache_path = str(cache_path)
+
     entry = {
         "id": entry_id,
         "source": source,
@@ -202,7 +214,7 @@ def update_manifest(
         "dataset": dataset,
         "retrieved": retrieved_utc,
         "record_id": record_id,
-        "cache_path": str(cache_path),
+        "cache_path": manifest_cache_path,
     }
     for i, existing in enumerate(sources):
         if existing.get("id") == entry_id:

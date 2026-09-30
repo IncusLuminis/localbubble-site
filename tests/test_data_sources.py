@@ -181,6 +181,7 @@ class TestManifest:
         assert entry["id"] == "simbad:Pleiades"
         assert entry["retrieved"] == "2026-08-17T00:00:00+00:00"
         assert entry["record_id"] == "Cl Melotte 22"
+        assert entry["cache_path"] == "simbad/pleiades.json"
 
     def test_update_manifest_updates_existing_entry_in_place(self, tmp_path: Path):
         manifest_path = tmp_path / "data_manifest.yaml"
