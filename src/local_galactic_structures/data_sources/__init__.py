@@ -202,10 +202,9 @@ def update_manifest(
             manifest_path.parent.resolve()
         ).as_posix()
     except ValueError:
-        # Callers may deliberately store a cache outside the manifest's
-        # directory. Preserve that path rather than recording a misleading
-        # relative location.
-        manifest_cache_path = str(cache_path)
+        # Do not expose a contributor's external filesystem layout. The
+        # filename remains sufficient to identify a cache kept elsewhere.
+        manifest_cache_path = cache_path.name
 
     entry = {
         "id": entry_id,

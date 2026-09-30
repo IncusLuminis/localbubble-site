@@ -200,6 +200,20 @@ class TestManifest:
         assert len(data["sources"]) == 1  # updated, not duplicated
         assert data["sources"][0]["retrieved"] == "2026-08-18T00:00:00+00:00"
 
+    def test_update_manifest_does_not_expose_external_cache_path(self, tmp_path: Path):
+        manifest_path = tmp_path / "data_manifest.yaml"
+        update_manifest(
+            source="simbad",
+            query="Pleiades",
+            retrieved_utc="2026-08-17T00:00:00+00:00",
+            record_id="Cl Melotte 22",
+            dataset="SIMBAD basic identifier query",
+            cache_path=Path("external-cache/pleiades.json"),
+            manifest_path=manifest_path,
+        )
+        data = yaml.safe_load(manifest_path.read_text())
+        assert data["sources"][0]["cache_path"] == "pleiades.json"
+
     def test_update_manifest_preserves_unrelated_existing_entries(
         self, tmp_path: Path
     ):
