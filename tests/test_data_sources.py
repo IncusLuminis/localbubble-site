@@ -208,7 +208,7 @@ class TestManifest:
             retrieved_utc="2026-08-17T00:00:00+00:00",
             record_id="Cl Melotte 22",
             dataset="SIMBAD basic identifier query",
-            cache_path=Path("external-cache/pleiades.json"),
+            cache_path=tmp_path.parent / "private-cache" / "pleiades.json",
             manifest_path=manifest_path,
         )
         data = yaml.safe_load(manifest_path.read_text())
