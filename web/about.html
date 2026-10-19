@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Local Galactic Structures — Local Bubble</title>
+    <meta
+      name="description"
+      content="About the data, methodology, and scientific models behind Local Bubble, an interactive 3D map of the Solar neighborhood."
+    />
+    <link rel="canonical" href="https://localbubble.space/about" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://localbubble.space/about" />
+    <meta property="og:title" content="About Local Galactic Structures — Local Bubble" />
+    <meta
+      property="og:description"
+      content="The data, methodology, and scientific models behind Local Bubble's interactive 3D map."
+    />
+    <meta property="og:image" content="https://localbubble.space/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="stylesheet" href="/about.css" />
+  </head>
+  <body>
+    <main class="about-page">
+      <a class="back-link" href="/" aria-label="Return to the Local Bubble explorer">← Explore Local Bubble</a>
+
+      <article class="about-content">
+        <p class="eyebrow">Local Bubble</p>
+        <h1>About Local Galactic Structures</h1>
+
+        <section aria-labelledby="what-youre-looking-at">
+          <h2 id="what-youre-looking-at">What you're looking at</h2>
+          <p>
+            This is an interactive 3D map of the Solar neighborhood, showing real stars, star clusters,
+            stellar associations, and molecular clouds out to roughly 800 pc from the Sun, each placed at
+            its actual derived Galactic XYZ position — not sketched or hand-placed. Three toggleable
+            overlays let you compare competing large-scale interpretations of the region's shape: the
+            <strong>Gould Belt</strong>, the <strong>Radcliffe Wave</strong>, and the
+            <strong>Local Bubble</strong> — the cavity of hot, rarefied gas the Sun itself sits inside.
+          </p>
+        </section>
+
+        <section aria-labelledby="data-methodology">
+          <h2 id="data-methodology">Data &amp; methodology</h2>
+          <p>
+            The catalog (956 objects) is built from live lookups against <strong>SIMBAD</strong>,
+            <strong>Gaia</strong>, and <strong>VizieR</strong> (via Astropy/astroquery), backed by cited
+            literature distances where a direct catalog match isn't available. Some candidate names were
+            first identified from a Galaxy Map "Gaia star density map" poster and from the RECONS "100
+            Nearest Star Systems" census, but only as a list of names to look up: every position and
+            distance shown here comes from a live SIMBAD/Gaia resolution, never read off an image or table.
+          </p>
+          <p>
+            The three structure overlays are each a separate, literature-fitted scientific model, not raw
+            data:
+          </p>
+          <ul>
+            <li><strong>Gould Belt</strong> — Perrot &amp; Grenier (2003), <em>A&amp;A</em> 404, 519–531</li>
+            <li>
+              <strong>Radcliffe Wave</strong> — Konietzka et al. (2024), "The Radcliffe Wave is
+              oscillating," <em>Nature</em> 626, 63–68
+            </li>
+            <li>
+              <strong>Local Bubble</strong> — Alves et al. (2018), "The Local Bubble: a magnetic veil to
+              our Galaxy," <em>A&amp;A</em> 611, L5
+            </li>
+          </ul>
+          <p>
+            Coordinates use a heliocentric Galactic Cartesian frame, in parsecs: the Sun sits at the
+            origin, +X points toward the Galactic Center, +Y toward the direction of Galactic rotation,
+            and +Z toward the North Galactic Pole.
+          </p>
+          <p>The data pipeline is Python/Astropy; the scene you're navigating is rendered in the browser with Three.js.</p>
+        </section>
+
+        <section aria-labelledby="links">
+          <h2 id="links">Links</h2>
+          <ul>
+            <li>
+              <strong>Source code (GitHub): </strong>
+              <a href="https://github.com/IncusLuminis/visualization-studio-tools" target="_blank" rel="noopener">https://github.com/IncusLuminis/visualization-studio-tools</a>
+            </li>
+            <li>
+              <strong>Gould Belt model source (Perrot &amp; Grenier 2003): </strong>
+              <a href="https://doi.org/10.1051/0004-6361:20030477" target="_blank" rel="noopener">https://doi.org/10.1051/0004-6361:20030477</a>
+            </li>
+            <li>
+              <strong>Radcliffe Wave model source (Konietzka et al. 2024): </strong>
+              <a href="https://doi.org/10.1038/s41586-024-07127-3" target="_blank" rel="noopener">https://doi.org/10.1038/s41586-024-07127-3</a>
+            </li>
+            <li>
+              <strong>Local Bubble model source (Alves et al. 2018): </strong>
+              <a href="https://doi.org/10.1051/0004-6361/201832637" target="_blank" rel="noopener">https://doi.org/10.1051/0004-6361/201832637</a>
+            </li>
+            <li>
+              <strong>RECONS, "The 100 Nearest Star Systems": </strong>
+              <a href="https://www.astro.gsu.edu/RECONS/TOP100.posted.htm" target="_blank" rel="noopener">https://www.astro.gsu.edu/RECONS/TOP100.posted.htm</a>
+            </li>
+          </ul>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>
